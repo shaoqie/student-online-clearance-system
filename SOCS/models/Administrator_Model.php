@@ -1,16 +1,13 @@
 <?php
 
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 /**
- * Description of adminAccount
+ * Administrator Model
  *
- * @author ronversa09
+ * @author ronversa09, Ozy
  */
-class adminAccount {
+require_once 'libs/Model.php';
+
+class Administrator_Model extends Model{
     private $username;
     private $password;
     

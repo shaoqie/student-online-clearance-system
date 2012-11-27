@@ -7,7 +7,6 @@
  */
 
 require_once 'libs/Controller.php';
-require_once 'libs/Template.php';
 
 class Login extends Controller{
 
@@ -22,7 +21,7 @@ class Login extends Controller{
     }
 
     public function display() {
-        $this->template->display('views/templates/simple.tpl');
+        $this->template->display(TEMPLATE);
     }
 }
 

@@ -5,9 +5,11 @@
     </head>
     <body>
     
-        <div><a href="/SOCS/">Home</a></div>
+        <div style="background: #DEE"><a href="/SOCS/">Home</a></div>
         
         {include file=$tpl_file}
         
+        <div style="background: #DEE">SOCS &COPY; 2012</div>
+
     </body>
 </html>
