@@ -1,29 +1,23 @@
 <?php
 
 /**
- * Administrator's index page
+ * Administrator's Index Page
  *
  * @author Ozy
  */
 
-require_once '../libs/Controller.php';
-require_once '../libs/Session.php';
-require_once '../administrator/admin_libs/Template.php';
+require_once 'libs/Controller.php';
 
 class Index extends Controller{
-    
-    private $template;
 
     public function __construct() {
         parent::__construct();
         
-        $this->template = new Template();
-        $this->template->setPageName('Home');
-        $this->template->setContent('views/index.tpl');
+        echo "Admin Page";
     }
 
     public function display() {
-        $this->template->display('views/administrator.tpl');
+        //displaying the UI
     }
 }
 

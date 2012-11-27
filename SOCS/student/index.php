@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Signatory's Index Page
+ * Student's Index Page
  *
  * @author Ozy
  */
@@ -13,7 +13,7 @@ class Index extends Controller{
     public function __construct() {
         parent::__construct();
         
-        echo "Signatory Page";
+        echo "Student's Page";
     }
 
     public function display() {

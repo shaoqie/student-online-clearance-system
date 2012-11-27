@@ -1,12 +1,27 @@
 <?php
 
-class Index {
+/**
+ * Main Index Page
+ *
+ * @author Ozy
+ */
+
+require_once 'libs/Controller.php';
+
+class Index extends Controller{
 
     public function __construct() {
-        echo "Welcome to SOCS and this is the student's page!";
-        echo "Hi!";
+        parent::__construct();
+        
+        echo "Index Page";
+    }
+
+    public function display() {
+        //displaying the UI
     }
 }
 
-new Index();
+$controller = new Index();
+$controller->display();
+
 ?>

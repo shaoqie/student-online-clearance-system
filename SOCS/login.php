@@ -1,19 +1,19 @@
 <?php
 
 /**
- * Signatory's Index Page
+ * Login Page of Signatory, Administrator, and Student
  *
  * @author Ozy
  */
 
-require_once 'libs/Controller.php';
+require_once '../libs/Controller.php';
 
-class Index extends Controller{
+class Login extends Controller{
 
     public function __construct() {
         parent::__construct();
         
-        echo "Signatory Page";
+        echo "Login";
     }
 
     public function display() {
