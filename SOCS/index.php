@@ -6,7 +6,6 @@
  * @author Ozy
  */
 require_once 'libs/Controller.php';
-require_once 'models/Administrator_Model.php';
 
 class Index extends Controller {
 
@@ -19,33 +18,32 @@ class Index extends Controller {
         $this->admin = new Administrator_Model();
         $this->template = new Template();
         $this->template->setPageName('Login');
-        
-        if(Session::user_exist()){
+
+        if (Session::user_exist()) {
             $this->template->assign('username', Session::get_user());
             $this->template->setContent('views/adminview/welcome.tpl');
-        }else{
+        } else {
             $this->template->setContent('views/login.tpl');
         }
-        
     }
 
     public function login() {
         if ($this->admin->isEqual($_POST['username'], $_POST['password'])) {
             Session::set_user($_POST['username']);
             header('Location: /SOCS/');
-        }else{
+        } else {
             header('Location: index.php?action=error');
         }
     }
-    
-    public function logout(){
+
+    public function logout() {
         Session::destroy();
-        
+
         header('Location: /SOCS/');
     }
-    
-    public function error(){
-        $this->template->assign('alert','Error Logging in!');
+
+    public function error() {
+        $this->template->assign('alert', 'Error Logging in!');
     }
 
     public function display() {

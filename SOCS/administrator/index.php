@@ -8,21 +8,19 @@
 require_once '../libs/Controller.php';
 
 class Index extends Controller{
-
+    
     public function __construct() {
         parent::__construct();
-        
-        echo "Admin Page";
-        
         
     }
 
     public function display() {
-        //displaying the UI
+        $this->template->display('sim.tpl');
     }
 }
 
 $controller = new Index();
+$controller->perform_actions();
 $controller->display();
 
 ?>

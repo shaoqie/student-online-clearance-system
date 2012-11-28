@@ -40,12 +40,16 @@ abstract class Controller {
     //require all libs class and models
     private function load_libs() {
         
-        function __autoload($libs_name){
+        function __autoload($class_name){
             
-            if(file_exists("libs/$libs_name.php")){
-                require_once "libs/$libs_name.php";
-            }else{
-                require_once "../libs/$libs_name.php";
+            if(file_exists("libs/$class_name.php")){
+                require_once "libs/$class_name.php";
+            }else if(file_exists("../libs/$class_name.php")){
+                require_once "../libs/$class_name.php";
+            }else if(file_exists("models/$class_name.php")){
+                require_once "models/$class_name.php";
+            }else if(file_exists("../models/$class_name.php")){
+                require_once "../models/$class_name.php";
             }
             
         }
