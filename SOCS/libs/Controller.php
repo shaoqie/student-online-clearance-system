@@ -10,6 +10,8 @@ abstract class Controller {
     public function __construct() {
         $this->load_config();
         $this->load_libs();
+        
+        Session::init();
     }
 
     public function perform_actions() {
@@ -40,7 +42,7 @@ abstract class Controller {
         
         require_once 'libs/Model.php';
         require_once 'libs/Template.php';
-
+        require_once 'libs/Session.php';
     }
 
     public abstract function display();

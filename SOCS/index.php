@@ -19,15 +19,28 @@ class Index extends Controller {
         $this->admin = new Administrator_Model();
         $this->template = new Template();
         $this->template->setPageName('Login');
-        $this->template->setContent('views/login.tpl');
+        
+        if(Session::user_exist()){
+            $this->template->assign('username', Session::get_user());
+            $this->template->setContent('views/welcome.tpl');
+        }else{
+            $this->template->setContent('views/login.tpl');
+        }
+        
     }
 
     public function login() {
         if ($this->admin->isEqual($_POST['username'], $_POST['password'])) {
-            //$this->template->setPageName('Correct');
-        } else {
-            //$this->template->setPageName('Error');
+            Session::set_user($_POST['username']);   
         }
+        
+        header('Location: /SOCS/');
+    }
+    
+    public function logout(){
+        Session::destroy();
+        
+        header('Location: /SOCS/');
     }
 
     public function display() {
