@@ -21,7 +21,7 @@ class Index extends Controller {
 
         if (Session::user_exist()) {
             $this->template->assign('username', Session::get_user());
-            $this->template->setContent('views/adminview/welcome.tpl');
+            $this->template->setContent('views/adminview/index.tpl');
         } else {
             $this->template->setContent('views/login.tpl');
         }

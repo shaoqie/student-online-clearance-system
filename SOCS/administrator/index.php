@@ -15,7 +15,7 @@ class Index extends Controller{
     }
 
     public function display() {
-        $this->template->display('sim.tpl');
+      
     }
 }
 

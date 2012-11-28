@@ -16,8 +16,8 @@ class Administrator_Model extends Model{
     private $middlename;
     
     public function __construct() {
-        $this->username     = "admin";
-        $this->password     = "password";
+        $this->username     = "library";
+        $this->password     = "librarypassword";
     
         $this->lastname     = "";
         $this->firstname    = "";
