@@ -40,9 +40,15 @@ abstract class Controller {
     //require all libs class and models
     private function load_libs() {
         
-        require_once 'libs/Model.php';
-        require_once 'libs/Template.php';
-        require_once 'libs/Session.php';
+        function __autoload($libs_name){
+            
+            if(file_exists("libs/$libs_name.php")){
+                require_once "libs/$libs_name.php";
+            }else{
+                require_once "../libs/$libs_name.php";
+            }
+            
+        }
     }
 
     public abstract function display();
