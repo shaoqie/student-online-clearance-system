@@ -5,6 +5,10 @@
                 <td><h1>Login</h1></td>
             </tr>
             <tr>
+                <td>&nbsp;</td>
+                <td><div style="color: red">{$alert}</div></td>
+            </tr>
+            <tr>
                 <td><label>Username: </label></td>
                 <td><input type="text" placeholder="Enter Your Username" name = "username"></td>
             </tr>

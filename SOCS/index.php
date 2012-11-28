@@ -31,16 +31,21 @@ class Index extends Controller {
 
     public function login() {
         if ($this->admin->isEqual($_POST['username'], $_POST['password'])) {
-            Session::set_user($_POST['username']);   
+            Session::set_user($_POST['username']);
+            header('Location: /SOCS/');
+        }else{
+            header('Location: index.php?action=error');
         }
-        
-        header('Location: /SOCS/');
     }
     
     public function logout(){
         Session::destroy();
         
         header('Location: /SOCS/');
+    }
+    
+    public function error(){
+        $this->template->assign('alert','Error Logging in!');
     }
 
     public function display() {

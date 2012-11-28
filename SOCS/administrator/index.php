@@ -13,6 +13,8 @@ class Index extends Controller{
         parent::__construct();
         
         echo "Admin Page";
+        
+        
     }
 
     public function display() {
