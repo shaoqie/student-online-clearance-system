@@ -6,7 +6,7 @@
             </tr>
             <tr>
                 <td>&nbsp;</td>
-                <td><div style="color: red">{$alert}</div></td>
+                {$alert}
             </tr>
             <tr>
                 <td><label>Username: </label></td>
