@@ -5,51 +5,53 @@
  *
  * @author Ozy
  */
-require_once 'libs/Controller.php';
+require_once 'config/config.php';
 
 class Index extends Controller {
-
-    private $admin;
+    
     private $template;
+    private $administrator_model;
 
     public function __construct() {
         parent::__construct();
+        
+        $this->administrator_model = new Administrator_Model();
 
-        $this->admin = new Administrator_Model();
         $this->template = new Template();
-        $this->template->setPageName('Login');
-
-        if (Session::user_exist()) {
-            $this->template->assign('username', Session::get_user());
-            $this->template->setContent('views/adminview/index.tpl');
-        } else {
-            $this->template->setContent('views/login.tpl');
-        }
+        $this->template->setPageName('Home');
+        $this->template->setContent('login.tpl');
+        
     }
-
-    public function login() {
-        if ($this->admin->isEqual($_POST['username'], $_POST['password'])) {
+    
+    public function login(){
+        if($this->administrator_model->isEqual($_POST['username'], $_POST['password'])){
             Session::set_user($_POST['username']);
-            header('Location: /SOCS/');
-        } else {
-            header('Location: index.php?action=error');
+            header('Location: /SOCS/administrator/');
+            exit;
+        }else{
+            header('Location: index.php?action=login_error');
+            exit;
         }
     }
-
-    public function logout() {
+    
+    public function logout(){
         Session::destroy();
-
-        header('Location: /SOCS/');
+        $this->template->setAlert('Logout Successfully!', Template::ALERT_SUCCESS);
     }
-
-    public function error() {
-        $this->template->assign('alert', 'Error Logging in!');
+    
+    public function login_error(){
+        $this->template->setAlert('Error Logging in... ', Template::ALERT_ERROR);
     }
 
     public function display() {
-        $this->template->display(TEMPLATE);
+        
+        if(Session::user_exist()){
+            header('Location: /SOCS/administrator');
+        }else{
+            $this->template->display('simple.tpl');
+        }
     }
-
+    
 }
 
 $controller = new Index();

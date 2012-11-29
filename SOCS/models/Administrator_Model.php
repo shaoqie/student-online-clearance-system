@@ -5,7 +5,6 @@
  *
  * @author ronversa09, Ozy
  */
-require_once 'libs/Model.php';
 
 class Administrator_Model extends Model{
     private $username;
@@ -16,8 +15,8 @@ class Administrator_Model extends Model{
     private $middlename;
     
     public function __construct() {
-        $this->username     = "library";
-        $this->password     = "librarypassword";
+        $this->username     = "admin";
+        $this->password     = "password";
     
         $this->lastname     = "";
         $this->firstname    = "";

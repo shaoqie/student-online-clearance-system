@@ -5,11 +5,14 @@
  *
  * @author Ozy
  */
+
+require_once 'Model.php';
+require_once 'Session.php';
+require_once 'Template.php';
+
 abstract class Controller {
 
     public function __construct() {
-        $this->load_config();
-        $this->load_libs();
         
         Session::init();
     }
@@ -24,34 +27,6 @@ abstract class Controller {
                 $parameters = array_slice($_GET, 1);
                 @call_user_func_array(array($this, $method), $parameters);
             }
-        }
-    }
-    
-    //require config file
-    private function load_config(){
-        
-        if (file_exists('config/config.php')) {
-            require_once 'config/config.php';
-        } else {
-            require_once '../config/config.php';
-        }
-    }
-
-    //require all libs class and models
-    private function load_libs() {
-        
-        function __autoload($class_name){
-            
-            if(file_exists("libs/$class_name.php")){
-                require_once "libs/$class_name.php";
-            }else if(file_exists("../libs/$class_name.php")){
-                require_once "../libs/$class_name.php";
-            }else if(file_exists("models/$class_name.php")){
-                require_once "models/$class_name.php";
-            }else if(file_exists("../models/$class_name.php")){
-                require_once "../models/$class_name.php";
-            }
-            
         }
     }
 

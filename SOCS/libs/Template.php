@@ -6,12 +6,33 @@
  * @author Ozy
  */
 
-require_once 'smarty/Smarty.class.php';
+require_once PATH.'/libs/smarty/Smarty.class.php';
 
 class Template extends Smarty {
     
+    const ALERT_ERROR = 'red';
+    const ALERT_INFO = 'blue';
+    const ALERT_WARNING = 'orange';
+    const ALERT_SUCCESS = 'green';
+    const ALERT = 'black';
+
     public function __construct() {
         parent::__construct();
+        
+        $templatesDir = array(
+            'main_views' => './views/main_views', 
+            'administrator_views' => './views/administrator_views/',
+            'signatory_views' => './views/signatory_views/',
+            'student_views' => './views/student_views/',
+            'templates' => './views/templates/');
+        
+        $this->setTemplateDir($templatesDir);
+        $this->setCompileDir('./libs/smarty/templates_c/');
+        $this->setConfigDir('./libs/smarty/configs/');
+        $this->setCacheDir('./libs/smarty/cache/');
+        
+//        $this->caching = Smarty::CACHING_LIFETIME_CURRENT;
+        $this->assign('alert', '');
     }
     
     public function setPageName($page_name){
@@ -20,6 +41,10 @@ class Template extends Smarty {
     
     public function setContent($tpl_file){
         $this->assign('tpl_file', $tpl_file);
+    }
+    
+    public function setAlert($msg, $alert_type = self::ALERT){
+        $this->assign('alert', "<td><div style='color: $alert_type'>$msg</div></td>");
     }
 }
 

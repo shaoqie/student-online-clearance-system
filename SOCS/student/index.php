@@ -6,7 +6,7 @@
  * @author Ozy
  */
 
-require_once '../libs/Controller.php';
+require_once '../config/config.php';
 
 class Index extends Controller{
 
