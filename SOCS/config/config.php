@@ -1,23 +1,66 @@
 <?php
 
-//Server
+/*
+ * -----------------------------------------------------------------------------
+ * CONSTANTS
+ * -----------------------------------------------------------------------------
+ */
+
+/*
+ * Server
+ */
 define('SERVER', 'localhost');
 
-//Username
+/*
+ * Username
+ */
 define('USERNAME', 'root');
 
-//Password
+/*
+ * Password
+ */
 define('PASSWORD', '');
 
-//Database
+/*
+ * Database
+ */
 define('DATABASE', '');
 
-//Project Folder
+/*
+ * Project Root
+ */
 define('PATH', $_SERVER['DOCUMENT_ROOT']."SOCS/");
 
-require_once PATH.'config/config.php';
+/*
+ * -----------------------------------------------------------------------------
+ * AUTOLOADERS
+ * -----------------------------------------------------------------------------
+ */
 
-require_once PATH.'libs/Controller.php';
-require_once PATH.'libs/Model.php';
-require_once PATH.'models/Administrator_Model.php';
+/*
+ * Load classes from libs folder when a class instantiated
+ */
+function autoload_libs($class){
+    
+    if (file_exists(PATH."libs/$class.php")) {
+        require_once PATH."libs/$class.php";
+    }
+}
+
+/*
+ * Load classes from models folder when a model class instantiated
+ */
+function autoload_models($class){
+    
+    if (file_exists(PATH."models/$class.php")) {
+        require_once PATH."models/$class.php";
+    }
+}
+
+/*
+ * Register all autoload functions
+ */
+spl_autoload_register('autoload_libs');
+spl_autoload_register('autoload_models');
+
 ?>
