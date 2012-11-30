@@ -25,7 +25,7 @@ class Index extends Controller {
     
     public function login(){
         if($this->administrator_model->isExist(trim($_POST['username']), trim($_POST['password']))){
-            Session::set_user($_POST['username']);
+            Session::set_user($_POST['username'], $_POST['password']);
             header('Location: /SOCS/administrator/');
             exit;
         }else{
