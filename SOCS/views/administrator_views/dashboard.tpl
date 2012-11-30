@@ -1,6 +1,6 @@
 
 <div style="float:right;">
-     <a href='../index.php?action=myaccount'>My Account</a>&nbsp;&nbsp;<a href='../index.php?action=logout'>Logout</a></div>
+     <a href='../settings.php'>My Account</a>&nbsp;|&nbsp;<a href='../index.php?action=logout'>Logout</a></div>
 
 <center><div style="width:100px;height:100px;border:1px solid gray;"><img></img></div></center>
      
