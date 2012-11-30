@@ -7,72 +7,46 @@
  */
 
 class Administrator_Model extends Model{
-    private $username;
-    private $password;
+    public $Username;
+    public $Password;
     
-    private $lastname;
-    private $firstname;
-    private $middlename;
+    public $Surname;
+    public $First_Name;
+    public $Middle_Name;
+    public $Account_Type;
+    public $Picture;
+    public $Assigned_Signatory;
+    
+    private $query;
     
     public function __construct() {
-        $this->username     = "admin";
-        $this->password     = "password";
-    
-        $this->lastname     = "";
-        $this->firstname    = "";
-        $this->middlename   = "";
+       //$this->setUserAdmin();      
     }
-    
     // mutator
-    public function setUsername($Tusername){
-        $this->username = $Tusername;
-    }
     
-    public function setPassword($Tpassword){
-        $this->password = $Tpassword;
-    }
+    public function setUserAdmin(){
     
-    public function setLastname($Tlastname){
-        $this->lastname = $Tlastname;
-    }
+        return mysql_query("SELECT * from users");
+        
+       
+        
+    }     
     
-    public function setFirstname($Tfirstname){
-        $this->middlename = $Tfirstname;
-    }
-    
-    public function setMiddlename($Tmiddlename){
-        $this->lastname = $Tmiddlename;
-    }
-    
-    
-    // accessor
-    public function getUsername(){
-        return $this->username;
-    }
-    
-    public function getPassword(){
-        return $this->password;
-    }
-    
-    public function getLastname(){
-        return $this->lastname;
-    }
-    
-    public function getFirstname(){
-        return $this->firstname;
-    }
-    
-    public function getMiddlename(){
-        return $this->middlename;
-    }
-    
-    public function isEqual($Tuser, $Tpass){
-        if($this->username == $Tuser && $this->password == $Tpass){
-            return true;
+    public function isExist($tempUser, $tempPass){
+        
+        $this->query = mysql_query("SELECT Username, Password from users where = '$tempUser' ");       
+        $row = mysql_fetch_array($this->query);
+          
+            $this->Username = $row['Username'];      
+            $this->Password = $row['Password'];  
+  
+        if($this->Username == $tempUser && $this->Password == $tempPass){
+                    return true;
         }else{
-            false;
+                    return false;
         }
     }
-}
+    
+    }
 
 ?>
