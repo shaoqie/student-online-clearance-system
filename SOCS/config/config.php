@@ -24,7 +24,7 @@ define('PASSWORD', '');
 /*
  * Database
  */
-define('DATABASE', '');
+define('DATABASE', 'socs');
 
 /*
  * Project Root

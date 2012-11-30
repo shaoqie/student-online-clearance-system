@@ -24,7 +24,7 @@ class Index extends Controller {
     }
     
     public function login(){
-        if($this->administrator_model->isExist(trim($tempUser), trim($tempPass))){
+        if($this->administrator_model->isExist(trim($_POST['username']), trim($_POST['password']))){
             Session::set_user($_POST['username']);
             header('Location: /SOCS/administrator/');
             exit;
@@ -32,6 +32,7 @@ class Index extends Controller {
             header('Location: index.php?action=login_error');
             exit;
         }
+       // $this->administrator_model->isExist(trim($_POST['username']), trim($_POST['password']));
     }
     
     public function logout(){
@@ -50,6 +51,8 @@ class Index extends Controller {
         }else{
             $this->template->display('simple.tpl');
         }
+        
+        $this->administrator_model->db_close();
     }
     
 }

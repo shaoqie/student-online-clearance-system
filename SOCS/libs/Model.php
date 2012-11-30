@@ -12,13 +12,14 @@ abstract class Model {
     public function __construct() {
         //connect database
         
-        $this->connectdb = mysql_connect(SERVER, LOCALHOST, PASSWORD);
+        $this->connectdb = mysql_connect(SERVER, USERNAME, PASSWORD);
         
         if (!$this->connectdb){
             
         die('Could not connect: ' . mysql_error());
         }
-        mysql_select_db("my_db", $this->connectdb);
+        
+        mysql_select_db(DATABASE, $this->connectdb);
         
     }
     

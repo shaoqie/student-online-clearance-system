@@ -20,7 +20,7 @@ class Administrator_Model extends Model{
     private $query;
     
     public function __construct() {
-       //$this->setUserAdmin();      
+        parent::__construct();
     }
     // mutator
     
@@ -34,16 +34,15 @@ class Administrator_Model extends Model{
     
     public function isExist($tempUser, $tempPass){
         
-        $this->query = mysql_query("SELECT Username, Password from users where = '$tempUser' ");       
-        $row = mysql_fetch_array($this->query);
-          
-            $this->Username = $row['Username'];      
-            $this->Password = $row['Password'];  
-  
-        if($this->Username == $tempUser && $this->Password == $tempPass){
-                    return true;
+        $this->query = mysql_query("SELECT * FROM users WHERE username='$tempUser'and password='$tempPass' ");// where username = '$tempUser' and password = '$tempPass'");
+        
+        $rows = mysql_num_rows($this->query);
+        
+        if($rows==1){
+            return true;
         }else{
-                    return false;
+            //echo $tempPass;
+            return false;
         }
     }
     
