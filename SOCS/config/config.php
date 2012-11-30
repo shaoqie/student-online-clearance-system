@@ -31,6 +31,8 @@ define('DATABASE', 'socs');
  */
 define('PATH', $_SERVER['DOCUMENT_ROOT']."/SOCS/");
 
+
+
 /*
  * -----------------------------------------------------------------------------
  * AUTOLOADERS
