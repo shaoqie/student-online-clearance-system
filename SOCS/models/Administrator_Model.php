@@ -21,15 +21,23 @@ class Administrator_Model extends Model{
     
     public function __construct() {
         parent::__construct();
+        $this->Username = Session::get_user();
     }
     // mutator
     
-    public function setUserAdmin(){
-    
-        return mysql_query("SELECT * from users");
-        
-       
-        
+    public function update(){
+       // $sql = "UPDATE users  SET Surname='".$Surname."',First_Name='".$First_Name."',Middle_Name='". $Middle_Name ."',Password='".$Password."' WHERE Username='".$Username."'";
+
+        $sql = "UPDATE users SET Surname='".$this->Surname."', First_Name='".$this->First_Name."', Middle_Name='".$this->Middle_Name."',Password='".$this->Password."' Where Username='".$this->Username."'";
+        $message = "";
+        if(mysql_query($sql)){
+            $message = "Success";
+            
+        }else{
+            $message = "failed";
+        }
+        echo $this->Middle_Name;
+        echo $message;
     }     
     
     public function isExist($tempUser, $tempPass){
@@ -45,7 +53,8 @@ class Administrator_Model extends Model{
             return false;
         }
     }
-    
+    public function getPass(){
+        
     }
-
+}
 ?>

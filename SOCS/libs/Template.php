@@ -20,11 +20,11 @@ class Template extends Smarty {
         parent::__construct();
         
         $templatesDir = array(
-            'main_views' => './views/main_views', 
-            'administrator_views' => './views/administrator_views/',
-            'signatory_views' => './views/signatory_views/',
-            'student_views' => './views/student_views/',
-            'templates' => './views/templates/');
+            'main_views' => PATH.'/views/main_views', 
+            'administrator_views' => PATH.'/views/administrator_views/',
+            'signatory_views' => PATH.'/views/signatory_views/',
+            'student_views' => PATH.'/views/student_views/',
+            'templates' => PATH.'/views/templates/');
         
         $this->setTemplateDir($templatesDir);
         $this->setCompileDir('./libs/smarty/templates_c/');

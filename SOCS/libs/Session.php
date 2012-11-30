@@ -11,8 +11,13 @@ class Session {
         session_start();
     }
     
-    public static function set_user($username){
+    public static function set_user($username,$password){
         $_SESSION['username'] = $username;
+        $_SESSION['password'] = $password;
+    }
+    
+    public static function set_password($password){
+        $_SESSION['password'] = $password;
     }
     
     public static function get_user(){
@@ -30,6 +35,10 @@ class Session {
     public static function destroy(){
         unset($_SESSION['username']);
         session_destroy();
+    }
+    
+    public static function getUserPass(){
+        return $_SESSION['password'];
     }
 }
 

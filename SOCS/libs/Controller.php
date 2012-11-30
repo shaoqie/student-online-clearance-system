@@ -6,10 +6,6 @@
  * @author Ozy
  */
 
-require_once 'Model.php';
-require_once 'Session.php';
-require_once 'Template.php';
-
 abstract class Controller {
 
     public function __construct() {

@@ -29,7 +29,7 @@ define('DATABASE', 'socs');
 /*
  * Project Root
  */
-define('PATH', $_SERVER['DOCUMENT_ROOT']."SOCS/");
+define('PATH', $_SERVER['DOCUMENT_ROOT']."/SOCS/");
 
 /*
  * -----------------------------------------------------------------------------
