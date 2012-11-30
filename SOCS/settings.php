@@ -27,7 +27,7 @@ class Settings extends Controller {
 
             $this->admin = new User_Model();
             //$_SESSION['password']=12345;
-            echo $_SESSION['password'];
+//            echo $_SESSION['password'];
         } else {
             header('Location: /SOCS/');
             exit;

@@ -70,7 +70,7 @@ class Index extends Controller {
         $this->administrator_model->db_close();
     }
     
-    public function setSession($account_type){
+    private function setSession($account_type){
         Session::set_user($_POST['username'],$_POST['password']);
         
         $result = mysql_fetch_array($this->administrator_model->getUser(trim($_POST['username']), trim($_POST['password'])));

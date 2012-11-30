@@ -19,7 +19,7 @@ class User_Model extends Model {
 
     public function __construct() {
         parent::__construct();
-        $this->Username = Session::get_user();
+        @$this->Username = Session::get_user();
     }
 
     // mutator

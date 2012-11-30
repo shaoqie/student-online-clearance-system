@@ -11,7 +11,6 @@ class Session {
         session_start();
     }
     
-    
     //mutator
     public static function set_Account_type($Account_type){
         

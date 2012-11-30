@@ -33,6 +33,7 @@ class Template extends Smarty {
         
 //        $this->caching = Smarty::CACHING_LIFETIME_CURRENT;
         $this->assign('alert', '');
+        $this->assign('path', PATH);
     }
     
     public function setPageName($page_name){
