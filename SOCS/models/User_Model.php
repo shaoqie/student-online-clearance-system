@@ -6,7 +6,7 @@
  * @author ronversa09, Ozy
  */
 
-class Administrator_Model extends Model{
+class User_Model extends Model{
     public $Username;
     public $Password;
     
@@ -21,23 +21,15 @@ class Administrator_Model extends Model{
     
     public function __construct() {
         parent::__construct();
-        $this->Username = Session::get_user();
     }
     // mutator
     
-    public function update(){
-       // $sql = "UPDATE users  SET Surname='".$Surname."',First_Name='".$First_Name."',Middle_Name='". $Middle_Name ."',Password='".$Password."' WHERE Username='".$Username."'";
-
-        $sql = "UPDATE users SET Surname='".$this->Surname."', First_Name='".$this->First_Name."', Middle_Name='".$this->Middle_Name."',Password='".$this->Password."' Where Username='".$this->Username."'";
-        $message = "";
-        if(mysql_query($sql)){
-            $message = "Success";
-            
-        }else{
-            $message = "failed";
-        }
-        echo $this->Middle_Name;
-        echo $message;
+    public function getUser($tempUser, $tempPass){
+    
+        return mysql_query("SELECT * FROM users WHERE username='$tempUser'and password='$tempPass' ");
+        
+       
+        
     }     
     
     public function isExist($tempUser, $tempPass){
@@ -46,6 +38,9 @@ class Administrator_Model extends Model{
         
         $rows = mysql_num_rows($this->query);
         
+        
+        //echo $this->getAccount_Type($tempUser, $tempPass) . ", " .$rows;
+        
         if($rows==1){
             return true;
         }else{
@@ -53,8 +48,16 @@ class Administrator_Model extends Model{
             return false;
         }
     }
-    public function getPass(){
+    public function getAccount_Type($tempUser, $tempPass){
+       $this->query = mysql_query("SELECT Account_Type FROM users WHERE username='$tempUser'and password='$tempPass' ");
+        
+        $sample = mysql_fetch_array($this->query);
+        
+        return $sample['Account_Type'];
         
     }
+    
+    
 }
+
 ?>

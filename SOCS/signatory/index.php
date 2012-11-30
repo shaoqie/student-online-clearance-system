@@ -13,7 +13,12 @@ class Index extends Controller{
     public function __construct() {
         parent::__construct();
         
-        echo "Signatory Page";
+         if (Session::user_exist() && Session::get_Account_type() == "Signatory") {
+            echo "Signatory Page<br>";
+            echo "<a href='../index.php?action=logout'>Logout</a>";
+        } else {
+            header('Location: /SOCS/');
+        }
     }
 
     public function display() {

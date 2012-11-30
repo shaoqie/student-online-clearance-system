@@ -11,17 +11,19 @@ class Index extends Controller {
 
     public function __construct() {
         parent::__construct();
+        if (Session::user_exist() && Session::get_Account_type() == "Admin") {
 
-        if (Session::user_exist()) {
-            echo "Admin Page<br>";
-            echo "<a href='../index.php?action=logout'>Logout</a>";
+            $this->template = new Template();
+            $this->template->setPageName('Administrator Page');
+            $this->template->setContent('dashboard.tpl');
+            $this->template->set_UserInfo("" .Session::get_Surname() .", " .Session::get_Firstname() ." " .Session::get_Middlename() .".");
         } else {
             header('Location: /SOCS/');
         }
     }
 
     public function display() {
-        
+        $this->template->display('simple.tpl');
     }
 
 }

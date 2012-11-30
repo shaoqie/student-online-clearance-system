@@ -46,6 +46,10 @@ class Template extends Smarty {
     public function setAlert($msg, $alert_type = self::ALERT){
         $this->assign('alert', "<td><div style='color: $alert_type'>$msg</div></td>");
     }
+    
+    public function set_UserInfo($user_info){
+        $this->assign('user_info', $user_info);
+    }
 }
 
 ?>
