@@ -1,5 +1,5 @@
 {$alert}
-<form action='settings.php?action=verify' method='post'>
+<form action='adminSettings.php?action=verify' method='post'>
     Edit Account:
     <p>Surname: <input type ='text' name='surname'> <br />
         First Name: <input type='text' name='firstname'> <br />

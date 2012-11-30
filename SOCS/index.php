@@ -27,18 +27,17 @@ class Index extends Controller {
         if($this->administrator_model->isExist(trim($_POST['username']), trim($_POST['password']))){
 
             if($this->administrator_model->getAccount_Type(trim($_POST['username']), trim($_POST['password'])) == "Admin"){
-                //Session::set_user($_POST['username']);
-                //Session::set_Account_type('Admin');
+                
                 $this->setSession('Admin');
                 header('Location: /SOCS/administrator/');
+                
             }else if($this->administrator_model->getAccount_Type(trim($_POST['username']), trim($_POST['password'])) == "Student"){
-                //Session::set_user($_POST['username']);
-                //Session::set_Account_type('Student');
+                
                 $this->setSession('Student');
                 header('Location: /SOCS/student/');
+                
             }else if($this->administrator_model->getAccount_Type(trim($_POST['username']), trim($_POST['password'])) == "Signatory"){
-                //Session::set_user($_POST['username']);
-               // Session::set_Account_type('Signatory');
+                
                 $this->setSession('Signatory');
                 header('Location: /SOCS/signatory');
             }
@@ -72,14 +71,14 @@ class Index extends Controller {
     }
     
     public function setSession($account_type){
-        Session::set_user($_POST['username']);
+        Session::set_user($_POST['username'],$_POST['password']);
         
         $result = mysql_fetch_array($this->administrator_model->getUser(trim($_POST['username']), trim($_POST['password'])));
         
         Session::set_surname($result['Surname']);
         Session::set_firstname($result['First_Name']);
         Session::set_middlename($result['Middle_Name']);
-                
+       
         Session::set_Account_type($account_type);
     }
     

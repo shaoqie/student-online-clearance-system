@@ -18,7 +18,7 @@ class Session {
         $_SESSION['Account_type'] = $Account_type;
     }
     
-    public static function set_user($username){
+    public static function set_user($username,$password){
         $_SESSION['username'] = $username;
         $_SESSION['password'] = $password;
     }

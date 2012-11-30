@@ -5,7 +5,7 @@
     </head>
     <body>
 
-        <div style="background: #DEE"><a href="/SOCS/">Home</a></div>
+        <div style="background: #DEE"><a href="/SOCS/">Home</a> | <a href="../settings.php">Settings</a></div>
         
         {include file=$tpl_file}
         
