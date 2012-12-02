@@ -22,7 +22,7 @@ class Index extends Controller {
             $this->template->setContent('dashboard.tpl');
             $this->template->set_UserInfo("" . Session::get_Surname() . ", " . Session::get_Firstname() . " " . Session::get_Middlename() . ".");
 
-            $this->template->assign('myName', $this->getNameofUser('oz'));
+            $this->template->assign('myName', $this->getNameofUser(''));
         } else {
             header('Location: /SOCS/');
         }

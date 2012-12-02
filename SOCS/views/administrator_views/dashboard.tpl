@@ -1,3 +1,6 @@
+<div style="float:right;">
+     <a href='../settings.php'>My Account</a>&nbsp;|&nbsp;<a href='../index.php?action=logout'>Logout</a>
+</div>
 <center>
     <div style="width:100px;height:100px;border:1px solid gray;">
         <img></img>
@@ -35,7 +38,7 @@
     </table>  
 
     <div style="overflow:auto;width:550px;height:200px;border:1px;" >
-        <table border="1 solid gray">
+        <table border="1 solid gray">           
             {foreach $myName as $name}
                 <tr>
                     <td style="width:20px;"><input type="checkbox"></input></td>
