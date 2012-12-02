@@ -71,6 +71,10 @@ class Index extends Controller {
         return $type;
     }
     
+    public function delete($selected){
+        
+    }
+    
     public function displayTable($searchName, $page){
         $numOfPages = $this->administrator_model->getQueryPageSize($searchName);
         $numOfResults = count($this->getNameofUser($searchName, $page));

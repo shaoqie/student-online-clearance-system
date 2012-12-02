@@ -24,16 +24,18 @@
         }
         
         function findCheck(){
-            var valueDeleted = Array();
+            var valueDeleted = "";
             var count = 0;
-            for(var i = 0; i <= {$rowCount}; i++){
+            for(var i = 0; i < {$rowCount}; i++){
                 //document.getElementById("" +i).checked = isChecked;
                 if(document.getElementById("" +i).checked == true){
-                    alert(document.getElementById("" +i).value);
-                    //valueDeleted[count] = document.getElementById("" +i).value;
+                    //alert(document.getElementById("" +i).value);
+                    valueDeleted += document.getElementById("" +i).value + ";";
+
                     count ++;
                 }
             }
+            window.location.assign("?action=delete&selected=" + valueDeleted);
         }
 </script>
 
@@ -84,14 +86,15 @@
                     <td>{$myKey[$k]}</td>
                     <td style="width:100px;"><p>{$myPhotos[$k]}</p></td>
                     <td style="width:300px;"><p>{$i}</p></td>
-                    <td style="width:100px;"><p>{$myType[$k]}</p></td>                   
+                    <td style="width:100px;"><p>{$myType[$k]}</p></td>
+                    
                 </tr>
             {/foreach}   
         </table>  
         {$emptyResult}
     </div>      
         
-    <a href = "" onclick = "findCheck()">Delete Selected</a>
+    <a href="javascript:findCheck()">Delete Selected</a>
     Jump to:  <select id = "jump" onchange="jumpToPage()">
         <option>--</option>
         {for $start = 1 to $end}
