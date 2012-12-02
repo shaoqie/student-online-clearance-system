@@ -52,6 +52,9 @@ class Template extends Smarty {
         $this->assign('user_info', $user_info);
     }
     
+    public function setListofUser($ListofUser){
+         $this->assign('$myName', $ListofUser);
+    }
 //    public function set_User(){
 //        
 //    }

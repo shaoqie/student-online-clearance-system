@@ -15,6 +15,7 @@ class User_Model extends Model {
     public $Account_Type;
     public $Picture;
     public $Assigned_Signatory;
+
     private $query;
 
     public function __construct() {
@@ -78,6 +79,14 @@ class User_Model extends Model {
             echo $message;
             echo $account;
         }
+    }
+    
+    public function getListofUsers($searchName){
+        return mysql_query("select Picture, concat(Surname, ', ', First_Name, ' ', Middle_Name) 
+                        as Name, Account_Type from users 
+                        where First_name like '%$searchName%' OR Surname like '%$searchName%' OR 
+                        Middle_Name like '%$searchName%'");
+               
     }
 
 }
