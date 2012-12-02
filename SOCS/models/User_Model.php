@@ -85,7 +85,7 @@ class User_Model extends Model {
     
     public function getListofUsers($searchName, $page){
 
-        $query = mysql_query("select Picture, concat(Surname, ', ', First_Name, ' ', Middle_Name) 
+        $query = mysql_query("select Username, Picture, concat(Surname, ', ', First_Name, ' ', Middle_Name) 
                         as Name, Account_Type from users 
                         where First_name like '%$searchName%' OR Surname like '%$searchName%' OR 
                         Middle_Name like '%$searchName%' LIMIT " . (($page-1) * $this->itemsPerPage) . ", " . $this->itemsPerPage);
@@ -100,6 +100,7 @@ class User_Model extends Model {
         return mysql_num_rows($query) / $this->itemsPerPage;
     }
     
+    //public function getListofKey(){
 }
 
 ?>

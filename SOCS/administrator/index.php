@@ -30,6 +30,16 @@ class Index extends Controller {
             header('Location: /SOCS/');
         }
     }
+    
+    private function getListofKey($searchName, $page){
+        $key = array();
+        $query = $this->administrator_model->getListofUsers($searchName, $page);
+        while ($row = mysql_fetch_array($query)) {
+            array_push($key, $row['Username']);
+        }
+        
+        return $key;
+    }
 
     private function getNameofUser($searchName, $page) {
         $name = array();
@@ -66,6 +76,8 @@ class Index extends Controller {
         $numOfResults = count($this->getNameofUser($searchName, $page));
         
         //$row = 0;
+        $this->template->assign('myKey', $this->getListofKey($searchName, $page));
+        
         $this->template->set_Name($this->getNameofUser($searchName, $page));
         $this->template->set_Photos($this->getPictureofUser($searchName, $page));
         $this->template->set_Type($this->getTypeeofUser($searchName, $page));

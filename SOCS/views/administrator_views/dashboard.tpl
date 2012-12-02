@@ -22,6 +22,19 @@
                 document.getElementById("" +i).checked = isChecked;
             }
         }
+        
+        function findCheck(){
+            var valueDeleted = Array();
+            var count = 0;
+            for(var i = 0; i <= {$rowCount}; i++){
+                //document.getElementById("" +i).checked = isChecked;
+                if(document.getElementById("" +i).checked == true){
+                    alert(document.getElementById("" +i).value);
+                    //valueDeleted[count] = document.getElementById("" +i).value;
+                    count ++;
+                }
+            }
+        }
 </script>
 
 <div style="float:right;">
@@ -67,7 +80,8 @@
         <table border="1 solid gray">   
             {foreach from = $myName key = k item = i}
                 <tr>
-                    <td style="width:20px;"><input type="checkbox" id = '{$k}'></input></td>
+                    <td style="width:20px;"><input type="checkbox" id = '{$k}' value = {$myKey[$k]}></input></td>
+                    <td>{$myKey[$k]}</td>
                     <td style="width:100px;"><p>{$myPhotos[$k]}</p></td>
                     <td style="width:300px;"><p>{$i}</p></td>
                     <td style="width:100px;"><p>{$myType[$k]}</p></td>                   
@@ -77,7 +91,7 @@
         {$emptyResult}
     </div>      
         
-    <a href = "#">Delete Selected</a>
+    <a href = "" onclick = "findCheck()">Delete Selected</a>
     Jump to:  <select id = "jump" onchange="jumpToPage()">
         <option>--</option>
         {for $start = 1 to $end}
