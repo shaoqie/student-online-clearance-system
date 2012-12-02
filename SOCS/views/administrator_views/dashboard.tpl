@@ -19,20 +19,26 @@
       
    </form>
    
-        <center><div style="overflow:auto;width:700px;height:300px;border:1px;" >
-        <table border="1 solid gray">       
-        <tr>
-            <th> /\</th>
-            <th style="width:200px;"> Pic</th>
-            <th style="width:600px;"> User</th>  
-            <th style="width:200px;"> Type</th>  
-        </tr>
         
+        <center>
+         <table border="1 solid gray">
+            <tr>
+                <th style="width:20px;"> /\</th>
+                <th style="width:100px;"> Pic</th>
+                <th style="width:300px;"> User</th>  
+                <th style="width:100px;"> Type</th>  
+            </tr>
+        </table>
+        
+            
+       <div style="overflow:auto;width:550px;height:200px;border:1px;" >                     
+        <table border="1 solid gray">       
+
           <tr>
-            <td><input type="checkbox"></input></td>
-            <td><p>Pic</p></td>
-            <td><p>Jay Erick on Torres tingson </p></td>
-            <td><p>Signatory in-charge</p></td>
+            <td style="width:20px;"><input type="checkbox"></input></td>
+            <td style="width:100px;"><p>Pic</p></td>
+            <td style="width:300px;"><p>Jay Erick on Torres tingson </p></td>
+            <td style="width:100px;"><p>Signatory in-charge</p></td>
         </tr>
          <tr>
             <td><input type="checkbox"></input></td>
