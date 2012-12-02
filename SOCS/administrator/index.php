@@ -62,17 +62,19 @@ class Index extends Controller {
     }
     
     public function displayTable($searchName, $page){
-        $row = $this->administrator_model->getQueryPageSize($searchName);
+        $numOfPages = $this->administrator_model->getQueryPageSize($searchName);
+        $numOfResults = count($this->getNameofUser($searchName, $page));
         
         //$row = 0;
         $this->template->set_Name($this->getNameofUser($searchName, $page));
         $this->template->set_Photos($this->getPictureofUser($searchName, $page));
         $this->template->set_Type($this->getTypeeofUser($searchName, $page));
         $this->template->set_Filter($searchName);
-        $this->template->assign('end', $row);
+        $this->template->assign('end', $numOfPages);
+        $this->template->assign('rowCount', $numOfResults);
         
-        if($row == 0){
-           // $this->template->assign('error_msg', "<p style='color: red'>Searching not Found!...</p>");
+        if ($numOfResults == 0){
+            $this->template->assign('emptyResult', "<tr><td colspan='4'>No results found</td></tr>");
         }
         
         //echo $searchName;

@@ -10,8 +10,8 @@
                 window.location.assign("?action=displayTable&filter=" + search + "&page=1");
         }
         
-        function isCheckAll(isChecked, rowCount){
-            for(var i = 0; i <= rowCount; i++){
+        function isCheckAll(isChecked){
+            for(var i = 0; i <= {$rowCount}; i++){
                 document.getElementById("" +i).checked = isChecked;
             }
         }
@@ -40,8 +40,8 @@
         &nbsp;&nbsp;<a href='../administrator/department_list_manager.php'>Departments</a></div></center>           
 <br> 
 <form>
-    <center><input id = "search" type="text" style="width:500px;" placeholder="Search..." value = {$filter} ></input><input type="button" value="Go ->" onclick = "mySearch()"></input><br>
-        <a href = "javascript:isCheckAll('true',{$end})" >Checked All</a> / <a href = "javascript:isCheckAll('false',{$end})">Unchecked All</a> <input type="button" value="Add User Account"></input><br>
+    <center><input id = "search" type="text" style="width:500px;" placeholder="Search..." value ="{$filter}"></input><input type="button" value="Go ->" onclick = "mySearch()"></input><br>
+        <a href = "javascript:isCheckAll(true)" >Checked All</a> / <a href = "javascript:isCheckAll(false)">Unchecked All</a> <input type="button" value="Add User Account"></input><br>
     </center>
 
 </form>
@@ -65,7 +65,8 @@
                     <td style="width:300px;"><p>{$i}</p></td>
                     <td style="width:100px;"><p>{$myType[$k]}</p></td>                   
                 </tr>
-            {/foreach}           
+            {/foreach}   
+            {$emptyResult}
         </table>  
     </div>      
         
