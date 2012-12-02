@@ -73,8 +73,11 @@ class Index extends Controller {
         $this->template->assign('end', $numOfPages);
         $this->template->assign('rowCount', $numOfResults);
         
+        echo $numOfResults;
         if ($numOfResults == 0){
-            $this->template->assign('emptyResult', "<tr><td colspan='4'>No results found</td></tr>");
+            $this->template->assign('emptyResult', "<div style='color:red;font-size:20pt;'>No results found</div>");
+        }else{
+             $this->template->assign('emptyResult', "");
         }
         
         //echo $searchName;

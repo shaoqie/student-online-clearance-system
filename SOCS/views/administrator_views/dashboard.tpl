@@ -66,8 +66,8 @@
                     <td style="width:100px;"><p>{$myType[$k]}</p></td>                   
                 </tr>
             {/foreach}   
-            {$emptyResult}
         </table>  
+        {$emptyResult}
     </div>      
         
     <a href = "#">Delete Selected</a>
