@@ -2,7 +2,7 @@
 	function myFunction(){
 		//alert("eawe");
 		var jump = document.getElementById("jump").value;
-		//document.write(jump);
+                window.location.assign("?action=gotoPage&page=" + jump);
 	}
 </script>
 
@@ -58,9 +58,10 @@
         </table>
 
     </div>      
-
+        
     <a href = "#">Delete Selected</a>
     Jump to:  <select id = "jump" onchange="myFunction()">
+        <option>--</option>
         <option>1</option>
         <option>2</option>
         <option>3</option>
