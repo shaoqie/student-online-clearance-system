@@ -22,9 +22,10 @@ class Index extends Controller {
             $this->template->setContent('dashboard.tpl');
             $this->template->set_UserInfo("" . Session::get_Surname() . ", " . Session::get_Firstname() . " " . Session::get_Middlename() . ".");
             
-            $this->template->set_Name($this->getNameofUser('', 1));
-            $this->template->set_Photos($this->getPictureofUser('', 1));
-            $this->template->set_Type($this->getTypeeofUser('', 1));
+//            $this->template->set_Name($this->getNameofUser('', 1));
+//            $this->template->set_Photos($this->getPictureofUser('', 1));
+//            $this->template->set_Type($this->getTypeeofUser('', 1));
+            $this->displayTable('', 1);
         } else {
             header('Location: /SOCS/');
         }
@@ -61,11 +62,12 @@ class Index extends Controller {
     }
     
     public function displayTable($searchName, $page){
-       // echo "test Search: " . $searchName;
         $this->template->set_Name($this->getNameofUser($searchName, $page));
         $this->template->set_Photos($this->getPictureofUser($searchName, $page));
         $this->template->set_Type($this->getTypeeofUser($searchName, $page));
         $this->template->set_Filter($searchName);
+        
+        //echo $searchName;
     }
 
     public function display() {
