@@ -52,6 +52,17 @@ class Template extends Smarty {
         $this->assign('user_info', $user_info);
     }
     
+    public function set_Name($name){
+        $this->assign('myName', $name);
+    }
+    
+    public function set_Photos($photos){
+        $this->assign('myPhotos', $photos);
+    }
+    
+    public function set_Type($type){
+        $this->assign('myType', $type);
+    }
 }
 
 ?>

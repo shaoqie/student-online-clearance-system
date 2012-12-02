@@ -1,3 +1,11 @@
+<script>
+	function myFunction(){
+		//alert("eawe");
+		var jump = document.getElementById("jump").value;
+		//document.write(jump);
+	}
+</script>
+
 <div style="float:right;">
      <a href='../settings.php'>My Account</a>&nbsp;|&nbsp;<a href='../index.php?action=logout'>Logout</a>
 </div>
@@ -52,7 +60,7 @@
     </div>      
 
     <a href = "#">Delete Selected</a>
-    Jump to:  <select>
+    Jump to:  <select id = "jump" onchange="myFunction()">
         <option>1</option>
         <option>2</option>
         <option>3</option>
