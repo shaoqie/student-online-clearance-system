@@ -9,6 +9,12 @@
                 var search = document.getElementById("search").value;
                 window.location.assign("?action=displayTable&filter=" + search + "&page=1");
         }
+        
+        function isCheckAll(isChecked, rowCount){
+            for(var i = 0; i <= rowCount; i++){
+                document.getElementById("" +i).checked = isChecked;
+            }
+        }
 </script>
 
 <div style="float:right;">
@@ -35,7 +41,7 @@
 <br> 
 <form>
     <center><input id = "search" type="text" style="width:500px;" placeholder="Search..." value = {$filter} ></input><input type="button" value="Go ->" onclick = "mySearch()"></input><br>
-        <a href = "#">Checked All</a> / <a href = "#">Unchecked All</a> <input type="button" value="Add User Account"></input><br>
+        <a href = "javascript:isCheckAll('true',{$end})" >Checked All</a> / <a href = "javascript:isCheckAll('false',{$end})">Unchecked All</a> <input type="button" value="Add User Account"></input><br>
     </center>
 
 </form>
@@ -54,14 +60,13 @@
         <table border="1 solid gray">   
             {foreach from = $myName key = k item = i}
                 <tr>
-                    <td style="width:20px;"><input type="checkbox"></input></td>
+                    <td style="width:20px;"><input type="checkbox" id = '{$k}'></input></td>
                     <td style="width:100px;"><p>{$myPhotos[$k]}</p></td>
                     <td style="width:300px;"><p>{$i}</p></td>
-                    <td style="width:100px;"><p>{$myType[$k]}</p></td>
+                    <td style="width:100px;"><p>{$myType[$k]}</p></td>                   
                 </tr>
-            {/foreach}
-        </table>
-
+            {/foreach}           
+        </table>  
     </div>      
         
     <a href = "#">Delete Selected</a>

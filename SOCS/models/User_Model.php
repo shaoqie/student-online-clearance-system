@@ -18,7 +18,7 @@ class User_Model extends Model {
 
     private $query;
     
-    private $itemsPerPage = 2;
+    private $itemsPerPage = 4;
 
     public function __construct() {
         parent::__construct();
@@ -99,6 +99,7 @@ class User_Model extends Model {
                         Middle_Name like '%$searchName%'");
         return mysql_num_rows($query) / $this->itemsPerPage;
     }
+    
 }
 
 ?>

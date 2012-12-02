@@ -71,6 +71,10 @@ class Index extends Controller {
         $this->template->set_Filter($searchName);
         $this->template->assign('end', $row);
         
+        if($row == 0){
+           // $this->template->assign('error_msg', "<p style='color: red'>Searching not Found!...</p>");
+        }
+        
         //echo $searchName;
     }
 
