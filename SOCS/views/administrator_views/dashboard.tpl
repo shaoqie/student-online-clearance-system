@@ -6,8 +6,15 @@
 	}
         
         function mySearch(){
-                var search = document.getElementById("search").value;
+                var search = document.getElementById("search").value.trim();
                 window.location.assign("?action=displayTable&filter=" + search + "&page=1");
+                
+        }
+
+        function mySearch_EnterKey(){
+           if (event.keyCode == 13){
+                document.getElementById('btnSearch').click();
+           }
         }
         
         function isCheckAll(isChecked){
@@ -40,7 +47,7 @@
         &nbsp;&nbsp;<a href='../administrator/department_list_manager.php'>Departments</a></div></center>           
 <br> 
 <form>
-    <center><input id = "search" type="text" style="width:500px;" placeholder="Search..." value ="{$filter}"></input><input type="button" value="Go ->" onclick = "mySearch()"></input><br>
+    <center><input id = "search" type="text" style="width:500px;" placeholder="Search..." value ="{$filter}" onkeyup="mySearch_EnterKey()"></input><input type="button" value="Go ->" onclick = "mySearch()" id="btnSearch"></input><br>
         <a href = "javascript:isCheckAll(true)" >Checked All</a> / <a href = "javascript:isCheckAll(false)">Unchecked All</a> <input type="button" value="Add User Account"></input><br>
     </center>
 
