@@ -38,13 +38,13 @@
     </table>  
 
     <div style="overflow:auto;width:550px;height:200px;border:1px;" >
-        <table border="1 solid gray">           
-            {foreach $myName as $name}
+        <table border="1 solid gray">   
+            {foreach from = $myName key = k item = i}
                 <tr>
                     <td style="width:20px;"><input type="checkbox"></input></td>
-                    <td style="width:100px;"><p>weaw</p></td>
-                    <td style="width:300px;"><p>{$name}</p></td>
-                    <td style="width:100px;"><p>eeee</p></td>
+                    <td style="width:100px;"><p>{$myPhotos[$k]}</p></td>
+                    <td style="width:300px;"><p>{$i}</p></td>
+                    <td style="width:100px;"><p>{$myType[$k]}</p></td>
                 </tr>
             {/foreach}
         </table>

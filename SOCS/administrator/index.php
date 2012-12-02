@@ -23,6 +23,8 @@ class Index extends Controller {
             $this->template->set_UserInfo("" . Session::get_Surname() . ", " . Session::get_Firstname() . " " . Session::get_Middlename() . ".");
 
             $this->template->assign('myName', $this->getNameofUser(''));
+            $this->template->assign('myPhotos', $this->getPictureofUser(''));
+            $this->template->assign('myType', $this->getTypeeofUser(''));
         } else {
             header('Location: /SOCS/');
         }
@@ -40,8 +42,9 @@ class Index extends Controller {
 
     private function getPictureofUser($searchName) {
         $picture = array();
-        while ($row = mysql_fetch_array($this->administrator_model->getListofUsers($searchName))) {
-            array_push($name, $row['Picture']);
+        $query = $this->administrator_model->getListofUsers($searchName);
+        while ($row = mysql_fetch_array($query)) {
+            array_push($picture, $row['Picture']);
         }
 
         return $picture;
@@ -49,8 +52,9 @@ class Index extends Controller {
 
     private function getTypeeofUser($searchName) {
         $type = array();
-        while ($row = mysql_fetch_array($this->administrator_model->getListofUsers($searchName))) {
-            array_push($name, $row['Account_Type']);
+        $query = $this->administrator_model->getListofUsers($searchName);
+        while ($row = mysql_fetch_array($query)) {
+            array_push($type, $row['Account_Type']);
         }
 
         return $type;

@@ -51,6 +51,7 @@ class Template extends Smarty {
     public function set_UserInfo($user_info){
         $this->assign('user_info', $user_info);
     }
+    
 }
 
 ?>
