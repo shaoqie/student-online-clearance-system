@@ -61,7 +61,7 @@ class Index extends Controller {
     }
     
     public function gotoPage($pageNum){
-        
+        echo "test: " . $pageNum;
     }
 
     public function display() {
