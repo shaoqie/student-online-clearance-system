@@ -1,4 +1,4 @@
-{$alert}
+    {$alert}
 <form action='adminSettings.php?action=verify' method='post'>
     Edit Account:
     <p>Surname: <input type ='text' name='surname'> <br />
