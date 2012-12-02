@@ -62,10 +62,14 @@ class Index extends Controller {
     }
     
     public function displayTable($searchName, $page){
+        $row = count($this->getNameofUser($searchName, $page)) + 1;
+        echo $row;
+        
         $this->template->set_Name($this->getNameofUser($searchName, $page));
         $this->template->set_Photos($this->getPictureofUser($searchName, $page));
         $this->template->set_Type($this->getTypeeofUser($searchName, $page));
         $this->template->set_Filter($searchName);
+        $this->template->assign('end', $row);
         
         //echo $searchName;
     }

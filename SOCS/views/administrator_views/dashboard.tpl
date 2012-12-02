@@ -67,11 +67,9 @@
     <a href = "#">Delete Selected</a>
     Jump to:  <select id = "jump" onchange="jumpToPage()">
         <option>--</option>
-        <option>1</option>
-        <option>2</option>
-        <option>3</option>
-        <option>4</option>
-        <option>5</option>
+        {for $start = 1 to $end}
+            <option>{$start}</option>
+        {/for}
     </select>
 </center>
 </div>
