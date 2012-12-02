@@ -21,10 +21,10 @@ class Index extends Controller {
             $this->template->setPageName('Administrator Page');
             $this->template->setContent('dashboard.tpl');
             $this->template->set_UserInfo("" . Session::get_Surname() . ", " . Session::get_Firstname() . " " . Session::get_Middlename() . ".");
-
-            $this->template->assign('myName', $this->getNameofUser(''));
-            $this->template->assign('myPhotos', $this->getPictureofUser(''));
-            $this->template->assign('myType', $this->getTypeeofUser(''));
+            
+            $this->template->set_Name($this->getNameofUser(''));
+            $this->template->set_Photos($this->getPictureofUser(''));
+            $this->template->set_Type($this->getTypeeofUser(''));
         } else {
             header('Location: /SOCS/');
         }
@@ -58,6 +58,10 @@ class Index extends Controller {
         }
 
         return $type;
+    }
+    
+    public function gotoPage($pageNum){
+        
     }
 
     public function display() {
