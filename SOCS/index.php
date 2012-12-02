@@ -39,7 +39,7 @@ class Index extends Controller {
             }else if($this->administrator_model->getAccount_Type(trim($_POST['username']), trim($_POST['password'])) == "Signatory"){
                 
                 $this->setSession('Signatory');
-                header('Location: /SOCS/signatory');
+                header('Location: /SOCS/signatory/');
             }
                         
             exit;
@@ -62,7 +62,13 @@ class Index extends Controller {
     public function display() {
         
         if(Session::user_exist()){
-            header('Location: /SOCS/administrator');
+            if (Session::get_Account_type() == 'Admin')
+                header('Location: /SOCS/administrator');
+            elseif (Session::get_Account_type() == 'Signatory')
+                header('Location: /SOCS/signatory/');
+            elseif (Session::get_Account_type() == 'Student')
+                header('Location: /SOCS/student/');
+            
         }else{
             $this->template->display('simple.tpl');
         }
