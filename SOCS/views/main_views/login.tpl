@@ -1,4 +1,4 @@
-<form action="index.php?action=login" method="post">  
+<form action="index.php?action=login" method="post" class="form-horizontal">  
     <center>
         <table border = '0'>
             <tr>

@@ -57,11 +57,6 @@ class Settings extends Controller {
         }
     }
 
-    public function cancel() {
-        header('Location:/SOCS/');
-        exit;
-    }
-
     public function settings_error() {
         $this->template->setAlert('Something is not right', Template::ALERT_ERROR);
     }

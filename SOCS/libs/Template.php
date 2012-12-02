@@ -27,13 +27,13 @@ class Template extends Smarty {
             'templates' => PATH.'/views/templates/');
         
         $this->setTemplateDir($templatesDir);
-        $this->setCompileDir('./libs/smarty/templates_c/');
-        $this->setConfigDir('./libs/smarty/configs/');
-        $this->setCacheDir('./libs/smarty/cache/');
+        $this->setCompileDir(PATH.'/libs/smarty/templates_c/');
+        $this->setConfigDir(PATH.'/libs/smarty/configs/');
+        $this->setCacheDir(PATH.'/libs/smarty/cache/');
         
-//        $this->caching = Smarty::CACHING_LIFETIME_CURRENT;
         $this->assign('alert', '');
         $this->assign('path', PATH);
+        $this->assign('host', HOST);
     }
     
     public function setPageName($page_name){
@@ -51,13 +51,6 @@ class Template extends Smarty {
     public function set_UserInfo($user_info){
         $this->assign('user_info', $user_info);
     }
-    
-    public function setListofUser($ListofUser){
-         $this->assign('$myName', $ListofUser);
-    }
-//    public function set_User(){
-//        
-//    }
 }
 
 ?>
