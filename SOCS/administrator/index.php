@@ -61,7 +61,14 @@ class Index extends Controller {
     }
     
     public function gotoPage($pageNum){
-        echo "test: " . $pageNum;
+        //echo "test: " . $pageNum;
+    }
+    
+    public function gotoSearch($searchName){
+       // echo "test Search: " . $searchName;
+        $this->template->set_Name($this->getNameofUser($searchName));
+        $this->template->set_Photos($this->getPictureofUser($searchName));
+        $this->template->set_Type($this->getTypeeofUser($searchName));
     }
 
     public function display() {
