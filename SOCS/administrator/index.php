@@ -22,17 +22,17 @@ class Index extends Controller {
             $this->template->setContent('dashboard.tpl');
             $this->template->set_UserInfo("" . Session::get_Surname() . ", " . Session::get_Firstname() . " " . Session::get_Middlename() . ".");
             
-            $this->template->set_Name($this->getNameofUser(''));
-            $this->template->set_Photos($this->getPictureofUser(''));
-            $this->template->set_Type($this->getTypeeofUser(''));
+            $this->template->set_Name($this->getNameofUser('', 1));
+            $this->template->set_Photos($this->getPictureofUser('', 1));
+            $this->template->set_Type($this->getTypeeofUser('', 1));
         } else {
             header('Location: /SOCS/');
         }
     }
 
-    private function getNameofUser($searchName) {
+    private function getNameofUser($searchName, $page) {
         $name = array();
-        $query = $this->administrator_model->getListofUsers($searchName);
+        $query = $this->administrator_model->getListofUsers($searchName, $page);
         while ($row = mysql_fetch_array($query)) {
             array_push($name, $row['Name']);
         }
@@ -40,9 +40,9 @@ class Index extends Controller {
         return $name;
     }
 
-    private function getPictureofUser($searchName) {
+    private function getPictureofUser($searchName, $page) {
         $picture = array();
-        $query = $this->administrator_model->getListofUsers($searchName);
+        $query = $this->administrator_model->getListofUsers($searchName, $page);
         while ($row = mysql_fetch_array($query)) {
             array_push($picture, $row['Picture']);
         }
@@ -50,9 +50,9 @@ class Index extends Controller {
         return $picture;
     }
 
-    private function getTypeeofUser($searchName) {
+    private function getTypeeofUser($searchName, $page) {
         $type = array();
-        $query = $this->administrator_model->getListofUsers($searchName);
+        $query = $this->administrator_model->getListofUsers($searchName, $page);
         while ($row = mysql_fetch_array($query)) {
             array_push($type, $row['Account_Type']);
         }
@@ -60,15 +60,12 @@ class Index extends Controller {
         return $type;
     }
     
-    public function gotoPage($pageNum){
-        //echo "test: " . $pageNum;
-    }
-    
-    public function gotoSearch($searchName){
+    public function displayTable($searchName, $page){
        // echo "test Search: " . $searchName;
-        $this->template->set_Name($this->getNameofUser($searchName));
-        $this->template->set_Photos($this->getPictureofUser($searchName));
-        $this->template->set_Type($this->getTypeeofUser($searchName));
+        $this->template->set_Name($this->getNameofUser($searchName, $page));
+        $this->template->set_Photos($this->getPictureofUser($searchName, $page));
+        $this->template->set_Type($this->getTypeeofUser($searchName, $page));
+        $this->template->set_Filter($searchName);
     }
 
     public function display() {

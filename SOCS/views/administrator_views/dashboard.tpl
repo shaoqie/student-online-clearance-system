@@ -1,12 +1,13 @@
 <script>
-	function myFunction(){
+	function jumpToPage(){
 		var jump = document.getElementById("jump").value;
-                window.location.assign("?action=gotoPage&page=" + jump);
+                var search = document.getElementById("search").value;
+                window.location.assign("?action=displayTable&filter=" + search +"&page=" + jump);
 	}
         
         function mySearch(){
                 var search = document.getElementById("search").value;
-                window.location.assign("?action=gotoSearch&seach=" + search);
+                window.location.assign("?action=displayTable&filter=" + search + "&page=1");
         }
 </script>
 
@@ -33,7 +34,7 @@
         &nbsp;&nbsp;<a href='../administrator/department_list_manager.php'>Departments</a></div></center>           
 <br> 
 <form>
-    <center><input id = "search" type="text" style="width:500px;"placeholder="Search.."></input><input type="button" value="Go ->" onclick = "mySearch()"></input><br>
+    <center><input id = "search" type="text" style="width:500px;" placeholder="Search..." value="{$textFilter}"></input><input type="button" value="Go ->" onclick = "mySearch()"></input><br>
         <a href = "#">Checked All</a> / <a href = "#">Unchecked All</a> <input type="button" value="Add User Account"></input><br>
     </center>
 
@@ -64,7 +65,7 @@
     </div>      
         
     <a href = "#">Delete Selected</a>
-    Jump to:  <select id = "jump" onchange="myFunction()">
+    Jump to:  <select id = "jump" onchange="jumpToPage()">
         <option>--</option>
         <option>1</option>
         <option>2</option>

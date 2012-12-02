@@ -63,6 +63,10 @@ class Template extends Smarty {
     public function set_Type($type){
         $this->assign('myType', $type);
     }
+    
+    public function set_Filter($filter){
+        $this->assign('filter', $filter);
+    }
 }
 
 ?>

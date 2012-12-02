@@ -17,6 +17,8 @@ class User_Model extends Model {
     public $Assigned_Signatory;
 
     private $query;
+    
+    private $itemsPerPage = 2;
 
     public function __construct() {
         parent::__construct();
@@ -81,12 +83,27 @@ class User_Model extends Model {
         }
     }
     
-    public function getListofUsers($searchName){
+    public function getListofUsers($searchName, $page){
+
+        /*
+        echo "select Picture, concat(Surname, ', ', First_Name, ' ', Middle_Name) 
+                        as Name, Account_Type from users 
+                        where First_name like '%$searchName%' OR Surname like '%$searchName%' OR 
+                        Middle_Name like '%$searchName%' LIMIT " . (($page-1) * $this->itemsPerPage) , ", " . $this->itemsPerPage;
+        */
+         
+        $query = mysql_query("select Picture, concat(Surname, ', ', First_Name, ' ', Middle_Name) 
+                        as Name, Account_Type from users 
+                        where First_name like '%$searchName%' OR Surname like '%$searchName%' OR 
+                        Middle_Name like '%$searchName%' LIMIT " . (($page-1) * $this->itemsPerPage) . ", " . $this->itemsPerPage);
+        //echo "mysql error: " . mysql_error();
+        return $query;
+        /*
         return mysql_query("select Picture, concat(Surname, ', ', First_Name, ' ', Middle_Name) 
                         as Name, Account_Type from users 
                         where First_name like '%$searchName%' OR Surname like '%$searchName%' OR 
-                        Middle_Name like '%$searchName%'");
-               
+                        Middle_Name like '%$searchName%' LIMIT " . (($page-1) * $this->itemsPerPage) , ", " . $this->itemsPerPage);
+               */
     }
 
 }
