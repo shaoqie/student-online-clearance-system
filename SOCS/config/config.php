@@ -29,12 +29,12 @@ define('DATABASE', 'socs');
 /*
  * Project Root
  */
-define('PATH', $_SERVER['DOCUMENT_ROOT']."SOCS/");
+define('PATH', "C:/wamp/www/SOCS/");
 
 /*
  * Host
  */
-define('HOST', $_SERVER['HTTP_HOST']."/SOCS/");
+define('HOST', "http://localhost/SOCS");
 
 
 /*

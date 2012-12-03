@@ -14,7 +14,8 @@ class Index extends Controller {
 
         if (Session::user_exist() && Session::get_Account_type() == "Signatory") {
             echo "Signatory Page<br>";
-            echo "<a href='../index.php?action=logout'>Logout</a>";
+            echo "<a href='../index.php?action=logout'>Logout</a><br>";
+            echo "<a href='../settings.php'>Account Settings</a>";
         } else {
             header('Location: /SOCS/');
         }

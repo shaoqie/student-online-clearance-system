@@ -10,11 +10,10 @@ require_once PATH.'/libs/smarty/Smarty.class.php';
 
 class Template extends Smarty {
     
-    const ALERT_ERROR = 'red';
-    const ALERT_INFO = 'blue';
-    const ALERT_WARNING = 'orange';
-    const ALERT_SUCCESS = 'green';
-    const ALERT = 'black';
+    const ALERT_ERROR = 'alert alert-error fade in';
+    const ALERT_INFO = 'alert alert-info fade in';
+    const ALERT_WARNING = 'alert fade in';
+    const ALERT_SUCCESS = 'alert alert-success fade in';
 
     public function __construct() {
         parent::__construct();
@@ -41,11 +40,29 @@ class Template extends Smarty {
     }
     
     public function setContent($tpl_file){
-        $this->assign('tpl_file', $tpl_file);
+        $this->assign('content', $tpl_file);
     }
     
-    public function setAlert($msg, $alert_type = self::ALERT){
-        $this->assign('alert', "<td><div style='color: $alert_type'>$msg</div></td>");
+    public function setAlert($msg, $alert_type = self::ALERT_WARNING){
+        
+        $pre_msg = "";
+        
+        if($alert_type == self::ALERT_ERROR){
+            $pre_msg = "Error! ";
+        }else if($alert_type == self::ALERT_INFO){
+            $pre_msg = "Oops! ";
+        }else if($alert_type == self::ALERT_SUCCESS){
+            $pre_msg = "Success! ";
+        }else{
+            $pre_msg = "Warning! ";
+        }
+        
+        $alert = "<div class='$alert_type'>".
+                "<a href='#' class='close' data-dismiss='alert'><i class='icon-remove'></i></a>".
+                "<strong>$pre_msg</strong>$msg".
+                "</div>";
+        
+        $this->assign('alert', $alert);
     }
     
     public function set_UserInfo($user_info){
@@ -66,6 +83,10 @@ class Template extends Smarty {
     
     public function set_Filter($filter){
         $this->assign('filter', $filter);
+    }
+    
+    public function set_header_right($tpl_file){
+        $this->assign('header_right', $tpl_file);
     }
 }
 

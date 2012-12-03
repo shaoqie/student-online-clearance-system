@@ -17,6 +17,8 @@ class Settings extends Controller {
         if (Session::user_exist()) {
             $this->template = new Template();
             $this->template->setPageName('Settings');
+            $this->template->set_header_right('user_nav.tpl');
+            $this->template->set_UserInfo("" . Session::get_Surname() . ", " . Session::get_Firstname() . " " . Session::get_Middlename() . ".");
             if (Session::get_Account_type() == "Admin") {
                 $this->template->setContent('admin_settings.tpl');
             } else if (Session::get_Account_type() == "Student") {
@@ -27,7 +29,7 @@ class Settings extends Controller {
 
             $this->admin = new User_Model();
             //$_SESSION['password']=12345;
-           echo $_SESSION['password'];
+//           echo $_SESSION['password'];
         } else {
             header('Location: /SOCS/');
             exit;
@@ -64,7 +66,7 @@ class Settings extends Controller {
     }
 
     public function display() {
-        $this->template->display('simple.tpl');
+        $this->template->display('bootstrap.tpl');
         $this->admin->db_close();
     }
 

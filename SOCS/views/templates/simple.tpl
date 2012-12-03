@@ -7,7 +7,7 @@
 
         <div style="background: #DEE"><a href="/SOCS/">Home</a></div>
         
-        {include file=$tpl_file}
+        {include file=$content}
         
         <div style="background: #DEE">SOCS &COPY; 2012</div>
 

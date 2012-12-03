@@ -25,6 +25,14 @@ abstract class Controller {
             }
         }
     }
+    
+    public function has_actions(){
+        if(isset($_GET['action'])){
+            return true;
+        }else{
+            return false;
+        }
+    }
 
     public abstract function display();
 }

@@ -20,11 +20,12 @@ class Index extends Controller {
             $this->template = new Template();
             $this->template->setPageName('Administrator Page');
             $this->template->setContent('dashboard.tpl');
+            $this->template->set_header_right('user_nav.tpl');
             $this->template->set_UserInfo("" . Session::get_Surname() . ", " . Session::get_Firstname() . " " . Session::get_Middlename() . ".");
             
             $this->displayTable('', 1);
         } else {
-            header('Location: /SOCS/');
+            header('Location: /administrator/index.php');
         }
     }
     
@@ -97,7 +98,7 @@ class Index extends Controller {
     }
 
     public function display() {
-        $this->template->display('simple.tpl');
+        $this->template->display('bootstrap.tpl');
     }
 
 }

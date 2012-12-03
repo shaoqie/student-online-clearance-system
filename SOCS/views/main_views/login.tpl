@@ -1,25 +1,22 @@
-<form action="index.php?action=login" method="post" class="form-horizontal">  
-    <center>
-        <table border = '0'>
-            <tr>
-                <td><h1>Login</h1></td>
-            </tr>
-            <tr>
-                <td>&nbsp;</td>
-                {$alert}
-            </tr>
-            <tr>
-                <td><label>Username: </label></td>
-                <td><input type="text" placeholder="Enter Your Username" name = "username"></td>
-            </tr>
-            <tr>
-                <td><label>Password: </label></td>
-                <td><input type="password" placeholder="Enter Your Password" name = "password"></td>
-            </tr>
-            <tr>
-                <td></td>
-                <td align = 'right'><label></label><input type="submit" value="Login"></td>
-            </tr>
-        </table>
-    </center> 
+<form action="index.php?action=login" method="post" class="form-horizontal">
+    <legend>Login</legend>
+    <div class="control-group">
+        <label class="control-label">Username: </label>
+        <div class="controls">
+            <input type="text" placeholder="Enter Your Username" name = "username">
+        </div>
+    </div>
+
+    <div class="control-group">
+        <label class="control-label">Password: </label>
+        <div class="controls">
+            <input type="password" placeholder="Enter Your Password" name = "password">
+        </div>
+    </div>
+
+    <div class="control-group">
+        <div class="controls">
+            <button class="btn btn-primary" type="submit">Login</button>
+        </div>
+    </div>
 </form>
