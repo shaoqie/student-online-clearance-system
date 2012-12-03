@@ -26,7 +26,7 @@
         function findCheck(){
             var valueDeleted = "";
             var count = 0;
-            for(var i = 0; i <= {$rowCount}; i++){
+            for(var i = 0; i < {$rowCount}; i++){
                 if(document.getElementById("" +i).checked == true){
                     valueDeleted += document.getElementById("" +i).value + "-";
                     count ++;

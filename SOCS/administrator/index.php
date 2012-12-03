@@ -22,9 +22,6 @@ class Index extends Controller {
             $this->template->setContent('dashboard.tpl');
             $this->template->set_UserInfo("" . Session::get_Surname() . ", " . Session::get_Firstname() . " " . Session::get_Middlename() . ".");
             
-//            $this->template->set_Name($this->getNameofUser('', 1));
-//            $this->template->set_Photos($this->getPictureofUser('', 1));
-//            $this->template->set_Type($this->getTypeeofUser('', 1));
             $this->displayTable('', 1);
         } else {
             header('Location: /SOCS/');
@@ -74,8 +71,7 @@ class Index extends Controller {
     public function delete($selected){
         $explode = explode("-", $selected);
         foreach ($explode as $value) {
-            //$this->administrator_model->deleteUser($value);
-            echo $value ."<br/>";
+            $this->administrator_model->deleteUser(trim($value));
         }
     }
     
@@ -83,7 +79,6 @@ class Index extends Controller {
         $numOfPages = $this->administrator_model->getQueryPageSize($searchName);
         $numOfResults = count($this->getNameofUser($searchName, $page));
         
-        //$row = 0;
         $this->template->assign('myKey', $this->getListofKey($searchName, $page));
         
         $this->template->set_Name($this->getNameofUser($searchName, $page));
@@ -99,7 +94,6 @@ class Index extends Controller {
              $this->template->assign('emptyResult', "");
         }
         
-        //echo $searchName;
     }
 
     public function display() {
