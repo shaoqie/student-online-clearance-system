@@ -26,12 +26,9 @@
         function findCheck(){
             var valueDeleted = "";
             var count = 0;
-            for(var i = 0; i < {$rowCount}; i++){
-                //document.getElementById("" +i).checked = isChecked;
+            for(var i = 0; i <= {$rowCount}; i++){
                 if(document.getElementById("" +i).checked == true){
-                    //alert(document.getElementById("" +i).value);
                     valueDeleted += document.getElementById("" +i).value + "-";
-
                     count ++;
                 }
             }

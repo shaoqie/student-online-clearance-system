@@ -100,7 +100,9 @@ class User_Model extends Model {
         return mysql_num_rows($query) / $this->itemsPerPage;
     }
     
-    //public function getListofKey(){
+    public function deleteUser($key){
+        mysql_query("delete from users where Username = '$key'");
+    }
 }
 
 ?>

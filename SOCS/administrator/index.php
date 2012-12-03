@@ -72,7 +72,11 @@ class Index extends Controller {
     }
     
     public function delete($selected){
-        
+        $explode = explode("-", $selected);
+        foreach ($explode as $value) {
+            //$this->administrator_model->deleteUser($value);
+            echo $value ."<br/>";
+        }
     }
     
     public function displayTable($searchName, $page){
