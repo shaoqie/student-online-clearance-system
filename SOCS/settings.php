@@ -40,7 +40,7 @@ class Settings extends Controller {
         $confirmpass = $_POST['confirmpass'];
         $actualPass = Session::getUserPass();
 
-        if (Session::get_Account_type() == "Student" || Session::get_Account_type() == "Signatory") {
+        if (Session::get_Account_type() == "Admin" || Session::get_Account_type() == "Signatory") {
             $this->admin->Surname = $_POST['surname'];
             $this->admin->First_Name = $_POST['firstname'];
             $this->admin->Middle_Name = $_POST['middleName'];
