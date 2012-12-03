@@ -1,4 +1,4 @@
-<form action='studentSettings.php?action=verify' method='post'>
+<form action='settings.php?action=verify' method='post'>
      </p>
 
     Change password:

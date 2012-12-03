@@ -6,7 +6,7 @@
  * @author Ozy
  */
 require_once 'config/config.php';
-
+require_once 'libs/Controller.php';
 class Index extends Controller {
     
     private $template;

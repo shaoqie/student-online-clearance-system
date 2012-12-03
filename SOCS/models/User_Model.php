@@ -15,9 +15,7 @@ class User_Model extends Model {
     public $Account_Type;
     public $Picture;
     public $Assigned_Signatory;
-
     private $query;
-    
     private $itemsPerPage = 4;
 
     public function __construct() {
@@ -59,47 +57,45 @@ class User_Model extends Model {
 
     public function update($account) {
         // $sql = "UPDATE users  SET Surname='".$Surname."',First_Name='".$First_Name."',Middle_Name='". $Middle_Name ."',Password='".$Password."' WHERE Username='".$Username."'";
-        if ($account == "Admin") {
+        if ($account == "Admin" || $account == "Signatory") {
             $sql = "UPDATE users SET Surname='" . $this->Surname . "', First_Name='" . $this->First_Name . "', Middle_Name='" . $this->Middle_Name . "',Password='" . $this->Password . "' Where Username='" . $this->Username . "'";
+            echo $account;
         } else if ($account == "Student") {
             $sql = "UPDATE users SET password='" . $this->Password . "' Where username ='" . $this->Username . "'";
-            echo "Student";
-        } else if ($account == "Signatory") {
-            echo "Signatory";
-
-            $message = "";
-            if (mysql_query($sql)) {
-                $message = "Success";
-                Session::set_password($this->Password);
-                Session::set_firstname($this->First_Name);
-                Session::set_middlename($this->Middle_Name);
-                Session::set_surname($this->Surname);
-            } else {
-                $message = "failed";
-            }
-            // echo $this->Middle_Name;
-            echo $message;
-            echo $account;
+            //   echo "Student";
         }
+        $message = "";
+        if (mysql_query($sql)) {
+            $message = "Success";
+            Session::set_password($this->Password);
+            Session::set_firstname($this->First_Name);
+            Session::set_middlename($this->Middle_Name);
+            Session::set_surname($this->Surname);
+        } else {
+            $message = "failed";
+        }
+        // echo $this->Middle_Name;
+        echo $message . "<br />";
+        echo $account;
     }
-    
-    public function getListofUsers($searchName, $page){
+
+    public function getListofUsers($searchName, $page) {
 
         $query = mysql_query("select Username, Picture, concat(Surname, ', ', First_Name, ' ', Middle_Name) 
                         as Name, Account_Type from users 
                         where First_name like '%$searchName%' OR Surname like '%$searchName%' OR 
-                        Middle_Name like '%$searchName%' LIMIT " . (($page-1) * $this->itemsPerPage) . ", " . $this->itemsPerPage);
-        return $query;    
-    } 
-    
-    public function getQueryPageSize($searchName){
+                        Middle_Name like '%$searchName%' LIMIT " . (($page - 1) * $this->itemsPerPage) . ", " . $this->itemsPerPage);
+        return $query;
+    }
+
+    public function getQueryPageSize($searchName) {
         $query = mysql_query("select Picture, concat(Surname, ', ', First_Name, ' ', Middle_Name) 
                         as Name, Account_Type from users 
                         where First_name like '%$searchName%' OR Surname like '%$searchName%' OR 
                         Middle_Name like '%$searchName%'");
         return mysql_num_rows($query) / $this->itemsPerPage;
     }
-    
+
     public function deleteUser($key){
         mysql_query("delete from users where Username = '$key'");
     }

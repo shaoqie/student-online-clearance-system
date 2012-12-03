@@ -27,7 +27,7 @@ class Settings extends Controller {
 
             $this->admin = new User_Model();
             //$_SESSION['password']=12345;
-//            echo $_SESSION['password'];
+           echo $_SESSION['password'];
         } else {
             header('Location: /SOCS/');
             exit;
@@ -40,10 +40,12 @@ class Settings extends Controller {
         $confirmpass = $_POST['confirmpass'];
         $actualPass = Session::getUserPass();
 
-        if (Session::get_Account_type() != "Student") {
+        if (Session::get_Account_type() == "Student" || Session::get_Account_type() == "Signatory") {
             $this->admin->Surname = $_POST['surname'];
             $this->admin->First_Name = $_POST['firstname'];
             $this->admin->Middle_Name = $_POST['middleName'];
+//            
+//            echo "<br />" . $actualPass . " == " . $oldpass;
         }
 
         if ($actualPass == $oldpass) {
