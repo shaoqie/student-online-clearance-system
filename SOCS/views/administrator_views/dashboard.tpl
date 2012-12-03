@@ -30,7 +30,7 @@
                 //document.getElementById("" +i).checked = isChecked;
                 if(document.getElementById("" +i).checked == true){
                     //alert(document.getElementById("" +i).value);
-                    valueDeleted += document.getElementById("" +i).value + ";";
+                    valueDeleted += document.getElementById("" +i).value + "-";
 
                     count ++;
                 }
