@@ -1,8 +1,8 @@
 <?php
 
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+ * Settings Page
+ * 
  */
 require_once 'config/config.php';
 
@@ -15,10 +15,17 @@ class Settings extends Controller {
         parent::__construct();
 
         if (Session::user_exist()) {
+
+            $this->admin = new User_Model();
+
             $this->template = new Template();
             $this->template->setPageName('Settings');
-            $this->template->set_header_right('user_nav.tpl');
-            $this->template->set_UserInfo("" . Session::get_Surname() . ", " . Session::get_Firstname() . " " . Session::get_Middlename() . ".");
+            $this->template->set_username(Session::get_user());
+            $this->template->set_surname(Session::get_Surname());
+            $this->template->set_firstname(Session::get_Firstname());
+            $this->template->set_middlename(Session::get_Middlename());
+            $this->template->set_account_type(Session::get_Account_type());
+
             if (Session::get_Account_type() == "Admin") {
                 $this->template->setContent('admin_settings.tpl');
             } else if (Session::get_Account_type() == "Student") {
@@ -26,12 +33,8 @@ class Settings extends Controller {
             } else if (Session::get_Account_type() == "Signatory") {
                 $this->template->setContent('signatory_settings.tpl');
             }
-
-            $this->admin = new User_Model();
-            //$_SESSION['password']=12345;
-//           echo $_SESSION['password'];
         } else {
-            header('Location: /SOCS/');
+            header('Location: ' . HOST);
             exit;
         }
     }
@@ -46,8 +49,6 @@ class Settings extends Controller {
             $this->admin->Surname = $_POST['surname'];
             $this->admin->First_Name = $_POST['firstname'];
             $this->admin->Middle_Name = $_POST['middleName'];
-//            
-//            echo "<br />" . $actualPass . " == " . $oldpass;
         }
 
         if ($actualPass == $oldpass) {

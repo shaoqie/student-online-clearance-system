@@ -48,7 +48,7 @@
     
     <div class="control-group">
         <div class="controls">
-            <input class="btn btn-primary" type='Submit'> &nbsp; <a href='/SOCS/'>Cancel</a>
+            <input class="btn btn-primary" type='Submit' value='Save'> &nbsp; <a href='/SOCS/'>Cancel</a>
         </div>
     </div>
 </form>

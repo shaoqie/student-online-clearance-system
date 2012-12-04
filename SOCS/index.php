@@ -19,11 +19,7 @@ class Index extends Controller {
 
         $this->template = new Template();
         $this->template->setPageName('Home');
-        $this->template->set_header_right('login_horizontal.tpl');
-
-        if (!$this->has_actions()) {
-            $this->template->setContent('welcome.tpl');
-        }
+        $this->template->setContent('welcome.tpl');
     }
 
     public function login() {
@@ -32,15 +28,15 @@ class Index extends Controller {
             if ($this->administrator_model->getAccount_Type(trim($_POST['username']), trim($_POST['password'])) == "Admin") {
 
                 $this->setSession('Admin');
-                header('Location: /SOCS/administrator/');
+                header('Location: '.HOST.'/administrator/');
             } else if ($this->administrator_model->getAccount_Type(trim($_POST['username']), trim($_POST['password'])) == "Student") {
 
                 $this->setSession('Student');
-                header('Location: /SOCS/student/');
+                header('Location: '.HOST.'/student/');
             } else if ($this->administrator_model->getAccount_Type(trim($_POST['username']), trim($_POST['password'])) == "Signatory") {
 
                 $this->setSession('Signatory');
-                header('Location: /SOCS/signatory/');
+                header('Location: '.HOST.'/signatory/');
             }
 
             exit;
@@ -78,11 +74,11 @@ class Index extends Controller {
 
         if (Session::user_exist()) {
             if (Session::get_Account_type() == 'Admin')
-                header('Location: /SOCS/administrator');
+                header('Location: '.HOST.'/administrator/');
             elseif (Session::get_Account_type() == 'Signatory')
-                header('Location: /SOCS/signatory/');
+                header('Location: '.HOST.'/signatory/');
             elseif (Session::get_Account_type() == 'Student')
-                header('Location: /SOCS/student/');
+                header('Location: '.HOST.'/student/');
         }else {
             $this->template->display('bootstrap.tpl');
         }

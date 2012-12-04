@@ -3,7 +3,7 @@
     <div class="control-group">
         <label class="control-label">Username: </label>
         <div class="controls">
-            <input type="text" placeholder="Enter Your Username" name = "username">
+            <input type="text" placeholder="Enter Your Username" name = "username" autofocus>
         </div>
     </div>
 

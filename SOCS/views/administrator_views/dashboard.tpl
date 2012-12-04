@@ -36,14 +36,15 @@ window.location.assign("?action=delete&selected=" + valueDeleted);
 }
 </script>
 
+
 <ul class="nav nav-tabs">
     <li class="active"><a href='../administrator/index.php'>User Accounts</a></li>
-    <li class="active"><a href='../administrator/signatory_list_manager.php'>Signatories</a></li>
-    <li class="active"><a href='../administrator/department_list_manager.php'>Departments</a></li>
+    <li><a href='../administrator/signatory_list_manager.php'>Signatories</a></li>
+    <li><a href='../administrator/department_list_manager.php'>Departments</a></li>
 </ul>
 
 <form class="form-horizontal">
-    <input id = "search" type="text" style="width:500px;" placeholder="Search..." value ="{$filter}" onkeyup="mySearch_EnterKey()">
+    <input class="input-xxlarge" id = "search" type="text" placeholder="Search..." value ="{$filter}" onkeyup="mySearch_EnterKey()">
     <input class="btn btn-primary"type="button" value="Go ->" onclick = "mySearch()" id="btnSearch">
 </form>
 
@@ -70,16 +71,15 @@ window.location.assign("?action=delete&selected=" + valueDeleted);
         </tr>
     {/foreach}
 </table>
-<a href="javascript:findCheck()">Delete Selected</a><br>
+<a href="javascript:findCheck()">Delete Selected</a>
 
 {$emptyResult}
 
-<center>
+<div class="pull-right">
     Jump to: <select id="jump" class="input-mini" onchange="jumpToPage()">
         <option>--</option>
         {for $start = 1 to $end}
         <option>{$start}</option>
         {/for}
     </select>
-</center>
 </div>

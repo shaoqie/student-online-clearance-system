@@ -41,25 +41,51 @@
                     </a>
                     <a class="brand" href="index.php">Student Online Clearance System</a>
                     <div class="nav-collapse collapse">
-                        
-                        {include file=$header_right}
+
+                        {if isset($username)}
+                            <div class="btn-group pull-right">
+                                <button class="btn" onclick="window.location.href='index.php'"><i class="icon-user"></i> {$username}</button>
+                                <button class="btn dropdown-toggle" data-toggle="dropdown">
+                                    <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li><a href="{$host}/settings.php">My Account</a></li>
+                                    <li><a href="{$host}/index.php?action=logout">Logout</a></li>
+                                </ul>
+                            </div>
+                        {else}
+                            <form class="navbar-form pull-right" action="index.php?action=login" method="post">
+                                <input class="span2" type="text" placeholder="Username" name="username">
+                                <input class="span2" type="password" placeholder="Password" name="password">
+                                <button type="submit" class="btn">Sign in</button>
+                            </form>
+                        {/if}
                     </div><!--/.nav-collapse -->
                 </div>
             </div>
         </div>
-        
+
         <div class="container">
-            
+
             {$alert}
-            
-            <div class="hero-unit">
-                {include file=$content}
-            </div>
+
+            {if isset($username)}
+                <div class="row">
+                    <div class="span1"><img src="{$host}/photos/default.png" class="img-polaroid" /></div>
+                    <div class="span3">
+                        <h4>{$surname}, {$firstname} {$middlename}</h4>
+                        <h5>- {$account_type}</h5>
+                    </div>
+                </div>
+                <hr>
+            {/if}
+
+            {include file=$content}
 
             <hr>
 
             <footer>
-                <p>&copy; Student Online Clearance System 2012</p>
+                <p class="pull-right">&copy; Student Online Clearance System 2012</p>
             </footer>
 
         </div> <!-- /container -->
