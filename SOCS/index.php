@@ -48,9 +48,9 @@ class Index extends Controller {
     }
 
     public function logout() {
-        Session::destroy();
         $this->template->setContent('login.tpl');
         $this->template->setAlert('Logout Successfully!', Template::ALERT_SUCCESS);
+        Session::destroy();
     }
 
     public function login_error() {
