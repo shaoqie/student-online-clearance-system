@@ -16,7 +16,7 @@
 
     <div class="control-group">
         <div class="controls">
-            <button class="btn btn-primary" type="submit">Login</button>
+            <button class="btn btn-primary" type="submit"><i class="icon-check icon-white"></i>  Login</button>
         </div>
     </div>
 </form>
