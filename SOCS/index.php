@@ -44,7 +44,6 @@ class Index extends Controller {
             header('Location: index.php?action=login_error');
             exit;
         }
-        //$this->administrator_model->isExist(trim($_POST['username']), trim($_POST['password']));
     }
 
     public function logout() {

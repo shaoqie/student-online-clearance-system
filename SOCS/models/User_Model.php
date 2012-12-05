@@ -16,7 +16,7 @@ class User_Model extends Model {
     public $Picture;
     public $Assigned_Signatory;
     private $query;
-    private $itemsPerPage = 4;
+    private $itemsPerPage = 10;
 
     public function __construct() {
         parent::__construct();

@@ -1,39 +1,27 @@
 <script>
     function jumpToPage(){
-    var jump = document.getElementById("jump").value;
-    var search = document.getElementById("search").value;
-    window.location.assign("?action=displayTable&filter=" + search +"&page=" + jump);
-}
+        var jump = document.getElementById("jump").value;
+        var search = document.getElementById("search").value;
+        window.location.assign("?action=displayTable&filter=" + search +"&page=" + jump);
+    }       
         
-function mySearch(){
-var search = document.getElementById("search").value.trim();
-window.location.assign("?action=displayTable&filter=" + search + "&page=1");
-                
-}
-
-function mySearch_EnterKey(){
-if (event.keyCode == 13){
-document.getElementById('btnSearch').click();
-}
-}
+    function isCheckAll(isChecked){
+        for(var i = 0; i <= {$rowCount}; i++){
+            document.getElementById("" +i).checked = isChecked;
+        }
+    }
         
-function isCheckAll(isChecked){
-for(var i = 0; i <= {$rowCount}; i++){
-document.getElementById("" +i).checked = isChecked;
-}
-}
-        
-function findCheck(){
-var valueDeleted = "";
-var count = 0;
-for(var i = 0; i < {$rowCount}; i++){
-if(document.getElementById("" +i).checked == true){
-valueDeleted += document.getElementById("" +i).value + "-";
-count ++;
-}
-}
-window.location.assign("?action=delete&selected=" + valueDeleted);
-}
+    function findCheck(){
+        var valueDeleted = "";
+        var count = 0;
+        for(var i = 0; i < {$rowCount}; i++){
+            if(document.getElementById("" +i).checked == true){
+                valueDeleted += document.getElementById("" +i).value + "-";
+                count ++;
+            }
+        }
+        window.location.assign("?action=delete&selected=" + valueDeleted);
+    }
 </script>
 
 
@@ -43,9 +31,10 @@ window.location.assign("?action=delete&selected=" + valueDeleted);
     <li><a href='../administrator/department_list_manager.php'>Departments</a></li>
 </ul>
 
-<form class="form-horizontal">
-    <input class="input-xxlarge" id = "search" type="text" placeholder="Search..." value ="{$filter}" onkeyup="mySearch_EnterKey()">
-    <button class="btn btn-primary"type="button" onclick = "mySearch()" id="btnSearch"><i class="icon-search icon-white"></i></button>
+<form class="form-horizontal" method="get" action="?action=filter">
+    <input type="hidden" value="filter" name="action">
+    <input class="input-xxlarge" id="search" type="text" placeholder="Search..." value ="{$filter}" name="filterName">
+    <button class="btn btn-primary" type="submit"><i class="icon-search icon-white"></i></button>
 </form>
 
 <div class="row">

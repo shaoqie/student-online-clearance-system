@@ -28,10 +28,18 @@ class Index extends Controller {
 
             $this->template->setContent('dashboard.tpl');
 
-            $this->displayTable('', 1);
+            $this->displayTable('', 1, "default");
         } else {
             header('Location: ' . HOST);
         }
+    }
+    
+    private function getStrongchar($str, $findname){
+        $left = substr($str, 0, strpos(strtolower($str), strtolower($findname))); //cut left
+	$center = "<strong>" .substr($str, strpos(strtolower($str), strtolower($findname)), strlen($findname)) ."</strong>"; // cut center
+	$right =  substr($str, strpos(strtolower($str), strtolower($findname)) + strlen($findname));		
+		
+	return $left .$center .$right;
     }
 
     private function getListofKey($searchName, $page) {
@@ -42,13 +50,17 @@ class Index extends Controller {
         }
 
         return $key;
-    }
-
-    private function getNameofUser($searchName, $page) {
+    }   
+    
+    private function getNameofUser($searchName, $page, $finder) {
         $name = array();
         $query = $this->administrator_model->getListofUsers($searchName, $page);
         while ($row = mysql_fetch_array($query)) {
-            array_push($name, $row['Name']);
+            if($finder == "default"){
+                array_push($name, $row['Name']);
+            }else{
+                array_push($name, $this->getStrongchar($row['Name'], $searchName));
+            }
         }
 
         return $name;
@@ -79,21 +91,33 @@ class Index extends Controller {
         foreach ($explode as $value) {
             $this->administrator_model->deleteUser(trim($value));
         }
+        header('Location: ' .HOST ."/administrator/?action=deleted");
+    }
+    
+    public function deleted(){
+        $this->template->setAlert('Delete an Account Successfully!..', Template::ALERT_SUCCESS);
+    }
+    
+    public function filter($filterName){
+        $this->displayTable($filterName, 1);
     }
 
-    public function displayTable($searchName, $page) {
+    public function displayTable($searchName, $page, $finder) {
         $numOfPages = $this->administrator_model->getQueryPageSize($searchName);
-        $numOfResults = count($this->getNameofUser($searchName, $page));
+        $numOfResults = count($this->getNameofUser($searchName, $page, "default"));
 
-        $this->template->assign('myKey', $this->getListofKey($searchName, $page));
-
-        $this->template->set_Name($this->getNameofUser($searchName, $page));
+        $this->template->assign('myKey', $this->getListofKey($searchName, $page));      
         $this->template->set_Photos($this->getPictureofUser($searchName, $page));
         $this->template->set_Type($this->getTypeeofUser($searchName, $page));
         $this->template->set_Filter($searchName);
         $this->template->assign('end', $numOfPages);
         $this->template->assign('rowCount', $numOfResults);
 
+        if($finder == "default"){
+            $this->template->set_Name($this->getNameofUser($searchName, $page, "default"));
+        }else{
+            $this->template->set_Name($this->getNameofUser($searchName, $page, "not_default"));
+        }
         if ($numOfResults == 0) {
             $this->template->setAlert('No Results Found.', Template::ALERT_ERROR);
         }
