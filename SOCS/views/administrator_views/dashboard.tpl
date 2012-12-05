@@ -76,8 +76,6 @@ window.location.assign("?action=delete&selected=" + valueDeleted);
 </table>
 <a href="javascript:findCheck()">Delete Selected</a>
 
-{$emptyResult}
-
 <div class="pull-right">
     Jump to: <select id="jump" class="input-mini" onchange="jumpToPage()">
         <option>--</option>
