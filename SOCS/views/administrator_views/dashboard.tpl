@@ -45,7 +45,7 @@ window.location.assign("?action=delete&selected=" + valueDeleted);
 
 <form class="form-horizontal">
     <input class="input-xxlarge" id = "search" type="text" placeholder="Search..." value ="{$filter}" onkeyup="mySearch_EnterKey()">
-    <input class="btn btn-primary"type="button" value="Go ->" onclick = "mySearch()" id="btnSearch">
+    <button class="btn btn-primary"type="button" onclick = "mySearch()" id="btnSearch"><i class="icon-search icon-white"></i></button>
 </form>
 
 <input class="btn" type="button" value="Add User Account"><br>
