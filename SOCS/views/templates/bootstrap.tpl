@@ -39,12 +39,12 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </a>
-                    <a class="brand" href="index.php">Student Online Clearance System</a>
+                    <a class="brand" href="index.php"><img src="{$host}/public/img/logo.png">Student Online Clearance System</a>
                     <div class="nav-collapse collapse">
 
                         {if isset($username)}
                             <div class="btn-group pull-right">
-                                <button class="btn" onclick="window.location.href='index.php'"><i class="icon-user"></i> {$username}</button>
+                                <button class="btn " onclick="window.location.href='index.php'"><i class="icon-user"></i> {$username}</button>
                                 <button class="btn dropdown-toggle" data-toggle="dropdown">
                                     <span class="caret"></span>
                                 </button>
@@ -64,7 +64,7 @@
                 </div>
             </div>
         </div>
-
+                        <hr>
         <div class="container">
 
             {$alert}
