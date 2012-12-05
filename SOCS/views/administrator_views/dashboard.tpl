@@ -49,10 +49,11 @@ window.location.assign("?action=delete&selected=" + valueDeleted);
 </form>
 
 <div class="row">
-    <div class="span6">
+     <div class="span6">
         <input class="btn pull-right" type="button" value="Add User Account">
     </div>
 </div>
+    
 <a href = "javascript:isCheckAll(true)" >Checked All</a> / 
 <a href = "javascript:isCheckAll(false)">Unchecked All</a> 
 
