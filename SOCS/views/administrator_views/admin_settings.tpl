@@ -5,21 +5,21 @@
     <div class="control-group">
         <label class="control-label">Surname: </label>
         <div class="controls">
-            <input type ='text' name='surname'>
+            <input type ='text' name='surname' value="{$surname}">
         </div>
     </div>
     
     <div class="control-group">
         <label class="control-label">First Name: </label>
         <div class="controls">
-            <input type='text' name='firstname'>
+            <input type='text' name='firstname' value="{$firstname}">
         </div>
     </div>
     
     <div class="control-group">
         <label class="control-label">Middle Name: </label>
         <div class="controls">
-            <input type='text'name='middleName'>
+            <input type='text'name='middleName' value="{$middlename}">
         </div>
     </div>
     

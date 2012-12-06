@@ -63,7 +63,7 @@
         </tr>
     {/foreach}
 </table>
-<a href="javascript:findCheck()">Delete Selected</a>
+<a href="javascript:findCheck()"> Delete Selected</a>
 
 <div class="pull-right">
     Jump to: <select id="jump" class="input-mini" onchange="jumpToPage()">

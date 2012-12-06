@@ -56,27 +56,21 @@ class User_Model extends Model {
     }
 
     public function update($account) {
-        // $sql = "UPDATE users  SET Surname='".$Surname."',First_Name='".$First_Name."',Middle_Name='". $Middle_Name ."',Password='".$Password."' WHERE Username='".$Username."'";
         if ($account == "Admin" || $account == "Signatory") {
             $sql = "UPDATE users SET Surname='" . $this->Surname . "', First_Name='" . $this->First_Name . "', Middle_Name='" . $this->Middle_Name . "',Password='" . $this->Password . "' Where Username='" . $this->Username . "'";
-            echo $account;
         } else if ($account == "Student") {
             $sql = "UPDATE users SET password='" . $this->Password . "' Where username ='" . $this->Username . "'";
-            //   echo "Student";
         }
-        $message = "";
+
         if (mysql_query($sql)) {
-            $message = "Success";
             Session::set_password($this->Password);
             Session::set_firstname($this->First_Name);
             Session::set_middlename($this->Middle_Name);
             Session::set_surname($this->Surname);
-        } else {
-            $message = "failed";
+            return true;
+        }else{
+            return false;
         }
-        // echo $this->Middle_Name;
-        echo $message . "<br />";
-        echo $account;
     }
 
     public function getListofUsers($searchName, $page) {
@@ -96,9 +90,10 @@ class User_Model extends Model {
         return mysql_num_rows($query) / $this->itemsPerPage;
     }
 
-    public function deleteUser($key){
+    public function deleteUser($key) {
         mysql_query("delete from users where Username = '$key'");
     }
+
 }
 
 ?>

@@ -45,25 +45,36 @@ class Settings extends Controller {
         $confirmpass = $_POST['confirmpass'];
         $actualPass = Session::getUserPass();
 
-        if (Session::get_Account_type() == "Admin" || Session::get_Account_type() == "Signatory") {
-            $this->admin->Surname = $_POST['surname'];
-            $this->admin->First_Name = $_POST['firstname'];
-            $this->admin->Middle_Name = $_POST['middleName'];
-        }
+        if ($_POST['surname'] != "" && $_POST['firstname'] != "" && $_POST['middleName'] != "") {
+            if (Session::get_Account_type() == "Admin" || Session::get_Account_type() == "Signatory") {
+                $this->admin->Surname = $_POST['surname'];
+                $this->admin->First_Name = $_POST['firstname'];
+                $this->admin->Middle_Name = $_POST['middleName'];
+            }
 
-        if ($actualPass == $oldpass) {
-            if ($newpass == $confirmpass) {
-                $this->admin->Password = $newpass;
-                $this->admin->update(Session::get_Account_type());
+            if ($actualPass == $oldpass) {
+                if ($newpass == $confirmpass) {
+
+                    if ($newpass == "") {
+                        $this->admin->Password = $oldpass;
+                    } else {
+                        $this->admin->Password = $newpass;
+                    }
+
+                    if ($this->admin->update(Session::get_Account_type())) {
+                        $this->template->setAlert('Your Account Has Been Updated!', Template::ALERT_SUCCESS);
+                    } else {
+                        $this->template->setAlert('Database Error!', Template::ALERT_ERROR);
+                    }
+                } else {
+                    $this->template->setAlert('Passwords does not matched!', Template::ALERT_INFO);
+                }
+            } else {
+                $this->template->setAlert('Check your password!', Template::ALERT_INFO);
             }
         } else {
-            header('Location: settings.php?action=settings_error');
-            exit;
+            $this->template->setAlert('Surname, first name and middle name are required!', Template::ALERT_INFO);
         }
-    }
-
-    public function settings_error() {
-        $this->template->setAlert('Something is not right', Template::ALERT_ERROR);
     }
 
     public function display() {

@@ -39,7 +39,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </a>
-                    <a class="brand" href="index.php"><img src="{$host}/public/img/logo.png">Student Online Clearance System</a>
+                    <a class="brand" href="index.php"><img src="{$host}/public/img/logo.png"> Student Online Clearance System</a>
                     <div class="nav-collapse collapse">
 
                         {if isset($username)}
@@ -49,8 +49,12 @@
                                     <span class="caret"></span>
                                 </button>
                                 <ul class="dropdown-menu">
-                                    <li><a href="{$host}/settings.php">My Account</a></li>
-                                    <li><a href="{$host}/index.php?action=logout">Logout</a></li>
+                                    <li>
+                                        <a href="{$host}/settings.php"><i class="icon-wrench"></i> My Account</a>
+                                    </li>
+                                    <li>
+                                        <a href="{$host}/index.php?action=logout"><i class="icon-off"></i> Logout</a>
+                                    </li>
                                 </ul>
                             </div>
                         {else}
