@@ -45,6 +45,9 @@ class Settings extends Controller {
         $confirmpass = $_POST['confirmpass'];
         $actualPass = Session::getUserPass();
 
+        $test = 0;
+
+        //Check if fields are empty in firstname surname and middlename
         if ($_POST['surname'] != "" && $_POST['firstname'] != "" && $_POST['middleName'] != "") {
             if (Session::get_Account_type() == "Admin" || Session::get_Account_type() == "Signatory") {
                 $this->admin->Surname = $_POST['surname'];
@@ -52,28 +55,36 @@ class Settings extends Controller {
                 $this->admin->Middle_Name = $_POST['middleName'];
             }
 
-            if ($actualPass == $oldpass) {
-                if ($newpass == $confirmpass) {
-
-                    if ($newpass == "") {
-                        $this->admin->Password = $oldpass;
-                    } else {
-                        $this->admin->Password = $newpass;
-                    }
-
-                    if ($this->admin->update(Session::get_Account_type())) {
-                        $this->template->setAlert('Your Account Has Been Updated!', Template::ALERT_SUCCESS);
-                    } else {
-                        $this->template->setAlert('Database Error!', Template::ALERT_ERROR);
-                    }
-                } else {
-                    $this->template->setAlert('Passwords does not matched!', Template::ALERT_INFO);
-                }
-            } else {
-                $this->template->setAlert('Check your password!', Template::ALERT_INFO);
-            }
+            $test++;
         } else {
             $this->template->setAlert('Surname, first name and middle name are required!', Template::ALERT_INFO);
+            return;
+        }
+
+        // check if actual pass and old pass are equal
+        if ($actualPass == $oldpass && $test == 1) {
+            $test++;
+        } else {
+            $this->template->setAlert('That\'s not your password!', Template::ALERT_INFO);
+            return;
+        }
+
+        //check if new pass and confirm pass are equal
+        if ($newpass == $confirmpass && $test == 2) {
+
+            if ($newpass == "") {
+                $this->admin->Password = $oldpass;
+            } else {
+                $this->admin->Password = $newpass;
+            }
+
+            if ($this->admin->update(Session::get_Account_type())) {
+                $this->template->setAlert('Your Account Has Been Updated!', Template::ALERT_SUCCESS);
+            } else {
+                $this->template->setAlert('Database Error!', Template::ALERT_ERROR);
+            }
+        } else {
+            $this->template->setAlert('Passwords does not matched!', Template::ALERT_INFO);
         }
     }
 
