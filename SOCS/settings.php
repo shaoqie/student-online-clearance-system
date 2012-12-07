@@ -45,11 +45,16 @@ class Settings extends Controller {
         $confirmpass = $_POST['confirmpass'];
         $actualPass = Session::getUserPass();
 
+        if ($newpass == "") {
+            $newpass = $oldpass;
+            $confirmpass = $oldpass;
+        }
+
         $test = 0;
 
         //Check if fields are empty in firstname surname and middlename
         if ($_POST['surname'] != "" && $_POST['firstname'] != "" && $_POST['middleName'] != "") {
-            if (Session::get_Account_type() == "Admin" || Session::get_Account_type() == "Signatory") {
+            if (Session::get_Account_type() != "Student") {
                 $this->admin->Surname = $_POST['surname'];
                 $this->admin->First_Name = $_POST['firstname'];
                 $this->admin->Middle_Name = $_POST['middleName'];
@@ -61,8 +66,36 @@ class Settings extends Controller {
             return;
         }
 
+        //checks the surname if valid
+        if (Validator::is_valid_name($_POST['surname']) && $test == 1) {
+
+            $test++;
+        } else {
+            $this->template->setAlert('Surname must not have a numerical values and characters / \ ? < > : ; " and *', Template::ALERT_INFO);
+            return;
+        }
+
+        //checks the firstname if valid
+        if (Validator::is_valid_name($_POST['firstname']) && $test == 2) {
+
+            $test++;
+        } else {
+            $this->template->setAlert('Surname must not have a numerical values and characters / \ ? < > : ; " and *', Template::ALERT_INFO);
+            return;
+        }
+
+        //checks the middlename if valid
+        if (Validator::is_valid_name($_POST['middleName']) && $test == 3) {
+
+            $test++;
+        } else {
+            $this->template->setAlert('Surname must not have a numerical values and characters / \ ? < > : ; " and *', Template::ALERT_INFO);
+            return;
+        }
+
         // check if actual pass and old pass are equal
-        if ($actualPass == $oldpass && $test == 1) {
+        if ($actualPass == $oldpass && $test == 4) {
+
             $test++;
         } else {
             $this->template->setAlert('That\'s not your password!', Template::ALERT_INFO);
@@ -70,21 +103,24 @@ class Settings extends Controller {
         }
 
         //check if new pass and confirm pass are equal
-        if ($newpass == $confirmpass && $test == 2) {
+        if ($newpass == $confirmpass && $test == 5) {
 
-            if ($newpass == "") {
-                $this->admin->Password = $oldpass;
-            } else {
-                $this->admin->Password = $newpass;
-            }
-
-            if ($this->admin->update(Session::get_Account_type())) {
-                $this->template->setAlert('Your Account Has Been Updated!', Template::ALERT_SUCCESS);
-            } else {
-                $this->template->setAlert('Database Error!', Template::ALERT_ERROR);
-            }
+            $test++;
         } else {
             $this->template->setAlert('Passwords does not matched!', Template::ALERT_INFO);
+            return;
+        }
+
+        if (Validator::is_valid_password($newpass) && $test == 6) {
+
+//            if ($this->admin->update(Session::get_Account_type())) {
+            $this->template->setAlert('Your Account Has Been Updated!', Template::ALERT_SUCCESS);
+//            } else {
+//                $this->template->setAlert('Database Error!', Template::ALERT_ERROR);
+//            }
+        } else {
+            $this->template->setAlert('Password\'s length must have a minimum of 7 characters!', Template::ALERT_INFO);
+            echo $test;
         }
     }
 
