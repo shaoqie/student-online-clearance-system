@@ -112,15 +112,16 @@ class Settings extends Controller {
         }
 
         if (Validator::is_valid_password($newpass) && $test == 6) {
+            
+            $this->admin->Password = $newpass;
 
-//            if ($this->admin->update(Session::get_Account_type())) {
+            if ($this->admin->update(Session::get_Account_type())) {
             $this->template->setAlert('Your Account Has Been Updated!', Template::ALERT_SUCCESS);
-//            } else {
-//                $this->template->setAlert('Database Error!', Template::ALERT_ERROR);
-//            }
+            } else {
+                $this->template->setAlert('Database Error!', Template::ALERT_ERROR);
+            }
         } else {
             $this->template->setAlert('Password\'s length must have a minimum of 7 characters!', Template::ALERT_INFO);
-            echo $test;
         }
     }
 
