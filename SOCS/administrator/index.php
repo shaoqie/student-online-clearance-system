@@ -36,7 +36,7 @@ class Index extends Controller {
     
     private function getStrongchar($str, $findname){
         $left = substr($str, 0, strpos(strtolower($str), strtolower($findname))); //cut left
-	$center = "<strong>" .substr($str, strpos(strtolower($str), strtolower($findname)), strlen($findname)) ."</strong>"; // cut center
+	$center = "<strong style='color: #049cdb;'>" .substr($str, strpos(strtolower($str), strtolower($findname)), strlen($findname)) ."</strong>"; // cut center
 	$right =  substr($str, strpos(strtolower($str), strtolower($findname)) + strlen($findname));		
 		
 	return $left .$center .$right;
@@ -91,7 +91,8 @@ class Index extends Controller {
         foreach ($explode as $value) {
             $this->administrator_model->deleteUser(trim($value));
         }
-        header('Location: ' .HOST ."/administrator/?action=deleted");
+        $HOST = $explode[0] != null ? HOST ."/administrator/?action=deleted" : HOST;
+        header('Location: ' .$HOST);
     }
     
     public function deleted(){
