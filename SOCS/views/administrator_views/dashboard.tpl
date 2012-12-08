@@ -6,18 +6,16 @@
     }       
         
     function isCheckAll(isChecked){
-        for(var i = 0; i <= {$rowCount}; i++){
+        for(var i = 0; i <= {$rowCount_admin}; i++){
             document.getElementById("" +i).checked = isChecked;
         }
     }
         
     function findCheck(){
         var valueDeleted = "";
-        var count = 0;
-        for(var i = 0; i < {$rowCount}; i++){
+        for(var i = 0; i < {$rowCount_admin}; i++){
             if(document.getElementById("" +i).checked == true){
                 valueDeleted += document.getElementById("" +i).value + "-";
-                count ++;
             }
         }
         window.location.assign("?action=delete&selected=" + valueDeleted);
@@ -55,7 +53,7 @@
     </tr>
     {foreach from = $myName key = k item = i}
         <tr>
-            <td><input type="checkbox" id = '{$k}' value = {$myKey[$k]}></input></td>
+            <td width="300px"><input type="checkbox" id = '{$k}' value = {$myKey_admin[$k]}></input></td>
             <!--<td style="width:100px;"><p>{$myPhotos[$k]}</p></td>-->
             <td><p>{$i}</p></td>
             <td><p>{$myType[$k]}</p></td>
@@ -68,7 +66,7 @@
 <div class="pull-right">
     Jump to: <select id="jump" class="input-mini" onchange="jumpToPage()">
         <option>--</option>
-        {for $start = 1 to $end}
+        {for $start = 1 to $admin_length}
         <option>{$start}</option>
         {/for}
     </select>

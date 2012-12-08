@@ -36,7 +36,7 @@ class Index extends Controller {
     
     private function getStrongchar($str, $findname){
         $left = substr($str, 0, strpos(strtolower($str), strtolower($findname))); //cut left
-	$center = "<strong style='color: #049cdb;'>" .substr($str, strpos(strtolower($str), strtolower($findname)), strlen($findname)) ."</strong>"; // cut center
+	$center = "<strong style='color: #049cdb;'><u>" .substr($str, strpos(strtolower($str), strtolower($findname)), strlen($findname)) ."</u></strong>"; // cut center
 	$right =  substr($str, strpos(strtolower($str), strtolower($findname)) + strlen($findname));		
 		
 	return $left .$center .$right;
@@ -107,12 +107,12 @@ class Index extends Controller {
         $numOfPages = $this->administrator_model->getQueryPageSize($searchName);
         $numOfResults = count($this->getNameofUser($searchName, $page, "default"));
 
-        $this->template->assign('myKey', $this->getListofKey($searchName, $page));      
+        $this->template->assign('myKey_admin', $this->getListofKey($searchName, $page));      
         $this->template->set_Photos($this->getPictureofUser($searchName, $page));
         $this->template->set_Type($this->getTypeeofUser($searchName, $page));
         $this->template->set_Filter($searchName);
-        $this->template->assign('end', $numOfPages);
-        $this->template->assign('rowCount', $numOfResults);
+        $this->template->assign('admin_length', $numOfPages);
+        $this->template->assign('rowCount_admin', $numOfResults);
 
         if($finder == "default"){
             $this->template->set_Name($this->getNameofUser($searchName, $page, "default"));
