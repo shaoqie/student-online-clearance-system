@@ -49,9 +49,9 @@
     <tr>
         <th></th>
         <!--<th style="width:100px;"> Pic</th>-->
-        <th> User</th>  
+        <th> Signatories</th>  
     </tr>
-    {foreach from = $myDescription_sign key = k item = i}
+    {foreach from = $myName_sign key = k item = i}
         <tr>
             <td width="300px"><input type="checkbox" id = '{$k}' value = {$myKey_sign[$k]} ></input></td>
             <td><p>{$i}</p></td>

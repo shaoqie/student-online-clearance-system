@@ -38,7 +38,7 @@ class Signatory_List_Manager extends Controller {
 	return $left .$center .$right;
     }
     
-    private function getListofDescription($arrayTemp, $searchName, $finder){
+    private function getListofSignName($arrayTemp, $searchName, $finder){
         $row = array();
         foreach ($arrayTemp as $value) {
             $str = $finder == "default" ? $value : $this->getStrongchar($value, $searchName);
@@ -67,9 +67,9 @@ class Signatory_List_Manager extends Controller {
     
     public function displayTable($searchName, $page, $finder){
         $numOfPages = $this->signatory_model->getQueryPageSize($searchName);
-        $numOfResults = count($this->signatory_model->filter_Description($searchName, $page));
+        $numOfResults = count($this->signatory_model->filter_SignName($searchName, $page));
         
-        $this->template->assign('myDescription_sign', $this->getListofDescription($this->signatory_model->filter_Description($searchName, $page), $searchName, $finder)); //$this->signatory_model->filter_Description($searchName, $page));
+        $this->template->assign('myName_sign', $this->getListofSignName($this->signatory_model->filter_SignName($searchName, $page), $searchName, $finder)); //$this->signatory_model->filter_Description($searchName, $page));
         $this->template->assignByRef('myKey_sign', $this->signatory_model->filter_ID($searchName, $page));
         $this->template->assign('filter', $searchName);
         $this->template->assign('sign_length', $numOfPages);

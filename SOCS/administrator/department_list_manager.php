@@ -38,7 +38,7 @@ class Department_List_Manager extends Controller {
 	return $left .$center .$right;
     }
     
-    private function getListofDescription($arrayTemp, $searchName, $finder){
+    private function getListofDeptName($arrayTemp, $searchName, $finder){
         $row = array();
         foreach ($arrayTemp as $value) {
             $str = $finder == "default" ? $value : $this->getStrongchar($value, $searchName);
@@ -67,9 +67,9 @@ class Department_List_Manager extends Controller {
     
     public function displayTable($searchName, $page, $finder){
         $numOfPages = $this->department_model->getQueryPageSize($searchName);
-        $numOfResults = count($this->department_model->filter_Description($searchName, $page));
+        $numOfResults = count($this->department_model->filter_DeptName($searchName, $page));
         
-        $this->template->assign('myDescription_dept', $this->getListofDescription($this->department_model->filter_Description($searchName, $page), $searchName, $finder)); //$this->signatory_model->filter_Description($searchName, $page));
+        $this->template->assign('myName_dept', $this->getListofDeptName($this->department_model->filter_DeptName($searchName, $page), $searchName, $finder)); //$this->signatory_model->filter_Description($searchName, $page));
         $this->template->assignByRef('myKey_dept', $this->department_model->filter_ID($searchName, $page));
         $this->template->assign('filter', $searchName);
         $this->template->assign('dept_length', $numOfPages);

@@ -23,7 +23,7 @@ class Department_Model extends Model{
     public function filter_ID($Tdescription, $Tpage){
         $filter = array();
         $this->query = mysql_query("select Department_ID from departments
-                                    where Description like '%$Tdescription%' 
+                                    where Department_Name like '%$Tdescription%' 
                                     LIMIT " . (($Tpage - 1) * $this->itemsPerPage) . ", " . $this->itemsPerPage);
         
         while($row = mysql_fetch_array($this->query)){
@@ -33,22 +33,22 @@ class Department_Model extends Model{
         return $filter;
     }
     
-    public function filter_Description($Tdescription, $Tpage){
+    public function filter_DeptName($Tdept_name, $Tpage){
         $filter = array();
-        $this->query = mysql_query("select Description from departments
-                                    where Description like '%$Tdescription%' 
+        $this->query = mysql_query("select Department_Name from departments
+                                    where Department_Name like '%$Tdept_name%' 
                                     LIMIT " . (($Tpage - 1) * $this->itemsPerPage) . ", " . $this->itemsPerPage);
         
         while($row = mysql_fetch_array($this->query)){
-            array_push($filter, $row['Description']);
+            array_push($filter, $row['Department_Name']);
         }
         
         return $filter;
     }
     
     public function getQueryPageSize($searchName) {
-        $this->query = mysql_query("select Description from departments 
-                        where Description like '%$searchName%'");
+        $this->query = mysql_query("select Department_Name from departments 
+                        where Department_Name like '%$searchName%'");
         
         return mysql_num_rows($this->query) / $this->itemsPerPage;
     }

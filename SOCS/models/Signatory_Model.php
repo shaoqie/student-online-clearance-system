@@ -23,7 +23,7 @@ class Signatory_Model extends Model{
     public function filter_ID($Tdescription, $Tpage){
         $filter = array();
         $this->query = mysql_query("select Signatory_ID from signatories
-                                    where Description like '%$Tdescription%' 
+                                    where Signatory_Name like '%$Tdescription%' 
                                     LIMIT " . (($Tpage - 1) * $this->itemsPerPage) . ", " . $this->itemsPerPage);
         
         while($row = mysql_fetch_array($this->query)){
@@ -33,22 +33,22 @@ class Signatory_Model extends Model{
         return $filter;
     }
     
-    public function filter_Description($Tdescription, $Tpage){
+    public function filter_SignName($Tsign_name, $Tpage){
         $filter = array();
-        $this->query = mysql_query("select Description from signatories
-                                    where Description like '%$Tdescription%' 
+        $this->query = mysql_query("select Signatory_Name from signatories
+                                    where Signatory_Name like '%$Tsign_name%' 
                                     LIMIT " . (($Tpage - 1) * $this->itemsPerPage) . ", " . $this->itemsPerPage);
         
         while($row = mysql_fetch_array($this->query)){
-            array_push($filter, $row['Description']);
+            array_push($filter, $row['Signatory_Name']);
         }
         
         return $filter;
     }
     
     public function getQueryPageSize($searchName) {
-        $this->query = mysql_query("select Description from signatories 
-                        where Description like '%$searchName%'");
+        $this->query = mysql_query("select Signatory_Name from signatories 
+                        where Signatory_Name like '%$searchName%'");
         
         return mysql_num_rows($this->query) / $this->itemsPerPage;
     }

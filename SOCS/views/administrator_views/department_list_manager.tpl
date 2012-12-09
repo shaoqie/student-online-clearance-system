@@ -48,9 +48,9 @@
     <tr>
         <th></th>
         <!--<th style="width:100px;"> Pic</th>-->
-        <th> User</th>  
+        <th> Departments</th>  
     </tr>
-    {foreach from = $myDescription_dept key = k item = i}
+    {foreach from = $myName_dept key = k item = i}
         <tr>
             <td width="300px"><input type="checkbox" id = '{$k}' value = {$myKey_dept[$k]} ></input></td>
             <td><p>{$i}</p></td>
