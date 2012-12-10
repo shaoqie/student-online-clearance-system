@@ -1,26 +1,3 @@
-<script>
-    function jumpToPage(){
-    var jump = document.getElementById("jump").value;
-    var search = document.getElementById("search").value;
-    window.location.assign("?action=displayTable&filter=" + search +"&page=" + jump);
-}
-    
-function isCheckAll(isChecked){
-for(var i = 0; i <= {$rowCount_dept}; i++){
-document.getElementById("" +i).checked = isChecked;
-}
-}
-    
-function findCheck(){
-var valueDeleted = "";
-for(var i = 0; i < {$rowCount_dept}; i++){
-if(document.getElementById("" +i).checked == true){
-valueDeleted += document.getElementById("" +i).value + "-";
-}
-}
-window.location.assign("?action=delete&selected=" + valueDeleted);
-}
-</script>
 <ul class="nav nav-tabs">
     <li><a href='../administrator/index.php'>User Accounts</a></li>
     <li><a href='../administrator/signatory_list_manager.php'>Signatories</a></li>
@@ -31,18 +8,13 @@ window.location.assign("?action=delete&selected=" + valueDeleted);
     <input type="hidden" value="filter" name="action">
     <input class="input-xxlarge" id="search" type="text" placeholder="Search..." value ="{$filter}" name="filterName">
     <button class="btn btn-primary" type="submit"><i class="icon-search icon-white"></i></button>
+    <input class="btn pull-right" type="button" value="Add Department">
 </form>
-
-<div class="row">
-    <div class="span6">
-        <input class="btn pull-right" type="button" value="Add Department">
-    </div> 
-</div>   
 
 <br>
 
-<a href = "javascript:isCheckAll(true)" >Checked All</a> / 
-<a href = "javascript:isCheckAll(false)" >Unchecked All</a> 
+<a href = "javascript:isCheckAll(true, {$rowCount_dept})" >Checked All</a> / 
+<a href = "javascript:isCheckAll(false, {$rowCount_dept})" >Unchecked All</a> 
 
 <div class="socs_list">
     <table class="table table-hover">     
@@ -61,7 +33,7 @@ window.location.assign("?action=delete&selected=" + valueDeleted);
     </table>
 </div>
 
-<a href = "javascript:findCheck()" >Delete Selected</a>
+<a href = "javascript:findCheck({$rowCount_dept})" >Delete Selected</a>
 
 
 <div class="pull-right">

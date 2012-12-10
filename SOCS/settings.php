@@ -44,6 +44,9 @@ class Settings extends Controller {
         $newpass = $_POST['newpass'];
         $confirmpass = $_POST['confirmpass'];
         $actualPass = Session::getUserPass();
+        $surname = $_POST['surname'];
+        $firstname = $_POST['firstname'];
+        $middleName = $_POST['middleName'];
 
         if ($newpass == "") {
             $newpass = $oldpass;
@@ -53,11 +56,11 @@ class Settings extends Controller {
         $test = 0;
 
         //Check if fields are empty in firstname surname and middlename
-        if ($_POST['surname'] != "" && $_POST['firstname'] != "" && $_POST['middleName'] != "") {
+        if ($surname != "" && $firstname != "" && $middleName != "") {
             if (Session::get_Account_type() != "Student") {
-                $this->admin->Surname = $_POST['surname'];
-                $this->admin->First_Name = $_POST['firstname'];
-                $this->admin->Middle_Name = $_POST['middleName'];
+                $this->admin->Surname = $surname;
+                $this->admin->First_Name = $firstname;
+                $this->admin->Middle_Name = $middleName;
             }
 
             $test++;
@@ -67,7 +70,7 @@ class Settings extends Controller {
         }
 
         //checks the surname if valid
-        if (Validator::is_valid_name($_POST['surname']) && $test == 1) {
+        if (Validator::is_valid_name($surname) && $test == 1) {
 
             $test++;
         } else {
@@ -76,7 +79,7 @@ class Settings extends Controller {
         }
 
         //checks the firstname if valid
-        if (Validator::is_valid_name($_POST['firstname']) && $test == 2) {
+        if (Validator::is_valid_name($firstname) && $test == 2) {
 
             $test++;
         } else {
@@ -85,7 +88,7 @@ class Settings extends Controller {
         }
 
         //checks the middlename if valid
-        if (Validator::is_valid_name($_POST['middleName']) && $test == 3) {
+        if (Validator::is_valid_name($middleName) && $test == 3) {
 
             $test++;
         } else {
@@ -98,7 +101,7 @@ class Settings extends Controller {
 
             $test++;
         } else {
-            $this->template->setAlert('That\'s not your password!', Template::ALERT_INFO);
+            $this->template->setAlert('Incorrect Password!', Template::ALERT_INFO);
             return;
         }
 
@@ -112,11 +115,14 @@ class Settings extends Controller {
         }
 
         if (Validator::is_valid_password($newpass) && $test == 6) {
-            
+
             $this->admin->Password = $newpass;
 
             if ($this->admin->update(Session::get_Account_type())) {
-            $this->template->setAlert('Your Account Has Been Updated!', Template::ALERT_SUCCESS);
+                $this->template->setAlert('Your Account Has Been Updated!', Template::ALERT_SUCCESS);
+                $this->template->set_surname($surname);
+                $this->template->set_firstname($firstname);
+                $this->template->set_middlename($middleName);
             } else {
                 $this->template->setAlert('Database Error!', Template::ALERT_ERROR);
             }
