@@ -57,21 +57,21 @@
                                     </li>
                                 </ul>
                             </div>
-                        {else}
-                            <form class="navbar-form pull-right" action="index.php?action=login" method="post">
-                                <input class="span2" type="text" placeholder="Username" name="username">
-                                <input class="span2" type="password" placeholder="Password" name="password">
-                                <button type="submit" class="btn"><i class="icon-check"></i>   Sign in</button>
-                            </form>
+                        {elseif $smarty.get.action != login_error}
+                            {if $smarty.get.action != logout}
+                                <form class="navbar-form pull-right" action="index.php?action=login" method="post">
+                                    <input class="span2" type="text" placeholder="Username" name="username">
+                                    <input class="span2" type="password" placeholder="Password" name="password">
+                                    <button type="submit" class="btn"><i class="icon-check"></i> Sign in</button>
+                                </form>
+                            {/if}
                         {/if}
                     </div><!--/.nav-collapse -->
                 </div>
             </div>
         </div>
-                        
-        <div class="container">
 
-            {$alert}
+        <div class="container">
 
             {if isset($username)}
                 <div class="row">
@@ -83,6 +83,8 @@
                 </div>
                 <hr>
             {/if}
+            
+            {$alert}
 
             {include file=$content}
 
