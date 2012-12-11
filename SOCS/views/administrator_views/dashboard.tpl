@@ -12,29 +12,29 @@
 </form>
 
 <a href = "javascript:isCheckAll(true, {$rowCount_admin})" >Checked All</a> / 
-<a href = "javascript:isCheckAll(false, {$rowCount_admin})">Unchecked All</a> 
+<a href = "javascript:isCheckAll(false, {$rowCount_admin})">Unchecked All</a>
 
-<div class="socs_list">
-
-    <table class="table table-hover">     
-        <tr>
-            <th></th>
-            <!--<th style="width:100px;"> Pic</th>-->
-            <th> User</th>  
-            <th> Type</th>  
-        </tr>
-        {foreach from = $myName key = k item = i}
-            <tr>
-                <td><input type="checkbox" id = '{$k}' value = {$myKey_admin[$k]}></input></td>
-                <td><p>{$i}</p></td>
-                <td><p>{$myType[$k]}</p></td>
-
-            </tr>
-        {/foreach}
-    </table>
-
-</div>
-
+<table class="table table-hover">     
+    <tr>
+        <th></th>
+        <!--<th style="width:100px;"> Pic</th>-->
+        <th> User</th>  
+        <th> Type</th>
+        <th><p class="pull-right">Controls</p></th>
+</tr>
+{foreach from = $myName key = k item = i}
+    <tr>
+        <td><input type="checkbox" id = '{$k}' value = {$myKey_admin[$k]}></input></td>
+        <td><p>{$i}</p></td>
+        <td><p>{$myType[$k]}</p></td>
+        <td>
+            <div class="pull-right">
+                <i class="icon-pencil"></i>&nbsp; &nbsp; &nbsp; &nbsp;<i class="icon-remove"></i>
+            </div>
+        </td>
+    </tr>
+{/foreach}
+</table>
 <a href="javascript:findCheck({$rowCount_admin})"> Delete Selected</a>
 
 <div class="pull-right">

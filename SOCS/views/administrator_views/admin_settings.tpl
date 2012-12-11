@@ -28,7 +28,9 @@
     <div class="control-group">
         <label class="control-label">New password: </label>
         <div class="controls">
-            <input type='password' name='newpass' pattern="{literal}{7, 50}{/literal}">
+            {literal}
+                <input type='password' name='newpass' pattern="^.{7,50}$" title="Password minimum of 7 characters">
+            {/literal}
         </div>
     </div>
 
@@ -36,11 +38,10 @@
         <label class="control-label">Confirm new password: </label>
         <div class="controls">
             <input type='password' name='confirmpass'>
-            <span class="help-block">Password: minimum of 7 characters</span>
         </div>
     </div>
-
-    <legend>Upload Picture</legend>
+<!--
+    <legend>Upload Picture</legend>(?=^.7,$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$
 
     <div class="control-group">
         <label class="control-label">Upload Picture: </label>
@@ -48,7 +49,7 @@
             <input type="file" disabled>
         </div>
     </div>
-
+-->
     <legend>Authentication: </legend>
 
     <div class="control-group">
