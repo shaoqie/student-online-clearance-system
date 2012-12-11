@@ -62,7 +62,7 @@ class Department_List_Manager extends Controller {
     }
     
     public function filter($filterName){
-        $this->displayTable($filterName, 1);
+        $this->displayTable(trim($filterName), 1);
     }
     
     public function displayTable($searchName, $page, $finder){
