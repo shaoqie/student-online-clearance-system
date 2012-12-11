@@ -27,7 +27,7 @@
         <td><p>{$i}</p></td>
         <td>
             <div class="pull-right">
-                <i class="icon-pencil"></i>&nbsp; &nbsp; &nbsp; &nbsp;<i class="icon-remove"></i>
+                <a href="#" rel="tooltip" data-placement="top" data-original-tilte="edit"><i class="icon-pencil"></i></a>&nbsp; &nbsp; &nbsp; &nbsp;<i class="icon-remove"></i>
             </div>
         </td>
     </tr>
