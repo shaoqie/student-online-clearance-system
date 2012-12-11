@@ -78,7 +78,8 @@ class User_Model extends Model {
         $query = mysql_query("select Username, Picture, concat(Surname, ', ', First_Name, ' ', Middle_Name) 
                         as Name, Account_Type from users 
                         where First_name like '%$searchName%' OR Surname like '%$searchName%' OR 
-                        Middle_Name like '%$searchName%' LIMIT " . (($page - 1) * $this->itemsPerPage) . ", " . $this->itemsPerPage);
+                        Middle_Name like '%$searchName%' order by Name
+                        LIMIT " . (($page - 1) * $this->itemsPerPage) . ", " . $this->itemsPerPage);
         return $query;
     }
 

@@ -23,7 +23,7 @@ class Department_Model extends Model{
     public function filter_ID($Tdescription, $Tpage){
         $filter = array();
         $this->query = mysql_query("select Department_ID from departments
-                                    where Department_Name like '%$Tdescription%' 
+                                    where Department_Name like '%$Tdescription%' order by Department_Name 
                                     LIMIT " . (($Tpage - 1) * $this->itemsPerPage) . ", " . $this->itemsPerPage);
         
         while($row = mysql_fetch_array($this->query)){
@@ -36,7 +36,7 @@ class Department_Model extends Model{
     public function filter_DeptName($Tdept_name, $Tpage){
         $filter = array();
         $this->query = mysql_query("select Department_Name from departments
-                                    where Department_Name like '%$Tdept_name%' 
+                                    where Department_Name like '%$Tdept_name%' order by Department_Name  
                                     LIMIT " . (($Tpage - 1) * $this->itemsPerPage) . ", " . $this->itemsPerPage);
         
         while($row = mysql_fetch_array($this->query)){

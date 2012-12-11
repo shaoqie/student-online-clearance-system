@@ -23,7 +23,7 @@ class Signatory_Model extends Model{
     public function filter_ID($Tdescription, $Tpage){
         $filter = array();
         $this->query = mysql_query("select Signatory_ID from signatories
-                                    where Signatory_Name like '%$Tdescription%' 
+                                    where Signatory_Name like '%$Tdescription%' order by Signatory_Name 
                                     LIMIT " . (($Tpage - 1) * $this->itemsPerPage) . ", " . $this->itemsPerPage);
         
         while($row = mysql_fetch_array($this->query)){
@@ -36,8 +36,8 @@ class Signatory_Model extends Model{
     public function filter_SignName($Tsign_name, $Tpage){
         $filter = array();
         $this->query = mysql_query("select Signatory_Name from signatories
-                                    where Signatory_Name like '%$Tsign_name%' 
-                                    LIMIT " . (($Tpage - 1) * $this->itemsPerPage) . ", " . $this->itemsPerPage);
+                                    where Signatory_Name like '%$Tsign_name%' order by Signatory_Name 
+                                    LIMIT " . (($Tpage - 1) * $this->itemsPerPage) . ", " . $this->itemsPerPage );
         
         while($row = mysql_fetch_array($this->query)){
             array_push($filter, $row['Signatory_Name']);
