@@ -16,20 +16,19 @@
 
 <table class="table table-hover">     
     <tr>
-        <th></th>
-        <!--<th style="width:100px;"> Pic</th>-->
-        <th>Signatories</th>
-        <th><p class="pull-right">Controls</p></th>
+        <th><p class="pull-left">Controls</p></th>
+        <th>Signatories</th>       
     </tr>
     {foreach from = $myName_sign key = k item = i}
         <tr>
-            <td><input type="checkbox" id = '{$k}' value = {$myKey_sign[$k]} ></input></td>
-            <td><p>{$i}</p></td>
-            <td>
-                <div class="pull-right">
-                    <i class="icon-pencil"></i>&nbsp; &nbsp; &nbsp; &nbsp;<i class="icon-remove"></i>
+            <td style="width:400px">
+                <div class="pull-left">
+                    <input type="checkbox" id = '{$k}' value = {$myKey_sign[$k]} ></input> &nbsp; &nbsp;
+                    <i class="icon-pencil"></i><a>Edit</a>&nbsp; &nbsp;
+                    <i class="icon-remove"></i><a  href='../administrator/signatory_list_manager.php?action=delete&selected={$myKey_sign[$k]}-' >Delete</a>
                 </div>
-            </td>
+            </td>    
+            <td><p>{$i}</p></td>
         </tr>
     {/foreach}
 </table>

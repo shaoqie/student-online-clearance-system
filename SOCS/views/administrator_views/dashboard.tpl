@@ -16,22 +16,21 @@
 
 <table class="table table-hover">     
     <tr>
-        <th></th>
-        <!--<th style="width:100px;"> Pic</th>-->
+        <th><p class="pull-left">Controls</p></th>
         <th> User</th>  
-        <th> Type</th>
-        <th><p class="pull-right">Controls</p></th>
-</tr>
+        <th> Type</th>        
+    </tr>
 {foreach from = $myName key = k item = i}
     <tr>
-        <td><input type="checkbox" id = '{$k}' value = {$myKey_admin[$k]}></input></td>
+        <td style="width:400px">
+            <div class="pull-left">
+                <input type="checkbox" id = '{$k}' value = {$myKey_admin[$k]}></input>&nbsp; &nbsp; 
+                <i class="icon-pencil"></i><a>Edit</a>&nbsp; &nbsp;
+                <i class="icon-remove"></i><a href='../administrator/index.php?action=delete&selected={$myKey_admin[$k]}-'>Delete</a>
+            </div>                
+        </td>       
         <td><p>{$i}</p></td>
         <td><p>{$myType[$k]}</p></td>
-        <td>
-            <div class="pull-right">
-                <i class="icon-pencil"></i>&nbsp; &nbsp; &nbsp; &nbsp;<i class="icon-remove"></i>
-            </div>
-        </td>
     </tr>
 {/foreach}
 </table>

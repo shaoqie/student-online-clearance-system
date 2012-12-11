@@ -16,20 +16,19 @@
 
 <table class="table table-hover">     
     <tr>
-        <th></th>
-        <!--<th style="width:100px;"> Pic</th>-->
-        <th> Departments</th>
-        <th><p class="pull-right">Controls</p></th>
-</tr>
+        <th><p class="pull-left">Controls</p></th>
+        <th> Departments</th>       
+    </tr>
 {foreach from = $myName_dept key = k item = i}
     <tr>
-        <td><input type="checkbox" id = '{$k}' value = {$myKey_dept[$k]} ></input></td>
-        <td><p>{$i}</p></td>
-        <td>
-            <div class="pull-right">
-                <a href="#" rel="tooltip" data-placement="top" data-original-tilte="edit"><i class="icon-pencil"></i></a>&nbsp; &nbsp; &nbsp; &nbsp;<i class="icon-remove"></i>
-            </div>
+        <td style="width:400px">
+            <div class="pull-left">
+                <input type="checkbox" id = '{$k}' value = {$myKey_dept[$k]} ></input> &nbsp; &nbsp;
+                <i class="icon-pencil"></i><a>Edit</a>&nbsp; &nbsp; 
+                <i class="icon-remove"></i><a href='../administrator/department_list_manager.php?action=delete&selected={$myKey_dept[$k]}-' >Delete</a>
+            </div>          
         </td>
+        <td><p>{$i}</p></td>
     </tr>
 {/foreach}
 </table>

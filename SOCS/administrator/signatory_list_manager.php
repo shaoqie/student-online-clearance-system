@@ -49,7 +49,7 @@ class Signatory_List_Manager extends Controller {
     }
     
     public function deleted(){
-        $this->template->setAlert('Delete an Account Successfully!..', Template::ALERT_SUCCESS);
+        $this->template->setAlert('Delete an Signatory Successfully!..', Template::ALERT_SUCCESS);
     }
     
     public function delete($selected) {
