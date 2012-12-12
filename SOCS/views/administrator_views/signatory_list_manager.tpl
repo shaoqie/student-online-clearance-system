@@ -25,7 +25,7 @@
                 <div class="pull-left">
                     <input type="checkbox" id = '{$k}' value = {$myKey_sign[$k]} ></input> &nbsp; &nbsp;
                     <i class="icon-pencil"></i><a href="#"> Edit</a>&nbsp; &nbsp;
-                    <i class="icon-remove"></i><a href="#" onclick="confirmDelete({$myKey_sign[$k]})"> Delete</a>
+                    <i class="icon-remove"></i><a href="#" onclick="confirmDelete('{$myKey_sign[$k]}')"> Delete</a>
                 </div>
             </td>    
             <td><p>{$i}</p></td>

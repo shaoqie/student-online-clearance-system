@@ -34,7 +34,7 @@ function findCheck(rowCount){
 }
 
 function confirmDelete(selected){
-    var bool = confirm("Are you sure you want to delete?");
+    var bool = confirm("Are you sure you want delete?");
     
     if(bool == true){
         window.location = "?action=delete&selected=" + selected;
