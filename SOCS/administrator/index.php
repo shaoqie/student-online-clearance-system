@@ -123,6 +123,10 @@ class Index extends Controller {
             $this->template->setAlert('No Results Found.', Template::ALERT_ERROR);
         }
     }
+    
+    public function display_add_account(){
+        $this->template->setContent('add_edit_account.tpl');
+    }
 
     public function display() {
         $this->template->display('bootstrap.tpl');

@@ -1,3 +1,4 @@
+<button class="pull-right btn" onclick="window.location.href='index.php'">Back</button>
 <form action='settings.php?action=verify' method='post' class="form-horizontal">
 
     <legend>Edit Account: </legend>

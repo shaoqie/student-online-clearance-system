@@ -1,19 +1,12 @@
-<div style="float:right;">
-    <a href='../settings.php'>My Account</a>&nbsp;&nbsp;<a href='../index.php?action=logout'>Logout</a></div>
+<ul class="nav nav-tabs">
+    <li class="active"><a href='../administrator/index.php'>User Accounts</a></li>
+    <li><a href='../administrator/signatory_list_manager.php'>Signatories</a></li>
+    <li><a href='../administrator/department_list_manager.php'>Departments</a></li>
+</ul>
 
-<center><div style="width:100px;height:100px;border:1px solid gray;"><img></img></div></center>
+<button class="pull-right btn" onclick="window.location.href='index.php'">Back</button>
 
-<center><div style="width:550px;"><Strong><h3>{$user_info}</h3></Strong><br>
-        <Strong>Students Online  Clearance System</Strong><br><hr></div></center>
-
-
-<center><div style="width:550px;">
-        <a href='#'>User Accounts</a>&nbsp;&nbsp;<a href='#'>Signatories</a>
-        &nbsp;&nbsp;<a href='#'>Departments</a></div></center>           
-<br> 
-
-
-<form action="index.php?action=add_user" method='post'>
+<form action="index.php?action=add_user" method='post' class="form-horizontal">
     <legend>Add Account:</legend>
     <div class="control-group">
         <label class="control-label">Username: </label>
@@ -37,21 +30,6 @@
         <label class="control-label">Middle Name: </label>
         <div class="controls">
             <input type='text'name='middleName'>
-        </div>
-    </div>
-
-    <legend>Account password: </legend>
-    <div class="control-group">
-        <label class="control-label">Password: </label>
-        <div class="controls">
-            <input type='password' name='password'>
-        </div>
-    </div>
-
-    <div class="control-group">
-        <label class="control-label">Confirm password: </label>
-        <div class="controls">
-            <input type='password' name='confirmpass'>
         </div>
     </div>
 
