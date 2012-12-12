@@ -19,11 +19,24 @@ function isCheckAll(isChecked, rowCount){
 }
         
 function findCheck(rowCount){
-    var valueDeleted = "";
-    for(var i = 0; i < rowCount; i++){
-        if(document.getElementById("" +i).checked == true){
-            valueDeleted += document.getElementById("" +i).value + "-";
+    
+    var bool = confirm("Are you sure you want to delete?");
+    
+    if(bool == true){
+        var valueDeleted = "";
+        for(var i = 0; i < rowCount; i++){
+            if(document.getElementById("" +i).checked == true){
+                valueDeleted += document.getElementById("" +i).value + "-";
+            }
         }
+        window.location.assign("?action=delete&selected=" + valueDeleted);
     }
-    window.location.assign("?action=delete&selected=" + valueDeleted);
+}
+
+function confirmDelete(selected){
+    var bool = confirm("Are you sure you want to delete?");
+    
+    if(bool == true){
+        window.location = "?action=delete&selected=" + selected;
+    }
 }

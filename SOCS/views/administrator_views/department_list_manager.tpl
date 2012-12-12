@@ -24,8 +24,8 @@
         <td style="width:400px">
             <div class="pull-left">
                 <input type="checkbox" id = '{$k}' value = {$myKey_dept[$k]} ></input> &nbsp; &nbsp;
-                <i class="icon-pencil"></i><a>Edit</a>&nbsp; &nbsp; 
-                <i class="icon-remove"></i><a href='../administrator/department_list_manager.php?action=delete&selected={$myKey_dept[$k]}-' >Delete</a>
+                <i class="icon-pencil"></i><a href="#"> Edit</a>&nbsp; &nbsp; 
+                <i class="icon-remove"></i><a href='#' onclick="confirmDelete('{$myKey_dept[$k]}')"> Delete</a>
             </div>          
         </td>
         <td><p>{$i}</p></td>
@@ -33,8 +33,7 @@
 {/foreach}
 </table>
 
-<a href = "javascript:findCheck({$rowCount_dept})" >Delete Selected</a>
-
+<a href="#" onclick="findCheck('{$rowCount_dept}')" >Delete Selected</a>
 
 <div class="pull-right">
     Jump to: <select id="jump" class="input-mini" onchange="jumpToPage()">
