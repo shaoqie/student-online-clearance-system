@@ -24,11 +24,11 @@
         <td style="width:400px">
             <div class="pull-left">
                 <input type="checkbox" id = '{$k}' value = {$myKey_dept[$k]} ></input> &nbsp; &nbsp;
-                <i class="icon-pencil"></i><a href="#"> Edit</a>&nbsp; &nbsp; 
-                <i class="icon-remove"></i><a href='#' onclick="confirmDelete('{$myKey_dept[$k]}')"> Delete</a>
+                <i class="icon-pencil"></i><a style="cursor:pointer;"> Edit</a>&nbsp; &nbsp; 
+                <i class="icon-remove"></i><a style="cursor:pointer;" onclick="confirmDelete('{$myKey_dept[$k]}')"> Delete</a>
             </div>          
         </td>
-        <td><p>{$i}</p></td>
+        <td><p onclick="window.location.href='department_list_manager.php?action=displayCourse&deptName={$i}'" style="cursor:pointer;" >{$i}</p></td>
     </tr>
 {/foreach}
 </table>

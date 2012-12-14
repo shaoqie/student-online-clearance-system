@@ -38,6 +38,10 @@ class Session {
         $_SESSION['middlename'] = $middlename;
     }
     
+    public static function set_deptpartName($deptName){
+        $_SESSION['Department_Name'] = $deptName;
+    }
+    
 
         //acessor
     public static function get_user(){
@@ -59,6 +63,10 @@ class Session {
     
     public static function get_Middlename(){
         return $_SESSION['middlename'];
+    }
+    
+    public static function get_DepartmentName(){
+        return $_SESSION['Department_Name'];
     }
     
     public static function user_exist(){
