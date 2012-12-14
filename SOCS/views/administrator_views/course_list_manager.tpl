@@ -1,5 +1,9 @@
 <h1><center>{$Dept_name}</center></h1>
-<h2><center>Academic Courses</center></h2>
+
+<ul class="nav nav-tabs">
+    <li class="active"><a href='../administrator/course_list_manager.php'>Courses</a></li>
+    <li><a href='#'>Signatorial List</a></li>
+</ul>
 
 <form class="form-horizontal">
     <input type="hidden" value="filter" name="action">
