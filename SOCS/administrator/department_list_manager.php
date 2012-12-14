@@ -51,6 +51,20 @@ class Department_List_Manager extends Controller {
 
         return $row;
     }
+    
+    public function addDepartment(){
+        $this->template->setContent('addDepartment.tpl');
+    }
+    
+    public function add_department(){
+        $this->template->setContent('addDepartment.tpl');       
+        if(trim($_POST['dept_name']) == "" || trim($_POST['dept_description']) == ""){       
+            $this->template->setAlert("Adding Department was Failed", Template::ALERT_ERROR);
+        }else{
+            $this->department_model->insert(trim($_POST['dept_name']), trim($_POST['dept_description']));
+            $this->template->setAlert("Adding Department was Successful", Template::ALERT_SUCCESS);
+        }
+    }
 
     public function displayCourse($deptName) {
         Session::set_deptpartName($deptName);

@@ -58,6 +58,23 @@ class course_list_manager extends Controller {
         return $row;
     }
     
+    public function addCourse(){
+        $this->template->setContent('addCourse.tpl');
+    }
+    
+    public function add_course(){
+        $this->template->setContent('addCourse.tpl');    
+        $dept_ID = $this->course_model->getDept_ID(Session::get_DepartmentName());
+        
+        if(trim($_POST['course_name']) == "" || trim($_POST['course_description']) == ""){       
+            $this->template->setAlert("Adding Course was Failed", Template::ALERT_ERROR);
+        }else{
+            
+            $this->course_model->insert(trim($_POST['course_name']), trim($_POST['course_description']), $dept_ID);
+            $this->template->setAlert("Adding Course was Successful", Template::ALERT_SUCCESS);
+        }
+    }
+    
     public function deleted(){
         $this->template->setAlert('Delete an Department Successfully!..', Template::ALERT_SUCCESS);
     }

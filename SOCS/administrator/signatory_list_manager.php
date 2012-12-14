@@ -51,6 +51,20 @@ class Signatory_List_Manager extends Controller {
 
         return $row;
     }
+    
+    public function addSignatory(){
+        $this->template->setContent('addSignatory.tpl');       
+    }
+    
+    public function add_signatory(){
+        $this->template->setContent('addSignatory.tpl');       
+        if(trim($_POST['sign_name']) == "" || trim($_POST['sign_description']) == ""){       
+            $this->template->setAlert("Adding Signatory was Failed", Template::ALERT_ERROR);
+        }else{
+            $this->signatory_model->insert(trim($_POST['sign_name']), trim($_POST['sign_description']));
+            $this->template->setAlert("Adding Signatory was Successful", Template::ALERT_SUCCESS);
+        }
+    }
 
     public function deleted() {
         $this->template->setAlert('Delete an Signatory Successfully!..', Template::ALERT_SUCCESS);
@@ -75,7 +89,6 @@ class Signatory_List_Manager extends Controller {
         $getListofSignName = $this->getListofSignName($this->signatory_model->filter_SignName($searchName, $page), $searchName, $finder);
         $filter_ID = $this->signatory_model->filter_ID($searchName, $page);
 
-        //$this->
         $this->template->assign('myName_sign', $getListofSignName); //$this->signatory_model->filter_Description($searchName, $page));
         $this->template->assignByRef('myKey_sign', $filter_ID);
         $this->template->assign('filter', $searchName);

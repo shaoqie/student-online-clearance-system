@@ -1,31 +1,28 @@
-    
-<div style="float:right;">
-     <a href='../settings.php'>My Account</a>&nbsp;&nbsp;<a href='../index.php?action=logout'>Logout</a></div>
+<ul class="nav nav-tabs">
+    <li><a href='../administrator/index.php'>User Accounts</a></li>
+    <li  class="active"><a href='../administrator/signatory_list_manager.php'>Signatories</a></li>
+    <li><a href='../administrator/department_list_manager.php'>Departments</a></li>
+</ul>
 
-<center><div style="width:100px;height:100px;border:1px solid gray;"><img></img></div></center>
-     
-<center><div style="width:550px;"><Strong><h3>{$user_info}</h3></Strong><br>
-        <Strong>Students Online  Clearance System</Strong><br><hr></div></center>
+<button class="pull-right btn" onclick="window.location.href='signatory_list_manager.php'">Back</button>
         
-     
-<center><div style="width:550px;">
-     <a href='#'>User Accounts</a>&nbsp;&nbsp;<a href='#'>Signatories</a>
-&nbsp;&nbsp;<a href='#'>Departments</a></div></center>           
-        <br> 
-        
-        
-       <center> <form action='#' method='post'>
-    Add Signatory:
-    <p>Signatory name: <input type ='text' name='signame'> <br /><br />
-        
-       Description:<br /> 
-        <form action="#">
-        <textarea name="myTextBox" cols="50" rows="5">
-        Enter some description here..
-        </textarea>
-        <br />
-        <input type="submit" value="Add Signatory"/>&nbsp; <a href='settings.php?action=cancel'>Cancel</a>
-        </form>
-
-    </p>
-        </form></center>
+<form action="signatory_list_manager.php?action=add_signatory" method='post' class="form-horizontal">
+    <legend>Add Signatory:</legend>
+    <div class="control-group">
+        <label class="control-label">Signatory Name: </label>
+        <div class="controls">
+            <input class="input-xxlarge" type ='text' name='sign_name'>
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label">Description: </label>
+        <div class="controls">
+            <textarea class="input-xxlarge" name='sign_description' rows="5" cols="50"></textarea>
+        </div>
+    </div>
+    <div class="control-group">
+        <div class="controls">
+            <input class="btn btn-primary" type='Submit' value='Save'>
+        </div>
+    </div>
+</form>       

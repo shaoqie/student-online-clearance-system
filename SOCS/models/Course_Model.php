@@ -61,6 +61,21 @@ class Course_Model extends Model{
     public function deleteCourse($key){
         mysql_query("delete from courses where Course_ID = '$key'");
     }
+    
+    public function insert($course_name, $description, $dept_ID){
+        mysql_query("INSERT INTO `socs`.`courses` (`Course_ID`, `Course_Name`, `Description`, `Department_ID`) 
+                    VALUES (NULL, '$course_name', '$description', '$dept_ID');");
+    }
+    
+    
+    /*----------- For Special Purposes ------------*/
+    
+    public function getDept_ID($dept_name){
+        $this->query = mysql_query("select Department_ID from departments where Department_Name like '%$dept_name%'");
+        $row = mysql_fetch_array($this->query);
+        
+        return $row['Department_ID'];
+    }
 }
 
 ?>

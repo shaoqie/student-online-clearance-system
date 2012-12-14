@@ -1,3 +1,24 @@
+<script>
+    function aJaxStyle(){
+        var accountType = document.getElementById("accountType").value
+        var str = "";
+        if(accountType == "Signatory In-Charge"){
+                str = "<label class='control-label'> Assigned signatory: </label>";
+                str += "<div class='controls'>";
+                    str += "<select id='jump' class='input-large'>";
+                        str += "<option>Default &nbsp:</option>";
+                        {foreach from = $mySignatory item = i}
+                            str += "<option>{$i}</option>";
+                        {/foreach}
+                    str += "</select>";
+                str += "</div>";
+        }
+        
+        document.getElementById("assignSign").innerHTML = str;
+    }
+</script>
+
+
 <ul class="nav nav-tabs">
     <li class="active"><a href='../administrator/index.php'>User Accounts</a></li>
     <li><a href='../administrator/signatory_list_manager.php'>Signatories</a></li>
@@ -37,28 +58,20 @@
     <div class="control-group">
         <label class="control-label"> Account Type: </label>
         <div class="controls">
-            <select class="input-large">
+            <select class="input-large" id="accountType" onchange="aJaxStyle()">
                 <option>Default &nbsp:</option>
                 <option>System Administrator</option>
                 <option>Signatory In-Charge</option>
             </select>
         </div>   
     </div>
-    <div class="control-group">
-        <label class="control-label"> Assigned signatory: </label>
-        <div class="controls">
-            <select id="jump" class="input-large">
-                <option>Default &nbsp:</option>
-                {foreach from = $mySignatory item = i}
-                        <option>{$i}</option>
-                {/foreach}
-            </select>
-        </div>   
+    <div class="control-group" id="assignSign">
+         
     </div>
 
     <div class="control-group">
         <div class="controls">
-            <input class="btn btn-primary" type='Submit' value='Add Account'>
+            <input class="btn btn-primary" type='Submit' value='Save'>
         </div>
     </div>
 </form>

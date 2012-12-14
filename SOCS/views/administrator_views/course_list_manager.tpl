@@ -6,7 +6,7 @@
     <input class="input-xxlarge" id="search" type="text" placeholder="Search..." value ="{$filter}" name="filterName">
     <button class="btn btn-primary" type="submit"><i class="icon-search icon-white"></i></button>
     <div class="pull-right">   
-        <input class="btn" type="button" value="Add Courses">
+        <input class="btn" type="button" value="Add Courses" onclick="window.location.href='course_list_manager.php?action=addCourse'">
         <input class="btn" type="button" value="Back" onclick="window.location.href='department_list_manager.php'">    
     </div>
 </form>

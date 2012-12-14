@@ -56,6 +56,11 @@ class Signatory_Model extends Model{
     public function deleteSignatory($key){
         mysql_query("delete from signatories where Signatory_ID = '$key'");
     }
+    
+    public function insert($sign_name, $description){
+        mysql_query("INSERT INTO `socs`.`signatories` (`Signatory_ID`, `Signatory_Name`, `Description`) 
+                    VALUES (NULL, '$sign_name', '$description')");
+    }
 }
 
 ?>
