@@ -124,8 +124,11 @@ class Index extends Controller {
         }
     }
     
-    public function display_add_account(){
-        $this->template->setContent('add_edit_account.tpl');
+    public function display_add_edit_account(){
+        $listOfSignatory = $this->administrator_model->getListofSignatory();
+        
+        $this->template->setContent('add_edit_account.tpl');   
+        $this->template->assign('mySignatory', $listOfSignatory);
     }
 
     public function display() {

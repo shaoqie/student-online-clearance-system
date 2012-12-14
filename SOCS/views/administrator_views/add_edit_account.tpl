@@ -33,23 +33,27 @@
         </div>
     </div>
 
-    <legend>Account type: </legend>
+    <legend>Account type: </legend> 
     <div class="control-group">
+        <label class="control-label"> Account Type: </label>
         <div class="controls">
-            <input type="radio" name="account_type" value="Signatory" checked> Signatory in-charge
-        </div>
-        <div class="controls">
-            <label class="control-label"> Assigned signatory: </label>
-            <select>
-                <option>OSS</option>
-                <option>OCSC</option>
-                <option>Evening College</option>
-                <option>Library</option>
+            <select class="input-large">
+                <option>Default &nbsp:</option>
+                <option>System Administrator</option>
+                <option>Signatory In-Charge</option>
             </select>
-        </div>
+        </div>   
+    </div>
+    <div class="control-group">
+        <label class="control-label"> Assigned signatory: </label>
         <div class="controls">
-            <input type="radio" name="account_type" value="Admin">System Administrator
-        </div>
+            <select id="jump" class="input-large">
+                <option>Default &nbsp:</option>
+                {foreach from = $mySignatory item = i}
+                        <option>{$i}</option>
+                {/foreach}
+            </select>
+        </div>   
     </div>
 
     <div class="control-group">

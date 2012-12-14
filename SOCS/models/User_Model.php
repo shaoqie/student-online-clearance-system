@@ -94,6 +94,27 @@ class User_Model extends Model {
     public function deleteUser($key) {
         mysql_query("delete from users where Username = '$key'");
     }
+    
+    
+    /*--------- For Assigning Signatory ----------*/
+    
+    public function getListofSignatory(){
+        $rowInfo = array();
+        $this->query = mysql_query("select signatory_name from signatories");
+        
+        while($row = mysql_fetch_array($this->query)){
+            array_push($rowInfo, $row['signatory_name']);
+        }
+        
+        return $rowInfo;
+    } 
+    
+    public function getAssignSignatory($sign_name){
+        $this->query = mysql_query("select signatory_id from signatories where Signatory_Name = '$sign_name'");
+        $row = mysql_fetch_array($this->query);
+        
+        return $row['signatory_id'];
+    }
 
 }
 
