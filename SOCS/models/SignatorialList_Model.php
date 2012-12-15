@@ -67,6 +67,43 @@ class SignatorialList_Model extends Model{
         return mysql_num_rows($this->query) / $this->itemsPerPage;
     }
     
+    public function deleteSignatorial($key){
+        mysql_query("delete from signatoriallist where Signatory_ID = '$key'");
+    }
+    
+    public function insert($dept_ID, $sign_ID){
+        mysql_query("INSERT INTO `socs`.`signatoriallist` (`Department_ID`, `Signatory_ID`) 
+                VALUES ('$dept_ID', '$sign_ID')");
+    }
+    
+    
+    /*--------- For Assigning Signatory ----------*/
+    
+    public function getListofSignatory(){
+        $rowInfo = array();
+        $this->query = mysql_query("select signatory_name from signatories");
+        
+        while($row = mysql_fetch_array($this->query)){
+            array_push($rowInfo, $row['signatory_name']);
+        }
+        
+        return $rowInfo;
+    } 
+    
+    public function getDeptId($dept_name){
+        $this->query = mysql_query("select Department_ID from departments where Department_Name like '%$dept_name%'");
+        $row = mysql_fetch_array($this->query);
+        
+        return $row['Department_ID'];
+    }
+    
+    public function getSignId($sign_name){
+        $this->query = mysql_query("select Signatory_ID from signatories where Signatory_Name like '%$sign_name%'");
+        $row = mysql_fetch_array($this->query);
+        
+        return $row['Signatory_ID'];
+    }
+    
 }
 
 ?>

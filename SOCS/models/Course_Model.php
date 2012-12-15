@@ -64,7 +64,7 @@ class Course_Model extends Model{
     
     public function insert($course_name, $description, $dept_ID){
         mysql_query("INSERT INTO `socs`.`courses` (`Course_ID`, `Course_Name`, `Description`, `Department_ID`) 
-                    VALUES (NULL, '$course_name', '$description', '$dept_ID');");
+                    VALUES (NULL, '$course_name', '$description', '$dept_ID')");
     }
     
     

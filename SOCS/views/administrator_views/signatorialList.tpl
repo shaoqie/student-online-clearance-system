@@ -5,13 +5,22 @@
     <li class="active"><a href='../administrator/signatorialList.php'>Signatorial List</a></li>
 </ul>
    
-<form class="form-horizontal">
+<form class="form-horizontal" method="post">
     <input type="hidden" value="filter" name="action">
     <input class="input-xxlarge" id="search" type="text" placeholder="Search..." value ="{$filter}" name="filterName">
     <button class="btn btn-primary" type="submit"><i class="icon-search icon-white"></i></button>
     <div class="pull-right">   
-        <input class="btn" type="button" value="Add Signatory" onclick="window.location.href='signatorialList.php?action=addCourse'">
-        <input class="btn" type="button" value="Back" onclick="window.location.href='department_list_manager.php'">    
+        <label class="control-label">Choose Signatory:</label>
+        <div class="controls">
+            <select class='input-large' name="signatorylist">
+                <option>Default &nbsp:</option>
+                {foreach from = $SignatoryList item = i}
+                    <option>{$i}</option>
+                {/foreach}
+            </select>
+            <input class="btn" type="button" value="Add" onclick="window.location.href='signatorialList.php?action=addSignatory'">
+            <input class="btn" type="button" value="Back" onclick="window.location.href='department_list_manager.php'"> 
+        </div>
     </div>
 </form>
 

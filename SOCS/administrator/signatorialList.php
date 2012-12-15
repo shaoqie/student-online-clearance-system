@@ -56,17 +56,31 @@ class signatorialList extends Controller{
         return $row;
     }
     
+    public function addSignatory(){    
+        $dept_id = $this->signatorialList_model->getDeptId(Session::get_DepartmentName());
+        $sign_id = $this->signatorialList_model->getSignId(trim($_POST['signatorylist']));
+        $this->signatorialList_model->insert($dept_id, $sign_id);
+
+        $this->displayTable('', 1, "default");
+    }
+    
+    public function filter($filterName){
+        $this->displayTable(trim($filterName), 1);
+    }  
+    
     public function displayTable($searchName, $page, $finder){
         $numOfPages = $this->signatorialList_model->getQueryPageSize(Session::get_DepartmentName(), $searchName);
         $numOfResults = count($this->signatorialList_model->filter_SignName(Session::get_DepartmentName(), $searchName, $page));
         $getListofSignatorialList = $this->getListofSignatorialList($this->signatorialList_model->filter_SignName(Session::get_DepartmentName(), $searchName, $page), $searchName, $finder);
         $filter_ID = $this->signatorialList_model->filter_ID(Session::get_DepartmentName(), $searchName, $page);
+        $SignatoryList = $this->signatorialList_model->getListofSignatory();
         
         $this->template->assign('myName_signatorial', $getListofSignatorialList); 
         $this->template->assignByRef('myKey_signatorial', $filter_ID);
         $this->template->assign('filter', $searchName);
         $this->template->assign('signatorial_length', $numOfPages);
         $this->template->assign('rowCount_signatorial', $numOfResults);
+        $this->template->assign('SignatoryList', $SignatoryList);
         
         if ($numOfResults == 0) {
             $this->template->setAlert('No Results Found.', Template::ALERT_ERROR);
