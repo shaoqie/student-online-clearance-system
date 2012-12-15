@@ -34,7 +34,7 @@
     </tr>
 {/foreach}
 </table>
-<a href="#" onclick="findCheck('{$rowCount_admin}')"> Delete Selected</a>
+<a style="cursor:pointer;" onclick="findCheck('{$rowCount_admin}')"> Delete Selected</a>
 
 <div class="pull-right">
     Jump to: 

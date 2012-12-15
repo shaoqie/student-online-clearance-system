@@ -1,9 +1,9 @@
 <h1><center>{$Dept_name}</center></h1>
 <h2><center>Academic Courses</center></h2>
 
-<button class="pull-right btn" onclick="window.location.href='course_list_manager.php'">Back</button>
+<button class="pull-right btn" onclick="window.location.href='course_list_byDepartment.php'">Back</button>
         
-<form action="course_list_manager.php?action=add_course" method='post' class="form-horizontal">
+<form action="course_list_byDepartment.php?action=add_course" method='post' class="form-horizontal">
     <legend>Add Course:</legend>
     <div class="control-group">
         <label class="control-label">Course Name: </label>

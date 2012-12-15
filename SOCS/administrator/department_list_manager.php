@@ -68,7 +68,7 @@ class Department_List_Manager extends Controller {
 
     public function displayCourse($deptName) {
         Session::set_deptpartName($deptName);
-        header('Location: ' . HOST . "/administrator/course_list_manager.php");
+        header('Location: ' . HOST . "/administrator/course_list_byDepartment.php");
     }
 
     public function deleted() {

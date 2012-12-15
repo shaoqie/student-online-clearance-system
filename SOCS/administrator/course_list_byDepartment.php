@@ -6,14 +6,14 @@
  */
 
 /**
- * Description of course_list_manager
+ * Description of course_list_byDepartment
  *
  * @author ronversa09
  */
 
 require_once '../config/config.php';
 
-class course_list_manager extends Controller {
+class course_list_byDepartment extends Controller {
     private $template;
     private $course_model;
     
@@ -32,7 +32,7 @@ class course_list_manager extends Controller {
             $this->template->set_account_type(Session::get_Account_type());
             $this->template->assign('Dept_name', Session::get_DepartmentName());
 
-            $this->template->setContent('course_list_manager.tpl');
+            $this->template->setContent('course_list_byDepartment.tpl');
 
             $this->displayTable('', 1, "default");
         }else{
@@ -84,7 +84,7 @@ class course_list_manager extends Controller {
         foreach ($explode as $value) {
             $this->course_model->deleteCourse(trim($value));
         }
-        $HOST = $explode[0] != null ? HOST ."/administrator/course_list_manager.php?action=deleted" : HOST ."/administrator/course_list_manager.php";
+        $HOST = $explode[0] != null ? HOST ."/administrator/course_list_byDepartment.php?action=deleted" : HOST ."/administrator/course_list_byDepartment.php";
         header('Location: ' .$HOST);
     }
     
@@ -115,7 +115,7 @@ class course_list_manager extends Controller {
     }    
 }
 
-$controller = new course_list_manager();
+$controller = new course_list_byDepartment();
 $controller->perform_actions();
 $controller->display();
 

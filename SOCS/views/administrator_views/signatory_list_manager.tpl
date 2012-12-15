@@ -33,7 +33,7 @@
     {/foreach}
 </table>
 
-<a href="#" onclick="findCheck('{$rowCount_sign}')">Delete Selected</a>
+<a style="cursor:pointer;" onclick="findCheck('{$rowCount_sign}')">Delete Selected</a>
 
 <div class="pull-right">
     Jump to: <select id="jump" class="input-mini" onchange="jumpToPage()">
