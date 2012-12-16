@@ -62,6 +62,7 @@ class signatorialList extends Controller{
         $this->signatorialList_model->insert($dept_id, $sign_id);
         
         $this->displayTable('', 1, "default");
+        $this->template->setAlert('Signatorial List was Added Successfully!..', Template::ALERT_SUCCESS);
     }
     
     public function deleted() {

@@ -5,13 +5,20 @@
                                                 +"<option>{$i}</option>"
                                             +"{/foreach}"
                                         +"</select>";
+        var editSignatorialList = "<input type='button' class='btn' value='Confirmed' onclick='confirmedEdit(" +sign_id +")'> &nbsp; &nbsp; "
+                                   + "<input type='button' class='btn' value='Cancel' onclick=cancel()>";
+        
         document.getElementById("unSelectedSignatorialList" +idEdit).innerHTML = listOfUnSelectSignatory;                         
-        document.getElementById("confirmed" +idEdit).innerHTML = "<input type='button' class='btn' value='Confirmed' onclick='confirmedEdit(" +sign_id +")'>";                            
+        document.getElementById("confirmed" +idEdit).innerHTML = editSignatorialList;                            
     }
     
     function confirmedEdit(sign_id){
         var selectSignatorialListFromEdit = document.getElementById("editSignatorialList").value;
         window.location.assign("?action=editSignatorialList&newSign_Name=" +selectSignatorialListFromEdit +"&oldSign_ID=" +sign_id);
+    }
+    
+    function cancel(){
+        window.location.assign("signatorialList.php")
     }
 </script>
 
