@@ -6,7 +6,10 @@
  * Administrator Script Functions
  */
 
-
+function getSignatory(){
+    var cmdSignatory = document.getElementById("cmdSignatory").value;
+    window.location.assign("?action=addSignatory&cmdSignatory=" +cmdSignatory);
+}
 
 function jumpToPage(){
     var jump = document.getElementById("jump").value;

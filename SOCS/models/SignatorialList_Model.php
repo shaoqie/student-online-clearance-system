@@ -28,7 +28,6 @@ class SignatorialList_Model extends Model{
                                     inner join departments
                                     on signatorialList.department_id = departments.department_id
                                     where departments.Department_Name like '%$Tdept_name%' and signatories.signatory_name like '%$Tsign_name%'
-                                    order by signatories.signatory_name
                                     LIMIT " . (($Tpage - 1) * $this->itemsPerPage) . ", " . $this->itemsPerPage);
         
         while($row = mysql_fetch_array($this->query)){
@@ -46,7 +45,6 @@ class SignatorialList_Model extends Model{
                                     inner join departments
                                     on signatorialList.department_id = departments.department_id
                                     where departments.Department_Name like '%$Tdept_name%' and signatories.signatory_name like '%$Tsign_name%'
-                                    order by signatories.signatory_name
                                     LIMIT " . (($Tpage - 1) * $this->itemsPerPage) . ", " . $this->itemsPerPage);
         
         while($row = mysql_fetch_array($this->query)){
@@ -67,8 +65,13 @@ class SignatorialList_Model extends Model{
         return mysql_num_rows($this->query) / $this->itemsPerPage;
     }
     
-    public function deleteSignatorial($key){
-        mysql_query("delete from signatoriallist where Signatory_ID = '$key'");
+    public function update($dept_ID, $sign_ID, $newSign_ID){
+        mysql_query("UPDATE signatoriallist SET Signatory_ID=$newSign_ID
+                    WHERE Department_ID=$dept_ID and Signatory_ID=$sign_ID");
+    }
+    
+    public function deleteSignatorial($dept_ID, $sign_ID){
+        mysql_query("delete from signatoriallist where Department_ID = '$dept_ID' and Signatory_ID = '$sign_ID'" );
     }
     
     public function insert($dept_ID, $sign_ID){

@@ -56,12 +56,38 @@ class signatorialList extends Controller{
         return $row;
     }
     
-    public function addSignatory(){    
+    public function addSignatory($cmdSignatory){    
         $dept_id = $this->signatorialList_model->getDeptId(Session::get_DepartmentName());
-        $sign_id = $this->signatorialList_model->getSignId(trim($_POST['signatorylist']));
+        $sign_id = $this->signatorialList_model->getSignId(trim($cmdSignatory));
         $this->signatorialList_model->insert($dept_id, $sign_id);
-
+        
         $this->displayTable('', 1, "default");
+    }
+    
+    public function deleted() {
+        $this->template->setAlert('Delete an Signatorial List Successfully!..', Template::ALERT_SUCCESS);
+    }
+
+    public function delete($selected) {
+        $dept_id = $this->signatorialList_model->getDeptId(Session::get_DepartmentName());
+        $explode = explode("-", $selected);
+        foreach ($explode as $value) {
+            $this->signatorialList_model->deleteSignatorial($dept_id, trim($value));
+        }
+        $HOST = $explode[0] != null ? HOST . "/administrator/signatorialList.php?action=deleted" : HOST . "/administrator/signatorialList.php";
+        header('Location: ' . $HOST);
+    }
+    
+    public function edited() {
+        $this->template->setAlert('Signatorial List was Edited Successfully!..', Template::ALERT_SUCCESS);
+    }
+    
+    public function editSignatorialList($newSign_Name, $oldSign_ID){
+        $dept_id_temp = $this->signatorialList_model->getDeptId(Session::get_DepartmentName());
+        $newSign_ID_temp = $this->signatorialList_model->getSignId($newSign_Name);
+
+        $this->signatorialList_model->update($dept_id_temp, $oldSign_ID, $newSign_ID_temp);
+        header('Location: ' . HOST . "/administrator/signatorialList.php?action=edited");
     }
     
     public function filter($filterName){
@@ -73,14 +99,19 @@ class signatorialList extends Controller{
         $numOfResults = count($this->signatorialList_model->filter_SignName(Session::get_DepartmentName(), $searchName, $page));
         $getListofSignatorialList = $this->getListofSignatorialList($this->signatorialList_model->filter_SignName(Session::get_DepartmentName(), $searchName, $page), $searchName, $finder);
         $filter_ID = $this->signatorialList_model->filter_ID(Session::get_DepartmentName(), $searchName, $page);
+        //$dept_id = $this->signatorialList_model->getDeptId(Session::get_DepartmentName());
+        
         $SignatoryList = $this->signatorialList_model->getListofSignatory();
+        $getSignatorialList_signName = $this->signatorialList_model->filter_SignName(Session::get_DepartmentName(), '', $page);
+        $listOfUnSelectSignatory = array_diff($SignatoryList, $getSignatorialList_signName);      
         
         $this->template->assign('myName_signatorial', $getListofSignatorialList); 
         $this->template->assignByRef('myKey_signatorial', $filter_ID);
         $this->template->assign('filter', $searchName);
         $this->template->assign('signatorial_length', $numOfPages);
         $this->template->assign('rowCount_signatorial', $numOfResults);
-        $this->template->assign('SignatoryList', $SignatoryList);
+        $this->template->assign('SignatoryList', $listOfUnSelectSignatory);
+        //$this->template->assign('dept_id', $dept_id);
         
         if ($numOfResults == 0) {
             $this->template->setAlert('No Results Found.', Template::ALERT_ERROR);
