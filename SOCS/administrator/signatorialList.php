@@ -100,7 +100,6 @@ class signatorialList extends Controller{
         $numOfResults = count($this->signatorialList_model->filter_SignName(Session::get_DepartmentName(), $searchName, $page));
         $getListofSignatorialList = $this->getListofSignatorialList($this->signatorialList_model->filter_SignName(Session::get_DepartmentName(), $searchName, $page), $searchName, $finder);
         $filter_ID = $this->signatorialList_model->filter_ID(Session::get_DepartmentName(), $searchName, $page);
-        //$dept_id = $this->signatorialList_model->getDeptId(Session::get_DepartmentName());
         
         $SignatoryList = $this->signatorialList_model->getListofSignatory();
         $getSignatorialList_signName = $this->signatorialList_model->filter_SignName(Session::get_DepartmentName(), '', $page);
@@ -112,7 +111,6 @@ class signatorialList extends Controller{
         $this->template->assign('signatorial_length', $numOfPages);
         $this->template->assign('rowCount_signatorial', $numOfResults);
         $this->template->assign('SignatoryList', $listOfUnSelectSignatory);
-        //$this->template->assign('dept_id', $dept_id);
         
         if ($numOfResults == 0) {
             $this->template->setAlert('No Results Found.', Template::ALERT_ERROR);

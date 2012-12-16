@@ -1,11 +1,10 @@
-<script>
-    var globalSign_name = "";
+<script>  
     function getSignatory(){
         var cmdSignatory = document.getElementById("cmdSignatory").value;
         window.location.assign("?action=addSignatory&cmdSignatory=" +cmdSignatory);
     }
     
-    function edit(idEdit, sign_id, sign_name){     
+    function edit(idEdit, sign_id){     
         var listOfUnSelectSignatory =   "<select class='input-large' id='editSignatorialList'>"
                                             +"{foreach from = $SignatoryList item = i}"
                                                 +"<option>{$i}</option>"
@@ -13,7 +12,7 @@
                                         +"</select>";
         var editSignatorialList = "<input type='button' class='btn' value='Confirmed' onclick='confirmedEdit(" +sign_id +")'> &nbsp; &nbsp; "
                                    + "<input type='button' class='btn' value='Cancel' onclick=cancel('" +idEdit +"')>";
-        globalSign_name = sign_name;
+              
         document.getElementById("unSelectedSignatorialList" +idEdit).innerHTML = listOfUnSelectSignatory;                         
         document.getElementById("confirmed" +idEdit).innerHTML = editSignatorialList;                            
     }
@@ -24,7 +23,7 @@
     }
     
     function cancel(TidEdit){
-        document.getElementById("unSelectedSignatorialList" +TidEdit).innerHTML = globalSign_name;
+        document.getElementById("unSelectedSignatorialList" +TidEdit).innerHTML = document.getElementById("edit" +TidEdit).value;
         document.getElementById("confirmed" +TidEdit).innerHTML = "";
         
     }
@@ -68,8 +67,9 @@
     <tr>
         <td style="width:400px">
             <div class="pull-left">
+                <input type="hidden" id = 'edit{$k}' value = "{$i}">
                 <input type="checkbox" id = '{$k}' value = {$myKey_signatorial[$k]} ></input> &nbsp; &nbsp;
-                <i class="icon-pencil"></i><a style="cursor:pointer;" href="javascript:edit('{$k}','{$myKey_signatorial[$k]}','{$i}')"> Edit</a>&nbsp; &nbsp; 
+                <i class="icon-pencil"></i><a style="cursor:pointer;" href="javascript:edit('{$k}','{$myKey_signatorial[$k]}')"> Edit</a>&nbsp; &nbsp; 
                 <i class="icon-remove"></i><a style="cursor:pointer;" onclick="confirmDelete('{$myKey_signatorial[$k]}')"> Delete</a>
             </div>          
         </td>
