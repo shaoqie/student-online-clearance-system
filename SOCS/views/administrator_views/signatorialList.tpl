@@ -1,4 +1,9 @@
 <script>
+    function getSignatory(){
+        var cmdSignatory = document.getElementById("cmdSignatory").value;
+        window.location.assign("?action=addSignatory&cmdSignatory=" +cmdSignatory);
+    }
+    
     function edit(idEdit, sign_id){     
         var listOfUnSelectSignatory =   "<select class='input-large' id='editSignatorialList'>"
                                             +"{foreach from = $SignatoryList item = i}"
