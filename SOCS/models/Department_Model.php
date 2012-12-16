@@ -54,7 +54,8 @@ class Department_Model extends Model{
     }
     
     public function deleteSignatory($key){
-        mysql_query("delete from departments where Department_ID = '$key'");
+        $delete = mysql_query("delete from departments where Department_ID = '$key'");
+        if(!$delete){return "false";}
     }
     
     public function insert($dept_name, $description){

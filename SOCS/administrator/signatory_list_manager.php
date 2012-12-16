@@ -73,7 +73,8 @@ class Signatory_List_Manager extends Controller {
     public function delete($selected) {
         $explode = explode("-", $selected);
         foreach ($explode as $value) {
-            $this->signatory_model->deleteSignatory(trim($value));
+            $delete = $this->signatory_model->deleteSignatory(trim($value));
+            if($delete == "false"){ $this->template->setAlert('You can delete an Unuse Signatory only!..', Template::ALERT_ERROR); return;}
         }
         $HOST = $explode[0] != null ? HOST . "/administrator/signatory_list_manager.php?action=deleted" : HOST . "/administrator/signatory_list_manager.php";
         header('Location: ' . $HOST);
