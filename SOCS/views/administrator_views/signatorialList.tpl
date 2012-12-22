@@ -10,22 +10,23 @@
                                                 +"<option>{$i}</option>"
                                             +"{/foreach}"
                                         +"</select>";
-        var editSignatorialList = "<input type='button' class='btn' value='Confirmed' onclick='confirmedEdit(" +sign_id +")'> &nbsp; &nbsp; "
-                                   + "<input type='button' class='btn' value='Cancel' onclick=cancel('" +idEdit +"')>";
-              
-        document.getElementById("unSelectedSignatorialList" +idEdit).innerHTML = listOfUnSelectSignatory;                         
-        document.getElementById("confirmed" +idEdit).innerHTML = editSignatorialList;                            
-    }
-    
-    function confirmedEdit(sign_id){
-        var selectSignatorialListFromEdit = document.getElementById("editSignatorialList").value;
-        window.location.assign("?action=editSignatorialList&newSign_Name=" +selectSignatorialListFromEdit +"&oldSign_ID=" +sign_id);
-    }
-    
-    function cancel(TidEdit){
-        document.getElementById("unSelectedSignatorialList" +TidEdit).innerHTML = document.getElementById("edit" +TidEdit).value;
-        document.getElementById("confirmed" +TidEdit).innerHTML = "";
+        var editSignatorialList = "<input type='button' class='btn' value='Confirmed' id='save'> &nbsp; &nbsp; "
+                                   + "<input type='button' class='btn' value='Cancel' id='cancel'>";
+                
+        $(document).ready(function(){
         
+            $("#unSelectedSignatorialList" +idEdit).html(listOfUnSelectSignatory);                         
+            $("#confirmed" +idEdit).html(editSignatorialList);        
+        
+        
+            $("#save").click(function(){
+                window.location.assign("?action=editSignatorialList&newSign_Name=" +$("#editSignatorialList").val() +"&oldSign_ID=" +sign_id);
+            });
+            $("#cancel").click(function(){
+                $("#unSelectedSignatorialList" +idEdit).html($("#edit" +idEdit).val());
+                $("#confirmed" +idEdit).html("");
+            });
+        });
     }
 </script>
 

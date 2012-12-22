@@ -28,7 +28,7 @@
         <td style="width:400px">
             <div class="pull-left">
                 <input type="checkbox" id = '{$k}' value = {$myKey_course[$k]} ></input> &nbsp; &nbsp;
-                <i class="icon-pencil"></i><a style="cursor:pointer;"> Edit</a>&nbsp; &nbsp; 
+                <i class="icon-pencil"></i><a style="cursor:pointer;" onclick="window.location.href='course_list_byDepartment.php?action=editCourse&seleted={$myKey_course[$k]}'"> Edit</a>&nbsp; &nbsp; 
                 <i class="icon-remove"></i><a style="cursor:pointer;" onclick="confirmDelete('{$myKey_course[$k]}')"> Delete</a>
             </div>          
         </td>

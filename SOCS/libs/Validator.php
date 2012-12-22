@@ -25,6 +25,6 @@ class Validator {
 
     public static function is_valid_name($storename) {
         /** don't allow characters / \ ? < > : ; " * and numerical characters on store name */
-        return preg_match('/[0-9\?\:\>\<\"\\\*\/\;]/', $storename) ? false : true;
+        return preg_match('/[0-9\?\:\>\<\"\\\*\/\;]/', $storename) ? false : true; 
     }
 }

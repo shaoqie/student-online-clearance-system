@@ -84,6 +84,28 @@ class Department_List_Manager extends Controller {
         $HOST = $explode[0] != null ? HOST . "/administrator/department_list_manager.php?action=deleted" : HOST . "/administrator/department_list_manager.php";
         header('Location: ' . $HOST);
     }
+    
+    public function editDepartment($seleted){
+        $dept_name = $this->department_model->getDept_Name($seleted);
+        $dept_desc = $this->department_model->getDept_Desc($seleted);
+
+        $this->template->setContent("editDepartment.tpl");
+        $this->template->assign("editDepartment_Name", $dept_name);
+        $this->template->assign("editDepartment_Desc", $dept_desc);
+        
+        if(isset($_POST['editSave'])){
+            if(trim($_POST['dept_name']) == "" || trim($_POST['dept_description']) == ""){       
+                $this->template->setAlert("Updating Signatory was Failed", Template::ALERT_ERROR);
+            }else{
+                $this->department_model->update($seleted, trim($_POST['dept_name']), trim($_POST['dept_description']));
+                $this->template->setAlert("Updating Signatory was Successful", Template::ALERT_SUCCESS);
+                $this->template->assign("editDepartment_Name", trim($_POST['dept_name']));
+                $this->template->assign("editDepartment_Desc", trim($_POST['dept_description']));
+            }
+        }
+        
+    }
+    
 
     public function filter($filterName) {
         $this->displayTable(trim($filterName), 1);

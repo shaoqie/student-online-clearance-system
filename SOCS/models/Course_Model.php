@@ -67,6 +67,11 @@ class Course_Model extends Model{
                     VALUES (NULL, '$course_name', '$description', '$dept_ID')");
     }
     
+    public function update($key, $newCourseName, $newCourseDesc){
+        mysql_query("UPDATE `socs`.`courses` SET `Course_Name` = '$newCourseName',
+                    `Description` = '$newCourseDesc' WHERE `courses`.`Course_ID` ='$key'");
+    }
+    
     
     /*----------- For Special Purposes ------------*/
     
@@ -75,6 +80,20 @@ class Course_Model extends Model{
         $row = mysql_fetch_array($this->query);
         
         return $row['Department_ID'];
+    }
+    
+    public function getCourse_Name($key){
+        $this->query = mysql_query("select Course_Name from courses where Course_ID = '$key'");
+        $row = mysql_fetch_array($this->query);
+        
+        return $row['Course_Name'];
+    }
+    
+    public function getCourse_Desc($key){
+        $this->query = mysql_query("select Description from courses where Course_ID = '$key'");
+        $row = mysql_fetch_array($this->query);
+        
+        return $row['Description'];
     }
 }
 

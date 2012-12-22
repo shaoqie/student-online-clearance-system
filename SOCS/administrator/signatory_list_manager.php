@@ -52,6 +52,7 @@ class Signatory_List_Manager extends Controller {
         return $row;
     }
     
+    /*---------------- Adding Signatory -----------------*/
     public function addSignatory(){
         $this->template->setContent('addSignatory.tpl');       
     }
@@ -65,7 +66,29 @@ class Signatory_List_Manager extends Controller {
             $this->template->setAlert("Adding Signatory was Successful", Template::ALERT_SUCCESS);
         }
     }
+    
+    public function editSignatory($seleted){
+        $sign_name = $this->signatory_model->getSign_Name($seleted);
+        $sign_desc = $this->signatory_model->getSign_Desc($seleted);
 
+        $this->template->setContent("editSignatory.tpl");
+        $this->template->assign("editSignatory_Name", $sign_name);
+        $this->template->assign("editSignatory_Desc", $sign_desc);
+        
+        if(isset($_POST['editSave'])){
+            if(trim($_POST['sign_name']) == "" || trim($_POST['sign_description']) == ""){       
+                $this->template->setAlert("Updating Signatory was Failed", Template::ALERT_ERROR);
+            }else{
+                $this->signatory_model->update($seleted, trim($_POST['sign_name']), trim($_POST['sign_description']));
+                $this->template->setAlert("Updating Signatory was Successful", Template::ALERT_SUCCESS);
+                $this->template->assign("editSignatory_Name", trim($_POST['sign_name']));
+                $this->template->assign("editSignatory_Desc", trim($_POST['sign_description']));
+            }
+        }
+        
+    }
+
+    /*---------------- Deleting Signatory -----------------*/
     public function deleted() {
         $this->template->setAlert('Delete an Signatory Successfully!..', Template::ALERT_SUCCESS);
     }
@@ -80,6 +103,9 @@ class Signatory_List_Manager extends Controller {
         header('Location: ' . $HOST);
     }
 
+    
+    /*-------------------------------------------------------------------------------*/
+    
     public function filter($filterName) {
         $this->displayTable(trim($filterName), 1);
     }

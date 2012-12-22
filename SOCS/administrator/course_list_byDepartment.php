@@ -74,6 +74,29 @@ class course_list_byDepartment extends Controller {
             $this->template->setAlert("Adding Course was Successful", Template::ALERT_SUCCESS);
         }
     }
+        
+    public function editCourse($seleted){
+        $course_name = $this->course_model->getCourse_Name($seleted);
+        $course_desc = $this->course_model->getCourse_Desc($seleted);
+
+        $this->template->setContent("editCourse.tpl");
+        $this->template->assign("editCourse_Name", $course_name);
+        $this->template->assign("editCourse_Desc", $course_desc);
+        
+        if(isset($_POST['editSave'])){
+            if(trim($_POST['course_name']) == "" || trim($_POST['course_description']) == ""){       
+                $this->template->setAlert("Updating Course was Failed", Template::ALERT_ERROR);
+            }else{
+                $this->course_model->update($seleted, trim($_POST['course_name']), trim($_POST['course_description']));
+                $this->template->setAlert("Updating Course was Successful", Template::ALERT_SUCCESS);
+                $this->template->assign("editCourse_Name", trim($_POST['course_name']));
+                $this->template->assign("editCourse_Desc", trim($_POST['course_description']));
+            }
+        }
+        
+    }
+    
+    
     
     public function deleted(){
         $this->template->setAlert('Delete an Department Successfully!..', Template::ALERT_SUCCESS);

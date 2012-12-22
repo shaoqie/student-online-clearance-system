@@ -62,6 +62,27 @@ class Department_Model extends Model{
         mysql_query("INSERT INTO `socs`.`departments` (`Department_ID`, `Department_Name`, `Description`) 
                     VALUES (NULL, '$dept_name', '$description');");
     }
+    
+    public function update($key, $newDeptName, $newDeptDesc){
+        mysql_query("UPDATE `socs`.`departments` SET `Department_Name` = '$newDeptName',
+                    `Description` = '$newDeptDesc' WHERE `departments`.`Department_ID` ='$key'");
+    }
+    
+    
+    
+    public function getDept_Name($key){
+        $this->query = mysql_query("select Department_Name from departments where Department_ID = '$key'");
+        $row = mysql_fetch_array($this->query);
+        
+        return $row['Department_Name'];
+    }
+    
+    public function getDept_Desc($key){
+        $this->query = mysql_query("select Description from departments where Department_ID = '$key'");
+        $row = mysql_fetch_array($this->query);
+        
+        return $row['Description'];
+    }
 }
 
 ?>

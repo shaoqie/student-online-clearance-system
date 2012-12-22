@@ -62,6 +62,27 @@ class Signatory_Model extends Model{
         mysql_query("INSERT INTO `socs`.`signatories` (`Signatory_ID`, `Signatory_Name`, `Description`) 
                     VALUES (NULL, '$sign_name', '$description')");
     }
+    
+    public function update($key, $newSignName, $newSignDesc){
+        mysql_query("UPDATE `socs`.`signatories` SET `Signatory_Name` = '$newSigname',
+                    `Description` = '$newSignDesc' WHERE `signatories`.`Signatory_ID` ='$key'");
+    }
+    
+    
+    
+    public function getSign_Name($key){
+        $this->query = mysql_query("select Signatory_Name from signatories where Signatory_ID = '$key'");
+        $row = mysql_fetch_array($this->query);
+        
+        return $row['Signatory_Name'];
+    }
+    
+    public function getSign_Desc($key){
+        $this->query = mysql_query("select Description from signatories where Signatory_ID = '$key'");
+        $row = mysql_fetch_array($this->query);
+        
+        return $row['Description'];
+    }
 }
 
 ?>
