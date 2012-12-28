@@ -34,7 +34,8 @@ class Index extends Controller {
                 $this->setSession('Student');
                 header('Location: '.HOST.'/student/');
             } else if ($this->administrator_model->getAccount_Type(trim($_POST['username']), trim($_POST['password'])) == "Signatory") {
-
+                $assign_sign = $this->administrator_model->getAssignSignatory(trim($_POST['username']));
+                Session::set_assignSignatory($assign_sign);
                 $this->setSession('Signatory');
                 header('Location: '.HOST.'/signatory/');
             }

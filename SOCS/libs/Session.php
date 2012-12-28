@@ -38,6 +38,10 @@ class Session {
         $_SESSION['middlename'] = $middlename;
     }
     
+    public static function set_assignSignatory($assignSign){
+        $_SESSION['assignSignatory'] = $assignSign;
+    }
+    
     public static function set_deptpartName($deptName){
         $_SESSION['Department_Name'] = $deptName;
     }
@@ -67,6 +71,10 @@ class Session {
     
     public static function get_DepartmentName(){
         return $_SESSION['Department_Name'];
+    }
+    
+    public static function get_AssignSignatory(){
+        return $_SESSION['assignSignatory'];
     }
     
     public static function user_exist(){

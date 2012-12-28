@@ -28,10 +28,13 @@ class Settings extends Controller {
 
             if (Session::get_Account_type() == "Admin") {
                 $this->template->setContent('admin_settings.tpl');
+                $this->template->assign('assign_sign', '');
             } else if (Session::get_Account_type() == "Student") {
                 $this->template->setContent('student_settings.tpl');
+                $this->template->assign('assign_sign', '');
             } else if (Session::get_Account_type() == "Signatory") {
                 $this->template->setContent('signatory_settings.tpl');
+                $this->template->assign('assign_sign', ", " .Session::get_AssignSignatory());
             }
         } else {
             header('Location: ' . HOST);

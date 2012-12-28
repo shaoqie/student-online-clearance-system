@@ -76,7 +76,7 @@
                     <div class="span1"><img src="{$host}/photos/default.png" class="img-polaroid" /></div>
                     <div class="span3">
                         <h4>{$surname}, {$firstname} {$middlename}</h4>
-                        <h5>- {$account_type}</h5>
+                        <h5>- {$account_type} {$assign_sign}</h5>
                     </div>
                 </div>
                 <hr>

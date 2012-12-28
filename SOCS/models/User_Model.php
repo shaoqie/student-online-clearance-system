@@ -109,13 +109,58 @@ class User_Model extends Model {
         return $rowInfo;
     } 
     
-    public function getAssignSignatory($sign_name){
-        $this->query = mysql_query("select signatory_id from signatories where Signatory_Name = '$sign_name'");
+    public function getAssignSignatory($uname){
+        $this->query = mysql_query("select Signatory_Name from users
+                                    inner join signatories
+                                    on users.Assigned_Signatory = signatories.Signatory_ID
+                                    where username = '$uname'");
         $row = mysql_fetch_array($this->query);
         
-        return $row['signatory_id'];
+        return $row['Signatory_Name'];
     }
-
+    
+    
+    /*---------------------------------------------------------------------------------------*/
+    /*------------ For Signatory Dashboard Part ----------------*/
+    
+    // List of student users.
+    public function filter_ListofStudent_Username($searchName, $page){
+        $filter = array();
+        $this->query = mysql_query("select Username, concat(Surname, ', ', First_Name, ' ', Middle_Name) 
+                        as Name from users 
+                        where (First_name like '%$searchName%' OR Surname like '%$searchName%' OR 
+                        Middle_Name like '%$searchName%') AND Account_Type = 'student' order by Name
+                        LIMIT " . (($page - 1) * $this->itemsPerPage) . ", " . $this->itemsPerPage);
+        
+        while($row = mysql_fetch_array($this->query)){
+            array_push($filter, $row['Username']);
+        }
+        
+        return $filter;
+    }
+    
+    public function filter_ListofStudent_NameUsers($searchName, $page){
+        $filter = array();
+        $this->query = mysql_query("select concat(Surname, ', ', First_Name, ' ', Middle_Name) 
+                        as Name from users 
+                        where (First_name like '%$searchName%' OR Surname like '%$searchName%' OR 
+                        Middle_Name like '%$searchName%') AND Account_Type = 'student' order by Name
+                        LIMIT " . (($page - 1) * $this->itemsPerPage) . ", " . $this->itemsPerPage);
+        
+        while($row = mysql_fetch_array($this->query)){
+            array_push($filter, $row['Name']);
+        }
+        
+        return $filter;
+    }
+    
+    public function getStudent_PageSize($searchName){
+        $this->query = mysql_query("select * from users 
+                        where (First_name like '%$searchName%' OR Surname like '%$searchName%' OR 
+                        Middle_Name like '%$searchName%') AND Account_Type = 'student'");
+        return mysql_num_rows($this->query) / $this->itemsPerPage;
+    }
+    
 }
 
 ?>
