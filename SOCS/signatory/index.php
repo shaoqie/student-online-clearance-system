@@ -24,13 +24,13 @@ class Index extends Controller {
             
             $listOfSchoolYear = $this->schoolYearSem_model->getSchool_Year();
             
-            $this->template->setPageName('Administrator Page');
+            $this->template->setPageName('Signatory Page');
 
             $this->template->set_username(Session::get_user());
             $this->template->set_surname(Session::get_Surname());
             $this->template->set_firstname(Session::get_Firstname());
             $this->template->set_middlename(Session::get_Middlename());
-            $this->template->set_account_type(Session::get_Account_type());
+            $this->template->set_account_type(Session::get_Account_type() ." in Charge -");
 
             $this->template->setContent('Signatorydashboard.tpl');
             $this->template->assign('assign_sign', ", " .Session::get_AssignSignatory());

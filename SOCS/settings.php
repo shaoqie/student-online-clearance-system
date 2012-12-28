@@ -34,6 +34,7 @@ class Settings extends Controller {
                 $this->template->assign('assign_sign', '');
             } else if (Session::get_Account_type() == "Signatory") {
                 $this->template->setContent('signatory_settings.tpl');
+                $this->template->set_account_type(Session::get_Account_type() ." in Charge -");
                 $this->template->assign('assign_sign', ", " .Session::get_AssignSignatory());
             }
         } else {
