@@ -13,6 +13,7 @@ class Index extends Controller {
     private $schoolYearSem_model;
     private $clearanceStatus_model;
     private $student_model;
+    private $requirementbyStudent_model;
 
     public function __construct() {
         parent::__construct();
@@ -22,6 +23,7 @@ class Index extends Controller {
             $this->schoolYearSem_model = new SchoolYearSem();
             $this->student_model = new Student_Model();
             $this->clearanceStatus_model = new ClearanceStatus();
+            $this->requirementbyStudent_model = new Requirementbystudent_Model();
             $this->template = new Template();
             
             $listOfSchoolYear = $this->schoolYearSem_model->getSchool_Year();
@@ -100,11 +102,13 @@ class Index extends Controller {
         $stud_name = $this->student_model->getStudent_name(trim($stud_id));
         $stud_course = $this->student_model->getStudent_course(trim($stud_id));
         $stud_dept = $this->student_model->getStudent_department(trim($stud_id));
+        $stud_requirements = $this->requirementbyStudent_model->getListofRequirements($stud_id);
         
         $this->template->setContent("ClearancePage.tpl");
         $this->template->assign('student_name', $stud_name);
         $this->template->assign('course_name', $stud_course);
         $this->template->assign('dept_name', $stud_dept);
+        $this->template->assign('myRequirements_byStudent', $stud_requirements);
     }
     
             

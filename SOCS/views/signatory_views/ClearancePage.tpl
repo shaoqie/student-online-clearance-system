@@ -24,7 +24,7 @@
         
     
 <div class="row">
-    <div class="span1 offset1"><img src="{$host}/photos/default.png" class="img-polaroid" /></div>
+    <div class="span1 offset1"><img src="{$host}/photos/default_student.png" class="img-polaroid" /></div>
     <div class="span3">
         <h4>{$student_name}</h4>
         <h5>{$course_name}, {$dept_name}</h5>
