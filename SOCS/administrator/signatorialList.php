@@ -64,11 +64,11 @@ class signatorialList extends Controller{
         $this->signatorialList_model->insert($dept_id, $sign_id);
         
         $this->displayTable('', 1, "default");
-        $this->template->setAlert('Signatorial List was Added Successfully!..', Template::ALERT_SUCCESS);
+        $this->template->setAlert('Signatorial List was Added Successfully!..', Template::ALERT_SUCCESS, 'alert');
     }
     
     public function deleted() {
-        $this->template->setAlert('Delete an Signatorial List Successfully!..', Template::ALERT_SUCCESS);
+        $this->template->setAlert('Delete an Signatorial List Successfully!..', Template::ALERT_SUCCESS, 'alert');
     }
 
     public function delete($selected) {
@@ -82,7 +82,7 @@ class signatorialList extends Controller{
     }
     
     public function edited() {
-        $this->template->setAlert('Signatorial List was Edited Successfully!..', Template::ALERT_SUCCESS);
+        $this->template->setAlert('Signatorial List was Edited Successfully!..', Template::ALERT_SUCCESS, 'alert');
     }
     
     public function editSignatorialList($newSign_Name, $oldSign_ID){
@@ -115,7 +115,7 @@ class signatorialList extends Controller{
         $this->template->assign('SignatoryList', $listOfUnSelectSignatory);
         
         if ($numOfResults == 0) {
-            $this->template->setAlert('No Results Found.', Template::ALERT_ERROR);
+            $this->template->setAlert('No Results Found.', Template::ALERT_ERROR, 'alert');
         }
     }
     

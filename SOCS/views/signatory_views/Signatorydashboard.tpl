@@ -37,7 +37,7 @@
 {foreach from = $myName_student_NameUser key = k item = i}
     <tr>
         <td>{$myKey_Student_Username[$k]}</td>
-        <td>{$i}</td>
+        <td onclick="window.location.href='index.php?action=viewClearavePage&stud_id={$myKey_Student_Username[$k]}'" style="cursor:pointer;" >{$i}</td>
         {if $myStudent_ClearanceStatus[$k] eq 'Cleared'}
             <td style="color:blue;">{$myStudent_ClearanceStatus[$k]}</td>
          {else}

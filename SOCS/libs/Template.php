@@ -66,7 +66,7 @@ class Template extends Smarty {
         $this->assign('content', $tpl_file);
     }
 
-    public function setAlert($msg, $alert_type = self::ALERT_WARNING) {
+    public function setAlert($msg, $alert_type = self::ALERT_WARNING, $assign_name) {
 
         $pre_msg = "";
 
@@ -85,7 +85,7 @@ class Template extends Smarty {
                 "<strong>$pre_msg</strong>$msg" .
                 "</div>";
 
-        $this->assign('alert', $alert);
+        $this->assign($assign_name, $alert);
     }
 
     public function set_UserInfo($user_info) {

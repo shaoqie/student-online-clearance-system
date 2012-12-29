@@ -60,10 +60,10 @@ class Department_List_Manager extends Controller {
     public function add_department(){
         $this->template->setContent('addDepartment.tpl');       
         if(trim($_POST['dept_name']) == "" || trim($_POST['dept_description']) == ""){       
-            $this->template->setAlert("Adding Department was Failed", Template::ALERT_ERROR);
+            $this->template->setAlert("Adding Department was Failed", Template::ALERT_ERROR, 'alert');
         }else{
             $this->department_model->insert(trim($_POST['dept_name']), trim($_POST['dept_description']));
-            $this->template->setAlert("Adding Department was Successful", Template::ALERT_SUCCESS);
+            $this->template->setAlert("Adding Department was Successful", Template::ALERT_SUCCESS, 'alert');
         }
     }
 
@@ -73,14 +73,14 @@ class Department_List_Manager extends Controller {
     }
 
     public function deleted() {
-        $this->template->setAlert('Delete an Department Successfully!..', Template::ALERT_SUCCESS);
+        $this->template->setAlert('Delete an Department Successfully!..', Template::ALERT_SUCCESS, 'alert');
     }
 
     public function delete($selected) {
         $explode = explode("-", $selected);
         foreach ($explode as $value) {
             $delete = $this->department_model->deleteSignatory(trim($value));
-            if($delete == "false"){ $this->template->setAlert('You can delete an Unuse Department only!..', Template::ALERT_ERROR); return;}
+            if($delete == "false"){ $this->template->setAlert('You can delete an Unuse Department only!..', Template::ALERT_ERROR, 'alert'); return;}
         }
         $HOST = $explode[0] != null ? HOST . "/administrator/department_list_manager.php?action=deleted" : HOST . "/administrator/department_list_manager.php";
         header('Location: ' . $HOST);
@@ -99,7 +99,7 @@ class Department_List_Manager extends Controller {
                 $this->template->setAlert("Updating Signatory was Failed", Template::ALERT_ERROR);
             }else{
                 $this->department_model->update($seleted, trim($_POST['dept_name']), trim($_POST['dept_description']));
-                $this->template->setAlert("Updating Signatory was Successful", Template::ALERT_SUCCESS);
+                $this->template->setAlert("Updating Signatory was Successful", Template::ALERT_SUCCESS, 'alert');
                 $this->template->assign("editDepartment_Name", trim($_POST['dept_name']));
                 $this->template->assign("editDepartment_Desc", trim($_POST['dept_description']));
             }
@@ -125,7 +125,7 @@ class Department_List_Manager extends Controller {
         $this->template->assign('rowCount_dept', $numOfResults);
 
         if ($numOfResults == 0) {
-            $this->template->setAlert('No Results Found.', Template::ALERT_ERROR);
+            $this->template->setAlert('No Results Found.', Template::ALERT_ERROR, 'alert');
         }
     }
 

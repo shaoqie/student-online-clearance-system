@@ -69,7 +69,7 @@ class Settings extends Controller {
 
             $test++;
         } else {
-            $this->template->setAlert('Surname, first name and middle name are required!', Template::ALERT_ERROR);
+            $this->template->setAlert('Surname, first name and middle name are required!', Template::ALERT_ERROR, 'alert');
             return;
         }
 
@@ -78,7 +78,7 @@ class Settings extends Controller {
 
             $test++;
         } else {
-            $this->template->setAlert('Surname must not have a numerical values and characters / \ ? < > : ; " and *', Template::ALERT_ERROR);
+            $this->template->setAlert('Surname must not have a numerical values and characters / \ ? < > : ; " and *', Template::ALERT_ERROR, 'alert');
             return;
         }
 
@@ -87,7 +87,7 @@ class Settings extends Controller {
 
             $test++;
         } else {
-            $this->template->setAlert('Surname must not have a numerical values and characters / \ ? < > : ; " and *', Template::ALERT_ERROR);
+            $this->template->setAlert('Surname must not have a numerical values and characters / \ ? < > : ; " and *', Template::ALERT_ERROR, 'alert');
             return;
         }
 
@@ -96,7 +96,7 @@ class Settings extends Controller {
 
             $test++;
         } else {
-            $this->template->setAlert('Surname must not have a numerical values and characters / \ ? < > : ; " and *', Template::ALERT_ERROR);
+            $this->template->setAlert('Surname must not have a numerical values and characters / \ ? < > : ; " and *', Template::ALERT_ERROR, 'alert');
             return;
         }
 
@@ -105,7 +105,7 @@ class Settings extends Controller {
 
             $test++;
         } else {
-            $this->template->setAlert('Incorrect Password!', Template::ALERT_ERROR);
+            $this->template->setAlert('Incorrect Password!', Template::ALERT_ERROR, 'alert');
             return;
         }
 
@@ -114,7 +114,7 @@ class Settings extends Controller {
 
             $test++;
         } else {
-            $this->template->setAlert('Passwords does not matched!', Template::ALERT_ERROR);
+            $this->template->setAlert('Passwords does not matched!', Template::ALERT_ERROR, 'alert');
             return;
         }
 
@@ -123,15 +123,15 @@ class Settings extends Controller {
             $this->admin->Password = $newpass;
 
             if ($this->admin->update(Session::get_Account_type())) {
-                $this->template->setAlert('Your Account Has Been Updated!', Template::ALERT_SUCCESS);
+                $this->template->setAlert('Your Account Has Been Updated!', Template::ALERT_SUCCESS, 'alert');
                 $this->template->set_surname($surname);
                 $this->template->set_firstname($firstname);
                 $this->template->set_middlename($middleName);
             } else {
-                $this->template->setAlert('Database Error!', Template::ALERT_ERROR);
+                $this->template->setAlert('Database Error!', Template::ALERT_ERROR, 'alert');
             }
         } else {
-            $this->template->setAlert('Password\'s length must have a minimum of 7 characters!', Template::ALERT_ERROR);
+            $this->template->setAlert('Password\'s length must have a minimum of 7 characters!', Template::ALERT_ERROR, 'alert');
         }
     }
 

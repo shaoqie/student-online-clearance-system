@@ -97,7 +97,7 @@ class Index extends Controller {
     }
     
     public function deleted(){
-        $this->template->setAlert('Delete an Account Successfully!..', Template::ALERT_SUCCESS);
+        $this->template->setAlert('Delete an Account Successfully!..', Template::ALERT_SUCCESS, 'alert');
     }
     
     public function filter($filterName){
@@ -121,7 +121,7 @@ class Index extends Controller {
             $this->template->set_Name($this->getNameofUser($searchName, $page, "not_default"));
         }
         if ($numOfResults == 0) {
-            $this->template->setAlert('No Results Found.', Template::ALERT_ERROR);
+            $this->template->setAlert('No Results Found.', Template::ALERT_ERROR, 'alert');
         }
     }
     

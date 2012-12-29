@@ -12,6 +12,7 @@ class Index extends Controller {
     private $user_model;
     private $schoolYearSem_model;
     private $clearanceStatus_model;
+    private $student_model;
 
     public function __construct() {
         parent::__construct();
@@ -19,6 +20,7 @@ class Index extends Controller {
         if (Session::user_exist() && Session::get_Account_type() == "Signatory") {
             $this->user_model = new User_Model();
             $this->schoolYearSem_model = new SchoolYearSem();
+            $this->student_model = new Student_Model();
             $this->clearanceStatus_model = new ClearanceStatus();
             $this->template = new Template();
             
@@ -88,13 +90,32 @@ class Index extends Controller {
         $this->template->assign('signatoryDashboard_length', $numOfPages);
         
         if ($numOfResults == 0) {
-            $this->template->setAlert('No Results Found.', Template::ALERT_ERROR);
+            $this->template->setAlert('No Results Found.', Template::ALERT_ERROR, 'alert');
         }
     }
 
+    /*----------- For Clearance Page ------------*/
+    
+    public function viewClearavePage($stud_id){
+        $stud_name = $this->student_model->getStudent_name(trim($stud_id));
+        $stud_course = $this->student_model->getStudent_course(trim($stud_id));
+        $stud_dept = $this->student_model->getStudent_department(trim($stud_id));
+        
+        $this->template->setContent("ClearancePage.tpl");
+        $this->template->assign('student_name', $stud_name);
+        $this->template->assign('course_name', $stud_course);
+        $this->template->assign('dept_name', $stud_dept);
+    }
+    
+            
+            
+    /*------------ Display UI -----------------*/
     public function display() {
         $this->template->display('bootstrap.tpl');
         $this->user_model->db_close();
+        $this->schoolYearSem_model->db_close();
+        $this->student_model->db_close();
+        $this->clearanceStatus_model->db_close();
     }
 
 }

@@ -61,10 +61,10 @@ class Signatory_List_Manager extends Controller {
     public function add_signatory(){
         $this->template->setContent('addSignatory.tpl');       
         if(trim($_POST['sign_name']) == "" || trim($_POST['sign_description']) == ""){       
-            $this->template->setAlert("Adding Signatory was Failed", Template::ALERT_ERROR);
+            $this->template->setAlert("Adding Signatory was Failed", Template::ALERT_ERROR, 'alert');
         }else{
             $this->signatory_model->insert(trim($_POST['sign_name']), trim($_POST['sign_description']));
-            $this->template->setAlert("Adding Signatory was Successful", Template::ALERT_SUCCESS);
+            $this->template->setAlert("Adding Signatory was Successful", Template::ALERT_SUCCESS, 'alert');
         }
     }
     
@@ -78,10 +78,10 @@ class Signatory_List_Manager extends Controller {
         
         if(isset($_POST['editSave'])){
             if(trim($_POST['sign_name']) == "" || trim($_POST['sign_description']) == ""){       
-                $this->template->setAlert("Updating Signatory was Failed", Template::ALERT_ERROR);
+                $this->template->setAlert("Updating Signatory was Failed", Template::ALERT_ERROR, 'alert');
             }else{
                 $this->signatory_model->update($seleted, trim($_POST['sign_name']), trim($_POST['sign_description']));
-                $this->template->setAlert("Updating Signatory was Successful", Template::ALERT_SUCCESS);
+                $this->template->setAlert("Updating Signatory was Successful", Template::ALERT_SUCCESS, 'alert');
                 $this->template->assign("editSignatory_Name", trim($_POST['sign_name']));
                 $this->template->assign("editSignatory_Desc", trim($_POST['sign_description']));
             }
@@ -91,14 +91,14 @@ class Signatory_List_Manager extends Controller {
 
     /*---------------- Deleting Signatory -----------------*/
     public function deleted() {
-        $this->template->setAlert('Delete an Signatory Successfully!..', Template::ALERT_SUCCESS);
+        $this->template->setAlert('Delete an Signatory Successfully!..', Template::ALERT_SUCCESS, 'alert');
     }
 
     public function delete($selected) {
         $explode = explode("-", $selected);
         foreach ($explode as $value) {
             $delete = $this->signatory_model->deleteSignatory(trim($value));
-            if($delete == "false"){ $this->template->setAlert('You can delete an Unuse Signatory only!..', Template::ALERT_ERROR); return;}
+            if($delete == "false"){ $this->template->setAlert('You can delete an Unuse Signatory only!..', Template::ALERT_ERROR, 'alert'); return;}
         }
         $HOST = $explode[0] != null ? HOST . "/administrator/signatory_list_manager.php?action=deleted" : HOST . "/administrator/signatory_list_manager.php";
         header('Location: ' . $HOST);
@@ -124,7 +124,7 @@ class Signatory_List_Manager extends Controller {
         $this->template->assign('rowCount_sign', $numOfResults);
 
         if ($numOfResults == 0) {
-            $this->template->setAlert('No Results Found.', Template::ALERT_ERROR);
+            $this->template->setAlert('No Results Found.', Template::ALERT_ERROR, 'alert');
         }
     }
 

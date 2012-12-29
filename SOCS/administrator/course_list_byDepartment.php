@@ -68,11 +68,11 @@ class course_list_byDepartment extends Controller {
         $dept_ID = $this->course_model->getDept_ID(Session::get_DepartmentName());
         
         if(trim($_POST['course_name']) == "" || trim($_POST['course_description']) == ""){       
-            $this->template->setAlert("Adding Course was Failed", Template::ALERT_ERROR);
+            $this->template->setAlert("Adding Course was Failed", Template::ALERT_ERROR, 'alert');
         }else{
             
             $this->course_model->insert(trim($_POST['course_name']), trim($_POST['course_description']), $dept_ID);
-            $this->template->setAlert("Adding Course was Successful", Template::ALERT_SUCCESS);
+            $this->template->setAlert("Adding Course was Successful", Template::ALERT_SUCCESS, 'alert');
         }
     }
         
@@ -86,10 +86,10 @@ class course_list_byDepartment extends Controller {
         
         if(isset($_POST['editSave'])){
             if(trim($_POST['course_name']) == "" || trim($_POST['course_description']) == ""){       
-                $this->template->setAlert("Updating Course was Failed", Template::ALERT_ERROR);
+                $this->template->setAlert("Updating Course was Failed", Template::ALERT_ERROR, 'alert');
             }else{
                 $this->course_model->update($seleted, trim($_POST['course_name']), trim($_POST['course_description']));
-                $this->template->setAlert("Updating Course was Successful", Template::ALERT_SUCCESS);
+                $this->template->setAlert("Updating Course was Successful", Template::ALERT_SUCCESS, 'alert');
                 $this->template->assign("editCourse_Name", trim($_POST['course_name']));
                 $this->template->assign("editCourse_Desc", trim($_POST['course_description']));
             }
@@ -100,7 +100,7 @@ class course_list_byDepartment extends Controller {
     
     
     public function deleted(){
-        $this->template->setAlert('Delete an Department Successfully!..', Template::ALERT_SUCCESS);
+        $this->template->setAlert('Delete an Department Successfully!..', Template::ALERT_SUCCESS, 'alert');
     }
     
     public function delete($selected) {
@@ -129,7 +129,7 @@ class course_list_byDepartment extends Controller {
         $this->template->assign('rowCount_course', $numOfResults);
         
         if ($numOfResults == 0) {
-            $this->template->setAlert('No Results Found.', Template::ALERT_ERROR);
+            $this->template->setAlert('No Results Found.', Template::ALERT_ERROR, 'alert');
         }
     }
     
