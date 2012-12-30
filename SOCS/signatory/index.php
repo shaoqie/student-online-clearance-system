@@ -109,9 +109,7 @@ class Index extends Controller {
         $this->template->assign('course_name', $stud_course);
         $this->template->assign('dept_name', $stud_dept);
         $this->template->assign('myRequirements_byStudent', $stud_requirements);
-    }
-    
-            
+    }       
             
     /*------------ Display UI -----------------*/
     public function display() {

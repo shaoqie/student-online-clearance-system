@@ -15,6 +15,8 @@ require_once '../config/config.php';
 class Messages extends Controller {
     private $template;
     private $schoolYearSem_model;
+    private $student_model;
+    private $message_model;
     
     public function __construct() {
         parent::__construct();
@@ -36,9 +38,18 @@ class Messages extends Controller {
             $this->template->setContent('MessagePage.tpl');
             $this->template->assign('assign_sign', ", " .Session::get_AssignSignatory());
             $this->template->assign('mySchool_Year', $listOfSchoolYear);
+            
+            
+//            $stud_name = $this->student_model->getStudent_name(trim($stud_id));
+//            $stud_course = $this->student_model->getStudent_course(trim($stud_id));
+//            $stud_dept = $this->student_model->getStudent_department(trim($stud_id));
         }else{
             header('Location: /SOCS/');
         }
+    }
+    
+    public function viewLatestMessage(){
+        
     }
     
     public function display() {

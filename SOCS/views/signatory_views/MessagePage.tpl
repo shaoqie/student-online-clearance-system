@@ -34,7 +34,7 @@
                             <p style="margin-left: 50px">Please see Mr. Jhon Tulas for verification of your Library Card</p>
                             <i style="font-size: 9px">Post on Sept. 17, 2012 at 10:30pm</i> 
                         </div>
-                        <div class="span1"><i class="icon-remove"></i><a>Delete</a></div>
+                        <div class="span1"><i class="icon-remove"></i><a style="cursor: pointer">Delete</a></div>
                     </div>   
                     <hr>
                 </td>                  
@@ -47,7 +47,7 @@
                             <p style="margin-left: 50px">Yes Sir...</p>
                             <i style="font-size: 9px">Post on Sept. 18, 2012 at 02:34pm</i> 
                         </div>
-                        <div class="span1"><i class="icon-remove"></i><a>Delete</a></div>
+                        <div class="span1"><i class="icon-remove"></i><a style="cursor: pointer">Delete</a></div>
                     </div>   
                     <hr>
                 </td>                  
@@ -60,18 +60,18 @@
                             <p style="margin-left: 50px">OK..</p>
                             <i style="font-size: 9px">Post on Sept. 18, 2012 at 08:30pm</i> 
                         </div>
-                        <div class="span1"><i class="icon-remove"></i><a>Delete</a></div>
+                        <div class="span1"><i class="icon-remove"></i><a style="cursor: pointer">Delete</a></div>
                     </div>   
                     <hr>
                 </td>                  
-            </tr>
+            </tr> 
         </table>
     </div>
     <div class="span2 offset1">
-        <i class="icon-backward"></i>&nbsp;<a>Previous</a>
+        <i class="icon-backward"></i>&nbsp;<a style="cursor: pointer">Previous</a>
     </div>
     <div class="span1 offset3">
-        <a>Next</a>&nbsp;<i class="icon-forward"></i>
+        <a style="cursor: pointer">Next</a>&nbsp;<i class="icon-forward"></i>
     </div>
     
 </div>
