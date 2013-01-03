@@ -25,6 +25,23 @@ class Validator {
 
     public static function is_valid_name($storename) {
         /** don't allow characters / \ ? < > : ; " * and numerical characters on store name */
-        return preg_match('/[0-9\?\:\>\<\"\\\*\/\;]/', $storename) ? false : true; 
+        return preg_match('/[0-9\?\:\>\<\"\\\*\/\;]/', $storename) ? false : true;
+    }
+
+    public static function is_valid_photo(array $imagefile) {
+
+        $ext = array("jpg", "jpeg", "png", "gif");
+        $types = array("image/jpeg", "image/png", "image/gif", "image/pjpeg");
+
+        $filename = explode(".", $imagefile["name"]);
+        $type = $imagefile["type"];
+
+        if ($imagefile["error"] > 0) {
+            return false;
+        } else if (in_array(strtolower(end($filename)), $ext) && in_array($type, $types)) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }

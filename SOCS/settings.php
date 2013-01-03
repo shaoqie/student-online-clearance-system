@@ -117,6 +117,14 @@ class Settings extends Controller {
             $this->template->setAlert('Passwords does not matched!', Template::ALERT_ERROR, 'alert');
             return;
         }
+        
+        //check if photo is valid
+//        if(Validator::is_valid_photo($_FILES["photo"]) && $test == 6){
+//            $test++;
+//        }else{
+//            $this->template->setAlert('Not valid picture!', Template::ALERT_ERROR, 'alert');
+//            return;
+//        }
 
         if (Validator::is_valid_password($newpass) && $test == 6) {
 

@@ -41,16 +41,16 @@
             <input type='password' name='confirmpass'>
         </div>
     </div>
-<!--
-    <legend>Upload Picture</legend>(?=^.7,$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$
+
+    <legend>Upload Picture</legend>
 
     <div class="control-group">
         <label class="control-label">Upload Picture: </label>
         <div class="controls">
-            <input type="file" disabled>
+            <input type="file" name="photo">
         </div>
     </div>
--->
+
     <legend>Authentication: </legend>
 
     <div class="control-group">
