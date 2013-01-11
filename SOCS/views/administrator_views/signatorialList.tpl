@@ -4,7 +4,7 @@
         window.location.assign("?action=addSignatory&cmdSignatory=" +cmdSignatory);
     }
     
-    function edit(idEdit, sign_id){     
+    function edit(idEdit, sign_id, length){     
         var listOfUnSelectSignatory =   "<select class='input-large' id='editSignatorialList'>"
                                             +"{foreach from = $SignatoryList item = i}"
                                                 +"<option>{$i}</option>"
@@ -12,9 +12,9 @@
                                         +"</select>";
         var editSignatorialList = "<input type='button' class='btn' value='Confirmed' id='save'> &nbsp; &nbsp; "
                                    + "<input type='button' class='btn' value='Cancel' id='cancel'>";
-                
-        $(document).ready(function(){
         
+        hideAll(length);               
+        $(document).ready(function(){
             $("#unSelectedSignatorialList" +idEdit).html(listOfUnSelectSignatory);                         
             $("#confirmed" +idEdit).html(editSignatorialList);        
         
@@ -26,6 +26,15 @@
                 $("#unSelectedSignatorialList" +idEdit).html($("#edit" +idEdit).val());
                 $("#confirmed" +idEdit).html("");
             });
+        });
+    }
+    
+    function hideAll(Tlength){
+        $(document).ready(function(){
+            for(var x = 0; x < Tlength; x ++){
+                $("#unSelectedSignatorialList" +x).html($("#edit" +x).val());
+                $("#confirmed" +x).html("");
+            }
         });
     }
 </script>
@@ -70,7 +79,7 @@
             <div class="pull-left">
                 <input type="hidden" id = 'edit{$k}' value = "{$i}">
                 <input type="checkbox" id = '{$k}' value = {$myKey_signatorial[$k]} ></input> &nbsp; &nbsp;
-                <i class="icon-pencil"></i><a style="cursor:pointer;" href="javascript:edit('{$k}','{$myKey_signatorial[$k]}')"> Edit</a>&nbsp; &nbsp; 
+                <i class="icon-pencil"></i><a style="cursor:pointer;" href="javascript:edit('{$k}','{$myKey_signatorial[$k]}','{$rowCount_signatorial}')"> Edit</a>&nbsp; &nbsp; 
                 <i class="icon-remove"></i><a style="cursor:pointer;" onclick="confirmDelete('{$myKey_signatorial[$k]}')"> Delete</a>
             </div>          
         </td>
