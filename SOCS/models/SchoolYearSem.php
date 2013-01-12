@@ -29,6 +29,13 @@ class SchoolYearSem extends Model{
         
         return $arrayTemp;
     }
+    
+    public function getSy_ID($sy_sem){
+        $this->query = mysql_query("select SY_SEM_ID from schoolyearsem where School_Year = '$sy_sem'");
+        $row = mysql_fetch_array($this->query);
+        
+        return $row['SY_SEM_ID'];
+    }
 }
 
 ?>

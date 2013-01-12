@@ -14,6 +14,9 @@ class Index extends Controller {
     private $clearanceStatus_model;
     private $student_model;
     private $requirementbyStudent_model;
+    private $signatorialList_model;
+    
+    private $bulletin_model;
 
     public function __construct() {
         parent::__construct();
@@ -24,6 +27,8 @@ class Index extends Controller {
             $this->student_model = new Student_Model();
             $this->clearanceStatus_model = new ClearanceStatus();
             $this->requirementbyStudent_model = new Requirementbystudent_Model();
+            $this->signatorialList_model = new SignatorialList_Model();
+            $this->bulletin_model = new Bulletin_Model();
             $this->template = new Template();
             
             $listOfSchoolYear = $this->schoolYearSem_model->getSchool_Year();
@@ -79,11 +84,12 @@ class Index extends Controller {
     }
     
     public function displayTable($searchName, $page, $finder) {  
-        $numOfPages = $this->user_model->getStudent_PageSize($searchName);
-        $getListofStudent_Name = $this->getListofStudentName($this->user_model->filter_ListofStudent_NameUsers($searchName, $page), $searchName, $finder);
-        $getListofStudent_Username = $this->user_model->filter_ListofStudent_Username($searchName, $page);
+        $sign_id = $this->signatorialList_model->getSignId(Session::get_AssignSignatory());
+        $numOfPages = $this->user_model->getStudent_PageSize($sign_id, $searchName);
+        $getListofStudent_Name = $this->getListofStudentName($this->user_model->filter_ListofStudent_NameUsers($sign_id, $searchName, $page), $searchName, $finder);
+        $getListofStudent_Username = $this->user_model->filter_ListofStudent_Username($sign_id, $searchName, $page);
         $getListOfStudenClearanceStatus = $this->getListofClearanceStatus($getListofStudent_Username);
-        $numOfResults = count($this->user_model->filter_ListofStudent_NameUsers($searchName, $page));
+        $numOfResults = count($this->user_model->filter_ListofStudent_NameUsers($sign_id, $searchName, $page));
 
         $this->template->assign('myName_student_NameUser', $getListofStudent_Name); 
         $this->template->assign('myKey_Student_Username', $getListofStudent_Username); 
@@ -96,6 +102,25 @@ class Index extends Controller {
         }
     }
 
+    public function viewPosting_Bulletin(){
+        $this->template->setPageName('Bulletin Page');
+        $this->template->setContent('BulletinPage.tpl');
+         
+        $sign_id = $this->signatorialList_model->getSignId(Session::get_AssignSignatory());
+        $sy_id = $this->schoolYearSem_model->getSy_ID(trim($_POST['school_year']));
+         
+        
+        if(isset($_POST['postBulletin'])){
+            if(trim($_POST['post_message']) != ""){
+                $this->bulletin_model->insert($sign_id, $sy_id, trim($_POST['post_message']));
+                $this->template->setAlert("Posting Bulletin was Successful!... ", Template::ALERT_SUCCESS);
+            }else{
+                $this->template->setAlert("Cannot Post an empty field!... ", Template::ALERT_ERROR);
+            }
+        }
+       
+    }
+    
     /*----------- For Clearance Page ------------*/
     
     public function viewClearavePage($stud_id){
@@ -109,7 +134,7 @@ class Index extends Controller {
         $this->template->assign('course_name', $stud_course);
         $this->template->assign('dept_name', $stud_dept);
         $this->template->assign('myRequirements_byStudent', $stud_requirements);
-    }       
+    }           
             
     /*------------ Display UI -----------------*/
     public function display() {

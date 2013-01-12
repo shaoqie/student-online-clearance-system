@@ -54,7 +54,6 @@
         <label class="control-label">Choose Signatory:</label>
         <div class="controls">
             <select class='input-large' id="cmdSignatory">
-                <option>Default &nbsp:</option>
                 {foreach from = $SignatoryList item = i}
                     <option>{$i}</option>
                 {/foreach}
