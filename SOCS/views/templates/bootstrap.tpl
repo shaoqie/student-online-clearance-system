@@ -74,7 +74,7 @@
             {if isset($username)}
                 <div class="row">
                     <div class="span1"><img src="{$host}/photos/default.png" class="img-polaroid" /></div>
-                    <div class="span3">
+                    <div class="span5">
                         <h4>{$surname}, {$firstname} {$middlename}</h4>
                         <h5>- {$account_type} {$assign_sign}</h5>
                     </div>

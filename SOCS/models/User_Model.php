@@ -117,8 +117,7 @@ class User_Model extends Model {
         $row = mysql_fetch_array($this->query);
         
         return $row['Signatory_Name'];
-    }
-    
+    }    
     
     /*---------------------------------------------------------------------------------------*/
     /*------------ For Signatory Dashboard Part ----------------*/

@@ -107,6 +107,36 @@ class SignatorialList_Model extends Model{
         return $row['Signatory_ID'];
     }
     
+     /*--------- For Student Page ----------*/
+    
+    public function getListofSignatoryByDept($dept_id){
+        $rowInfo = array();
+        $this->query = mysql_query("select signatory_name from signatoriallist
+                                    inner join departments on departments.Department_ID = signatoriallist.Department_ID
+                                    inner join signatories on signatories.Signatory_ID = signatoriallist.Signatory_ID
+                                    where departments.Department_ID = '$dept_id'");
+        
+        while($row = mysql_fetch_array($this->query)){
+            array_push($rowInfo, $row['signatory_name']);
+        }
+        
+        return $rowInfo;
+    }
+    
+    public function getListofSignatory_ID_ByDept($dept_id){
+        $rowInfo = array();
+        $this->query = mysql_query("select signatoriallist.Signatory_ID from signatoriallist
+                                    inner join departments on departments.Department_ID = signatoriallist.Department_ID
+                                    inner join signatories on signatories.Signatory_ID = signatoriallist.Signatory_ID
+                                    where departments.Department_ID = '$dept_id'");
+        
+        while($row = mysql_fetch_array($this->query)){
+            array_push($rowInfo, $row['0']);
+        }
+        
+        return $rowInfo;
+    }
+    
 }
 
 ?>

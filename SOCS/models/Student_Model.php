@@ -47,6 +47,16 @@ class Student_Model extends Model{
         return $row['dept_name'];
     }
     
+    public function getStudent_deptID($student_id){
+        $this->query = mysql_query("select departments.department_id as dept_id from students
+                                    inner join courses on students.course_id = courses.course_id
+                                    inner join departments on courses.Department_ID = departments.Department_ID
+                                    where students.username = '$student_id'");
+        $row = mysql_fetch_array($this->query);
+        
+        return $row['dept_id'];
+    }
+    
     public function getStudent_gender($student_id){
         $this->query = mysql_query("select Gender from students where students.username = '$student_id'");
         $row = mysql_fetch_array($this->query);
