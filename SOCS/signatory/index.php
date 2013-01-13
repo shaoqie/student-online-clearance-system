@@ -102,6 +102,8 @@ class Index extends Controller {
         }
     }
 
+     /*----------- For Bulletin Page ------------*/
+    
     public function viewPosting_Bulletin(){
         $this->template->setPageName('Bulletin Page');
         $this->template->setContent('BulletinPage.tpl');
@@ -129,13 +131,73 @@ class Index extends Controller {
         $stud_dept = $this->student_model->getStudent_department(trim($stud_id));
         $stud_requirements = $this->requirementbyStudent_model->getListofRequirements($stud_id);
         
+        $this->template->setPageName("Student Clearance Page");
         $this->template->setContent("ClearancePage.tpl");
         $this->template->assign('student_name', $stud_name);
         $this->template->assign('course_name', $stud_course);
         $this->template->assign('dept_name', $stud_dept);
         $this->template->assign('myRequirements_byStudent', $stud_requirements);
-    }           
-            
+    }    
+    
+    /*----------- For Student Detail Page ------------*/
+    
+    public function viewStudent_Detail($stud_id){
+        $stud_name = $this->student_model->getStudent_name(trim($stud_id));
+        $stud_course = $this->student_model->getStudent_course(trim($stud_id));
+        $stud_dept = $this->student_model->getStudent_department(trim($stud_id));
+        
+        $stud_gender = $this->student_model->getStudent_gender(trim($stud_id));
+        $stud_yr_level = $this->student_model->getStudent_yr_level(trim($stud_id));
+        $stud_program = $this->student_model->getStudent_program(trim($stud_id));
+        $stud_section = $this->student_model->getStudent_section(trim($stud_id));
+        $stud_status = $this->student_model->getStudent_clearance_status(trim($stud_id));
+        
+        $this->template->setPageName("Student Detailed Page");
+        $this->template->setContent("Student_Detailed.tpl");
+        $this->template->assign('student_name', $stud_name);
+        $this->template->assign('course_name', $stud_course);
+        $this->template->assign('dept_name', $stud_dept);
+        
+        $this->template->assign('stud_gender', $stud_gender);
+        $this->template->assign('stud_yr_level', $stud_yr_level ." Year");
+        $this->template->assign('stud_program', $stud_program);
+        $this->template->assign('stud_section', $stud_section);
+        $this->template->assign('stud_status', $stud_status);
+    }     
+    
+    /*----------- For Requirements Page ------------*/
+    
+    public function viewListOfRequirements(){
+        $this->template->setPageName("Requirements Page");
+        $this->template->setContent("RequirementsPage.tpl");       
+    }
+    
+     /*----------- For Adding Requirements Page ------------*/
+
+    public function viewAdd_Requirements(){
+        $this->template->setPageName("Adding Requirements Page");
+        $this->template->setContent("Add_Requirements.tpl"); 
+        
+        if(isset($_POST['Next'])){
+            if(trim($_POST['requirement_title']) != "" && trim($_POST['requirement_description']) != ""){
+                /// procceed to the next page
+                header('Location: ../signatory/index.php?action=viewNext_Add_Requirements&T_title=' .trim($_POST['requirement_title']) .'&T_desc=' .trim($_POST['requirement_description']));
+            }else{
+                $this->template->setAlert("Cannot Procceed if a field is empty!... ", Template::ALERT_ERROR);
+            }
+        }
+    }
+    
+    /*----------- For the next page for Adding Requirements ------------*/
+    
+    public function viewNext_Add_Requirements($T_title, $T_desc){
+        $this->template->setPageName("Adding Requirements Page");
+        $this->template->setContent("Next_Add_Requirements.tpl"); 
+              
+        
+    }
+
+
     /*------------ Display UI -----------------*/
     public function display() {
         $this->template->display('bootstrap.tpl');

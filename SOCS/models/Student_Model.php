@@ -47,6 +47,43 @@ class Student_Model extends Model{
         return $row['dept_name'];
     }
     
+    public function getStudent_gender($student_id){
+        $this->query = mysql_query("select Gender from students where students.username = '$student_id'");
+        $row = mysql_fetch_array($this->query);
+        
+        return $row['Gender'];
+    }
+    
+    public function getStudent_yr_level($student_id){
+        $this->query = mysql_query("select Year_Level from students where students.username = '$student_id'");
+        $row = mysql_fetch_array($this->query);
+        
+        return $row['Year_Level'];
+    }
+    
+    public function getStudent_program($student_id){
+        $this->query = mysql_query("select Program from students where students.username = '$student_id'");
+        $row = mysql_fetch_array($this->query);
+        
+        return $row['Program'];
+    }
+    
+    public function getStudent_section($student_id){
+        $this->query = mysql_query("select Section from students where students.username = '$student_id'");
+        $row = mysql_fetch_array($this->query);
+        
+        return $row['Section'];
+    }
+    
+    public function getStudent_clearance_status($student_id){
+        $this->query = mysql_query("select Cleared from users 
+                                    inner join clearancestatus on clearancestatus.student = users.username
+                                    where username = '$student_id'");
+        $row = mysql_fetch_array($this->query);
+        
+        return $row['Cleared'];
+    }
+    
 }
 
 ?>
