@@ -23,7 +23,7 @@
         </div> 
     </div>                
             
-    <legend>Post Bulliten</legend>
+    <legend>Post Bulletin</legend>
     <div class="row">    
             <div class="offset1">
                 <textarea class="input-xxlarge" placeholder="Post a bulletin here....." name='post_message' rows="10" cols="30"></textarea>
