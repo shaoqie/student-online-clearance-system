@@ -92,6 +92,20 @@ class SignatorialList_Model extends Model{
         
         return $rowInfo;
     } 
+	
+	public function getSignatorialList_underDeptName($Tdept_name){
+		$filter = array();
+        $this->query = mysql_query("select signatories.signatory_name from signatorialList
+                                    inner join signatories on signatorialList.signatory_id = signatories.signatory_id
+                                    inner join departments on signatorialList.department_id = departments.department_id
+                                    where departments.Department_Name = '$Tdept_name'");
+        
+        while($row = mysql_fetch_array($this->query)){
+            array_push($filter, $row['0']);
+        }
+        
+        return $filter;
+	}
     
     public function getDeptId($dept_name){
         $this->query = mysql_query("select Department_ID from departments where Department_Name like '%$dept_name%'");

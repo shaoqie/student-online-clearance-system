@@ -12,6 +12,8 @@ class Index extends Controller {
     private $schoolYearSem_model;
     private $student_model;
     private $signatoialList;
+    private $signatory_model;
+    private $bulletin_model;
 
     public function __construct() {
         parent::__construct();
@@ -21,6 +23,8 @@ class Index extends Controller {
             $this->schoolYearSem_model = new SchoolYearSem();
             $this->student_model = new Student_Model();
             $this->signatoialList = new SignatorialList_Model();
+            $this->signatory_model = new Signatory_Model();
+            $this->bulletin_model = new Bulletin_Model();
             
             $listOfSchoolYear = $this->schoolYearSem_model->getSchool_Year();
             $stud_course = $this->student_model->getStudent_course(Session::get_user());
@@ -52,14 +56,59 @@ class Index extends Controller {
     
     /*----------- for viewing the post of signatory -----------*/
     
-    public function viewMessages($Tsign_ID){
+    public function viewMessages($Tsign_ID, $page){
         $this->template->setPageName("Messages for a Signatory In Charge");
-        $this->template->setContent("Messages.tpl");
+        $this->template->setContent("Messages.tpl");        
+        
+        $signName = $this->signatory_model->getSign_Name($Tsign_ID);
+        $list_messages = $this->bulletin_model->getListofMessages($Tsign_ID, $page);
+        $list_datePosted = $this->getDate($this->bulletin_model->getListofPost_Date($Tsign_ID, $page));
+        $list_timePosted = $this->bulletin_model->getListofPost_Time($Tsign_ID, $page);
+        $numRows = $this->bulletin_model->getStudMessage_PageSize($Tsign_ID);
+        
+        
+        $this->template->assign('sign_name', $signName);
+        $this->template->assign('sign_id', $Tsign_ID);
+        $this->template->assign('my_messages', $list_messages);
+        $this->template->assign('_date', $list_datePosted);
+        $this->template->assign('_time', $list_timePosted);
+        $this->template->assign('stud_message_length', $numRows);
+        
+        //$this->template->assign('stud_message_length', count($list_timePosted));
     }
 
     public function display() {
         //displaying the UI
         $this->template->display('bootstrap.tpl');
+    }
+    
+    
+    /*---------- for Date into word ----------------*/
+    
+    public function getDate($T_Date){
+        $t_month;
+        $t_day;
+        $t_year;
+        $_Date = array();
+        
+        foreach ($T_Date as $value) {
+            $temp_date = explode("-", $value);
+            $t_year = trim($temp_date[0]);
+            $t_month = trim($this->convertMonth(trim($temp_date[1])));
+            $t_day = trim($temp_date[2]);
+            
+            array_push($_Date, $t_month ." " .$t_day .", " .$t_year);
+        }
+        
+        return $_Date;
+    }
+    
+    public function convertMonth($month){
+        $_month = array("January", "Febuary", "March", "April", 
+                        "May", "June", "July", "August", 
+                        "September", "October", "November", "December");
+        
+        return $_month[$month - 1];
     }
 
 }

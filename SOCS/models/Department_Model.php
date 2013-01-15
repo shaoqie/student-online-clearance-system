@@ -83,6 +83,18 @@ class Department_Model extends Model{
         
         return $row['Description'];
     }
+    
+    
+    /*------- for testing existing name --------*/
+    
+    public function isExist($dept_name, $description){
+        $this->query = mysql_query("select count(Department_Name) from departments where Department_Name = '$dept_name' OR 
+                                    description = '$description'");
+        
+        $row = mysql_fetch_array($this->query);
+        
+        return $row['0'] > 0 ? true : false;
+    }
 }
 
 ?>

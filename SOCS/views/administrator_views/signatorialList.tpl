@@ -4,29 +4,33 @@
         window.location.assign("?action=addSignatory&cmdSignatory=" +cmdSignatory);
     }
     
-    function edit(idEdit, sign_id, length){     
-        var listOfUnSelectSignatory =   "<select class='input-large' id='editSignatorialList'>"
-                                            +"{foreach from = $SignatoryList item = i}"
-                                                +"<option>{$i}</option>"
-                                            +"{/foreach}"
-                                        +"</select>";
-        var editSignatorialList = "<input type='button' class='btn' value='Confirmed' id='save'> &nbsp; &nbsp; "
-                                   + "<input type='button' class='btn' value='Cancel' id='cancel'>";
-        
-        hideAll(length);               
-        $(document).ready(function(){
-            $("#unSelectedSignatorialList" +idEdit).html(listOfUnSelectSignatory);                         
-            $("#confirmed" +idEdit).html(editSignatorialList);        
-        
-        
-            $("#save").click(function(){
-                window.location.assign("?action=editSignatorialList&newSign_Name=" +$("#editSignatorialList").val() +"&oldSign_ID=" +sign_id);
-            });
-            $("#cancel").click(function(){
-                $("#unSelectedSignatorialList" +idEdit).html($("#edit" +idEdit).val());
-                $("#confirmed" +idEdit).html("");
-            });
-        });
+    function edit(idEdit, sign_id, length, countSignList){ 
+		if(parseInt(countSignList) > 0){
+			var listOfUnSelectSignatory =   "<select class='input-large' id='editSignatorialList'>"
+												+"{foreach from = $SignatoryList item = i}"
+													+"<option>{$i}</option>"
+												+"{/foreach}"
+											+"</select>";
+			var editSignatorialList = "<input type='button' class='btn' value='Confirmed' id='save'> &nbsp; &nbsp; "
+									   + "<input type='button' class='btn' value='Cancel' id='cancel'>";
+			
+			hideAll(length);               
+			$(document).ready(function(){
+				$("#unSelectedSignatorialList" +idEdit).html(listOfUnSelectSignatory);                         
+				$("#confirmed" +idEdit).html(editSignatorialList);        
+			
+			
+				$("#save").click(function(){
+					window.location.assign("?action=editSignatorialList&newSign_Name=" +$("#editSignatorialList").val() +"&oldSign_ID=" +sign_id);
+				});
+				$("#cancel").click(function(){
+					$("#unSelectedSignatorialList" +idEdit).html($("#edit" +idEdit).val());
+					$("#confirmed" +idEdit).html("");
+				});
+			});
+		}else{
+			window.location.assign("?action=cannotEdit");
+		}
     }
     
     function hideAll(Tlength){
@@ -51,14 +55,18 @@
     <input class="input-xxlarge" id="search" type="text" placeholder="Search..." value ="{$filter}" name="filterName">
     <button class="btn btn-primary" type="submit"><i class="icon-search icon-white"></i></button>
     <div class="pull-right">   
-        <label class="control-label">Choose Signatory:</label>
+        {if $countSignList > 0}
+			<label class="control-label">Choose Signatory:</label>
+		{/if}      
         <div class="controls">
-            <select class='input-large' id="cmdSignatory">
+			{if $countSignList > 0}
+				<select class='input-large' id="cmdSignatory">
                 {foreach from = $SignatoryList item = i}
                     <option>{$i}</option>
                 {/foreach}
-            </select>
-            <input class="btn" type="button" value="Add" onclick="getSignatory()">
+				</select>
+				<input class="btn" type="button" value="Add" onclick="getSignatory()">
+			{/if}            
             <input class="btn" type="button" value="Back" onclick="window.location.href='department_list_manager.php'"> 
         </div>
     </div>
@@ -78,7 +86,7 @@
             <div class="pull-left">
                 <input type="hidden" id = 'edit{$k}' value = "{$i}">
                 <input type="checkbox" id = '{$k}' value = {$myKey_signatorial[$k]} ></input> &nbsp; &nbsp;
-                <i class="icon-pencil"></i><a style="cursor:pointer;" href="javascript:edit('{$k}','{$myKey_signatorial[$k]}','{$rowCount_signatorial}')"> Edit</a>&nbsp; &nbsp; 
+                <i class="icon-pencil"></i><a style="cursor:pointer;" href="javascript:edit('{$k}','{$myKey_signatorial[$k]}','{$rowCount_signatorial}','{$countSignList}')"> Edit</a>&nbsp; &nbsp; 
                 <i class="icon-remove"></i><a style="cursor:pointer;" onclick="confirmDelete('{$myKey_signatorial[$k]}')"> Delete</a>
             </div>          
         </td>

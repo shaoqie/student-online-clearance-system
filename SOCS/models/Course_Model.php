@@ -95,6 +95,18 @@ class Course_Model extends Model{
         
         return $row['Description'];
     }
+    
+    
+    /*------- for testing existing name --------*/
+    
+    public function isExist($course_name, $description){
+        $this->query = mysql_query("select count(Course_Name) from courses where course_name = '$course_name' OR 
+                                    description = '$description'");
+        
+        $row = mysql_fetch_array($this->query);
+        
+        return $row['0'] > 0 ? true : false;
+    }
 }
 
 ?>

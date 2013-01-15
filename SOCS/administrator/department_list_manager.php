@@ -61,6 +61,8 @@ class Department_List_Manager extends Controller {
         $this->template->setContent('addDepartment.tpl');       
         if(trim($_POST['dept_name']) == "" || trim($_POST['dept_description']) == ""){       
             $this->template->setAlert("Adding Department was Failed", Template::ALERT_ERROR, 'alert');
+        }else if($this->department_model->isExist(trim($_POST['dept_name']), trim($_POST['dept_description']))){
+            $this->template->setAlert("Cannot Add a Department that is Existing", Template::ALERT_ERROR, 'alert');
         }else{
             $this->department_model->insert(trim($_POST['dept_name']), trim($_POST['dept_description']));
             $this->template->setAlert("Adding Department was Successful", Template::ALERT_SUCCESS, 'alert');
@@ -97,6 +99,8 @@ class Department_List_Manager extends Controller {
         if(isset($_POST['editSave'])){
             if(trim($_POST['dept_name']) == "" || trim($_POST['dept_description']) == ""){       
                 $this->template->setAlert("Updating Signatory was Failed", Template::ALERT_ERROR);
+            }else if($this->department_model->isExist(trim($_POST['dept_name']), trim($_POST['dept_description']))){
+                $this->template->setAlert("Cannot Update a Department that is Existing", Template::ALERT_ERROR, 'alert');
             }else{
                 $this->department_model->update($seleted, trim($_POST['dept_name']), trim($_POST['dept_description']));
                 $this->template->setAlert("Updating Signatory was Successful", Template::ALERT_SUCCESS, 'alert');

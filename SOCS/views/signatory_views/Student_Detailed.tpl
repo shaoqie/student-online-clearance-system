@@ -21,7 +21,6 @@
         </select>
     </div> 
 </div>
-        
     
 <div class="row">
     <div class="span1 offset1"><img src="{$host}/photos/default_student.png" class="img-polaroid" /></div>

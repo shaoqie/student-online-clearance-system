@@ -21,9 +21,7 @@
                 <option>Summer</option>
             </select>
         </div> 
-    </div>
-            
-    <button class="pull-right btn" onclick="window.location.href='index.php'">Back</button>              
+    </div>                
             
     <legend>Post Bulliten</legend>
     <div class="row">    

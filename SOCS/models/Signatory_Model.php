@@ -64,7 +64,7 @@ class Signatory_Model extends Model{
     }
     
     public function update($key, $newSignName, $newSignDesc){
-        mysql_query("UPDATE `socs`.`signatories` SET `Signatory_Name` = '$newSigname',
+        mysql_query("UPDATE `socs`.`signatories` SET `Signatory_Name` = '$newSignName',
                     `Description` = '$newSignDesc' WHERE `signatories`.`Signatory_ID` ='$key'");
     }
     
@@ -82,6 +82,17 @@ class Signatory_Model extends Model{
         $row = mysql_fetch_array($this->query);
         
         return $row['Description'];
+    }
+    
+    /*------- for testing existing name --------*/
+    
+    public function isExist($sign_name, $description){
+        $this->query = mysql_query("select count(Signatory_Name) from signatories where Signatory_Name = '$sign_name' OR 
+                                    description = '$description'");
+        
+        $row = mysql_fetch_array($this->query);
+        
+        return $row['0'] > 0 ? true : false;
     }
 }
 

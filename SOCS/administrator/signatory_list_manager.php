@@ -62,6 +62,8 @@ class Signatory_List_Manager extends Controller {
         $this->template->setContent('addSignatory.tpl');       
         if(trim($_POST['sign_name']) == "" || trim($_POST['sign_description']) == ""){       
             $this->template->setAlert("Adding Signatory was Failed", Template::ALERT_ERROR, 'alert');
+        }else if($this->signatory_model->isExist(trim($_POST['sign_name']), trim($_POST['sign_description']))){
+            $this->template->setAlert("Cannot Add a Signatory that is Existing", Template::ALERT_ERROR, 'alert');
         }else{
             $this->signatory_model->insert(trim($_POST['sign_name']), trim($_POST['sign_description']));
             $this->template->setAlert("Adding Signatory was Successful", Template::ALERT_SUCCESS, 'alert');
@@ -79,6 +81,8 @@ class Signatory_List_Manager extends Controller {
         if(isset($_POST['editSave'])){
             if(trim($_POST['sign_name']) == "" || trim($_POST['sign_description']) == ""){       
                 $this->template->setAlert("Updating Signatory was Failed", Template::ALERT_ERROR, 'alert');
+            }else if($this->signatory_model->isExist(trim($_POST['sign_name']), trim($_POST['sign_description']))){
+                $this->template->setAlert("Cannot Update a Signatory that is Existing", Template::ALERT_ERROR, 'alert');
             }else{
                 $this->signatory_model->update($seleted, trim($_POST['sign_name']), trim($_POST['sign_description']));
                 $this->template->setAlert("Updating Signatory was Successful", Template::ALERT_SUCCESS, 'alert');

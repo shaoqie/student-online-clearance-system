@@ -6,6 +6,11 @@
  * Administrator Script Functions
  */
 
+function jumpToPageMessages(sign_id){
+    var jump = document.getElementById("jump_studMessages").value;
+    window.location.assign("?action=viewMessages&Tsign_ID=" +sign_id +"&page=" +jump);
+} 
+
 function jumpToPage(){
     var jump = document.getElementById("jump").value;
     var search = document.getElementById("search").value;

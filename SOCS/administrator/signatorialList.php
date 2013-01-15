@@ -84,6 +84,10 @@ class signatorialList extends Controller{
     public function edited() {
         $this->template->setAlert('Signatorial List was Edited Successfully!..', Template::ALERT_SUCCESS, 'alert');
     }
+	
+	public function cannotEdit(){
+		$this->template->setAlert('Cannot Edit an Signatorial List anymore!..', Template::ALERT_ERROR, 'alert');
+	}
     
     public function editSignatorialList($newSign_Name, $oldSign_ID){
         $dept_id_temp = $this->signatorialList_model->getDeptId(Session::get_DepartmentName());
@@ -104,7 +108,7 @@ class signatorialList extends Controller{
         $filter_ID = $this->signatorialList_model->filter_ID(Session::get_DepartmentName(), $searchName, $page);
         
         $SignatoryList = $this->signatorialList_model->getListofSignatory();
-        $getSignatorialList_signName = $this->signatorialList_model->filter_SignName(Session::get_DepartmentName(), '', $page);
+        $getSignatorialList_signName = $this->signatorialList_model->getSignatorialList_underDeptName(Session::get_DepartmentName());
         $listOfUnSelectSignatory = array_diff($SignatoryList, $getSignatorialList_signName);      
         
         $this->template->assign('myName_signatorial', $getListofSignatorialList); 
@@ -113,6 +117,7 @@ class signatorialList extends Controller{
         $this->template->assign('signatorial_length', $numOfPages);
         $this->template->assign('rowCount_signatorial', $numOfResults);
         $this->template->assign('SignatoryList', $listOfUnSelectSignatory);
+		$this->template->assign('countSignList', count($listOfUnSelectSignatory));
         
         if ($numOfResults == 0) {
             $this->template->setAlert('No Results Found.', Template::ALERT_ERROR, 'alert');
