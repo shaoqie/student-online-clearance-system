@@ -30,6 +30,18 @@ class Signatory_List_Manager extends Controller {
             $this->template->assign('assign_sign', '');
 
             $this->displayTable('', 1, "default");
+            
+            if(isset($_GET['successEdit'])){
+                if($_GET['successEdit'] == 'true'){
+                    $this->template->setAlert("Updating Signatory was Successful", Template::ALERT_SUCCESS, 'alert');
+                }
+            }
+            
+            if(isset($_GET['successAdd'])){
+                if($_GET['successAdd'] == 'true'){
+                    $this->template->setAlert("Adding Signatory was Successful", Template::ALERT_SUCCESS, 'alert');
+                }
+            }
         } else {
             header('Location: ' . HOST);
         }
@@ -66,7 +78,9 @@ class Signatory_List_Manager extends Controller {
             $this->template->setAlert("Cannot Add a Signatory that is Existing", Template::ALERT_ERROR, 'alert');
         }else{
             $this->signatory_model->insert(trim($_POST['sign_name']), trim($_POST['sign_description']));
-            $this->template->setAlert("Adding Signatory was Successful", Template::ALERT_SUCCESS, 'alert');
+            //$this->template->setAlert("Adding Signatory was Successful", Template::ALERT_SUCCESS, 'alert');
+            
+            header('Location: signatory_list_manager.php?successAdd=true');
         }
     }
     
@@ -81,13 +95,15 @@ class Signatory_List_Manager extends Controller {
         if(isset($_POST['editSave'])){
             if(trim($_POST['sign_name']) == "" || trim($_POST['sign_description']) == ""){       
                 $this->template->setAlert("Updating Signatory was Failed", Template::ALERT_ERROR, 'alert');
-            }else if($this->signatory_model->isExist(trim($_POST['sign_name']), trim($_POST['sign_description']))){
+            }/*else if($this->signatory_model->isExist(trim($_POST['sign_name']), trim($_POST['sign_description']))){
                 $this->template->setAlert("Cannot Update a Signatory that is Existing", Template::ALERT_ERROR, 'alert');
-            }else{
+            }*/else{
                 $this->signatory_model->update($seleted, trim($_POST['sign_name']), trim($_POST['sign_description']));
-                $this->template->setAlert("Updating Signatory was Successful", Template::ALERT_SUCCESS, 'alert');
+                //$this->template->setAlert("Updating Signatory was Successful", Template::ALERT_SUCCESS, 'alert');
                 $this->template->assign("editSignatory_Name", trim($_POST['sign_name']));
                 $this->template->assign("editSignatory_Desc", trim($_POST['sign_description']));
+                
+                header('Location: signatory_list_manager.php?successEdit=true');
             }
         }
         

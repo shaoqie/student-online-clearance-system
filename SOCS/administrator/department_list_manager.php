@@ -30,6 +30,18 @@ class Department_List_Manager extends Controller {
             $this->template->assign('assign_sign', '');
 
             $this->displayTable('', 1, "default");
+            
+            if(isset($_GET['successEdit'])){
+                if($_GET['successEdit'] == 'true'){
+                    $this->template->setAlert("Updating Department was Successful", Template::ALERT_SUCCESS, 'alert');
+                }
+            }
+            
+            if(isset($_GET['successAdd'])){
+                if($_GET['successAdd'] == 'true'){
+                    $this->template->setAlert("Adding Department was Successful", Template::ALERT_SUCCESS, 'alert');
+                }
+            }
         } else {
             header('Location: ' . HOST);
         }
@@ -65,7 +77,9 @@ class Department_List_Manager extends Controller {
             $this->template->setAlert("Cannot Add a Department that is Existing", Template::ALERT_ERROR, 'alert');
         }else{
             $this->department_model->insert(trim($_POST['dept_name']), trim($_POST['dept_description']));
-            $this->template->setAlert("Adding Department was Successful", Template::ALERT_SUCCESS, 'alert');
+            //$this->template->setAlert("Adding Department was Successful", Template::ALERT_SUCCESS, 'alert');
+            
+            header('Location: department_list_manager.php?successAdd=true');
         }
     }
 
@@ -99,13 +113,15 @@ class Department_List_Manager extends Controller {
         if(isset($_POST['editSave'])){
             if(trim($_POST['dept_name']) == "" || trim($_POST['dept_description']) == ""){       
                 $this->template->setAlert("Updating Signatory was Failed", Template::ALERT_ERROR);
-            }else if($this->department_model->isExist(trim($_POST['dept_name']), trim($_POST['dept_description']))){
+            }/*else if($this->department_model->isExist(trim($_POST['dept_name']), trim($_POST['dept_description']))){
                 $this->template->setAlert("Cannot Update a Department that is Existing", Template::ALERT_ERROR, 'alert');
-            }else{
+            }*/else{
                 $this->department_model->update($seleted, trim($_POST['dept_name']), trim($_POST['dept_description']));
-                $this->template->setAlert("Updating Signatory was Successful", Template::ALERT_SUCCESS, 'alert');
+                //$this->template->setAlert("Updating Signatory was Successful", Template::ALERT_SUCCESS, 'alert');
                 $this->template->assign("editDepartment_Name", trim($_POST['dept_name']));
                 $this->template->assign("editDepartment_Desc", trim($_POST['dept_description']));
+                
+                header('Location: department_list_manager.php?successEdit=true');
             }
         }
         

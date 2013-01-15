@@ -36,6 +36,19 @@ class course_list_byDepartment extends Controller {
             $this->template->assign('assign_sign', '');
 
             $this->displayTable('', 1, "default");
+            
+            if(isset($_GET['successEdit'])){
+                if($_GET['successEdit'] == 'true'){
+                    $this->template->setAlert("Updating Course was Successful", Template::ALERT_SUCCESS, 'alert');
+                }
+            }
+            
+            if(isset($_GET['successAdd'])){
+                if($_GET['successAdd'] == 'true'){
+                    $this->template->setAlert("Adding Course was Successful", Template::ALERT_SUCCESS, 'alert');
+                }
+            }
+            
         }else{
             header('Location: ' . HOST);
         }
@@ -73,7 +86,9 @@ class course_list_byDepartment extends Controller {
             $this->template->setAlert("Cannot Add a Course that is Existing", Template::ALERT_ERROR, 'alert');
         }else{ 
             $this->course_model->insert(trim($_POST['course_name']), trim($_POST['course_description']), $dept_ID);
-            $this->template->setAlert("Adding Course was Successful", Template::ALERT_SUCCESS, 'alert');
+            //$this->template->setAlert("Adding Course was Successful", Template::ALERT_SUCCESS, 'alert');
+            
+            header('Location: course_list_byDepartment.php?successAdd=true');
         }
     }
         
@@ -88,13 +103,15 @@ class course_list_byDepartment extends Controller {
         if(isset($_POST['editSave'])){
             if(trim($_POST['course_name']) == "" || trim($_POST['course_description']) == ""){       
                 $this->template->setAlert("Updating Course was Failed", Template::ALERT_ERROR, 'alert');
-            }else if($this->course_model->isExist(trim($_POST['course_name']), trim($_POST['course_description']))){
+            }/*else if($this->course_model->isExist(trim($_POST['course_name']), trim($_POST['course_description']))){
                 $this->template->setAlert("Cannot Update a Course that is Existing", Template::ALERT_ERROR, 'alert');
-            }else{
+            }*/else{
                 $this->course_model->update($seleted, trim($_POST['course_name']), trim($_POST['course_description']));
-                $this->template->setAlert("Updating Course was Successful", Template::ALERT_SUCCESS, 'alert');
+                //$this->template->setAlert("Updating Course was Successful", Template::ALERT_SUCCESS, 'alert');
                 $this->template->assign("editCourse_Name", trim($_POST['course_name']));
                 $this->template->assign("editCourse_Desc", trim($_POST['course_description']));
+                
+                header('Location: course_list_byDepartment.php?successEdit=true');
             }
         }
         
