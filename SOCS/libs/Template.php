@@ -29,6 +29,8 @@ class Template extends Smarty {
         $this->setConfigDir(PATH . '/libs/smarty/configs/');
         $this->setCacheDir(PATH . '/libs/smarty/cache/');
 
+        $this-> caching= 0;
+        
         $this->assign('alert', '');
         $this->assign('path', PATH);
         $this->assign('host', HOST);
