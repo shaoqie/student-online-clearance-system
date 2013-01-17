@@ -6,7 +6,7 @@
             <li><a href='../signatory/index.php?action=viewListOfRequirements'>Requirements</a></li>
         </ul>
     </div>    
-    <div class="span4 offset4">
+    <div class="pull-right">
         School Year:
         <select id="school_year" class="input-small">
             {foreach from = $mySchool_Year key = k item = i}

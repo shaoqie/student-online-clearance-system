@@ -1,5 +1,5 @@
 <div class="row">   
-    <div class="span4 offset4 pull-right">
+    <div class="pull-right">
         School Year:
         <select id="school_year" class="input-small">
             {foreach from = $mySchool_Year key = k item = i}
@@ -27,7 +27,7 @@
         {foreach from = $my_messages key = k item = i}
             <tr>
                 <td>
-                    <div class="span8 offset1">
+                    <div class="span8 offset1" id="divMessages">
                         <label><i style="font-size: 12px; color:blue;">Posted on {$_date[$k]} at {$_time[$k]}</i></label>
                         <p style="margin-left: 50px; font-size: 15px;">{$i}</p>
                     </div>

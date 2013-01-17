@@ -69,19 +69,54 @@ class Index extends Controller {
         
         $this->template->assign('sign_name', $signName);
         $this->template->assign('sign_id', $Tsign_ID);
-        $this->template->assign('my_messages', $list_messages);
+        $this->template->assign('my_messages', $this->parsingNewLine($list_messages));
         $this->template->assign('_date', $list_datePosted);
         $this->template->assign('_time', $list_timePosted);
         $this->template->assign('stud_message_length', $numRows);
         
         //$this->template->assign('stud_message_length', count($list_timePosted));
-    }
-
+    }   
+    
     public function display() {
         //displaying the UI
         $this->template->display('bootstrap.tpl');
     }
     
+    /*-------------- Especial purposes function ----------------*/
+    
+    private function parsingNewLine($_messages){
+        $list_messages = array();
+        
+        foreach ($_messages as $value) {
+            $temp = explode("\r\n", $value);
+            $strTemp = "";
+            foreach ($temp as $newvalue) {
+                $strTemp .= $newvalue ."<br/>";
+            }
+            
+            array_push($list_messages, $this->parsingLengthPerLine($strTemp));
+        }
+        
+        return $list_messages;
+    }
+    
+    private function parsingLengthPerLine($_str){
+        $_array = str_split($_str);
+        $_strTemp = "";
+        
+        $counter = 0;
+        foreach ($_array as $value) {
+            if($counter >= 60){
+                $_strTemp .= $value ."<br/>";
+                $counter = -1;
+            }else{
+                $_strTemp .= $value;
+                $counter ++;
+            }   
+        }
+        
+        return $_strTemp;
+    }
     
     /*---------- for Date into word ----------------*/
     

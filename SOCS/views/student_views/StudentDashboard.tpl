@@ -1,5 +1,5 @@
 <div class="row">   
-    <div class="span4 offset4 pull-right">
+    <div class="pull-right">
         School Year:
         <select id="school_year" class="input-small">
             {foreach from = $mySchool_Year key = k item = i}
