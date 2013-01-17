@@ -40,7 +40,7 @@
                         </div>                
                     </td>
                     <td style="width: 300px;"><h4><a>{$i}</a></h4></td>
-                    <td style="width: 300px;"><img src="{$host}/photos/not cleared.png" class="img-polaroid" /></td>
+                    <td style="width: 300px;"><img src="{$host}/photos/cleared.png" class="img-polaroid" /></td>
                 </tr>
             {/foreach}
         </table>

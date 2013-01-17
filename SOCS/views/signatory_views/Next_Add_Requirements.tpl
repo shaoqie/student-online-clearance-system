@@ -30,33 +30,45 @@
           <div class="row">
 <div class="control-group offset1">
         
-       <label for="example_radio1"> <input type="radio" id="example_radio1" name="radioA" /> All Students</label>
+       <label> <input type="radio" id="example_radio1" name="radioA" /><b> All Students</label>
 
-        <label for="example_radio2"><input type="radio" id="example_radio2" name="radioA" /> Students from the following department:</label>
-            Department: <select id="" class="input-small">
+        <label><input type="radio" id="example_radio2" name="radioA" /> <b>Students from the following department:</label>
+            <label class="offset1">
+        Department: <select id="" class="input-small">
             <option>Institute of Computing</option>
                          </select>
-        <label for="example_radio3"><input type="radio" id="example_radio3" name="radioA" /> Students from the following course:</label>
-            Course: <select id="" class="input-small">
+            </label>
+        
+        <label><input type="radio" id="example_radio3" name="radioA" /> <b>Students from the following course:</label>
+            <label class="offset1">
+       Course:<select id="" class="input-small">
             <option>BSIT</option>
                          </select>
-        <label for="example_radio4"><input type="radio" id="example_radio4" name="radioA" /> Students from a particular level:</label>
-            Year level: <select id="" class="input-small">
+            </label> 
+        
+        <label><input type="radio" id="example_radio4" name="radioA" /> <b>Students from a particular level:</label>
+            <label class="offset1">
+        Year level: <select id="" class="input-small">
             <option>4th year</option>
                          </select>
-        <label for="example_radio5"><input type="radio" id="example_radio5" name="radioA" /> Students from a particular program:</label>
-            Year level: <select id="" class="input-small">
+            </label>
+        
+        <label><input type="radio" id="example_radio5" name="radioA" /> <b>Students from a particular program:</label>
+            <label class="offset1">
+        Year level: <select id="" class="input-small">
             <option>Day</option>
             <option>Evening</option>
                          </select>
-        <label for="example_radio6"><input type="radio" id="example_radio6" name="radioA" /> Selected students:</label>
+            </label>
+        
+        <label><input type="radio" id="example_radio6" name="radioA" /> <b>Selected students:</label>
   
-        <div class="control-group">
+        <div class="control-group offset1">
             <textarea class="input-xxlarge" name='' rows="5" cols="50"></textarea>
         </div>
 
         <div class="control-group">
-        <label class="control-label">
+        <label class="control-label offset1">
             <input class="btn btn-primary" type='Submit' value='Add Requirement' name="Save">
         </div>
     </label>
