@@ -11,10 +11,11 @@
     <input class="btn pull-right" type="button" value="Add Department" onclick="window.location.href='department_list_manager.php?action=addDepartment'">
 </form>
 
-<a href = "javascript:isCheckAll(true, {$rowCount_dept})" >Checked All</a> / 
-<a href = "javascript:isCheckAll(false, {$rowCount_dept})" >Unchecked All</a>
-
-<table class="table table-hover">     
+<table class="table table-hover">   
+    <tr>
+        <td> <input type="checkbox" onclick="isCheck({$rowCount_dept})" id="check"></input> &nbsp; &nbsp; <i class="icon-check"></i><a>Toggle Check</a></td>      
+        <td></td>   <td></td>
+    </tr>
     <tr>
         <th><p class="pull-left">Controls</p></th>
         <th> Departments</th>       
@@ -24,8 +25,7 @@
         <td style="width:400px">
             <div class="pull-left">
                 <input type="checkbox" id = '{$k}' value = {$myKey_dept[$k]} ></input> &nbsp; &nbsp;
-                <i class="icon-pencil"></i><a style="cursor:pointer;" onclick="window.location.href='department_list_manager.php?action=editDepartment&seleted={$myKey_dept[$k]}'"> Edit</a>&nbsp; &nbsp; 
-                <i class="icon-remove"></i><a style="cursor:pointer;" onclick="confirmDelete('{$myKey_dept[$k]}')"> Delete</a>
+                <i class="icon-pencil"></i><a style="cursor:pointer;" onclick="window.location.href='department_list_manager.php?action=editDepartment&seleted={$myKey_dept[$k]}'"> Edit</a>  
             </div>          
         </td>
         <td><p onclick="window.location.href='department_list_manager.php?action=displayCourse&deptName={$i}'" style="cursor:pointer;" >{$i}</p></td>
@@ -33,7 +33,7 @@
 {/foreach}
 </table>
 
-<a style="cursor:pointer;" onclick="findCheck('{$rowCount_dept}')" >Delete Selected</a>
+<i class="icon-remove"></i><a style="cursor:pointer;" onclick="findCheck('{$rowCount_dept}')" >Delete Selected</a>
 
 <div class="pull-right">
     Jump to: <select id="jump" class="input-mini" onchange="jumpToPage()">

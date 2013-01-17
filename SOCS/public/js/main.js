@@ -11,6 +11,11 @@ function jumpToPageMessages(sign_id){
     window.location.assign("?action=viewMessages&Tsign_ID=" +sign_id +"&page=" +jump);
 } 
 
+function isCheck(rowCount){
+    var check = document.getElementById("check").checked;
+    isCheckAll(check, rowCount)
+}
+
 function jumpToPage(){
     var jump = document.getElementById("jump").value;
     var search = document.getElementById("search").value;

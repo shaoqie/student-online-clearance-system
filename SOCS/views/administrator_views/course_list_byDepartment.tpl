@@ -15,10 +15,11 @@
     </div>
 </form>
 
-<a href = "javascript:isCheckAll(true, {$rowCount_course})" >Checked All</a> / 
-<a href = "javascript:isCheckAll(false, {$rowCount_course})" >Unchecked All</a>
-
 <table class="table table-hover">     
+    <tr>
+        <td> <input type="checkbox" onclick="isCheck({$rowCount_course})" id="check"></input> &nbsp; &nbsp; <i class="icon-check"></i><a>Toggle Check</a></td>      
+        <td></td>   <td></td>
+    </tr>
     <tr>
         <th><p class="pull-left">Controls</p></th>
         <th> Courses</th>       
@@ -28,16 +29,15 @@
         <td style="width:400px">
             <div class="pull-left">
                 <input type="checkbox" id = '{$k}' value = {$myKey_course[$k]} ></input> &nbsp; &nbsp;
-                <i class="icon-pencil"></i><a style="cursor:pointer;" onclick="window.location.href='course_list_byDepartment.php?action=editCourse&seleted={$myKey_course[$k]}'"> Edit</a>&nbsp; &nbsp; 
-                <i class="icon-remove"></i><a style="cursor:pointer;" onclick="confirmDelete('{$myKey_course[$k]}')"> Delete</a>
+                <i class="icon-pencil"></i> <a style="cursor:pointer;" onclick="window.location.href='course_list_byDepartment.php?action=editCourse&seleted={$myKey_course[$k]}'">Edit</a>
             </div>          
         </td>
-        <td><p>{$i}</p></td>
+        <td><p style="cursor:pointer;" onclick="window.location.href='course_list_byDepartment.php?action=editCourse&seleted={$myKey_course[$k]}'">{$i}</p></td>
     </tr>
 {/foreach}
 </table>
 
-<a style="cursor:pointer;" onclick="findCheck('{$rowCount_course}')" >Delete Selected</a>
+<i class="icon-remove"></i><a style="cursor:pointer;" onclick="findCheck('{$rowCount_course}')" >Delete Selected</a>
 
 <div class="pull-right">
     Jump to: <select id="jump" class="input-mini" onchange="jumpToPage()">

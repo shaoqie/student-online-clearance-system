@@ -72,10 +72,11 @@
     </div>
 </form>
 
-<a href = "javascript:isCheckAll(true, {$rowCount_signatorial})" >Checked All</a> / 
-<a href = "javascript:isCheckAll(false, {$rowCount_signatorial})" >Unchecked All</a>
-
-<table class="table table-hover">     
+<table class="table table-hover">    
+    <tr>
+        <td> <input type="checkbox" onclick="isCheck({$rowCount_signatorial})" id="check"></input> &nbsp; &nbsp; <i class="icon-check"></i><a>Toggle Check</a></td>      
+        <td></td>   <td></td>
+    </tr>
     <tr>
         <th><p class="pull-left">Controls</p></th>
         <th> Signatories</th>       
@@ -86,8 +87,7 @@
             <div class="pull-left">
                 <input type="hidden" id = 'edit{$k}' value = "{$i}">
                 <input type="checkbox" id = '{$k}' value = {$myKey_signatorial[$k]} ></input> &nbsp; &nbsp;
-                <i class="icon-pencil"></i><a style="cursor:pointer;" href="javascript:edit('{$k}','{$myKey_signatorial[$k]}','{$rowCount_signatorial}','{$countSignList}')"> Edit</a>&nbsp; &nbsp; 
-                <i class="icon-remove"></i><a style="cursor:pointer;" onclick="confirmDelete('{$myKey_signatorial[$k]}')"> Delete</a>
+                <i class="icon-pencil"></i><a style="cursor:pointer;" href="javascript:edit('{$k}','{$myKey_signatorial[$k]}','{$rowCount_signatorial}','{$countSignList}')"> Edit</a>&nbsp; &nbsp;              
             </div>          
         </td>
         <td><p id='unSelectedSignatorialList{$k}'>{$i}</p></td>
@@ -96,7 +96,7 @@
 {/foreach}
 </table>
 
-<a style="cursor:pointer;" onclick="findCheck('{$rowCount_signatorial}')" >Delete Selected</a>
+<i class="icon-remove"></i><a style="cursor:pointer;" onclick="findCheck('{$rowCount_signatorial}')" >Delete Selected</a>
 
 <div class="pull-right">
     Jump to: <select id="jump" class="input-mini" onchange="jumpToPage()">

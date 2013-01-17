@@ -16,6 +16,10 @@
 
 <table class="table table-hover">     
     <tr>
+        <td> <input type="checkbox" onclick="isCheck({$rowCount_sign})" id="check"></input> &nbsp; &nbsp; <i class="icon-check"></i><a>Toggle Check</a></td>      
+        <td></td>   <td></td>
+    </tr>
+    <tr>
         <th><p class="pull-left">Controls</p></th>
         <th>Signatories</th>       
     </tr>
@@ -25,15 +29,14 @@
                 <div class="pull-left">
                     <input type="checkbox" id = '{$k}' value = {$myKey_sign[$k]} ></input> &nbsp; &nbsp;
                     <i class="icon-pencil"></i><a style="cursor:pointer;" onclick="window.location.href='signatory_list_manager.php?action=editSignatory&seleted={$myKey_sign[$k]}'"> Edit</a>&nbsp; &nbsp;
-                    <i class="icon-remove"></i><a style="cursor:pointer;" onclick="confirmDelete('{$myKey_sign[$k]}')"> Delete</a>
                 </div>
             </td>    
-            <td><p>{$i}</p></td>
+            <td><p style="cursor:pointer;" onclick="window.location.href='signatory_list_manager.php?action=editSignatory&seleted={$myKey_sign[$k]}'">{$i}</p></td>
         </tr>
     {/foreach}
 </table>
 
-<a style="cursor:pointer;" onclick="findCheck('{$rowCount_sign}')">Delete Selected</a>
+<i class="icon-remove"></i><a style="cursor:pointer;" onclick="findCheck('{$rowCount_sign}')">Delete Selected</a>
 
 <div class="pull-right">
     Jump to: <select id="jump" class="input-mini" onchange="jumpToPage()">

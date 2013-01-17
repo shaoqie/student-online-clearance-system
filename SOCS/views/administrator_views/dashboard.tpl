@@ -16,6 +16,10 @@
 
 <table class="table table-hover">     
     <tr>
+        <td> <input type="checkbox" onclick="isCheck({$rowCount_admin})" id="check"></input> &nbsp; &nbsp; <i class="icon-check"></i><a>Toggle Check</a></td>      
+        <td></td>   <td></td>
+    </tr>
+    <tr>
         <th><p class="pull-left">Controls</p></th>
         <th> User</th>  
         <th> Type</th>        
@@ -25,8 +29,7 @@
         <td style="width:400px">
             <div class="pull-left">
                 <input type="checkbox" id = '{$k}' value = {$myKey_admin[$k]}></input>&nbsp; &nbsp; 
-                <i class="icon-pencil"></i> <a style="cursor:pointer;" >Edit</a>&nbsp; &nbsp;
-                <i class="icon-remove"></i> <a style="cursor:pointer;" onclick="confirmDelete('{$myKey_admin[$k]}')">Delete</a>
+                <i class="icon-pencil"></i> <a style="cursor:pointer;" >Edit</a>&nbsp; &nbsp;       
             </div>                
         </td>       
         <td><p>{$i}</p></td>
@@ -34,7 +37,8 @@
     </tr>
 {/foreach}
 </table>
-<a style="cursor:pointer;" onclick="findCheck('{$rowCount_admin}')"> Delete Selected</a>
+
+<i class="icon-remove"></i><a style="cursor:pointer;" onclick="findCheck('{$rowCount_admin}')"> Delete Selected</a>
 
 <div class="pull-right">
     Jump to: 
