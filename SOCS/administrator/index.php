@@ -34,14 +34,6 @@ class Index extends Controller {
             header('Location: ' . HOST);
         }
     }
-    
-    private function getStrongchar($str, $findname){
-        $left = substr($str, 0, strpos(strtolower($str), strtolower($findname))); //cut left
-	$center = "<strong style='color: #049cdb;'><u>" .substr($str, strpos(strtolower($str), strtolower($findname)), strlen($findname)) ."</u></strong>"; // cut center
-	$right =  substr($str, strpos(strtolower($str), strtolower($findname)) + strlen($findname));		
-		
-	return $left .$center .$right;
-    }
 
     private function getListofKey($searchName, $page) {
         $key = array();

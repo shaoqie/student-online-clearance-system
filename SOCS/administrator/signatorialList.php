@@ -40,24 +40,6 @@ class signatorialList extends Controller{
         }
     }  
     
-    private function getStrongchar($str, $findname){
-        $left = substr($str, 0, strpos(strtolower($str), strtolower($findname))); //cut left
-	$center = "<strong style='color: #049cdb;'><u>" .substr($str, strpos(strtolower($str), strtolower($findname)), strlen($findname)) ."</u></strong>"; // cut center
-	$right =  substr($str, strpos(strtolower($str), strtolower($findname)) + strlen($findname));		
-		
-	return $left .$center .$right;
-    }
-    
-    private function getListofSignatorialList($arrayTemp, $searchName, $finder){
-        $row = array();
-        foreach ($arrayTemp as $value) {
-            $str = $finder == "default" ? $value : $this->getStrongchar($value, $searchName);
-            array_push($row, $str);
-        }
-        
-        return $row;
-    }
-    
     public function addSignatory($cmdSignatory){    
         $dept_id = $this->signatorialList_model->getDeptId(Session::get_DepartmentName());
         $sign_id = $this->signatorialList_model->getSignId(trim($cmdSignatory));
@@ -104,7 +86,7 @@ class signatorialList extends Controller{
     public function displayTable($searchName, $page, $finder){
         $numOfPages = $this->signatorialList_model->getQueryPageSize(Session::get_DepartmentName(), $searchName);
         $numOfResults = count($this->signatorialList_model->filter_SignName(Session::get_DepartmentName(), $searchName, $page));
-        $getListofSignatorialList = $this->getListofSignatorialList($this->signatorialList_model->filter_SignName(Session::get_DepartmentName(), $searchName, $page), $searchName, $finder);
+        $getListofSignatorialList = $this->getListofName($this->signatorialList_model->filter_SignName(Session::get_DepartmentName(), $searchName, $page), $searchName, $finder);
         $filter_ID = $this->signatorialList_model->filter_ID(Session::get_DepartmentName(), $searchName, $page);
         
         $SignatoryList = $this->signatorialList_model->getListofSignatory();

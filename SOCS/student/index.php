@@ -64,7 +64,7 @@ class Index extends Controller {
         $list_messages = $this->bulletin_model->getListofMessages($Tsign_ID, $page);
         $list_datePosted = $this->getDate($this->bulletin_model->getListofPost_Date($Tsign_ID, $page));
         $list_timePosted = $this->bulletin_model->getListofPost_Time($Tsign_ID, $page);
-        $numRows = $this->bulletin_model->getStudMessage_PageSize($Tsign_ID);
+        $numRows = $this->bulletin_model->getMessage_PageSize($Tsign_ID);
         
         
         $this->template->assign('sign_name', $signName);

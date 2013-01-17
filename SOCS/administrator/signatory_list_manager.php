@@ -46,24 +46,6 @@ class Signatory_List_Manager extends Controller {
             header('Location: ' . HOST);
         }
     }
-
-    private function getStrongchar($str, $findname) {
-        $left = substr($str, 0, strpos(strtolower($str), strtolower($findname))); //cut left
-        $center = "<strong style='color: #049cdb;'><u>" . substr($str, strpos(strtolower($str), strtolower($findname)), strlen($findname)) . "</u></strong>"; // cut center
-        $right = substr($str, strpos(strtolower($str), strtolower($findname)) + strlen($findname));
-
-        return $left . $center . $right;
-    }
-
-    private function getListofSignName($arrayTemp, $searchName, $finder) {
-        $row = array();
-        foreach ($arrayTemp as $value) {
-            $str = $finder == "default" ? $value : $this->getStrongchar($value, $searchName);
-            array_push($row, $str);
-        }
-
-        return $row;
-    }
     
     /*---------------- Adding Signatory -----------------*/
     public function addSignatory(){
@@ -134,7 +116,7 @@ class Signatory_List_Manager extends Controller {
     public function displayTable($searchName, $page, $finder) {
         $numOfPages = $this->signatory_model->getQueryPageSize($searchName);
         $numOfResults = count($this->signatory_model->filter_SignName($searchName, $page));
-        $getListofSignName = $this->getListofSignName($this->signatory_model->filter_SignName($searchName, $page), $searchName, $finder);
+        $getListofSignName = $this->getListofName($this->signatory_model->filter_SignName($searchName, $page), $searchName, $finder);
         $filter_ID = $this->signatory_model->filter_ID($searchName, $page);
 
         $this->template->assign('myName_sign', $getListofSignName); //$this->signatory_model->filter_Description($searchName, $page));

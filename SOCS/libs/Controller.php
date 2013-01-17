@@ -33,6 +33,24 @@ abstract class Controller {
             return false;
         }
     }
+    
+    public function getStrongchar($str, $findname){
+        $left = substr($str, 0, strpos(strtolower($str), strtolower($findname))); //cut left
+	$center = "<strong style='color: #049cdb;'><u>" .substr($str, strpos(strtolower($str), strtolower($findname)), strlen($findname)) ."</u></strong>"; // cut center
+	$right =  substr($str, strpos(strtolower($str), strtolower($findname)) + strlen($findname));		
+		
+	return $left .$center .$right;
+    }
+    
+    public function getListofName($arrayTemp, $searchName, $finder){
+        $row = array();
+        foreach ($arrayTemp as $value) {
+            $str = $finder == "default" ? $value : $this->getStrongchar($value, $searchName);
+            array_push($row, $str);
+        }
+        
+        return $row;
+    }
 
     public abstract function display();
 }

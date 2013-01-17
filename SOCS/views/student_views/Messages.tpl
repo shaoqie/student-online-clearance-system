@@ -29,6 +29,7 @@
                 <td>
                     <div class="span8 offset1" id="divMessages">
                         <label><i style="font-size: 12px; color:blue;">Posted on {$_date[$k]} at {$_time[$k]}</i></label>
+                        <hr/>
                         <p style="margin-left: 50px; font-size: 15px;">{$i}</p>
                     </div>
                 </td>

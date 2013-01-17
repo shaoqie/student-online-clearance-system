@@ -46,24 +46,6 @@ class Department_List_Manager extends Controller {
             header('Location: ' . HOST);
         }
     }
-
-    private function getStrongchar($str, $findname) {
-        $left = substr($str, 0, strpos(strtolower($str), strtolower($findname))); //cut left
-        $center = "<strong style='color: #049cdb;'><u>" . substr($str, strpos(strtolower($str), strtolower($findname)), strlen($findname)) . "</u></strong>"; // cut center
-        $right = substr($str, strpos(strtolower($str), strtolower($findname)) + strlen($findname));
-
-        return $left . $center . $right;
-    }
-
-    private function getListofDeptName($arrayTemp, $searchName, $finder) {
-        $row = array();
-        foreach ($arrayTemp as $value) {
-            $str = $finder == "default" ? $value : $this->getStrongchar($value, $searchName);
-            array_push($row, $str);
-        }
-
-        return $row;
-    }
     
     public function addDepartment(){
         $this->template->setContent('addDepartment.tpl');
@@ -135,7 +117,7 @@ class Department_List_Manager extends Controller {
     public function displayTable($searchName, $page, $finder) {
         $numOfPages = $this->department_model->getQueryPageSize($searchName);
         $numOfResults = count($this->department_model->filter_DeptName($searchName, $page));
-        $getListofDeptName = $this->getListofDeptName($this->department_model->filter_DeptName($searchName, $page), $searchName, $finder);
+        $getListofDeptName = $this->getListofName($this->department_model->filter_DeptName($searchName, $page), $searchName, $finder);
         $filter_ID = $this->department_model->filter_ID($searchName, $page);
 
         $this->template->assign('myName_dept', $getListofDeptName);

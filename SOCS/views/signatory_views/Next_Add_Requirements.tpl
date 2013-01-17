@@ -2,7 +2,7 @@
     <div class="span4">
         <ul class="nav nav-tabs">
             <li><a href='../signatory/index.php'>Dashboard</a></li>
-            <li><a href='../signatory/index.php?action=viewPosting_Bulletin'>Bulletin</a></li>
+            <li><a href='../signatory/bulletin.php'>Bulletin</a></li>
             <li class="active"><a href='../signatory/index.php?action=viewListOfRequirements'>Requirements</a></li>
         </ul>
     </div>    
@@ -22,7 +22,8 @@
     </div> 
 </div>
         
-<button class="pull-right btn" onclick="window.location.href='../signatory/index.php?action=viewAdd_Requirements'">Back</button> 
+<input type="button" class="pull-right btn" value="Back" onclick="window.location.href='../signatory/index.php?action=viewAdd_Requirements'"></input>
+
 
 <form method='post' class="form-horizontal">
           <legend>This Requirements applies to...</legend>

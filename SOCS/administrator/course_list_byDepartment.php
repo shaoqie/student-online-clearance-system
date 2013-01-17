@@ -52,25 +52,7 @@ class course_list_byDepartment extends Controller {
         }else{
             header('Location: ' . HOST);
         }
-    }               
-    
-    private function getStrongchar($str, $findname){
-        $left = substr($str, 0, strpos(strtolower($str), strtolower($findname))); //cut left
-	$center = "<strong style='color: #049cdb;'><u>" .substr($str, strpos(strtolower($str), strtolower($findname)), strlen($findname)) ."</u></strong>"; // cut center
-	$right =  substr($str, strpos(strtolower($str), strtolower($findname)) + strlen($findname));		
-		
-	return $left .$center .$right;
-    }
-    
-    private function getListofCourseName($arrayTemp, $searchName, $finder){
-        $row = array();
-        foreach ($arrayTemp as $value) {
-            $str = $finder == "default" ? $value : $this->getStrongchar($value, $searchName);
-            array_push($row, $str);
-        }
-        
-        return $row;
-    }
+    }                 
     
     public function addCourse(){
         $this->template->setContent('addCourse.tpl');
@@ -139,7 +121,7 @@ class course_list_byDepartment extends Controller {
     public function displayTable($searchName, $page, $finder){
         $numOfPages = $this->course_model->getQueryPageSize(Session::get_DepartmentName(), $searchName);
         $numOfResults = count($this->course_model->filter_CourseName(Session::get_DepartmentName(), $searchName, $page));
-        $getListofDeptName = $this->getListofCourseName($this->course_model->filter_CourseName(Session::get_DepartmentName(), $searchName, $page), $searchName, $finder);
+        $getListofDeptName = $this->getListofName($this->course_model->filter_CourseName(Session::get_DepartmentName(), $searchName, $page), $searchName, $finder);
         $filter_ID = $this->course_model->filter_ID(Session::get_DepartmentName(), $searchName, $page);
         
         $this->template->assign('myName_course', $getListofDeptName); 

@@ -11,9 +11,6 @@
     <input class="btn pull-right" type="button" value="Add Signatory" onclick="window.location.href='signatory_list_manager.php?action=addSignatory'">
 </form>
 
-<a href = "javascript:isCheckAll(true, {$rowCount_sign})" >Checked All</a> / 
-<a href = "javascript:isCheckAll(false, {$rowCount_sign})">Unchecked All</a>
-
 <table class="table table-hover">     
     <tr>
         <td> <input type="checkbox" onclick="isCheck({$rowCount_sign})" id="check"></input> &nbsp; &nbsp; <i class="icon-check"></i><a>Toggle Check</a></td>      

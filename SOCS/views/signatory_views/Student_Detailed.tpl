@@ -2,7 +2,7 @@
     <div class="span4">
         <ul class="nav nav-tabs">
             <li class="active"><a href='../signatory/index.php'>Dashboard</a></li>
-            <li><a href='../signatory/index.php?action=viewPosting_Bulletin'>Bulletin</a></li>
+            <li><a href='../signatory/bulletin.php'>Bulletin</a></li>
             <li><a href='../signatory/index.php?action=viewListOfRequirements'>Requirements</a></li>
         </ul>
     </div>    

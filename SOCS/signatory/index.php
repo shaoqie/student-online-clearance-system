@@ -59,25 +59,7 @@ class Index extends Controller {
         }
         
         return $row;
-    }
-    
-    private function getStrongchar($str, $findname){
-        $left = substr($str, 0, strpos(strtolower($str), strtolower($findname))); //cut left
-	$center = "<strong style='color: #049cdb;'><u>" .substr($str, strpos(strtolower($str), strtolower($findname)), strlen($findname)) ."</u></strong>"; // cut center
-	$right =  substr($str, strpos(strtolower($str), strtolower($findname)) + strlen($findname));		
-		
-	return $left .$center .$right;
-    }
-    
-    private function getListofStudentName($arrayTemp, $searchName, $finder){
-        $row = array();
-        foreach ($arrayTemp as $value) {
-            $str = $finder == "default" ? $value : $this->getStrongchar($value, $searchName);
-            array_push($row, $str);
-        }
-        
-        return $row;
-    }
+    }      
     
     public function filter($filterName){
         $this->displayTable(trim($filterName), 1);
@@ -86,7 +68,7 @@ class Index extends Controller {
     public function displayTable($searchName, $page, $finder) {  
         $sign_id = $this->signatorialList_model->getSignId(Session::get_AssignSignatory());
         $numOfPages = $this->user_model->getStudent_PageSize($sign_id, $searchName);
-        $getListofStudent_Name = $this->getListofStudentName($this->user_model->filter_ListofStudent_NameUsers($sign_id, $searchName, $page), $searchName, $finder);
+        $getListofStudent_Name = $this->getListofName($this->user_model->filter_ListofStudent_NameUsers($sign_id, $searchName, $page), $searchName, $finder);
         $getListofStudent_Username = $this->user_model->filter_ListofStudent_Username($sign_id, $searchName, $page);
         $getListOfStudenClearanceStatus = $this->getListofClearanceStatus($getListofStudent_Username);
         $numOfResults = count($this->user_model->filter_ListofStudent_NameUsers($sign_id, $searchName, $page));
@@ -100,28 +82,7 @@ class Index extends Controller {
         if ($numOfResults == 0) {
             $this->template->setAlert('No Results Found.', Template::ALERT_ERROR, 'alert');
         }
-    }
-
-     /*----------- For Bulletin Page ------------*/
-    
-    public function viewPosting_Bulletin(){
-        $this->template->setPageName('Bulletin Page');
-        $this->template->setContent('BulletinPage.tpl');
-         
-        $sign_id = $this->signatorialList_model->getSignId(Session::get_AssignSignatory());
-        $sy_id = $this->schoolYearSem_model->getSy_ID(trim($_POST['school_year']));
-         
-        
-        if(isset($_POST['postBulletin'])){
-            if(trim($_POST['post_message']) != ""){
-                $this->bulletin_model->insert($sign_id, $sy_id, trim($_POST['post_message']));
-                $this->template->setAlert("Posting Bulletin was Successful!... ", Template::ALERT_SUCCESS);
-            }else{
-                $this->template->setAlert("Cannot Post an empty field!... ", Template::ALERT_ERROR);
-            }
-        }
-       
-    }
+    }    
     
     /*----------- For Clearance Page ------------*/
     
@@ -163,7 +124,7 @@ class Index extends Controller {
         $this->template->assign('stud_program', $stud_program);
         $this->template->assign('stud_section', $stud_section);
         $this->template->assign('stud_status', $stud_status);
-    }     
+    }  
     
     /*----------- For Requirements Page ------------*/
     

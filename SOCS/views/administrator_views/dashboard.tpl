@@ -11,9 +11,6 @@
     <input class="btn pull-right" type="button" value="Add User Account" onclick="window.location.href='index.php?action=display_add_edit_account'">
 </form>
 
-<a href = "javascript:isCheckAll(true, {$rowCount_admin})" >Checked All</a> / 
-<a href = "javascript:isCheckAll(false, {$rowCount_admin})">Unchecked All</a>
-
 <table class="table table-hover">     
     <tr>
         <td> <input type="checkbox" onclick="isCheck({$rowCount_admin})" id="check"></input> &nbsp; &nbsp; <i class="icon-check"></i><a>Toggle Check</a></td>      
