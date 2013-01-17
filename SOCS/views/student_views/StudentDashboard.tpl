@@ -38,9 +38,9 @@
                             <i class="icon-zoom-in"></i> <a style="cursor:pointer;" onclick="window.location.href=''">Requirements</a>
                             <i class="icon-zoom-in"></i> <a style="cursor:pointer;" onclick="window.location.href='index.php?action=viewMessages&Tsign_ID={$myKey_signID[$k]}&page=1'" >Messages</a> &nbsp;                           
                         </div>                
-                    </td>    
+                    </td>
                     <td style="width: 300px;"><h4><a>{$i}</a></h4></td>
-                    <td style="width: 300px;"><img src="{$host}/photos/not cleared.jpg" class="img-polaroid" /></td>
+                    <td style="width: 300px;"><img src="{$host}/photos/not cleared.png" class="img-polaroid" /></td>
                 </tr>
             {/foreach}
         </table>
