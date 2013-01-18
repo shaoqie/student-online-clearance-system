@@ -1,7 +1,7 @@
 <div class="row">
     <div class="span4">
         <ul class="nav nav-tabs">
-            <li class="dropdown active">
+            <li class="dropdown">
                 <a class="dropdown-toggle"
                     data-toggle="dropdown"
                     href="#">
@@ -13,7 +13,7 @@
                     <li><a href='../signatory/index.php?action=displayTable&filter=&page=1&finder=not&clearanceStatus=Not_Cleared' style="color:red; cursor: pointer;"><i class="icon-remove-circle"></i>&nbsp; Not Cleared</a></li>
                 </ul>
             </li>       
-            <li class="dropdown-toggle"><a href='../signatory/bulletin.php'>Bulletin</a></li>
+            <li class="active"><a href='../signatory/bulletin.php'>Bulletin</a></li>
             <li><a href='../signatory/index.php?action=viewListOfRequirements'>Requirements</a></li>       
         </ul>
     </div>    
