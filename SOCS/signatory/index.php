@@ -130,39 +130,6 @@ class Index extends Controller {
         $this->template->assign('stud_section', $stud_section);
         $this->template->assign('stud_status', $stud_status);
     }  
-    
-    /*----------- For Requirements Page ------------*/
-    
-    public function viewListOfRequirements(){
-        $this->template->setPageName("Requirements Page");
-        $this->template->setContent("RequirementsPage.tpl");       
-    }
-    
-     /*----------- For Adding Requirements Page ------------*/
-
-    public function viewAdd_Requirements(){
-        $this->template->setPageName("Adding Requirements Page");
-        $this->template->setContent("Add_Requirements.tpl"); 
-        
-        if(isset($_POST['Next'])){
-            if(trim($_POST['requirement_title']) != "" && trim($_POST['requirement_description']) != ""){
-                /// procceed to the next page
-                header('Location: ../signatory/index.php?action=viewNext_Add_Requirements&T_title=' .trim($_POST['requirement_title']) .'&T_desc=' .trim($_POST['requirement_description']));
-            }else{
-                $this->template->setAlert("Cannot Procceed if a field is empty!... ", Template::ALERT_ERROR);
-            }
-        }
-    }
-    
-    /*----------- For the next page for Adding Requirements ------------*/
-    
-    public function viewNext_Add_Requirements($T_title, $T_desc){
-        $this->template->setPageName("Adding Requirements Page");
-        $this->template->setContent("Next_Add_Requirements.tpl"); 
-              
-        
-    }
-
 
     /*------------ Display UI -----------------*/
     public function display() {

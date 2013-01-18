@@ -14,7 +14,7 @@
                 </ul>
             </li>       
             <li><a href='../signatory/bulletin.php'>Bulletin</a></li>
-            <li class="active"><a href='../signatory/index.php?action=viewListOfRequirements'>Requirements</a></li>       
+            <li class="active"><a href='../signatory/requirements.php'>Requirements</a></li>           
         </ul>
     </div>    
     <div class="pull-right">
@@ -33,7 +33,7 @@
     </div> 
 </div>
         
-<input type="button" class="pull-right btn" value="Back" onclick="window.location.href='../signatory/index.php?action=viewAdd_Requirements'"></input>
+<input type="button" class="pull-right btn" value="Back" onclick="window.location.href='../signatory/requirements.php'"></input>
 
 
 <form method='post' class="form-horizontal">

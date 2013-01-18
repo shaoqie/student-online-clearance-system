@@ -15,7 +15,7 @@
                 </ul>
             </li>       
             <li class="active"><a href='../signatory/bulletin.php'>Bulletin</a></li>
-            <li><a href='../signatory/index.php?action=viewListOfRequirements'>Requirements</a></li>       
+            <li><a href='../signatory/requirements.php'>Requirements</a></li>            
         </ul>
         </div>    
         <div class="pull-right">

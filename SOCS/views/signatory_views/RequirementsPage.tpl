@@ -14,7 +14,7 @@
                 </ul>
             </li>       
             <li><a href='../signatory/bulletin.php'>Bulletin</a></li>
-            <li class="active"><a href='../signatory/index.php?action=viewListOfRequirements'>Requirements</a></li>       
+            <li class="active"><a href='../signatory/requirements.php'>Requirements</a></li>            
         </ul>
     </div>    
     <div class="pull-right">
@@ -35,7 +35,7 @@
 
 <form class="form-horizontal" method="get" action="?action=filter">
     <input type="hidden" value="filter" name="action">
-    <input class="input-xxlarge" id="search" type="text" placeholder="Search..." value ="{$filter}" name="filterName">
+    <input class="input-xxlarge" id="search" type="text" placeholder="Search..." value ="" name="filterName">
     <button class="btn btn-primary" type="submit"><i class="icon-search icon-white"></i></button>  
-    <input class="btn pull-right" type="button" value="Add Requirements" onclick="window.location.href='../signatory/index.php?action=viewAdd_Requirements'">
+    <input class="btn pull-right" type="button" value="Add Requirements" onclick="window.location.href='../signatory/requirements.php?action=viewAdd_Requirements'">
 </form>
