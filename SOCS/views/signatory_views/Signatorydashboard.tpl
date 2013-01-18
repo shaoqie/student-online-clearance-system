@@ -1,9 +1,20 @@
 <div class="row">
     <div class="span4">
         <ul class="nav nav-tabs">
-            <li class="active"><a href='../signatory/index.php'>Dashboard</a></li>
-            <li><a href='../signatory/bulletin.php'>Bulletin</a></li>
-            <li><a href='../signatory/index.php?action=viewListOfRequirements'>Requirements</a></li>
+            <li class="dropdown active">
+                <a class="dropdown-toggle"
+                    data-toggle="dropdown"
+                    href="#">
+                    Student
+                    <b class="caret"></b>
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a href='../signatory/index.php?action=displayTable&filter=&page=1&finder=not&clearanceStatus=Cleared'  style="color:blue; cursor: pointer;"><i class="icon-check"></i>&nbsp; Cleared</a></li>
+                    <li><a href='../signatory/index.php?action=displayTable&filter=&page=1&finder=not&clearanceStatus=Not_Cleared' style="color:red; cursor: pointer;"><i class="icon-remove-circle"></i>&nbsp; Not Cleared</a></li>
+                </ul>
+            </li>       
+            <li class="dropdown-toggle"><a href='../signatory/bulletin.php'>Bulletin</a></li>
+            <li><a href='../signatory/index.php?action=viewListOfRequirements'>Requirements</a></li>       
         </ul>
     </div>    
     <div class="pull-right">
@@ -25,6 +36,7 @@
 <form class="form-horizontal" method="get" action="?action=filter">
     <input type="hidden" value="filter" name="action">
     <input class="input-xxlarge" id="search" type="text" placeholder="Search..." value ="{$filter}" name="filterName">
+    <input type="hidden" value="{$clearedStatus}" name="status">
     <button class="btn btn-primary" type="submit"><i class="icon-search icon-white"></i></button>  
 </form>
 
@@ -57,7 +69,7 @@
 &nbsp;
 <div class="pull-right">
     Jump to: 
-    <select id="jump" class="input-mini" onchange="jumpToPage()">
+    <select id="jump" class="input-mini" onchange="jumpToPageSignatory('{$clearedStatus}')">
         <option>--</option>
         {for $start = 1 to $signatoryDashboard_length}
         <option>{$start}</option>

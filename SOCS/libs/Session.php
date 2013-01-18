@@ -45,7 +45,6 @@ class Session {
     public static function set_deptpartName($deptName){
         $_SESSION['Department_Name'] = $deptName;
     }
-    
 
         //acessor
     public static function get_user(){

@@ -20,7 +20,13 @@ function jumpToPage(){
     var jump = document.getElementById("jump").value;
     var search = document.getElementById("search").value;
     window.location.assign("?action=displayTable&filter=" + search +"&page=" + jump);
-}       
+} 
+
+function jumpToPageSignatory(status){
+    var jump = document.getElementById("jump").value;
+    var search = document.getElementById("search").value;
+    window.location.assign("?action=displayTable&filter=" + search +"&page=" + jump +"&finder=not&clearanceStatus=" +status);
+}
         
 function isCheckAll(isChecked, rowCount){
     for(var i = 0; i <= rowCount; i++){

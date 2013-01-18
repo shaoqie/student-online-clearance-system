@@ -123,17 +123,18 @@ class User_Model extends Model {
     /*------------ For Signatory Dashboard Part ----------------*/
     
     // List of student users.
-    public function filter_ListofStudent_Username($Tsign_id, $searchName, $page){
+    public function filter_ListofStudent_Username($Tsign_id, $searchName, $page, $status){
         $filter = array();
         $this->query = mysql_query("select students.username, concat(Surname, ', ', First_Name, ' ', Middle_Name) as Name from students
                                     inner join users on students.username = users.username
+                                    inner join clearancestatus on users.username = clearancestatus.student
                                     inner join courses on students.course_id = courses.course_id
                                     inner join departments on courses.Department_ID = departments.Department_ID
                                     inner join signatorialList on departments.Department_ID = signatorialList.department_id
                                     inner join signatories on signatorialList.signatory_id = signatories.signatory_id
                                     where (First_name like '%$searchName%' OR Surname like '%$searchName%' OR 
                                     Middle_Name like '%$searchName%') AND Account_Type = 'student' 
-                                    AND signatories.signatory_id = '$Tsign_id' order by Name
+                                    AND signatories.signatory_id = '$Tsign_id' AND clearancestatus.cleared = '$status' order by Name
                                     LIMIT " . (($page - 1) * $this->itemsPerPage) . ", " . $this->itemsPerPage);
         
         while($row = mysql_fetch_array($this->query)){
@@ -143,17 +144,18 @@ class User_Model extends Model {
         return $filter;
     }
     
-    public function filter_ListofStudent_NameUsers($Tsign_id, $searchName, $page){
+    public function filter_ListofStudent_NameUsers($Tsign_id, $searchName, $page, $status){
         $filter = array();
         $this->query = mysql_query("select concat(Surname, ', ', First_Name, ' ', Middle_Name) as Name from students
                                     inner join users on students.username = users.username
+                                    inner join clearancestatus on users.username = clearancestatus.student
                                     inner join courses on students.course_id = courses.course_id
                                     inner join departments on courses.Department_ID = departments.Department_ID
                                     inner join signatorialList on departments.Department_ID = signatorialList.department_id
                                     inner join signatories on signatorialList.signatory_id = signatories.signatory_id
                                     where (First_name like '%$searchName%' OR Surname like '%$searchName%' OR 
                                     Middle_Name like '%$searchName%') AND Account_Type = 'student' 
-                                    AND signatories.signatory_id = '$Tsign_id' order by Name
+                                    AND signatories.signatory_id = '$Tsign_id' AND clearancestatus.cleared = '$status' order by Name
                                     LIMIT " . (($page - 1) * $this->itemsPerPage) . ", " . $this->itemsPerPage);
         
         while($row = mysql_fetch_array($this->query)){
@@ -163,16 +165,17 @@ class User_Model extends Model {
         return $filter;
     }
     
-    public function getStudent_PageSize($Tsign_id, $searchName){
+    public function getStudent_PageSize($Tsign_id, $searchName, $status){
         $this->query = mysql_query("select concat(Surname, ', ', First_Name, ' ', Middle_Name) as Name from students
                                     inner join users on students.username = users.username
+                                    inner join clearancestatus on users.username = clearancestatus.student
                                     inner join courses on students.course_id = courses.course_id
                                     inner join departments on courses.Department_ID = departments.Department_ID
                                     inner join signatorialList on departments.Department_ID = signatorialList.department_id
                                     inner join signatories on signatorialList.signatory_id = signatories.signatory_id
                         where (First_name like '%$searchName%' OR Surname like '%$searchName%' OR 
                         Middle_Name like '%$searchName%') AND Account_Type = 'student'
-                        AND signatories.signatory_id = '$Tsign_id'");
+                        AND signatories.signatory_id = '$Tsign_id' AND clearancestatus.cleared = '$status'");
         return mysql_num_rows($this->query) / $this->itemsPerPage;
     }
     
