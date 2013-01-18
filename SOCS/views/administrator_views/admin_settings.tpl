@@ -41,7 +41,7 @@
             <input type='password' name='confirmpass'>
         </div>
     </div>
-
+<!--
     <legend>Upload Picture</legend>
 
     <div class="control-group">
@@ -50,7 +50,7 @@
             <input type="file" name="photo">
         </div>
     </div>
-
+-->
     <legend>Authentication: </legend>
 
     <div class="control-group">

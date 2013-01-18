@@ -1,8 +1,13 @@
+
+<!-- Navigation Tabs-->
+
 <ul class="nav nav-tabs">
     <li><a href='../administrator/index.php'>User Accounts</a></li>
     <li class="active"><a href='../administrator/signatory_list_manager.php'>Signatories</a></li>
     <li><a href='../administrator/department_list_manager.php'>Departments</a></li>
 </ul>
+
+<!-- Search Bar and Add User Button-->
 
 <form class="form-horizontal">
     <input type="hidden" value="filter" name="action">
@@ -11,29 +16,34 @@
     <input class="btn pull-right" type="button" value="Add Signatory" onclick="window.location.href='signatory_list_manager.php?action=addSignatory'">
 </form>
 
+<!-- Signatory Table-->
+
 <table class="table table-hover">     
     <tr>
-        <td> <input type="checkbox" onclick="isCheck({$rowCount_sign})" id="check"></input> &nbsp; &nbsp; <i class="icon-check"></i><a>Toggle Check</a></td>      
-        <td></td>   <td></td>
-    </tr>
-    <tr>
-        <th><p class="pull-left">Controls</p></th>
-        <th>Signatories</th>       
-    </tr>
-    {foreach from = $myName_sign key = k item = i}
+        <th>
+            <input type="checkbox" onclick="isCheck({$rowCount_sign})" id="check"> Signatories
+        </th>
+        <th>
+            <div>Controls</div>
+        </th>
+        </tr>
+        {foreach from = $myName_sign key = k item = i}
         <tr>
-            <td style="width:400px">
-                <div class="pull-left">
-                    <input type="checkbox" id = '{$k}' value = {$myKey_sign[$k]} ></input> &nbsp; &nbsp;
+            <td>
+                <label class="checkbox">
+                    <input type="checkbox" id = '{$k}' value = {$myKey_sign[$k]} > {$i}
+                </label>
+            </td>
+            <td>
+                <div>
                     <i class="icon-pencil"></i><a style="cursor:pointer;" onclick="window.location.href='signatory_list_manager.php?action=editSignatory&seleted={$myKey_sign[$k]}'"> Edit</a>&nbsp; &nbsp;
                 </div>
-            </td>    
-            <td><p style="cursor:pointer;" onclick="window.location.href='signatory_list_manager.php?action=editSignatory&seleted={$myKey_sign[$k]}'">{$i}</p></td>
+            </td>
         </tr>
     {/foreach}
 </table>
 
-<i class="icon-remove"></i><a style="cursor:pointer;" onclick="findCheck('{$rowCount_sign}')">Delete Selected</a>
+<a style="cursor:pointer;" onclick="findCheck('{$rowCount_sign}')"><i class="icon-remove"></i> Delete Selected</a>
 
 <div class="pull-right">
     Jump to: <select id="jump" class="input-mini" onchange="jumpToPage()">
