@@ -21,7 +21,7 @@ class SchoolYearSem extends Model{
     
     public function getSchool_Year(){
         $arrayTemp = array();
-        $this->query = mysql_query("SELECT School_Year from schoolyearsem");
+        $this->query = mysql_query("SELECT School_Year from schoolyearsem group by School_Year");
         
         while($row = mysql_fetch_array($this->query)){
             array_push($arrayTemp, $row['School_Year']);

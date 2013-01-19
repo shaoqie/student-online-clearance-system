@@ -51,6 +51,10 @@ function autoload_libs($class){
     if (file_exists(PATH."libs/$class.php")) {
         require_once PATH."libs/$class.php";
     }
+    
+    if ($class == "FPDF"){
+        require_once PATH."libs/fpdf/fpdf.php";
+    }
 }
 
 /*

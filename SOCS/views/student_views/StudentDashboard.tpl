@@ -1,13 +1,13 @@
 <div class="row">   
     <div class="pull-right">
         School Year:
-        <select id="school_year" class="input-small">
+        <select id="school_year" class="input-medium" >
             {foreach from = $mySchool_Year key = k item = i}
                 <option>{$i}</option>
             {/foreach}
         </select>
         Semester:
-        <select id="semester" class="input-small">
+        <select id="semester" class="input-medium" >
             <option>First</option>
             <option>Second</option>
             <option>Summer</option>
@@ -18,8 +18,7 @@
 <hr/>
 
 <div class="pull-right">
-    <i class="icon-print"></i><input class="btn btn-link" type="button" value="Print Preview"> 
-    <i class="icon-download"></i><input class="btn btn-link" type="button" value="Export to PDF">
+    <i class="icon-download"></i><a href="export.php" class="btn btn-link">Export to PDF </a>
 </div>
 
 
