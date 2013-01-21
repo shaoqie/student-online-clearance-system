@@ -11,7 +11,7 @@
 
 <form class="form-horizontal" method="get" action="?action=filter">
     <input type="hidden" value="filter" name="action">
-    <input id="search_bar" class="input-xxlarge" id="search" type="text" placeholder="Search..." value ="{$filter}" name="filterName">
+    <input id="search_bar" class="input-xxlarge" type="text" placeholder="Search..." value ="{$filter}" name="filterName" required>
     <button id="search_btn" class="btn btn-primary" type="submit">
         <i class="icon-search icon-white"></i>
     </button>
@@ -26,9 +26,7 @@
             <input type="checkbox" onclick="isCheck({$rowCount_admin})" id="check"> User
         </th>
         <th>Type</th>
-        <th>
-            <div class="pull-left">Controls</div>
-        </th>
+        <th>Controls</th>
     </tr>
     {foreach from = $myName key = k item = i}
     <tr>
@@ -39,9 +37,7 @@
         </td>
         <td>{$myType[$k]}</td>
         <td>
-            <div class="pull-left">
-                <i class="icon-pencil"></i> <a style="cursor:pointer;" >Edit</a>&nbsp; &nbsp;       
-            </div>                
+            <i class="icon-pencil"></i> <a style="cursor:pointer;" >Edit</a>
         </td>
     </tr>
     {/foreach}

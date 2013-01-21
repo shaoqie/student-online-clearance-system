@@ -7,11 +7,11 @@
     <li><a href='../administrator/department_list_manager.php'>Departments</a></li>
 </ul>
 
-<!-- Search Bar and Add User Button-->
+<!-- Search Bar and Add Signatory Button-->
 
 <form class="form-horizontal">
     <input type="hidden" value="filter" name="action">
-    <input class="input-xxlarge" id="search" type="text" placeholder="Search..." value ="{$filter}" name="filterName">
+    <input class="input-xxlarge" type="text" placeholder="Search..." value ="{$filter}" name="filterName" required>
     <button class="btn btn-primary" type="submit"><i class="icon-search icon-white"></i></button>
     <input class="btn pull-right" type="button" value="Add Signatory" onclick="window.location.href='signatory_list_manager.php?action=addSignatory'">
 </form>
@@ -23,25 +23,29 @@
         <th style="width: 600px;">
             <input type="checkbox" onclick="isCheck({$rowCount_sign})" id="check"> Signatories
         </th>
-        <th><div>Controls</div></th>
+        <th>Controls</th>
     </tr>
     {foreach from = $myName_sign key = k item = i}
-    <tr>
-        <td>
-            <label class="checkbox">
-                <input type="checkbox" id = '{$k}' value = {$myKey_sign[$k]} > {$i}
-            </label>
-        </td>
-        <td>
-            <div>
-                <i class="icon-pencil"></i><a style="cursor:pointer;" onclick="window.location.href='signatory_list_manager.php?action=editSignatory&seleted={$myKey_sign[$k]}'"> Edit</a>&nbsp; &nbsp;
-            </div>
-        </td>
-    </tr>
+        <tr>
+            <td>
+                <label class="checkbox">
+                    <input type="checkbox" id = '{$k}' value = {$myKey_sign[$k]} > {$i}
+                </label>
+            </td>
+            <td>
+                <i class="icon-pencil"></i><a style="cursor:pointer;" onclick="window.location.href='signatory_list_manager.php?action=editSignatory&seleted={$myKey_sign[$k]}'"> Edit</a>
+            </td>
+        </tr>
     {/foreach}
 </table>
 
-<a style="cursor:pointer;" onclick="findCheck('{$rowCount_sign}')"><i class="icon-remove"></i> Delete Selected</a>
+<!-- Delete Control-->
+
+<a style="cursor:pointer;" onclick="findCheck('{$rowCount_sign}')">
+    <i class="icon-remove"></i> Delete Selected
+</a>
+
+<!-- Pagination-->
 
 <div class="pull-right">
     Jump to: <select id="jump" class="input-mini" onchange="jumpToPage()">

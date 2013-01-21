@@ -13,10 +13,31 @@
         <link rel="stylesheet" href="{$host}/public/css/bootstrap.min.css">
         {literal}
             <style>
-                body {
-                    padding-top: 60px;
-                    padding-bottom: 40px;
+                body {{/literal}
+                    padding-top: 45px;
+                    padding-bottom: 40px;                    
+                    background-image: url('{$host}/public/img/background.jpg');
+                    background-attachment: fixed;
+                }{literal}
+
+                #navbar{
+                    opacity: 0.9;
                 }
+
+                #content{
+                    background-color: white;
+                    box-shadow: 5px 5px 7px #444;
+                    border: double 5px;
+                    padding-left: 50px;
+                    padding-right: 50px;
+                    padding-top: 20px;
+                    padding-bottom: 50px;
+                    min-height: 500px;
+                }
+                /*
+                div{
+                border: 1px #000 solid;
+                }*/
             </style>
         {/literal}
         <link rel="stylesheet" href="{$host}/public/css/bootstrap-responsive.min.css">
@@ -31,7 +52,7 @@
 
         <!-- This code is taken from http://twitter.github.com/bootstrap/examples/hero.html -->
 
-        <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="navbar navbar-inverse navbar-fixed-top" id="navbar">
             <div class="navbar-inner">
                 <div class="container">
                     <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
@@ -44,8 +65,10 @@
 
                         {if isset($username)}
                             <div class="btn-group pull-right">
-                                <button class="btn " onclick="window.location.href='index.php'"><i class="icon-user"></i> {$username}</button>
-                                <button class="btn dropdown-toggle" data-toggle="dropdown">
+                                <button class="btn btn-inverse" onclick="window.location.href='index.php'">
+                                    <i class="icon-user icon-white"></i> {$username}
+                                </button>
+                                <button class="btn btn-inverse dropdown-toggle" data-toggle="dropdown">
                                     <span class="caret"></span>
                                 </button>
                                 <ul class="dropdown-menu">
@@ -69,7 +92,7 @@
             </div>
         </div>
 
-        <div class="container">
+        <div class="container" id="content">
 
             {if isset($username)}
                 <div class="row">
@@ -86,13 +109,13 @@
 
             {include file=$content}
 
-            <hr>
-
-            <footer>
-                <p class="pull-right">&copy; Student Online Clearance System 2012</p>
-            </footer>
-
         </div> <!-- /container -->
+
+        <hr>
+
+        <footer>
+            <p class="pull-right">&copy; Student Online Clearance System 2012</p>
+        </footer>
 
         <!--<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>-->
         <!--<script>window.jQuery || document.write('<script src="{$host}/js/vendor/jquery-1.8.3.min.js"><\/script>')</script>-->
