@@ -38,10 +38,7 @@ class SchoolYearSem_Model extends Model{
     }
     
     public function getCurSemester(){
-        $this->query = mysql_query("select curdate()");
-        $row = mysql_fetch_array($this->query);
-        
-        $row = explode("-", $row['0']);
+        $row = explode("-", date("Y-m-d"));
         $curMonth = $row[1];
         
         if($curMonth >= 1 && $curMonth <= 3){
@@ -56,10 +53,7 @@ class SchoolYearSem_Model extends Model{
     }
     
     public function getCurSchool_Year(){
-        $this->query = mysql_query("select curdate()");
-        $row = mysql_fetch_array($this->query);
-        
-        $row = explode("-", $row['0']);
+        $row = explode("-", date("Y-m-d"));
         $curYear = $row[0];
         $curMonth = $row[1];
         

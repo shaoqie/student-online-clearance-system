@@ -48,7 +48,7 @@ class bulletin extends Controller{
             $this->template->assign('currentSchool_Year', $currentSchool_Year);
             
             $this->displayTable('', 1, "default");
-            
+
             if(isset($_GET['successAdd'])){
                 if($_GET['successAdd'] == 'true'){
                     $this->template->setAlert("Posting a Bulletin was Successful", Template::ALERT_SUCCESS, 'alert');
