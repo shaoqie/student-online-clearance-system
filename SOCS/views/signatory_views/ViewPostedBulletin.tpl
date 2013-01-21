@@ -18,9 +18,6 @@
             <li><a href='../signatory/requirements.php'>Requirements</a></li>            
         </ul>
         </div>    
-        <div class="pull-right">
-            {include file=$School_year_content}
-        </div> 
     </div>    
 
     <input type="button" class="pull-right btn" value="Back" onclick="window.location.href='../signatory/bulletin.php'">

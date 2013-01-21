@@ -13,7 +13,7 @@
     <div class="row">   
         <div class="pull-right">
             School Year:
-            <select id="school_year" name="school_year" class="input-medium" onchange="change_schoolYear({$sign_id})">
+            <select id="school_year" name="school_year" class="input-medium">
                 {foreach from = $mySchool_Year key = k item = i}
                     {if $currentSchool_Year eq $i}
                         <option selected>{$i}</option>
@@ -23,7 +23,7 @@
                 {/foreach}
             </select>
             Semester:
-            <select id="semester" name="semester" class="input-medium" onchange="change_schoolYear({$sign_id})">
+            <select id="semester" name="semester" class="input-medium">
                 {if $currentSemester eq 'First'}
                     <option selected>First</option>
                     <option>Second</option>
@@ -37,7 +37,8 @@
                     <option>Second</option>
                     <option selected>Summer</option>
                 {/if}           
-            </select>   
+            </select> 
+            <input class="btn btn-primary" type="button" value="GO" name="GO" onclick="change_schoolYear({$sign_id})">
         </div> 
     </div>   
            

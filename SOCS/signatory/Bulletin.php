@@ -63,13 +63,22 @@ class bulletin extends Controller{
         $this->displayTable(trim($filterName), 1);
     }
     
-    public function displayTable($searchName, $page, $finder) {  
-        $t_sign_id = $this->signatorialList_model->getSignId(Session::get_AssignSignatory());
-        $numOfPages = $this->bulletin_model->getMessage_PageSize($t_sign_id, $searchName);
+    public function displayTable($searchName, $page, $finder) { 
+        if(isset($_POST['GO'])){
+           $sy_id = $this->schoolYearSem_model->getSy_ID(trim($_POST['school_year']), trim($_POST['semester'])); 
+           $this->template->assign('currentSemester', trim($_POST['semester']));
+           $this->template->assign('currentSchool_Year', trim($_POST['school_year']));
+        }else{
+           $sy_id = $this->schoolYearSem_model->getSy_ID($this->schoolYearSem_model->getCurSchool_Year(), $this->schoolYearSem_model->getCurSemester());  
+        }
+          
         
-        $getListofID = $this->bulletin_model->getListofID($t_sign_id, $page, $searchName);
-        $getListofMessages = $this->bulletin_model->getListofMessages($t_sign_id, $page, $searchName);
-        $getListofDateTime = $this->getListofName($this->bulletin_model->getListofPost_DateTime($t_sign_id, $page, $searchName), $searchName, $finder);
+        $t_sign_id = $this->signatorialList_model->getSignId(Session::get_AssignSignatory());
+        $numOfPages = $this->bulletin_model->getMessage_PageSize($t_sign_id, $sy_id, $searchName);
+        
+        $getListofID = $this->bulletin_model->getListofID($t_sign_id, $sy_id, $page, $searchName);
+        $getListofMessages = $this->bulletin_model->getListofMessages($t_sign_id, $sy_id, $page, $searchName);
+        $getListofDateTime = $this->getListofName($this->bulletin_model->getListofPost_DateTime($t_sign_id, $sy_id, $page, $searchName), $searchName, $finder);
         
         $numOfResults = count($getListofMessages);
        

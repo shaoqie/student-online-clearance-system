@@ -24,3 +24,4 @@ Semester:
         <option selected>Summer</option>
     {/if}           
 </select>
+<input class="btn btn-primary" type="submit" value="GO" name="GO">

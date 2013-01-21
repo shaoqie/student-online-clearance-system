@@ -1,3 +1,4 @@
+<form method="POST">
 <div class="row">
     <div class="span4">
         <ul class="nav nav-tabs">
@@ -16,11 +17,12 @@
             <li class="active"><a href='../signatory/bulletin.php'>Bulletin</a></li>
             <li><a href='../signatory/requirements.php'>Requirements</a></li>         
         </ul>
-    </div>    
-    <div class="pull-right">
-        {include file=$School_year_content}
     </div> 
+        <div class="pull-right">
+            {include file=$School_year_content}
+        </div> 
 </div>
+</form>   
         
 <form class="form-horizontal" method="get" action="?action=filter">
     <input type="hidden" value="filter" name="action">
