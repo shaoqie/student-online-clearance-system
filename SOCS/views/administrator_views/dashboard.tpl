@@ -22,7 +22,7 @@
     
 <table class="table table-hover">     
     <tr>
-        <th>
+        <th style="width: 600px;">
             <input type="checkbox" onclick="isCheck({$rowCount_admin})" id="check"> User
         </th>
         <th>Type</th>

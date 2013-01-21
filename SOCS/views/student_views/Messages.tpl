@@ -1,19 +1,47 @@
-<div class="row">   
-    <div class="pull-right">
-        School Year:
-        <select id="school_year" class="input-small">
-            {foreach from = $mySchool_Year key = k item = i}
-                <option>{$i}</option>
-            {/foreach}
-        </select>
-        Semester:
-        <select id="semester" class="input-small">
-            <option>First</option>
-            <option>Second</option>
-            <option>Summer</option>
-        </select>
-    </div> 
-</div>
+<script>
+    function change_schoolYear(sign_id){
+        var sy = document.getElementById("school_year").value;
+        var sem = document.getElementById("semester").value;
+        
+        var sy_sem = sy +"@" +sem;
+        
+        window.location.assign("?action=viewMessages&Tsign_ID=" +sign_id +"&page=1" + "&sysem=" +sy_sem);
+    }
+</script>
+
+<form method="post">
+    <div class="row">   
+        <div class="pull-right">
+            School Year:
+            <select id="school_year" name="school_year" class="input-medium" onchange="change_schoolYear({$sign_id})">
+                {foreach from = $mySchool_Year key = k item = i}
+                    {if $currentSchool_Year eq $i}
+                        <option selected>{$i}</option>
+                    {else}
+                        <option>{$i}</option>
+                    {/if}        
+                {/foreach}
+            </select>
+            Semester:
+            <select id="semester" name="semester" class="input-medium" onchange="change_schoolYear({$sign_id})">
+                {if $currentSemester eq 'First'}
+                    <option selected>First</option>
+                    <option>Second</option>
+                    <option>Summer</option>
+                {elseif $currentSemester eq 'Second'}
+                    <option>First</option>
+                    <option selected>Second</option>
+                    <option>Summer</option>
+                {else}
+                    <option>First</option>
+                    <option>Second</option>
+                    <option selected>Summer</option>
+                {/if}           
+            </select>   
+        </div> 
+    </div>   
+           
+</form>
 
 <hr/>
 
@@ -36,7 +64,7 @@
             </tr>
         {/foreach}
     </table>   
-    
+
     <div class="pull-right">
         Jump to: 
         <select id="jump_studMessages" class="input-mini" onchange="jumpToPageMessages({$sign_id})">
@@ -47,4 +75,4 @@
         </select>
     </div>
 </div>
-    
+

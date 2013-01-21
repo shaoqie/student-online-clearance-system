@@ -24,11 +24,13 @@ class bulletin extends Controller{
         if (Session::user_exist() && Session::get_Account_type() == "Signatory") {
             $this->template = new Template();
             $this->user_model = new User_Model();
-            $this->schoolYearSem_model = new SchoolYearSem();
+            $this->schoolYearSem_model = new SchoolYearSem_Model();
             $this->signatorialList_model = new SignatorialList_Model();
             $this->bulletin_model = new Bulletin_Model();
             
             $listOfSchoolYear = $this->schoolYearSem_model->getSchool_Year();
+            $currentSemester = $this->schoolYearSem_model->getCurSemester();
+            $currentSchool_Year = $this->schoolYearSem_model->getCurSchool_Year();
             
             $this->template->setPageName('Bulletin Page');
 
@@ -39,8 +41,11 @@ class bulletin extends Controller{
             $this->template->set_account_type(Session::get_Account_type() ." in Charge -");
 
             $this->template->setContent('BulletinPage.tpl');
+            $this->template->setSchool_YearSemContent('SchoolYear_Sem.tpl');
             $this->template->assign('assign_sign', ", " .Session::get_AssignSignatory());
             $this->template->assign('mySchool_Year', $listOfSchoolYear);
+            $this->template->assign('currentSemester', $currentSemester);
+            $this->template->assign('currentSchool_Year', $currentSchool_Year);
             
             $this->displayTable('', 1, "default");
             
@@ -87,13 +92,17 @@ class bulletin extends Controller{
         $this->template->setContent('Post_BulletinPage.tpl');
          
         $sign_id = $this->signatorialList_model->getSignId(Session::get_AssignSignatory());
-        $sy_id = $this->schoolYearSem_model->getSy_ID(trim($_POST['school_year']));
+        $sy_id = $this->schoolYearSem_model->getSy_ID(trim($_POST['school_year']), trim($_POST['semester']));
          
+        
         
         if(isset($_POST['postBulletin'])){
             if(trim($_POST['post_message']) != ""){
                 $this->bulletin_model->insert($sign_id, $sy_id, trim($_POST['post_message']));
                 //$this->template->setAlert("Posting Bulletin was Successful!... ", Template::ALERT_SUCCESS);
+//                var_dump(trim($_POST['school_year']));
+//                var_dump(trim($_POST['semester']));
+//                var_dump($sy_id);
                 header('Location: bulletin.php?successAdd=true');         
             }else{
                 $this->template->setAlert("Cannot Post an empty field!... ", Template::ALERT_ERROR);

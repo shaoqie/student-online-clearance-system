@@ -13,22 +13,23 @@
 
 <table class="table table-hover">   
     <tr>
-        <td> <input type="checkbox" onclick="isCheck({$rowCount_dept})" id="check"></input> &nbsp; &nbsp; <i class="icon-check"></i><a>Toggle Check</a></td>      
-        <td></td>   <td></td>
-    </tr>
-    <tr>
-        <th><p class="pull-left">Controls</p></th>
-        <th> Departments</th>       
+        <th style="width: 600px;">
+            <input type="checkbox" onclick="isCheck({$rowCount_dept})" id="check"> Departments
+        </th>
+        <th><div>Controls</div></th>
     </tr>
 {foreach from = $myName_dept key = k item = i}
     <tr>
-        <td style="width:400px">
-            <div class="pull-left">
-                <input type="checkbox" id = '{$k}' value = {$myKey_dept[$k]} ></input> &nbsp; &nbsp;
-                <i class="icon-pencil"></i><a style="cursor:pointer;" onclick="window.location.href='department_list_manager.php?action=editDepartment&seleted={$myKey_dept[$k]}'"> Edit</a>  
-            </div>          
+        <td>
+            <label class="checkbox">
+                <input type="checkbox" id = '{$k}' value = {$myKey_dept[$k]} > <p onclick="window.location.href='department_list_manager.php?action=displayCourse&deptName={$i}'" style="cursor:pointer;" >{$i}</p>
+            </label>        
         </td>
-        <td><p onclick="window.location.href='department_list_manager.php?action=displayCourse&deptName={$i}'" style="cursor:pointer;" >{$i}</p></td>
+        <td>
+            <div>
+                <i class="icon-pencil"></i><a style="cursor:pointer;" onclick="window.location.href='department_list_manager.php?action=editDepartment&seleted={$myKey_dept[$k]}'"> Edit</a>  
+            </div>        
+        </td>
     </tr>
 {/foreach}
 </table>

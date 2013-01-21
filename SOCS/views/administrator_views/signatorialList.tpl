@@ -11,7 +11,7 @@
 													+"<option>{$i}</option>"
 												+"{/foreach}"
 											+"</select>";
-			var editSignatorialList = "<input type='button' class='btn' value='Confirmed' id='save'> &nbsp; &nbsp; "
+			var editSignatorialList = "<input type='button' class='btn' value='Confirmed' id='save'> "
 									   + "<input type='button' class='btn' value='Cancel' id='cancel'>";
 			
 			hideAll(length);               
@@ -74,24 +74,25 @@
 
 <table class="table table-hover">    
     <tr>
-        <td> <input type="checkbox" onclick="isCheck({$rowCount_signatorial})" id="check"></input> &nbsp; &nbsp; <i class="icon-check"></i><a>Toggle Check</a></td>      
-        <td></td>   <td></td>
-    </tr>
-    <tr>
-        <th><p class="pull-left">Controls</p></th>
-        <th> Signatories</th>       
+        <th style="width: 250px;">
+            <input type="checkbox" onclick="isCheck({$rowCount_signatorial})" id="check"> Signatories
+        </th>
+        <th style="width: 340px;"></th>
+        <th><div>Controls</div></th>
     </tr>
 {foreach from = $myName_signatorial key = k item = i} 
     <tr>
-        <td style="width:400px">
-            <div class="pull-left">
+        <td>
+            <label class="checkbox">
                 <input type="hidden" id = 'edit{$k}' value = "{$i}">
-                <input type="checkbox" id = '{$k}' value = {$myKey_signatorial[$k]} ></input> &nbsp; &nbsp;
-                <i class="icon-pencil"></i><a style="cursor:pointer;" href="javascript:edit('{$k}','{$myKey_signatorial[$k]}','{$rowCount_signatorial}','{$countSignList}')"> Edit</a>&nbsp; &nbsp;              
-            </div>          
-        </td>
-        <td><p id='unSelectedSignatorialList{$k}'>{$i}</p></td>
-        <td><p id="confirmed{$k}"></p></td>
+                <input type="checkbox" id = '{$k}' value = {$myKey_signatorial[$k]} ></input> 
+                <div id='unSelectedSignatorialList{$k}'>{$i}</div>
+            </label>
+        </td>    
+        <td><label id="confirmed{$k}"></label></td>
+        <td>
+            <i class="icon-pencil"></i><a style="cursor:pointer;" href="javascript:edit('{$k}','{$myKey_signatorial[$k]}','{$rowCount_signatorial}','{$countSignList}')"> Edit</a> &nbsp;                     
+        </td>    
     </tr>
 {/foreach}
 </table>

@@ -67,6 +67,10 @@ class Template extends Smarty {
     public function setContent($tpl_file) {
         $this->assign('content', $tpl_file);
     }
+    
+    public function setSchool_YearSemContent($tpl_file) {
+        $this->assign('School_year_content', $tpl_file);
+    }
 
     public function setAlert($msg, $alert_type = self::ALERT_WARNING) {
 

@@ -18,18 +18,7 @@
         </ul>
     </div>    
     <div class="pull-right">
-        School Year:
-        <select id="school_year" class="input-small">
-            {foreach from = $mySchool_Year key = k item = i}
-                <option>{$i}</option>
-            {/foreach}
-        </select>
-        Semester:
-        <select id="semester" class="input-small">
-            <option>First</option>
-            <option>Second</option>
-            <option>Summer</option>
-        </select>
+        {include file=$School_year_content}
     </div> 
 </div>
 
@@ -42,26 +31,26 @@
 
 <table class="table table-hover">     
     <tr>
-        <th>Controls</th>
         <th>ID</th>
         <th>Name</th>  
-        <th>Status</th>        
+        <th>Status</th>    
+        <th>Student Info.</th>
     </tr>
 {foreach from = $myName_student_NameUser key = k item = i}
-    <tr>
-        <td style="width:300px">
+    <tr> 
+        <td style="width:150px">{$myKey_Student_Username[$k]}</td>
+        <td>{$i}</td>
+        {if $myStudent_ClearanceStatus[$k] eq 'Cleared'}
+            <td style="color:blue;">{$myStudent_ClearanceStatus[$k]}</td>
+        {else}
+            <td style="color:red;">{$myStudent_ClearanceStatus[$k]}</td>
+        {/if}
+        <td>
             <div class="pull-left">
                 <i class="icon-info-sign"></i> <a style="cursor:pointer;" onclick="window.location.href='index.php?action=viewStudent_Detail&stud_id={$myKey_Student_Username[$k]}'">Detail</a>&nbsp; &nbsp;
                 <i class="icon-zoom-in"></i> <a style="cursor:pointer;" onclick="window.location.href='index.php?action=viewClearavePage&stud_id={$myKey_Student_Username[$k]}'">Clearance</a>
             </div>                
-        </td> 
-        <td>{$myKey_Student_Username[$k]}</td>
-        <td>{$i}</td>
-        {if $myStudent_ClearanceStatus[$k] eq 'Cleared'}
-            <td style="color:blue;">{$myStudent_ClearanceStatus[$k]}</td>
-         {else}
-            <td style="color:red;">{$myStudent_ClearanceStatus[$k]}</td>
-        {/if}
+        </td>
     </tr>
 {/foreach}
 </table> 

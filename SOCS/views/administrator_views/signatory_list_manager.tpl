@@ -20,26 +20,24 @@
 
 <table class="table table-hover">     
     <tr>
-        <th>
+        <th style="width: 600px;">
             <input type="checkbox" onclick="isCheck({$rowCount_sign})" id="check"> Signatories
         </th>
-        <th>
-            <div>Controls</div>
-        </th>
-        </tr>
-        {foreach from = $myName_sign key = k item = i}
-        <tr>
-            <td>
-                <label class="checkbox">
-                    <input type="checkbox" id = '{$k}' value = {$myKey_sign[$k]} > {$i}
-                </label>
-            </td>
-            <td>
-                <div>
-                    <i class="icon-pencil"></i><a style="cursor:pointer;" onclick="window.location.href='signatory_list_manager.php?action=editSignatory&seleted={$myKey_sign[$k]}'"> Edit</a>&nbsp; &nbsp;
-                </div>
-            </td>
-        </tr>
+        <th><div>Controls</div></th>
+    </tr>
+    {foreach from = $myName_sign key = k item = i}
+    <tr>
+        <td>
+            <label class="checkbox">
+                <input type="checkbox" id = '{$k}' value = {$myKey_sign[$k]} > {$i}
+            </label>
+        </td>
+        <td>
+            <div>
+                <i class="icon-pencil"></i><a style="cursor:pointer;" onclick="window.location.href='signatory_list_manager.php?action=editSignatory&seleted={$myKey_sign[$k]}'"> Edit</a>&nbsp; &nbsp;
+            </div>
+        </td>
+    </tr>
     {/foreach}
 </table>
 

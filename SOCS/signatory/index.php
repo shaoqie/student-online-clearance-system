@@ -23,7 +23,7 @@ class Index extends Controller {
 
         if (Session::user_exist() && Session::get_Account_type() == "Signatory") {
             $this->user_model = new User_Model();
-            $this->schoolYearSem_model = new SchoolYearSem();
+            $this->schoolYearSem_model = new SchoolYearSem_Model();
             $this->student_model = new Student_Model();
             $this->clearanceStatus_model = new ClearanceStatus();
             $this->requirementbyStudent_model = new Requirementbystudent_Model();
@@ -32,6 +32,8 @@ class Index extends Controller {
             $this->template = new Template();
             
             $listOfSchoolYear = $this->schoolYearSem_model->getSchool_Year();
+            $currentSemester = $this->schoolYearSem_model->getCurSemester();
+            $currentSchool_Year = $this->schoolYearSem_model->getCurSchool_Year();
             
             $this->template->setPageName('Signatory Page');
 
@@ -42,8 +44,12 @@ class Index extends Controller {
             $this->template->set_account_type(Session::get_Account_type() ." in Charge -");
 
             $this->template->setContent('Signatorydashboard.tpl');
+            $this->template->setSchool_YearSemContent('SchoolYear_Sem.tpl');
             $this->template->assign('assign_sign', ", " .Session::get_AssignSignatory());
             $this->template->assign('mySchool_Year', $listOfSchoolYear);
+            $this->template->assign('currentSemester', $currentSemester);
+            $this->template->assign('currentSchool_Year', $currentSchool_Year);
+            
             
             $this->displayTable('', 1, "default", "Cleared");
         } else {

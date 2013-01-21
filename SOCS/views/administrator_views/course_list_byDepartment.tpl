@@ -17,22 +17,23 @@
 
 <table class="table table-hover">     
     <tr>
-        <td> <input type="checkbox" onclick="isCheck({$rowCount_course})" id="check"></input> &nbsp; &nbsp; <i class="icon-check"></i><a>Toggle Check</a></td>      
-        <td></td>   <td></td>
-    </tr>
-    <tr>
-        <th><p class="pull-left">Controls</p></th>
-        <th> Courses</th>       
+        <th style="width: 600px;">
+            <input type="checkbox" onclick="isCheck({$rowCount_course})" id="check"> Courses
+        </th>
+        <th><div>Controls</div></th>
     </tr>
 {foreach from = $myName_course key = k item = i}
     <tr>
-        <td style="width:400px">
-            <div class="pull-left">
-                <input type="checkbox" id = '{$k}' value = {$myKey_course[$k]} ></input> &nbsp; &nbsp;
-                <i class="icon-pencil"></i> <a style="cursor:pointer;" onclick="window.location.href='course_list_byDepartment.php?action=editCourse&seleted={$myKey_course[$k]}'">Edit</a>
-            </div>          
+        <td>
+            <label class="checkbox">
+                <input type="checkbox" id = '{$k}' value = {$myKey_course[$k]} > {$i}
+            </label>
         </td>
-        <td><p style="cursor:pointer;" onclick="window.location.href='course_list_byDepartment.php?action=editCourse&seleted={$myKey_course[$k]}'">{$i}</p></td>
+        <td>
+            <div>
+                <i class="icon-pencil"></i><a style="cursor:pointer;" onclick="window.location.href='signatory_list_manager.php?action=editSignatory&seleted={$myKey_course[$k]}'"> Edit</a>&nbsp; &nbsp;
+            </div>
+        </td>
     </tr>
 {/foreach}
 </table>

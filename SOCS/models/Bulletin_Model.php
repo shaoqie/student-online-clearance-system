@@ -45,9 +45,9 @@ class Bulletin_Model extends Model{
         return $rowInfo;
     }
     
-    public function getListofMessages($sign_id, $page, $search){
+    public function getListofMessages($sign_id, $sysem_id, $page, $search){
         $rowInfo = array();
-        $this->query = mysql_query("select Message from bulletin where Signatory_ID = '$sign_id' AND
+        $this->query = mysql_query("select Message from bulletin where Signatory_ID = '$sign_id' AND sy_sem_id = '$sysem_id' AND
                                     (post_date like '%$search%' OR post_time like '%$search%')
                                     order by post_date desc, post_time desc
                                     LIMIT " . (($page - 1) * $this->itemsPerPage) . ", " . $this->itemsPerPage);
@@ -59,9 +59,9 @@ class Bulletin_Model extends Model{
         return $rowInfo;
     }
     
-    public function getListofPost_Date($sign_id, $page , $search){
+    public function getListofPost_Date($sign_id, $sysem_id, $page , $search){
         $rowInfo = array();
-        $this->query = mysql_query("select Post_Date from bulletin where Signatory_ID = '$sign_id' AND
+        $this->query = mysql_query("select Post_Date from bulletin where Signatory_ID = '$sign_id' AND sy_sem_id = '$sysem_id' AND
                                     (post_date like '%$search%' OR post_time like '%$search%')
                                     order by post_date desc, post_time desc
                                     LIMIT " . (($page - 1) * $this->itemsPerPage) . ", " . $this->itemsPerPage);
@@ -73,9 +73,9 @@ class Bulletin_Model extends Model{
         return $rowInfo;
     }
     
-    public function getListofPost_Time($sign_id, $page, $search){
+    public function getListofPost_Time($sign_id, $sysem_id, $page, $search){
         $rowInfo = array();
-        $this->query = mysql_query("select Post_Time from bulletin where Signatory_ID = '$sign_id' AND
+        $this->query = mysql_query("select Post_Time from bulletin where Signatory_ID = '$sign_id' AND sy_sem_id = '$sysem_id' AND
                                     (post_date like '%$search%' OR post_time like '%$search%')
                                     order by post_date desc, post_time desc
                                     LIMIT " . (($page - 1) * $this->itemsPerPage) . ", " . $this->itemsPerPage);
@@ -87,9 +87,9 @@ class Bulletin_Model extends Model{
         return $rowInfo;
     }
   
-    public function getListofPost_DateTime($sign_id, $page, $search){
+    public function getListofPost_DateTime($sign_id, $sysem_id, $page, $search){
         $rowInfo = array();
-        $this->query = mysql_query("select concat(post_date, ' | ', post_time) as datetime from bulletin where Signatory_ID = '$sign_id' AND
+        $this->query = mysql_query("select concat(post_date, ' | ', post_time) as datetime from bulletin where Signatory_ID = '$sign_id' AND sy_sem_id = '$sysem_id' AND
                                     (post_date like '%$search%' OR post_time like '%$search%')
                                     order by post_date desc, post_time desc
                                     LIMIT " . (($page - 1) * $this->itemsPerPage) . ", " . $this->itemsPerPage);
@@ -101,8 +101,8 @@ class Bulletin_Model extends Model{
         return $rowInfo;
     }
     
-    public function getMessage_PageSize($sign_id, $search){
-        $this->query = mysql_query("select Post_Time from bulletin where Signatory_ID = '$sign_id' AND
+    public function getMessage_PageSize($sign_id, $sysem_id, $search){
+        $this->query = mysql_query("select Post_Time from bulletin where Signatory_ID = '$sign_id' AND sy_sem_id = '$sysem_id' AND
                                     (post_date like '%$search%' OR post_time like '%$search%')
                                     order by post_date desc, post_time desc");
         

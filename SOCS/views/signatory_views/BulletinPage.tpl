@@ -18,18 +18,7 @@
         </ul>
     </div>    
     <div class="pull-right">
-        School Year:
-        <select id="school_year" class="input-small">
-            {foreach from = $mySchool_Year key = k item = i}
-                <option>{$i}</option>
-            {/foreach}
-        </select>
-        Semester:
-        <select id="semester" class="input-small">
-            <option>First</option>
-            <option>Second</option>
-            <option>Summer</option>
-        </select>
+        {include file=$School_year_content}
     </div> 
 </div>
         
@@ -44,25 +33,22 @@
         
 <table class="table">
     <tr>
-        <td> <input type="checkbox" onclick="isCheck({$rowCount_bulletin})" id="check"></input> &nbsp; &nbsp; <i class="icon-check"></i><a>Toggle Check</a></td>      
-        <td></td>   <td></td>
-    </tr>
-    <tr>
-        <th style="width: 200px;"><p class="pull-left">Controls</p></th>
-        <th>Messages</th> 
+        <th style="width: 200px;"><input type="checkbox" onclick="isCheck({$rowCount_bulletin})" id="check"></input> &nbsp;Messages</th> 
         <th> Post Date and Time</th>
+        <th> Message Info.</th>
     </tr>
     
     {foreach from = $myName_messages key = k item = i}
-        <tr>
+        <tr>        
             <td>
                 <div class="pull-left">
-                    <input type="checkbox" id = '{$k}' value = {$myMessage_ID[$k]} ></input> &nbsp; &nbsp;
-                    <i class="icon-eye-open"></i><a style="cursor:pointer;" onclick="window.location.href='../signatory/bulletin.php?action=viewPosted_Bulletin&key={$myMessage_ID[$k]}'"> View</a>&nbsp; &nbsp;
+                    <input type="checkbox" id = '{$k}' value = {$myMessage_ID[$k]} ></input> &nbsp; {$i}
                 </div>
             </td>
-            <td>{$i}</td>
             <td>{$my_dateTime[$k]}</td>
+             <td>
+                <i class="icon-eye-open"></i><a style="cursor:pointer;" onclick="window.location.href='../signatory/bulletin.php?action=viewPosted_Bulletin&key={$myMessage_ID[$k]}'"> View</a>&nbsp; &nbsp;         
+            </td>
         </tr>
     {/foreach}
 </table>

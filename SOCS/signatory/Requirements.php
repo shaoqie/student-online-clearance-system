@@ -20,9 +20,11 @@ class Requirements extends Controller{
     public function __construct() {
         parent::__construct();
         $this->template = new Template();
-        $this->schoolYearSem_model = new SchoolYearSem();
+        $this->schoolYearSem_model = new SchoolYearSem_Model();
         
         $listOfSchoolYear = $this->schoolYearSem_model->getSchool_Year();
+        $currentSemester = $this->schoolYearSem_model->getCurSemester();
+        $currentSchool_Year = $this->schoolYearSem_model->getCurSchool_Year();
             
         $this->template->setPageName('Requirements Page');
         
@@ -33,8 +35,11 @@ class Requirements extends Controller{
         $this->template->set_account_type(Session::get_Account_type() . " in Charge -");
 
         $this->template->setContent('RequirementsPage.tpl');
+        $this->template->setSchool_YearSemContent('SchoolYear_Sem.tpl');
         $this->template->assign('assign_sign', ", " . Session::get_AssignSignatory());
         $this->template->assign('mySchool_Year', $listOfSchoolYear);
+        $this->template->assign('currentSemester', $currentSemester);
+        $this->template->assign('currentSchool_Year', $currentSchool_Year);
         
     }
     
