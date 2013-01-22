@@ -34,6 +34,7 @@
                     padding-bottom: 50px;
                     min-height: 500px;
                     border-radius: 10px;
+                    opacity: 0.9;
                 }
                 
                 #header{{/literal}

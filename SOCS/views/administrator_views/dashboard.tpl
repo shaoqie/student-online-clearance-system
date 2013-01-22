@@ -11,8 +11,8 @@
 
 <form class="form-horizontal" method="get" action="?action=filter">
     <input type="hidden" value="filter" name="action">
-    <input id="search_bar" class="input-xxlarge" type="text" placeholder="Search..." value ="{$filter}" name="filterName" required>
-    <button id="search_btn" class="btn btn-primary" type="submit">
+    <input id="search" class="input-xxlarge" type="text" placeholder="Search..." value ="{$filter}" name="filterName">
+    <button class="btn btn-primary" type="submit">
         <i class="icon-search icon-white"></i>
     </button>
     <input class="btn pull-right" type="button" value="Add User Account" onclick="window.location.href='index.php?action=display_add_edit_account'">
