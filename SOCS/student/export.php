@@ -108,7 +108,7 @@ $fpdf->Write(5, ".");
 $fpdf->Ln(18);
 $fpdf->Write(5, "[This portion over here still needs to be coded and will be finished soon.]");
 
-$fpdf->Output("SOCS Clearance Export - $stud_name.pdf", 'I');
+$fpdf->Output("SOCS Clearance Export - $stud_name.pdf", 'D');
  
 
 function getNumberNth($number){
