@@ -9,9 +9,9 @@
 
 <!-- Search Bar and Add User Button-->
 
-<form class="form-horizontal" method="get" action="?action=filter">
+<form class="form-inline" method="get" action="?action=filter">
     <input type="hidden" value="filter" name="action">
-    <input id="search" class="input-xxlarge" type="text" placeholder="Search..." value ="{$filter}" name="filterName">
+    <input id="search" class="input-xlarge" type="text" placeholder="Search..." value ="{$filter}" name="filterName">
     <button class="btn btn-primary" type="submit">
         <i class="icon-search icon-white"></i>
     </button>

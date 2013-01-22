@@ -31,16 +31,16 @@
                     padding-left: 50px;
                     padding-right: 50px;
                     padding-top: 20px;
-                    padding-bottom: 50px;
-                    min-height: 500px;
+                    padding-bottom: 20px;
+                    /*min-height: 500px;*/
                     border-radius: 10px;
                     opacity: 0.9;
                 }
-                
+
                 #header{{/literal}
                     background-image: url('{$host}/public/img/header.png');
                 }{literal}
-                
+
                 /*
                 div{
                 border: 1px #000 solid;
@@ -89,17 +89,21 @@
                             </div>
                         {elseif !isset($smarty.get.action) && !isset($username)}
                             <form class="navbar-form pull-right" action="index.php?action=login" method="post">
-                                <input class="span2" type="text" placeholder="Username" name="username">
-                                <input class="span2" type="password" placeholder="Password" name="password">
+                                <input class="span2" type="text" placeholder="Username" name="username" required>
+                                <input class="span2" type="password" placeholder="Password" name="password" required>
                                 <button type="submit" class="btn"><i class="icon-check"></i> Sign in</button>
                             </form>
+                        {else}
+                            <ul class="nav pull-right">
+                                <li><a href="index.php">Home</a></li>
+                            </ul>
                         {/if}
                     </div><!--/.nav-collapse -->
                 </div>
             </div>
         </div>
 
-        <div class="container" id="content">
+        <div id="content" class="span9 offset1">
 
             {if isset($username)}
                 <div id="header" class="row">
@@ -116,13 +120,19 @@
 
             {include file=$content}
 
+            <hr>
+
+            <footer>
+                <p class="pull-right">&copy; Student Online Clearance System 2012</p>
+            </footer>
+        </div>
+        {*
+        <div class="container" id="content">
+
+        
+
         </div> <!-- /container -->
-
-        <hr>
-
-        <footer>
-            <p class="pull-right">&copy; Student Online Clearance System 2012</p>
-        </footer>
+        *}
 
         <!--<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>-->
         <!--<script>window.jQuery || document.write('<script src="{$host}/js/vendor/jquery-1.8.3.min.js"><\/script>')</script>-->
@@ -134,12 +144,12 @@
 
         {*
         {literal}
-            <script>
-                var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
-                (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
-                g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
-                s.parentNode.insertBefore(g,s)}(document,'script'));
-            </script>
+        <script>
+        var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
+        (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+        g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+        s.parentNode.insertBefore(g,s)}(document,'script'));
+        </script>
         {/literal}*}
     </body>
 </html>

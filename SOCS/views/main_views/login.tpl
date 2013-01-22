@@ -8,14 +8,14 @@
             <div class="control-group">
                 <label class="control-label">Username: </label>
                 <div class="controls">
-                    <input type="text" placeholder="Enter Your Username" name = "username" autofocus>
+                    <input type="text" placeholder="Enter Your Username" name = "username" autofocus required>
                 </div>
             </div>
 
             <div class="control-group">
                 <label class="control-label">Password: </label>
                 <div class="controls">
-                    <input type="password" placeholder="Enter Your Password" name = "password">
+                    <input type="password" placeholder="Enter Your Password" name = "password" required>
                 </div>
             </div>
 
