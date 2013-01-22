@@ -13,9 +13,12 @@ if (!(Session::user_exist() && Session::get_Account_type() == "Student")) {
     header('Location: /SOCS/index.php');
 }
 
-$globals_model = new Globals_Model();
-$current_sy = $globals_model->getCurrentSchoolYear();
-$current_sem = $globals_model->getCurrentSem();
+$sy_model = new SchoolYearSem_Model();
+$current_sy = $sy_model->getCurSchool_Year();
+$current_sem = $sy_model->getCurSemester();
+if ($current_sem != "Summer")
+    $current_sem .= " Semester";
+
 
 $student_model = new Student_Model();
 $stud_id = Session::get_user();
@@ -96,7 +99,7 @@ $fpdf->Write(5, " is cleared of all, property and other accountabilities with th
 $fpdf->SetFont('Times','BU',12);
 $fpdf->Write(5, $current_sem);
 $fpdf->SetFont('Times','',12);
-$fpdf->Write(5, ", SY ");
+$fpdf->Write(5, " , SY ");
 $fpdf->SetFont('Times','BU',12);
 $fpdf->Write(5, $current_sy);
 $fpdf->SetFont('Times','',12);
@@ -105,7 +108,7 @@ $fpdf->Write(5, ".");
 $fpdf->Ln(18);
 $fpdf->Write(5, "[This portion over here still needs to be coded and will be finished soon.]");
 
-$fpdf->Output("SOCS Clearance Export - $stud_name.pdf", 'D');
+$fpdf->Output("SOCS Clearance Export - $stud_name.pdf", 'I');
  
 
 function getNumberNth($number){
