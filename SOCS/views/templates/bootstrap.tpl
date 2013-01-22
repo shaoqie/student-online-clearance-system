@@ -16,7 +16,7 @@
                 body {{/literal}
                     padding-top: 45px;
                     padding-bottom: 40px;                    
-                    background-image: url('{$host}/public/img/background.jpg');
+                    background-image: url('{$host}/public/img/background.png');
                     background-attachment: fixed;
                 }{literal}
 
