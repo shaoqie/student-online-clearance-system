@@ -26,19 +26,15 @@
             <input type="checkbox" onclick="isCheck({$rowCount_admin})" id="check"> User
         </th>
         <th>Type</th>
-        <th>Controls</th>
     </tr>
     {foreach from = $myName key = k item = i}
     <tr>
         <td>
             <label class="checkbox">
-                <input type="checkbox" id = '{$k}' value = {$myKey_admin[$k]}> {$i}
+                <input class="userCheckbox" type="checkbox" id = '{$k}' value = {$myKey_admin[$k]}> {$i}
             </label>
         </td>
         <td>{$myType[$k]}</td>
-        <td>
-            <i class="icon-pencil"></i> <a style="cursor:pointer;" >Edit</a>
-        </td>
     </tr>
     {/foreach}
 </table>

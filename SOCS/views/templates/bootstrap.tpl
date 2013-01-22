@@ -33,7 +33,13 @@
                     padding-top: 20px;
                     padding-bottom: 50px;
                     min-height: 500px;
+                    border-radius: 10px;
                 }
+                
+                #header{{/literal}
+                    background-image: url('{$host}/public/img/header.png');
+                }{literal}
+                
                 /*
                 div{
                 border: 1px #000 solid;
@@ -95,7 +101,7 @@
         <div class="container" id="content">
 
             {if isset($username)}
-                <div class="row">
+                <div id="header" class="row">
                     <div class="span1"><img src="{$host}/photos/default.png" class="img-polaroid" /></div>
                     <div class="span5">
                         <h4>{$surname}, {$firstname} {$middlename}</h4>
@@ -125,6 +131,7 @@
 
         <script src="{$host}/public/js/main.js"></script>
 
+        {*
         {literal}
             <script>
                 var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
@@ -132,6 +139,6 @@
                 g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
                 s.parentNode.insertBefore(g,s)}(document,'script'));
             </script>
-        {/literal}
+        {/literal}*}
     </body>
 </html>

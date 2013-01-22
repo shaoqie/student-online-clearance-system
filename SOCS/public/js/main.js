@@ -35,17 +35,21 @@ function isCheckAll(isChecked, rowCount){
 }
         
 function findCheck(rowCount){
+
+    if($('.userCheckbox:checked').length > 0){
+        var bool = confirm("Attempting to delete " + $('.userCheckbox:checked').length + " user/s. Are you sure?");
     
-    var bool = confirm("Are you sure you want to delete?");
-    
-    if(bool == true){
-        var valueDeleted = "";
-        for(var i = 0; i < rowCount; i++){
-            if(document.getElementById("" +i).checked == true){
-                valueDeleted += document.getElementById("" +i).value + "-";
+        if(bool == true){
+            var valueDeleted = "";
+            for(var i = 0; i < rowCount; i++){
+                if(document.getElementById("" +i).checked == true){
+                    valueDeleted += document.getElementById("" +i).value + "-";
+                }
             }
+            window.location.assign("?action=delete&selected=" + valueDeleted);
         }
-        window.location.assign("?action=delete&selected=" + valueDeleted);
+    }else{
+        alert("Select First!");
     }
 }
 
