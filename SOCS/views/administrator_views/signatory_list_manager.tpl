@@ -29,7 +29,7 @@
         <tr>
             <td>
                 <label class="checkbox">
-                    <input type="checkbox" id = '{$k}' value = {$myKey_sign[$k]} > {$i}
+                    <input class="userCheckbox" type="checkbox" id = '{$k}' value = {$myKey_sign[$k]} > {$i}
                 </label>
             </td>
             <td>

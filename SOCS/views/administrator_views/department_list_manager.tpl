@@ -29,7 +29,7 @@
     <tr>
         <td>
             <label class="checkbox">
-                <input type="checkbox" id = '{$k}' value = {$myKey_dept[$k]} > <p onclick="window.location.href='department_list_manager.php?action=displayCourse&deptName={$i}'" style="cursor:pointer;" >{$i}</p>
+                <input class="userCheckbox" type="checkbox" id = '{$k}' value = {$myKey_dept[$k]} > <p onclick="window.location.href='department_list_manager.php?action=displayCourse&deptName={$i}'" style="cursor:pointer;" >{$i}</p>
             </label>        
         </td>
             <td><i class="icon-pencil"></i><a style="cursor:pointer;" onclick="window.location.href='department_list_manager.php?action=editDepartment&seleted={$myKey_dept[$k]}'"> Edit</a>  
