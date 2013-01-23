@@ -11,13 +11,13 @@
     <div class="control-group">
         <label class="control-label">Signatory Name: </label>
         <div class="controls">
-            <input class="input-xxlarge" type ='text' name='sign_name' value='{$editSignatory_Name}'>
+            <input class="span5" type ='text' name='sign_name' value='{$editSignatory_Name}'>
         </div>
     </div>
     <div class="control-group">
         <label class="control-label">Description: </label>
         <div class="controls">
-            <textarea class="input-xxlarge" name='sign_description' rows="5" cols="50">{$editSignatory_Desc}</textarea>
+            <textarea class="span5" name='sign_description' rows="5" cols="50">{$editSignatory_Desc}</textarea>
         </div>
     </div>
     <div class="control-group">

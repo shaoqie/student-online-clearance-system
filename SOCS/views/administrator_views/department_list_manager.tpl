@@ -11,7 +11,7 @@
 
 <form class="form-inline">
     <input type="hidden" value="filter" name="action">
-    <input id="search" class="input-xlarge" type="text" placeholder="Search..." value ="{$filter}" name="filterName" required>
+    <input id="search" class="span5" type="text" placeholder="Search..." value ="{$filter}" name="filterName" required>
     <button class="btn btn-primary" id="btnsearch" type="submit"><i class="icon-search icon-white"></i></button>
     <input class="btn pull-right" type="button" value="Add Department" onclick="window.location.href='department_list_manager.php?action=addDepartment'">
 </form>

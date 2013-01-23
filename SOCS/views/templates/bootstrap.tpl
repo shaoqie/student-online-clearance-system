@@ -103,7 +103,7 @@
             </div>
         </div>
 
-        <div id="content" class="span9 offset1">
+        <div id="content" class="span10 offset1">
 
             {if isset($username)}
                 <div id="header" class="row">
