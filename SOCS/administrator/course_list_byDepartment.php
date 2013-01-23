@@ -33,6 +33,7 @@ class course_list_byDepartment extends Controller {
             $this->template->assign('Dept_name', Session::get_DepartmentName());
 
             $this->template->setContent('course_list_byDepartment.tpl');
+            $this->template->setCalendar('Calendar.tpl');
             $this->template->assign('assign_sign', '');
 
             $this->displayTable('', 1, "default");

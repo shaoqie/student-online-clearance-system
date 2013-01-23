@@ -134,7 +134,7 @@ class User_Model extends Model {
                                     inner join signatories on signatorialList.signatory_id = signatories.signatory_id
                                     where (First_name like '%$searchName%' OR Surname like '%$searchName%' OR 
                                     Middle_Name like '%$searchName%') AND Account_Type = 'student' 
-                                    AND signatories.signatory_id = '$Tsign_id' AND clearancestatus.cleared = '$status' order by Name
+                                    AND signatories.signatory_id = '$Tsign_id' AND clearancestatus.cleared like '$status%' order by Name
                                     LIMIT " . (($page - 1) * $this->itemsPerPage) . ", " . $this->itemsPerPage);
         
         while($row = mysql_fetch_array($this->query)){
@@ -155,7 +155,7 @@ class User_Model extends Model {
                                     inner join signatories on signatorialList.signatory_id = signatories.signatory_id
                                     where (First_name like '%$searchName%' OR Surname like '%$searchName%' OR 
                                     Middle_Name like '%$searchName%') AND Account_Type = 'student' 
-                                    AND signatories.signatory_id = '$Tsign_id' AND clearancestatus.cleared = '$status' order by Name
+                                    AND signatories.signatory_id = '$Tsign_id' AND clearancestatus.cleared like '$status%' order by Name
                                     LIMIT " . (($page - 1) * $this->itemsPerPage) . ", " . $this->itemsPerPage);
         
         while($row = mysql_fetch_array($this->query)){
@@ -175,7 +175,7 @@ class User_Model extends Model {
                                     inner join signatories on signatorialList.signatory_id = signatories.signatory_id
                         where (First_name like '%$searchName%' OR Surname like '%$searchName%' OR 
                         Middle_Name like '%$searchName%') AND Account_Type = 'student'
-                        AND signatories.signatory_id = '$Tsign_id' AND clearancestatus.cleared = '$status'");
+                        AND signatories.signatory_id = '$Tsign_id' AND clearancestatus.cleared like '$status%'");
         return mysql_num_rows($this->query) / $this->itemsPerPage;
     }
     

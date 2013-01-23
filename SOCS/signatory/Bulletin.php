@@ -41,6 +41,7 @@ class bulletin extends Controller{
             $this->template->set_account_type(Session::get_Account_type() ." in Charge -");
 
             $this->template->setContent('BulletinPage.tpl');
+            $this->template->setCalendar('Calendar.tpl');
             $this->template->setSchool_YearSemContent('SchoolYear_Sem.tpl');
             $this->template->assign('assign_sign', ", " .Session::get_AssignSignatory());
             $this->template->assign('mySchool_Year', $listOfSchoolYear);
@@ -185,7 +186,7 @@ class bulletin extends Controller{
         
         $counter = 0;
         foreach ($_array as $value) {
-            if($counter >= 60){
+            if($counter >= 40){
                 $_strTemp .= $value ."<br/>";
                 $counter = -1;
             }else{

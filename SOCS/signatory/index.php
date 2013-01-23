@@ -44,6 +44,7 @@ class Index extends Controller {
             $this->template->set_account_type(Session::get_Account_type() ." in Charge -");
 
             $this->template->setContent('Signatorydashboard.tpl');
+            $this->template->setCalendar('Calendar.tpl');
             $this->template->setSchool_YearSemContent('SchoolYear_Sem.tpl');
             $this->template->assign('assign_sign', ", " .Session::get_AssignSignatory());
             $this->template->assign('mySchool_Year', $listOfSchoolYear);
@@ -51,7 +52,7 @@ class Index extends Controller {
             $this->template->assign('currentSchool_Year', $currentSchool_Year);
             
             
-            $this->displayTable('', 1, "default", "Cleared");
+            $this->displayTable('', 1, "default", "");
         } else {
             header('Location: /SOCS/');
         }
@@ -72,7 +73,7 @@ class Index extends Controller {
     }
     
     public function displayTable($searchName, $page, $finder, $clearanceStatus) { 
-        $clearanceStatus = $clearanceStatus == "Cleared" ? "Cleared" : "Not Cleared";       
+        //$clearanceStatus = $clearanceStatus == "Cleared" ? "Cleared" : "Not Cleared";       
         
         $sign_id = $this->signatorialList_model->getSignId(Session::get_AssignSignatory());
         $numOfPages = $this->user_model->getStudent_PageSize($sign_id, $searchName, $clearanceStatus);

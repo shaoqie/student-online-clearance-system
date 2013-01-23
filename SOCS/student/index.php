@@ -40,7 +40,9 @@ class Index extends Controller {
             
             $this->template->setPageName('Signatory Page');
             $this->template->setContent('StudentDashboard.tpl');
+            $this->template->setCalendar('Calendar.tpl');
             $this->template->setSchool_YearSemContent('SchoolYear_Sem.tpl');
+            
 
             $this->template->set_username(Session::get_user());
             $this->template->set_surname(Session::get_Surname());
@@ -126,7 +128,7 @@ class Index extends Controller {
         
         $counter = 0;
         foreach ($_array as $value) {
-            if($counter >= 60){
+            if($counter >= 40){
                 $_strTemp .= $value ."<br/>";
                 $counter = -1;
             }else{

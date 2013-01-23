@@ -31,6 +31,7 @@ class signatorialList extends Controller{
             $this->template->assign('Dept_name', Session::get_DepartmentName());
             
             $this->template->setContent('signatorialList.tpl');
+            $this->template->setCalendar('Calendar.tpl');
             $this->template->assign('assign_sign', '');
             
             $this->displayTable('', 1, "default");

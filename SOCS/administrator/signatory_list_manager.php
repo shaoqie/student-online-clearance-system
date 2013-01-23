@@ -27,6 +27,7 @@ class Signatory_List_Manager extends Controller {
             $this->template->set_account_type(Session::get_Account_type());
 
             $this->template->setContent('signatory_list_manager.tpl');
+            $this->template->setCalendar('Calendar.tpl');
             $this->template->assign('assign_sign', '');
 
             $this->displayTable('', 1, "default");

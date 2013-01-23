@@ -25,6 +25,7 @@
                 }
 
                 #content{
+                    width: 940px;
                     background-color: white;
                     box-shadow: 5px 5px 7px #444;
                     border: 1px;
@@ -35,7 +36,7 @@
                     border-bottom-left-radius: 10px;
                     border-bottom-right-radius: 10px;
                     opacity: 0.9;
-                    border-style: dotted
+                    border-style: dotted    
                 }
 
                 #header{{/literal}
@@ -131,9 +132,17 @@
        
         {*
         <div class="container" id="content">
-
+            <div class="container-fluid">
+                <div class="row-fluid">
+                    <div class="span8">
+                        <!--Body content-->
+                    </div>
+                    <div class="span4">
+                        <!--Sidebar content-->
+                    </div>
+                </div>
+            </div>
         
-
         </div> <!-- /container -->
         *}
 
