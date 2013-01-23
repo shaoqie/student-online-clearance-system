@@ -48,8 +48,6 @@ function findCheck(rowCount){
             }
             window.location.assign("?action=delete&selected=" + valueDeleted);
         }
-    }else{
-        alert("Select First!");
     }
 }
 

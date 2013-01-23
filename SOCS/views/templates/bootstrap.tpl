@@ -14,7 +14,7 @@
         {literal}
             <style>
                 body {{/literal}
-                    padding-top: 45px;
+                    padding-top: 40px;
                     padding-bottom: 40px;                    
                     background-image: url('{$host}/public/img/background.png');
                     background-attachment: fixed;
@@ -27,18 +27,20 @@
                 #content{
                     background-color: white;
                     box-shadow: 5px 5px 7px #444;
-                    border: double 5px;
+                    border: 1px;
                     padding-left: 50px;
                     padding-right: 50px;
                     padding-top: 20px;
                     padding-bottom: 20px;
-                    /*min-height: 500px;*/
-                    border-radius: 10px;
+                    border-bottom-left-radius: 10px;
+                    border-bottom-right-radius: 10px;
                     opacity: 0.9;
+                    border-style: dotted
                 }
 
                 #header{{/literal}
                     background-image: url('{$host}/public/img/header.png');
+                    background-position: right;
                 }{literal}
 
                 /*
@@ -126,6 +128,7 @@
                 <p class="pull-right">&copy; Student Online Clearance System 2012</p>
             </footer>
         </div>
+       
         {*
         <div class="container" id="content">
 
