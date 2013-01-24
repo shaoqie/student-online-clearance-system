@@ -55,6 +55,8 @@
         <link rel="stylesheet" href="{$host}/public/css/main.css">
 
         <script src="{$host}/public/js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+        <script src="{$host}/public/js/calendarview.js"></script>
+        <script src="{$host}/public/js/prototype.js"></script>
     </head>
     <body>
         <!--[if lt IE 7]>
@@ -137,7 +139,7 @@
         <script src="{$host}/public/js/vendor/jquery-1.8.3.min.js"></script>
         <script src="{$host}/public/js/vendor/bootstrap.min.js"></script>
 
-        <script src="{$host}/public/js/main.js"></script>
+        <script src="{$host}/public/js/main.js"></script>        
 
         {*
         {literal}
