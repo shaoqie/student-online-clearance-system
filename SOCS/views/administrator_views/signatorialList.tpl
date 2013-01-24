@@ -91,7 +91,7 @@ $("#confirmed" +x).html("");
                         <td>
                             <label class="checkbox">
                                 <input type="hidden" id = 'edit{$k}' value = "{$i}">
-                                <input type="checkbox" id = '{$k}' value = {$myKey_signatorial[$k]} ></input> 
+                                <input class="Checkbox" type="checkbox" id = '{$k}' value = {$myKey_signatorial[$k]} ></input> 
                                 <div id='unSelectedSignatorialList{$k}'>{$i}</div>
                             </label>
                         </td>    
@@ -103,7 +103,7 @@ $("#confirmed" +x).html("");
                 {/foreach}
             </table>
 
-            <i class="icon-remove"></i><a style="cursor:pointer;" onclick="findCheck('{$rowCount_signatorial}')" >Delete Selected</a>
+            <i class="icon-remove"></i><a style="cursor:pointer;" onclick="findCheck('{$rowCount_signatorial}','signatorial list')" >Delete Selected</a>
 
             <div class="pull-right">
                 Jump to: <select id="jump" class="input-mini" onchange="jumpToPage()">

@@ -34,10 +34,9 @@ function isCheckAll(isChecked, rowCount){
     }
 }
         
-function findCheck(rowCount){
-
-    if($('.userCheckbox:checked').length > 0){
-        var bool = confirm("Attempting to delete " + $('.userCheckbox:checked').length + " user/s. Are you sure?");
+function findCheck(rowCount, type){
+    if($('.Checkbox:checked').length > 0){
+        var bool = confirm("Attempting to delete " + $('.Checkbox:checked').length + " " +type +"/s. Are you sure?");
     
         if(bool == true){
             var valueDeleted = "";

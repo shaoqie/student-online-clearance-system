@@ -15,13 +15,13 @@
                 <div class="control-group">
                     <label class="control-label">Signatory Name: </label>
                     <div class="controls">
-                        <input class="input-xlarge" type ='text' name='sign_name' value='{$editSignatory_Name}'>
+                        <input style="width: 400px;" class="input-xlarge" type ='text' name='sign_name' value='{$editSignatory_Name}'>
                     </div>
                 </div>
                 <div class="control-group">
                     <label class="control-label">Description: </label>
                     <div class="controls">
-                        <textarea class="input-xlarge" name='sign_description' rows="5" cols="50">{$editSignatory_Desc}</textarea>
+                        <textarea style="width: 400px;" class="input-xlarge" name='sign_description' rows="5" cols="50">{$editSignatory_Desc}</textarea>
                     </div>
                 </div>
                 <div class="control-group">

@@ -35,13 +35,13 @@
                 <div class="control-group">
                     <label class="control-label">Title: </label>
                     <div class="controls">
-                        <input class="input-xlarge" type ='text' name='requirement_title'>
+                        <input style="width: 400px;" class="input-xlarge" type ='text' name='requirement_title'>
                     </div>
                 </div>
                 <div class="control-group">
                     <label class="control-label">Description: </label>
                     <div class="controls">
-                        <textarea class="input-xlarge" name='requirement_description' rows="5" cols="50"></textarea>
+                        <textarea style="width: 400px;" class="input-xlarge" name='requirement_description' rows="5" cols="50"></textarea>
                     </div>
                 </div>
                 <div class="control-group">

@@ -59,14 +59,13 @@
                 <input type="button" class="pull-right btn" value="Back" onclick="window.location.href='../signatory/bulletin.php'">               
                 <legend>Post Bulletin</legend>
                 <div class="row">    
-                    <div class="offset1">
+                    <div class="offset1 pull-right">
                         <textarea class="input-xxlarge" placeholder="Post a bulletin here....." name='post_message' rows="10" cols="30"></textarea>
-                    </div>  
-                    <div class="pull-right">
-                        <input type="submit" class="btn btn-primary" value="Post" name="postBulletin">
-                    </div>  
+                    </div>                      
                 </div>
-
+                <div class="pull-right" style="padding-top: 5px;">
+                    <input type="submit" class="btn btn-primary" value="Post" name="postBulletin">
+                </div>  
             </div>
             <div class="span4">
                 <!--Sidebar content-->

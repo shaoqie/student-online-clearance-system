@@ -33,7 +33,7 @@
                     <tr>
                         <td>
                             <label class="checkbox">
-                                <input class="userCheckbox" type="checkbox" id = '{$k}' value = {$myKey_dept[$k]} >
+                                <input class="Checkbox" type="checkbox" id = '{$k}' value = {$myKey_dept[$k]} >
                                 <div onclick="window.location.href='department_list_manager.php?action=displayCourse&deptName={$i}'" style="cursor:pointer;" >{$i}</div>
                             </label>        
                         </td>
@@ -45,7 +45,7 @@
 
             <!-- Delete Control-->
 
-            <a style="cursor:pointer;" onclick="findCheck('{$rowCount_dept}')" >
+            <a style="cursor:pointer;" onclick="findCheck('{$rowCount_dept}','department')" >
                 <i class="icon-remove"></i> Delete Selected
             </a>
 

@@ -17,13 +17,13 @@
                 <div class="control-group">
                     <label class="control-label">Course Name: </label>
                     <div class="controls">
-                        <input class="input-xlarge" type ='text' name='course_name'>
+                        <input style="width: 400px;" class="input-xlarge" type ='text' name='course_name'>
                     </div>
                 </div>
                 <div class="control-group">
                     <label class="control-label">Description: </label>
                     <div class="controls">
-                        <textarea class="input-xlarge" name='course_description' rows="5" cols="50"></textarea>
+                        <textarea style="width: 400px;" class="input-xlarge" name='course_description' rows="5" cols="50"></textarea>
                     </div>
                 </div>
                 <div class="control-group">

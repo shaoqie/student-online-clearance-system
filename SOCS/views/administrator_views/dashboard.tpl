@@ -42,7 +42,7 @@
                     <tr>
                         <td>
                             <label class="checkbox">
-                                <input class="userCheckbox" type="checkbox" id = '{$k}' value = {$myKey_admin[$k]}> {$i}
+                                <input class="Checkbox" type="checkbox" id = '{$k}' value = {$myKey_admin[$k]}> {$i}
                             </label>
                         </td>
                         <td>{$myType[$k]}</td>
@@ -52,7 +52,7 @@
 
             <!-- Delete Control-->
 
-            <a style="cursor:pointer;" onclick="findCheck('{$rowCount_admin}')">
+            <a style="cursor:pointer;" onclick="findCheck('{$rowCount_admin}','users')">
                 <i class="icon-remove"></i> Delete Selected
             </a>
 

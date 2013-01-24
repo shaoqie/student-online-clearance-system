@@ -31,7 +31,7 @@
                     <tr>
                         <td>
                             <label class="checkbox">
-                                <input type="checkbox" id = '{$k}' value = {$myKey_course[$k]} > {$i}
+                                <input class="Checkbox" type="checkbox" id = '{$k}' value = {$myKey_course[$k]} > {$i}
                             </label>
                         </td>
                         <td>
@@ -43,8 +43,8 @@
                 {/foreach}
             </table>
 
-            <i class="icon-remove"></i><a style="cursor:pointer;" onclick="findCheck('{$rowCount_course}')" >Delete Selected</a>
-
+            <i class="icon-remove"></i><a style="cursor:pointer;" onclick="findCheck('{$rowCount_course}','course')" >Delete Selected</a>
+            
             <div class="pull-right">
                 Jump to: <select id="jump" class="input-mini" onchange="jumpToPage()">
                     <option>--</option>

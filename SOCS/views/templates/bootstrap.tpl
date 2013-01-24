@@ -43,7 +43,8 @@
                     background-image: url('{$host}/public/img/header.png');
                     background-position: right;
                 }{literal}
-
+               
+                
                 /*
                 div{
                 border: 1px #000 solid;
@@ -129,22 +130,6 @@
                 <p class="pull-right">&copy; Student Online Clearance System 2012</p>
             </footer>
         </div>
-       
-        {*
-        <div class="container" id="content">
-            <div class="container-fluid">
-                <div class="row-fluid">
-                    <div class="span8">
-                        <!--Body content-->
-                    </div>
-                    <div class="span4">
-                        <!--Sidebar content-->
-                    </div>
-                </div>
-            </div>
-        
-        </div> <!-- /container -->
-        *}
 
         <!--<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>-->
         <!--<script>window.jQuery || document.write('<script src="{$host}/js/vendor/jquery-1.8.3.min.js"><\/script>')</script>-->

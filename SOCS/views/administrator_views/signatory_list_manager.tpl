@@ -34,7 +34,7 @@
                     <tr>
                         <td>
                             <label class="checkbox">
-                                <input class="userCheckbox" type="checkbox" id = '{$k}' value = {$myKey_sign[$k]} > {$i}
+                                <input class="Checkbox" type="checkbox" id = '{$k}' value = {$myKey_sign[$k]} > {$i}
                             </label>
                         </td>
                         <td>
@@ -46,7 +46,7 @@
 
             <!-- Delete Control-->
 
-            <a style="cursor:pointer;" onclick="findCheck('{$rowCount_sign}')">
+            <a style="cursor:pointer;" onclick="findCheck('{$rowCount_sign}','signatory')">
                 <i class="icon-remove"></i> Delete Selected
             </a>
 

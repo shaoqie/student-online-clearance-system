@@ -18,13 +18,13 @@
                 <div class="control-group">
                     <label class="control-label">Course Name: </label>
                     <div class="controls">
-                        <input class="input-xlarge" type ='text' name='course_name' value='{$editCourse_Name}'>
+                        <input style="width: 400px;" class="input-xlarge" type ='text' name='course_name' value='{$editCourse_Name}'>
                     </div>
                 </div>
                 <div class="control-group">
                     <label class="control-label">Description: </label>
                     <div class="controls">
-                        <textarea class="input-xlarge" name='course_description' rows="5" cols="50" id='course_desc'>{$editCourse_Desc}</textarea>
+                        <textarea style="width: 400px;" class="input-xlarge" name='course_description' rows="5" cols="50" id='course_desc'>{$editCourse_Desc}</textarea>
                     </div>
                 </div>
                 <div class="control-group">
