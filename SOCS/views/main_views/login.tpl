@@ -2,7 +2,7 @@
     <div class="span3">
         <img src="{$host}/public/img/title.png" />
     </div>
-    <div class="span6">
+    <div class="span5">
         <form action="index.php?action=login" method="post" class="form-horizontal">
             <legend>Login</legend>
             <div class="control-group">

@@ -14,7 +14,7 @@
         {literal}
             <style>
                 body {{/literal}
-                    padding-top: 40px;
+                    padding-top: 45px;
                     padding-bottom: 40px;                    
                     background-image: url('{$host}/public/img/background.png');
                     background-attachment: fixed;
@@ -24,27 +24,24 @@
                     opacity: 0.9;
                 }
 
-                #content{
-                    width: 940px;
+                .socs-content{
                     background-color: white;
                     box-shadow: 5px 5px 7px #444;
-                    border: 1px;
+                    border: dotted 1px;
                     padding-left: 50px;
                     padding-right: 50px;
                     padding-top: 20px;
                     padding-bottom: 20px;
-                    border-bottom-left-radius: 10px;
-                    border-bottom-right-radius: 10px;
+                    border-radius: 10px;
                     opacity: 0.9;
-                    border-style: dotted    
+                    margin-bottom: 5px;
                 }
 
                 #header{{/literal}
                     background-image: url('{$host}/public/img/header.png');
                     background-position: right;
                 }{literal}
-               
-                
+
                 /*
                 div{
                 border: 1px #000 solid;
@@ -109,28 +106,32 @@
             </div>
         </div>
 
-        <div id="content" class="span10 offset1">
+        <div class="span10 offset1">
 
             {if isset($username)}
-                <div id="header" class="row">
+                <div id="header" class="row socs-content">
                     <div class="span1"><img src="{$host}/photos/default.png" class="img-polaroid" /></div>
                     <div class="span5">
                         <h4>{$surname}, {$firstname} {$middlename}</h4>
                         <h5>- {$account_type} {$assign_sign}</h5>
                     </div>
                 </div>
-                <hr>
             {/if}
 
-            {$alert}
+            <div class="row socs-content">
 
-            {include file=$content}
+                {$alert}
 
-            <hr>
+                {include file='UIsections.tpl'}
+                {include file=$content}
 
-            <footer>
-                <p class="pull-right">&copy; Student Online Clearance System 2012</p>
-            </footer>
+                <hr>
+
+                <footer>
+                    <p class="pull-right">&copy; Student Online Clearance System 2012</p>
+                </footer>
+
+            </div>
         </div>
 
         <!--<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>-->

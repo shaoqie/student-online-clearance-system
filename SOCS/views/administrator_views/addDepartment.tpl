@@ -4,39 +4,25 @@
     <li class="active"><a href='../administrator/department_list_manager.php'>Departments</a></li>
 </ul>
 
-<div class="container-fluid">
-    <div class="row-fluid">
-        <div class="span8">
-            <!--Body content-->
-            <button class="pull-right btn" onclick="window.location.href='department_list_manager.php'">Back</button>
+<button class="pull-right btn" onclick="window.location.href='department_list_manager.php'">Back</button>
 
-            <form action="department_list_manager.php?action=add_department" method='post' class="form-horizontal">
-                <legend>Add Department:</legend>
-                <div class="control-group">
-                    <label class="control-label">Department Name: </label>
-                    <div class="controls">
-                        <input style="width: 400px;" class="input-xlarge" type ='text' name='dept_name'>
-                    </div>
-                </div>
-                <div class="control-group">
-                    <label class="control-label">Description: </label>
-                    <div class="controls">
-                        <textarea style="width: 400px;" class="input-xlarge" name='dept_description' rows="5" cols="50"></textarea>
-                    </div>
-                </div>
-                <div class="control-group">
-                    <div class="controls">
-                        <input class="btn btn-primary" type='Submit' value='Save'>
-                    </div>
-                </div>
-            </form> 
-
-        </div>
-        <div class="span4">
-            <!--Sidebar content-->
-            {include file=$calendar}
+<form action="department_list_manager.php?action=add_department" method='post' class="form-horizontal">
+    <legend>Add Department:</legend>
+    <div class="control-group">
+        <label class="control-label">Department Name: </label>
+        <div class="controls">
+            <input class="span5" type ='text' name='dept_name'>
         </div>
     </div>
-</div>
-
-
+    <div class="control-group">
+        <label class="control-label">Description: </label>
+        <div class="controls">
+            <textarea class="span5" name='dept_description' rows="5" cols="50"></textarea>
+        </div>
+    </div>
+    <div class="control-group">
+        <div class="controls">
+            <input class="btn btn-primary" type='Submit' value='Save'>
+        </div>
+    </div>
+</form>
