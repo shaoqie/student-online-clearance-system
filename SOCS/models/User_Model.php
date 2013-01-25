@@ -123,7 +123,7 @@ class User_Model extends Model {
     /*------------ For Signatory Dashboard Part ----------------*/
     
     // List of student users.
-    public function filter_ListofStudent_Username($Tsign_id, $searchName, $page, $status){
+    public function filter_ListofStudent_Username($Tsign_id, $searchName, $page){
         $filter = array();
         $this->query = mysql_query("select students.username, concat(Surname, ', ', First_Name, ' ', Middle_Name) as Name from students
                                     inner join users on students.username = users.username
@@ -134,7 +134,7 @@ class User_Model extends Model {
                                     inner join signatories on signatorialList.signatory_id = signatories.signatory_id
                                     where (First_name like '%$searchName%' OR Surname like '%$searchName%' OR 
                                     Middle_Name like '%$searchName%') AND Account_Type = 'student' 
-                                    AND signatories.signatory_id = '$Tsign_id' AND clearancestatus.cleared like '$status%' order by Name
+                                    AND signatories.signatory_id = '$Tsign_id' group by Name order by Name
                                     LIMIT " . (($page - 1) * $this->itemsPerPage) . ", " . $this->itemsPerPage);
         
         while($row = mysql_fetch_array($this->query)){
@@ -144,7 +144,7 @@ class User_Model extends Model {
         return $filter;
     }
     
-    public function filter_ListofStudent_NameUsers($Tsign_id, $searchName, $page, $status){
+    public function filter_ListofStudent_NameUsers($Tsign_id, $searchName, $page){
         $filter = array();
         $this->query = mysql_query("select concat(Surname, ', ', First_Name, ' ', Middle_Name) as Name from students
                                     inner join users on students.username = users.username
@@ -155,7 +155,7 @@ class User_Model extends Model {
                                     inner join signatories on signatorialList.signatory_id = signatories.signatory_id
                                     where (First_name like '%$searchName%' OR Surname like '%$searchName%' OR 
                                     Middle_Name like '%$searchName%') AND Account_Type = 'student' 
-                                    AND signatories.signatory_id = '$Tsign_id' AND clearancestatus.cleared like '$status%' order by Name
+                                    AND signatories.signatory_id = '$Tsign_id' group by Name order by Name
                                     LIMIT " . (($page - 1) * $this->itemsPerPage) . ", " . $this->itemsPerPage);
         
         while($row = mysql_fetch_array($this->query)){
@@ -165,7 +165,7 @@ class User_Model extends Model {
         return $filter;
     }
     
-    public function getStudent_PageSize($Tsign_id, $searchName, $status){
+    public function getStudent_PageSize($Tsign_id, $searchName){
         $this->query = mysql_query("select concat(Surname, ', ', First_Name, ' ', Middle_Name) as Name from students
                                     inner join users on students.username = users.username
                                     inner join clearancestatus on users.username = clearancestatus.student
@@ -175,7 +175,7 @@ class User_Model extends Model {
                                     inner join signatories on signatorialList.signatory_id = signatories.signatory_id
                         where (First_name like '%$searchName%' OR Surname like '%$searchName%' OR 
                         Middle_Name like '%$searchName%') AND Account_Type = 'student'
-                        AND signatories.signatory_id = '$Tsign_id' AND clearancestatus.cleared like '$status%'");
+                        AND signatories.signatory_id = '$Tsign_id' group by Name");
         return mysql_num_rows($this->query) / $this->itemsPerPage;
     }
     

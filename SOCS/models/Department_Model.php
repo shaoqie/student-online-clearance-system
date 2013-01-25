@@ -53,6 +53,20 @@ class Department_Model extends Model{
         return mysql_num_rows($this->query) / $this->itemsPerPage;
     }
     
+    public function getListOfCourses($deptID){
+        $filter = array();
+        $this->query = mysql_query("select courses.course_name from departments
+                                    inner join courses on courses.department_id = departments.department_id
+                                    where departments.department_id = '$deptID'");
+        
+        while($row = mysql_fetch_array($this->query)){
+            array_push($filter, $row['0']);
+        }
+        
+        return $filter;
+    }
+    
+    
     public function deleteSignatory($key){
         $delete = mysql_query("delete from departments where Department_ID = '$key'");
         if(!$delete){return "false";}

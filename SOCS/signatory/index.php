@@ -15,6 +15,7 @@ class Index extends Controller {
     private $student_model;
     private $requirementbyStudent_model;
     private $signatorialList_model;
+    private $department_model;
     
     private $bulletin_model;
 
@@ -29,6 +30,7 @@ class Index extends Controller {
             $this->requirementbyStudent_model = new Requirementbystudent_Model();
             $this->signatorialList_model = new SignatorialList_Model();
             $this->bulletin_model = new Bulletin_Model();
+            $this->department_model = new Department_Model();
             $this->template = new Template();
             
             $listOfSchoolYear = $this->schoolYearSem_model->getSchool_Year();
@@ -58,36 +60,54 @@ class Index extends Controller {
         }
     }
     
-    private function getListofClearanceStatus($arrayUsername){
+    private function getListofClearanceStatus($signID, $sysemID, $arrayUsername){
         $row = array();
         foreach ($arrayUsername as $value) {
-            $studentStatus = $this->clearanceStatus_model->getClearanceStatus($value);
+            $numberOfRequirements = $this->clearanceStatus_model->getStudent_NumberOfRequirements($value, $signID, $sysemID);
+            $numberOfCleared = $this->clearanceStatus_model->getStudent_NumberOfClearedPerRequirements($value, $signID, $sysemID);
+            
+            $studentStatus = $numberOfRequirements == 0? "Not Cleared" : $this->clearanceStatus_model->getClearanceStatus($numberOfRequirements, $numberOfCleared);
             array_push($row, $studentStatus);
         }
         
         return $row;
     }      
     
-    public function filter($filterName, $status){
-        $this->displayTable(trim($filterName), 1, "not", $status);
+    public function filter($filterName){
+        $this->displayTable(trim($filterName), 1, "not");
     }
     
-    public function displayTable($searchName, $page, $finder, $clearanceStatus) { 
-        //$clearanceStatus = $clearanceStatus == "Cleared" ? "Cleared" : "Not Cleared";       
+    public function displayTable($searchName, $page, $finder) { 
+        //$clearanceStatus = $clearanceStatus == "Cleared" ? "Cleared" : "Not Cleared";         
+        if(isset($_POST['GO'])){
+           $sy_id = $this->schoolYearSem_model->getSy_ID(trim($_POST['school_year']), trim($_POST['semester'])); 
+           $this->template->assign('currentSemester', trim($_POST['semester']));
+           $this->template->assign('currentSchool_Year', trim($_POST['school_year']));
+        }else{
+           $sy_id = $this->schoolYearSem_model->getSy_ID($this->schoolYearSem_model->getCurSchool_Year(), $this->schoolYearSem_model->getCurSemester());  
+        }        
         
-        $sign_id = $this->signatorialList_model->getSignId(Session::get_AssignSignatory());
-        $numOfPages = $this->user_model->getStudent_PageSize($sign_id, $searchName, $clearanceStatus);
-        $getListofStudent_Name = $this->getListofName($this->user_model->filter_ListofStudent_NameUsers($sign_id, $searchName, $page, $clearanceStatus), $searchName, $finder);
-        $getListofStudent_Username = $this->user_model->filter_ListofStudent_Username($sign_id, $searchName, $page, $clearanceStatus);
-        $getListOfStudenClearanceStatus = $this->getListofClearanceStatus($getListofStudent_Username);
-        $numOfResults = count($this->user_model->filter_ListofStudent_NameUsers($sign_id, $searchName, $page, $clearanceStatus));
-
+        $sign_id = $this->signatorialList_model->getSignId(Session::get_AssignSignatory()); 
+        $listOfDept = $this->signatorialList_model->getListOfDept_underSignName($sign_id);
+        $listOfCourse = $this->department_model->getListOfCourses(4);
+        
+        $numOfPages = $this->user_model->getStudent_PageSize($sign_id, $searchName);
+        $getListofStudent_Name = $this->getListofName($this->user_model->filter_ListofStudent_NameUsers($sign_id, $searchName, $page), $searchName, $finder);
+        $getListofStudent_Username = $this->user_model->filter_ListofStudent_Username($sign_id, $searchName, $page);
+        $getListOfStudenClearanceStatus = $this->getListofClearanceStatus($sign_id, $sy_id, $getListofStudent_Username);
+        $numOfResults = count($this->user_model->filter_ListofStudent_NameUsers($sign_id, $searchName, $page));
+        
+        
+        
+        
         $this->template->assign('myName_student_NameUser', $getListofStudent_Name); 
         $this->template->assign('myKey_Student_Username', $getListofStudent_Username); 
         $this->template->assign('myStudent_ClearanceStatus', $getListOfStudenClearanceStatus);
         $this->template->assign('filter', $searchName);
         $this->template->assign('signatoryDashboard_length', $numOfPages);
-        $this->template->assign('clearedStatus', $clearanceStatus);
+        $this->template->assign('clearedStatus', $getListOfStudenClearanceStatus);
+        $this->template->assign('myDept', $listOfDept);
+        $this->template->assign('myCourse', $listOfCourse);
         
         if ($numOfResults == 0) {
             $this->template->setAlert('No Results Found.', Template::ALERT_ERROR, 'alert');
