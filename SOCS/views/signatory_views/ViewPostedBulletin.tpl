@@ -9,25 +9,13 @@
     </div>    
 </div> 
 
-<div class="container-fluid">
-    <div class="row-fluid">
-        <div class="span8">
-            <!--Body content-->
-            <input type="button" class="pull-right btn" value="Back" onclick="window.location.href='../signatory/bulletin.php'">
+<input type="button" class="pull-right btn" value="Back" onclick="window.location.href='../signatory/bulletin.php'">
 
-            <legend>Already Posted Bulletin</legend>
-            <div class="row">    
-                <div class="span11 offset1" id="divMessages">
-                    <label><i style="font-size: 12px; color:blue;">Posted on {$date} at {$time}</i></label>
-                    <hr/>
-                    <p style="margin-left: 50px; font-size: 15px;">{$message}</p>
-                </div>   
-            </div>
-        </div>
-        <div class="span4">
-            <!--Sidebar content-->
-            {include file=$calendar}
-        </div>
-    </div>
+<legend>Already Posted Bulletin</legend>
+<div class="row">    
+    <div class="span11 offset1" id="divMessages">
+        <label><i style="font-size: 12px; color:blue;">Posted on {$date} at {$time}</i></label>
+        <hr/>
+        <p style="margin-left: 50px; font-size: 15px;">{$message}</p>
+    </div>   
 </div>
-
