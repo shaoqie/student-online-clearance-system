@@ -23,7 +23,12 @@
                     <td style="width: 300px;"><h4><a style="cursor:pointer;" onclick="window.location.href='index.php?action=viewMessages&Tsign_ID={$myKey_signID[$k]}&page=1'">{$i}</a></h4></td>
                     <td style="width: 300px;">
                         <div class="btn-group">
-                            <img src="{$host}/photos/cleared.png" class="img-polaroid" />
+                            
+                            {if $myStudent_ClearanceStatus[$k] eq 'Cleared'}
+                                <img src="{$host}/photos/cleared.png" class="img-polaroid" />
+                            {else}
+                                <img src="{$host}/photos/not cleared.png" class="img-polaroid" />
+                            {/if}
                             <button style="height: 50px;"class="btn dropdown-toggle" data-toggle="dropdown">
                                 <span class="caret"></span>
                             </button>
