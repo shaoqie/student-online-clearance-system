@@ -18,7 +18,8 @@
                     padding-bottom: 40px;                    
                     background-image: url('{$host}/public/img/background.png');
                     background-attachment: fixed;
-                    background-position: right;
+                    background-position: bottom;
+                    background-repeat: repeat-x;
                 }{literal}
 
                 #navbar{
@@ -140,6 +141,7 @@
 
         <script src="{$host}/public/js/vendor/jquery-1.8.3.min.js"></script>
         <script src="{$host}/public/js/vendor/bootstrap.min.js"></script>
+        <script src="{$host}/public/js/vendor/bootbox.min.js"></script>
 
         <script src="{$host}/public/js/main.js"></script>        
 

@@ -36,17 +36,18 @@ function isCheckAll(isChecked, rowCount){
         
 function findCheck(rowCount, type){
     if($('.Checkbox:checked').length > 0){
-        var bool = confirm("Attempting to delete " + $('.Checkbox:checked').length + " " +type +"/s. Are you sure?");
-    
-        if(bool == true){
-            var valueDeleted = "";
-            for(var i = 0; i < rowCount; i++){
-                if(document.getElementById("" +i).checked == true){
-                    valueDeleted += document.getElementById("" +i).value + "-";
+        
+        bootbox.confirm("<strong>Attempting to delete " + $('.Checkbox:checked').length + " " +type +"/s. Are you sure?</strong>", function(result) {
+            if(result == true){
+                var valueDeleted = "";
+                for(var i = 0; i < rowCount; i++){
+                    if(document.getElementById("" +i).checked == true){
+                        valueDeleted += document.getElementById("" +i).value + "-";
+                    }
                 }
+                window.location.assign("?action=delete&selected=" + valueDeleted);
             }
-            window.location.assign("?action=delete&selected=" + valueDeleted);
-        }
+        });
     }
 }
 
