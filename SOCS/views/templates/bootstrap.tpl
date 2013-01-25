@@ -18,6 +18,7 @@
                     padding-bottom: 40px;                    
                     background-image: url('{$host}/public/img/background.png');
                     background-attachment: fixed;
+                    background-position: right;
                 }{literal}
 
                 #navbar{

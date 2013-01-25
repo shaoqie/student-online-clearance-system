@@ -8,6 +8,7 @@
         <button class="btn btn-primary" type="submit">
             <i class="icon-search icon-white"></i>
         </button>
+        <button class="btn btn-inverse btn-mini"><i class="icon-search"></i>Advance Search</button>
 
         <!-- Delete this portion
         <input class="btn pull-right" type="button" value="Add User Account" onclick="window.location.href='index.php?action=display_add_edit_account'">
