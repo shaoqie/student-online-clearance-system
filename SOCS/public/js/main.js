@@ -78,3 +78,13 @@ function confirmDelete(selected){
         window.location = "?action=delete&selected=" + selected;
     }
 }
+
+function checkPasswordEquality(){
+
+    var pass = $("#password_entered").attr("value");
+    var pass_2 = $("#retyped_password_entered").attr("value");
+    
+    if(pass != pass_2){
+        bootbox.alert("Passwords does not matched!");
+    }
+}
