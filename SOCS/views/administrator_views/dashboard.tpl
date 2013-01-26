@@ -41,7 +41,7 @@
 </table>
 
 <!-- Delete Control-->
-<a style="cursor:pointer;" onclick="findCheck('{$rowCount_admin}','users')">
+<a style="cursor:pointer;" onclick="findCheckUser('{$rowCount_admin}','users','{$account_type}')">
     <i class="icon-remove"></i> Delete Selected
 </a>
 

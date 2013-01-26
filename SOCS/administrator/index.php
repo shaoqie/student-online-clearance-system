@@ -85,18 +85,19 @@ class Index extends Controller {
         return $type;
     }
 
-    public function delete($selected) {
+    public function delete($selected, $account_type) {
         $explode = explode("@", $selected);
         foreach ($explode as $value) {
             $this->administrator_model->deleteUser(trim($value));
         }
         
-        $HOST = $explode[0] != null ? HOST ."/administrator/?action=deleted" : HOST;
+        $HOST = $explode[0] != null ? HOST ."/administrator/?action=deleted&type=" .$account_type : HOST;
         header('Location: ' .$HOST);
     }
     
-    public function deleted(){
+    public function deleted($type){
         $this->template->setAlert('Delete an Account Successfully!..', Template::ALERT_SUCCESS, 'alert');
+        $this->displayTable('', 1, $type, "default");
     }
     
     public function filter($filterName, $type){
