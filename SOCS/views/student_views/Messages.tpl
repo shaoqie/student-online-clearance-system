@@ -1,14 +1,3 @@
-<script>
-    function change_schoolYear(sign_id){
-    var sy = document.getElementById("school_year").value;
-    var sem = document.getElementById("semester").value;
-        
-    var sy_sem = sy +"@" +sem;
-        
-    window.location.assign("?action=viewMessages&Tsign_ID=" +sign_id +"&page=1" + "&sysem=" +sy_sem);
-}
-</script>
-
 <div class="row">   
     <div class="pull-right">
         <form class="form-inline" method="post">
@@ -38,7 +27,7 @@
                     <option selected>Summer</option>
                 {/if}           
             </select> 
-            <input class="btn btn-primary" type="button" value="GO" name="GO" onclick="change_schoolYear({$sign_id})">
+            <input class="btn btn-primary" type="button" value="GO" name="GO" onclick="change_schoolYear({$sign_id},1)">
         </form>
     </div> 
 </div>   

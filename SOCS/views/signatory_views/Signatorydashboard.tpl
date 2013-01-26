@@ -57,7 +57,7 @@
 &nbsp;
 <div class="pull-right">
     Jump to: 
-    <select id="jump" class="input-mini" onchange="jumpToPageSignatory('{$clearedStatus}')">
+    <select id="jump" class="input-mini" onchange="jumpToPageWithSchoolYear()">
         <option>--</option>
         {for $start = 1 to $signatoryDashboard_length}
         <option>{$start}</option>

@@ -6,9 +6,29 @@
  * Administrator Script Functions
  */
 
+function change_schoolYear(sign_id, page){
+    var sy = document.getElementById("school_year").value;
+    var sem = document.getElementById("semester").value;
+        
+    var sy_sem = sy +"@" +sem;
+        
+    window.location.assign("?action=viewMessages&Tsign_ID=" +sign_id +"&page=" +page + "&sysem=" +sy_sem);
+}
+
+function jumpToPageWithSchoolYear(){
+    var sy = document.getElementById("school_year").options[document.getElementById("school_year").selectedIndex].text;
+    var sem = document.getElementById("semester").options[document.getElementById("semester").selectedIndex].text;
+    
+    var jump = document.getElementById("jump").value;
+    var search = document.getElementById("search").value;
+     
+    window.location.assign("?action=displayTable&filter=" + search +"&page=" + jump +"&sy=" +sy +"&sem=" +sem);
+}
+
 function jumpToPageMessages(sign_id){
     var jump = document.getElementById("jump_studMessages").value;
-    window.location.assign("?action=viewMessages&Tsign_ID=" +sign_id +"&page=" +jump);
+    change_schoolYear(sign_id, jump);
+    //window.location.assign("?action=viewMessages&Tsign_ID=" +sign_id +"&page=" +jump);
 } 
 
 function isCheck(rowCount){
@@ -16,7 +36,7 @@ function isCheck(rowCount){
     isCheckAll(check, rowCount)
 }
 
-function jumpToPage(){
+function jumpToPage(){   
     var jump = document.getElementById("jump").value;
     var search = document.getElementById("search").value;
     window.location.assign("?action=displayTable&filter=" + search +"&page=" + jump);

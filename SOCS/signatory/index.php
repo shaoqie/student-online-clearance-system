@@ -77,12 +77,15 @@ class Index extends Controller {
         $this->displayTable(trim($filterName), 1, "not");
     }
     
-    public function displayTable($searchName, $page, $finder) { 
-        //$clearanceStatus = $clearanceStatus == "Cleared" ? "Cleared" : "Not Cleared";         
+    public function displayTable($searchName, $page, $finder) {         
         if(isset($_POST['GO'])){
            $sy_id = $this->schoolYearSem_model->getSy_ID(trim($_POST['school_year']), trim($_POST['semester'])); 
            $this->template->assign('currentSemester', trim($_POST['semester']));
            $this->template->assign('currentSchool_Year', trim($_POST['school_year']));
+        }else if (isset($_GET['sy']) && isset($_GET['sem'])) {
+            $sy_id = $this->schoolYearSem_model->getSy_ID(trim($_GET['sy']), trim($_GET['sem']));
+            $this->template->assign('currentSemester', trim($_GET['sem']));
+            $this->template->assign('currentSchool_Year', trim($_GET['sy']));
         }else{
            $sy_id = $this->schoolYearSem_model->getSy_ID($this->schoolYearSem_model->getCurSchool_Year(), $this->schoolYearSem_model->getCurSemester());  
         }        

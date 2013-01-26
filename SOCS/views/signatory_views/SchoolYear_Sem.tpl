@@ -1,6 +1,6 @@
 <form class="form-inline" method="post">
     <label >School Year:  </label>
-    <select name="school_year" class="input-medium">
+    <select id="school_year" name="school_year" class="input-medium">
         {foreach from = $mySchool_Year key = k item = i}
             {if $currentSchool_Year eq $i}
                 <option selected>{$i}</option>
@@ -12,7 +12,7 @@
 
 
     <label>Semester: 
-        <select name="semester" class="input-medium">
+        <select id="semester" name="semester" class="input-medium">
             {if $currentSemester eq 'First'}
                 <option selected>First</option>
                 <option>Second</option>

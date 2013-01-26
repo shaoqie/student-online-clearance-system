@@ -45,7 +45,7 @@
 <i class="icon-remove"></i><a style="cursor:pointer;" onclick="findCheck('{$rowCount_bulletin}')">Delete Selected</a>
 
 <div class="pull-right">
-    Jump to: <select id="jump" class="input-mini" onchange="jumpToPage()">
+    Jump to: <select id="jump" class="input-mini" onchange="jumpToPageWithSchoolYear()">
         <option>--</option>
         {for $start = 1 to $bulletin_length}
         <option>{$start}</option>
