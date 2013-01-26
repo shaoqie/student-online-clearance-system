@@ -3,23 +3,11 @@
     <legend>Login Information: </legend>
 
     <div class="control-group">
-        <label class="control-label">Student ID: </label>
+        <label class="control-label">Username: </label>
         <div class="controls">
-            <select class="input-small" required>
-                <option></option>
-
-                {if !isset($years)}
-                    {assign var=years value=[2009, 2010, 2011, 2012, 2013]}
-                {/if}
-
-                {foreach from=$years item=year}
-                    <option>{$year}</option>
-                {/foreach}
-            </select> - 
             {literal}
-                <input class="input-small" type ='text' name='surname' value="" maxlength="5" pattern="[0-9]{5}" required title="Numbers Only">
+                <input type ='text' name='surname' value="" maxlength="5" pattern="[0-9]{5}" required title="Letters and spaces only">
             {/literal}
-            <span class="help-block">ID number that has been given by the University after admission.</span>
         </div>
     </div>
 
@@ -62,42 +50,27 @@
         </div>
     </div>
 
+    <legend>Signatory Designation: </legend>
+
     <div class="control-group">
-        <label class="control-label">Gender: </label>
+        <label class="control-label">Signatory: </label>
         <div class="controls">
+
+            {if !isset($signatories)}
+                {assign var=signatories value=["OCSC", "OSS", "CTLC", "ICLC"]}
+            {/if}
+
             <select>
                 <option></option>
-                <option>Male</option>
-                <option>Female</option>
+                {foreach from=$signatories item=signatory}
+                    <option>{$signatory}</option>
+                {/foreach}
             </select>
         </div>
     </div>
 
-    <div class="control-group">
-        <label class="control-label">Year Level: </label>
-        <div class="controls">
-            <select>
-                <option></option>
-                <option>First Year</option>
-                <option>Second Year</option>
-                <option>Third Year</option>
-                <option>Fourth Year</option>
-                <option>Fifth Year</option>
-            </select>
-        </div>
-    </div>
-
-    <div class="control-group">
-        <label class="control-label">Program: </label>
-        <div class="controls">
-            <select>
-                <option></option>
-                <option>Day</option>
-                <option>Evening</option>
-            </select>
-        </div>
-    </div>
     <legend>Personal Identification: </legend>
+
     <div class="control-group">
         <label class="control-label">Upload Picture: </label>
         <div class="controls">

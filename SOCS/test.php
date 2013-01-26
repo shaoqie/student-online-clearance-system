@@ -17,9 +17,9 @@
             
             $smarty = new Smarty();
             
-            $smarty->setTemplateDir("views/student_views");
+            $smarty->setTemplateDir("views/signatory_views");
             
-            $smarty->display("student_registration.tpl");
+            $smarty->display("signatory_registration.tpl");
         ?>
 
 
