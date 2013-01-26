@@ -58,6 +58,28 @@ class Course_Model extends Model{
         return mysql_num_rows($this->query) / $this->itemsPerPage;
     }
     
+    public function getListDept_ID_inCourse(){
+        $filter = array();
+        $this->query = mysql_query("select Department_ID from courses");
+        
+        while($row = mysql_fetch_array($this->query)){
+            array_push($filter, $row['0']);
+        }
+        
+        return $filter;
+    }
+    
+    public function getListOfCourses(){
+         $filter = array();
+        $this->query = mysql_query("select Course_Name from courses");
+        
+        while($row = mysql_fetch_array($this->query)){
+            array_push($filter, $row['0']);
+        }
+        
+        return $filter;
+    }
+    
     public function deleteCourse($key){
         mysql_query("delete from courses where Course_ID = '$key'");
     }

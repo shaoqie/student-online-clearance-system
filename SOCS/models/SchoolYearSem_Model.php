@@ -69,6 +69,29 @@ class SchoolYearSem_Model extends Model{
              return ($curYear - 1) ."-" .$curYear;
         }
     }
+    
+    
+    /*=========== for registration purposes =================*/
+    
+    public function getListOfYear(){
+        $array_temp = array();
+        
+        $temp_year = $this->getSchool_Year();
+        $first = $temp_year[0];
+        $last = $temp_year[count($temp_year) - 1];
+        
+        $first = explode("-", $first);
+        $last = explode("-", $last);
+        
+        $first = $first[0];
+        $last = $last[1];
+        
+        for ($index = $first; $index < $last; $index ++) {
+            array_push($array_temp, $index);
+        }
+        
+        return $array_temp;
+    }
 }
 
 ?>

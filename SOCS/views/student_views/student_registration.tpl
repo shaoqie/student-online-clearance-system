@@ -1,3 +1,23 @@
+{*
+{literal}
+<script type="text/javascript">      
+    function changeCourses(){
+        var select = document.getElementById("course");
+    {/literal}
+        //alert(select.options.length);
+        
+        var str = "";
+        {foreach from=$dept_ID key=k item=key}
+               {if $key eq $dept_id_inCourses[$k]}
+                    str += "<option>{$course_underDept[$k]}</option>";
+                {/if}          
+        {/foreach}
+            select.innerHTML = str;
+    {literal}    
+    }
+</script>
+{/literal}
+    <pre>{$course_underDept|@print_r}</pre> *}
 <form method='post' class="form-horizontal">
 
     <legend>Login Information: </legend>
@@ -108,8 +128,7 @@
     <div class="control-group">
         <label class="control-label">Department: </label>
         <div class="controls">
-            <select name="dept" required>
-                <option></option>
+            <select id="dept" name="dept" required onchange="">
 
                 {if !isset($depts)}
                     {assign var=depts value=["CT - College of Technology", "CAS - College of Arts and Sciences", "IC - Institute of Computing", "CE - College of Engineering"]}
@@ -126,8 +145,7 @@
     <div class="control-group">
         <label class="control-label">Course: </label>
         <div class="controls">
-            <select name="course" required>
-                <option></option>
+            <select id="course" name="course" required>
 
                 {if !isset($courses)}
                     {assign var=courses value=["BSIT", "BSCS", "BCT", "DT", "BIT", "BTTE"]}

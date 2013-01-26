@@ -53,6 +53,28 @@ class Department_Model extends Model{
         return mysql_num_rows($this->query) / $this->itemsPerPage;
     }
     
+    public function getListOfDepartments(){
+        $array_temp = array();
+        $this->query = mysql_query("select Department_Name from departments");
+        
+        while($row = mysql_fetch_array($this->query)){
+            array_push($array_temp, $row['0']);
+        }
+        
+        return $array_temp;
+    }
+    
+    public function getListOfDept_ID(){
+        $array_temp = array();
+        $this->query = mysql_query("select Department_ID from departments");
+        
+        while($row = mysql_fetch_array($this->query)){
+            array_push($array_temp, $row['0']);
+        }
+        
+        return $array_temp;
+    }
+    
     public function getListOfCourses($deptID){
         $filter = array();
         $this->query = mysql_query("select courses.course_name from departments

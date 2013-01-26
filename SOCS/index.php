@@ -11,12 +11,18 @@ class Index extends Controller {
 
     private $template;
     private $administrator_model;
+    private $school_year_model;
+    private $department_model;
+    private $courses_mode;
 
     public function __construct() {
         parent::__construct();
 
         $this->administrator_model = new User_Model();
-
+        $this->school_year_model = new SchoolYearSem_Model();
+        $this->department_model = new Department_Model();
+        $this->courses_mode = new Course_Model();
+        
         $this->template = new Template();
         $this->template->setPageName('Home');
         $this->template->setContent('welcome.tpl');
@@ -56,6 +62,25 @@ class Index extends Controller {
     public function login_error() {
         $this->template->setContent('login.tpl');
         $this->template->setAlert('Error Logging in... ', Template::ALERT_ERROR);
+    }
+    
+    public function registrationForm(){
+        $this->template->setPageName("Student Registration Form");
+        $this->template->setContent("student_registration.tpl");
+        
+        $listOfYear = $this->school_year_model->getListOfYear();
+        $listOfDept_Name = $this->department_model->getListOfDepartments();
+        $listOfDept_ID = $this->department_model->getListOfDept_ID();
+        $ListDept_ID_inCourse = $this->courses_mode->getListDept_ID_inCourse();
+        $listOfCourses = $this->courses_mode->getListOfCourses();
+        $listOfCourses_UnderDeptName = $this->department_model->getListOfCourses(1);
+        
+        $this->template->assign('years', $listOfYear);
+        $this->template->assign('depts', $listOfDept_Name);
+        $this->template->assign('dept_ID', $listOfDept_ID);
+        $this->template->assign('courses', $listOfCourses_UnderDeptName);
+        $this->template->assign('dept_id_inCourses', $ListDept_ID_inCourse);
+        $this->template->assign('course_underDept', $listOfCourses);
     }
 
     private function setSession($account_type) {

@@ -111,3 +111,6 @@ function checkPasswordEquality(){
         bootbox.alert("Passwords does not matched!");
     }
 }
+
+/*=========== for registration purposes =======================*/
+
