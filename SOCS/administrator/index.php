@@ -28,17 +28,22 @@ class Index extends Controller {
 
             $this->template->setContent('dashboard.tpl');
             $this->template->setCalendar('Calendar.tpl');
-            $this->template->assign('assign_sign', '');
-
-            $this->displayTable('', 1, "default");
+            $this->template->assign('assign_sign', '');  
+            
+            if(isset($_GET['account_type'])){
+                $this->displayTable('', 1, trim($_GET['account_type']), "default");
+            }else{
+                $this->displayTable('', 1, 'Student', "default");
+            }
+            
         } else {
             header('Location: ' . HOST);
         }
     }
 
-    private function getListofKey($searchName, $page) {
+    private function getListofKey($searchName, $page, $acc_type) {
         $key = array();
-        $query = $this->administrator_model->getListofUsers($searchName, $page);
+        $query = $this->administrator_model->getListofUsers($searchName, $page, $acc_type);
         while ($row = mysql_fetch_array($query)) {
             array_push($key, $row['Username']);
         }
@@ -46,9 +51,9 @@ class Index extends Controller {
         return $key;
     }   
     
-    private function getNameofUser($searchName, $page, $finder) {
+    private function getNameofUser($searchName, $page, $finder, $acc_type) {
         $name = array();
-        $query = $this->administrator_model->getListofUsers($searchName, $page);
+        $query = $this->administrator_model->getListofUsers($searchName, $page, $acc_type);
         while ($row = mysql_fetch_array($query)) {
             if($finder == "default"){
                 array_push($name, $row['Name']);
@@ -60,9 +65,9 @@ class Index extends Controller {
         return $name;
     }
 
-    private function getPictureofUser($searchName, $page) {
+    private function getPictureofUser($searchName, $page, $acc_type) {
         $picture = array();
-        $query = $this->administrator_model->getListofUsers($searchName, $page);
+        $query = $this->administrator_model->getListofUsers($searchName, $page, $acc_type);
         while ($row = mysql_fetch_array($query)) {
             array_push($picture, $row['Picture']);
         }
@@ -70,9 +75,9 @@ class Index extends Controller {
         return $picture;
     }
 
-    private function getTypeeofUser($searchName, $page) {
+    private function getTypeeofUser($searchName, $page, $acc_type) {
         $type = array();
-        $query = $this->administrator_model->getListofUsers($searchName, $page);
+        $query = $this->administrator_model->getListofUsers($searchName, $page, $acc_type);
         while ($row = mysql_fetch_array($query)) {
             array_push($type, $row['Account_Type']);
         }
@@ -81,10 +86,11 @@ class Index extends Controller {
     }
 
     public function delete($selected) {
-        $explode = explode("-", $selected);
+        $explode = explode("@", $selected);
         foreach ($explode as $value) {
             $this->administrator_model->deleteUser(trim($value));
         }
+        
         $HOST = $explode[0] != null ? HOST ."/administrator/?action=deleted" : HOST;
         header('Location: ' .$HOST);
     }
@@ -93,25 +99,26 @@ class Index extends Controller {
         $this->template->setAlert('Delete an Account Successfully!..', Template::ALERT_SUCCESS, 'alert');
     }
     
-    public function filter($filterName){
-        $this->displayTable(trim($filterName), 1);
+    public function filter($filterName, $type){
+        $this->displayTable(trim($filterName), 1, $type, 'not');
     }
 
-    public function displayTable($searchName, $page, $finder) {
-        $numOfPages = $this->administrator_model->getQueryPageSize($searchName);
-        $numOfResults = count($this->getNameofUser($searchName, $page, "default"));
+    public function displayTable($searchName, $page, $account_type , $finder) {
+        $numOfPages = $this->administrator_model->getQueryPageSize($searchName, $account_type);
+        $numOfResults = count($this->getNameofUser($searchName, $page, "default", $account_type));
 
-        $this->template->assign('myKey_admin', $this->getListofKey($searchName, $page));      
-        $this->template->set_Photos($this->getPictureofUser($searchName, $page));
-        $this->template->set_Type($this->getTypeeofUser($searchName, $page));
+        $this->template->assign('myKey_admin', $this->getListofKey($searchName, $page, $account_type));      
+        $this->template->set_Photos($this->getPictureofUser($searchName, $page, $account_type));
+        $this->template->set_Type($this->getTypeeofUser($searchName, $page, $account_type));
         $this->template->set_Filter($searchName);
         $this->template->assign('admin_length', $numOfPages);
         $this->template->assign('rowCount_admin', $numOfResults);
+        $this->template->assign('account_type', $account_type);
 
         if($finder == "default"){
-            $this->template->set_Name($this->getNameofUser($searchName, $page, "default"));
+            $this->template->set_Name($this->getNameofUser($searchName, $page, "default", $account_type));
         }else{
-            $this->template->set_Name($this->getNameofUser($searchName, $page, "not_default"));
+            $this->template->set_Name($this->getNameofUser($searchName, $page, "not_default", $account_type));
         }
         if ($numOfResults == 0) {
             $this->template->setAlert('No Results Found.', Template::ALERT_ERROR, 'alert');

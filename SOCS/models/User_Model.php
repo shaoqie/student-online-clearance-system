@@ -73,21 +73,21 @@ class User_Model extends Model {
         }
     }
 
-    public function getListofUsers($searchName, $page) {
+    public function getListofUsers($searchName, $page, $type) {
 
         $query = mysql_query("select Username, Picture, concat(Surname, ', ', First_Name, ' ', Middle_Name) 
                         as Name, Account_Type from users 
                         where (First_name like '%$searchName%' OR Surname like '%$searchName%' OR 
-                        Middle_Name like '%$searchName%') AND Account_Type = 'Signatory' order by Name
+                        Middle_Name like '%$searchName%') AND Account_Type = '$type' order by Name
                         LIMIT " . (($page - 1) * $this->itemsPerPage) . ", " . $this->itemsPerPage);
         return $query;
     }
 
-    public function getQueryPageSize($searchName) {
+    public function getQueryPageSize($searchName, $type) {
         $query = mysql_query("select Picture, concat(Surname, ', ', First_Name, ' ', Middle_Name) 
                         as Name, Account_Type from users 
                         where (First_name like '%$searchName%' OR Surname like '%$searchName%' OR 
-                        Middle_Name like '%$searchName%') AND Account_Type = 'Signatory'");
+                        Middle_Name like '%$searchName%') AND Account_Type = '$type'");
         return mysql_num_rows($query) / $this->itemsPerPage;
     }
 

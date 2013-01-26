@@ -1,7 +1,18 @@
 
 <!-- Navigation Tabs-->
 <ul class="nav nav-tabs">
-    <li class="active"><a href='../administrator/index.php'>User Accounts</a></li>
+    <li class="dropdown active" >
+        <a class="dropdown-toggle"
+           data-toggle="dropdown"
+           href="#">
+            User Accounts
+            <b class="caret"></b>
+        </a>
+        <ul class="dropdown-menu">
+            <li><a href='../administrator/index.php?account_type=Student'>Student</a></li>
+            <li><a href='../administrator/index.php?account_type=Signatory'>Signatory</a></li>
+        </ul>
+    </li>   
     <li><a href='../administrator/signatory_list_manager.php'>Signatories</a></li>
     <li><a href='../administrator/department_list_manager.php'>Departments</a></li>
 </ul>
@@ -38,7 +49,7 @@
 
 <div class="pull-right">
     Jump to: 
-    <select id="jump" class="input-mini" onchange="jumpToPage()">
+    <select id="jump" class="input-mini" onchange="jumpToPageUser('{$account_type}')">
         <option>--</option>
         {for $start = 1 to $admin_length}
         <option>{$start}</option>

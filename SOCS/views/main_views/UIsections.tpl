@@ -5,7 +5,9 @@
     <form class="form-inline">
         <input type="hidden" value="filter" name="action">
         <input id="search" class="span5" type="text" placeholder="Search..." value="{$filter}" name="filterName">
-
+        {if isset($account_type)}
+            <input type="hidden" value="{$account_type}" name="type">
+        {/if}
         <button class="btn btn-primary" type="submit">
             <i class="icon-search icon-white"></i>
         </button>

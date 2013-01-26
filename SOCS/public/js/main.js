@@ -28,7 +28,6 @@ function jumpToPageWithSchoolYear(){
 function jumpToPageMessages(sign_id){
     var jump = document.getElementById("jump_studMessages").value;
     change_schoolYear(sign_id, jump);
-    //window.location.assign("?action=viewMessages&Tsign_ID=" +sign_id +"&page=" +jump);
 } 
 
 function isCheck(rowCount){
@@ -41,6 +40,12 @@ function jumpToPage(){
     var search = document.getElementById("search").value;
     window.location.assign("?action=displayTable&filter=" + search +"&page=" + jump);
 } 
+
+function jumpToPageUser(account_type){   
+    var jump = document.getElementById("jump").value;
+    var search = document.getElementById("search").value;
+    window.location.assign("?action=displayTable&filter=" + search +"&page=" + jump +"&account_type=" +account_type);
+}
 
 function jumpToPageSignatory(status){
     var jump = document.getElementById("jump").value;
@@ -62,7 +67,7 @@ function findCheck(rowCount, type){
                 var valueDeleted = "";
                 for(var i = 0; i < rowCount; i++){
                     if(document.getElementById("" +i).checked == true){
-                        valueDeleted += document.getElementById("" +i).value + "-";
+                        valueDeleted += document.getElementById("" +i).value + "@";
                     }
                 }
                 window.location.assign("?action=delete&selected=" + valueDeleted);
