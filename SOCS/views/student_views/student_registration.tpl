@@ -5,7 +5,7 @@
     <div class="control-group">
         <label class="control-label">Student ID: </label>
         <div class="controls">
-            <select class="input-small" required>
+            <select class="input-small" name="stud_id" required>
                 <option></option>
 
                 {if !isset($years)}
@@ -27,7 +27,7 @@
         <label class="control-label">Password: </label>
         <div class="controls">
             {literal}
-                <input id="password_entered" type='password' name='newpass' pattern="^.{7,50}$" title="Password minimum of 7 characters" required>
+                <input id="password_entered" type='password' name='password' pattern="^.{7,50}$" title="Password minimum of 7 characters" required>
             {/literal}
         </div>
     </div>
@@ -63,9 +63,16 @@
     </div>
 
     <div class="control-group">
+        <label class="control-label">Section: </label>
+        <div class="controls">
+            <input type='text'name='section' value="" pattern="[A-Za-z\s]+" required title="Letters and spaces only">
+        </div>
+    </div>
+
+    <div class="control-group">
         <label class="control-label">Gender: </label>
         <div class="controls">
-            <select>
+            <select name="gender" required>
                 <option></option>
                 <option>Male</option>
                 <option>Female</option>
@@ -76,7 +83,7 @@
     <div class="control-group">
         <label class="control-label">Year Level: </label>
         <div class="controls">
-            <select>
+            <select name="year" required>
                 <option></option>
                 <option>First Year</option>
                 <option>Second Year</option>
@@ -90,14 +97,50 @@
     <div class="control-group">
         <label class="control-label">Program: </label>
         <div class="controls">
-            <select>
+            <select name="program" required>
                 <option></option>
                 <option>Day</option>
                 <option>Evening</option>
             </select>
         </div>
     </div>
-    <legend>Personal Identification: </legend>
+
+    <div class="control-group">
+        <label class="control-label">Department: </label>
+        <div class="controls">
+            <select name="dept" required>
+                <option></option>
+
+                {if !isset($depts)}
+                    {assign var=depts value=["CT - College of Technology", "CAS - College of Arts and Sciences", "IC - Institute of Computing", "CE - College of Engineering"]}
+                {/if}
+
+                {foreach from=$depts item=dept}
+                    <option>{$dept}</option>
+                {/foreach}
+
+            </select>
+        </div>
+    </div>
+
+    <div class="control-group">
+        <label class="control-label">Course: </label>
+        <div class="controls">
+            <select name="course" required>
+                <option></option>
+
+                {if !isset($courses)}
+                    {assign var=courses value=["BSIT", "BSCS", "BCT", "DT", "BIT", "BTTE"]}
+                {/if}
+
+                {foreach from=$courses item=course}
+                    <option>{$course}</option>
+                {/foreach}
+
+            </select>
+        </div>
+    </div>
+
     <div class="control-group">
         <label class="control-label">Upload Picture: </label>
         <div class="controls">
