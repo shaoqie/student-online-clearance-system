@@ -30,12 +30,23 @@
                     background-color: white;
                     box-shadow: 5px 5px 7px #444;
                     border: dotted 1px;
-                    padding-left: 50px;
-                    padding-right: 50px;
+                    padding-left: 20px;
+                    padding-right: 20px;
                     padding-top: 20px;
                     padding-bottom: 20px;
                     border-radius: 10px;
                     opacity: 0.9;
+                    margin-bottom: 5px;
+                }
+
+                .socs-content2{
+                    box-shadow: 5px 5px 7px #444;
+                    border: dotted 1px;
+                    padding-left: 20px;
+                    padding-right: 20px;
+                    padding-top: 20px;
+                    padding-bottom: 20px;
+                    border-radius: 10px;
                     margin-bottom: 5px;
                 }
 
@@ -130,7 +141,7 @@
                 <hr>
 
                 <footer>
-                    <p class="pull-right">&copy; Student Online Clearance System 2012</p>
+                    <p>&copy; Student Online Clearance System 2012</p>
                 </footer>
 
             </div>
