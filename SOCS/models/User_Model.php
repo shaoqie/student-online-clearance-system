@@ -34,8 +34,6 @@ class User_Model extends Model {
         $this->query = mysql_query("INSERT INTO `socs`.`users` (`Username`, `Password`, `Surname`, `First_Name`, `Middle_Name`, `Account_Type`) 
                         VALUES 
                         ('$uname', '$pass', '$sname', '$fname', '$mname', '$user_type')");
-        
-        echo "Error user: " .mysql_error();
     }
     
     // mutator

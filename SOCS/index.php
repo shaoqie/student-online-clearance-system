@@ -70,11 +70,11 @@ class Index extends Controller {
         $this->template->setContent('login.tpl');
         $this->template->setAlert('Your registration form was succesfully save in the Database!... ', Template::ALERT_SUCCESS);
 
-        //if (isset($_POST['Save'])) {
-            //$course_id = $this->courses_model->getCourseID(trim($_POST['course']));
-           // $this->administrator_model->insert(($_POST['stud_id'] . "-" . $_POST['number']), md5(($_POST['password'])), trim($_POST['surname']), trim($_POST['firstname']), trim($_POST['middleName']), NULL, 'Student', NULL);
-            //$this->stud_model->insert(($_POST['stud_id'] . "-" . $_POST['number']), ($_POST['gender']), ($_POST['year_level']), ($_POST['program']), ($_POST['section']), $_POST['course']);
-        //}
+        if (isset($_POST['Save'])) {
+            $course_id = $this->courses_model->getCourseID(trim($_POST['course']));  
+            $this->administrator_model->insert(($_POST['stud_id'] . "-" . $_POST['number']), md5(($_POST['password'])), trim($_POST['surname']), trim($_POST['firstname']), trim($_POST['middleName']), NULL, 'Student', NULL);
+            $this->stud_model->insert(($_POST['stud_id'] . "-" . $_POST['number']), ($_POST['gender']), ($_POST['year_level']), ($_POST['program']), ($_POST['section']), $course_id);
+        }
 
 /*
         
@@ -108,24 +108,6 @@ class Index extends Controller {
         $this->template->assign('dept_ID', $listOfDept_ID);
         $this->template->assign('dept_id_inCourses', $ListDept_ID_inCourse);
         $this->template->assign('course_underDept', $listOfCourses);
-
-
-        if (isset($_POST['Save'])) {
-            echo "wwww";
-            //$this->template->setAlert("Asuudawe");
-//            echo "ID Number: " .$_POST['stud_id'] ."-" .$_POST['number'] ."<br/>";
-//            echo "Password: " .$_POST['password'] ."<br/>";
-//            echo "Confirm Password: " .$_POST['confirmpass'] ."<br/>";
-//            echo "Surname: " .$_POST['surname'] ."<br/>";
-//            echo "Firstname: " .$_POST['firstname'] ."<br/>";
-//            echo "Middlename: " .$_POST['middleName'] ."<br/>";
-//            echo "Section: " .$_POST['section'] ."<br/>";
-//            echo "Gender: " .$_POST['gender'] ."<br/>";
-//            echo "Year Level: " .$_POST['year_level'] ."<br/>";
-//            echo "Program: " .$_POST['program'] ."<br/>";
-//            echo "Department: " .$_POST['dept'] ."<br/>";
-//            echo "Course: " .$_POST['course'] ."<br/>";
-        }
     }
 
     private function setSession($account_type) {

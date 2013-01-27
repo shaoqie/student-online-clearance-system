@@ -33,6 +33,15 @@ class Index extends Controller {
             $currentSemester = $this->schoolYearSem_model->getCurSemester();
             $currentSchool_Year = $this->schoolYearSem_model->getCurSchool_Year();
             
+            if (isset($_POST['GO'])) {
+                $sy_id = $this->schoolYearSem_model->getSy_ID(trim($_POST['school_year']), trim($_POST['semester']));
+                $this->template->assign('currentSemester', trim($_POST['semester']));
+                $this->template->assign('currentSchool_Year', trim($_POST['school_year']));
+            } else {
+                $sy_id = $this->schoolYearSem_model->getSy_ID($currentSchool_Year, $currentSemester);
+                $this->template->assign('currentSemester', $currentSemester);
+                $this->template->assign('currentSchool_Year', $currentSchool_Year);
+            }
             
             $this->student_model->queryStudent_Info(Session::get_user());
             
@@ -44,23 +53,10 @@ class Index extends Controller {
             $this->signatoialList->getListofSignatoryByDept($stud_deptID);
             $listOfSign_underDeptName = $this->signatoialList->getSign_Name();
             $listOfSignID_underDeptName = $this->signatoialList->getSign_ID();
-            
-            if (isset($_POST['GO'])) {
-                $sy_id = $this->schoolYearSem_model->getSy_ID(trim($_POST['school_year']), trim($_POST['semester']));
-                $this->template->assign('currentSemester', trim($_POST['semester']));
-                $this->template->assign('currentSchool_Year', trim($_POST['school_year']));
-            } else {
-                $sy_id = $this->schoolYearSem_model->getSy_ID($currentSchool_Year, $currentSemester);
-                $this->template->assign('currentSemester', $currentSemester);
-                $this->template->assign('currentSchool_Year', $currentSchool_Year);
-            }
-            
-            
             $listOfClearanceStatus = $this->getListofClearanceStatus($listOfSignID_underDeptName, $sy_id, Session::get_user());
 
             $this->template->setPageName('Signatory Page');
             $this->template->setContent('StudentDashboard.tpl');
-            $this->template->setCalendar('Calendar.tpl');
             $this->template->setSchool_YearSemContent('SchoolYear_Sem.tpl');
 
 
@@ -76,10 +72,8 @@ class Index extends Controller {
             $this->template->assign('myKey_signID', $listOfSignID_underDeptName);          
             $this->template->assign('myStudent_ClearanceStatus', $listOfClearanceStatus);
             
-
+            //var_dump($listOfSign_underDeptName);
             
-            
-            //echo $sy_id;
         } else {
             header('Location: /SOCS/index.php');
         }

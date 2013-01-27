@@ -93,7 +93,6 @@ class Student_Model extends Model{
                         VALUES 
                         ('$uname', '$gender', '$yr_level', '$program', '$section', '$courseID')");
         
-        echo "Error student: " .mysql_error();
     }
     
     /*--------------------------------------*/

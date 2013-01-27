@@ -153,7 +153,7 @@ class Course_Model extends Model{
     }
     
     public function getCourseID($course_name){
-        $this->query = mysql_query("select Course_ID from courses where Course_Name = '$key'");
+        $this->query = mysql_query("select Course_ID from courses where Course_Name = '$course_name'");
         $row = mysql_fetch_array($this->query);
         
         return $row['0'];

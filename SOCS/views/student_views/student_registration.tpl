@@ -147,15 +147,7 @@
         <label class="control-label">Course: </label>
         <div class="controls">
             <select id="course" name="course">
-                
-                {if !isset($courses)}
-                    {assign var=courses value=["BSIT", "BSCS", "BCT", "DT", "BIT", "BTTE"]}
-                {/if}
-
-                {foreach from=$courses item=course}
-                    <option>{$course}</option>
-                {/foreach}
-
+                <option></option>
             </select>
         </div>
     </div>
@@ -169,7 +161,7 @@
 
     <div class="control-group">
         <div class="controls">
-            <input class="btn btn-primary" type='Submit' value='Save'>
+            <input class="btn btn-primary" type='Submit' value='Save' name='Save'>
             <a href='/SOCS/index.php'>Cancel</a>
         </div>
     </div>
