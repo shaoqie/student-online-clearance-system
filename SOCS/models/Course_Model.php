@@ -152,6 +152,13 @@ class Course_Model extends Model{
         $this->course_desc = $row['Description'];
     }
     
+    public function getCourseID($course_name){
+        $this->query = mysql_query("select Course_ID from courses where Course_Name = '$key'");
+        $row = mysql_fetch_array($this->query);
+        
+        return $row['0'];
+    }
+    
 //    public function getCourse_Name($key){
 //        $this->query = mysql_query("select Course_Name from courses where Course_ID = '$key'");
 //        $row = mysql_fetch_array($this->query);

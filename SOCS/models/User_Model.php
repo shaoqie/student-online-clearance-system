@@ -30,6 +30,14 @@ class User_Model extends Model {
         @$this->Username = Session::get_user();
     }
 
+    public function insert($uname, $pass, $sname, $fname, $mname, $pic, $user_type, $assign_sign){
+        $this->query = mysql_query("INSERT INTO `socs`.`users` (`Username`, `Password`, `Surname`, `First_Name`, `Middle_Name`, `Account_Type`) 
+                        VALUES 
+                        ('$uname', '$pass', '$sname', '$fname', '$mname', '$user_type')");
+        
+        echo "Error user: " .mysql_error();
+    }
+    
     // mutator
 
     public function getUser($tempUser, $tempPass) {

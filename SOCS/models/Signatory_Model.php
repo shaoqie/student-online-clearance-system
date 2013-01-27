@@ -110,9 +110,10 @@ class Signatory_Model extends Model{
     public function getSign_Info($key){
         $this->query = mysql_query("select * from signatories where Signatory_ID = '$key'");
         
+        $row = mysql_fetch_array($this->query);
         $this->sign_name = $row['Signatory_Name'];
         $this->sign_desc = $row['Description'];
-    }
+    }   
     
 //    public function getSign_Name($key){
 //        $this->query = mysql_query("select Signatory_Name from signatories where Signatory_ID = '$key'");

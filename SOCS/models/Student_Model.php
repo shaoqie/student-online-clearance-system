@@ -13,12 +13,92 @@
 class Student_Model extends Model{
     private $query;
     
+    private $stud_name;
+    private $stud_course;
+    private $stud_deptName;
+    private $stud_deptID;
+    private $stud_gender;
+    private $stud_yearLevel;
+    private $stud_program;
+    private $stud_section;
+    private $stud_clearanceStatus;
+    
     public function __construct() {        
         parent::__construct();
         
         $this->query = "";
     }
     
+    public function getStud_Name(){
+        return $this->stud_name;
+    }
+    
+    public function getStud_Course(){
+        return $this->stud_course;
+    }
+    
+    public function getStud_DeptName(){
+        return $this->stud_deptName;
+    }
+    
+    public function getStud_DeptID(){
+        return $this->stud_deptID;
+    }
+    
+    public function getStud_Gender(){
+        return $this->stud_gender;
+    }
+    
+    public function getStud_Yearlevel(){
+        return $this->stud_yearLevel;
+    }
+    
+    public function getStud_Program(){
+        return $this->stud_program;
+    }
+    
+    public function getStud_Section(){
+        return $this->stud_section;
+    }
+    
+    public function getStud_ClearanceStatus(){
+        return $this->stud_clearanceStatus;
+    }
+    
+    public function queryStudent_Info($student_id){
+        $this->query = mysql_query("select concat(Surname, ', ', First_Name, ' ', Middle_Name) as Name,
+                                    courses.course_name, departments.department_name, departments.department_id,
+                                    Gender, Year_Level, Program, Section, Cleared from students
+                                    inner join users on students.username = users.username
+                                    inner join clearancestatus on clearancestatus.student = users.username
+                                    inner join courses on students.course_id = courses.course_id
+                                    inner join departments on courses.Department_ID = departments.Department_ID
+                                    where students.username = '$student_id'");
+        
+        $row = mysql_fetch_array($this->query);
+        
+        $this->stud_name = $row['0'];
+        $this->stud_course = $row['1'];
+        $this->stud_deptName = $row['2'];
+        $this->stud_deptID = $row['3'];
+        $this->stud_gender = $row['4'];
+        $this->stud_yearLevel = $row['5'];
+        $this->stud_program = $row['6'];
+        $this->stud_section = $row['7'];
+        $this->stud_clearanceStatus = $row['8'];
+    }
+    
+    public function insert($uname, $gender, $yr_level, $program, $section, $courseID){
+        $this->query = mysql_query("INSERT INTO `socs`.`students` (`Username`, `Gender`, `Year_Level`, `Program`, `Section`, `Course_ID`) 
+                        VALUES 
+                        ('$uname', '$gender', '$yr_level', '$program', '$section', '$courseID')");
+        
+        echo "Error student: " .mysql_error();
+    }
+    
+    /*--------------------------------------*/
+    
+    /*
     public function getStudent_name($student_id){
         $this->query = mysql_query("select concat(Surname, ', ', First_Name, ' ', Middle_Name) as Name from students
                                     inner join users on students.username = users.username
@@ -93,6 +173,10 @@ class Student_Model extends Model{
         
         return $row['Cleared'];
     }
+    
+     */
+     
+     /*--------------------------------------*/
     
 }
 

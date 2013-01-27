@@ -62,7 +62,7 @@
 
                         <ul class="nav">
                             <li><a href="index.php">Home</a></li>
-                            <li><a href="index.php?action=registrationForm">Register</a></li>
+                            <li><a href="index.php?action=student_registrationForm">Register</a></li>
                         </ul>
 
                         {/function}

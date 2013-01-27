@@ -32,13 +32,18 @@ class Index extends Controller {
             $listOfSchoolYear = $this->schoolYearSem_model->getSchool_Year();
             $currentSemester = $this->schoolYearSem_model->getCurSemester();
             $currentSchool_Year = $this->schoolYearSem_model->getCurSchool_Year();
-            $stud_course = $this->student_model->getStudent_course(Session::get_user());
-            $stud_deptName = $this->student_model->getStudent_department(Session::get_user());
-            $stud_deptID = $this->student_model->getStudent_deptID(Session::get_user());
+            
+            
+            $this->student_model->queryStudent_Info(Session::get_user());
+            
+            $stud_course = $this->student_model->getStud_Course();
+            $stud_deptName = $this->student_model->getStud_DeptName();
+            $stud_deptID = $this->student_model->getStud_DeptID();
 
 
-            $listOfSign_underDeptName = $this->signatoialList->getListofSignatoryByDept($stud_deptID);
-            $listOfSignID_underDeptName = $this->signatoialList->getListofSignatory_ID_ByDept($stud_deptID);
+            $this->signatoialList->getListofSignatoryByDept($stud_deptID);
+            $listOfSign_underDeptName = $this->signatoialList->getSign_Name();
+            $listOfSignID_underDeptName = $this->signatoialList->getSign_ID();
             
             if (isset($_POST['GO'])) {
                 $sy_id = $this->schoolYearSem_model->getSy_ID(trim($_POST['school_year']), trim($_POST['semester']));
@@ -112,12 +117,16 @@ class Index extends Controller {
         }
 
 
-        //var_dump($sy_id);
+       
 
-        $signName = $this->signatory_model->getSign_Name($Tsign_ID);
-        $list_messages = $this->bulletin_model->getListofMessages($Tsign_ID, $sy_id, $page);
-        $list_datePosted = $this->getDate($this->bulletin_model->getListofPost_Date($Tsign_ID, $sy_id, $page));
-        $list_timePosted = $this->bulletin_model->getListofPost_Time($Tsign_ID, $sy_id, $page);
+        $this->signatory_model->getSign_Info($Tsign_ID);
+        $signName = $this->signatory_model->getSign_Name();
+        
+        $this->bulletin_model->filter($Tsign_ID, $sy_id, $page);
+        
+        $list_messages = $this->bulletin_model->getMessages();
+        $list_datePosted = $this->bulletin_model->getPostDate();
+        $list_timePosted = $this->bulletin_model->getPostTime();
         $numRows = $this->bulletin_model->getMessage_PageSize($Tsign_ID, $sy_id);
 
 
