@@ -76,12 +76,14 @@ class course_list_byDepartment extends Controller {
     }
         
     public function editCourse($seleted){
-        $course_name = $this->course_model->getCourse_Name($seleted);
-        $course_desc = $this->course_model->getCourse_Desc($seleted);
+        $this->course_model->getCourse_Info($seleted);
+        
+//        $course_name = $this->course_model->getCourse_Name($seleted);
+//        $course_desc = $this->course_model->getCourse_Desc($seleted);
 
         $this->template->setContent("editCourse.tpl");
-        $this->template->assign("editCourse_Name", $course_name);
-        $this->template->assign("editCourse_Desc", $course_desc);
+        $this->template->assign("editCourse_Name", $this->course_model->getCourse_Name());
+        $this->template->assign("editCourse_Desc", $this->course_model->getCourse_Desc());
         
         if(isset($_POST['editSave'])){
             if(trim($_POST['course_name']) == "" || trim($_POST['course_description']) == ""){       

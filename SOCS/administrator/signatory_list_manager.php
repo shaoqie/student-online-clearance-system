@@ -68,12 +68,14 @@ class Signatory_List_Manager extends Controller {
     }
     
     public function editSignatory($seleted){
-        $sign_name = $this->signatory_model->getSign_Name($seleted);
-        $sign_desc = $this->signatory_model->getSign_Desc($seleted);
+        $this->signatory_model->getSign_Info($seleted);
+        
+        //$sign_name = $this->signatory_model->getSign_Name($seleted);
+        //$sign_desc = $this->signatory_model->getSign_Desc($seleted);
 
         $this->template->setContent("editSignatory.tpl");
-        $this->template->assign("editSignatory_Name", $sign_name);
-        $this->template->assign("editSignatory_Desc", $sign_desc);
+        $this->template->assign("editSignatory_Name", $this->signatory_model->getSign_Name());
+        $this->template->assign("editSignatory_Desc", $this->signatory_model->getSign_Desc());
         
         if(isset($_POST['editSave'])){
             if(trim($_POST['sign_name']) == "" || trim($_POST['sign_description']) == ""){       

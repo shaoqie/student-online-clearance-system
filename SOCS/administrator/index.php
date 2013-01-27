@@ -39,50 +39,19 @@ class Index extends Controller {
         } else {
             header('Location: ' . HOST);
         }
-    }
-
-    private function getListofKey($searchName, $page, $acc_type) {
-        $key = array();
-        $query = $this->administrator_model->getListofUsers($searchName, $page, $acc_type);
-        while ($row = mysql_fetch_array($query)) {
-            array_push($key, $row['Username']);
-        }
-
-        return $key;
     }   
     
-    private function getNameofUser($searchName, $page, $finder, $acc_type) {
-        $name = array();
-        $query = $this->administrator_model->getListofUsers($searchName, $page, $acc_type);
-        while ($row = mysql_fetch_array($query)) {
+    private function getNameofUser($listOfName, $searchName, $finder) {
+        $name = array();     
+        foreach ($listOfName as $value) {
             if($finder == "default"){
-                array_push($name, $row['Name']);
+                array_push($name, $value);
             }else{
-                array_push($name, $this->getStrongchar($row['Name'], $searchName));
+                array_push($name, $this->getStrongchar($value, $searchName));
             }
-        }
+        }       
 
         return $name;
-    }
-
-    private function getPictureofUser($searchName, $page, $acc_type) {
-        $picture = array();
-        $query = $this->administrator_model->getListofUsers($searchName, $page, $acc_type);
-        while ($row = mysql_fetch_array($query)) {
-            array_push($picture, $row['Picture']);
-        }
-
-        return $picture;
-    }
-
-    private function getTypeeofUser($searchName, $page, $acc_type) {
-        $type = array();
-        $query = $this->administrator_model->getListofUsers($searchName, $page, $acc_type);
-        while ($row = mysql_fetch_array($query)) {
-            array_push($type, $row['Account_Type']);
-        }
-
-        return $type;
     }
 
     public function delete($selected, $user_type) {
@@ -105,21 +74,23 @@ class Index extends Controller {
     }
 
     public function displayTable($searchName, $page, $user_type , $finder) {
+        $this->administrator_model->filter($searchName, $page, $user_type);
+        
         $numOfPages = $this->administrator_model->getQueryPageSize($searchName, $user_type);
-        $numOfResults = count($this->getNameofUser($searchName, $page, "default", $user_type));
+        $numOfResults = count($this->administrator_model->getFilter_Name());
 
-        $this->template->assign('myKey_admin', $this->getListofKey($searchName, $page, $user_type));      
-        $this->template->set_Photos($this->getPictureofUser($searchName, $page, $user_type));
-        $this->template->set_Type($this->getTypeeofUser($searchName, $page, $user_type));
+        $this->template->assign('myKey_admin', $this->administrator_model->getFilter_ID());      
+        $this->template->set_Photos($this->administrator_model->getFilter_Picture());
+        $this->template->set_Type($this->administrator_model->getFilter_Type());
         $this->template->set_Filter($searchName);
         $this->template->assign('admin_length', $numOfPages);
         $this->template->assign('rowCount_admin', $numOfResults);
         $this->template->assign('user_type', $user_type);
 
         if($finder == "default"){
-            $this->template->set_Name($this->getNameofUser($searchName, $page, "default", $user_type));
+            $this->template->set_Name($this->getNameofUser($this->administrator_model->getFilter_Name(), $searchName, "default"));
         }else{
-            $this->template->set_Name($this->getNameofUser($searchName, $page, "not_default", $user_type));
+            $this->template->set_Name($this->getNameofUser($this->administrator_model->getFilter_Name(), $searchName, "not_default"));
         }
         if ($numOfResults == 0) {
             $this->template->setAlert('No Results Found.', Template::ALERT_ERROR, 'alert');

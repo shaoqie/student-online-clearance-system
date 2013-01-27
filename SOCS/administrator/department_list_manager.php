@@ -121,9 +121,11 @@ class Department_List_Manager extends Controller {
         $numOfPages = $this->department_model->getQueryPageSize($searchName);
         $numOfResults = count($this->department_model->getFilter_Name());
         $getListofDeptName = $this->getListofName($this->department_model->getFilter_Name(), $searchName, $finder);
+        $getListofDeptNameWithoutColor = $this->department_model->getFilter_Name();
         $filter_ID = $this->department_model->getFilter_ID();
 
         $this->template->assign('myName_dept', $getListofDeptName);
+        $this->template->assign('myDept_Name', $getListofDeptNameWithoutColor);
         $this->template->assignByRef('myKey_dept', $filter_ID);
         $this->template->assign('filter', $searchName);
         $this->template->assign('dept_length', $numOfPages);

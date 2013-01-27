@@ -81,11 +81,12 @@ class bulletin extends Controller {
 
 
         $t_sign_id = $this->signatorialList_model->getSignId(Session::get_AssignSignatory());
+        $this->bulletin_model->filter($t_sign_id, $sy_id, $page, $searchName);
+        
         $numOfPages = $this->bulletin_model->getMessage_PageSize($t_sign_id, $sy_id, $searchName);
-
-        $getListofID = $this->bulletin_model->getListofID($t_sign_id, $sy_id, $page, $searchName);
-        $getListofMessages = $this->bulletin_model->getListofMessages($t_sign_id, $sy_id, $page, $searchName);
-        $getListofDateTime = $this->getListofName($this->bulletin_model->getListofPost_DateTime($t_sign_id, $sy_id, $page, $searchName), $searchName, $finder);
+        $getListofID = $this->bulletin_model->getID();
+        $getListofMessages = $this->bulletin_model->getMessages();
+        $getListofDateTime = $this->getListofName($this->bulletin_model->getPost_DateTime(), $searchName, $finder);
 
         $numOfResults = count($getListofMessages);
 
@@ -131,9 +132,12 @@ class bulletin extends Controller {
         $this->template->setContent('ViewPostedBulletin.tpl');
 
         $sign_id = $this->signatorialList_model->getSignId(Session::get_AssignSignatory());
-        $message = $this->parsingLengthPerLine($this->bulletin_model->getPost_Messages($key, $sign_id));
-        $date = $this->getDate($this->bulletin_model->getPost_Date($key, $sign_id));
-        $time = $this->bulletin_model->getPost_Time($key, $sign_id);
+        
+        $this->bulletin_model->ViewBulletin($key, $sign_id);
+        
+        $message = $this->parsingLengthPerLine($this->bulletin_model->getMessages());
+        $date = $this->getDate($this->bulletin_model->getPostDate());
+        $time = $this->bulletin_model->getPostTime();
 
         $this->template->assign('message', $this->parsingNewLine($message));
         $this->template->assign('date', $date);

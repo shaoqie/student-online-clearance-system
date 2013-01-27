@@ -29,7 +29,7 @@
         <tr>        
             <td>
                 <div class="pull-left">
-                    <input type="checkbox" id = '{$k}' value = {$myMessage_ID[$k]} ></input> &nbsp; {$i}
+                    <input class="Checkbox" type="checkbox" id = '{$k}' value = {$myMessage_ID[$k]} ></input> &nbsp; {$i}
                 </div>
             </td>
             <td>{$my_dateTime[$k]}</td>
@@ -40,7 +40,7 @@
     {/foreach}
 </table>
 
-<i class="icon-remove"></i><a style="cursor:pointer;" onclick="findCheck('{$rowCount_bulletin}')">Delete Selected</a>
+<i class="icon-remove"></i><a style="cursor:pointer;" onclick="findCheck('{$rowCount_bulletin}','Bulletin')">Delete Selected</a>
 
 <div class="pull-right">
     Jump to: <select id="jump" class="input-mini" onchange="jumpToPageWithSchoolYear()">

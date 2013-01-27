@@ -1,23 +1,23 @@
-{*
+
 {literal}
 <script type="text/javascript">      
     function changeCourses(){
         var select = document.getElementById("course");
-    {/literal}
-        //alert(select.options.length);
-        
+        var dept_id = document.getElementById("dept").options[document.getElementById("dept").selectedIndex].value;
+    {/literal}     
         var str = "";
-        {foreach from=$dept_ID key=k item=key}
-               {if $key eq $dept_id_inCourses[$k]}
-                    str += "<option>{$course_underDept[$k]}</option>";
-                {/if}          
-        {/foreach}
+               {foreach from=$dept_id_inCourses key=k_course item=item}
+                   
+                   if(dept_id == {$item}){
+                    str += "<option>{$course_underDept[$k_course]}</option>";
+                   }               
+               {/foreach}                          
             select.innerHTML = str;
     {literal}    
     }
 </script>
 {/literal}
-    <pre>{$course_underDept|@print_r}</pre> *}
+   {*<pre>{$dept_id_inCourses|@print_r}</pre> *}
 <form method='post' class="form-horizontal">
 
     <legend>Login Information: </legend>
@@ -128,7 +128,7 @@
     <div class="control-group">
         <label class="control-label">Department: </label>
         <div class="controls">
-            <select id="dept" name="dept" required onchange="">
+            <select id="dept" name="dept" required onchange="changeCourses()">
                 
                 <option></option>
                 
@@ -136,8 +136,8 @@
                     {assign var=depts value=["CT - College of Technology", "CAS - College of Arts and Sciences", "IC - Institute of Computing", "CE - College of Engineering"]}
                 {/if}
 
-                {foreach from=$depts item=dept}
-                    <option>{$dept}</option>
+                {foreach from=$depts key=k item=dept}
+                    <option value="{$dept_ID[$k]}">{$dept}</option>
                 {/foreach}
 
             </select>

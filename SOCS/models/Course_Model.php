@@ -16,6 +16,9 @@ class Course_Model extends Model{
     private $filter_ID;
     private $filter_Name;
     
+    private $course_name;
+    private $course_desc;
+    
     public function __construct() {        
         parent::__construct();
         
@@ -28,6 +31,14 @@ class Course_Model extends Model{
     
     public function getFilter_Name(){
         return $this->filter_Name;
+    }
+    
+    public function getCourse_Name(){
+        return $this->course_name;
+    }
+    
+    public function getCourse_Desc(){
+        return $this->course_desc;
     }
     
     /*-----------------------------------------------*/
@@ -133,19 +144,27 @@ class Course_Model extends Model{
         return $row['Department_ID'];
     }
     
-    public function getCourse_Name($key){
-        $this->query = mysql_query("select Course_Name from courses where Course_ID = '$key'");
+    public function getCourse_Info($key){
+        $this->query = mysql_query("select * from courses where Course_ID = '$key'");
         $row = mysql_fetch_array($this->query);
         
-        return $row['Course_Name'];
+        $this->course_name = $row['Course_Name'];
+        $this->course_desc = $row['Description'];
     }
     
-    public function getCourse_Desc($key){
-        $this->query = mysql_query("select Description from courses where Course_ID = '$key'");
-        $row = mysql_fetch_array($this->query);
-        
-        return $row['Description'];
-    }
+//    public function getCourse_Name($key){
+//        $this->query = mysql_query("select Course_Name from courses where Course_ID = '$key'");
+//        $row = mysql_fetch_array($this->query);
+//        
+//        return $row['Course_Name'];
+//    }
+//    
+//    public function getCourse_Desc($key){
+//        $this->query = mysql_query("select Description from courses where Course_ID = '$key'");
+//        $row = mysql_fetch_array($this->query);
+//        
+//        return $row['Description'];
+//    }
     
     
     /*------- for testing existing name --------*/

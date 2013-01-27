@@ -68,9 +68,9 @@ class signatorialList extends Controller{
         $this->template->setAlert('Signatorial List was Edited Successfully!..', Template::ALERT_SUCCESS, 'alert');
     }
 	
-	public function cannotEdit(){
-		$this->template->setAlert('Cannot Edit an Signatorial List anymore!..', Template::ALERT_ERROR, 'alert');
-	}
+    public function cannotEdit(){
+            $this->template->setAlert('Cannot Edit an Signatorial List anymore!..', Template::ALERT_ERROR, 'alert');
+    }
     
     public function editSignatorialList($newSign_Name, $oldSign_ID){
         $dept_id_temp = $this->signatorialList_model->getDeptId(Session::get_DepartmentName());
@@ -85,10 +85,12 @@ class signatorialList extends Controller{
     }  
     
     public function displayTable($searchName, $page, $finder){
+        $this->signatorialList_model->filter(Session::get_DepartmentName(), $searchName, $page);
+        
         $numOfPages = $this->signatorialList_model->getQueryPageSize(Session::get_DepartmentName(), $searchName);
-        $numOfResults = count($this->signatorialList_model->filter_SignName(Session::get_DepartmentName(), $searchName, $page));
-        $getListofSignatorialList = $this->getListofName($this->signatorialList_model->filter_SignName(Session::get_DepartmentName(), $searchName, $page), $searchName, $finder);
-        $filter_ID = $this->signatorialList_model->filter_ID(Session::get_DepartmentName(), $searchName, $page);
+        $numOfResults = count($this->signatorialList_model->getFilter_Name());
+        $getListofSignatorialList = $this->getListofName($this->signatorialList_model->getFilter_Name(), $searchName, $finder);
+        $filter_ID = $this->signatorialList_model->getFilter_ID();
         
         $SignatoryList = $this->signatorialList_model->getListofSignatory();
         $getSignatorialList_signName = $this->signatorialList_model->getSignatorialList_underDeptName(Session::get_DepartmentName());

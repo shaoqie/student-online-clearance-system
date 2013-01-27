@@ -91,14 +91,16 @@ class Index extends Controller {
         }        
         
         $sign_id = $this->signatorialList_model->getSignId(Session::get_AssignSignatory()); 
-        $listOfDept = $this->signatorialList_model->getListOfDept_underSignName($sign_id);
-        $listOfCourse = $this->department_model->getListOfCourses(4);
+        //$listOfDept = $this->signatorialList_model->getListOfDept_underSignName($sign_id);
+        //$listOfCourse = $this->department_model->getListOfCourses(4);
+        
+        $this->user_model->filterStudent($sign_id, $searchName, $page);
         
         $numOfPages = $this->user_model->getStudent_PageSize($sign_id, $searchName);
-        $getListofStudent_Name = $this->getListofName($this->user_model->filter_ListofStudent_NameUsers($sign_id, $searchName, $page), $searchName, $finder);
-        $getListofStudent_Username = $this->user_model->filter_ListofStudent_Username($sign_id, $searchName, $page);
+        $getListofStudent_Name = $this->getListofName($this->user_model->getFilter_Name(), $searchName, $finder);
+        $getListofStudent_Username = $this->user_model->getFilter_ID();
         $getListOfStudenClearanceStatus = $this->getListofClearanceStatus($sign_id, $sy_id, $getListofStudent_Username);
-        $numOfResults = count($this->user_model->filter_ListofStudent_NameUsers($sign_id, $searchName, $page));
+        $numOfResults = count($this->user_model->getFilter_Name());
         
         
         
@@ -109,8 +111,8 @@ class Index extends Controller {
         $this->template->assign('filter', $searchName);
         $this->template->assign('signatoryDashboard_length', $numOfPages);
         $this->template->assign('clearedStatus', $getListOfStudenClearanceStatus);
-        $this->template->assign('myDept', $listOfDept);
-        $this->template->assign('myCourse', $listOfCourse);
+        //$this->template->assign('myDept', $listOfDept);
+        //$this->template->assign('myCourse', $listOfCourse);
         
         if ($numOfResults == 0) {
             $this->template->setAlert('No Results Found.', Template::ALERT_ERROR, 'alert');

@@ -16,6 +16,9 @@ class Signatory_Model extends Model{
     private $filter_ID;
     private $filter_Name;
     
+    private $sign_name;
+    private $sign_desc;
+    
     public function __construct() {        
         parent::__construct();
         
@@ -28,6 +31,14 @@ class Signatory_Model extends Model{
     
     public function getFilter_Name(){
         return $this->filter_Name;
+    }
+    
+    public function getSign_Name(){
+        return $this->sign_name;
+    }
+    
+    public function getSign_Desc(){
+        return $this->sign_desc;
     }
     
     /*-----------------------------------------------*/
@@ -96,21 +107,26 @@ class Signatory_Model extends Model{
                     `Description` = '$newSignDesc' WHERE `signatories`.`Signatory_ID` ='$key'");
     }
     
-    
-    
-    public function getSign_Name($key){
-        $this->query = mysql_query("select Signatory_Name from signatories where Signatory_ID = '$key'");
-        $row = mysql_fetch_array($this->query);
+    public function getSign_Info($key){
+        $this->query = mysql_query("select * from signatories where Signatory_ID = '$key'");
         
-        return $row['Signatory_Name'];
+        $this->sign_name = $row['Signatory_Name'];
+        $this->sign_desc = $row['Description'];
     }
     
-    public function getSign_Desc($key){
-        $this->query = mysql_query("select Description from signatories where Signatory_ID = '$key'");
-        $row = mysql_fetch_array($this->query);
-        
-        return $row['Description'];
-    }
+//    public function getSign_Name($key){
+//        $this->query = mysql_query("select Signatory_Name from signatories where Signatory_ID = '$key'");
+//        $row = mysql_fetch_array($this->query);
+//        
+//        return $row['Signatory_Name'];
+//    }
+//    
+//    public function getSign_Desc($key){
+//        $this->query = mysql_query("select Description from signatories where Signatory_ID = '$key'");
+//        $row = mysql_fetch_array($this->query);
+//        
+//        return $row['Description'];
+//    }
     
     /*------- for testing existing name --------*/
     
