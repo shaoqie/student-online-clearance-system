@@ -71,19 +71,19 @@ class Index extends Controller {
         $this->template->setAlert('Your registration form was succesfully save in the Database!... ', Template::ALERT_SUCCESS);
 
         //if (isset($_POST['Save'])) {
-            $course_id = $this->courses_model->getCourseID(trim($_POST['course']));
-            $this->administrator_model->insert(trim($_POST['stud_id'] . "-" . $_POST['number']), md5(trim($_POST['password'])), trim($_POST['surname']), trim($_POST['firstname']), trim($_POST['middleName']), NULL, 'Student', NULL);
-            $this->stud_model->insert(trim($_POST['stud_id'] . "-" . $_POST['number']), trim($_POST['gender']), trim($_POST['year_level']), trim($_POST['program']), trim($_POST['section']), $course_id);
+            //$course_id = $this->courses_model->getCourseID(trim($_POST['course']));
+           // $this->administrator_model->insert(($_POST['stud_id'] . "-" . $_POST['number']), md5(($_POST['password'])), trim($_POST['surname']), trim($_POST['firstname']), trim($_POST['middleName']), NULL, 'Student', NULL);
+            //$this->stud_model->insert(($_POST['stud_id'] . "-" . $_POST['number']), ($_POST['gender']), ($_POST['year_level']), ($_POST['program']), ($_POST['section']), $_POST['course']);
         //}
 
-
-        /*
+/*
+        
           echo "ID Number: " .$_POST['stud_id'] ."-" .$_POST['number'] ."<br/>";
-          echo "Password: " .$_POST['password'] ."<br/>";
-          echo "Confirm Password: " .$_POST['confirmpass'] ."<br/>";
-          echo "Surname: " .$_POST['surname'] ."<br/>";
-          echo "Firstname: " .$_POST['firstname'] ."<br/>";
-          echo "Middlename: " .$_POST['middleName'] ."<br/>";
+          echo "Password: " .trim($_POST['password']) ."<br/>";
+          echo "Confirm Password: " .trim($_POST['confirmpass']) ."<br/>";
+          echo "Surname: " .trim($_POST['surname']) ."<br/>";
+          echo "Firstname: " .trim($_POST['firstname']) ."<br/>";
+          echo "Middlename: " .trim($_POST['middleName']) ."<br/>";
           echo "Section: " .$_POST['section'] ."<br/>";
           echo "Gender: " .$_POST['gender'] ."<br/>";
           echo "Year Level: " .$_POST['year_level'] ."<br/>";

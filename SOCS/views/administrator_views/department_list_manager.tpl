@@ -42,7 +42,7 @@
             </td>
             <td>
                 <i class="icon-pencil"></i>
-                <a href="'department_list_manager.php?action=editDepartment&seleted={$myKey_dept[$k]}'"> Edit</a>  
+                <a href="department_list_manager.php?action=editDepartment&seleted={$myKey_dept[$k]}"> Edit</a>  
             </td>
         </tr>
     {/foreach}
