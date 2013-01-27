@@ -21,7 +21,6 @@ class Student_Model extends Model{
     private $stud_yearLevel;
     private $stud_program;
     private $stud_section;
-    private $stud_clearanceStatus;
     
     public function __construct() {        
         parent::__construct();
@@ -61,16 +60,11 @@ class Student_Model extends Model{
         return $this->stud_section;
     }
     
-    public function getStud_ClearanceStatus(){
-        return $this->stud_clearanceStatus;
-    }
-    
     public function queryStudent_Info($student_id){
         $this->query = mysql_query("select concat(Surname, ', ', First_Name, ' ', Middle_Name) as Name,
                                     courses.course_name, departments.department_name, departments.department_id,
-                                    Gender, Year_Level, Program, Section, Cleared from students
+                                    Gender, Year_Level, Program, Section from students
                                     inner join users on students.username = users.username
-                                    inner join clearancestatus on clearancestatus.student = users.username
                                     inner join courses on students.course_id = courses.course_id
                                     inner join departments on courses.Department_ID = departments.Department_ID
                                     where students.username = '$student_id'");
@@ -84,8 +78,7 @@ class Student_Model extends Model{
         $this->stud_gender = $row['4'];
         $this->stud_yearLevel = $row['5'];
         $this->stud_program = $row['6'];
-        $this->stud_section = $row['7'];
-        $this->stud_clearanceStatus = $row['8'];
+        $this->stud_section = $row['7'];       
     }
     
     public function insert($uname, $gender, $yr_level, $program, $section, $courseID){

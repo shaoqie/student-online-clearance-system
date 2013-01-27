@@ -70,9 +70,7 @@ class Index extends Controller {
             $this->template->assign('assign_sign', ", " . $stud_deptName);
             $this->template->assign('myListOfSign_underDeptName', $listOfSign_underDeptName);
             $this->template->assign('myKey_signID', $listOfSignID_underDeptName);          
-            $this->template->assign('myStudent_ClearanceStatus', $listOfClearanceStatus);
-            
-            //var_dump($listOfSign_underDeptName);
+            $this->template->assign('myStudent_ClearanceStatus', $listOfClearanceStatus);           
             
         } else {
             header('Location: /SOCS/index.php');
