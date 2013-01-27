@@ -55,8 +55,17 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </a>
-                    <a class="brand" href="index.php"><img src="{$host}/public/img/logo.png"> Student Online Clearance System</a>
+                    <a class="brand" href="index.php"><img src="{$host}/public/img/logo.png"> SOCS</a>
                     <div class="nav-collapse collapse">
+
+                        {function name=welcome_navigations}
+
+                        <ul class="nav">
+                            <li><a href="index.php">Home</a></li>
+                            <li><a href="index.php?action=registrationForm">Register</a></li>
+                        </ul>
+
+                        {/function}
 
                         {if isset($username)}
                             <div class="btn-group pull-right">
@@ -76,16 +85,29 @@
                                 </ul>
                             </div>
                         {elseif !isset($smarty.get.action) && !isset($username)}
+
+                            {call name=welcome_navigations}
+
                             <form class="navbar-form pull-right" action="index.php?action=login" method="post">
                                 <input class="span2" type="text" placeholder="Username" name="username" required>
                                 <input class="span2" type="password" placeholder="Password" name="password" required>
                                 <button type="submit" class="btn"><i class="icon-check"></i> Sign in</button>
                             </form>
+
+                        {elseif $smarty.get.action=="registrationForm" && !isset($username)}
+
+                            {call name=welcome_navigations}
+
+                            <form class="navbar-form pull-right" action="index.php?action=login" method="post">
+                                <input class="span2" type="text" placeholder="Username" name="username" required>
+                                <input class="span2" type="password" placeholder="Password" name="password" required>
+                                <button type="submit" class="btn"><i class="icon-check"></i> Sign in</button>
+                            </form>
+
                         {else}
-                            <ul class="nav pull-right">
-                                <li><a href="index.php">Home</a></li>
-                            </ul>
+                            {call name=welcome_navigations}
                         {/if}
+
                     </div><!--/.nav-collapse -->
                 </div>
             </div>

@@ -8,9 +8,9 @@
         {if isset($user_type)}
             <input type="hidden" value="{$user_type}" name="type">
         {/if}
-        
+
         {*<input type="hidden" value="{$clearedStatus}" name="status">*}
-        
+
         <button class="btn btn-primary" type="submit">
             <i class="icon-search icon-white"></i>
         </button>
