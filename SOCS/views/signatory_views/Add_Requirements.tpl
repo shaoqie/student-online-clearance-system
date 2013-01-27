@@ -1,19 +1,15 @@
-<div class="pull-right">
-    {include file=$School_year_content}
-</div> 
-
-<div class="row">
-    <div class="span4">
-        <ul class="nav nav-tabs">
-            <li><a href='../signatory/index.php'>Student</a></li>       
-            <li><a href='../signatory/bulletin.php'>Bulletin</a></li>
-            <li class="active"><a href='../signatory/requirements.php'>Requirements</a></li>         
-        </ul>
-    </div>       
-</div>
-
-<!--Body content-->
+<!-- Back Button-->
 <button class="pull-right btn" onclick="window.location.href='../signatory/requirements.php'">Back</button> 
+
+<!-- Navigation Tabs-->
+<ul class="nav nav-tabs">
+    <li><a href='../signatory/index.php'>Student</a></li>       
+    <li><a href='../signatory/bulletin.php'>Bulletin</a></li>
+    <li class="active"><a href='../signatory/requirements.php'>Requirements</a></li>         
+</ul>
+
+<!--Archive Search Bar -->
+{call name=archiveSearch}
 
 <form method='post' class="form-horizontal">
     <legend>Add Requirement:</legend>

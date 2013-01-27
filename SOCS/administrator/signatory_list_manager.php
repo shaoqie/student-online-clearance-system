@@ -72,7 +72,7 @@ class Signatory_List_Manager extends Controller {
         
         //$sign_name = $this->signatory_model->getSign_Name($seleted);
         //$sign_desc = $this->signatory_model->getSign_Desc($seleted);
-
+        
         $this->template->setContent("editSignatory.tpl");
         $this->template->assign("editSignatory_Name", $this->signatory_model->getSign_Name());
         $this->template->assign("editSignatory_Desc", $this->signatory_model->getSign_Desc());

@@ -27,6 +27,12 @@
                     background-position: right;
                 }{literal}
 
+                #welcome{{/literal}
+                    background: url('{$host}/public/img/title.png');
+                    background-position: bottom right;
+                    background-repeat: no-repeat;
+                }{literal}
+
                 /*
                 div{
                 border: 1px #000 solid;

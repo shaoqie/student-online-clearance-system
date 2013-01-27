@@ -41,7 +41,7 @@
             <input type='password' name='confirmpass'>
         </div>
     </div>
-<!--
+
     <legend>Upload Picture</legend>
 
     <div class="control-group">
@@ -50,7 +50,7 @@
             <input type="file" name="photo">
         </div>
     </div>
--->
+
     <legend>Authentication: </legend>
 
     <div class="control-group">
@@ -62,7 +62,8 @@
 
     <div class="control-group">
         <div class="controls">
-            <input class="btn btn-primary" type='Submit' value='Save'> &nbsp; <a href='/SOCS/'>Cancel</a>
+            <input class="btn btn-primary" type='Submit' value='Save'> &nbsp;
+            <a href='/SOCS/'>Cancel</a>
         </div>
     </div>
 </form>

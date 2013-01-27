@@ -1,3 +1,7 @@
+<!-- Back Button-->
+<button class="pull-right btn" onclick="window.location.href='department_list_manager.php'">Back</button>
+
+<!-- Navigation Tabs-->
 <ul class="nav nav-tabs">
     <li class="dropdown" >
         <a class="dropdown-toggle"
@@ -15,8 +19,7 @@
     <li class="active"><a href='../administrator/department_list_manager.php'>Departments</a></li>
 </ul>
 
-<button class="pull-right btn" onclick="window.location.href='department_list_manager.php'">Back</button>
-
+<!-- Adding Form-->
 <form action="department_list_manager.php?action=add_department" method='post' class="form-horizontal">
     <legend>Add Department:</legend>
     <div class="control-group">

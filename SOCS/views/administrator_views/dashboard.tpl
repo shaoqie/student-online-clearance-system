@@ -1,4 +1,3 @@
-
 <!-- Navigation Tabs-->
 <ul class="nav nav-tabs">
     <li class="dropdown active" >
@@ -18,7 +17,9 @@
 </ul>
 
 <!-- Search Bar-->
-{call name=search}
+<span class="pull-right">
+    {call name=search}
+</span>
 
 <!-- User Table-->
 <table class="table table-hover">     

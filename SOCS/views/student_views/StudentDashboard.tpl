@@ -1,7 +1,5 @@
 <!-- Archive Search Box-->
-<div class="row">   
-    {call name=archiveSearch}
-</div>
+{call name=archiveSearch}
 
 {assign var=num_cleared value=0}
 
@@ -12,16 +10,18 @@
 {/foreach}
 
 <!-- Export Link-->
-<div class="pull-right row">
-    {if $num_cleared == ($myListOfSign_underDeptName|@count)}
-        <a href="export.php"> 
-            <i class="icon-download"></i> Export to PDF
-        </a>
-    {else}
-        <a href="#" onclick="bootbox.alert('<div class=\'alert alert-info alert-block\'><strong>Oops!</strong> Must clear all signatories before can download the clearance form.</div>')"> 
-            <i class="icon-download"></i> Export to PDF
-        </a>
-    {/if}
+<div class="row">
+    <div class="span9">
+        {if $num_cleared == ($myListOfSign_underDeptName|@count)}
+            <a class="pull-right" href="export.php"> 
+                <i class="icon-download"></i> Export to PDF
+            </a>
+        {else}
+            <a class="pull-right" href="#" onclick="bootbox.alert('<div class=\'alert alert-info alert-block\'><strong>Oops!</strong> Must clear all signatories before can download the clearance form.</div>')"> 
+                <i class="icon-download"></i> Export to PDF
+            </a>
+        {/if}
+    </div>
 </div>
 
 <hr>

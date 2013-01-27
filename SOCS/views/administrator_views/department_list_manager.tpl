@@ -1,8 +1,3 @@
-<!-- Add Department Button-->
-<div class="row">
-    <input class="btn pull-right" type="button" value="Add Department" onclick="window.location.href='department_list_manager.php?action=addDepartment'">
-</div>
-
 <!-- Navigation Tabs-->
 <ul class="nav nav-tabs">
     <li class="dropdown" >
@@ -21,8 +16,13 @@
     <li class="active"><a href='../administrator/department_list_manager.php'>Departments</a></li>
 </ul>
 
+<!-- Add Department Button-->
+<input class="btn" type="button" value="Add Department" onclick="window.location.href='department_list_manager.php?action=addDepartment'">
+
 <!-- Search Bar-->
-{call name=search}
+<span class="pull-right">
+    {call name=search}
+</span>
     
 <!-- Department Table-->
 <table class="table table-hover">   

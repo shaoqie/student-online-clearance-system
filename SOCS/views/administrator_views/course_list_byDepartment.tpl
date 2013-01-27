@@ -1,7 +1,5 @@
-<!-- Header-->
-<h1>
-    <center>{$Dept_name}</center>
-</h1>
+<!-- Back Button-->
+<input class="btn pull-right" type="button" value="Back" onclick="window.location.href='department_list_manager.php'">
 
 <!-- Navigation Tabs-->
 <ul class="nav nav-tabs">
@@ -9,14 +7,21 @@
     <li><a href='../administrator/signatorialList.php'>Signatorial List</a></li>
 </ul>
 
-<!-- Buttons-->
-<div class="pull-right">   
-    <input class="btn" type="button" value="Add Courses" onclick="window.location.href='course_list_byDepartment.php?action=addCourse'">
-    <input class="btn" type="button" value="Back" onclick="window.location.href='department_list_manager.php'">    
+<!-- Department Name-->
+<div class="row">
+    <div class="span9 well">
+        <h1 style="text-align: center;">{$Dept_name}</h1>
+    </div>
 </div>
 
-<!--Search Bar and other buttons-->
-{call name=search}
+
+<!-- Add Courses Button-->
+<input class="btn" type="button" value="Add Courses" onclick="window.location.href='course_list_byDepartment.php?action=addCourse'">
+
+<!-- Search Bar-->
+<span class="pull-right">
+    {call name=search}
+</span>
 
 <!-- Course List Table-->
 <table class="table table-hover">     

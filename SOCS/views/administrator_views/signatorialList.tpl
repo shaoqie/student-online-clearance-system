@@ -45,10 +45,8 @@ $("#confirmed" +x).html("");
 }
 </script>
 
-<!-- Header-->
-<h1>
-    <center>{$Dept_name}</center>
-</h1>
+<!-- Back Button-->
+<input class="btn pull-right" type="button" value="Back" onclick="window.location.href='department_list_manager.php'">
 
 <!-- Navigation Tab-->
 <ul class="nav nav-tabs">
@@ -56,49 +54,62 @@ $("#confirmed" +x).html("");
     <li class="active"><a href='../administrator/signatorialList.php'>Signatorial List</a></li>
 </ul>
 
-<!-- Inputs -->
-
-{if $countSignList > 0}
-    <select class='input-large pull-right' id="cmdSignatory">
-        <option>Signatory:</option>
-        {foreach from = $SignatoryList item = i}
-            <option>{$i}</option>
-        {/foreach}
-    </select>
-
-{/if}  
-
-<!--Search Bar and other inputs-->
-{call name=search}
-
-<div class="pull-right" style="margin-top: -15px; padding-bottom: 20px;">
-    <input class="btn" type="button" value="Add" onclick="getSignatory()"> &nbsp;
-    <input class="btn pull-right" type="button" value="Back" onclick="window.location.href='department_list_manager.php'"> 
+<!-- Header-->
+<div class="row">
+    <div class="span9 well">
+        <h1 style="text-align: center;">{$Dept_name}</h1>
+    </div>
 </div>
 
+<!-- Add Signatory -->
+{if $countSignList > 0}
+    <span class="pull-left">
+        <form class="form-inline">
+            <label>Add Signatory:</label>
+            <select class="span2" id="cmdSignatory" required>
+                <option></option>
+                {foreach from = $SignatoryList item = i}
+                    <option>{$i}</option>
+                {/foreach}
+            </select>
+            <input class="btn btn-primary" type="button" value="Add" onclick="getSignatory()">
+        </form>
+    </span>
+{/if}
+
+<!-- Search Bar-->
+<span class="pull-right">
+    {call name=search}
+</span>
+
+<!-- Table of Signatories-->
 <table class="table table-hover">    
     <tr>
-        <th style="width: 250px;">
+        <th>
             <input type="checkbox" onclick="isCheck({$rowCount_signatorial})" id="check"> Signatories
         </th>
-        <th style="width: 340px;"></th>
-        <th><div>Controls</div></th>
-</tr>
-{foreach from = $myName_signatorial key = k item = i} 
-    <tr>
-        <td>
-            <label class="checkbox">
-                <input type="hidden" id = 'edit{$k}' value = "{$i}">
-                <input class="Checkbox" type="checkbox" id = '{$k}' value = {$myKey_signatorial[$k]} ></input> 
-                <div id='unSelectedSignatorialList{$k}'>{$i}</div>
-            </label>
-        </td>    
-        <td><label id="confirmed{$k}"></label></td>
-        <td>
-            <i class="icon-pencil"></i><a style="cursor:pointer;" href="javascript:edit('{$k}','{$myKey_signatorial[$k]}','{$rowCount_signatorial}','{$countSignList}')"> Edit</a> &nbsp;                     
-        </td>    
+        <th>
+            <div>Controls</div>
+        </th>
     </tr>
-{/foreach}
+    {foreach from = $myName_signatorial key = k item = i} 
+        <tr>
+            <td>
+                <label class="checkbox">
+                    <input type="hidden" id = 'edit{$k}' value = "{$i}">
+                    <input class="Checkbox" type="checkbox" id = '{$k}' value = {$myKey_signatorial[$k]} ></input> 
+                    <div id='unSelectedSignatorialList{$k}'>{$i}</div>
+                </label>
+            </td>    
+            <td>
+                <label id="confirmed{$k}"></label>
+            </td>
+            <td>
+                <i class="icon-pencil"></i>
+                <a style="cursor:pointer;" href="javascript:edit('{$k}','{$myKey_signatorial[$k]}','{$rowCount_signatorial}','{$countSignList}')"> Edit</a>
+            </td>    
+        </tr>
+    {/foreach}
 </table>
 
 <i class="icon-remove"></i><a style="cursor:pointer;" onclick="findCheck('{$rowCount_signatorial}','signatorial list')" >Delete Selected</a>

@@ -128,8 +128,9 @@
     <div class="control-group">
         <label class="control-label">Department: </label>
         <div class="controls">
-            <select id="dept" name="dept" onchange="changeCourses()">
+            <select id="dept" name="dept" onchange="changeCourses()" required>
                 
+                <option></option>
                 
                 {if !isset($depts)}
                     {assign var=depts value=["CT - College of Technology", "CAS - College of Arts and Sciences", "IC - Institute of Computing", "CE - College of Engineering"]}

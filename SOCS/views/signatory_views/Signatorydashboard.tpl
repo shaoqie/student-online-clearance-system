@@ -1,8 +1,3 @@
-<!-- Archive Search-->
-<div class="row">
-    {call name=archiveSearch}
-</div>
-
 <!-- Navigation Tabs-->
 <ul class="nav nav-tabs">       
     <li class="active"><a href='../signatory/index.php'>Student</a></li>
@@ -10,8 +5,15 @@
     <li><a href='../signatory/requirements.php'>Requirements</a></li>       
 </ul>
 
-<!--Search Bar-->
-{call name=search}
+<!-- Archive Search-->
+<span>
+    {call name=archiveSearch}
+</span>
+
+<!-- Search Bar-->
+<span class="pull-right">
+    {call name=search}
+</span>
 
 <!-- Student Table-->
 <table class="table table-hover">

@@ -1,3 +1,6 @@
+<!-- Back Button-->
+<button class="pull-right btn" onclick="window.location.href='signatory_list_manager.php'">Back</button>
+
 <!-- Navigation Tabs-->
 <ul class="nav nav-tabs">
     <li class="dropdown" >
@@ -15,9 +18,6 @@
     <li  class="active"><a href='../administrator/signatory_list_manager.php'>Signatories</a></li>
     <li><a href='../administrator/department_list_manager.php'>Departments</a></li>
 </ul>
-
-<!-- Back Button-->
-<button class="pull-right btn" onclick="window.location.href='signatory_list_manager.php'">Back</button>
 
 <!-- Adding Form-->
 <form action="signatory_list_manager.php?action=add_signatory" method='post' class="form-horizontal">

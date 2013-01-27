@@ -1,14 +1,21 @@
-<h1><center>{$Dept_name}</center></h1>
-<h2><center>Academic Courses</center></h2>
+<!--Body content-->
+<button class="pull-right btn" onclick="window.location.href='course_list_byDepartment.php'">Back</button>
 
+<!-- Navigation Tabs-->
 <ul class="nav nav-tabs">
     <li class="active"><a href='../administrator/course_list_byDepartment.php'>Courses</a></li>
     <li><a href='../administrator/signatorialList.php'>Signatorial List</a></li>
 </ul>
 
-<!--Body content-->
-<button class="pull-right btn" onclick="window.location.href='course_list_byDepartment.php'">Back</button>
+<!-- Department Name-->
+<div class="row">
+    <div class="span9 well">
+        <h1 style="text-align: center;">{$Dept_name}</h1>
+        <!--<h2 style="text-align: center;">Academic Courses</h2>-->
+    </div>
+</div>
 
+<!-- -->
 <form action="course_list_byDepartment.php?action=add_course" method='post' class="form-horizontal">
     <legend>Add Course:</legend>
     <div class="control-group">
