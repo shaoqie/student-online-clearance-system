@@ -1,3 +1,8 @@
+<!-- Add Department Button-->
+<div class="row">
+    <input class="btn pull-right" type="button" value="Add Department" onclick="window.location.href='department_list_manager.php?action=addDepartment'">
+</div>
+
 <!-- Navigation Tabs-->
 <ul class="nav nav-tabs">
     <li class="dropdown" >
@@ -16,9 +21,6 @@
     <li class="active"><a href='../administrator/department_list_manager.php'>Departments</a></li>
 </ul>
 
-<!-- Add Department Button-->
-<input class="btn pull-right" type="button" value="Add Department" onclick="window.location.href='department_list_manager.php?action=addDepartment'">
-
 <!-- Search Bar-->
 {call name=search}
     
@@ -35,10 +37,12 @@
             <td>
                 <label class="checkbox">
                     <input class="Checkbox" type="checkbox" id = '{$k}' value = {$myKey_dept[$k]} >
-                    <div onclick="window.location.href='department_list_manager.php?action=displayCourse&deptName={$i}'" style="cursor:pointer;" >{$i}</div>
+                    <div id="hover_link" onclick="window.location.href='department_list_manager.php?action=displayCourse&deptName={$i}'" >{$i}</div>
                 </label>        
             </td>
-            <td><i class="icon-pencil"></i><a style="cursor:pointer;" onclick="window.location.href='department_list_manager.php?action=editDepartment&seleted={$myKey_dept[$k]}'"> Edit</a>  
+            <td>
+                <i class="icon-pencil"></i>
+                <a href="'department_list_manager.php?action=editDepartment&seleted={$myKey_dept[$k]}'"> Edit</a>  
             </td>
         </tr>
     {/foreach}

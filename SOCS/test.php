@@ -9,17 +9,37 @@
         <script type="text/javascript" src="public/js/vendor/bootstrap.min.js"></script>
         <script type="text/javascript" src="public/js/vendor/bootbox.min.js"></script>
         <script type="text/javascript" src="public/js/main.js"></script>
+
+        <style type="text/css">
+
+            p:hover#hover{
+                color: #0088cc;
+                text-decoration: none;
+                cursor: pointer;
+            }
+
+        </style>
+
     </head>  
     <body>
 
+        <p id="hover">sadfsadfsdf</p>
+
+        <script type='text/javascript'>
+            
+            var a = '<div class="alert-success"><strong>$pre_msg</strong>$msg</div>';
+            
+            bootbox.alert(a);
+        </script>
+
         <?php
-            require_once 'libs/smarty/Smarty.class.php';
-            
-            $smarty = new Smarty();
-            
-            $smarty->setTemplateDir("views/signatory_views");
-            
-            $smarty->display("signatory_registration.tpl");
+        require_once 'libs/smarty/Smarty.class.php';
+
+        $smarty = new Smarty();
+
+        $smarty->setTemplateDir("views/student_views");
+
+        $smarty->display("student_registration.tpl");
         ?>
 
 

@@ -39,7 +39,7 @@
             {literal}
                 <input class="input-small" type ='text' name='surname' value="" maxlength="5" pattern="[0-9]{5}" required title="Numbers Only">
             {/literal}
-            <span class="help-block">ID number that has been given by the University after admission.</span>
+            <span class="help-block">ID number that has been given by the University after admission. Must be a bonafied student of the University of Southeastern Philippines.</span>
         </div>
     </div>
 
@@ -129,7 +129,9 @@
         <label class="control-label">Department: </label>
         <div class="controls">
             <select id="dept" name="dept" required onchange="">
-
+                
+                <option></option>
+                
                 {if !isset($depts)}
                     {assign var=depts value=["CT - College of Technology", "CAS - College of Arts and Sciences", "IC - Institute of Computing", "CE - College of Engineering"]}
                 {/if}
@@ -147,6 +149,8 @@
         <div class="controls">
             <select id="course" name="course" required>
 
+                <option></option>>
+                
                 {if !isset($courses)}
                     {assign var=courses value=["BSIT", "BSCS", "BCT", "DT", "BIT", "BTTE"]}
                 {/if}

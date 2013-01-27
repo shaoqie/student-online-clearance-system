@@ -26,17 +26,15 @@ class Settings extends Controller {
             $this->template->set_middlename(Session::get_Middlename());
             $this->template->set_account_type(Session::get_Account_type());
 
-            if (Session::get_Account_type() == "Admin") {
-                $this->template->setContent('admin_settings.tpl');
-                $this->template->assign('assign_sign', '');
-            } else if (Session::get_Account_type() == "Student") {
-                $this->template->setContent('student_settings.tpl');
-                $this->template->assign('assign_sign', '');
-            } else if (Session::get_Account_type() == "Signatory") {
-                $this->template->setContent('signatory_settings.tpl');
+            if (Session::get_Account_type() == "Signatory") {
                 $this->template->set_account_type(Session::get_Account_type() ." in Charge -");
                 $this->template->assign('assign_sign', ", " .Session::get_AssignSignatory());
+            }else{
+                $this->template->assign('assign_sign', '');
             }
+            
+            $this->template->setContent('settings.tpl');
+            
         } else {
             header('Location: ' . HOST);
             exit;

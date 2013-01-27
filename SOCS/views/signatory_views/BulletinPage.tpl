@@ -1,24 +1,22 @@
-<div class="pull-right">
-    {include file=$School_year_content}
+<!-- Archive Search-->
+<div class="row">
+    {call name=archiveSearch}
 </div>
 
+<!-- Post Bulletin Button-->
 <div class="row">
-    <div class="span4">
-        <ul class="nav nav-tabs">
-            <li><a href='../signatory/index.php'>Student</a></li>       
-            <li class="active"><a href='../signatory/bulletin.php'>Bulletin</a></li>
-            <li><a href='../signatory/requirements.php'>Requirements</a></li>         
-        </ul>
-    </div> 
-</div> 
-
-<!--Body content-->
-<form class="form-horizontal" method="get" action="?action=filter">
-    <input type="hidden" value="filter" name="action">
-    <input class="span5" id="search" type="text" placeholder="Search for data and time here..." value ="{$filter}" name="filterName">
-    <button class="btn btn-primary" type="submit"><i class="icon-search icon-white"></i></button>  
     <input class="btn pull-right" type="button" value="Post Bulletin" onclick="window.location.href='../signatory/bulletin.php?action=viewPosting_Bulletin'">
-</form>
+</div>
+
+<!-- Navigation Tabs-->
+<ul class="nav nav-tabs">
+    <li><a href='../signatory/index.php'>Student</a></li>       
+    <li class="active"><a href='../signatory/bulletin.php'>Bulletin</a></li>
+    <li><a href='../signatory/requirements.php'>Requirements</a></li>         
+</ul>
+
+<!--Search Bar-->
+{call name=search}
 
 <table class="table">
     <tr>

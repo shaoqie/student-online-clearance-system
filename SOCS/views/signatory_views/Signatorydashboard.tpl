@@ -1,3 +1,8 @@
+<!-- Archive Search-->
+<div class="row">
+    {call name=archiveSearch}
+</div>
+
 <!-- Navigation Tabs-->
 <ul class="nav nav-tabs">       
     <li class="active"><a href='../signatory/index.php'>Student</a></li>
@@ -5,53 +10,11 @@
     <li><a href='../signatory/requirements.php'>Requirements</a></li>       
 </ul>
 
-<form class="form-inline pull-right" method="post">
-
-    <label>School Year:  
-        <select id="school_year" name="school_year" class="input-medium">
-            {foreach from = $mySchool_Year key = k item = i}
-                {if $currentSchool_Year eq $i}
-                    <option selected>{$i}</option>
-                {else}
-                    <option>{$i}</option>
-                {/if}
-            {/foreach}
-        </select>
-    </label>
-
-    <label>Semester: 
-        <select id="semester" name="semester" class="input-medium">
-            {if $currentSemester eq 'First'}
-                <option selected>First</option>
-                <option>Second</option>
-                <option>Summer</option>
-            {elseif $currentSemester eq 'Second'}
-                <option>First</option>
-                <option selected>Second</option>
-                <option>Summer</option>
-            {else}
-                <option>First</option>
-                <option>Second</option>
-                <option selected>Summer</option>
-            {/if}           
-        </select>
-    </label>
-        
-    <button class="btn btn-primary" type="submit" name="GO">
-        <i class="icon-arrow-right icon-white"></i>
-    </button>
-</form>
-
 <!--Search Bar-->
-<form class="form-horizontal" method="get" action="?action=filter">
-    <input type="hidden" value="filter" name="action">
-    <input class="span4" id="search" type="text" placeholder="Search..." value ="{$filter}" name="filterName">
-    <input type="hidden" value="{$clearedStatus}" name="status">
-    <button class="btn btn-primary" type="submit"><i class="icon-search icon-white"></i></button>  
-</form>
+{call name=search}
 
 <!-- Student Table-->
-<table class="table table-hover">     
+<table class="table table-hover">
     <tr>
         <th>ID</th>
         <th>Name</th>  
@@ -83,7 +46,7 @@
             </td>
         </tr>
     {/foreach}
-</table> 
+</table>
 
 <!-- Pagination-->
 <div class="pull-right">

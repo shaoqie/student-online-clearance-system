@@ -112,5 +112,9 @@ function checkPasswordEquality(){
     }
 }
 
+function alert_box(msg){
+    bootbox.alert(msg)
+}
+
 /*=========== for registration purposes =======================*/
 

@@ -18,37 +18,9 @@
                     padding-bottom: 40px;                    
                     background-image: url('{$host}/public/img/background.png');
                     background-attachment: fixed;
-                    background-position: bottom;
+                    background-position: top;
                     background-repeat: repeat-x;
                 }{literal}
-
-                #navbar{
-                    opacity: 0.9;
-                }
-
-                .socs-content{
-                    background-color: white;
-                    box-shadow: 5px 5px 7px #444;
-                    border: dotted 1px;
-                    padding-left: 20px;
-                    padding-right: 20px;
-                    padding-top: 20px;
-                    padding-bottom: 20px;
-                    border-radius: 10px;
-                    opacity: 0.9;
-                    margin-bottom: 5px;
-                }
-
-                .socs-content2{
-                    box-shadow: 5px 5px 7px #444;
-                    border: dotted 1px;
-                    padding-left: 20px;
-                    padding-right: 20px;
-                    padding-top: 20px;
-                    padding-bottom: 20px;
-                    border-radius: 10px;
-                    margin-bottom: 5px;
-                }
 
                 #header{{/literal}
                     background-image: url('{$host}/public/img/header.png');

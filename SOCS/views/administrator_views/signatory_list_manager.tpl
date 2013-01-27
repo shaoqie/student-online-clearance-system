@@ -1,3 +1,8 @@
+<!-- Add Signatory Button-->
+<div class="row">
+    <input class="btn pull-right" type="button" value="Add Signatory" onclick="window.location.href='signatory_list_manager.php?action=addSignatory'">
+</div>
+
 <!-- Navigation Tabs-->
 <ul class="nav nav-tabs">
     <li class="dropdown" >
@@ -15,9 +20,6 @@
     <li class="active"><a href='../administrator/signatory_list_manager.php'>Signatories</a></li>
     <li><a href='../administrator/department_list_manager.php'>Departments</a></li>
 </ul>
-
-<!-- Add Signatory Button-->
-<input class="btn pull-right" type="button" value="Add Signatory" onclick="window.location.href='signatory_list_manager.php?action=addSignatory'">
 
 <!-- Search Bar-->
 {call name=search}

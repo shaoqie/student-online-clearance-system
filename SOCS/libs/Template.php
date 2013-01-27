@@ -89,7 +89,7 @@ class Template extends Smarty {
         } else {
             $pre_msg = "Warning! ";
         }
-
+        
         $alert = "<div class='$alert_type'>" .
                 "<a href='#' class='close' data-dismiss='alert'><i class='icon-remove'></i></a>" .
                 "<strong>$pre_msg</strong>$msg" .

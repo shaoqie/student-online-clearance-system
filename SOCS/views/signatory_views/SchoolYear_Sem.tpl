@@ -10,7 +10,6 @@
         {/foreach}
     </select>
 
-
     <label>Semester: 
         <select id="semester" name="semester" class="input-medium">
             {if $currentSemester eq 'First'}
