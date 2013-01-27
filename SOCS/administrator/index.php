@@ -85,13 +85,13 @@ class Index extends Controller {
         return $type;
     }
 
-    public function delete($selected, $account_type) {
+    public function delete($selected, $user_type) {
         $explode = explode("@", $selected);
         foreach ($explode as $value) {
             $this->administrator_model->deleteUser(trim($value));
         }
         
-        $HOST = $explode[0] != null ? HOST ."/administrator/?action=deleted&type=" .$account_type : HOST;
+        $HOST = $explode[0] != null ? HOST ."/administrator/?action=deleted&type=" .$user_type : HOST;
         header('Location: ' .$HOST);
     }
     
@@ -104,22 +104,22 @@ class Index extends Controller {
         $this->displayTable(trim($filterName), 1, $type, 'not');
     }
 
-    public function displayTable($searchName, $page, $account_type , $finder) {
-        $numOfPages = $this->administrator_model->getQueryPageSize($searchName, $account_type);
-        $numOfResults = count($this->getNameofUser($searchName, $page, "default", $account_type));
+    public function displayTable($searchName, $page, $user_type , $finder) {
+        $numOfPages = $this->administrator_model->getQueryPageSize($searchName, $user_type);
+        $numOfResults = count($this->getNameofUser($searchName, $page, "default", $user_type));
 
-        $this->template->assign('myKey_admin', $this->getListofKey($searchName, $page, $account_type));      
-        $this->template->set_Photos($this->getPictureofUser($searchName, $page, $account_type));
-        $this->template->set_Type($this->getTypeeofUser($searchName, $page, $account_type));
+        $this->template->assign('myKey_admin', $this->getListofKey($searchName, $page, $user_type));      
+        $this->template->set_Photos($this->getPictureofUser($searchName, $page, $user_type));
+        $this->template->set_Type($this->getTypeeofUser($searchName, $page, $user_type));
         $this->template->set_Filter($searchName);
         $this->template->assign('admin_length', $numOfPages);
         $this->template->assign('rowCount_admin', $numOfResults);
-        $this->template->assign('account_type', $account_type);
+        $this->template->assign('user_type', $user_type);
 
         if($finder == "default"){
-            $this->template->set_Name($this->getNameofUser($searchName, $page, "default", $account_type));
+            $this->template->set_Name($this->getNameofUser($searchName, $page, "default", $user_type));
         }else{
-            $this->template->set_Name($this->getNameofUser($searchName, $page, "not_default", $account_type));
+            $this->template->set_Name($this->getNameofUser($searchName, $page, "not_default", $user_type));
         }
         if ($numOfResults == 0) {
             $this->template->setAlert('No Results Found.', Template::ALERT_ERROR, 'alert');

@@ -41,10 +41,10 @@ function jumpToPage(){
     window.location.assign("?action=displayTable&filter=" + search +"&page=" + jump);
 } 
 
-function jumpToPageUser(account_type){   
+function jumpToPageUser(user_type){   
     var jump = document.getElementById("jump").value;
     var search = document.getElementById("search").value;
-    window.location.assign("?action=displayTable&filter=" + search +"&page=" + jump +"&account_type=" +account_type);
+    window.location.assign("?action=displayTable&filter=" + search +"&page=" + jump +"&user_type=" +user_type);
 }
 
 function jumpToPageSignatory(status){
@@ -76,7 +76,7 @@ function findCheck(rowCount, type){
     }
 }
 
-function findCheckUser(rowCount, type, account_type){
+function findCheckUser(rowCount, type, user_type){
     if($('.Checkbox:checked').length > 0){
         
         bootbox.confirm("<strong>Attempting to delete " + $('.Checkbox:checked').length + " " +type +"/s. Are you sure?</strong>", function(result) {
@@ -87,7 +87,7 @@ function findCheckUser(rowCount, type, account_type){
                         valueDeleted += document.getElementById("" +i).value + "@";
                     }
                 }
-                window.location.assign("?action=delete&selected=" + valueDeleted +"&account_type=" +account_type);
+                window.location.assign("?action=delete&selected=" + valueDeleted +"&user_type=" +user_type);
             }
         });
     }

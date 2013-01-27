@@ -120,10 +120,12 @@ class course_list_byDepartment extends Controller {
     }   
     
     public function displayTable($searchName, $page, $finder){
+        $this->course_model->filter(Session::get_DepartmentName(), $searchName, $page);
+        
         $numOfPages = $this->course_model->getQueryPageSize(Session::get_DepartmentName(), $searchName);
-        $numOfResults = count($this->course_model->filter_CourseName(Session::get_DepartmentName(), $searchName, $page));
-        $getListofDeptName = $this->getListofName($this->course_model->filter_CourseName(Session::get_DepartmentName(), $searchName, $page), $searchName, $finder);
-        $filter_ID = $this->course_model->filter_ID(Session::get_DepartmentName(), $searchName, $page);
+        $numOfResults = count($this->course_model->getFilter_Name());
+        $getListofDeptName = $this->getListofName($this->course_model->getFilter_Name(), $searchName, $finder);
+        $filter_ID = $this->course_model->getFilter_ID();
         
         $this->template->assign('myName_course', $getListofDeptName); 
         $this->template->assignByRef('myKey_course', $filter_ID);

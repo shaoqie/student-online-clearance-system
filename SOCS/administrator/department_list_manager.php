@@ -116,10 +116,12 @@ class Department_List_Manager extends Controller {
     }
 
     public function displayTable($searchName, $page, $finder) {
+        $this->department_model->filter($searchName, $page);
+        
         $numOfPages = $this->department_model->getQueryPageSize($searchName);
-        $numOfResults = count($this->department_model->filter_DeptName($searchName, $page));
-        $getListofDeptName = $this->getListofName($this->department_model->filter_DeptName($searchName, $page), $searchName, $finder);
-        $filter_ID = $this->department_model->filter_ID($searchName, $page);
+        $numOfResults = count($this->department_model->getFilter_Name());
+        $getListofDeptName = $this->getListofName($this->department_model->getFilter_Name(), $searchName, $finder);
+        $filter_ID = $this->department_model->getFilter_ID();
 
         $this->template->assign('myName_dept', $getListofDeptName);
         $this->template->assignByRef('myKey_dept', $filter_ID);

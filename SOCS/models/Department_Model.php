@@ -13,6 +13,8 @@
 class Department_Model extends Model{
     private $query;
     private $itemsPerPage = 10;
+    private $filter_ID;
+    private $filter_Name;
     
     public function __construct() {        
         parent::__construct();
@@ -20,31 +22,59 @@ class Department_Model extends Model{
         $this->query = "";
     }
     
-    public function filter_ID($Tdept_name, $Tpage){
-        $filter = array();
-        $this->query = mysql_query("select Department_ID from departments
+    public function getFilter_ID(){
+        return $this->filter_ID;
+    }
+    
+    public function getFilter_Name(){
+        return $this->filter_Name;
+    }
+    
+    /*-----------------------------------------------*/
+    
+    public function filter($Tdept_name ,$Tpage){
+        $this->query = mysql_query("select * from departments
                                     where Department_Name like '%$Tdept_name%' order by Department_Name 
                                     LIMIT " . (($Tpage - 1) * $this->itemsPerPage) . ", " . $this->itemsPerPage);
         
+        $this->filter_ID = array();
+        $this->filter_Name = array();
         while($row = mysql_fetch_array($this->query)){
-            array_push($filter, $row['Department_ID']);
+            array_push($this->filter_ID, $row['0']);
+            array_push($this->filter_Name, $row['1']);
         }
-        
-        return $filter;
     }
     
-    public function filter_DeptName($Tdept_name, $Tpage){
-        $filter = array();
-        $this->query = mysql_query("select Department_Name from departments
-                                    where Department_Name like '%$Tdept_name%' order by Department_Name  
-                                    LIMIT " . (($Tpage - 1) * $this->itemsPerPage) . ", " . $this->itemsPerPage);
-        
-        while($row = mysql_fetch_array($this->query)){
-            array_push($filter, $row['Department_Name']);
-        }
-        
-        return $filter;
-    }
+    
+    /*-----------------------------------------------*/
+    
+//    public function filter_ID($Tdept_name, $Tpage){
+//        $filter = array();
+//        $this->query = mysql_query("select Department_ID from departments
+//                                    where Department_Name like '%$Tdept_name%' order by Department_Name 
+//                                    LIMIT " . (($Tpage - 1) * $this->itemsPerPage) . ", " . $this->itemsPerPage);
+//        
+//        while($row = mysql_fetch_array($this->query)){
+//            array_push($filter, $row['Department_ID']);
+//        }
+//        
+//        return $filter;
+//    }
+//    
+//    public function filter_DeptName($Tdept_name, $Tpage){
+//        $filter = array();
+//        $this->query = mysql_query("select Department_Name from departments
+//                                    where Department_Name like '%$Tdept_name%' order by Department_Name  
+//                                    LIMIT " . (($Tpage - 1) * $this->itemsPerPage) . ", " . $this->itemsPerPage);
+//        
+//        while($row = mysql_fetch_array($this->query)){
+//            array_push($filter, $row['Department_Name']);
+//        }
+//        
+//        return $filter;
+//    }
+//    
+    /*-----------------------------------------------*/
     
     public function getQueryPageSize($searchName) {
         $this->query = mysql_query("select Department_Name from departments 

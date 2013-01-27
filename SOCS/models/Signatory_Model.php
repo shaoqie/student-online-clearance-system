@@ -13,6 +13,8 @@
 class Signatory_Model extends Model{
     private $query;
     private $itemsPerPage = 10;
+    private $filter_ID;
+    private $filter_Name;
     
     public function __construct() {        
         parent::__construct();
@@ -20,31 +22,57 @@ class Signatory_Model extends Model{
         $this->query = "";
     }
     
-    public function filter_ID($Tdescription, $Tpage){
-        $filter = array();
-        $this->query = mysql_query("select Signatory_ID from signatories
-                                    where Signatory_Name like '%$Tdescription%' order by Signatory_Name 
-                                    LIMIT " . (($Tpage - 1) * $this->itemsPerPage) . ", " . $this->itemsPerPage);
-        
-        while($row = mysql_fetch_array($this->query)){
-            array_push($filter, $row['Signatory_ID']);
-        }
-        
-        return $filter;
+    public function getFilter_ID(){
+        return $this->filter_ID;
     }
     
-    public function filter_SignName($Tsign_name, $Tpage){
-        $filter = array();
-        $this->query = mysql_query("select Signatory_Name from signatories
+    public function getFilter_Name(){
+        return $this->filter_Name;
+    }
+    
+    /*-----------------------------------------------*/
+    
+    public function filter($Tsign_name ,$Tpage){
+        $this->query = mysql_query("select * from signatories
                                     where Signatory_Name like '%$Tsign_name%' order by Signatory_Name 
-                                    LIMIT " . (($Tpage - 1) * $this->itemsPerPage) . ", " . $this->itemsPerPage );
+                                    LIMIT " . (($Tpage - 1) * $this->itemsPerPage) . ", " . $this->itemsPerPage);
         
+        $this->filter_ID = array();
+        $this->filter_Name = array();
         while($row = mysql_fetch_array($this->query)){
-            array_push($filter, $row['Signatory_Name']);
+            array_push($this->filter_ID, $row['0']);
+            array_push($this->filter_Name, $row['1']);
         }
         
-        return $filter;
     }
+    /* ----------------------------------------*/
+//    public function filter_ID($Tsign_name ,$Tpage){
+//        $filter = array();
+//        $this->query = mysql_query("select Signatory_ID from signatories
+//                                    where Signatory_Name like '%$Tsign_name%' order by Signatory_Name 
+//                                    LIMIT " . (($Tpage - 1) * $this->itemsPerPage) . ", " . $this->itemsPerPage);
+//        
+//        while($row = mysql_fetch_array($this->query)){
+//            array_push($filter, $row['Signatory_ID']);
+//        }
+//        
+//        return $filter;
+//    }
+//    
+//    public function filter_SignName($Tsign_name, $Tpage){
+//        $filter = array();
+//        $this->query = mysql_query("select Signatory_Name from signatories
+//                                    where Signatory_Name like '%$Tsign_name%' order by Signatory_Name 
+//                                    LIMIT " . (($Tpage - 1) * $this->itemsPerPage) . ", " . $this->itemsPerPage );
+//        
+//        while($row = mysql_fetch_array($this->query)){
+//            array_push($filter, $row['Signatory_Name']);
+//        }
+//        
+//        return $filter;
+//    }
+//    
+    /*-----------------------------------------*/
     
     public function getQueryPageSize($searchName) {
         $this->query = mysql_query("select Signatory_Name from signatories 

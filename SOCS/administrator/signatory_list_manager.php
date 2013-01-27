@@ -115,10 +115,12 @@ class Signatory_List_Manager extends Controller {
     }
 
     public function displayTable($searchName, $page, $finder) {
+        $this->signatory_model->filter($searchName, $page);
+        
         $numOfPages = $this->signatory_model->getQueryPageSize($searchName);
-        $numOfResults = count($this->signatory_model->filter_SignName($searchName, $page));
-        $getListofSignName = $this->getListofName($this->signatory_model->filter_SignName($searchName, $page), $searchName, $finder);
-        $filter_ID = $this->signatory_model->filter_ID($searchName, $page);
+        $numOfResults = count($this->signatory_model->getFilter_Name());
+        $getListofSignName = $this->getListofName($this->signatory_model->getFilter_Name(), $searchName, $finder);
+        $filter_ID = $this->signatory_model->getFilter_ID();
 
         $this->template->assign('myName_sign', $getListofSignName); //$this->signatory_model->filter_Description($searchName, $page));
         $this->template->assignByRef('myKey_sign', $filter_ID);
