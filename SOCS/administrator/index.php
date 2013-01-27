@@ -30,9 +30,11 @@ class Index extends Controller {
             $this->template->setCalendar('Calendar.tpl');
             $this->template->assign('assign_sign', '');  
             
-            if(isset($_GET['account_types'])){
-                $this->displayTable('', 1, trim($_GET['account_types']), "default");
+            //var_dump($_GET['account_types']);
+            if(isset($_GET['user_type'])){
+                $this->displayTable('', 1, trim($_GET['user_type']), "default");
             }else{
+               // echo "wwwwwwwwww";
                 $this->displayTable('', 1, 'Student', "default");
             }
             

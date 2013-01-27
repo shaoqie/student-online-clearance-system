@@ -1,4 +1,4 @@
-<form method='post' class="form-horizontal">
+<form method='post' class="form-horizontal" action="/SOCS/index.php?action=signatory_register">
 
     <legend>Login Information: </legend>
 
@@ -6,7 +6,7 @@
         <label class="control-label">Username: </label>
         <div class="controls">
             {literal}
-                <input type ='text' name='surname' value="" maxlength="5" pattern="[0-9]{5}" required title="Letters and spaces only">
+                <input type ='text' name='uname' value="" maxlength="15" pattern="[0-9a-zA-Z]+" required title="Letters and spaces only">
             {/literal}
         </div>
     </div>
@@ -15,7 +15,7 @@
         <label class="control-label">Password: </label>
         <div class="controls">
             {literal}
-                <input id="password_entered" type='password' name='newpass' pattern="^.{7,50}$" title="Password minimum of 7 characters" required>
+                <input id="password_entered" type='password' name='newpass' pattern="[0-9a-zA-Z]+" title="Password minimum of 7 characters" required>
             {/literal}
         </div>
     </div>
@@ -60,7 +60,7 @@
                 {assign var=signatories value=["OCSC", "OSS", "CTLC", "ICLC"]}
             {/if}
 
-            <select>
+            <select name="sign_name" required>
                 <option></option>
                 {foreach from=$signatories item=signatory}
                     <option>{$signatory}</option>
@@ -80,7 +80,7 @@
 
     <div class="control-group">
         <div class="controls">
-            <input class="btn btn-primary" type='Submit' value='Save'>
+            <input class="btn btn-primary" type='Submit' value='Save' name='Save'>
             <a href='/SOCS/index.php'>Cancel</a>
         </div>
     </div>

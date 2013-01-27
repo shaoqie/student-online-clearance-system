@@ -67,8 +67,19 @@
                         {function name=welcome_navigations}
 
                         <ul class="nav">
-                            <li><a href="index.php">Home</a></li>
-                            <li><a href="index.php?action=student_registrationForm">Register</a></li>
+                            <li><a href="index.php">Home</a></li>      
+                            <li class="dropdown" >
+                                <a class="dropdown-toggle"
+                                   data-toggle="dropdown"
+                                   href="#">
+                                    Register
+                                    <b class="caret"></b>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="index.php?action=student_registrationForm">As Student</a></li>
+                                    <li><a href="index.php?action=signatory_registrationForm">As Signatory</a></li>
+                                </ul>
+                            </li>
                         </ul>
 
                         {/function}

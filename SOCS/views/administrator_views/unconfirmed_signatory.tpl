@@ -1,6 +1,6 @@
 <!-- Navigation Tabs-->
 <ul class="nav nav-tabs">
-    <li class="dropdown active" >
+    <li class="dropdown active">
         <a class="dropdown-toggle"
            data-toggle="dropdown"
            href="#">
@@ -12,49 +12,50 @@
             <li><a href='../administrator/index.php?user_type=Signatory'>confirmed signatory</a></li>
             <li><a href='../administrator/unconfirmed_signatory.php'>unconfirmed signatory</a></li>
         </ul>
-    </li>   
+    </li>
     <li><a href='../administrator/signatory_list_manager.php'>Signatories</a></li>
     <li><a href='../administrator/department_list_manager.php'>Departments</a></li>
 </ul>
 
+{*
 <!-- Search Bar-->
-<span class="pull-right">
-    {call name=search}
-</span>
+{call name=search}
 
-<!-- User Table-->
+<!-- Signatory Table -->
 <table class="table table-hover">     
     <tr>
         <th>
-            <input type="checkbox" onclick="isCheck({$rowCount_admin})" id="check"> User
+            <input type="checkbox" onclick="isCheck({$rowCount_unconfirmedSign})" id="check"> Accounts
         </th>
-        <th>Type</th>
+        <th>Controls</th>
     </tr>
-    {foreach from = $myName key = k item = i}
+    {foreach from = $myName_unconfirmedSign key = k item = i}
         <tr>
             <td>
                 <label class="checkbox">
-                    <input class="Checkbox" type="checkbox" id = '{$k}' value = {$myKey_admin[$k]}> {$i}
+                    <input class="Checkbox" type="checkbox" id = '{$k}' value = {$myKey_unconfirmedSign[$k]} > {$i}
                 </label>
             </td>
-            <td>{$myType[$k]}</td>
+            <td>
+                <i class="icon-pencil"></i><a style="cursor:pointer;" onclick="window.location.href=''"> Confirmed</a>
+            </td>
         </tr>
     {/foreach}
 </table>
 
 <!-- Delete Control-->
-<a style="cursor:pointer;" onclick="findCheckUser('{$rowCount_admin}','users','{$user_type}')">
+<a style="cursor:pointer;" onclick="findCheck('{$rowCount_unconfirmedSign}','unconfirmed signatory')">
     <i class="icon-remove"></i> Delete Selected
 </a>
 
-<!-- Pagination -->
-
+<!-- Pagination-->
 <div class="pull-right">
-    Jump to: 
-    <select id="jump" class="input-mini" onchange="jumpToPageUser('{$user_type}')">
+    Jump to: <select id="jump" class="input-mini" onchange="jumpToPage()">
         <option>--</option>
-        {for $start = 1 to $admin_length}
+        {for $start = 1 to $unconfirmedSign_length}
         <option>{$start}</option>
         {/for}
     </select>
 </div>
+
+*}

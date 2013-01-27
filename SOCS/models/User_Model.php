@@ -15,6 +15,8 @@ class User_Model extends Model {
     public $Account_Type;
     public $Picture;
     public $Assigned_Signatory;
+    public $validation_status;
+    
     private $query;
     private $itemsPerPage = 10;
     
@@ -30,10 +32,16 @@ class User_Model extends Model {
         @$this->Username = Session::get_user();
     }
 
-    public function insert($uname, $pass, $sname, $fname, $mname, $pic, $user_type, $assign_sign){
+    public function insertStudent($uname, $pass, $sname, $fname, $mname, $pic, $user_type, $assign_sign){
         $this->query = mysql_query("INSERT INTO `socs`.`users` (`Username`, `Password`, `Surname`, `First_Name`, `Middle_Name`, `Account_Type`) 
                         VALUES 
                         ('$uname', '$pass', '$sname', '$fname', '$mname', '$user_type')");
+    }
+    
+    public function insertSignatory_User($uname, $pass, $sname, $fname, $mname, $pic, $user_type, $assign_sign){
+        $this->query = mysql_query("INSERT INTO `socs`.`users` (`Username`, `Password`, `Surname`, `First_Name`, `Middle_Name`, `Picture`, `Account_Type`, `Assigned_Signatory`, `Validatiion_Status`) 
+                            VALUES 
+                            ('$uname', '$pass', '$sname', '$fname', '$mname', NULL, 'Signatory', '$assign_sign', 'Unconfirmed')");  
     }
     
     // mutator
@@ -60,26 +68,23 @@ class User_Model extends Model {
         }
     }
 
-    public function getAccount_Type($tempUser, $tempPass) {
-        $this->query = mysql_query("SELECT Account_Type FROM users WHERE username='$tempUser'and password='$tempPass' ");
+    public function queryUser_Type($tempUser, $tempPass) {
+        $this->query = mysql_query("SELECT Account_Type, Validatiion_Status FROM users WHERE username='$tempUser'and password='$tempPass' ");
 
         $sample = mysql_fetch_array($this->query);
-
-        return $sample['Account_Type'];
+        
+        $this->Account_Type = $sample['0'];
+        $this->validation_status = $sample['1'];
     }
 
-    public function update($account) {
-        if ($account == "Admin" || $account == "Signatory") {
-            $sql = "UPDATE users SET Surname='" . $this->Surname . "', First_Name='" . $this->First_Name . "', Middle_Name='" . $this->Middle_Name . "',Password='" . $this->Password . "' Where Username='" . $this->Username . "'";
-        } else if ($account == "Student") {
-            $sql = "UPDATE users SET password='" . $this->Password . "' Where username ='" . $this->Username . "'";
-        }
+    public function update($account, $sname, $fname, $mname, $uname, $pass) {
+        $sql = "UPDATE users SET Surname='$sname', First_Name='$fname', Middle_Name='$mname',Password='$pass' Where Username='$uname' and Account_Type='$account'";
 
         if (mysql_query($sql)) {
-            Session::set_password($this->Password);
-            Session::set_firstname($this->First_Name);
-            Session::set_middlename($this->Middle_Name);
-            Session::set_surname($this->Surname);
+            Session::set_password($pass);
+            Session::set_firstname($fname);
+            Session::set_middlename($mname);
+            Session::set_surname($sname);
             return true;
         }else{
             return false;
@@ -123,6 +128,8 @@ class User_Model extends Model {
         }
         
     }
+    
+    //public function filterUnconfirmedSign(){
     
     /*------------------------------*/
 

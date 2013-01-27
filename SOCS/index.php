@@ -15,6 +15,7 @@ class Index extends Controller {
     private $department_model;
     private $courses_model;
     private $stud_model;
+    private $signatoriallist_model;
 
     public function __construct() {
         parent::__construct();
@@ -24,6 +25,7 @@ class Index extends Controller {
         $this->department_model = new Department_Model();
         $this->courses_model = new Course_Model();
         $this->stud_model = new Student_Model();
+        $this->signatoriallist_model = new SignatorialList_Model();
 
         $this->template = new Template();
         $this->template->setPageName('Home');
@@ -31,24 +33,29 @@ class Index extends Controller {
     }
 
     public function login() {
-        if ($this->administrator_model->isExist(trim($_POST['username']), trim($_POST['password']))) {
+        if ($this->administrator_model->isExist(trim($_POST['username']), (trim($_POST['password'])))) {
+            $this->administrator_model->queryUser_Type(trim($_POST['username']), (trim($_POST['password'])));
+            
+            if ($this->administrator_model->Account_Type == "Admin") {
 
-            if ($this->administrator_model->getAccount_Type(trim($_POST['username']), trim($_POST['password'])) == "Admin") {
-
+                Session::set_user($_POST['username'], trim($_POST['password']));
                 $this->setSession('Admin');
                 header('Location: ' . HOST . '/administrator/');
-            } else if ($this->administrator_model->getAccount_Type(trim($_POST['username']), trim($_POST['password'])) == "Student") {
+            } else if ($this->administrator_model->Account_Type == "Student") {
 
+                Session::set_user($_POST['username'], $_POST['password']);
                 $this->setSession('Student');
                 header('Location: ' . HOST . '/student/');
-            } else if ($this->administrator_model->getAccount_Type(trim($_POST['username']), trim($_POST['password'])) == "Signatory") {
+            } else if ($this->administrator_model->Account_Type == "Signatory" && $this->administrator_model->validation_status == "Confirmed") {
                 $assign_sign = $this->administrator_model->getAssignSignatory(trim($_POST['username']));
+                Session::set_user($_POST['username'], $_POST['password']);
                 Session::set_assignSignatory($assign_sign);
                 $this->setSession('Signatory');
                 header('Location: ' . HOST . '/signatory/');
+            }else{
+                header('Location: index.php?action=login_error');
+                exit;
             }
-
-            exit;
         } else {
             header('Location: index.php?action=login_error');
             exit;
@@ -67,17 +74,18 @@ class Index extends Controller {
     }
 
     public function student_register() {
-        $this->template->setContent('login.tpl');
-        $this->template->setAlert('Your registration form was succesfully save in the Database!... ', Template::ALERT_SUCCESS);
-
         if (isset($_POST['Save'])) {
-            $course_id = $this->courses_model->getCourseID(trim($_POST['course']));  
-            $this->administrator_model->insert(($_POST['stud_id'] . "-" . $_POST['number']), md5(($_POST['password'])), trim($_POST['surname']), trim($_POST['firstname']), trim($_POST['middleName']), NULL, 'Student', NULL);
+            $course_id = $this->courses_model->getCourseID(trim($_POST['course']));
+            $this->administrator_model->insertStudent(($_POST['stud_id'] . "-" . $_POST['number']), md5(($_POST['password'])), trim($_POST['surname']), trim($_POST['firstname']), trim($_POST['middleName']), NULL, 'Student', NULL);
             $this->stud_model->insert(($_POST['stud_id'] . "-" . $_POST['number']), ($_POST['gender']), ($_POST['year_level']), ($_POST['program']), ($_POST['section']), $course_id);
+
+
+            $this->template->setContent('login.tpl');
+            $this->template->setAlert('Your registration form was succesfully save in the Database!... ', Template::ALERT_SUCCESS);
         }
 
-/*
-        
+        /*
+
           echo "ID Number: " .$_POST['stud_id'] ."-" .$_POST['number'] ."<br/>";
           echo "Password: " .trim($_POST['password']) ."<br/>";
           echo "Confirm Password: " .trim($_POST['confirmpass']) ."<br/>";
@@ -91,6 +99,25 @@ class Index extends Controller {
           echo "Department: " .$_POST['dept'] ."<br/>";
           echo "Course: " .$_POST['course'] ."<br/>";
          */
+    }
+
+    public function signatory_register() {
+        if (isset($_POST['Save'])) {
+            $sign_id = $this->signatoriallist_model->getSignId($_POST['sign_name']);
+            $this->administrator_model->insertSignatory_User(trim($_POST['uname']), trim($_POST['confirmpass']), trim($_POST['surname']), trim($_POST['firstname']), trim($_POST['middleName']), NULL, 'Signatory', $sign_id);
+            
+//          echo "Password: " .trim($_POST['uname']) ."<br/>";
+//          echo "Confirm Password: " .trim($_POST['newpass']) ."<br/>";
+//          echo "Confirm Password: " .trim($_POST['confirmpass']) ."<br/>";
+//          echo "Surname: " .trim($_POST['surname']) ."<br/>";
+//          echo "Firstname: " .trim($_POST['firstname']) ."<br/>";
+//          echo "Middlename: " .trim($_POST['middleName']) ."<br/>";
+//          echo "Section: " .$_POST['sign_name'] ."<br/>";
+          
+            
+            $this->template->setContent('login.tpl');
+            $this->template->setAlert('Your registration form was succesfully save. See the Admin to confirmed your account!... ', Template::ALERT_SUCCESS);
+        }
     }
 
     public function student_registrationForm() {
@@ -110,9 +137,16 @@ class Index extends Controller {
         $this->template->assign('course_underDept', $listOfCourses);
     }
 
-    private function setSession($account_type) {
-        Session::set_user($_POST['username'], $_POST['password']);
+    public function signatory_registrationForm() {
+        $this->template->setPageName("Signatory Registration Form");
+        $this->template->setContent("signatory_registration.tpl");
 
+        $listOfsignatory = $this->signatoriallist_model->getListofSignatory();
+
+        $this->template->assign('signatories', $listOfsignatory);
+    }
+
+    private function setSession($account_type) {
         $result = mysql_fetch_array($this->administrator_model->getUser(trim($_POST['username']), trim($_POST['password'])));
 
         Session::set_surname($result['Surname']);

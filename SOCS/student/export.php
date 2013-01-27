@@ -85,7 +85,7 @@ $fpdf->Write(5, $stud_name);
 $fpdf->SetFont('Times','',12);
 $fpdf->Write(5, ", a ");
 $fpdf->SetFont('Times','BU',12);
-$fpdf->Write(5, $stud_year);
+$fpdf->Write(5, $stud_year ." Semester");
 $fpdf->SetFont('Times','',12);
 $fpdf->Write(5, " year ");
 $fpdf->SetFont('Times','BU',12);
