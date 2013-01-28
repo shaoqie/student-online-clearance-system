@@ -16,36 +16,32 @@ class User_Model extends Model {
     public $Picture;
     public $Assigned_Signatory;
     public $validation_status;
-    
     private $query;
     private $itemsPerPage = 10;
-    
-    
     private $filter_ID;
     private $filter_Name;
     private $filter_Picture;
     private $filter_Type;
     private $filter_AssignSignName;
     private $filter_courseORsign;
-    
 
     public function __construct() {
         parent::__construct();
         @$this->Username = Session::get_user();
     }
 
-    public function insertStudent($uname, $pass, $sname, $fname, $mname, $pic, $user_type, $assign_sign){
+    public function insertStudent($uname, $pass, $sname, $fname, $mname, $pic, $user_type, $assign_sign) {
         $this->query = mysql_query("INSERT INTO `socs`.`users` (`Username`, `Password`, `Surname`, `First_Name`, `Middle_Name`, `Account_Type`) 
                         VALUES 
                         ('$uname', '$pass', '$sname', '$fname', '$mname', '$user_type')");
     }
-    
-    public function insertSignatory_User($uname, $pass, $sname, $fname, $mname, $pic, $user_type, $assign_sign){
+
+    public function insertSignatory_User() {
         $this->query = mysql_query("INSERT INTO `socs`.`users` (`Username`, `Password`, `Surname`, `First_Name`, `Middle_Name`, `Picture`, `Account_Type`, `Assigned_Signatory`, `Validatiion_Status`) 
                             VALUES 
-                            ('$uname', '$pass', '$sname', '$fname', '$mname', $pic, 'Signatory', '$assign_sign', 'Unconfirmed')");  
+                            ('$this->Username', '$this->Password', '$this->Surname', '$this->First_Name', '$this->Middle_Name', $this->Picture, 'Signatory', '$this->Assigned_Signatory', 'Unconfirmed')");
     }
-    
+
     // mutator
 
     public function getUser($tempUser, $tempPass) {
@@ -74,7 +70,7 @@ class User_Model extends Model {
         $this->query = mysql_query("SELECT Account_Type, Validatiion_Status FROM users WHERE username='$tempUser'and password='$tempPass' ");
 
         $sample = mysql_fetch_array($this->query);
-        
+
         $this->Account_Type = $sample['0'];
         $this->validation_status = $sample['1'];
     }
@@ -88,106 +84,104 @@ class User_Model extends Model {
             Session::set_middlename($this->Middle_Name);
             Session::set_surname($this->Surname);
             Session::set_photo($this->Picture);
-            
+
             return true;
-        }else{
+        } else {
             return false;
         }
     }
-    
-    public function getValidation_status($uname){
+
+    public function getValidation_status($uname) {
         $this->query = mysql_query("select Validatiion_Status FROM users WHERE username = '$uname'");
         $sample = mysql_fetch_array($this->query);
         return $sample['0'];
     }
-    
-    public function getFilter_ID(){
+
+    public function getFilter_ID() {
         return $this->filter_ID;
     }
-    
-    public function getFilter_Name(){
+
+    public function getFilter_Name() {
         return $this->filter_Name;
     }
-    
-    public function getFilter_Picture(){
+
+    public function getFilter_Picture() {
         return $this->filter_Picture;
     }
-    
-    public function getFilter_Type(){
+
+    public function getFilter_Type() {
         return $this->filter_Type;
     }
-    
-    public function getFilter_AssignSignName(){
+
+    public function getFilter_AssignSignName() {
         return $this->filter_AssignSignName;
     }
-    
-    public function getFilter_courseORsign(){
+
+    public function getFilter_courseORsign() {
         return $this->filter_courseORsign;
     }
-    
-    /*-----------------------------------------------*/
-    
-    public function filter($t_searchName ,$t_page, $t_type){  
-        $valid = $t_type == 'Student'? "and `Validatiion_Status` IS NULL" : "and `Validatiion_Status` = 'confirmed'"; 
-        $select = $t_type == 'Student'? "course_name" : "signatory_name";
-        $join = $t_type == 'Student'? "inner join students on students.username = users.username
+
+    /* ----------------------------------------------- */
+
+    public function filter($t_searchName, $t_page, $t_type) {
+        $valid = $t_type == 'Student' ? "and `Validatiion_Status` IS NULL" : "and `Validatiion_Status` = 'confirmed'";
+        $select = $t_type == 'Student' ? "course_name" : "signatory_name";
+        $join = $t_type == 'Student' ? "inner join students on students.username = users.username
                                         inner join courses on courses .course_id = students.course_id " :
-                                       "inner join signatories on signatories.signatory_id = users.Assigned_Signatory ";
-        
+                "inner join signatories on signatories.signatory_id = users.Assigned_Signatory ";
+
         $this->query = mysql_query("select users.username, Picture, concat(Surname, ', ', First_Name, ' ', Middle_Name) 
-                        as Name, Account_Type, " .$select ." from users " .$join
-                        ."where (First_name like '%$t_searchName%' OR Surname like '%$t_searchName%' OR 
-                        Middle_Name like '%$t_searchName%') AND Account_Type = '$t_type' " . $valid ." order by Name
+                        as Name, Account_Type, " . $select . " from users " . $join
+                . "where (First_name like '%$t_searchName%' OR Surname like '%$t_searchName%' OR 
+                        Middle_Name like '%$t_searchName%') AND Account_Type = '$t_type' " . $valid . " order by Name
                         LIMIT " . (($t_page - 1) * $this->itemsPerPage) . ", " . $this->itemsPerPage);
-        
+
         $this->filter_ID = array();
         $this->filter_Name = array();
         $this->filter_Picture = array();
         $this->filter_Type = array();
         $this->filter_courseORsign = array();
-        while($row = mysql_fetch_array($this->query)){
+        while ($row = mysql_fetch_array($this->query)) {
             array_push($this->filter_ID, $row['0']);
             array_push($this->filter_Name, $row['2']);
             array_push($this->filter_Picture, $row['1']);
             array_push($this->filter_Type, $row['3']);
             array_push($this->filter_courseORsign, $row['4']);
         }
-        
     }
 
     public function getQueryPageSize($searchName, $type) {
-        $valid = $type == 'Student'? "and `Validatiion_Status` IS NULL" : "and `Validatiion_Status` = 'confirmed'"; 
+        $valid = $type == 'Student' ? "and `Validatiion_Status` IS NULL" : "and `Validatiion_Status` = 'confirmed'";
         $query = mysql_query("select Picture, concat(Surname, ', ', First_Name, ' ', Middle_Name) 
                         as Name, Account_Type from users 
                         where (First_name like '%$searchName%' OR Surname like '%$searchName%' OR 
                         Middle_Name like '%$searchName%') AND Account_Type = '$type' " . $valid);
         return mysql_num_rows($query) / $this->itemsPerPage;
     }
-    
-    
-    /*-------------- for unconfirmed signatory users --------------------------*/
-    public function filterUnconfirmedSign($t_searchName, $t_page){
+
+    /* -------------- for unconfirmed signatory users -------------------------- */
+
+    public function filterUnconfirmedSign($t_searchName, $t_page) {
         $this->query = mysql_query("select Username, Picture, concat(Surname, ', ', First_Name, ' ', Middle_Name) 
                         as Name, Account_Type, Signatory_Name from users 
                         inner join signatories on signatories.signatory_id = users.Assigned_Signatory
                         where (First_name like '%$t_searchName%' OR Surname like '%$t_searchName%' OR 
                         Middle_Name like '%$t_searchName%') AND Account_Type = 'Signatory' and `Validatiion_Status` = 'unconfirmed' order by Name
                         LIMIT " . (($t_page - 1) * $this->itemsPerPage) . ", " . $this->itemsPerPage);
-    
+
         $this->filter_ID = array();
         $this->filter_Name = array();
         $this->filter_Picture = array();
         $this->filter_Type = array();
         $this->filter_AssignSignName = array();
         $this->page_row = mysql_num_rows($this->query) / $this->itemsPerPage;
-        while($row = mysql_fetch_array($this->query)){
+        while ($row = mysql_fetch_array($this->query)) {
             array_push($this->filter_ID, $row['0']);
             array_push($this->filter_Name, $row['2']);
             array_push($this->filter_Picture, $row['1']);
             array_push($this->filter_Type, $row['3']);
             array_push($this->filter_AssignSignName, $row['4']);
         }
-        
     }
 
     public function getQueryPageSizeUnconfirmedSign($searchName) {
@@ -198,43 +192,43 @@ class User_Model extends Model {
         return mysql_num_rows($query) / $this->itemsPerPage;
     }
 
-    public function confirmed($uname){
+    public function confirmed($uname) {
         mysql_query("UPDATE `socs`.`users` SET `Validatiion_Status` = 'Confirmed' WHERE `users`.`Username` = '$uname'");
     }
-    
-    /*------------------------------------------------*/
-    public function deleteUser($key) {  
-        mysql_query("delete from users where Username = '$key'");  
+
+    /* ------------------------------------------------ */
+
+    public function deleteUser($key) {
+        mysql_query("delete from users where Username = '$key'");
     }
-    
-    
-    /*--------- For Assigning Signatory ----------*/
-    
-    public function getListofSignatory(){
+
+    /* --------- For Assigning Signatory ---------- */
+
+    public function getListofSignatory() {
         $rowInfo = array();
         $this->query = mysql_query("select signatory_name from signatories");
-        
-        while($row = mysql_fetch_array($this->query)){
+
+        while ($row = mysql_fetch_array($this->query)) {
             array_push($rowInfo, $row['signatory_name']);
         }
-        
+
         return $rowInfo;
-    } 
-    
-    public function getAssignSignatory($uname){
+    }
+
+    public function getAssignSignatory($uname) {
         $this->query = mysql_query("select Signatory_Name from users
                                     inner join signatories
                                     on users.Assigned_Signatory = signatories.Signatory_ID
                                     where username = '$uname'");
         $row = mysql_fetch_array($this->query);
-        
+
         return $row['Signatory_Name'];
-    }    
-    
-    /*---------------------------------------------------------------------------------------*/
-    /*------------ For Signatory Dashboard Part ----------------*/
-    
-    public function filterStudent($Tsign_id, $searchName, $page){
+    }
+
+    /* --------------------------------------------------------------------------------------- */
+    /* ------------ For Signatory Dashboard Part ---------------- */
+
+    public function filterStudent($Tsign_id, $searchName, $page) {
         $this->query = mysql_query("select students.username, concat(Surname, ', ', First_Name, ' ', Middle_Name) as Name from students
                                     inner join users on students.username = users.username
                                     inner join clearancestatus on users.username = clearancestatus.student
@@ -246,19 +240,17 @@ class User_Model extends Model {
                                     Middle_Name like '%$searchName%') AND Account_Type = 'student' 
                                     AND signatories.signatory_id = '$Tsign_id' group by Name order by Name
                                     LIMIT " . (($page - 1) * $this->itemsPerPage) . ", " . $this->itemsPerPage);
-        
-        
+
+
         $this->filter_ID = array();
         $this->filter_Name = array();
-        while($row = mysql_fetch_array($this->query)){
+        while ($row = mysql_fetch_array($this->query)) {
             array_push($this->filter_ID, $row['0']);
             array_push($this->filter_Name, $row['1']);
         }
     }
-    
-    
-    
-    public function getStudent_PageSize($Tsign_id, $searchName){
+
+    public function getStudent_PageSize($Tsign_id, $searchName) {
         $this->query = mysql_query("select concat(Surname, ', ', First_Name, ' ', Middle_Name) as Name from students
                                     inner join users on students.username = users.username
                                     inner join clearancestatus on users.username = clearancestatus.student
@@ -271,7 +263,7 @@ class User_Model extends Model {
                         AND signatories.signatory_id = '$Tsign_id' group by Name");
         return mysql_num_rows($this->query) / $this->itemsPerPage;
     }
-    
+
 }
 
 ?>

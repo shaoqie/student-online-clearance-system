@@ -27,6 +27,7 @@ class Signatory_Registration extends Controller {
         $this->department_model = new Department_Model();
         $this->courses_model = new Course_Model();
         $this->admin = new User_Model();
+        $this->signatoriallist_model = new SignatorialList_Model();
 
         $this->template = new Template();
         $this->template->setPageName("Student Registration");
@@ -37,7 +38,9 @@ class Signatory_Registration extends Controller {
         $listOfDept_ID = $this->department_model->getListOfDept_ID();
         $ListDept_ID_inCourse = $this->courses_model->getListDept_ID_inCourse();
         $listOfCourses = $this->courses_model->getListOfCourses();
+        $listOfsignatory = $this->signatoriallist_model->getListofSignatory();
 
+        $this->template->assign('signatories', $listOfsignatory);
         $this->template->assign('years', $listOfYear);
         $this->template->assign('depts', $listOfDept_Name);
         $this->template->assign('dept_ID', $listOfDept_ID);
@@ -51,8 +54,7 @@ class Signatory_Registration extends Controller {
         $confirmpass = $_POST["confirmpass"];
         $surname = $_POST["surname"];
         $firstname = $_POST["firstname"];
-        $middleName = $_POST["middlename"];
-        $sign_name = $_POST["photo"];
+        $middleName = $_POST["middleName"];
 
         $test = 0;
 
@@ -61,6 +63,7 @@ class Signatory_Registration extends Controller {
             $this->admin->Surname = $surname;
             $this->admin->First_Name = $firstname;
             $this->admin->Middle_Name = $middleName;
+            $this->admin->Username = $username;
 
             $test++;
         } else {
@@ -70,6 +73,9 @@ class Signatory_Registration extends Controller {
 
         if (Validator::is_valid_username($username) && $test == 1) {
             $test++;
+        } else {
+            $this->template->setAlert('Username must not have a numerical values and characters / \ ? < > : ; " spaces and *', Template::ALERT_ERROR, 'alert');
+            return;
         }
 
         //checks the surname if valid
@@ -134,6 +140,27 @@ class Signatory_Registration extends Controller {
                 return;
             }
         }
+
+        $this->admin->Assigned_Signatory = $_POST["sign_name"];
+        
+//        if ($this->admin->update() && $test == 7) {
+//
+//            $this->template->set_surname($surname);
+//            $this->template->set_firstname($firstname);
+//            $this->template->set_middlename($middleName);
+//            $this->template->set_photo($this->admin->Picture);
+//
+//            if (isset($this->admin->Picture)) {
+//
+//                if (move_uploaded_file($imagefile["tmp_name"], $this->local_dir)) {
+//                    $this->template->setAlert('Registered Successfully!', Template::ALERT_SUCCESS);
+//                } else {
+//                    $this->template->setAlert('Registered Successfully! But there\'s problem in uploading a photo.', Template::ALERT_INFO);
+//                }
+//            }
+//        } else {
+//            $this->template->setAlert('Database Error!', Template::ALERT_ERROR);
+//        }
     }
 
     public function display() {
