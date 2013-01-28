@@ -28,20 +28,25 @@ class Validator {
         return preg_match('/[0-9\?\:\>\<\"\\\*\/\;]/', $storename) ? false : true;
     }
 
-    public static function is_valid_photo(array $imagefile) {
+    public static function is_valid_photo($imagefile) {
 
-        $ext = array("jpg", "jpeg", "png", "gif");
         $types = array("image/jpeg", "image/png", "image/gif", "image/pjpeg");
 
-        $filename = explode(".", $imagefile["name"]);
-        $type = $imagefile["type"];
+        $test = 0;
+        
+        if (in_array($imagefile["type"], $types)) {
+            $test++;
+        }
 
-        if ($imagefile["error"] > 0) {
-            return false;
-        } else if (in_array(strtolower(end($filename)), $ext) && in_array($type, $types)) {
+        if ($imagefile["size"] < 1000000) {
+            $test++;
+        }
+
+        if($test == 2){
             return true;
-        } else {
+        }else{
             return false;
         }
     }
+
 }

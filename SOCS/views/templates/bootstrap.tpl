@@ -101,28 +101,27 @@
                                     </li>
                                 </ul>
                             </div>
-                        {elseif !isset($smarty.get.action) && !isset($username)}
+
+                        {elseif isset($smarty.get.action) && !isset($username)}
 
                             {call name=welcome_navigations}
 
-                            <form class="navbar-form pull-right" action="index.php?action=login" method="post">
-                                <input class="span2" type="text" placeholder="Username" name="username" required>
-                                <input class="span2" type="password" placeholder="Password" name="password" required>
-                                <button type="submit" class="btn"><i class="icon-check"></i> Sign in</button>
-                            </form>
-
-                        {elseif $smarty.get.action=="registrationForm" && !isset($username)}
-
-                            {call name=welcome_navigations}
-
-                            <form class="navbar-form pull-right" action="index.php?action=login" method="post">
-                                <input class="span2" type="text" placeholder="Username" name="username" required>
-                                <input class="span2" type="password" placeholder="Password" name="password" required>
-                                <button type="submit" class="btn"><i class="icon-check"></i> Sign in</button>
-                            </form>
+                            {if $smarty.get.action == "student_registrationForm"}
+                                <form class="navbar-form pull-right" action="index.php?action=login" method="post">
+                                    <input class="span2" type="text" placeholder="Username" name="username" required>
+                                    <input class="span2" type="password" placeholder="Password" name="password" required>
+                                    <button type="submit" class="btn"><i class="icon-check"></i> Sign in</button>
+                                </form>
+                            {/if}
 
                         {else}
                             {call name=welcome_navigations}
+
+                            <form class="navbar-form pull-right" action="index.php?action=login" method="post">
+                                <input class="span2" type="text" placeholder="Username" name="username" required>
+                                <input class="span2" type="password" placeholder="Password" name="password" required>
+                                <button type="submit" class="btn"><i class="icon-check"></i> Sign in</button>
+                            </form>
                         {/if}
 
                     </div><!--/.nav-collapse -->
@@ -134,7 +133,15 @@
 
             {if isset($username)}
                 <div id="header" class="row socs-content">
-                    <div class="span1"><img src="{$host}/photos/default.png" class="img-polaroid" /></div>
+                    <div class="span1">
+
+                        {if isset($photo)}
+                            <img src="{$photo}" class="img-polaroid" />
+                        {else}
+                            <img src="{$host}/photos/default.png" class="img-polaroid" />
+                        {/if}
+                        
+                    </div>
                     <div class="span5">
                         <h4>{$surname}, {$firstname} {$middlename}</h4>
                         <h5>- {$account_type} {$assign_sign}</h5>

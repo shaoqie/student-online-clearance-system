@@ -25,6 +25,7 @@ class Signatory_List_Manager extends Controller {
             $this->template->set_firstname(Session::get_Firstname());
             $this->template->set_middlename(Session::get_Middlename());
             $this->template->set_account_type(Session::get_Account_type());
+            $this->template->set_photo(Session::get_photo());
 
             $this->template->setContent('signatory_list_manager.tpl');
             $this->template->setCalendar('Calendar.tpl');

@@ -31,6 +31,7 @@ class course_list_byDepartment extends Controller {
             $this->template->set_middlename(Session::get_Middlename());
             $this->template->set_account_type(Session::get_Account_type());
             $this->template->assign('Dept_name', Session::get_DepartmentName());
+            $this->template->set_photo(Session::get_photo());
 
             $this->template->setContent('course_list_byDepartment.tpl');
             $this->template->setCalendar('Calendar.tpl');

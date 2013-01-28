@@ -45,8 +45,12 @@ class Session {
     public static function set_deptpartName($deptName){
         $_SESSION['Department_Name'] = $deptName;
     }
+    
+    public static function set_photo($photo){
+        $_SESSION['photo'] = $photo;
+    }
 
-        //acessor
+    //acessor
     public static function get_user(){
         return $_SESSION['username'];
     }
@@ -76,6 +80,10 @@ class Session {
         return $_SESSION['assignSignatory'];
     }
     
+    public static function get_photo(){
+        return $_SESSION['photo'];
+    }
+
     public static function user_exist(){
         if(isset($_SESSION['username'])){
             return true;

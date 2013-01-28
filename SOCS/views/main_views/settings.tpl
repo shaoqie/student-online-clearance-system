@@ -1,8 +1,8 @@
 <button class="pull-right btn" onclick="window.location.href='index.php'">Back</button>
-<form action='settings.php?action=verify' method='post' class="form-horizontal">
+<form action='settings.php?action=verify' method='post' class="form-horizontal" enctype="multipart/form-data">
 
     <legend>Edit Account: </legend>
-
+    
     <div class="control-group">
         <label class="control-label">Surname: </label>
         <div class="controls">

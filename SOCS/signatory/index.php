@@ -53,6 +53,8 @@ class Index extends Controller {
             $this->template->assign('currentSemester', $currentSemester);
             $this->template->assign('currentSchool_Year', $currentSchool_Year);
             
+            $this->template->set_photo(Session::get_photo());
+            
             
             $this->displayTable('', 1, "default", "");
         } else {

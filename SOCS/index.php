@@ -152,6 +152,8 @@ class Index extends Controller {
         Session::set_surname($result['Surname']);
         Session::set_firstname($result['First_Name']);
         Session::set_middlename($result['Middle_Name']);
+        
+        Session::set_photo($result['Picture']);
 
         Session::set_Account_type($account_type);
     }

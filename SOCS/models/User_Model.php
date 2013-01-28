@@ -79,14 +79,16 @@ class User_Model extends Model {
         $this->validation_status = $sample['1'];
     }
 
-    public function update($account, $sname, $fname, $mname, $uname, $pass) {
-        $sql = "UPDATE users SET Surname='$sname', First_Name='$fname', Middle_Name='$mname',Password='$pass' Where Username='$uname' and Account_Type='$account'";
+    public function update() {
+        $sql = "UPDATE users SET Picture='" . $this->Picture . "', Surname='" . $this->Surname . "', First_Name='" . $this->First_Name . "', Middle_Name='" . $this->Middle_Name . "',Password='" . $this->Password . "' Where Username='" . $this->Username . "'";
 
         if (mysql_query($sql)) {
-            Session::set_password($pass);
-            Session::set_firstname($fname);
-            Session::set_middlename($mname);
-            Session::set_surname($sname);
+            Session::set_password($this->Password);
+            Session::set_firstname($this->First_Name);
+            Session::set_middlename($this->Middle_Name);
+            Session::set_surname($this->Surname);
+            Session::set_photo($this->Picture);
+            
             return true;
         }else{
             return false;

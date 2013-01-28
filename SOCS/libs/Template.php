@@ -121,6 +121,10 @@ class Template extends Smarty {
     public function set_header_right($tpl_file) {
         $this->assign('header_right', $tpl_file);
     }
+    
+    public function set_photo($photo){
+        $this->assign('photo', $photo);
+    }
 
 }
 

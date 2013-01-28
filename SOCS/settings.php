@@ -10,6 +10,7 @@ class Settings extends Controller {
 
     private $template;
     private $admin;
+    private $local_dir;
 
     public function __construct() {
         parent::__construct();
@@ -25,16 +26,16 @@ class Settings extends Controller {
             $this->template->set_firstname(Session::get_Firstname());
             $this->template->set_middlename(Session::get_Middlename());
             $this->template->set_account_type(Session::get_Account_type());
+            $this->template->set_photo(Session::get_photo());
 
             if (Session::get_Account_type() == "Signatory") {
-                $this->template->set_account_type(Session::get_Account_type() ." in Charge -");
-                $this->template->assign('assign_sign', ", " .Session::get_AssignSignatory());
-            }else{
+                $this->template->set_account_type(Session::get_Account_type() . " in Charge");
+                $this->template->assign('assign_sign', ", " . Session::get_AssignSignatory());
+            } else {
                 $this->template->assign('assign_sign', '');
             }
-            
+
             $this->template->setContent('settings.tpl');
-            
         } else {
             header('Location: ' . HOST);
             exit;
@@ -49,6 +50,7 @@ class Settings extends Controller {
         $surname = $_POST['surname'];
         $firstname = $_POST['firstname'];
         $middleName = $_POST['middleName'];
+        $imagefile = "";
 
         if ($newpass == "") {
             $newpass = $oldpass;
@@ -59,11 +61,9 @@ class Settings extends Controller {
 
         //Check if fields are empty in firstname surname and middlename
         if ($surname != "" && $firstname != "" && $middleName != "") {
-            if (Session::get_Account_type() != "Student") {
-                $this->admin->Surname = $surname;
-                $this->admin->First_Name = $firstname;
-                $this->admin->Middle_Name = $middleName;
-            }
+            $this->admin->Surname = $surname;
+            $this->admin->First_Name = $firstname;
+            $this->admin->Middle_Name = $middleName;
 
             $test++;
         } else {
@@ -115,29 +115,61 @@ class Settings extends Controller {
             $this->template->setAlert('Passwords does not matched!', Template::ALERT_ERROR, 'alert');
             return;
         }
-        
-        //check if photo is valid
-//        if(Validator::is_valid_photo($_FILES["photo"]) && $test == 6){
-//            $test++;
-//        }else{
-//            $this->template->setAlert('Not valid picture!', Template::ALERT_ERROR, 'alert');
-//            return;
-//        }
 
+        //check if password is valid
         if (Validator::is_valid_password($newpass) && $test == 6) {
 
-            //$this->admin->Password = $newpass;
+            $this->admin->Password = $newpass;
 
-            if ($this->admin->update(Session::get_Account_type(), $surname, $firstname, $middleName, Session::get_user(), $newpass)) {
-                $this->template->setAlert('Your Account Has Been Updated!', Template::ALERT_SUCCESS, 'alert');
-                $this->template->set_surname($surname);
-                $this->template->set_firstname($firstname);
-                $this->template->set_middlename($middleName);
-            } else {
-                $this->template->setAlert('Database Error!', Template::ALERT_ERROR, 'alert');
-            }
+            $test++;
         } else {
             $this->template->setAlert('Password\'s length must have a minimum of 7 characters!', Template::ALERT_ERROR, 'alert');
+        }
+
+        //check if photo is valid
+        if (isset($_FILES["photo"])) {
+
+            $imagefile = $_FILES["photo"];
+
+            if (Validator::is_valid_photo($imagefile)) {
+
+                $ext = explode(".", $imagefile["name"]);
+                
+                $actor = "";
+                
+                if(Session::get_Account_type() == "Admin"){
+                    $actor = "administrator";
+                }else if(Session::get_Account_type() == "Signatory"){
+                    $actor = "signatory";
+                }else if(Session::get_Account_type() == "Student"){
+                    $actor = "student";
+                }
+
+                $this->admin->Picture = HOST . "/photos/$actor/" . Session::get_user() . "." . end($ext);
+                $this->local_dir = PATH . "photos/$actor/" . Session::get_user() . "." . end($ext);
+            } else {
+                $this->template->setAlert('Invalid Photo!', Template::ALERT_ERROR, 'alert');
+                return;
+            }
+        }
+
+        if ($this->admin->update() && $test == 7) {
+
+            $this->template->set_surname($surname);
+            $this->template->set_firstname($firstname);
+            $this->template->set_middlename($middleName);
+            $this->template->set_photo($this->admin->Picture);
+
+            if (isset($this->admin->Picture)) {
+
+                if (move_uploaded_file($imagefile["tmp_name"], $this->local_dir)) {
+                    $this->template->setAlert('Account has been updated!', Template::ALERT_SUCCESS);
+                }else{
+                    $this->template->setAlert('Account has been updated! But there\'s problem in uploading a photo.', Template::ALERT_INFO);
+                }
+            }
+        } else {
+            $this->template->setAlert('Database Error!', Template::ALERT_ERROR);
         }
     }
 

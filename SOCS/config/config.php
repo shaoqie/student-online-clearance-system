@@ -36,6 +36,10 @@ define('PATH', "C:/wamp/www/SOCS/");
  */
 define('HOST', "http://localhost/SOCS");
 
+/*
+ * Default Photo
+ */
+define('DEFAULT_PHOTO', PATH . "photos/default.png");
 
 /*
  * -----------------------------------------------------------------------------
