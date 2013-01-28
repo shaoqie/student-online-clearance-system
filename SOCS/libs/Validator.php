@@ -22,6 +22,11 @@ class Validator {
         }
         return false;
     }
+    
+    public static function is_valid_username($username) {
+        /** don't allow characters / \ ? < > : ; " * and numerical characters on store name */
+        return preg_match('/[\s\?\:\>\<\"\\\*\/\;]/', $username) ? false : true;
+    }
 
     public static function is_valid_name($storename) {
         /** don't allow characters / \ ? < > : ; " * and numerical characters on store name */

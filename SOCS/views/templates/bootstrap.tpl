@@ -77,7 +77,7 @@
                                 </a>
                                 <ul class="dropdown-menu">
                                     <li><a href="index.php?action=student_registrationForm">As Student</a></li>
-                                    <li><a href="index.php?action=signatory_registrationForm">As Signatory</a></li>
+                                    <li><a href="signatory_registration.php">As Signatory</a></li>
                                 </ul>
                             </li>
                         </ul>

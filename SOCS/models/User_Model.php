@@ -43,7 +43,7 @@ class User_Model extends Model {
     public function insertSignatory_User($uname, $pass, $sname, $fname, $mname, $pic, $user_type, $assign_sign){
         $this->query = mysql_query("INSERT INTO `socs`.`users` (`Username`, `Password`, `Surname`, `First_Name`, `Middle_Name`, `Picture`, `Account_Type`, `Assigned_Signatory`, `Validatiion_Status`) 
                             VALUES 
-                            ('$uname', '$pass', '$sname', '$fname', '$mname', NULL, 'Signatory', '$assign_sign', 'Unconfirmed')");  
+                            ('$uname', '$pass', '$sname', '$fname', '$mname', $pic, 'Signatory', '$assign_sign', 'Unconfirmed')");  
     }
     
     // mutator
