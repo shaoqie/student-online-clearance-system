@@ -37,7 +37,7 @@ class User_Model extends Model {
     }
 
     public function insertSignatory_User() {
-        $this->query = mysql_query("INSERT INTO `socs`.`users` (`Username`, `Password`, `Surname`, `First_Name`, `Middle_Name`, `Picture`, `Account_Type`, `Assigned_Signatory`, `Validatiion_Status`) 
+        $this->query = mysql_query("INSERT INTO `socs`.`users` (`Username`, `Password`, `Surname`, `First_Name`, `Middle_Name`, `Picture`, `Account_Type`, `Assigned_Signatory`, `Validation_Status`) 
                             VALUES 
                             ('$this->Username', '$this->Password', '$this->Surname', '$this->First_Name', '$this->Middle_Name', $this->Picture, 'Signatory', '$this->Assigned_Signatory', 'Unconfirmed')");
     }
@@ -67,10 +67,10 @@ class User_Model extends Model {
     }
 
     public function queryUser_Type($tempUser, $tempPass) {
-        $this->query = mysql_query("SELECT Account_Type, Validatiion_Status FROM users WHERE username='$tempUser'and password='$tempPass' ");
+        $this->query = mysql_query("SELECT Account_Type, Validation_Status FROM users WHERE username='$tempUser'and password='$tempPass' ");
 
         $sample = mysql_fetch_array($this->query);
-
+        
         $this->Account_Type = $sample['0'];
         $this->validation_status = $sample['1'];
     }
@@ -92,7 +92,7 @@ class User_Model extends Model {
     }
 
     public function getValidation_status($uname) {
-        $this->query = mysql_query("select Validatiion_Status FROM users WHERE username = '$uname'");
+        $this->query = mysql_query("select Validation_Status FROM users WHERE username = '$uname'");
         $sample = mysql_fetch_array($this->query);
         return $sample['0'];
     }
@@ -124,7 +124,7 @@ class User_Model extends Model {
     /* ----------------------------------------------- */
 
     public function filter($t_searchName, $t_page, $t_type) {
-        $valid = $t_type == 'Student' ? "and `Validatiion_Status` IS NULL" : "and `Validatiion_Status` = 'confirmed'";
+        //$valid = $t_type == 'Student' ? "and `Validation_Status` IS NULL" : "and `Validation_Status` = 'confirmed'";
         $select = $t_type == 'Student' ? "course_name" : "signatory_name";
         $join = $t_type == 'Student' ? "inner join students on students.username = users.username
                                         inner join courses on courses .course_id = students.course_id " :
@@ -133,7 +133,7 @@ class User_Model extends Model {
         $this->query = mysql_query("select users.username, Picture, concat(Surname, ', ', First_Name, ' ', Middle_Name) 
                         as Name, Account_Type, " . $select . " from users " . $join
                 . "where (First_name like '%$t_searchName%' OR Surname like '%$t_searchName%' OR 
-                        Middle_Name like '%$t_searchName%') AND Account_Type = '$t_type' " . $valid . " order by Name
+                        Middle_Name like '%$t_searchName%') AND Account_Type = '$t_type' and `Validation_Status` = 'confirmed' order by Name
                         LIMIT " . (($t_page - 1) * $this->itemsPerPage) . ", " . $this->itemsPerPage);
 
         $this->filter_ID = array();
@@ -151,11 +151,11 @@ class User_Model extends Model {
     }
 
     public function getQueryPageSize($searchName, $type) {
-        $valid = $type == 'Student' ? "and `Validatiion_Status` IS NULL" : "and `Validatiion_Status` = 'confirmed'";
+        //$valid = $type == 'Student' ? "and `Validation_Status` IS NULL" : "and `Validation_Status` = 'confirmed'";
         $query = mysql_query("select Picture, concat(Surname, ', ', First_Name, ' ', Middle_Name) 
                         as Name, Account_Type from users 
                         where (First_name like '%$searchName%' OR Surname like '%$searchName%' OR 
-                        Middle_Name like '%$searchName%') AND Account_Type = '$type' " . $valid);
+                        Middle_Name like '%$searchName%') AND Account_Type = '$type' and `Validation_Status` = 'confirmed'");
         return mysql_num_rows($query) / $this->itemsPerPage;
     }
 
@@ -166,7 +166,7 @@ class User_Model extends Model {
                         as Name, Account_Type, Signatory_Name from users 
                         inner join signatories on signatories.signatory_id = users.Assigned_Signatory
                         where (First_name like '%$t_searchName%' OR Surname like '%$t_searchName%' OR 
-                        Middle_Name like '%$t_searchName%') AND Account_Type = 'Signatory' and `Validatiion_Status` = 'unconfirmed' order by Name
+                        Middle_Name like '%$t_searchName%') AND Account_Type = 'Signatory' and `Validation_Status` = 'unconfirmed' order by Name
                         LIMIT " . (($t_page - 1) * $this->itemsPerPage) . ", " . $this->itemsPerPage);
 
         $this->filter_ID = array();
@@ -188,12 +188,12 @@ class User_Model extends Model {
         $query = mysql_query("select Picture, concat(Surname, ', ', First_Name, ' ', Middle_Name) 
                         as Name, Account_Type from users 
                         where (First_name like '%$searchName%' OR Surname like '%$searchName%' OR 
-                        Middle_Name like '%$searchName%') AND Account_Type = 'Signatory' and `Validatiion_Status` = 'unconfirmed'");
+                        Middle_Name like '%$searchName%') AND Account_Type = 'Signatory' and `Validation_Status` = 'unconfirmed'");
         return mysql_num_rows($query) / $this->itemsPerPage;
     }
 
     public function confirmed($uname) {
-        mysql_query("UPDATE `socs`.`users` SET `Validatiion_Status` = 'Confirmed' WHERE `users`.`Username` = '$uname'");
+        mysql_query("UPDATE `socs`.`users` SET `Validation_Status` = 'Confirmed' WHERE `users`.`Username` = '$uname'");
     }
 
     /* ------------------------------------------------ */

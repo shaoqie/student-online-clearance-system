@@ -41,7 +41,7 @@ class Index extends Controller {
                 Session::set_user($_POST['username'], trim($_POST['password']));
                 $this->setSession('Admin');
                 header('Location: ' . HOST . '/administrator/');
-            } else if ($this->administrator_model->Account_Type == "Student") {
+            } else if ($this->administrator_model->Account_Type == "Student" && $this->administrator_model->validation_status == "Confirmed") {
 
                 Session::set_user($_POST['username'], $_POST['password']);
                 $this->setSession('Student');
