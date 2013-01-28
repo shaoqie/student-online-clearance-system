@@ -17,7 +17,7 @@
     <li><a href='../administrator/department_list_manager.php'>Departments</a></li>
 </ul>
 
-{*
+
 <!-- Search Bar-->
 {call name=search}
 
@@ -58,4 +58,3 @@
     </select>
 </div>
 
-*}

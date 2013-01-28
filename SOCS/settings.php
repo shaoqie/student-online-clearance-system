@@ -128,7 +128,7 @@ class Settings extends Controller {
 
             //$this->admin->Password = $newpass;
 
-            if ($this->admin->update(Session::get_Account_type(), $surname, $firstname, $mname, Session::get_user(), $newpass)) {
+            if ($this->admin->update(Session::get_Account_type(), $surname, $firstname, $middleName, Session::get_user(), $newpass)) {
                 $this->template->setAlert('Your Account Has Been Updated!', Template::ALERT_SUCCESS, 'alert');
                 $this->template->set_surname($surname);
                 $this->template->set_firstname($firstname);

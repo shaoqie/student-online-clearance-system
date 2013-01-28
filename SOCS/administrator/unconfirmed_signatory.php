@@ -35,27 +35,44 @@ class unconfirmed_signatory extends Controller{
         }
     }
     
+    /*---------------- Deleting Signatory Unconfirm User-----------------*/
+    public function deleted() {
+        $this->template->setAlert('Delete an Unconfirm Signatory User was Successfully!..', Template::ALERT_SUCCESS, 'alert');
+    }
+
+    public function delete($selected) {
+        $explode = explode("-", $selected);
+        
+        echo "aewwewe";
+        foreach ($explode as $value) {
+            $this->user_model->deleteUser(trim($value));
+            //if($delete == "false"){ $this->template->setAlert('You can delete an Unuse Signatory only!..', Template::ALERT_ERROR, 'alert'); return;}
+        }
+        $HOST = $explode[0] != null ? HOST . "/administrator/unconfirmed_signatory.php?action=deleted" : HOST . "/administrator/unconfirmed_signatory.php";
+        header('Location: ' . $HOST);
+    }
+    
     public function filter($filterName) {
         $this->displayTable(trim($filterName), 1);
     }
 
     public function displayTable($searchName, $page, $finder) {
-//        $this->signatory_model->filter($searchName, $page);
+        $this->user_model->filterUnconfirmedSign($searchName, $page);
 //        
-//        $numOfPages = $this->signatory_model->getQueryPageSize($searchName);
-//        $numOfResults = count($this->signatory_model->getFilter_Name());
-//        $getListofSignName = $this->getListofName($this->signatory_model->getFilter_Name(), $searchName, $finder);
-//        $filter_ID = $this->signatory_model->getFilter_ID();
+        $numOfPages = $this->user_model->getQueryPageSizeUnconfirmedSign($searchName);
+        $numOfResults = count($this->user_model->getFilter_Name());
+        $getListofSignUser = $this->getListofName($this->user_model->getFilter_Name(), $searchName, $finder);
+        $filter_ID = $this->user_model->getFilter_ID();
 
-        //$this->template->assign('myName_sign', $getListofSignName); //$this->signatory_model->filter_Description($searchName, $page));
-        //$this->template->assignByRef('myKey_sign', $filter_ID);
-       // $this->template->assign('filter', '');
-        //$this->template->assign('sign_length', $numOfPages);
-        //$this->template->assign('rowCount_sign', $numOfResults);
+        $this->template->assign('myName_unconfirmedSign', $getListofSignUser); //$this->signatory_model->filter_Description($searchName, $page));
+        $this->template->assignByRef('myKey_unconfirmedSign', $filter_ID);
+        $this->template->assign('filter', $searchName);
+        $this->template->assign('unconfirmedSign_length', $numOfPages);
+        $this->template->assign('rowCount_unconfirmedSign', $numOfResults);
 
-//        if ($numOfResults == 0) {
-//            $this->template->setAlert('No Results Found.', Template::ALERT_ERROR, 'alert');
-//        }
+        if ($numOfResults == 0) {
+            $this->template->setAlert('No Results Found.', Template::ALERT_ERROR, 'alert');
+        }
     }
 
     public function display() {

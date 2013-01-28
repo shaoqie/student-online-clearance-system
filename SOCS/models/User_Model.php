@@ -109,11 +109,13 @@ class User_Model extends Model {
     
     /*-----------------------------------------------*/
     
-    public function filter($t_searchName ,$t_page, $t_type){
+    public function filter($t_searchName ,$t_page, $t_type){  
+        $valid = $t_type == 'Student'? "and `Validatiion_Status` IS NULL" : "and `Validatiion_Status` = 'confirmed'"; 
+        
         $this->query = mysql_query("select Username, Picture, concat(Surname, ', ', First_Name, ' ', Middle_Name) 
                         as Name, Account_Type from users 
                         where (First_name like '%$t_searchName%' OR Surname like '%$t_searchName%' OR 
-                        Middle_Name like '%$t_searchName%') AND Account_Type = '$t_type' order by Name
+                        Middle_Name like '%$t_searchName%') AND Account_Type = '$t_type' " . $valid ." order by Name
                         LIMIT " . (($t_page - 1) * $this->itemsPerPage) . ", " . $this->itemsPerPage);
         
         $this->filter_ID = array();
@@ -129,22 +131,34 @@ class User_Model extends Model {
         
     }
     
-    //public function filterUnconfirmedSign(){
+    public function filterUnconfirmedSign($t_searchName, $t_page){
+        $this->query = mysql_query("select Username, Picture, concat(Surname, ', ', First_Name, ' ', Middle_Name) 
+                        as Name, Account_Type from users 
+                        where (First_name like '%$t_searchName%' OR Surname like '%$t_searchName%' OR 
+                        Middle_Name like '%$t_searchName%') AND Account_Type = 'Signatory' and `Validatiion_Status` = 'unconfirmed' order by Name
+                        LIMIT " . (($t_page - 1) * $this->itemsPerPage) . ", " . $this->itemsPerPage);
     
-    /*------------------------------*/
+        $this->filter_ID = array();
+        $this->filter_Name = array();
+        $this->filter_Picture = array();
+        $this->filter_Type = array();
+        while($row = mysql_fetch_array($this->query)){
+            array_push($this->filter_ID, $row['0']);
+            array_push($this->filter_Name, $row['2']);
+            array_push($this->filter_Picture, $row['1']);
+            array_push($this->filter_Type, $row['3']);
+        }
+        
+    }
 
-//    public function getListofUsers($searchName, $page, $type) {
-//
-//        $query = mysql_query("select Username, Picture, concat(Surname, ', ', First_Name, ' ', Middle_Name) 
-//                        as Name, Account_Type from users 
-//                        where (First_name like '%$searchName%' OR Surname like '%$searchName%' OR 
-//                        Middle_Name like '%$searchName%') AND Account_Type = '$type' order by Name
-//                        LIMIT " . (($page - 1) * $this->itemsPerPage) . ", " . $this->itemsPerPage);
-//        return $query;
-//    }
+    public function getQueryPageSizeUnconfirmedSign($searchName) {
+        $query = mysql_query("select Picture, concat(Surname, ', ', First_Name, ' ', Middle_Name) 
+                        as Name, Account_Type from users 
+                        where (First_name like '%$searchName%' OR Surname like '%$searchName%' OR 
+                        Middle_Name like '%$searchName%') AND Account_Type = 'Signatory' and `Validatiion_Status` = 'unconfirmed'");
+        return mysql_num_rows($query) / $this->itemsPerPage;
+    }
     
-    /*------------------------------*/
-
     public function getQueryPageSize($searchName, $type) {
         $query = mysql_query("select Picture, concat(Surname, ', ', First_Name, ' ', Middle_Name) 
                         as Name, Account_Type from users 
@@ -154,7 +168,7 @@ class User_Model extends Model {
     }
 
     public function deleteUser($key) {  
-        mysql_query("delete from users where Username = '$key'");   
+        mysql_query("delete from users where Username = '$key'");  
     }
     
     
@@ -206,48 +220,7 @@ class User_Model extends Model {
         }
     }
     
-    // List of student users.
-//    public function filter_ListofStudent_Username($Tsign_id, $searchName, $page){
-//        $filter = array();
-//        $this->query = mysql_query("select students.username, concat(Surname, ', ', First_Name, ' ', Middle_Name) as Name from students
-//                                    inner join users on students.username = users.username
-//                                    inner join clearancestatus on users.username = clearancestatus.student
-//                                    inner join courses on students.course_id = courses.course_id
-//                                    inner join departments on courses.Department_ID = departments.Department_ID
-//                                    inner join signatorialList on departments.Department_ID = signatorialList.department_id
-//                                    inner join signatories on signatorialList.signatory_id = signatories.signatory_id
-//                                    where (First_name like '%$searchName%' OR Surname like '%$searchName%' OR 
-//                                    Middle_Name like '%$searchName%') AND Account_Type = 'student' 
-//                                    AND signatories.signatory_id = '$Tsign_id' group by Name order by Name
-//                                    LIMIT " . (($page - 1) * $this->itemsPerPage) . ", " . $this->itemsPerPage);
-//        
-//        while($row = mysql_fetch_array($this->query)){
-//            array_push($filter, $row['0']);
-//        }
-//        
-//        return $filter;
-//    }
-//    
-//    public function filter_ListofStudent_NameUsers($Tsign_id, $searchName, $page){
-//        $filter = array();
-//        $this->query = mysql_query("select concat(Surname, ', ', First_Name, ' ', Middle_Name) as Name from students
-//                                    inner join users on students.username = users.username
-//                                    inner join clearancestatus on users.username = clearancestatus.student
-//                                    inner join courses on students.course_id = courses.course_id
-//                                    inner join departments on courses.Department_ID = departments.Department_ID
-//                                    inner join signatorialList on departments.Department_ID = signatorialList.department_id
-//                                    inner join signatories on signatorialList.signatory_id = signatories.signatory_id
-//                                    where (First_name like '%$searchName%' OR Surname like '%$searchName%' OR 
-//                                    Middle_Name like '%$searchName%') AND Account_Type = 'student' 
-//                                    AND signatories.signatory_id = '$Tsign_id' group by Name order by Name
-//                                    LIMIT " . (($page - 1) * $this->itemsPerPage) . ", " . $this->itemsPerPage);
-//        
-//        while($row = mysql_fetch_array($this->query)){
-//            array_push($filter, $row['Name']);
-//        }
-//        
-//        return $filter;
-//    }
+    
     
     public function getStudent_PageSize($Tsign_id, $searchName){
         $this->query = mysql_query("select concat(Surname, ', ', First_Name, ' ', Middle_Name) as Name from students

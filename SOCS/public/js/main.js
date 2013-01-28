@@ -67,7 +67,7 @@ function findCheck(rowCount, type){
                 var valueDeleted = "";
                 for(var i = 0; i < rowCount; i++){
                     if(document.getElementById("" +i).checked == true){
-                        valueDeleted += document.getElementById("" +i).value + "@";
+                        valueDeleted += document.getElementById("" +i).value + "-";
                     }
                 }
                 window.location.assign("?action=delete&selected=" + valueDeleted);
