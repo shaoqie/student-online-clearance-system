@@ -63,7 +63,7 @@
     <div class="control-group">
         <div class="controls">
             <input class="btn btn-primary" type='Submit' value='Save'> &nbsp;
-            <a href='/SOCS/'>Cancel</a>
+            <a href='/SOCS/'> Cancel</a>
         </div>
     </div>
 </form>
