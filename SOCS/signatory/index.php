@@ -21,9 +21,9 @@ class Index extends Controller {
 
     public function __construct() {
         parent::__construct();
-
-        if (Session::user_exist() && Session::get_Account_type() == "Signatory") {
             $this->user_model = new User_Model();
+        if (Session::user_exist() && Session::get_Account_type() == "Signatory") {
+            
             $this->schoolYearSem_model = new SchoolYearSem_Model();
             $this->student_model = new Student_Model();
             $this->clearanceStatus_model = new ClearanceStatus();

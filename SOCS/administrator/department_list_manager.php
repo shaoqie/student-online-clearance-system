@@ -123,6 +123,7 @@ class Department_List_Manager extends Controller {
         $getListofDeptName = $this->getListofName($this->department_model->getFilter_Name(), $searchName, $finder);
         $getListofDeptNameWithoutColor = $this->department_model->getFilter_Name();
         $filter_ID = $this->department_model->getFilter_ID();
+        $filter_Desc = $this->parsingNewLine_Decs($this->department_model->getFilter_Desc());
 
         $this->template->assign('myName_dept', $getListofDeptName);
         $this->template->assign('myDept_Name', $getListofDeptNameWithoutColor);
@@ -130,6 +131,7 @@ class Department_List_Manager extends Controller {
         $this->template->assign('filter', $searchName);
         $this->template->assign('dept_length', $numOfPages);
         $this->template->assign('rowCount_dept', $numOfResults);
+        $this->template->assign('desc_dept', $filter_Desc);
 
         if ($numOfResults == 0) {
             $this->template->setAlert('No Results Found.', Template::ALERT_ERROR, 'alert');

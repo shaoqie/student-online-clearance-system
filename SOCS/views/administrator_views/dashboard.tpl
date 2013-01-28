@@ -28,6 +28,7 @@
         <th>
             <input type="checkbox" onclick="isCheck({$rowCount_admin})" id="check"> User
         </th>
+        <th>{$courseORsign}</th>
         <th>Type</th>
     </tr>
     {foreach from = $myName key = k item = i}
@@ -37,6 +38,7 @@
                     <input class="Checkbox" type="checkbox" id = '{$k}' value = {$myKey_admin[$k]}> {$i}
                 </label>
             </td>
+            <td>{$my_courseORsign[$k]}</td>
             <td>{$myType[$k]}</td>
         </tr>
     {/foreach}

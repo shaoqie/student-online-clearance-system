@@ -78,6 +78,8 @@ class Index extends Controller {
     public function displayTable($searchName, $page, $user_type , $finder) {
         $this->administrator_model->filter($searchName, $page, $user_type);
         
+        
+        $temp = $user_type == 'Student' ? "Courses" : "Assigned Signatory";
         $numOfPages = $this->administrator_model->getQueryPageSize($searchName, $user_type);
         $numOfResults = count($this->administrator_model->getFilter_Name());
 
@@ -88,6 +90,8 @@ class Index extends Controller {
         $this->template->assign('admin_length', $numOfPages);
         $this->template->assign('rowCount_admin', $numOfResults);
         $this->template->assign('user_type', $user_type);
+        $this->template->assign('courseORsign', $temp);
+        $this->template->assign('my_courseORsign', $this->administrator_model->getFilter_courseORsign());
 
         if($finder == "default"){
             $this->template->set_Name($this->getNameofUser($this->administrator_model->getFilter_Name(), $searchName, "default"));

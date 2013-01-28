@@ -51,6 +51,16 @@ abstract class Controller {
         
         return $row;
     }
+    
+    public function parsingNewLine_Decs($arrayTemp){
+        $temp = array();
+        foreach ($arrayTemp as $value) {
+            $hold = strlen($value) > 25 ? substr($value, 0, 25) ."....." : $value;
+            array_push($temp, $hold );
+        }
+        
+        return $temp;
+    }
 
     public abstract function display();
 }

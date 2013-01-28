@@ -29,9 +29,8 @@
         <th>
             <input type="checkbox" onclick="isCheck({$rowCount_course})" id="check"> Courses
         </th>
-        <th>
-    <div>Controls</div>
-</th>
+        <th>Description</th>
+        <th>Controls</th>
 </tr>
 {foreach from = $myName_course key = k item = i}
     <tr>
@@ -40,6 +39,7 @@
                 <input class="Checkbox" type="checkbox" id = '{$k}' value = {$myKey_course[$k]} > {$i}
             </label>
         </td>
+        <td><label>{$desc_course[$k]}</label></td>
         <td>
             <div>
                 <a style="cursor:pointer;" onclick="window.location.href='course_list_byDepartment.php?action=editCourse&seleted={$myKey_course[$k]}'">

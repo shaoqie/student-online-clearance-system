@@ -31,6 +31,7 @@
         <th>
             <input type="checkbox" onclick="isCheck({$rowCount_sign})" id="check"> Signatories
         </th>
+        <th>Description</th>
         <th>Controls</th>
     </tr>
     {foreach from = $myName_sign key = k item = i}
@@ -40,6 +41,7 @@
                     <input class="Checkbox" type="checkbox" id = '{$k}' value = {$myKey_sign[$k]} > {$i}
                 </label>
             </td>
+            <td><label>{$desc_sign[$k]}</label></td>
             <td>
                 <i class="icon-pencil"></i><a style="cursor:pointer;" onclick="window.location.href='signatory_list_manager.php?action=editSignatory&seleted={$myKey_sign[$k]}'"> Edit</a>
             </td>

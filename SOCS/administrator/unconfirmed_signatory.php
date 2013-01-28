@@ -35,6 +35,11 @@ class unconfirmed_signatory extends Controller{
         }
     }
     
+    public function confirmedAccount($key){
+        $this->user_model->confirmed($key);
+        $this->template->setAlert('Signatory User was Successfully Confirmed and usable!..', Template::ALERT_SUCCESS, 'alert');
+        $this->displayTable('', 1, "default");
+    }
     /*---------------- Deleting Signatory Unconfirm User-----------------*/
     public function deleted() {
         $this->template->setAlert('Delete an Unconfirm Signatory User was Successfully!..', Template::ALERT_SUCCESS, 'alert');
@@ -69,6 +74,7 @@ class unconfirmed_signatory extends Controller{
         $this->template->assign('filter', $searchName);
         $this->template->assign('unconfirmedSign_length', $numOfPages);
         $this->template->assign('rowCount_unconfirmedSign', $numOfResults);
+        $this->template->assign('assignSignID_unconfirmedSign', $this->user_model->getFilter_AssignSignName());
 
         if ($numOfResults == 0) {
             $this->template->setAlert('No Results Found.', Template::ALERT_ERROR, 'alert');

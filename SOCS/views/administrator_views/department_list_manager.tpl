@@ -31,6 +31,7 @@
         <th>
             <input type="checkbox" onclick="isCheck({$rowCount_dept})" id="check"> Departments
         </th>
+        <th>Description</th>
         <th>Controls</th>
     </tr>
     {foreach from = $myName_dept key = k item = i}
@@ -41,6 +42,7 @@
                     <div id="hover_link" onclick="window.location.href='department_list_manager.php?action=displayCourse&deptName={$i}'" >{$i}</div>
                 </label>        
             </td>
+            <td><label>{$desc_dept[$k]}</label></td>
             <td>
                 <i class="icon-pencil"></i>
                 <a href="department_list_manager.php?action=editDepartment&seleted={$myKey_dept[$k]}"> Edit</a>  

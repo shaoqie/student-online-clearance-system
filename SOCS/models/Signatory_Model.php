@@ -15,6 +15,7 @@ class Signatory_Model extends Model{
     private $itemsPerPage = 10;
     private $filter_ID;
     private $filter_Name;
+    private $filter_Desc;
     
     private $sign_name;
     private $sign_desc;
@@ -31,6 +32,10 @@ class Signatory_Model extends Model{
     
     public function getFilter_Name(){
         return $this->filter_Name;
+    }
+    
+    public function getFilter_Desc(){
+        return $this->filter_Desc;
     }
     
     public function getSign_Name(){
@@ -50,9 +55,11 @@ class Signatory_Model extends Model{
         
         $this->filter_ID = array();
         $this->filter_Name = array();
+        $this->filter_Desc = array(); 
         while($row = mysql_fetch_array($this->query)){
             array_push($this->filter_ID, $row['0']);
             array_push($this->filter_Name, $row['1']);
+            array_push($this->filter_Desc, $row['2']);
         }
         
     }

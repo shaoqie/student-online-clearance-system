@@ -1,6 +1,6 @@
 {*Search Bar--------------------------------------------------------------------*}
 
-{function name=search filter=""}
+{function name=search}
 {if isset($filter)}
 
     <form class="form-inline">

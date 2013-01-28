@@ -128,12 +128,14 @@ class course_list_byDepartment extends Controller {
         $numOfResults = count($this->course_model->getFilter_Name());
         $getListofDeptName = $this->getListofName($this->course_model->getFilter_Name(), $searchName, $finder);
         $filter_ID = $this->course_model->getFilter_ID();
+        $filter_Desc = $this->parsingNewLine_Decs($this->course_model->getFilter_Desc());
         
         $this->template->assign('myName_course', $getListofDeptName); 
         $this->template->assignByRef('myKey_course', $filter_ID);
         $this->template->assign('filter', $searchName);
         $this->template->assign('course_length', $numOfPages);
         $this->template->assign('rowCount_course', $numOfResults);
+        $this->template->assign('desc_course', $filter_Desc);
         
         if ($numOfResults == 0) {
             $this->template->setAlert('No Results Found.', Template::ALERT_ERROR, 'alert');

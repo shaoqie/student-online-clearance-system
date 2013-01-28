@@ -25,6 +25,8 @@ class User_Model extends Model {
     private $filter_Name;
     private $filter_Picture;
     private $filter_Type;
+    private $filter_AssignSignName;
+    private $filter_courseORsign;
     
 
     public function __construct() {
@@ -91,6 +93,12 @@ class User_Model extends Model {
         }
     }
     
+    public function getValidation_status($uname){
+        $this->query = mysql_query("select Validatiion_Status FROM users WHERE username = '$uname'");
+        $sample = mysql_fetch_array($this->query);
+        return $sample['0'];
+    }
+    
     public function getFilter_ID(){
         return $this->filter_ID;
     }
@@ -107,14 +115,26 @@ class User_Model extends Model {
         return $this->filter_Type;
     }
     
+    public function getFilter_AssignSignName(){
+        return $this->filter_AssignSignName;
+    }
+    
+    public function getFilter_courseORsign(){
+        return $this->filter_courseORsign;
+    }
+    
     /*-----------------------------------------------*/
     
     public function filter($t_searchName ,$t_page, $t_type){  
         $valid = $t_type == 'Student'? "and `Validatiion_Status` IS NULL" : "and `Validatiion_Status` = 'confirmed'"; 
+        $select = $t_type == 'Student'? "course_name" : "signatory_name";
+        $join = $t_type == 'Student'? "inner join students on students.username = users.username
+                                        inner join courses on courses .course_id = students.course_id " :
+                                       "inner join signatories on signatories.signatory_id = users.Assigned_Signatory ";
         
-        $this->query = mysql_query("select Username, Picture, concat(Surname, ', ', First_Name, ' ', Middle_Name) 
-                        as Name, Account_Type from users 
-                        where (First_name like '%$t_searchName%' OR Surname like '%$t_searchName%' OR 
+        $this->query = mysql_query("select users.username, Picture, concat(Surname, ', ', First_Name, ' ', Middle_Name) 
+                        as Name, Account_Type, " .$select ." from users " .$join
+                        ."where (First_name like '%$t_searchName%' OR Surname like '%$t_searchName%' OR 
                         Middle_Name like '%$t_searchName%') AND Account_Type = '$t_type' " . $valid ." order by Name
                         LIMIT " . (($t_page - 1) * $this->itemsPerPage) . ", " . $this->itemsPerPage);
         
@@ -122,18 +142,32 @@ class User_Model extends Model {
         $this->filter_Name = array();
         $this->filter_Picture = array();
         $this->filter_Type = array();
+        $this->filter_courseORsign = array();
         while($row = mysql_fetch_array($this->query)){
             array_push($this->filter_ID, $row['0']);
             array_push($this->filter_Name, $row['2']);
             array_push($this->filter_Picture, $row['1']);
             array_push($this->filter_Type, $row['3']);
+            array_push($this->filter_courseORsign, $row['4']);
         }
         
     }
+
+    public function getQueryPageSize($searchName, $type) {
+        $valid = $type == 'Student'? "and `Validatiion_Status` IS NULL" : "and `Validatiion_Status` = 'confirmed'"; 
+        $query = mysql_query("select Picture, concat(Surname, ', ', First_Name, ' ', Middle_Name) 
+                        as Name, Account_Type from users 
+                        where (First_name like '%$searchName%' OR Surname like '%$searchName%' OR 
+                        Middle_Name like '%$searchName%') AND Account_Type = '$type' " . $valid);
+        return mysql_num_rows($query) / $this->itemsPerPage;
+    }
     
+    
+    /*-------------- for unconfirmed signatory users --------------------------*/
     public function filterUnconfirmedSign($t_searchName, $t_page){
         $this->query = mysql_query("select Username, Picture, concat(Surname, ', ', First_Name, ' ', Middle_Name) 
-                        as Name, Account_Type from users 
+                        as Name, Account_Type, Signatory_Name from users 
+                        inner join signatories on signatories.signatory_id = users.Assigned_Signatory
                         where (First_name like '%$t_searchName%' OR Surname like '%$t_searchName%' OR 
                         Middle_Name like '%$t_searchName%') AND Account_Type = 'Signatory' and `Validatiion_Status` = 'unconfirmed' order by Name
                         LIMIT " . (($t_page - 1) * $this->itemsPerPage) . ", " . $this->itemsPerPage);
@@ -142,11 +176,14 @@ class User_Model extends Model {
         $this->filter_Name = array();
         $this->filter_Picture = array();
         $this->filter_Type = array();
+        $this->filter_AssignSignName = array();
+        $this->page_row = mysql_num_rows($this->query) / $this->itemsPerPage;
         while($row = mysql_fetch_array($this->query)){
             array_push($this->filter_ID, $row['0']);
             array_push($this->filter_Name, $row['2']);
             array_push($this->filter_Picture, $row['1']);
             array_push($this->filter_Type, $row['3']);
+            array_push($this->filter_AssignSignName, $row['4']);
         }
         
     }
@@ -158,15 +195,12 @@ class User_Model extends Model {
                         Middle_Name like '%$searchName%') AND Account_Type = 'Signatory' and `Validatiion_Status` = 'unconfirmed'");
         return mysql_num_rows($query) / $this->itemsPerPage;
     }
-    
-    public function getQueryPageSize($searchName, $type) {
-        $query = mysql_query("select Picture, concat(Surname, ', ', First_Name, ' ', Middle_Name) 
-                        as Name, Account_Type from users 
-                        where (First_name like '%$searchName%' OR Surname like '%$searchName%' OR 
-                        Middle_Name like '%$searchName%') AND Account_Type = '$type'");
-        return mysql_num_rows($query) / $this->itemsPerPage;
-    }
 
+    public function confirmed($uname){
+        mysql_query("UPDATE `socs`.`users` SET `Validatiion_Status` = 'Confirmed' WHERE `users`.`Username` = '$uname'");
+    }
+    
+    /*------------------------------------------------*/
     public function deleteUser($key) {  
         mysql_query("delete from users where Username = '$key'");  
     }

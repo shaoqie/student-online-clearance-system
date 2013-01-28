@@ -88,9 +88,8 @@ $("#confirmed" +x).html("");
         <th>
             <input type="checkbox" onclick="isCheck({$rowCount_signatorial})" id="check"> Signatories
         </th>
-        <th>
-            <div>Controls</div>
-        </th>
+        <th></th>
+        <th>Controls</th>
     </tr>
     {foreach from = $myName_signatorial key = k item = i} 
         <tr>

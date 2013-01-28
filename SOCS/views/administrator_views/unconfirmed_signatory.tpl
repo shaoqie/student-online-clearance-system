@@ -27,6 +27,7 @@
         <th>
             <input type="checkbox" onclick="isCheck({$rowCount_unconfirmedSign})" id="check"> Accounts
         </th>
+        <th>Assigned Signatory</th>
         <th>Controls</th>
     </tr>
     {foreach from = $myName_unconfirmedSign key = k item = i}
@@ -36,8 +37,9 @@
                     <input class="Checkbox" type="checkbox" id = '{$k}' value = {$myKey_unconfirmedSign[$k]} > {$i}
                 </label>
             </td>
+            <td><label>{$assignSignID_unconfirmedSign[$k]}</label></td>
             <td>
-                <i class="icon-pencil"></i><a style="cursor:pointer;" onclick="window.location.href=''"> Confirmed</a>
+                <i class="icon-ok"></i><a style="cursor:pointer;" onclick="window.location.href='unconfirmed_signatory.php?action=confirmedAccount&key={$myKey_unconfirmedSign[$k]}'"> Confirmed</a>
             </td>
         </tr>
     {/foreach}

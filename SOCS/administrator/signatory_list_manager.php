@@ -123,12 +123,14 @@ class Signatory_List_Manager extends Controller {
         $numOfResults = count($this->signatory_model->getFilter_Name());
         $getListofSignName = $this->getListofName($this->signatory_model->getFilter_Name(), $searchName, $finder);
         $filter_ID = $this->signatory_model->getFilter_ID();
-
+        $filter_Desc = $this->parsingNewLine_Decs($this->signatory_model->getFilter_Desc());
+        
         $this->template->assign('myName_sign', $getListofSignName); //$this->signatory_model->filter_Description($searchName, $page));
         $this->template->assignByRef('myKey_sign', $filter_ID);
         $this->template->assign('filter', $searchName);
         $this->template->assign('sign_length', $numOfPages);
         $this->template->assign('rowCount_sign', $numOfResults);
+        $this->template->assign('desc_sign', $filter_Desc);
 
         if ($numOfResults == 0) {
             $this->template->setAlert('No Results Found.', Template::ALERT_ERROR, 'alert');
