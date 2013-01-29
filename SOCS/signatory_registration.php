@@ -154,15 +154,25 @@ class Signatory_Registration extends Controller {
             if ($test == 7 && $this->admin->insertSignatory_User()) {
 
                 if (move_uploaded_file($imagefile["tmp_name"], $this->local_dir)) {
-                    $this->template->setAlert('Registered Successfully!', Template::ALERT_SUCCESS);
+                    $this->registered();
                 } else {
-                    $this->template->setAlert('Registered Successfully! But there\'s problem in uploading a photo.', Template::ALERT_INFO);
+                    $this->partially_registered();
                 }
             } else {
                 echo mysql_error();
                 $this->template->setAlert('Database Error!', Template::ALERT_ERROR);
             }
         }
+    }
+    
+    private function registered(){
+        $this->template->setAlert('Registered Successfully!', Template::ALERT_SUCCESS);
+        $this->template->setContent('welcome.tpl');
+    }
+    
+    private function partially_registered(){
+        $this->template->setAlert('Registered Successfully! But there\'s problem in uploading a photo.', Template::ALERT_INFO);
+        $this->template->setContent('welcome.tpl');
     }
 
     public function display() {

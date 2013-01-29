@@ -111,14 +111,6 @@
 
                             {call name=welcome_navigations}
 
-                            {if $smarty.get.action == "student_registrationForm" || $smarty.get.action == "signatory_registrationForm"}
-                                <form class="navbar-form pull-right" action="index.php?action=login" method="post">
-                                    <input class="span2" type="text" placeholder="Username" name="username" required>
-                                    <input class="span2" type="password" placeholder="Password" name="password" required>
-                                    <button type="submit" class="btn"><i class="icon-check"></i> Sign in</button>
-                                </form>
-                            {/if}
-
                         {else}
                             {call name=welcome_navigations}
 
