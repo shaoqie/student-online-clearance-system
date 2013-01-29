@@ -2,7 +2,39 @@
 <input class="btn pull-right" type="button" value="Back" onclick="window.location.href='index.php'"> 
 
 <!-- Archive Search Box-->
-{call name=archiveSearch}
+<form class="form-inline">
+    <label>School Year:  </label>
+    <select id="school_year" name="school_year" class="span3">
+        {foreach from = $mySchool_Year key = k item = i}
+            {if $currentSchool_Year eq $i}
+                <option selected>{$i}</option>
+            {else}
+                <option>{$i}</option>
+            {/if}
+        {/foreach}
+    </select>
+
+    <label>Semester: </label>
+    <select id="semester" name="semester" class="span3">
+        {if $currentSemester eq 'First'}
+            <option selected>First</option>
+            <option>Second</option>
+            <option>Summer</option>
+        {elseif $currentSemester eq 'Second'}
+            <option>First</option>
+            <option selected>Second</option>
+            <option>Summer</option>
+        {else}
+            <option>First</option>
+            <option>Second</option>
+            <option selected>Summer</option>
+        {/if}           
+    </select>
+
+    <button class="btn btn-primary" type="button" name="GO" onclick="change_schoolYear('1','{$sign_id}','1')">
+        <i class="icon-search icon-white"></i>
+    </button>
+</form>
 
 <!-- Header-->
 <h2>{$sign_name} Clearance Requirements</h2>

@@ -6,13 +6,14 @@
  * Administrator Script Functions
  */
 
-function change_schoolYear(sign_id, page){
+function change_schoolYear(finder, sign_id, page){
     var sy = document.getElementById("school_year").value;
     var sem = document.getElementById("semester").value;
         
     var sy_sem = sy +"@" +sem;
-        
-    window.location.assign("?action=viewMessages&Tsign_ID=" +sign_id +"&page=" +page + "&sysem=" +sy_sem);
+    
+    var control = finder == 0 ? "viewMessages" : "viewRequirements";
+    window.location.assign("?action=" +control +"&Tsign_ID=" +sign_id +"&page=" +page + "&sysem=" +sy_sem);
 }
 
 function jumpToPageWithSchoolYear(){
@@ -25,9 +26,9 @@ function jumpToPageWithSchoolYear(){
     window.location.assign("?action=displayTable&filter=" + search +"&page=" + jump +"&sy=" +sy +"&sem=" +sem);
 }
 
-function jumpToPageMessages(sign_id){
+function jumpToPageMessages(finder, sign_id){
     var jump = document.getElementById("jump_studMessages").value;
-    change_schoolYear(sign_id, jump);
+    change_schoolYear(finder, sign_id, jump);
 } 
 
 function isCheck(rowCount){

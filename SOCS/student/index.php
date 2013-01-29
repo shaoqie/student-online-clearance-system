@@ -117,7 +117,7 @@ class Index extends Controller {
             $this->template->assign('currentSchool_Year', $temp_sy);
         }
 
-
+        //var_dump($sy_id);
        
 
         $this->signatory_model->getSign_Info($Tsign_ID);
@@ -161,6 +161,7 @@ class Index extends Controller {
         $signName = $this->signatory_model->getSign_Name();
         
         $this->template->assign('sign_name', $signName);
+        $this->template->assign('sign_id', $Tsign_ID);
         
         $result = $this->clearanceStatus_model->getRequirementList(Session::get_user(), $Tsign_ID, $sy_id);
         //var_dump($result);
