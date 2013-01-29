@@ -18,15 +18,20 @@ $current_sy = $sy_model->getCurSchool_Year();
 $current_sem = $sy_model->getCurSemester();
 if ($current_sem != "Summer")
     $current_sem .= " Semester";
+$current_sysemID = $sy_model->getSy_ID($sy_model->getCurSchool_Year(), $sy_model->getCurSemester());
 
 
 $student_model = new Student_Model();
 $stud_id = Session::get_user();
-$stud_name = $student_model->getStudent_name($stud_id);
-$stud_gender = $student_model->getStudent_gender($stud_id);
-$stud_year = getNumberNth($student_model->getStudent_yr_level($stud_id));
-$stud_course = $student_model->getStudent_course($stud_id);
-$stud_dept = $student_model->getStudent_department($stud_id);
+$student_model->queryStudent_Info($stud_id);
+$stud_name = $student_model->getStud_Name();
+$stud_gender = $student_model->getStud_Gender();
+$stud_year = $student_model->getStud_Yearlevel();
+$stud_course = $student_model->getStud_Course();
+$stud_dept = $student_model->getStud_DeptName();
+
+$clearance_model = new ClearanceStatus();
+
 
 
 $fpdf = new FPDF('P', 'mm', 'Letter');
@@ -85,7 +90,7 @@ $fpdf->Write(5, $stud_name);
 $fpdf->SetFont('Times','',12);
 $fpdf->Write(5, ", a ");
 $fpdf->SetFont('Times','BU',12);
-$fpdf->Write(5, $stud_year ." Semester");
+$fpdf->Write(5, $stud_year);
 $fpdf->SetFont('Times','',12);
 $fpdf->Write(5, " year ");
 $fpdf->SetFont('Times','BU',12);
@@ -108,7 +113,7 @@ $fpdf->Write(5, ".");
 $fpdf->Ln(18);
 $fpdf->Write(5, "[This portion over here still needs to be coded and will be finished soon.]");
 
-$fpdf->Output("SOCS Clearance Export - $stud_name.pdf", 'D');
+$fpdf->Output("SOCS Clearance Export - $stud_name.pdf", 'I');
  
 
 function getNumberNth($number){
