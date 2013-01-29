@@ -67,8 +67,10 @@
                         {function name=welcome_navigations}
 
                         <ul class="nav">
-                            <li><a href="index.php">Home</a></li>      
-                            <li class="dropdown" >
+                            <li>
+                                <a href="index.php">Home</a>
+                            </li>      
+                            <!--<li class="dropdown" >
                                 <a class="dropdown-toggle"
                                    data-toggle="dropdown"
                                    href="#">
@@ -79,6 +81,9 @@
                                     <li><a href="index.php?action=student_registrationForm">As Student</a></li>
                                     <li><a href="signatory_registration.php">As Signatory</a></li>
                                 </ul>
+                            </li>-->
+                            <li>
+                                <a href="index.php?action=student_registrationForm">Register</a>
                             </li>
                         </ul>
 
@@ -140,7 +145,7 @@
                         {else}
                             <img src="{$host}/photos/default.png" class="img-polaroid" />
                         {/if}
-                        
+
                     </div>
                     <div class="span5">
                         <h4>{$surname}, {$firstname} {$middlename}</h4>

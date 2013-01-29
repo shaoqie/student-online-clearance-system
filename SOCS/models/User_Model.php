@@ -37,9 +37,18 @@ class User_Model extends Model {
     }
 
     public function insertSignatory_User() {
-        $this->query = mysql_query("INSERT INTO `socs`.`users` (`Username`, `Password`, `Surname`, `First_Name`, `Middle_Name`, `Picture`, `Account_Type`, `Assigned_Signatory`, `Validation_Status`) 
+
+        $q = "INSERT INTO `socs`.`users` (`Username`, `Password`, `Surname`, `First_Name`, `Middle_Name`, `Picture`, `Account_Type`, `Assigned_Signatory`, `Validation_Status`) 
                             VALUES 
-                            ('$this->Username', '$this->Password', '$this->Surname', '$this->First_Name', '$this->Middle_Name', $this->Picture, 'Signatory', '$this->Assigned_Signatory', 'Unconfirmed')");
+                            ('$this->Username', '$this->Password', '$this->Surname', '$this->First_Name', '$this->Middle_Name', '$this->Picture', 'Signatory', '$this->Assigned_Signatory', 'Unconfirmed')";
+        
+        $this->query = mysql_query($q);
+        
+        if ($this->query){
+            return true;
+        }else{
+            return false;
+        }
     }
 
     // mutator
@@ -70,7 +79,7 @@ class User_Model extends Model {
         $this->query = mysql_query("SELECT Account_Type, Validation_Status FROM users WHERE username='$tempUser'and password='$tempPass' ");
 
         $sample = mysql_fetch_array($this->query);
-        
+
         $this->Account_Type = $sample['0'];
         $this->validation_status = $sample['1'];
     }

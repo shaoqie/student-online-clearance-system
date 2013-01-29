@@ -1,23 +1,28 @@
 
 {literal}
-<script type="text/javascript">      
-    function changeCourses(){
-        var select = document.getElementById("course");
-        var dept_id = document.getElementById("dept").options[document.getElementById("dept").selectedIndex].value;
+    <script type="text/javascript">      
+        function changeCourses(){
+            var select = document.getElementById("course");
+            var dept_id = document.getElementById("dept").options[document.getElementById("dept").selectedIndex].value;
     {/literal}     
         var str = "";
-               {foreach from=$dept_id_inCourses key=k_course item=item}
+    {foreach from=$dept_id_inCourses key=k_course item=item}
                    
-                   if(dept_id == {$item}){
-                    str += "<option>{$course_underDept[$k_course]}</option>";
-                   }               
-               {/foreach}                          
-            select.innerHTML = str;
+        if(dept_id == {$item}){
+        str += "<option>{$course_underDept[$k_course]}</option>";
+    }               
+    {/foreach}                          
+    select.innerHTML = str;
     {literal}    
-    }
-</script>
+        }
+    </script>
 {/literal}
-   {*<pre>{$dept_id_inCourses|@print_r}</pre> *}
+{*<pre>{$dept_id_inCourses|@print_r}</pre> *}
+
+<div class="alert alert-block alert-info">
+    Assign as a signatory? <a href="signatory_registration.php">Click Here</a>
+</div>
+
 <form method='post' class="form-horizontal" action="/SOCS/index.php?action=student_register">
 
     <legend>Login Information: </legend>
@@ -25,17 +30,14 @@
     <div class="control-group">
         <label class="control-label">Student ID: </label>
         <div class="controls">
+
             <select class="input-small" name="stud_id" required>
                 <option></option>
-
-                {if !isset($years)}
-                    {assign var=years value=[2009, 2010, 2011, 2012, 2013]}
-                {/if}
-
-                {foreach from=$years item=year}
-                    <option>{$year}</option>
-                {/foreach}
+                {for $year=2007 to 2013}
+                <option>{$year}</option>
+                {/for}
             </select> - 
+
             {literal}
                 <input class="input-small" type ='text' name='number' value="" maxlength="5" pattern="[0-9]{5}" required title="Numbers Only">
             {/literal}
@@ -129,9 +131,9 @@
         <label class="control-label">Department: </label>
         <div class="controls">
             <select id="dept" name="dept" onchange="changeCourses()" required>
-                
+
                 <option></option>
-                
+
                 {if !isset($depts)}
                     {assign var=depts value=["CT - College of Technology", "CAS - College of Arts and Sciences", "IC - Institute of Computing", "CE - College of Engineering"]}
                 {/if}

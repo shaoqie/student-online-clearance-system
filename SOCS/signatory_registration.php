@@ -19,6 +19,7 @@ class Signatory_Registration extends Controller {
     private $department_model;
     private $courses_model;
     private $admin;
+    private $signatoriallist_model;
 
     public function __construct() {
         parent::__construct();
@@ -39,8 +40,10 @@ class Signatory_Registration extends Controller {
         $ListDept_ID_inCourse = $this->courses_model->getListDept_ID_inCourse();
         $listOfCourses = $this->courses_model->getListOfCourses();
         $listOfsignatory = $this->signatoriallist_model->getListofSignatory();
+        $listOfKeysFromSignatories = $this->signatoriallist_model->getKeyListofSignatory();
 
         $this->template->assign('signatories', $listOfsignatory);
+        $this->template->assign('signatory_keys', $listOfKeysFromSignatories);
         $this->template->assign('years', $listOfYear);
         $this->template->assign('depts', $listOfDept_Name);
         $this->template->assign('dept_ID', $listOfDept_ID);
@@ -49,118 +52,117 @@ class Signatory_Registration extends Controller {
     }
 
     public function register() {
-        $username = $_POST["uname"];
-        $newpass = $_POST["newpass"];
-        $confirmpass = $_POST["confirmpass"];
-        $surname = $_POST["surname"];
-        $firstname = $_POST["firstname"];
-        $middleName = $_POST["middleName"];
 
-        $test = 0;
-
-        //Check if fields are empty in firstname surname and middlename
-        if ($surname != "" && $firstname != "" && $middleName != "" && $username != "") {
-            $this->admin->Surname = $surname;
-            $this->admin->First_Name = $firstname;
-            $this->admin->Middle_Name = $middleName;
-            $this->admin->Username = $username;
-
-            $test++;
-        } else {
-            $this->template->setAlert('Surname, first name and middle name are required!', Template::ALERT_ERROR, 'alert');
-            return;
-        }
-
-        if (Validator::is_valid_username($username) && $test == 1) {
-            $test++;
-        } else {
-            $this->template->setAlert('Username must not have a numerical values and characters / \ ? < > : ; " spaces and *', Template::ALERT_ERROR, 'alert');
-            return;
-        }
-
-        //checks the surname if valid
-        if (Validator::is_valid_name($surname) && $test == 2) {
-
-            $test++;
-        } else {
-            $this->template->setAlert('Surname must not have a numerical values and characters / \ ? < > : ; " and *', Template::ALERT_ERROR, 'alert');
-            return;
-        }
-
-        //checks the firstname if valid
-        if (Validator::is_valid_name($firstname) && $test == 3) {
-
-            $test++;
-        } else {
-            $this->template->setAlert('Surname must not have a numerical values and characters / \ ? < > : ; " and *', Template::ALERT_ERROR, 'alert');
-            return;
-        }
-
-        //checks the middlename if valid
-        if (Validator::is_valid_name($middleName) && $test == 4) {
-
-            $test++;
-        } else {
-            $this->template->setAlert('Surname must not have a numerical values and characters / \ ? < > : ; " and *', Template::ALERT_ERROR, 'alert');
-            return;
-        }
-
-        //check if new pass and confirm pass are equal
-        if ($newpass == $confirmpass && $test == 5) {
-
-            $test++;
-        } else {
-            $this->template->setAlert('Passwords does not matched!', Template::ALERT_ERROR);
-            return;
-        }
-
-        //check if password is valid
-        if (Validator::is_valid_password($newpass) && $test == 6) {
-
-            $this->admin->Password = $newpass;
-
-            $test++;
-        } else {
-            $this->template->setAlert('Password\'s length must have a minimum of 7 characters!', Template::ALERT_ERROR);
-        }
-
-        //check if photo is valid
-        if (isset($_FILES["photo"])) {
-
+        if (isset($_POST["Register"])) {
+            $username = $_POST["uname"];
+            $newpass = $_POST["newpass"];
+            $confirmpass = $_POST["confirmpass"];
+            $surname = $_POST["surname"];
+            $firstname = $_POST["firstname"];
+            $middleName = $_POST["middleName"];
             $imagefile = $_FILES["photo"];
 
-            if (Validator::is_valid_photo($imagefile)) {
+            $test = 0;
 
-                $ext = explode(".", $imagefile["name"]);
+            //Check if fields are empty in firstname surname and middlename
+            if ($surname != "" && $firstname != "" && $middleName != "" && $username != "") {
+                $this->admin->Surname = $surname;
+                $this->admin->First_Name = $firstname;
+                $this->admin->Middle_Name = $middleName;
+                $this->admin->Username = $username;
 
-                $this->admin->Picture = HOST . "/photos/signatory/" . Session::get_user() . "." . end($ext);
-                $this->local_dir = PATH . "photos/signatory/" . Session::get_user() . "." . end($ext);
+                $test++;
             } else {
-                $this->template->setAlert('Invalid Photo!', Template::ALERT_ERROR, 'alert');
+                $this->template->setAlert('Surname, first name and middle name are required!', Template::ALERT_ERROR, 'alert');
                 return;
             }
-        }
 
-        $this->admin->Assigned_Signatory = $_POST["sign_name"];
-        
-//        if ($this->admin->update() && $test == 7) {
-//
-//            $this->template->set_surname($surname);
-//            $this->template->set_firstname($firstname);
-//            $this->template->set_middlename($middleName);
-//            $this->template->set_photo($this->admin->Picture);
-//
-//            if (isset($this->admin->Picture)) {
-//
-//                if (move_uploaded_file($imagefile["tmp_name"], $this->local_dir)) {
-//                    $this->template->setAlert('Registered Successfully!', Template::ALERT_SUCCESS);
-//                } else {
-//                    $this->template->setAlert('Registered Successfully! But there\'s problem in uploading a photo.', Template::ALERT_INFO);
-//                }
-//            }
-//        } else {
-//            $this->template->setAlert('Database Error!', Template::ALERT_ERROR);
-//        }
+            //checks uername is valid
+            if (Validator::is_valid_username($username) && $test == 1) {
+                $test++;
+            } else {
+                $this->template->setAlert('Username must not have characters / \ ? < > : ; " spaces and *', Template::ALERT_ERROR, 'alert');
+                return;
+            }
+
+            //checks the surname if valid
+            if (Validator::is_valid_name($surname) && $test == 2) {
+
+                $test++;
+            } else {
+                $this->template->setAlert('Surname must not have a numerical values and characters / \ ? < > : ; " and *', Template::ALERT_ERROR, 'alert');
+                return;
+            }
+
+            //checks the firstname if valid
+            if (Validator::is_valid_name($firstname) && $test == 3) {
+
+                $test++;
+            } else {
+                $this->template->setAlert('Surname must not have a numerical values and characters / \ ? < > : ; " and *', Template::ALERT_ERROR, 'alert');
+                return;
+            }
+
+            //checks the middlename if valid
+            if (Validator::is_valid_name($middleName) && $test == 4) {
+
+                $test++;
+            } else {
+                $this->template->setAlert('Surname must not have a numerical values and characters / \ ? < > : ; " and *', Template::ALERT_ERROR, 'alert');
+                return;
+            }
+
+            //check if new pass and confirm pass are equal
+            if ($newpass == $confirmpass && $test == 5) {
+
+                $test++;
+            } else {
+                $this->template->setAlert('Passwords does not matched!', Template::ALERT_ERROR);
+                return;
+            }
+
+            //check if password is valid
+            if (Validator::is_valid_password($newpass) && $test == 6) {
+
+                $this->admin->Password = $newpass;
+
+                $test++;
+            } else {
+                $this->template->setAlert('Password\'s length must have a minimum of 7 characters!', Template::ALERT_ERROR);
+            }
+
+            //check if photo is valid
+            if (isset($_FILES["photo"])) {
+
+                if (Validator::is_valid_photo($imagefile)) {
+
+                    $ext = explode(".", $imagefile["name"]);
+
+                    $this->admin->Picture = HOST . "/photos/signatory/" . $username . "." . end($ext);
+                    $this->local_dir = PATH . "photos/signatory/" . $username . "." . end($ext);
+                } else {
+                    $this->template->setAlert('Invalid Photo!', Template::ALERT_ERROR, 'alert');
+                    return;
+                }
+            } else {
+                $this->admin->Picture = HOST . "/photos/default.png";
+                $this->local_dir = PATH . "photos/default.png";
+            }
+
+            $this->admin->Assigned_Signatory = $_POST["sign_name"];
+
+            if ($test == 7 && $this->admin->insertSignatory_User()) {
+
+                if (move_uploaded_file($imagefile["tmp_name"], $this->local_dir)) {
+                    $this->template->setAlert('Registered Successfully!', Template::ALERT_SUCCESS);
+                } else {
+                    $this->template->setAlert('Registered Successfully! But there\'s problem in uploading a photo.', Template::ALERT_INFO);
+                }
+            } else {
+                echo mysql_error();
+                $this->template->setAlert('Database Error!', Template::ALERT_ERROR);
+            }
+        }
     }
 
     public function display() {
