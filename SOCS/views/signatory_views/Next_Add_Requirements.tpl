@@ -52,12 +52,6 @@
                 </select>
             </label>
 
-            <label><input type="radio" id="example_radio6" name="radioA" /> <b>Selected students:</label>
-
-            <div class="control-group offset1">
-                <textarea class="input-xlarge" name='' rows="5" cols="50"></textarea>
-            </div>
-
             <div class="control-group">
                 <label class="control-label offset1">
                     <input class="btn btn-primary" type='Submit' value='Add Requirement' name="Save">

@@ -11,7 +11,7 @@
 <!-- Archive Search Bar-->
 <form class="form-inline" method="post">
     <label >School Year:  </label>
-    <select id="school_year" name="school_year" class="input-medium">
+    <select id="school_year" name="school_year" class="span3">
         {foreach from = $mySchool_Year key = k item = i}
             {if $currentSchool_Year eq $i}
                 <option selected>{$i}</option>
@@ -22,7 +22,7 @@
     </select>
 
     <label>Semester: 
-        <select id="semester" name="semester" class="input-medium">
+        <select id="semester" name="semester" class="span3">
             {if $currentSemester eq 'First'}
                 <option selected>First</option>
                 <option>Second</option>
@@ -37,10 +37,9 @@
                 <option selected>Summer</option>
             {/if}           
         </select>
-        <input class="btn btn-primary" type="submit" value="GO" name="GO">
     </label>
 
-<!-- Post Bulletin-->
+    <!-- Post Bulletin-->
 
     <legend>Post Bulletin:</legend>
 

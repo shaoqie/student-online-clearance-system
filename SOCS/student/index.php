@@ -55,7 +55,7 @@ class Index extends Controller {
             $listOfSignID_underDeptName = $this->signatoialList->getSign_ID();
             $listOfClearanceStatus = $this->getListofClearanceStatus($listOfSignID_underDeptName, $sy_id, Session::get_user());
             
-            $this->template->setPageName('Signatory Page');
+            $this->template->setPageName('Student Clearance Page');
             $this->template->setContent('StudentDashboard.tpl');
             $this->template->setSchool_YearSemContent('SchoolYear_Sem.tpl');
 
@@ -117,7 +117,7 @@ class Index extends Controller {
             $this->template->assign('currentSchool_Year', $temp_sy);
         }
 
-        //var_dump($sy_id);
+
        
 
         $this->signatory_model->getSign_Info($Tsign_ID);
@@ -161,7 +161,6 @@ class Index extends Controller {
         $signName = $this->signatory_model->getSign_Name();
         
         $this->template->assign('sign_name', $signName);
-        $this->template->assign('sign_id', $Tsign_ID);
         
         $result = $this->clearanceStatus_model->getRequirementList(Session::get_user(), $Tsign_ID, $sy_id);
         //var_dump($result);

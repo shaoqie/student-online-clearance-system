@@ -11,6 +11,18 @@ class Session {
         session_start();
     }
     
+    public static function setSY_SEM_ID($sy_id1){
+        $_SESSION['sy_id'] = $sy_id1;
+    }
+    
+    public static function setSchoolYear($sy){
+        $_SESSION['school_year'] = $sy;
+    }
+    
+    public static function setSemester($sem){
+        $_SESSION['semester'] = $sem;
+    }
+    
     //mutator
     public static function set_Account_type($Account_type){
         
@@ -51,6 +63,18 @@ class Session {
     }
 
     //acessor
+    public static function getSY_SEM_ID(){
+        return $_SESSION['sy_id'];
+    }
+    
+    public static function getSchoolYear(){
+        return $_SESSION['school_year'];
+    }
+    
+    public static function getSemester(){
+        return $_SESSION['semester'];
+    }
+    
     public static function get_user(){
         return $_SESSION['username'];
     }
