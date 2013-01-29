@@ -54,7 +54,7 @@ class Index extends Controller {
             $listOfSign_underDeptName = $this->signatoialList->getSign_Name();
             $listOfSignID_underDeptName = $this->signatoialList->getSign_ID();
             $listOfClearanceStatus = $this->getListofClearanceStatus($listOfSignID_underDeptName, $sy_id, Session::get_user());
-
+            
             $this->template->setPageName('Signatory Page');
             $this->template->setContent('StudentDashboard.tpl');
             $this->template->setSchool_YearSemContent('SchoolYear_Sem.tpl');
@@ -82,6 +82,12 @@ class Index extends Controller {
     /*==================== Student Clearance Status ===========================*/
     private function getListofClearanceStatus($signID_array, $sysemID, $username){
         $row = array();
+        foreach ($signID_array as $signID){
+            $status = $this->clearanceStatus_model->getOverallSignatoryClearanceStatus($username, $signID, $sysemID);
+            array_push($row, $status);
+        }
+        
+        /*
         foreach ($signID_array as $signID) {
             $numberOfRequirements = $this->clearanceStatus_model->getStudent_NumberOfRequirements($username, $signID, $sysemID);
             $numberOfCleared = $this->clearanceStatus_model->getStudent_NumberOfClearedPerRequirements($username, $signID, $sysemID);
@@ -89,6 +95,7 @@ class Index extends Controller {
             $studentStatus = $numberOfRequirements == 0? "Not Cleared" : $this->clearanceStatus_model->getClearanceStatus($numberOfRequirements, $numberOfCleared);
             array_push($row, $studentStatus);
         }
+        */
         
         return $row;
     }
@@ -132,6 +139,34 @@ class Index extends Controller {
         $this->template->assign('stud_message_length', $numRows);
 
         //$this->template->assign('stud_message_length', count($list_timePosted));
+    }
+    
+    /* -------------- View Requirements Page ---------------- */
+    public function viewRequirements($Tsign_ID, $page, $sysem) {
+        $this->template->setPageName("Clearance Requirements");
+        $this->template->setContent("Requirements.tpl");
+        
+        if ($sysem == "") {
+            $sy_id = $this->schoolYearSem_model->getSy_ID($this->schoolYearSem_model->getCurSchool_Year(), $this->schoolYearSem_model->getCurSemester());
+        } else {
+            $str = explode('@', $sysem);
+            $temp_sy = $str[0];
+            $temp_sem = $str[1];
+            $sy_id = $this->schoolYearSem_model->getSy_ID($temp_sy, $temp_sem);
+            $this->template->assign('currentSemester', $temp_sem);
+            $this->template->assign('currentSchool_Year', $temp_sy);
+        }
+        
+        $this->signatory_model->getSign_Info($Tsign_ID);
+        $signName = $this->signatory_model->getSign_Name();
+        
+        $this->template->assign('sign_name', $signName);
+        
+        $result = $this->clearanceStatus_model->getRequirementList(Session::get_user(), $Tsign_ID, $sy_id);
+        //var_dump($result);
+        
+        $this->template->assign('n_count', count($result));
+        $this->template->assign('clearanceList', $result);
     }
 
     public function display() {

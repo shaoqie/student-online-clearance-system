@@ -47,6 +47,55 @@ class ClearanceStatus extends Model{
         
         return $row['Count']; 
     }
+    
+    public function getRequirementList($studentID, $signatoryID, $sysemID){
+        
+        $stud_model = new Student_Model();
+        $stud_model->queryStudent_Info($studentID);
+        
+        $t_deptID = $stud_model->getStud_DeptID();
+        $t_courseID = $stud_model->getStud_CourseID();
+        $t_yl = $stud_model->getStud_Yearlevel();
+        $t_program = $stud_model->getStud_Program();
+        
+        $arrayTemp = array();
+        
+        $this->query = mysql_query("select Requirement_ID, Title, Description from requirements 
+                                    where Signatory_ID='$signatoryID' and SY_SEM_ID='$sysemID' and 
+                                    (Visibility='All' or Department_ID='$t_deptID' or Course_ID='$t_courseID' or Year_Level='$t_yl' or Program='$t_program')");
+        
+        while($row = mysql_fetch_array($this->query)){
+            $status = $this->getRequirementClearanceStatus($studentID, $row['Requirement_ID']);
+            array_push($arrayTemp, array($row['Requirement_ID'], $row['Title'], $row['Description'], $status));
+        }
+        return $arrayTemp;
+    }
+    
+    public function getOverallSignatoryClearanceStatus($studentID, $signatoryID, $sysemID){
+        $status_data = $this->getRequirementList($studentID, $signatoryID, $sysemID);
+        if (count($status_data)==0){
+            return "No Requirements";
+        }
+        
+        foreach($status_data as $eachRequirement)
+            if($eachRequirement[3]=='Not Cleared')
+                return 'Not Cleared';
+        
+        return "Cleared";
+    }
+    
+    private function getRequirementClearanceStatus($studentID, $requirementID){
+        $subquery = mysql_query("select Cleared from clearancestatus where student='$studentID' and requirement_id='$requirementID' limit 0,1");
+        $count = mysql_num_rows($subquery);
+        if ($count==0){
+            return 'Not Cleared';
+        }else{
+            $row = mysql_fetch_array($subquery);
+            return $row[0];
+        }
+    }
+    
+    
 }
 
 ?>

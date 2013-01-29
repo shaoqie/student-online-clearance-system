@@ -12,15 +12,18 @@
 <!-- Export Link-->
 <div class="row">
     <div class="span9">
-        {if $num_cleared == ($myListOfSign_underDeptName|@count)}
+        {*if $num_cleared == ($myListOfSign_underDeptName|@count)*}
+        
             <a class="pull-right" href="export.php"> 
                 <i class="icon-download"></i> Export to PDF
             </a>
+        {*
         {else}
             <a class="pull-right" href="#" onclick="bootbox.alert('<div class=\'alert alert-info alert-block\'><strong>Oops!</strong> Must clear all signatories before can download the clearance form.</div>')"> 
                 <i class="icon-download"></i> Export to PDF
             </a>
         {/if}
+        *}
     </div>
 </div>
 
@@ -37,7 +40,7 @@
                 <h4 class="lead">{$i}</h4>
             </div>
 
-            <div id="hover_link">
+            <div id="hover_link" onclick="window.location.href='index.php?action=viewRequirements&Tsign_ID={$myKey_signID[$k]}&page=1'">
                 <i class="icon-zoom-in"></i> Requirements
             </div>
 
@@ -45,7 +48,7 @@
                 <i class="icon-zoom-in"></i> Announcements
             </div>
 
-            {if $myStudent_ClearanceStatus[$k] eq 'Cleared'}
+            {if $myStudent_ClearanceStatus[$k] eq 'Cleared' or $myStudent_ClearanceStatus[$k] eq 'No Requirements'}
                 {assign var=label_type value="label-success"}
             {else}
                 {assign var=label_type value="label-important"}

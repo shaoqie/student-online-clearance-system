@@ -15,6 +15,7 @@ class Student_Model extends Model{
     
     private $stud_name;
     private $stud_course;
+    private $stud_courseID;
     private $stud_deptName;
     private $stud_deptID;
     private $stud_gender;
@@ -34,6 +35,10 @@ class Student_Model extends Model{
     
     public function getStud_Course(){
         return $this->stud_course;
+    }
+    
+    public function getStud_CourseID(){
+        return $this->stud_courseID;
     }
     
     public function getStud_DeptName(){
@@ -62,7 +67,7 @@ class Student_Model extends Model{
     
     public function queryStudent_Info($student_id){
         $this->query = mysql_query("select concat(Surname, ', ', First_Name, ' ', Middle_Name) as Name,
-                                    courses.course_name, departments.department_name, departments.department_id,
+                                    courses.course_name, courses.course_id, departments.department_name, departments.department_id,
                                     Gender, Year_Level, Program, Section from students
                                     inner join users on students.username = users.username
                                     inner join courses on students.course_id = courses.course_id
@@ -73,12 +78,13 @@ class Student_Model extends Model{
         
         $this->stud_name = $row['0'];
         $this->stud_course = $row['1'];
-        $this->stud_deptName = $row['2'];
-        $this->stud_deptID = $row['3'];
-        $this->stud_gender = $row['4'];
-        $this->stud_yearLevel = $row['5'];
-        $this->stud_program = $row['6'];
-        $this->stud_section = $row['7'];       
+        $this->stud_courseID = $row['2'];
+        $this->stud_deptName = $row['3'];
+        $this->stud_deptID = $row['4'];
+        $this->stud_gender = $row['5'];
+        $this->stud_yearLevel = $row['6'];
+        $this->stud_program = $row['7'];
+        $this->stud_section = $row['8'];       
     }
     
     public function insert($uname, $gender, $yr_level, $program, $section, $courseID){
