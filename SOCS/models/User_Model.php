@@ -50,6 +50,12 @@ class User_Model extends Model {
             return false;
         }
     }
+    
+    public function insertSignatory_UserByAdmin(){
+        $this->query = mysql_query("INSERT INTO `socs`.`users` (`Username`, `Password`, `Surname`, `First_Name`, `Middle_Name`, `Picture`, `Account_Type`, `Assigned_Signatory`, `Validation_Status`) 
+                            VALUES 
+                            ('$this->Username', '$this->Password', '$this->Surname', '$this->First_Name', '$this->Middle_Name', NULL, 'Signatory', '$this->Assigned_Signatory', 'Confirmed')");
+    }
 
     // mutator
 

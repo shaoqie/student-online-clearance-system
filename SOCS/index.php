@@ -76,7 +76,7 @@ class Index extends Controller {
     public function student_register() {
         if (isset($_POST['Save'])) {
             $course_id = $this->courses_model->getCourseID(trim($_POST['course']));
-            $this->administrator_model->insertStudent(($_POST['stud_id'] . "-" . $_POST['number']), md5(($_POST['password'])), trim($_POST['surname']), trim($_POST['firstname']), trim($_POST['middleName']), NULL, 'Student', NULL);
+            $this->administrator_model->insertStudent(($_POST['stud_id'] . "-" . $_POST['number']), (($_POST['password'])), trim($_POST['surname']), trim($_POST['firstname']), trim($_POST['middleName']), NULL, 'Student', NULL);
             $this->stud_model->insert(($_POST['stud_id'] . "-" . $_POST['number']), ($_POST['gender']), ($_POST['year_level']), ($_POST['program']), ($_POST['section']), $course_id);
 
 

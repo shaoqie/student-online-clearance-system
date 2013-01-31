@@ -18,6 +18,9 @@
 </ul>
 
 <!-- Search Bar-->
+{if $user_type == 'Signatory'}
+    <input class="btn" type="button" value="Add Signatory In-Charge" onclick="window.location.href='../administrator/index.php?action=addSignatoryInCharge'">
+{/if}
 <span class="pull-right">
     {call name=search}
 </span>

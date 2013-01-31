@@ -11,12 +11,14 @@ class Index extends Controller {
 
     private $template;
     private $administrator_model;
+    private $signatoriallist_model;
 
     public function __construct() {
         parent::__construct();
         if (Session::user_exist() && Session::get_Account_type() == "Admin") {
 
             $this->administrator_model = new User_Model();
+            $this->signatoriallist_model = new SignatorialList_Model();
             $this->template = new Template();
             $this->template->setPageName('Administrator Page');
 
@@ -109,6 +111,38 @@ class Index extends Controller {
         
         $this->template->setContent('add_edit_account.tpl');   
         $this->template->assign('mySignatory', $listOfSignatory);
+    }
+    
+    public function addSignatoryInCharge(){
+        $this->template->setPageName("Add Signatory In Charge");
+        $this->template->setContent('Add_SignatoryInCharge.tpl');
+        
+        $listOfsignatory = $this->signatoriallist_model->getListofSignatory();
+        $listOfKeysFromSignatories = $this->signatoriallist_model->getKeyListofSignatory();
+
+        $this->template->assign('signatories', $listOfsignatory);
+        $this->template->assign('signatory_keys', $listOfKeysFromSignatories);
+        
+        if(isset($_POST['Register'])){
+            $username = $_POST["uname"];
+            $newpass = $_POST["newpass"];
+            $confirmpass = $_POST["confirmpass"];
+            $surname = $_POST["surname"];
+            $firstname = $_POST["firstname"];
+            $middleName = $_POST["middleName"];
+            $assign_sign = $_POST['sign_name'];
+            
+            $this->administrator_model->Username = $username;
+            $this->administrator_model->Password = $newpass;
+            $this->administrator_model->Surname = $surname;
+            $this->administrator_model->First_Name = $firstname;
+            $this->administrator_model->Middle_Name = $middleName;
+            $this->administrator_model->Assigned_Signatory = $assign_sign;
+            
+            $this->administrator_model->insertSignatory_UserByAdmin();
+            
+            $this->template->setAlert('Signatoy In-Charge was Successfully Added!', Template::ALERT_SUCCESS);
+        }
     }
 
     public function display() {
