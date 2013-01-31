@@ -86,17 +86,6 @@ class Index extends Controller {
             $status = $this->clearanceStatus_model->getOverallSignatoryClearanceStatus($username, $signID, $sysemID);
             array_push($row, $status);
         }
-        
-        /*
-        foreach ($signID_array as $signID) {
-            $numberOfRequirements = $this->clearanceStatus_model->getStudent_NumberOfRequirements($username, $signID, $sysemID);
-            $numberOfCleared = $this->clearanceStatus_model->getStudent_NumberOfClearedPerRequirements($username, $signID, $sysemID);
-            
-            $studentStatus = $numberOfRequirements == 0? "Not Cleared" : $this->clearanceStatus_model->getClearanceStatus($numberOfRequirements, $numberOfCleared);
-            array_push($row, $studentStatus);
-        }
-        */
-        
         return $row;
     }
     

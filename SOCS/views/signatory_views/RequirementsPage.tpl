@@ -11,7 +11,45 @@
 <!-- Add Requirements Button-->
 <input class="btn" type="button" value="Add Requirements" onclick="window.location.href='../signatory/requirements.php?action=viewAdd_Requirements'">
 
+
 <!-- Search Bar-->
 <span class="pull-right">
     {call name=search}
 </span>
+
+<!-- Student Table-->
+<table class="table table-hover">
+    <tr>
+        <th>
+            <input type="checkbox" onclick="isCheck({$rowCount_requirement})" id="check"> Title
+        </th>
+        <th>Description</th>    
+    </tr>
+    
+     {foreach from = $myName_requirements key = k item = i}
+        <tr> 
+            <td>
+                <label class="checkbox">
+                    <input class="Checkbox" type="checkbox" id = '{$k}' value = {$requirement_ID[$k]}> {$i}
+                </label>
+            </td>
+            <td>{$myDesc_requirements[$k]}</td>
+        </tr>
+    {/foreach}
+</table>
+
+<!-- Delete Selected Button-->
+<a style="cursor:pointer;" onclick="findCheck('{$rowCount_requirement}','Requirements')">
+    <i class="icon-remove"></i> Delete Selected
+</a>
+
+<!-- Pagination-->
+<div class="pull-right">
+    Jump to: 
+    <select id="jump" class="input-mini" onchange="jumpToPageWithSchoolYear()">
+        <option>--</option>
+        {for $start = 1 to $requirement_length}
+        <option>{$start}</option>
+        {/for}
+    </select>
+</div>

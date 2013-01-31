@@ -64,12 +64,9 @@ class Index extends Controller {
     
     private function getListofClearanceStatus($signID, $sysemID, $arrayUsername){
         $row = array();
-        foreach ($arrayUsername as $value) {
-            $numberOfRequirements = $this->clearanceStatus_model->getStudent_NumberOfRequirements($value, $signID, $sysemID);
-            $numberOfCleared = $this->clearanceStatus_model->getStudent_NumberOfClearedPerRequirements($value, $signID, $sysemID);
-            
-            $studentStatus = $numberOfRequirements == 0? "Not Cleared" : $this->clearanceStatus_model->getClearanceStatus($numberOfRequirements, $numberOfCleared);
-            array_push($row, $studentStatus);
+        foreach ($arrayUsername as $value){
+            $status = $this->clearanceStatus_model->getOverallSignatoryClearanceStatus($value, $signID, $sysemID);
+            array_push($row, $status);
         }
         
         return $row;
@@ -102,6 +99,7 @@ class Index extends Controller {
         $getListofStudent_Name = $this->getListofName($this->user_model->getFilter_Name(), $searchName, $finder);
         $getListofStudent_Username = $this->user_model->getFilter_ID();
         $getListOfStudenClearanceStatus = $this->getListofClearanceStatus($sign_id, $sy_id, $getListofStudent_Username);
+        //$getListOfStudenClearanceStatus = $this->clearanceStatus_model->getRequirementList($studentID, $signatoryID, $sysemID);
         $numOfResults = count($this->user_model->getFilter_Name());
         
         

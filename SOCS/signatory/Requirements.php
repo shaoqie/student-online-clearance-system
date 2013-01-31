@@ -15,13 +15,16 @@ require_once '../config/config.php';
 class Requirements extends Controller{
     private $template;
     private $schoolYearSem_model;
-    private $signatoryModel;
+    private $requirement_model;
+    private $signatorialList_model;
     
     
     public function __construct() {
         parent::__construct();
         $this->template = new Template();
         $this->schoolYearSem_model = new SchoolYearSem_Model();
+        $this->requirement_model = new Requirements_Model();
+        $this->signatorialList_model = new SignatorialList_Model(); 
         
         $listOfSchoolYear = $this->schoolYearSem_model->getSchool_Year();
         $currentSemester = $this->schoolYearSem_model->getCurSemester();
@@ -45,6 +48,51 @@ class Requirements extends Controller{
         
         $this->template->set_photo(Session::get_photo());
         
+        $this->displayTable('', 1, "default");
+    }
+    
+    
+    public function filter($filterName) {
+        $this->displayTable(trim($filterName), 1);
+    }
+
+    public function displayTable($searchName, $page, $finder) {
+        if (isset($_POST['GO'])) {
+            $sy_id = $this->schoolYearSem_model->getSy_ID(trim($_POST['school_year']), trim($_POST['semester']));
+            $this->template->assign('currentSemester', trim($_POST['semester']));
+            $this->template->assign('currentSchool_Year', trim($_POST['school_year']));
+        } else if (isset($_GET['sy']) && isset($_GET['sem'])) {
+            $sy_id = $this->schoolYearSem_model->getSy_ID(trim($_GET['sy']), trim($_GET['sem']));
+            $this->template->assign('currentSemester', trim($_GET['sem']));
+            $this->template->assign('currentSchool_Year', trim($_GET['sy']));
+        } else {
+            $sy_id = $this->schoolYearSem_model->getSy_ID($this->schoolYearSem_model->getCurSchool_Year(), $this->schoolYearSem_model->getCurSemester());
+        }
+
+       
+        
+        $t_sign_id = $this->signatorialList_model->getSignId(Session::get_AssignSignatory());
+        $this->requirement_model->filterRequirements($t_sign_id, $sy_id, $page, $searchName);
+        
+        //var_dump($this->requirement_model->getDescription());
+        //var_dump($t_sign_id);
+        $numOfPages = $this->requirement_model->getRequirement_PageSize($t_sign_id, $sy_id, $searchName);
+        $getListofID = $this->requirement_model->getID();
+        $getListofTitle =  $this->getListofName($this->requirement_model->getTitle(), $searchName, $finder);
+        $getListofDesc = $this->requirement_model->getDescription();
+
+        $numOfResults = count($getListofTitle);
+
+        $this->template->assign('requirement_ID', $getListofID);
+        $this->template->assign('myDesc_requirements', $this->getMaximumStrLen($getListofDesc));
+        $this->template->assign('myName_requirements', $getListofTitle);
+        $this->template->assign('filter', $searchName);
+        $this->template->assign('requirement_length', $numOfPages);
+        $this->template->assign('rowCount_requirement', $numOfResults);
+
+        if ($numOfResults == 0) {
+            $this->template->setAlert('No Results Found.', Template::ALERT_ERROR, 'alert');
+        }
     }
     
      /*----------- For Adding Requirements Page ------------*/
@@ -66,6 +114,8 @@ class Requirements extends Controller{
         
         
         
+       // var_dump($school_year . " " . $semester . " " . $requirement_title . " " . 
+             //   $requirement_desc . " " . $requirement_type . " " . $signatory);
         
 //        var_dump($school_year . " " . $semester . " " . $requirement_title . " " . 
 //                $requirement_desc . " " . $requirement_type . " " . $signatory);
@@ -107,6 +157,17 @@ class Requirements extends Controller{
     /*------------ Display UI -----------------*/
     public function display() {
         $this->template->display('bootstrap.tpl');
+    }
+    
+    public function getMaximumStrLen($strArray) {
+        $temp = array();
+
+        foreach ($strArray as $value) {
+            $hold = strlen($value) > 15 ? substr($value, 0, 15) . "........ .... ." : $value;
+            array_push($temp, $hold);
+        }
+
+        return $temp;
     }
 }
 
