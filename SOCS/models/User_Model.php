@@ -29,11 +29,21 @@ class User_Model extends Model {
         parent::__construct();
         @$this->Username = Session::get_user();
     }
+    
+    public function verifyStudent($uname, $hashing){
+         $this->query = mysql_query("UPDATE `socs`.`users` SET `Validation_Status` = 'Confirmed',
+                `Hash` = '$hashing' WHERE `users`.`Username` = '$uname'");
+    }
 
-    public function insertStudent($uname, $pass, $sname, $fname, $mname, $pic, $user_type, $assign_sign) {
-        $this->query = mysql_query("INSERT INTO `socs`.`users` (`Username`, `Password`, `Surname`, `First_Name`, `Middle_Name`, `Account_Type`) 
-                        VALUES 
-                        ('$uname', '$pass', '$sname', '$fname', '$mname', '$user_type')");
+    public function insertStudent($uname, $pass, $sname, $fname, $mname, $hash) {
+            $this->query = mysql_query("INSERT INTO `socs`.`users` (`Username`, `Password`, `Surname`, `First_Name`, `Middle_Name`, `Picture`, `Account_Type`, `Assigned_Signatory`, `Validation_Status`, `Hash`) 
+                VALUES 
+                ('$uname', '$pass', '$sname', '$fname', '$mname', NULL, 'Student', NULL, 'Unconfirmed', '$hash')");
+            
+        
+//        $this->query = mysql_query("INSERT INTO `socs`.`users` (`Username`, `Password`, `Surname`, `First_Name`, `Middle_Name`, `Account_Type`) 
+//                        VALUES 
+//                        ('$uname', '$pass', '$sname', '$fname', '$mname', '$user_type')");
     }
 
     public function insertSignatory_User() {

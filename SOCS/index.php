@@ -6,6 +6,7 @@
  * @author Ozy
  */
 require_once 'config/config.php';
+require_once 'libs/phpmailer/sendmail.php';
 
 class Index extends Controller {
 
@@ -75,13 +76,27 @@ class Index extends Controller {
 
     public function student_register() {
         if (isset($_POST['Save'])) {
+            $hash = crypt(($_POST['stud_id'] . "-" . $_POST['number'] .$_POST['emailAdd']), 'wrawehydrufmjhyaswtgf');
             $course_id = $this->courses_model->getCourseID(trim($_POST['course']));
-            $this->administrator_model->insertStudent(($_POST['stud_id'] . "-" . $_POST['number']), (($_POST['password'])), trim($_POST['surname']), trim($_POST['firstname']), trim($_POST['middleName']), NULL, 'Student', NULL);
+            
+            $this->administrator_model->insertStudent(($_POST['stud_id'] . "-" . $_POST['number']), (($_POST['password'])), trim($_POST['surname']), trim($_POST['firstname']), trim($_POST['middleName']), $hash);
+            
+            //$this->administrator_model->insertStudent(($_POST['stud_id'] . "-" . $_POST['number']), (($_POST['password'])), trim($_POST['surname']), trim($_POST['firstname']), trim($_POST['middleName']), NULL, 'Student', NULL);
             $this->stud_model->insert(($_POST['stud_id'] . "-" . $_POST['number']), ($_POST['gender']), ($_POST['year_level']), ($_POST['program']), ($_POST['section']), $course_id);
 
-
+            
+            $verificationLink = HOST ."/index.php?action=verify&username=" .($_POST['stud_id'] . "-" . $_POST['number']) ."&hash=" .$hash;
+            
+            //var_dump($_POST['emailAdd']);
+            
+            
+            if(!sendMail(trim($_POST['firstname']), $_POST['emailAdd'], $verificationLink)){
+                //echo "wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww";
+            }else{
+                //echo "wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww2222222222222222222";
+            }
             $this->template->setContent('login.tpl');
-            $this->template->setAlert('Your registration form was succesfully save in the Database!... ', Template::ALERT_SUCCESS);
+            $this->template->setAlert('Please confirm your registration by clicking the link sent in your email!... ', Template::ALERT_SUCCESS);
         }
 
         /*
@@ -101,6 +116,11 @@ class Index extends Controller {
          */
     }
 
+    public function verify($username, $hash){
+        $this->administrator_model->verifyStudent($username, $hash);
+        $this->template->setAlert('Your Account was Successfully verified!... ', Template::ALERT_SUCCESS);
+    }
+    
     public function signatory_register() {
         if (isset($_POST['Save'])) {
             $sign_id = $this->signatoriallist_model->getSignId($_POST['sign_name']);
@@ -114,6 +134,7 @@ class Index extends Controller {
 //          echo "Middlename: " .trim($_POST['middleName']) ."<br/>";
 //          echo "Section: " .$_POST['sign_name'] ."<br/>";
           
+            
             
             $this->template->setContent('login.tpl');
             $this->template->setAlert('Your registration form was succesfully save. See the Admin to confirmed your account!... ', Template::ALERT_SUCCESS);
