@@ -15,6 +15,7 @@ require_once '../config/config.php';
 class Requirements extends Controller{
     private $template;
     private $schoolYearSem_model;
+    private $signatoryModel;
     
     
     public function __construct() {
@@ -49,20 +50,26 @@ class Requirements extends Controller{
      /*----------- For Adding Requirements Page ------------*/
 
     public function viewAdd_Requirements(){
+        $this->signatoryModel = new SignatorialList_Model();
+        $listOfSignatory = $this->signatoryModel->getListofSignatory();
+        $listOfDepartmentsUnder =  $this->signatoryModel->getListOfDept_underSignName($this->signatoryModel->getSignId(Session::get_AssignSignatory()));
+        $listOfCourse_UnderSign = $this->signatoryModel->getListOfCourse_Sign($this->signatoryModel->getSignId(Session::get_AssignSignatory()));
+                //($this->signatoryModel->getSignId(Session::get_AssignSignatory()));
+        
+                //var_dump($listOfCourse_UnderSign);
+        
         $this->template->setPageName("Adding Requirements Page");
         $this->template->setContent("Add_Requirements.tpl"); 
+        $this->template->assign('listOfSignatory', $listOfSignatory);
+        $this->template->assign('listOfDepartments', $listOfDepartmentsUnder);
+        $this->template->assign('listOfCourse_UnderSign', $listOfCourse_UnderSign);
         
         
-        $school_year = $_POST['school_year'];
-        $semester = $_POST['semester']; 
-        $requirement_title = $_POST['requirement_title'];
-        $requirement_desc = $_POST['requirement_description']; 
-        $requirement_type = $_POST['requirement_type'];
-        $signatory = $_POST['signatory']; 
         
-        var_dump($school_year . " " . $semester . " " . $requirement_title . " " . 
-                $requirement_desc . " " . $requirement_type . " " . $signatory);
         
+//        var_dump($school_year . " " . $semester . " " . $requirement_title . " " . 
+//                $requirement_desc . " " . $requirement_type . " " . $signatory);
+//        
 //        //var_dump($_POST);
 //        if(isset($_POST['Next'])){
 //            
@@ -77,6 +84,15 @@ class Requirements extends Controller{
 //                $this->template->setAlert("Cannot Procceed if a field is empty!... ", Template::ALERT_ERROR);
 //            }
 //        }
+    }
+    
+    public function viewAdd_Requirements_submit(){
+        $school_year = $_POST['school_year'];
+        $semester = $_POST['semester']; 
+        $requirement_title = $_POST['requirement_title'];
+        $requirement_desc = $_POST['requirement_description']; 
+        $requirement_type = $_POST['requirement_type'];
+        $signatory = $_POST['signatory']; 
     }
     
     /*----------- For the next page for Adding Requirements ------------*/

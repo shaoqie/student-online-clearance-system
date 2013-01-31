@@ -23,6 +23,19 @@
             }  
         }); 
     }
+    
+    function change_reqType(){
+        var x = document.getElementById("requirement_type").selectedIndex;
+        var select = document.getElementById  ("requirement_type").options;
+        
+        var SelectedIndex = select[x].index;
+        
+        $(document).ready(function(){
+            if(parseInt(SelectedIndex) == 1){ $("#Sign").show(); 
+            }else { $("#Sign").hide();
+            }  
+        }); 
+    }
 </script>
 
 
@@ -38,7 +51,7 @@
 
 <!--Archive Search Bar -->
 
-<form method='post' class="form-horizontal">
+<form method='post' class="form-horizontal" action="requirements.php?action=viewAdd_Requirements_submit">
     <div class="form-inline">
         <label >School Year:  </label>
         <select id="school_year" name="school_year" class="input-large">
@@ -86,21 +99,20 @@
     <div class="control-group">
         <label class="control-label">Requirement Type: </label>
         <div class="controls">
-            <select name="requirement_type" class="input-large">
-                <option></option>
+            <select id="requirement_type" name="requirement_type" class="input-large" onchange="change_reqType()">
                 <option>Textual</option>
                 <option>Pre-requisite</option>
             </select>
         </div>    
     </div>
 
-    <div class="control-group">
+    <div class="control-group" id="Sign" hidden>
         <label class="control-label">Select Signatory: </label>
         <div class="controls">
             <select name="signatory" class="input-large">
-                <option></option>
-                <option>OSS</option>
-                <option>OCSC</option>
+                {foreach from = $listOfSignatory key = k item = i}
+                    <option>{$listOfSignatory[$k]}</option>
+                {/foreach}
             </select>
         </div>    
     </div>    
@@ -121,34 +133,42 @@
         </div>    
     </div>  
 
-    <div class="control-group" id="selected_Dept">
+    <div class="control-group" id="selected_Dept" hidden>
         <label class="control-label" id> Departments: </label>
         <div class="controls">
             <select name="Departments" class="input-xlarge">   
-                <option>Institute of Computing</option>
+                {foreach from = $listOfDepartments key = k item = i}
+                    <option>{$listOfDepartments[$k]}</option>
+                {/foreach}
             </select>
         </div>    
     </div>
 
-    <div class="control-group" id="selected_Course">
+    <div class="control-group" id="selected_Course" hidden>
         <label class="control-label" id> Courses: </label>
         <div class="controls">
             <select name="Courses" class="input-xlarge">   
-                <option>BSIT</option>
+                {foreach from = $listOfCourse_UnderSign key = k item = i}
+                    <option>{$i}</option>
+                {/foreach}
             </select>
         </div>    
     </div>
 
-    <div class="control-group" id="selected_YearLevel">
+    <div class="control-group" id="selected_YearLevel" hidden>
         <label class="control-label" id> Year level: </label>
         <div class="controls">
             <select name="Year_level" class="input-xlarge">   
+                <option>1st year</option>
+                <option>2nd year</option>
+                <option>3rd year</option>
                 <option>4th year</option>
+                <option>5th year</option>
             </select>
         </div>    
     </div>
 
-    <div class="control-group" id="selected_Program">
+    <div class="control-group" id="selected_Program" hidden>
         <label class="control-label" id> Program: </label>
         <div class="controls">
             <select name="Program" class="input-xlarge">   
@@ -202,11 +222,12 @@
         </select>
     </label>
 
-    <div class="control-group">
-        <input class="btn btn-primary" type='Submit' value='Add Requirement' name="Save">
-    </div>
+    
    
 </div>  
 </div>   
     -->
+    <div class="control-group">
+        <input class="btn btn-primary" type='Submit' value='Add Requirement' name="Save">
+    </div>
 </form> 

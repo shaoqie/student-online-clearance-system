@@ -203,6 +203,20 @@ class SignatorialList_Model extends Model {
             array_push($this->sign_Name, $row['1']);
         }
     }
+    
+    public function getListOfCourse_Sign($signID){
+        $this->query = mysql_query("select courses.course_name from signatoriallist
+                                    inner join departments on (signatoriallist.Department_ID = departments.Department_ID)  
+                                    inner join courses on (departments.department_id = courses.department_id)
+                                    where signatoriallist.signatory_id = '$signID'");
+        
+        $listCourses = array();
+        while ($row = mysql_fetch_array($this->query)) {
+            array_push($listCourses, $row['0']);
+        }
+        
+        return $listCourses;
+    }
 
     /* -------------------------------------------- */
 
