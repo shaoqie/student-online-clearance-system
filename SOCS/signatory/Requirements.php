@@ -51,6 +51,19 @@ class Requirements extends Controller{
         $this->displayTable('', 1, "default");
     }
     
+    public function deleted() {
+        $this->template->setAlert('Delete an Requirement was Successfully!..', Template::ALERT_SUCCESS, 'alert');
+    }
+
+    public function delete($selected) {
+        $explode = explode("-", $selected);
+        
+        foreach ($explode as $value) {
+            $this->requirement_model->deleteRequirements($value);
+        }
+        $HOST = $explode[0] != null ? HOST . "/signatory/requirements.php?action=deleted" : HOST . "/signatory/bulletin.php";
+        header('Location: ' . $HOST);
+    }
     
     public function filter($filterName) {
         $this->displayTable(trim($filterName), 1);

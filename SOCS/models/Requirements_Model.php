@@ -59,6 +59,12 @@ class Requirements_Model extends Model{
         
         return mysql_num_rows($this->query) / $this->itemsPerPage;
     }
+    
+    public function deleteRequirements($key){
+        mysql_query("delete from requirements where Requirement_ID = '$key'");
+        
+        echo mysql_error();
+    }
 }
 
 ?>
