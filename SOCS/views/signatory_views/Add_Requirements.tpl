@@ -228,6 +228,8 @@
 </div>   
     -->
     <div class="control-group">
+        <div class="controls">
         <input class="btn btn-primary" type='Submit' value='Add Requirement' name="Save">
+        </div>
     </div>
 </form> 
