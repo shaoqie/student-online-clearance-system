@@ -36,7 +36,7 @@
 
         <div class="well span4">
 
-            <div id="hover_link" onclick="window.location.href='index.php?action=viewMessages&Tsign_ID={$myKey_signID[$k]}&page=1'">
+            <div id="hover_link" onclick="window.location.href='index.php?action=viewRequirements&Tsign_ID={$myKey_signID[$k]}&page=1'">
                 <h4 class="lead">{$i}</h4>
             </div>
 

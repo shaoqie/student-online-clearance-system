@@ -60,12 +60,24 @@ class ClearanceStatus extends Model{
         
         $arrayTemp = array();
         
-        $this->query = mysql_query("select Requirement_ID, Title, Description from requirements 
+        $this->query = mysql_query("select Requirement_ID, Title, Description, Requirement_Type, Prerequisite_Signatory from requirements 
                                     where Signatory_ID='$signatoryID' and SY_SEM_ID='$sysemID' and 
                                     (Visibility='All' or Department_ID='$t_deptID' or Course_ID='$t_courseID' or Year_Level='$t_yl' or Program='$t_program')");
         
+        /*
+        var_dump("select Requirement_ID, Title, Description from requirements 
+                                    where Signatory_ID='$signatoryID' and SY_SEM_ID='$sysemID' and 
+                                    (Visibility='All' or Department_ID='$t_deptID' or Course_ID='$t_courseID' or Year_Level='$t_yl' or Program='$t_program')");
+        */
         while($row = mysql_fetch_array($this->query)){
-            $status = $this->getRequirementClearanceStatus($studentID, $row['Requirement_ID']);
+            if ($row['Requirement_Type'] == 'Textual')
+                $status = $this->getRequirementClearanceStatus($studentID, $row['Requirement_ID']);
+            else{
+                $sigID = $row['Prerequisite_Signatory'];
+                $status = $this->getOverallSignatoryClearanceStatus($studentID, $sigID, $sysemID);
+                if($status == "No Requirements")
+                    $status = "Cleared";
+            }
             array_push($arrayTemp, array($row['Requirement_ID'], $row['Title'], $row['Description'], $status));
         }
         return $arrayTemp;

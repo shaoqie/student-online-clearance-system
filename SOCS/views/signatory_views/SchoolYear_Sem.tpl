@@ -10,22 +10,22 @@
         {/foreach}
     </select>
 
-    <label>Semester: 
-        <select id="semester" name="semester" class="input-medium">
-            {if $currentSemester eq 'First'}
-                <option selected>First</option>
-                <option>Second</option>
-                <option>Summer</option>
-            {elseif $currentSemester eq 'Second'}
-                <option>First</option>
-                <option selected>Second</option>
-                <option>Summer</option>
-            {else}
-                <option>First</option>
-                <option>Second</option>
-                <option selected>Summer</option>
-            {/if}           
-        </select>
-        <input class="btn btn-primary" type="submit" value="GO" name="GO">
-    </label>
+    <label>Semester: </label>
+    <select id="semester" name="semester" class="input-medium">
+        {if $currentSemester eq 'First'}
+            <option selected>First</option>
+            <option>Second</option>
+            <option>Summer</option>
+        {elseif $currentSemester eq 'Second'}
+            <option>First</option>
+            <option selected>Second</option>
+            <option>Summer</option>
+        {else}
+            <option>First</option>
+            <option>Second</option>
+            <option selected>Summer</option>
+        {/if}           
+    </select>
+    <input class="btn btn-primary" type="submit" value="GO" name="GO">
+
 </form>

@@ -52,14 +52,31 @@ class Requirements extends Controller{
         $this->template->setPageName("Adding Requirements Page");
         $this->template->setContent("Add_Requirements.tpl"); 
         
-        if(isset($_POST['Next'])){
-            if(trim($_POST['requirement_title']) != "" && trim($_POST['requirement_description']) != ""){
-                /// procceed to the next page
-                header('Location: ../signatory/requirements.php?action=viewNext_Add_Requirements&T_title=' .trim($_POST['requirement_title']) .'&T_desc=' .trim($_POST['requirement_description']));
-            }else{
-                $this->template->setAlert("Cannot Procceed if a field is empty!... ", Template::ALERT_ERROR);
-            }
-        }
+        
+        $school_year = $_POST['school_year'];
+        $semester = $_POST['semester']; 
+        $requirement_title = $_POST['requirement_title'];
+        $requirement_desc = $_POST['requirement_description']; 
+        $requirement_type = $_POST['requirement_type'];
+        $signatory = $_POST['signatory']; 
+        
+        var_dump($school_year . " " . $semester . " " . $requirement_title . " " . 
+                $requirement_desc . " " . $requirement_type . " " . $signatory);
+        
+//        //var_dump($_POST);
+//        if(isset($_POST['Next'])){
+//            
+//            if(trim($_POST['requirement_title']) != "" && trim($_POST['requirement_description']) != ""){
+//                /// procceed to the next page
+//                
+//                
+//                //header('Location: ../signatory/requirements.php?action=viewNext_Add_Requirements&T_title=' .trim($_POST['requirement_title']) .'&T_desc=' .trim($_POST['requirement_description']));
+//                
+//                
+//            }else{
+//                $this->template->setAlert("Cannot Procceed if a field is empty!... ", Template::ALERT_ERROR);
+//            }
+//        }
     }
     
     /*----------- For the next page for Adding Requirements ------------*/
