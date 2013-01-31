@@ -14,17 +14,17 @@ function sendMail($studentName, $studentEmail, $verificationLink){
     $mail->SMTPSecure = "ssl";                 // sets the prefix to the servier
     $mail->Host       = "smtp.gmail.com";      // sets GMAIL as the SMTP server
     $mail->Port       = 465;                   // set the SMTP port for the GMAIL server
-    $mail->Username   = "yasaka.nyaruko@gmail.com";  // GMAIL username
-    $mail->Password   = "4212012yasakanyaruko";            // GMAIL password
+    $mail->Username   = "usep.socs@gmail.com";  // GMAIL username
+    $mail->Password   = "mgabuang";            // GMAIL password
     
     
-    $mail->SetFrom('yasaka.nyaruko@gmail.com', 'Yasaka Nyaruko');
-    $mail->AddReplyTo("yasaka.nyaruko@gmail.com","Yasaka Nyaruko");
+    $mail->SetFrom('usep.socs@gmail.com', 'SOCS');
+    $mail->AddReplyTo("usep.socs@gmail.com","SOCS");
 
-    $mail->Subject    = "SOCS email verification ";
+    $mail->Subject    = "SOCS account confirmation ";
     
-    $body = "Welcome to Student Online Clearance System(SOCS)! " . "</br>" .
-            "<br/>Hello $studentName, <br/>" .
+    $body = "Welcome to Student Online Clearance System(SOCS)! " . "</br></br>" .
+            "<br/>Hello $studentName, <br/></br>" .
             "You have chosen to register an account on Student Online Clearance System. <br/>".
             "<a href=\"$verificationLink\">$verificationLink<a/> <br/>" .
             "Please click on above's link to confirm your registration..".

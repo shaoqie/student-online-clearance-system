@@ -35,10 +35,10 @@ class User_Model extends Model {
                 `Hash` = '$hashing' WHERE `users`.`Username` = '$uname'");
     }
 
-    public function insertStudent($uname, $pass, $sname, $fname, $mname, $hash) {
-            $this->query = mysql_query("INSERT INTO `socs`.`users` (`Username`, `Password`, `Surname`, `First_Name`, `Middle_Name`, `Picture`, `Account_Type`, `Assigned_Signatory`, `Validation_Status`, `Hash`) 
+    public function insertStudent($uname, $pass, $sname, $fname, $mname, $email, $hash) {
+            $this->query = mysql_query("INSERT INTO `socs`.`users` (`Username`, `Password`, `Surname`, `First_Name`, `Middle_Name`, `email_address`, `Picture`, `Account_Type`, `Assigned_Signatory`, `Validation_Status`, `Hash`) 
                 VALUES 
-                ('$uname', '$pass', '$sname', '$fname', '$mname', NULL, 'Student', NULL, 'Unconfirmed', '$hash')");
+                ('$uname', '$pass', '$sname', '$fname', '$mname', '$email', NULL, 'Student', NULL, 'Unconfirmed', '$hash')");
             
         
 //        $this->query = mysql_query("INSERT INTO `socs`.`users` (`Username`, `Password`, `Surname`, `First_Name`, `Middle_Name`, `Account_Type`) 
