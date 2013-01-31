@@ -167,6 +167,7 @@ class Index extends Controller {
         
         $this->template->assign('n_count', count($result));
         $this->template->assign('clearanceList', $result);
+        $this->template->assign('sign_id', $Tsign_ID);
     }
 
     public function display() {
