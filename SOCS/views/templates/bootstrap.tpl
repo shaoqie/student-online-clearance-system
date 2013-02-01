@@ -33,6 +33,24 @@
                     background-repeat: no-repeat;
                 }{literal}
 
+                .socs-welcome{
+                    background-color: transparent; 
+                    padding-bottom: 60px;
+                    padding-left: 75px;
+                    text-shadow: inherit;
+                }
+
+                .carousel-caption h1,
+                .carousel-caption .lead {
+                    margin: 0;
+                    line-height: 1.25;
+                    color: #fff;
+                    text-shadow: 0 1px 1px rgba(0,0,0,.4);
+                }
+                .carousel-caption .btn {
+                    margin-top: 10px;
+                }
+
                 /*
                 div{
                 border: 1px #000 solid;
@@ -169,7 +187,18 @@
         <script src="{$host}/public/js/vendor/bootstrap.min.js"></script>
         <script src="{$host}/public/js/vendor/bootbox.min.js"></script>
 
-        <script src="{$host}/public/js/main.js"></script>        
+        <script src="{$host}/public/js/main.js"></script>
+
+        {literal}
+            <script type="text/javascript">
+                $(document).ready(function (){
+                    $('#socs-carousel').carousel({
+                        interval: 5000,
+                        pause: "hover"
+                    });
+                });
+            </script>
+        {/literal}
 
         {*
         {literal}
