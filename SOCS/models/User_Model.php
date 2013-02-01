@@ -114,7 +114,7 @@ class User_Model extends Model {
     }
 
     public function update() {
-        $sql = "UPDATE users SET Picture='" . $this->Picture . "', Surname='" . $this->Surname . "', First_Name='" . $this->First_Name . "', Middle_Name='" . $this->Middle_Name . "',Password='" . $this->Password . "' Where Username='" . $this->Username . "'";
+        $sql = "UPDATE users SET Picture='" . $this->Picture . "', Surname='" . $this->Surname . "', First_Name='" . $this->First_Name . "', Middle_Name='" . $this->Middle_Name ."', email_address='" .$this->email_add . "', Password='" . $this->Password . "' Where Username='" . $this->Username . "'";
 
         if (mysql_query($sql)) {
             Session::set_password($this->Password);
@@ -122,6 +122,7 @@ class User_Model extends Model {
             Session::set_middlename($this->Middle_Name);
             Session::set_surname($this->Surname);
             Session::set_photo($this->Picture);
+            Session::set_emailAdd($this->email_add);
 
             return true;
         } else {

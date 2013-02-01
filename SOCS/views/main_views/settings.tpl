@@ -23,6 +23,13 @@
             <input type='text'name='middleName' value="{$middlename}" pattern="[A-Za-z\s]+" required title="Letters and spaces only">
         </div>
     </div>
+        
+    <div class="control-group">
+         <label class="control-label">Email Address: </label>
+           <div class="controls">
+                <input type='text'name='emailAdd' value="{$email_add}" required>
+            </div>
+    </div>
 
     <legend>Change password: </legend>
 

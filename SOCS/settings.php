@@ -25,6 +25,7 @@ class Settings extends Controller {
             $this->template->set_surname(Session::get_Surname());
             $this->template->set_firstname(Session::get_Firstname());
             $this->template->set_middlename(Session::get_Middlename());
+            $this->template->assign('email_add',Session::get_emailAdd());
             $this->template->set_account_type(Session::get_Account_type());
             $this->template->set_photo(Session::get_photo());
 
@@ -50,8 +51,10 @@ class Settings extends Controller {
         $surname = $_POST['surname'];
         $firstname = $_POST['firstname'];
         $middleName = $_POST['middleName'];
+        $email_add = $_POST['emailAdd'];
         $imagefile = "";
 
+        
         if ($newpass == "") {
             $newpass = $oldpass;
             $confirmpass = $oldpass;
@@ -60,14 +63,15 @@ class Settings extends Controller {
         $test = 0;
 
         //Check if fields are empty in firstname surname and middlename
-        if ($surname != "" && $firstname != "" && $middleName != "") {
+        if ($surname != "" && $firstname != "" && $middleName != "" && $email_add != "" ) {
             $this->admin->Surname = $surname;
             $this->admin->First_Name = $firstname;
             $this->admin->Middle_Name = $middleName;
+            $this->admin->email_add = $email_add;
 
             $test++;
         } else {
-            $this->template->setAlert('Surname, first name and middle name are required!', Template::ALERT_ERROR, 'alert');
+            $this->template->setAlert('Surname, first name, middle name and email address are required!', Template::ALERT_ERROR, 'alert');
             return;
         }
 
@@ -153,11 +157,13 @@ class Settings extends Controller {
             }
         }
 
+        //var_dump($this->admin->email_add);
         if ($this->admin->update() && $test == 7) {
 
             $this->template->set_surname($surname);
             $this->template->set_firstname($firstname);
             $this->template->set_middlename($middleName);
+            $this->template->assign('email_add' ,$email_add);
             $this->template->set_photo($this->admin->Picture);
 
             if (isset($this->admin->Picture)) {

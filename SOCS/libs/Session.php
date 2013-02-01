@@ -50,6 +50,11 @@ class Session {
         $_SESSION['middlename'] = $middlename;
     }
     
+    public static function set_emailAdd($email_add){
+        $_SESSION['emailAdd'] = $email_add;
+    }
+    
+    
     public static function set_assignSignatory($assignSign){
         $_SESSION['assignSignatory'] = $assignSign;
     }
@@ -94,6 +99,10 @@ class Session {
     
     public static function get_Middlename(){
         return $_SESSION['middlename'];
+    }
+    
+    public static function get_emailAdd(){
+        return $_SESSION['emailAdd'];
     }
     
     public static function get_DepartmentName(){
