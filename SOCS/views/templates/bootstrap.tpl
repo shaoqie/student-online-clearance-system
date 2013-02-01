@@ -47,10 +47,15 @@
                     color: #fff;
                     text-shadow: 0 1px 1px rgba(0,0,0,.4);
                 }
+
                 .carousel-caption .btn {
                     margin-top: 10px;
                 }
 
+                .carousel-images{
+                    width: 1200px; 
+                    height: 350px;
+                }
                 /*
                 div{
                 border: 1px #000 solid;
@@ -129,6 +134,14 @@
 
                             {call name=welcome_navigations}
 
+                            {if $smarty.get.action == "student_registrationForm"}
+                                <form class="navbar-form pull-right" action="index.php?action=login" method="post">
+                                    <input class="span2" type="text" placeholder="Username" name="username" required>
+                                    <input class="span2" type="password" placeholder="Password" name="password" required>
+                                    <button type="submit" class="btn"><i class="icon-check"></i> Sign in</button>
+                                </form>
+                            {/if}
+
                         {else}
                             {call name=welcome_navigations}
 
@@ -143,6 +156,34 @@
                 </div>
             </div>
         </div>
+        {*
+        <div class="container">
+        {if isset($username)}
+        <div id="header" class="row socs-content">
+        <div class="span1">
+
+        {if isset($photo)}
+        <img src="{$photo}" class="img-polaroid"/>
+        {else}
+        <img src="{$host}/photos/default.png" class="img-polaroid"/>
+        {/if}
+
+        </div>
+        <div class="span5">
+        <h4>{$surname}, {$firstname} {$middlename}</h4>
+        <h5>- {$account_type} {$assign_sign}</h5>
+        </div>
+        </div>
+        {/if}
+        </div>
+
+        <div class="container socs-content">
+
+        {$alert}
+
+        {include file='UIsections.tpl'}
+        {include file=$content}
+        </div>*}
 
         <div class="span10 offset1">
 
@@ -200,14 +241,14 @@
             </script>
         {/literal}
 
-        {*
+
         {literal}
-        <script>
-        var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
-        (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
-        g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
-        s.parentNode.insertBefore(g,s)}(document,'script'));
-        </script>
-        {/literal}*}
+            <script>
+            var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
+            (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+            g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+            s.parentNode.insertBefore(g,s)}(document,'script'));
+            </script>
+        {/literal}
     </body>
 </html>
