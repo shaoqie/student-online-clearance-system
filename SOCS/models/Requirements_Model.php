@@ -36,6 +36,24 @@ class Requirements_Model extends Model{
         return $this->Description;
     }
     
+    public function addRequirement($title, $description, $signatory, $sysemID, $visibility, 
+                                    $departmentID, $couseID, $yearLevel, $program, $requirement_type, $prereqSig){
+        
+        $departmentID = $departmentID != "NULL" ? "'$departmentID'" : $departmentID;
+        $couseID = $couseID != "NULL" ? "'$couseID'" : $couseID;
+        $yearLevel = $yearLevel != "NULL" ? "'$yearLevel'" : $yearLevel;
+        $program = $program != "NULL" ? "'$program'" : $program;
+        $prereqSig = $prereqSig != "NULL" ? "'$prereqSig'" : $prereqSig;
+        
+        $this->query = mysql_query("INSERT INTO `socs`.`requirements` (`Requirement_ID`, `Title`, `Description`, 
+                                    `Signatory_ID`, `SY_SEM_ID`, `Visibility`, `Department_ID`, `Course_ID`, 
+                                    `Year_Level`, `Program`, `Requirement_Type`, `Prerequisite_Signatory`) VALUES 
+                                    (NULL, '$title', '$description', '$signatory', '$sysemID', '$visibility', $departmentID, $couseID, 
+                                    $yearLevel, $program, '$requirement_type', $prereqSig)");
+        
+        var_dump(mysql_error());
+    }
+    
     public function filterRequirements($sign_id, $sysem_id, $page, $search){
         $this->query = mysql_query("select * from requirements where Signatory_ID = '$sign_id' AND sy_sem_id = '$sysem_id' AND
                                     (Title like '%$search%')

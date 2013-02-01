@@ -1,4 +1,3 @@
-<!-- Navigation Tabs-->
 <ul class="nav nav-tabs">
     <li class="dropdown">
         <a class="dropdown-toggle"
@@ -9,8 +8,8 @@
         </a>
         <ul class="dropdown-menu">
             <li><a href='../administrator/index.php?user_type=Student'>Student</a></li>
-            <li><a href='../administrator/index.php?user_type=Signatory'>confirmed signatory</a></li>
-            <li><a href='../administrator/unconfirmed_signatory.php'>unconfirmed signatory</a></li>
+            <li><a href='../administrator/index.php?user_type=Signatory'>Confirmed Signatory</a></li>
+            <li><a href='../administrator/unconfirmed_signatory.php'>Unconfirmed Signatory</a></li>
         </ul>
     </li>
     <li><a href='../administrator/signatory_list_manager.php'>Signatories</a></li>

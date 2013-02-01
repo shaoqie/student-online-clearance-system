@@ -111,19 +111,30 @@ class Requirements extends Controller{
      /*----------- For Adding Requirements Page ------------*/
 
     public function viewAdd_Requirements(){
-        $this->signatoryModel = new SignatorialList_Model();
-        $listOfSignatory = $this->signatoryModel->getListofSignatory();
-        $listOfDepartmentsUnder =  $this->signatoryModel->getListOfDept_underSignName($this->signatoryModel->getSignId(Session::get_AssignSignatory()));
-        $listOfCourse_UnderSign = $this->signatoryModel->getListOfCourse_Sign($this->signatoryModel->getSignId(Session::get_AssignSignatory()));
-                //($this->signatoryModel->getSignId(Session::get_AssignSignatory()));
+        $listOfSignatory = $this->signatorialList_model->getListofSignatory();
+        $listOfSignatoryID = $this->signatorialList_model->getListofSignatoryID();
         
-                //var_dump($listOfCourse_UnderSign);
+        $listOfDepartmentsUnder =  $this->signatorialList_model->getListOfDept_underSignName($this->signatorialList_model->getSignId(Session::get_AssignSignatory()));
+        $listOfDepartmentsUnderID =  $this->signatorialList_model->getListOfDept_underSignNameID($this->signatorialList_model->getSignId(Session::get_AssignSignatory()));
+        
+        $listOfCourse_UnderSign = $this->signatorialList_model->getListOfCourse_Sign($this->signatorialList_model->getSignId(Session::get_AssignSignatory()));
+        $listOfCourse_UnderSignID = $this->signatorialList_model->getListOfCourse_SignID($this->signatorialList_model->getSignId(Session::get_AssignSignatory()));
+        
+        $thisSignatory = Session::get_AssignSignatory();
         
         $this->template->setPageName("Adding Requirements Page");
         $this->template->setContent("Add_Requirements.tpl"); 
+        
         $this->template->assign('listOfSignatory', $listOfSignatory);
+        $this->template->assign('listOfSignatoryID', $listOfSignatoryID);
+        
         $this->template->assign('listOfDepartments', $listOfDepartmentsUnder);
+        $this->template->assign('listOfDepartmentsID', $listOfDepartmentsUnderID);
+        
         $this->template->assign('listOfCourse_UnderSign', $listOfCourse_UnderSign);
+        $this->template->assign('listOfCourse_UnderSignID', $listOfCourse_UnderSignID);
+        
+        $this->template->assign('thisSignatory', $thisSignatory);
         
         
         
@@ -150,12 +161,52 @@ class Requirements extends Controller{
     }
     
     public function viewAdd_Requirements_submit(){
-        $school_year = $_POST['school_year'];
-        $semester = $_POST['semester']; 
+        
+        $school_year  = $_POST['school_year'];
+        $semester = $_POST['semester'];
+        $sy_sem = $this->schoolYearSem_model->getSy_ID($school_year, $semester);
+        
         $requirement_title = $_POST['requirement_title'];
         $requirement_desc = $_POST['requirement_description']; 
         $requirement_type = $_POST['requirement_type'];
-        $signatory = $_POST['signatory']; 
+        if ($requirement_type == "Textual")
+            $signatory = "NULL" ;
+        else {
+            $signatory = $_POST['signatory']; 
+        }
+        
+        $thisSignantory = $this->signatorialList_model->getSignId(Session::get_AssignSignatory());
+        
+        $requirement_application = $_POST['req_appliesTo']; 
+        
+        $department = "NULL";
+        $courses = "NULL";
+        $year_level = "NULL";
+        $program = "NULL";
+        
+        switch ($requirement_application) {
+            case "By Department":
+                $department = $_POST['Departments'];
+                break;
+            case "By Course":
+                $courses = $_POST['Courses'];
+                break;
+            case "By Year Level":
+                $year_level = $_POST['Year_level'];
+                break;
+            case "By Program":
+                $program = $_POST['Program'];
+                break;
+        }
+        
+        
+        
+        /*
+        var_dump("sy-sem:'$sy_sem' title:'$requirement_title' desc:'$requirement_desc' type:'$requirement_type' sig:'$signatory' ".
+                 "appl:'$requirement_application' department:'$department' course:'$courses' yearlevel:'$year_level' program:'$program'");
+        */
+        
+        $this->requirement_model->addRequirement($requirement_title, $requirement_desc, $thisSignantory, $sy_sem, $requirement_application, $department, $courses, $year_level, $program, $requirement_type, $signatory);
     }
     
     /*----------- For the next page for Adding Requirements ------------*/

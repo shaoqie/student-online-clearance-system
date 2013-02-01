@@ -111,7 +111,9 @@
         <div class="controls">
             <select name="signatory" class="input-large">
                 {foreach from = $listOfSignatory key = k item = i}
-                    <option>{$listOfSignatory[$k]}</option>
+                    {if $thisSignatory != $listOfSignatory[$k]}
+                        <option value="{$listOfSignatoryID[$k]}">{$listOfSignatory[$k]}</option>
+                    {/if}
                 {/foreach}
             </select>
         </div>    
@@ -124,11 +126,11 @@
         <label class="control-label"> Select: </label>
         <div class="controls">
             <select id="req_appliesTo" name="req_appliesTo" class="input-xlarge" onchange="change_req_appliesTo()">
-                <option>All Students:</option>
-                <option>Students from the following department:</option>
-                <option>Students from the following course:</option>
-                <option>Students from a particular level:</option>
-                <option>Students from a particular program:</option>
+                <option value="All">All Students:</option>
+                <option value="By Department">Students from the following department:</option>
+                <option value="By Course">Students from the following course:</option>
+                <option value="By Year Level">Students from a particular level:</option>
+                <option value="By Program">Students from a particular program:</option>
             </select>
         </div>    
     </div>  
@@ -138,7 +140,7 @@
         <div class="controls">
             <select name="Departments" class="input-xlarge">   
                 {foreach from = $listOfDepartments key = k item = i}
-                    <option>{$listOfDepartments[$k]}</option>
+                    <option value="{$listOfDepartmentsID[$k]}">{$listOfDepartments[$k]}</option>
                 {/foreach}
             </select>
         </div>    
@@ -149,7 +151,7 @@
         <div class="controls">
             <select name="Courses" class="input-xlarge">   
                 {foreach from = $listOfCourse_UnderSign key = k item = i}
-                    <option>{$i}</option>
+                    <option value="{$listOfCourse_UnderSignID[$k]}">{$listOfCourse_UnderSign[$k]}</option>
                 {/foreach}
             </select>
         </div>    
@@ -159,11 +161,11 @@
         <label class="control-label" id> Year level: </label>
         <div class="controls">
             <select name="Year_level" class="input-xlarge">   
-                <option>1st year</option>
-                <option>2nd year</option>
-                <option>3rd year</option>
-                <option>4th year</option>
-                <option>5th year</option>
+                <option>First Year</option>
+                <option>Second Year</option>
+                <option>Third Year</option>
+                <option>Fourth Year</option>
+                <option>Fifth Year</option>
             </select>
         </div>    
     </div>

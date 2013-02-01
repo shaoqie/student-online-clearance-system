@@ -24,6 +24,7 @@
                 <th>Checked</th>
                 <th>Requirements</th>       
             </tr>
+            
             <tr>
                 <td><input type="checkbox"></td>
                 <td><p>Paid for Library Card</p></td>
@@ -40,7 +41,9 @@
     </div>
 </div>
 <div class="row">
+
     <div class="span2 offset1">
+        <input type="button" class="btn btn-primary" value="Save" onclick="window.location.href='../signatory/index.php?action=saveClearanceStatus'">
         <input type="button" class="btn btn-primary" value="Back" onclick="window.location.href='../signatory/index.php'">
     </div>   
 </div>

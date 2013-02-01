@@ -134,6 +134,17 @@ class SignatorialList_Model extends Model {
 
         return $rowInfo;
     }
+    
+    public function getListofSignatoryID() {
+        $rowInfo = array();
+        $this->query = mysql_query("select signatory_ID from signatories");
+
+        while ($row = mysql_fetch_array($this->query)) {
+            array_push($rowInfo, $row[0]);
+        }
+
+        return $rowInfo;
+    }
 
     public function getKeyListofSignatory() {
         $rowInfo = array();
@@ -163,6 +174,20 @@ class SignatorialList_Model extends Model {
     public function getListOfDept_underSignName($signID) {
         $filter = array();
         $this->query = mysql_query("select departments.department_name from signatorialList
+                                    inner join signatories on signatorialList.signatory_id = signatories.signatory_id
+                                    inner join departments on signatorialList.department_id = departments.department_id
+                                    where signatorialList.signatory_id = '$signID'");
+
+        while ($row = mysql_fetch_array($this->query)) {
+            array_push($filter, $row['0']);
+        }
+
+        return $filter;
+    }
+    
+    public function getListOfDept_underSignNameID($signID) {
+        $filter = array();
+        $this->query = mysql_query("select departments.department_id from signatorialList
                                     inner join signatories on signatorialList.signatory_id = signatories.signatory_id
                                     inner join departments on signatorialList.department_id = departments.department_id
                                     where signatorialList.signatory_id = '$signID'");
@@ -206,6 +231,20 @@ class SignatorialList_Model extends Model {
     
     public function getListOfCourse_Sign($signID){
         $this->query = mysql_query("select courses.course_name from signatoriallist
+                                    inner join departments on (signatoriallist.Department_ID = departments.Department_ID)  
+                                    inner join courses on (departments.department_id = courses.department_id)
+                                    where signatoriallist.signatory_id = '$signID'");
+        
+        $listCourses = array();
+        while ($row = mysql_fetch_array($this->query)) {
+            array_push($listCourses, $row['0']);
+        }
+        
+        return $listCourses;
+    }
+    
+    public function getListOfCourse_SignID($signID){
+        $this->query = mysql_query("select courses.course_id from signatoriallist
                                     inner join departments on (signatoriallist.Department_ID = departments.Department_ID)  
                                     inner join courses on (departments.department_id = courses.department_id)
                                     where signatoriallist.signatory_id = '$signID'");
