@@ -150,6 +150,7 @@ class Signatory_Registration extends Controller {
             }
 
             $this->admin->Assigned_Signatory = $_POST["sign_name"];
+            $this->admin->email_add = $_POST['emailAdd'];
 
             if ($test == 7 && $this->admin->insertSignatory_User()) {
 

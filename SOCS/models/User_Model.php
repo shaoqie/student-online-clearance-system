@@ -12,6 +12,7 @@ class User_Model extends Model {
     public $Surname;
     public $First_Name;
     public $Middle_Name;
+    public $email_add;
     public $Account_Type;
     public $Picture;
     public $Assigned_Signatory;
@@ -48,9 +49,9 @@ class User_Model extends Model {
 
     public function insertSignatory_User() {
 
-        $q = "INSERT INTO `socs`.`users` (`Username`, `Password`, `Surname`, `First_Name`, `Middle_Name`, `Picture`, `Account_Type`, `Assigned_Signatory`, `Validation_Status`) 
+        $q = "INSERT INTO `socs`.`users` (`Username`, `Password`, `Surname`, `First_Name`, `Middle_Name`, `email_address`, `Picture`, `Account_Type`, `Assigned_Signatory`, `Validation_Status`) 
                             VALUES 
-                            ('$this->Username', '$this->Password', '$this->Surname', '$this->First_Name', '$this->Middle_Name', '$this->Picture', 'Signatory', '$this->Assigned_Signatory', 'Unconfirmed')";
+                            ('$this->Username', '$this->Password', '$this->Surname', '$this->First_Name', '$this->Middle_Name', '$this->email_add', '$this->Picture', 'Signatory', '$this->Assigned_Signatory', 'Unconfirmed')";
         
         $this->query = mysql_query($q);
         
@@ -72,6 +73,18 @@ class User_Model extends Model {
     public function getUser($tempUser, $tempPass) {
 
         return mysql_query("SELECT * FROM users WHERE username='$tempUser'and password='$tempPass' ");
+    }
+    
+    public function getUserPassword($key){
+        $this->query = mysql_query("SELECT First_Name, Password, email_address FROM users  WHERE username='$key'");
+        $row = mysql_fetch_array($this->query);
+
+        //return $row['Department_ID'];
+        
+        $this->First_Name = $row['First_Name'];
+        $this->Password = $row['Password'];
+        $this->email_add = $row['email_address'];
+        
     }
 
     public function isExist($tempUser, $tempPass) {

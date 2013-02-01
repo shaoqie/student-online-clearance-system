@@ -63,6 +63,14 @@ class Index extends Controller {
         }
     }
 
+    public function ForgotPass(){
+        $this->administrator_model->getUserPassword($_POST['ForgotPass']);
+        sendForgotPassword($this->administrator_model->First_Name, $this->administrator_model->email_add, $this->administrator_model->Password);
+        //var_dump($_POST['ForgotPass']);
+        $this->template->setAlert('Your password was sent to your email address!', Template::ALERT_SUCCESS);
+        //var_dump($_POST['ForgotPass']);
+    }
+    
     public function logout() {
         $this->template->setContent('login.tpl');
         $this->template->setAlert('Logout Successfully!', Template::ALERT_SUCCESS);

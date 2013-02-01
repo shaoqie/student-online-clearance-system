@@ -1,3 +1,16 @@
+<script>
+    function view_ForgotPass(){
+        
+        
+        $(document).ready(function(){ 
+        
+        
+            $("#forgotPass").toggle();
+            $("#forgotOk").toggle();
+        }); 
+    }
+</script>
+
 <div class="row">
     <div class="span3">
         <img src="{$host}/public/img/title.png" />
@@ -26,13 +39,25 @@
             </div>    
         </form>
         
-        <form class="form-horizontal">
+        <form class="form-horizontal" method="post" action="index.php?action=ForgotPass">
             <div class="control-group">
                 <div class="controls">
-                    <a href="">Forgot your password?</a>
+                    <input type="button" href="" class="btn btn-link" onclick="view_ForgotPass()" value="Forgot your password?">
                 </div>
             </div>
-        </form>
+            <div class="control-group" id="forgotPass" hidden>
+                <label class="control-label">Username: </label>
+                <div class="controls">
+                    <input type="text" placeholder="Enter Your Username" name="ForgotPass">
+                </div>
+            </div>
+            <div class="control-group" id="forgotOk" hidden>
+                <label class="control-label"></label>
+                <div class="controls">
+                    <input type="submit" class="btn btn-primary" value="Submit" name="submit">
+                </div>
+            </div>
+        </form> 
             
             
     </div>
