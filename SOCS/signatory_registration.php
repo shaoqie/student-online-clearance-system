@@ -177,7 +177,7 @@ class Signatory_Registration extends Controller {
 
                         $image_upload->image_convert = "jpg";
                         $image_upload->file_overwrite = true;
-                        $image_upload->file_new_name_body = "default";
+                        $image_upload->file_new_name_body = $username;
                         $image_upload->process($this->local_dir);
 
                         if ($image_upload->processed) {
@@ -214,7 +214,7 @@ class Signatory_Registration extends Controller {
     }
 
     private function partially_registered() {
-        $this->template->setAlert('Registered Successfully! But there\'s problem in uploading a photo. Wait for the administrator\'s approval to access your account. Contact the administrator for more details, thank you.', Template::ALERT_INFO);
+        $this->template->setAlert('Registered Successfully! But there\'s problem in uploading a photo. Wait for the administrator\'s approval to access your account. Contact the administrator for more details, thank you.', Template::ALERT_SUCCESS);
         $this->template->setContent('login.tpl');
     }
 
