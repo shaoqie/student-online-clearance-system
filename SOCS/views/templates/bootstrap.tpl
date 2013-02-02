@@ -145,45 +145,16 @@
                 </div>
             </div>
         </div>
-{*
+        {*
         {if isset($username)}
-            <div id="header" class="container socs-content">
-                <div class="row">
-                    <div class="span1">
-
-                        {if isset($photo)}
-                            <img src="{$photo}" class="img-polaroid"/>
-                        {else}
-                            <img src="{$host}/photos/default.png" class="img-polaroid"/>
-                        {/if}
-
-                    </div>
-                    <div class="span5">
-                        <h4>{$surname}, {$firstname} {$middlename}</h4>
-                        <h5>- {$account_type} {$assign_sign}</h5>
-                    </div>
-                </div>
-            </div>
-        {/if}
-
-        <div class="container socs-content">
-
-            {$alert}
-
-            {include file='UIsections.tpl'}
-            {include file=$content}
-        </div>
-        *}
-        <div class="span10 offset1">
-
-        {if isset($username)}
-        <div id="header" class="row socs-content">
+        <div id="header" class="container socs-content">
+        <div class="row">
         <div class="span1">
 
         {if isset($photo)}
-        <img src="{$photo}" class="img-polaroid" />
+        <img src="{$photo}" class="img-polaroid"/>
         {else}
-        <img src="{$host}/photos/default.png" class="img-polaroid" />
+        <img src="{$host}/photos/default.png" class="img-polaroid"/>
         {/if}
 
         </div>
@@ -192,22 +163,51 @@
         <h5>- {$account_type} {$assign_sign}</h5>
         </div>
         </div>
+        </div>
         {/if}
 
-        <div class="row socs-content">
+        <div class="container socs-content">
 
         {$alert}
 
         {include file='UIsections.tpl'}
         {include file=$content}
-
-        <hr>
-
-        <footer>
-        <p>&copy; Student Online Clearance System 2012</p>
-        </footer>
-
         </div>
+        *}
+        <div class="span10 offset1">
+
+            {if isset($username)}
+                <div id="header" class="row socs-content">
+                    <div class="span1">
+
+                        {if isset($photo)}
+                            <img src="{$photo}" class="img-polaroid" />
+                        {else}
+                            <img src="{$host}/photos/default.png" class="img-polaroid" />
+                        {/if}
+
+                    </div>
+                    <div class="span5">
+                        <h4>{$surname}, {$firstname} {$middlename}</h4>
+                        <h5>- {$account_type} {$assign_sign}</h5>
+                    </div>
+                </div>
+            {/if}
+
+            <div class="row socs-content">
+
+                {$alert}
+
+                {include file='UIsections.tpl'}
+                {include file=$content}
+
+                <hr>
+
+                <footer>
+                    <p>&copy; Student Online Clearance System 2012</p>
+                </footer>
+
+            </div>
         </div>
 
         <!--<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>-->
@@ -230,14 +230,15 @@
             </script>
         {/literal}
 
-
+        {*
         {literal}
-            <script>
-            var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
-            (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
-            g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
-            s.parentNode.insertBefore(g,s)}(document,'script'));
-            </script>
+        <script>
+        var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
+        (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+        g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+        s.parentNode.insertBefore(g,s)}(document,'script'));
+        </script>
         {/literal}
+        *}
     </body>
 </html>

@@ -1,4 +1,4 @@
-    <?php
+<?php
 
 /*
  * To change this template, choose Tools | Templates
@@ -20,6 +20,7 @@ class Signatory_Registration extends Controller {
     private $courses_model;
     private $admin;
     private $signatoriallist_model;
+    private $local_dir;
 
     public function __construct() {
         parent::__construct();
@@ -132,48 +133,89 @@ class Signatory_Registration extends Controller {
             }
 
             //check if photo is valid
-            if (isset($_FILES["photo"])) {
+            if ($imagefile['name'] != "") {
 
                 if (Validator::is_valid_photo($imagefile)) {
 
-                    $ext = explode(".", $imagefile["name"]);
-
-                    $this->admin->Picture = HOST . "/photos/signatory/" . $username . "." . end($ext);
-                    $this->local_dir = PATH . "photos/signatory/" . $username . "." . end($ext);
+                    $this->admin->Picture = HOST . "/photos/signatory/" . $username . "." . "jpg";
+                    $this->local_dir = PATH . "photos/signatory/";
                 } else {
                     $this->template->setAlert('Invalid Photo!', Template::ALERT_ERROR, 'alert');
                     return;
                 }
             } else {
                 $this->admin->Picture = HOST . "/photos/default.png";
-                $this->local_dir = PATH . "photos/default.png";
             }
+
+//            //check if photo is valid
+//            if (isset($_FILES["photo"])) {
+//
+//                if (Validator::is_valid_photo($imagefile)) {
+//
+//                    $ext = explode(".", $imagefile["name"]);
+//
+//                    $this->admin->Picture = HOST . "/photos/signatory/" . $username . "." . end($ext);
+//                    $this->local_dir = PATH . "photos/signatory/" . $username . "." . end($ext);
+//                } else {
+//                    $this->template->setAlert('Invalid Photo!', Template::ALERT_ERROR, 'alert');
+//                    return;
+//                }
+//            } else {
+//                $this->admin->Picture = HOST . "/photos/default.png";
+//                $this->local_dir = PATH . "photos/default.png";
+//            }
 
             $this->admin->Assigned_Signatory = $_POST["sign_name"];
             $this->admin->email_add = $_POST['emailAdd'];
 
             if ($test == 7 && $this->admin->insertSignatory_User()) {
 
-                if (move_uploaded_file($imagefile["tmp_name"], $this->local_dir)) {
+                if (isset($imagefile['name'])) {
+                    $image_upload = new upload($imagefile);
+
+                    if ($image_upload->uploaded) {
+
+                        $image_upload->image_convert = "jpg";
+                        $image_upload->file_overwrite = true;
+                        $image_upload->file_new_name_body = "default";
+                        $image_upload->process($this->local_dir);
+
+                        if ($image_upload->processed) {
+                            $this->registered();
+                        } else {
+                            $this->partially_registered();
+                        }
+                    } else {
+                        $this->registered();
+                    }
+                }else{
                     $this->registered();
-                } else {
-                    $this->partially_registered();
                 }
+
+//                if (move_uploaded_file($imagefile["tmp_name"], $this->local_dir)) {
+//                    $this->registered();
+//                } else {
+//                    $this->partially_registered();
+//                }
             } else {
-                echo mysql_error();
-                $this->template->setAlert('Database Error!', Template::ALERT_ERROR);
+                if(mysql_errno() == 1062){
+                    $this->template->setAlert('Username already exists.', Template::ALERT_ERROR);
+                }else{
+                    $this->template->setAlert('Something went wrong! Check your input fields.', Template::ALERT_ERROR);
+                }
+                
             }
         }
     }
-    
-    private function registered(){
-        $this->template->setAlert('Registered Successfully!', Template::ALERT_SUCCESS);
-        $this->template->setContent('welcome.tpl');
+
+    private function registered() {
+        $this->template->setAlert('Registered Successfully! Wait for the administrator\'s approval to access your account. Contact the administrator for more details, thank you.', Template::ALERT_SUCCESS);
+        $this->template->setContent('login.tpl');
     }
-    
-    private function partially_registered(){
-        $this->template->setAlert('Registered Successfully! But there\'s problem in uploading a photo.', Template::ALERT_INFO);
-        $this->template->setContent('welcome.tpl');
+
+    private function partially_registered() {
+        $this->template->setAlert('Registered Successfully! But there\'s problem in uploading a photo. Wait for the administrator\'s approval to access your account. Contact the administrator for more details, thank you.', Template::ALERT_INFO);
+        $this->template->setContent('login.tpl');
     }
 
     public function display() {

@@ -2,7 +2,7 @@
 <form action='settings.php?action=verify' method='post' class="form-horizontal" enctype="multipart/form-data">
 
     <legend>Edit Account: </legend>
-    
+
     <div class="control-group">
         <label class="control-label">Surname: </label>
         <div class="controls">
@@ -23,12 +23,12 @@
             <input type='text'name='middleName' value="{$middlename}" pattern="[A-Za-z\s]+" required title="Letters and spaces only">
         </div>
     </div>
-        
+
     <div class="control-group">
-         <label class="control-label">Email Address: </label>
-           <div class="controls">
-                <input type='text'name='emailAdd' value="{$email_add}" required>
-            </div>
+        <label class="control-label">Email Address: </label>
+        <div class="controls">
+            <input type='text'name='emailAdd' value="{$email_add}" {literal}pattern="[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)"{/literal} required>
+        </div>
     </div>
 
     <legend>Change password: </legend>
@@ -55,6 +55,7 @@
         <label class="control-label">Upload Picture: </label>
         <div class="controls">
             <input type="file" name="photo">
+            <span class="help-block">Image file shall not exceed to 1MB</span>
         </div>
     </div>
 

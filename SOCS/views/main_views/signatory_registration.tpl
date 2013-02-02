@@ -48,14 +48,13 @@
                 <input type='text'name='middleName' value="" pattern="[A-Za-z\s]{2,15}" required title="Letters and spaces only">
             </div>
         </div>
-
-        <div class="control-group">
-            <label class="control-label">Email Address: </label>
-            <div class="controls">
-                <input type='text'name='emailAdd' value="" required>
-            </div>
-        </div>
     {/literal}
+    <div class="control-group">
+        <label class="control-label">Email Address: </label>
+        <div class="controls">
+            <input type='text'name='emailAdd' value="" {literal}pattern="[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)"{/literal} required>
+        </div>
+    </div>
 
     <legend>Signatory Designation: </legend>
 

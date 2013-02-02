@@ -46,12 +46,24 @@ class Validator {
         if ($imagefile["size"] < 1000000) {
             $test++;
         }
+        
+        if($imagefile["error"] == 0){
+            $test++;
+        }
 
-        if($test == 2){
+        if($test == 3){
             return true;
         }else{
             return false;
         }
     }
 
+    public static function is_email_valid($email){
+        
+        if(filter_var($email, FILTER_VALIDATE_EMAIL)){
+            return true;
+        }else{
+            return false;
+        }    
+    } 
 }

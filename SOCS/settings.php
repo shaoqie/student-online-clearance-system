@@ -52,8 +52,7 @@ class Settings extends Controller {
         $firstname = $_POST['firstname'];
         $middleName = $_POST['middleName'];
         $email_add = $_POST['emailAdd'];
-        $imagefile = "";
-
+        $imagefile = $_FILES["photo"];
         
         if ($newpass == "") {
             $newpass = $oldpass;
@@ -101,9 +100,17 @@ class Settings extends Controller {
             $this->template->setAlert('Surname must not have a numerical values and characters / \ ? < > : ; " and *', Template::ALERT_ERROR, 'alert');
             return;
         }
+        
+        //checks the email if valid
+        if(Validator::is_email_valid($email_add) && $test == 4){
+            $test++;
+        }else{
+            $this->template->setAlert('Not valid Email', Template::ALERT_ERROR, 'alert');
+            return;
+        }
 
         // check if actual pass and old pass are equal
-        if ($actualPass == $oldpass && $test == 4) {
+        if ($actualPass == $oldpass && $test == 5) {
 
             $test++;
         } else {
@@ -112,7 +119,7 @@ class Settings extends Controller {
         }
 
         //check if new pass and confirm pass are equal
-        if ($newpass == $confirmpass && $test == 5) {
+        if ($newpass == $confirmpass && $test == 6) {
 
             $test++;
         } else {
@@ -121,23 +128,22 @@ class Settings extends Controller {
         }
 
         //check if password is valid
-        if (Validator::is_valid_password($newpass) && $test == 6) {
+        if (Validator::is_valid_password($newpass) && $test == 7) {
 
             $this->admin->Password = $newpass;
 
             $test++;
         } else {
             $this->template->setAlert('Password\'s length must have a minimum of 7 characters!', Template::ALERT_ERROR, 'alert');
+            return;
         }
-
+        
         //check if photo is valid
-        if (isset($_FILES["photo"])) {
-
-            $imagefile = $_FILES["photo"];
+        if ($imagefile['name'] != "") {
 
             if (Validator::is_valid_photo($imagefile)) {
 
-                $ext = explode(".", $imagefile["name"]);
+//                $ext = explode(".", $imagefile["name"]);
                 
                 $actor = "";
                 
@@ -149,17 +155,20 @@ class Settings extends Controller {
                     $actor = "student";
                 }
 
-                $this->admin->Picture = HOST . "/photos/$actor/" . Session::get_user() . "." . end($ext);
-                $this->local_dir = PATH . "photos/$actor/" . Session::get_user() . "." . end($ext);
+//                $this->admin->Picture = HOST . "/photos/$actor/" . Session::get_user() . "." . end($ext);
+//                $this->local_dir = PATH . "photos/$actor/" . Session::get_user() . "." . end($ext);
+                
+                $this->admin->Picture = HOST . "/photos/$actor/" . Session::get_user() . "." . "jpg";
+                $this->local_dir = PATH . "photos/$actor/";
             } else {
                 $this->template->setAlert('Invalid Photo!', Template::ALERT_ERROR, 'alert');
                 return;
             }
         }
-
+        
         //var_dump($this->admin->email_add);
-        if ($this->admin->update() && $test == 7) {
-
+        if ($this->admin->update() && $test == 8) {
+            
             $this->template->set_surname($surname);
             $this->template->set_firstname($firstname);
             $this->template->set_middlename($middleName);
@@ -167,12 +176,32 @@ class Settings extends Controller {
             $this->template->set_photo($this->admin->Picture);
 
             if (isset($this->admin->Picture)) {
-
-                if (move_uploaded_file($imagefile["tmp_name"], $this->local_dir)) {
-                    $this->template->setAlert('Account has been updated!', Template::ALERT_SUCCESS);
+                
+                $image_upload = new upload($imagefile);
+                
+                if($image_upload->uploaded){
+                    
+                    $image_upload->image_convert = "jpg";
+                    $image_upload->file_overwrite = true;
+                    $image_upload->file_new_name_body = Session::get_user();
+                    $image_upload->process($this->local_dir);
+                    
+                    if($image_upload->processed){
+                        $this->template->setAlert('Account has been updated!', Template::ALERT_SUCCESS);
+                    }else{
+                        $this->template->setAlert('Account has been updated! But there\'s problem in uploading a photo.' . $image_upload->error, Template::ALERT_INFO);
+                    }
                 }else{
                     $this->template->setAlert('Account has been updated! But there\'s problem in uploading a photo.', Template::ALERT_INFO);
                 }
+                
+//                if (move_uploaded_file($imagefile["tmp_name"], $this->local_dir)) {
+//                    $this->template->setAlert('Account has been updated!', Template::ALERT_SUCCESS);
+//                }else{
+//                    $this->template->setAlert('Account has been updated! But there\'s problem in uploading a photo.', Template::ALERT_INFO);
+//                }
+            }else{
+                $this->template->setAlert('Account has been updated!', Template::ALERT_SUCCESS);
             }
         } else {
             $this->template->setAlert('Database Error!', Template::ALERT_ERROR);
