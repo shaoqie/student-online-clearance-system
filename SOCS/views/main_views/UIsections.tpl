@@ -5,7 +5,7 @@
 
     <form class="form-inline">
         <input type="hidden" value="filter" name="action">
-        <input id="search" class="span3" type="search" placeholder="Search..." value="{$filter}" name="filterName">
+        <input id="search" class="input-large" type="search" placeholder="Search..." value="{$filter}" name="filterName">
         {if isset($user_type)}
             <input type="hidden" value="{$user_type}" name="type">
         {/if}
@@ -56,4 +56,22 @@
         <i class="icon-search icon-white"></i>
     </button>
 </form>
+{/function}
+
+{function name=nav_admin index=0}
+
+<ul class="nav nav-list">
+    <li><a href="../administrator/index.php?user_type=Student">User Accounts</a>
+
+        <ul class="nav nav-list">
+            <li {if $index == 0}class="active"{/if}><a href='../administrator/index.php?user_type=Student'>Student</a></li>
+            <li {if $index == 1}class="active"{/if}><a href='../administrator/index.php?user_type=Signatory'>Confirmed Signatory</a></li>
+            <li {if $index == 2}class="active"{/if}><a href='../administrator/unconfirmed_signatory.php'>Unconfirmed Signatory</a></li>
+        </ul>
+        
+    </li>   
+    <li {if $index == 3}class="active"{/if}><a href='../administrator/signatory_list_manager.php'>Signatories</a></li>
+    <li {if $index == 4}class="active"{/if}><a href='../administrator/department_list_manager.php'>Departments</a></li>
+</ul>
+
 {/function}

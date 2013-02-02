@@ -25,6 +25,7 @@
                 #header{{/literal}
                     background-image: url('{$host}/public/img/header.png');
                     background-position: right;
+                    background-repeat: no-repeat;
                 }{literal}
 
                 #welcome{{/literal}
@@ -92,19 +93,7 @@
                         <ul class="nav">
                             <li>
                                 <a href="index.php">Home</a>
-                            </li>      
-                            <!--<li class="dropdown" >
-                                <a class="dropdown-toggle"
-                                   data-toggle="dropdown"
-                                   href="#">
-                                    Register
-                                    <b class="caret"></b>
-                                </a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="index.php?action=student_registrationForm">As Student</a></li>
-                                    <li><a href="signatory_registration.php">As Signatory</a></li>
-                                </ul>
-                            </li>-->
+                            </li>
                             <li>
                                 <a href="index.php?action=student_registrationForm">Register</a>
                             </li>
@@ -156,16 +145,45 @@
                 </div>
             </div>
         </div>
-        {*
-        <div class="container">
+{*
+        {if isset($username)}
+            <div id="header" class="container socs-content">
+                <div class="row">
+                    <div class="span1">
+
+                        {if isset($photo)}
+                            <img src="{$photo}" class="img-polaroid"/>
+                        {else}
+                            <img src="{$host}/photos/default.png" class="img-polaroid"/>
+                        {/if}
+
+                    </div>
+                    <div class="span5">
+                        <h4>{$surname}, {$firstname} {$middlename}</h4>
+                        <h5>- {$account_type} {$assign_sign}</h5>
+                    </div>
+                </div>
+            </div>
+        {/if}
+
+        <div class="container socs-content">
+
+            {$alert}
+
+            {include file='UIsections.tpl'}
+            {include file=$content}
+        </div>
+        *}
+        <div class="span10 offset1">
+
         {if isset($username)}
         <div id="header" class="row socs-content">
         <div class="span1">
 
         {if isset($photo)}
-        <img src="{$photo}" class="img-polaroid"/>
+        <img src="{$photo}" class="img-polaroid" />
         {else}
-        <img src="{$host}/photos/default.png" class="img-polaroid"/>
+        <img src="{$host}/photos/default.png" class="img-polaroid" />
         {/if}
 
         </div>
@@ -175,50 +193,21 @@
         </div>
         </div>
         {/if}
-        </div>
 
-        <div class="container socs-content">
+        <div class="row socs-content">
 
         {$alert}
 
         {include file='UIsections.tpl'}
         {include file=$content}
-        </div>*}
 
-        <div class="span10 offset1">
+        <hr>
 
-            {if isset($username)}
-                <div id="header" class="row socs-content">
-                    <div class="span1">
+        <footer>
+        <p>&copy; Student Online Clearance System 2012</p>
+        </footer>
 
-                        {if isset($photo)}
-                            <img src="{$photo}" class="img-polaroid" />
-                        {else}
-                            <img src="{$host}/photos/default.png" class="img-polaroid" />
-                        {/if}
-
-                    </div>
-                    <div class="span5">
-                        <h4>{$surname}, {$firstname} {$middlename}</h4>
-                        <h5>- {$account_type} {$assign_sign}</h5>
-                    </div>
-                </div>
-            {/if}
-
-            <div class="row socs-content">
-
-                {$alert}
-
-                {include file='UIsections.tpl'}
-                {include file=$content}
-
-                <hr>
-
-                <footer>
-                    <p>&copy; Student Online Clearance System 2012</p>
-                </footer>
-
-            </div>
+        </div>
         </div>
 
         <!--<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>-->

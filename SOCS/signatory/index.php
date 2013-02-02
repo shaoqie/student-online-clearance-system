@@ -123,7 +123,7 @@ class Index extends Controller {
     
     public function viewClearavePage($stud_id){
         
-        $thisSYSEM = $this->schoolYearSem_model->getSy_ID(Session::, $sem)
+        //$thisSYSEM = $this->schoolYearSem_model->getSy_ID(Session::, $sem)
         $thisSig = $this->signatorialList_model->getSignId(Session::get_AssignSignatory());
         $this->student_model->queryStudent_Info($stud_id);
        
@@ -133,7 +133,7 @@ class Index extends Controller {
         //$stud_requirements = $this->requirementbyStudent_model->getListofRequirements($stud_id);
         //$stud_status = $this->student_model->getStudent_clearance_status(trim($stud_id));
         
-        $clearanceStatus = $this->clearanceStatus_model->getRequirementList($stud_id, $thisSig, $sysemID)
+        //$clearanceStatus = $this->clearanceStatus_model->getRequirementList($stud_id, $thisSig, $sysemID)
         
         $this->template->setPageName("Student Clearance Page");
         $this->template->setContent("ClearancePage.tpl");
