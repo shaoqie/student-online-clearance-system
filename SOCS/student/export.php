@@ -18,7 +18,7 @@ $current_sy = $sy_model->getCurSchool_Year();
 $current_sem = $sy_model->getCurSemester();
 if ($current_sem != "Summer")
     $current_sem .= " Semester";
-$current_sysemID = $sy_model->getSy_ID($sy_model->getCurSchool_Year(), $sy_model->getCurSemester());
+$current_sysemID = $_GET["sy_sem_id"];
 
 
 $student_model = new Student_Model();
@@ -29,12 +29,25 @@ $stud_gender = $student_model->getStud_Gender();
 $stud_year = $student_model->getStud_Yearlevel();
 $stud_course = $student_model->getStud_Course();
 $stud_dept = $student_model->getStud_DeptName();
+$stud_deptID = $student_model->getStud_DeptID();
+
+$signatorial_model = new SignatorialList_Model();
+$signatorial_model->getListofSignatoryByDept($stud_deptID);
+$listOfSignatories["name"] = $signatorial_model->getSign_Name();
+$listOfSignatories["id"] = $signatorial_model->getSign_ID();
 
 $clearance_model = new ClearanceStatus();
 
+foreach ($listOfSignatories["id"] as $key => $value) {
+    $status = $clearance_model->getOverallSignatoryClearanceStatus($stud_id, $value, $current_sysemID);
+    if ($status == "No Requirements")
+        $status = "Cleared";
+    $listOfSignatories["status"][$key] = $status;
+}
 
+//var_dump($listOfSignatories);
 
-$fpdf = new FPDF('P', 'mm', 'Letter');
+$fpdf = new FPDF('P', 'mm', 'A4');
 $fpdf->SetDisplayMode('fullpage', 'continuous');
 $fpdf->SetTitle("SOCS Clearance - Export Copy");
 $fpdf->SetCreator("USEP SOCS");
@@ -44,78 +57,125 @@ $fpdf->SetSubject("Electronic Clearance (export copy)");
 $fpdf->SetMargins(15, 15, 15);
 $fpdf->AddPage();
 
-$fpdf->SetY('20');
-$fpdf->Image('logo.jpg', 13, 13, 30);
+$fpdf->SetY('15');
+$fpdf->Image('logo.jpg', 13, $fpdf->GetY()-5, 25);
+printBody();
 
-$fpdf->SetFont('Times','I',12);
-$fpdf->Cell(0, 0, "Republic of the Philippines", 0, 1, 'C');
+$fpdf->Cell(0, 0, "Registrar's Copy", 0, 1, 'R', false);
+$fpdf->Ln(4);
+$fpdf->Cell(0, 0, "", 1, 1, 'L', true);
+$fpdf->Ln(4);
+$fpdf->Cell(0, 0, "Adviser's Copy", 0, 1, 'R', false);
+$fpdf->SetY($fpdf->GetY()+ 10);
 
-$fpdf->Ln(6);
-$fpdf->SetFont('Times','',12);
-$fpdf->Cell(0, 0, "UNIVERSITY OF SOUTHEASTERN PHILIPPINES", 0, 1, 'C');
+$fpdf->Image('logo.jpg', 13, $fpdf->GetY()-5, 25);
+printBody();
 
-$fpdf->Ln(6);
-$fpdf->SetFont('Times','B',12);
-$fpdf->Cell(0, 0, "Evening Program", 0, 1, 'C');
+function printBody(){
+    global $fpdf, $stud_id, $stud_gender, $stud_name, $stud_year, 
+            $stud_course, $stud_dept, $current_sem, $current_sy, $listOfSignatories;
+    
+    $fontsize = 10;
+    $single_spacing = 4;
+    $double_spacing = 10;
 
-$fpdf->Ln(6);
-$fpdf->SetFont('Times','',12);
-$fpdf->Cell(0, 0, "Davao City", 0, 1, 'C');
+    $fpdf->SetFont('Times','I',$fontsize);
+    $fpdf->Cell(0, 0, "Republic of the Philippines", 0, 1, 'C');
 
-$fpdf->Ln(12);
-$fpdf->SetFont('Helvetica','B',12);
-$fpdf->Cell(0, 0, "STUDENT CLEARANCE", 0, 1, 'C');
+    $fpdf->Ln($single_spacing);
+    $fpdf->SetFont('Times','',$fontsize);
+    $fpdf->Cell(0, 0, "UNIVERSITY OF SOUTHEASTERN PHILIPPINES", 0, 1, 'C');
 
-$fpdf->Ln(12);
-$fpdf->SetFont('Times','B',12);
-$fpdf->Write(5, "I.D. No. ");
-$fpdf->SetFont('Times','U',12);
-$fpdf->Write(5, $stud_id);
+    $fpdf->Ln($single_spacing);
+    $fpdf->SetFont('Times','B',$fontsize);
+    $fpdf->Cell(0, 0, "Evening Program", 0, 1, 'C');
 
-$fpdf->Ln(12);
-$fpdf->SetFont('Times','',12);
-$fpdf->Write(5, "TO WHOM IT MAY CONCERN:");
+    $fpdf->Ln($single_spacing);
+    $fpdf->SetFont('Times','',$fontsize);
+    $fpdf->Cell(0, 0, "Davao City", 0, 1, 'C');
 
-$fpdf->Ln(12);
-$fpdf->Write(5, "This is to certify that " );
+    $fpdf->Ln($double_spacing);
+    $fpdf->SetFont('Helvetica','B',$fontsize);
+    $fpdf->Cell(0, 0, "STUDENT CLEARANCE", 0, 1, 'C');
 
-$fpdf->SetFont('Times','BU',12);
-if ($stud_gender == "Male")
-    $fpdf->Write(5, "Mr. ");
-else
-    $fpdf->Write(5, "Ms./Mrs. ");
+    $fpdf->Ln($double_spacing);
+    $fpdf->SetFont('Times','B',$fontsize);
+    $fpdf->Write(5, "I.D. No. ");
+    $fpdf->SetFont('Times','U',$fontsize);
+    $fpdf->Write(5, $stud_id);
+
+    $fpdf->Ln($double_spacing);
+    $fpdf->SetFont('Times','',$fontsize);
+    $fpdf->Write(5, "TO WHOM IT MAY CONCERN:");
+
+    $fpdf->Ln($double_spacing);
+    $fpdf->Write(5, "This is to certify that " );
+
+    $fpdf->SetFont('Times','BU',$fontsize);
+    if ($stud_gender == "Male")
+        $fpdf->Write(5, "Mr. ");
+    else
+        $fpdf->Write(5, "Ms./Mrs. ");
 
 
-$fpdf->Write(5, $stud_name);
-$fpdf->SetFont('Times','',12);
-$fpdf->Write(5, ", a ");
-$fpdf->SetFont('Times','BU',12);
-$fpdf->Write(5, $stud_year);
-$fpdf->SetFont('Times','',12);
-$fpdf->Write(5, " year ");
-$fpdf->SetFont('Times','BU',12);
-$fpdf->Write(5, $stud_course);
-$fpdf->SetFont('Times','',12);
-$fpdf->Write(5, " student in the ");
-$fpdf->SetFont('Times','BU',12);
-$fpdf->Write(5, $stud_dept);
-$fpdf->SetFont('Times','',12);
-$fpdf->Write(5, " is cleared of all, property and other accountabilities with this University as of the ");
-$fpdf->SetFont('Times','BU',12);
-$fpdf->Write(5, $current_sem);
-$fpdf->SetFont('Times','',12);
-$fpdf->Write(5, " , SY ");
-$fpdf->SetFont('Times','BU',12);
-$fpdf->Write(5, $current_sy);
-$fpdf->SetFont('Times','',12);
-$fpdf->Write(5, ".");
+    $fpdf->Write(5, $stud_name);
+    $fpdf->SetFont('Times','',$fontsize);
+    $fpdf->Write(5, ", a ");
+    $fpdf->SetFont('Times','BU',$fontsize);
+    $fpdf->Write(5, $stud_year);
+    $fpdf->SetFont('Times','',$fontsize);
+    $fpdf->Write(5, " year ");
+    $fpdf->SetFont('Times','BU',$fontsize);
+    $fpdf->Write(5, $stud_course);
+    $fpdf->SetFont('Times','',$fontsize);
+    $fpdf->Write(5, " student in the ");
+    $fpdf->SetFont('Times','BU',$fontsize);
+    $fpdf->Write(5, $stud_dept);
+    $fpdf->SetFont('Times','',$fontsize);
+    $fpdf->Write(5, " is cleared of all, property and other accountabilities with this University as of the ");
+    $fpdf->SetFont('Times','BU',$fontsize);
+    $fpdf->Write(5, $current_sem);
+    $fpdf->SetFont('Times','',$fontsize);
+    $fpdf->Write(5, " , SY ");
+    $fpdf->SetFont('Times','BU',$fontsize);
+    $fpdf->Write(5, $current_sy);
+    $fpdf->SetFont('Times','',$fontsize);
+    $fpdf->Write(5, ".");
 
-$fpdf->Ln(18);
-$fpdf->Write(5, "[This portion over here still needs to be coded and will be finished soon.]");
+    $fpdf->Ln($double_spacing);
 
-$fpdf->Output("SOCS Clearance Export - $stud_name.pdf", 'I');
+    $fpdf->SetFillColor(83,83,83);
+    $fpdf->SetTextColor(255,255,255);
+
+    $fpdf->Cell(120, 5, "Signatory", 1, 0, 'C', true);
+    $fpdf->Cell(0, 5, "Status", 1, 1, 'C', true);
+
+    $fpdf->SetFillColor(255,255,255);
+    $fpdf->SetTextColor(0,0,0);
+
+    foreach ($listOfSignatories["id"] as $key => $value) {
+        $fpdf->SetTextColor(0,0,0);
+        $fpdf->Cell(120, 5, $listOfSignatories["name"][$key], 1, 0, 'L', true);
+
+        if ($listOfSignatories["status"][$key] == "Cleared")
+            $fpdf->SetTextColor(38,148,10);
+        else
+            $fpdf->SetTextColor(242,34,34);
+        $fpdf->Cell(0, 5, $listOfSignatories["status"][$key], 1, 1, 'L', true);
+    }
+    
+    $fpdf->SetTextColor(0,0,0);
+    
+    $fpdf->Ln($double_spacing);
+    
+}
+
+//$fpdf->Write(5, "[This portion over here still needs to be coded and will be finished soon.]");
+
+$fpdf->Output("SOCS Clearance Export - $stud_name.pdf", 'D');
  
 
+/*
 function getNumberNth($number){
     $number = strval($number);
     $lastDigit = substr($number, -1);
@@ -137,6 +197,6 @@ function getNumberNth($number){
     
 }
 
-
+*/
 
 ?>

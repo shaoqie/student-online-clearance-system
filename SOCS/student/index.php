@@ -71,6 +71,7 @@ class Index extends Controller {
             $this->template->assign('myListOfSign_underDeptName', $listOfSign_underDeptName);
             $this->template->assign('myKey_signID', $listOfSignID_underDeptName);          
             $this->template->assign('myStudent_ClearanceStatus', $listOfClearanceStatus);
+            $this->template->assign('sy_sem_id', $sy_id);
             
             $this->template->set_photo(Session::get_photo());
             
