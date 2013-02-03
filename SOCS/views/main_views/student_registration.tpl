@@ -33,9 +33,9 @@
 
             <select class="input-small" name="stud_id" required>
                 <option></option>
-                {for $year=2007 to 2013}
-                <option>{$year}</option>
-                {/for}
+                {foreach from=$years key=k item=year}
+                    <option>{$year}</option>
+                {/foreach}
             </select> - 
 
             {literal}
