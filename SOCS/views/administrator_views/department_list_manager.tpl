@@ -11,7 +11,7 @@
     </div>
     <div class="span9">
 
-        <h2 class="well">Manage Departments</h2>
+        <h2 class="well center-text">Departments</h2>
 
         <div class="row">
             <div class="span9">
@@ -45,10 +45,11 @@
                                     <div id="hover_link" onclick="window.location.href='department_list_manager.php?action=displayCourse&deptName={$i}'" >{$i}</div>
                                 </label>        
                             </td>
-                            <td><label>{$desc_dept[$k]}</label></td>
+                            <td>{$desc_dept[$k]}</td>
                             <td>
-                                <i class="icon-pencil"></i>
-                                <a href="department_list_manager.php?action=editDepartment&seleted={$myKey_dept[$k]}"> Edit</a>  
+                                <a href="department_list_manager.php?action=editDepartment&seleted={$myKey_dept[$k]}">
+                                    <i class="icon-pencil"></i> Edit
+                                </a>  
                             </td>
                         </tr>
                     {/foreach}

@@ -4,19 +4,22 @@
         <!-- Navigations-->
         <div class="row">
             <div class="span3">
-                {call name=nav_admin index=2}
+                {call name=nav_admin index=0}
             </div>
         </div>
 
     </div>
     <div class="span9">
 
-        <h2 class="well">Manage Confirmed Signatories-in-charge</h2>
+        <!-- Header-->
+        <h2 class="well center-text">Unconfirmed Signatories-in-charge</h2>
 
+        <!-- Navigation Tab-->
+        {call name=nav_user_accounts index=2}
+
+        <!-- Search Bar-->
         <div class="row">
             <div class="span9">
-
-                <!-- Search Bar-->
                 <span class="pull-right">
                     {call name=search}
                 </span>
@@ -43,8 +46,9 @@
                             </td>
                             <td><label>{$assignSignID_unconfirmedSign[$k]}</label></td>
                             <td>
-                                <i class="icon-ok"></i>
-                                <a style="cursor:pointer;" onclick="window.location.href='unconfirmed_signatory.php?action=confirmedAccount&key={$myKey_unconfirmedSign[$k]}'"> Confirm</a>
+                                <a style="cursor:pointer;" onclick="window.location.href='unconfirmed_signatory.php?action=confirmedAccount&key={$myKey_unconfirmedSign[$k]}'">
+                                    <i class="icon-thumbs-up"></i> Confirm
+                                </a>
                             </td>
                         </tr>
                     {/foreach}

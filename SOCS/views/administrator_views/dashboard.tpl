@@ -4,13 +4,7 @@
         <!-- Navigations-->
         <div class="row">
             <div class="span3">
-
-                {if $user_type == 'Signatory'}
-                    {call name=nav_admin index=1}
-                {else}
-                    {call name=nav_admin index=0}
-                {/if}
-
+                {call name=nav_admin index=0}
             </div>
         </div>
 
@@ -18,12 +12,12 @@
     <div class="span9">
 
         {if $user_type == 'Signatory'}
-            <h2 class="well">Manage Confirmed Signatories-in-charge</h2>
+            <h2 class="well center-text">Signatories-in-charge</h2>
+            {call name=nav_user_accounts index=1}
         {else}
-            <h2 class="well">Manage Students</h2>
+            <h2 class="well center-text">Students</h2>
+            {call name=nav_user_accounts index=0}
         {/if}
-
-
 
         <div class="row">
             <div class="span9">

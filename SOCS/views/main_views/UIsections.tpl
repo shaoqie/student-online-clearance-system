@@ -1,5 +1,4 @@
-{*Search Bar--------------------------------------------------------------------*}
-
+<!-- Search Bar-->
 {function name=search}
 {if isset($filter)}
 
@@ -20,8 +19,7 @@
 {/if}
 {/function}
 
-{*Clearance Archive Search Bar--------------------------------------------------*}
-
+<!-- Archive Search Bar-->
 {function name=archiveSearch}
 <form class="form-inline" method="post">
     <label>School Year:  </label>
@@ -58,30 +56,44 @@
 </form>
 {/function}
 
+<!-- Navigation Admin-->
 {function name=nav_admin index=0}
 
 <ul class="nav nav-list well">
-    <li class="nav-header">Admin Menu</li>
-    <li>
-        <a href='../administrator/index.php?user_type=Student'>User Accounts</a>
-        <ul class="nav nav-list">
-            <li {if $index == 0}class="active"{/if}>
-                <a href='../administrator/index.php?user_type=Student'>Students</a>
-            </li>
-            <li {if $index == 1}class="active"{/if}>
-                <a href='../administrator/index.php?user_type=Signatory'>Signatories-in-Charge</a>
-            </li>
-            <li {if $index == 2}class="active"{/if}>
-                <a href='../administrator/unconfirmed_signatory.php'>Unconfirmed Signatories-in-charge</a>
-            </li>
-        </ul>
+    <li class="nav-header"><h5>Admin Menu</h5></li>
+
+    <li {if $index == 0}class="active"{/if}>
+        <a href='../administrator/index.php?user_type=Student'>
+            <i class="icon-user"></i> User Accounts
+        </a>
     </li>
 
     <li {if $index == 3}class="active"{/if}>
-        <a href='../administrator/signatory_list_manager.php'>Signatories</a>
+        <a href='../administrator/signatory_list_manager.php'>
+            <i class="icon-coffee"></i> Signatories
+        </a>
     </li>
     <li {if $index == 4}class="active"{/if}>
-        <a href='../administrator/department_list_manager.php'>Departments</a>
+        <a href='../administrator/department_list_manager.php'>
+            <i class="icon-building"></i> Departments
+        </a>
+    </li>
+</ul>
+
+{/function}
+
+<!-- Navigation Tabs User Accounts-->
+{function name="nav_user_accounts" index=0}
+
+<ul class="nav nav-tabs">
+    <li {if $index == 0}class="active"{/if}>
+        <a href='../administrator/index.php?user_type=Student'>Students</a>
+    </li>
+    <li {if $index == 1}class="active"{/if}>
+        <a href='../administrator/index.php?user_type=Signatory'>Signatories-in-Charge</a>
+    </li>
+    <li {if $index == 2}class="active"{/if}>
+        <a href='../administrator/unconfirmed_signatory.php'>Unconfirmed Signatories-in-charge</a>
     </li>
 </ul>
 

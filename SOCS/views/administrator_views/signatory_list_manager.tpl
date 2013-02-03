@@ -13,7 +13,7 @@
     </div>
     <div class="span9">
 
-        <h2 class="well">Manage Signatories</h2>
+        <h2 class="well center-text">Signatories</h2>
 
         <div class="row">
             <div class="span9">

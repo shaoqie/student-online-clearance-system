@@ -11,6 +11,7 @@
         <meta name="viewport" content="width=device-width">
 
         <link rel="stylesheet" href="{$host}/public/css/bootstrap.min.css">
+        <link rel="stylesheet" href="{$host}/public/css/font-awesome.min.css">
         {literal}
             <style>
                 body {{/literal}
@@ -172,6 +173,13 @@
 
             {include file='UIsections.tpl'}
             {include file=$content}
+
+            <hr>
+
+            <footer>
+                <p>&copy; Student Online Clearance System 2012</p>
+            </footer>
+
         </div>
         {*
         <div class="span10 offset1">

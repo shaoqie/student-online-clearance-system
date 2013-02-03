@@ -11,7 +11,7 @@
 
 <!-- Export Link-->
 <div class="row">
-    <div class="span9">
+    <div class="span12">
         {*if $num_cleared == ($myListOfSign_underDeptName|@count)*}
         
             <a class="pull-right" href="export.php"> 
@@ -34,7 +34,7 @@
 
     {foreach from = $myListOfSign_underDeptName key = k item = i}
 
-        <div class="well span4">
+        <div class="well well-large span5">
 
             <div id="hover_link" onclick="window.location.href='index.php?action=viewRequirements&Tsign_ID={$myKey_signID[$k]}&page=1'">
                 <h4 class="lead">{$i}</h4>
