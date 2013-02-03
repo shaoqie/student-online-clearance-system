@@ -12,7 +12,7 @@
 
         {*<input type="hidden" value="{$clearedStatus}" name="status">*}
 
-        <button class="btn btn-primary" type="submit">
+        <button class="btn btn-success" type="submit">
             <i class="icon-search icon-white"></i>
         </button>
     </form>
@@ -60,18 +60,29 @@
 
 {function name=nav_admin index=0}
 
-<ul class="nav nav-list">
-    <li><a href="../administrator/index.php?user_type=Student">User Accounts</a>
-
+<ul class="nav nav-list well">
+    <li class="nav-header">Admin Menu</li>
+    <li>
+        <a href='../administrator/index.php?user_type=Student'>User Accounts</a>
         <ul class="nav nav-list">
-            <li {if $index == 0}class="active"{/if}><a href='../administrator/index.php?user_type=Student'>Student</a></li>
-            <li {if $index == 1}class="active"{/if}><a href='../administrator/index.php?user_type=Signatory'>Confirmed Signatory</a></li>
-            <li {if $index == 2}class="active"{/if}><a href='../administrator/unconfirmed_signatory.php'>Unconfirmed Signatory</a></li>
+            <li {if $index == 0}class="active"{/if}>
+                <a href='../administrator/index.php?user_type=Student'>Students</a>
+            </li>
+            <li {if $index == 1}class="active"{/if}>
+                <a href='../administrator/index.php?user_type=Signatory'>Signatories-in-Charge</a>
+            </li>
+            <li {if $index == 2}class="active"{/if}>
+                <a href='../administrator/unconfirmed_signatory.php'>Unconfirmed Signatories-in-charge</a>
+            </li>
         </ul>
-        
-    </li>   
-    <li {if $index == 3}class="active"{/if}><a href='../administrator/signatory_list_manager.php'>Signatories</a></li>
-    <li {if $index == 4}class="active"{/if}><a href='../administrator/department_list_manager.php'>Departments</a></li>
+    </li>
+
+    <li {if $index == 3}class="active"{/if}>
+        <a href='../administrator/signatory_list_manager.php'>Signatories</a>
+    </li>
+    <li {if $index == 4}class="active"{/if}>
+        <a href='../administrator/department_list_manager.php'>Departments</a>
+    </li>
 </ul>
 
 {/function}

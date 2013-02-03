@@ -23,38 +23,6 @@
     </head>  
     <body>
 
-        <ul class="nav nav-list accordion">
-            <div class="accordion-group">
-
-                <li class="accordion-heading"><a href="#">User Accounts</a>
-
-                    <ul class="nav nav-list">
-                        <li><a href='#'>Student</a></li>
-                        <li><a href='#'>Confirmed Signatory</a></li>
-                        <li><a href='#'>Unconfirmed Signatory</a></li>
-                    </ul>
-
-                </li>   
-
-            </div>
-
-            <li><a href='#'>Signatories</a></li>
-            <li><a href='#'>Departments</a></li>
-        </ul>
-
-        <div class="accordion">
-            <div class="accordion-group">
-                <div class="accordion-heading">
-                    <a class="accordion-toggle">sdsdfsdfsdf</a>
-                </div>
-                <div class="accordion-body">
-                    <div class="accordion-inner">
-                        Anim pariatur cliche...
-                    </div>
-                </div>
-            </div>
-        </div>
-
         <div class="accordion" id="accordion2">
             <div class="accordion-group">
                 <div class="accordion-heading">
