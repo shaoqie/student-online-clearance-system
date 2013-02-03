@@ -270,7 +270,7 @@ class User_Model extends Model {
     public function filterStudent($Tsign_id, $searchName, $page) {
         $this->query = mysql_query("select students.username, concat(Surname, ', ', First_Name, ' ', Middle_Name) as Name from students
                                     inner join users on students.username = users.username
-                                    inner join clearancestatus on users.username = clearancestatus.student
+                                    
                                     inner join courses on students.course_id = courses.course_id
                                     inner join departments on courses.Department_ID = departments.Department_ID
                                     inner join signatorialList on departments.Department_ID = signatorialList.department_id

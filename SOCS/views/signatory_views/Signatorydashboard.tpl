@@ -38,10 +38,10 @@
                     </button>
                     <ul class="dropdown-menu">
                         <li>
-                            <a style="cursor:pointer;" onclick="window.location.href='index.php?action=viewStudent_Detail&stud_id={$myKey_Student_Username[$k]}'"> <i  class="icon-info-sign"></i> Detail</a>
+                            <a style="cursor:pointer;" onclick="window.location.href='index.php?action=viewStudent_Detail&stud_id={$myKey_Student_Username[$k]}&sy_sem_id={$sysemid}'"> <i  class="icon-info-sign"></i> Detail</a>
                         </li>
                         <li>
-                            <a style="cursor:pointer;" onclick="window.location.href='index.php?action=viewClearavePage&stud_id={$myKey_Student_Username[$k]}'"> <i class="icon-zoom-in"></i> Clearance</a>
+                            <a style="cursor:pointer;" onclick="window.location.href='index.php?action=viewClearancePage&stud_id={$myKey_Student_Username[$k]}&sy_sem_id={$sysemid}'"> <i class="icon-zoom-in"></i> Clearance</a>
                         </li>
                     </ul>    
                 </div> 

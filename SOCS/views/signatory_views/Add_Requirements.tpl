@@ -101,7 +101,7 @@
         <div class="controls">
             <select id="requirement_type" name="requirement_type" class="input-large" onchange="change_reqType()">
                 <option>Textual</option>
-                <option>Pre-requisite</option>
+                <option>Prerequisite</option>
             </select>
         </div>    
     </div>

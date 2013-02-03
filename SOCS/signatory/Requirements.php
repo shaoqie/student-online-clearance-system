@@ -207,6 +207,9 @@ class Requirements extends Controller{
         */
         
         $this->requirement_model->addRequirement($requirement_title, $requirement_desc, $thisSignantory, $sy_sem, $requirement_application, $department, $courses, $year_level, $program, $requirement_type, $signatory);
+    
+        header("location:requirements.php");
+        
     }
     
     /*----------- For the next page for Adding Requirements ------------*/

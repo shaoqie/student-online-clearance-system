@@ -102,15 +102,13 @@ class Index extends Controller {
         //$getListOfStudenClearanceStatus = $this->clearanceStatus_model->getRequirementList($studentID, $signatoryID, $sysemID);
         $numOfResults = count($this->user_model->getFilter_Name());
         
-        
-        
-        
         $this->template->assign('myName_student_NameUser', $getListofStudent_Name); 
         $this->template->assign('myKey_Student_Username', $getListofStudent_Username); 
         $this->template->assign('myStudent_ClearanceStatus', $getListOfStudenClearanceStatus);
         $this->template->assign('filter', $searchName);
         $this->template->assign('signatoryDashboard_length', $numOfPages);
         $this->template->assign('clearedStatus', $getListOfStudenClearanceStatus);
+        $this->template->assign('sysemid', $sy_id);
         //$this->template->assign('myDept', $listOfDept);
         //$this->template->assign('myCourse', $listOfCourse);
         
@@ -121,32 +119,47 @@ class Index extends Controller {
     
     /*----------- For Clearance Page ------------*/
     
-    public function viewClearavePage($stud_id){
+    public function viewClearancePage($stud_id, $sy_sem_id){
         
-        //$thisSYSEM = $this->schoolYearSem_model->getSy_ID(Session::, $sem)
         $thisSig = $this->signatorialList_model->getSignId(Session::get_AssignSignatory());
+        
         $this->student_model->queryStudent_Info($stud_id);
-       
         $stud_name = $this->student_model->getStud_Name();
         $stud_course = $this->student_model->getStud_Course();
         $stud_dept = $this->student_model->getStud_DeptName();
-        //$stud_requirements = $this->requirementbyStudent_model->getListofRequirements($stud_id);
-        //$stud_status = $this->student_model->getStudent_clearance_status(trim($stud_id));
         
-        //$clearanceStatus = $this->clearanceStatus_model->getRequirementList($stud_id, $thisSig, $sysemID)
+        $clearanceStatus = $this->clearanceStatus_model->getRequirementList($stud_id, $thisSig, $sy_sem_id);
+        
         
         $this->template->setPageName("Student Clearance Page");
         $this->template->setContent("ClearancePage.tpl");
         $this->template->assign('student_name', $stud_name);
         $this->template->assign('course_name', $stud_course);
         $this->template->assign('dept_name', $stud_dept);
+        $this->template->assign('clearanceStatus', $clearanceStatus);
+        $this->template->assign('stud_id', $stud_id);
+        
         //$this->template->assign('myRequirements_byStudent', $stud_requirements);
         //$this->template->assign('stud_status', $stud_status);
-    }    
+    }
+    
+    public function viewClearancePage_submit($stud_id){
+        $newRequirementStatus = $_GET["rq"];
+        //var_dump($newRequirementStatus);
+        //var_dump($stud_id);
+        
+        foreach ($newRequirementStatus as $key => $value) {
+            $lstatus = $value == "1" ? "Cleared" : "Not Cleared";
+            $this->clearanceStatus_model->setRequirementClearanceStatus($stud_id, $key, $lstatus);
+        }
+        
+        header("location:index.php");
+        //$this->template->setAlert('Clearance status successfully updated.', Template::ALERT_SUCCESS, 'alert');
+    }
     
     /*----------- For Student Detail Page ------------*/
     
-    public function viewStudent_Detail($stud_id){
+    public function viewStudent_Detail($stud_id, $sy_sem_id){
         $this->student_model->queryStudent_Info($stud_id);
         $stud_name = $this->student_model->getStud_Name();
         $stud_course =  $this->student_model->getStud_Course();
@@ -157,6 +170,8 @@ class Index extends Controller {
         $stud_program = $this->student_model->getStud_Program();
         $stud_section = $this->student_model->getStud_Section();
         //$stud_status = $this->student_model->getStudent_clearance_status(trim($stud_id));
+        $thisSig = $this->signatorialList_model->getSignId(Session::get_AssignSignatory());
+        $stud_status = $this->clearanceStatus_model->getOverallSignatoryClearanceStatus($stud_id, $thisSig, $sy_sem_id);
         
         $this->template->setPageName("Student Detailed Page");
         $this->template->setContent("Student_Detailed.tpl");
@@ -168,7 +183,7 @@ class Index extends Controller {
         $this->template->assign('stud_yr_level', $stud_yr_level ." Year");
         $this->template->assign('stud_program', $stud_program);
         $this->template->assign('stud_section', $stud_section);
-        $this->template->assign('stud_status', 'Not Cleared');
+        $this->template->assign('stud_status', $stud_status);
     }  
 
     /*------------ Display UI -----------------*/

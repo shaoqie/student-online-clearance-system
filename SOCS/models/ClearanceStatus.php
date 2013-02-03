@@ -107,7 +107,23 @@ class ClearanceStatus extends Model{
         }
     }
     
+    public function setRequirementClearanceStatus($studentID, $requirementID, $status){
+        if($this->requirementClearanceStatusExists($studentID, $requirementID)){
+            //var_dump("UPDATE `socs`.`clearancestatus` SET `Cleared` = '$status' WHERE `clearancestatus`.`Requirement_ID` = '$requirementID' AND `clearancestatus`.`Student` = '$studentID'");
+            mysql_query("UPDATE `socs`.`clearancestatus` SET `Cleared` = '$status' WHERE `clearancestatus`.`Requirement_ID` = '$requirementID' AND `clearancestatus`.`Student` = '$studentID'");
+        }else{
+            //var_dump("INSERT INTO `socs`.`clearancestatus` (`Requirement_ID`, `Student`, `Cleared`) VALUES ('$requirementID', '$studentID', '$status')");
+            mysql_query("INSERT INTO `socs`.`clearancestatus` (`Requirement_ID`, `Student`, `Cleared`) VALUES ('$requirementID', '$studentID', '$status')");
+        }
+        
+        //var_dump(mysql_ );
+    }
     
+    private function requirementClearanceStatusExists($studentID, $requirementID){
+        $subquery = mysql_query("select * from clearancestatus where requirement_id='$requirementID' and  student='$studentID'");
+        $count = mysql_num_rows($subquery);
+        return $count > 0 ? TRUE:FALSE;
+    }
 }
 
 ?>
