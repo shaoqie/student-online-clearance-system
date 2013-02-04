@@ -127,6 +127,7 @@ class Index extends Controller {
         $stud_name = $this->student_model->getStud_Name();
         $stud_course = $this->student_model->getStud_Course();
         $stud_dept = $this->student_model->getStud_DeptName();
+        $stud_photo = $this->student_model->getStud_Photo();
         
         $clearanceStatus = $this->clearanceStatus_model->getRequirementList($stud_id, $thisSig, $sy_sem_id);
         
@@ -138,6 +139,7 @@ class Index extends Controller {
         $this->template->assign('dept_name', $stud_dept);
         $this->template->assign('clearanceStatus', $clearanceStatus);
         $this->template->assign('stud_id', $stud_id);
+        $this->template->assign('stud_photo', $stud_photo);
         
         //$this->template->assign('myRequirements_byStudent', $stud_requirements);
         //$this->template->assign('stud_status', $stud_status);
