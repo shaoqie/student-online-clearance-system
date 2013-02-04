@@ -169,6 +169,7 @@ class Index extends Controller {
         $stud_yr_level = $this->student_model->getStud_Yearlevel();
         $stud_program = $this->student_model->getStud_Program();
         $stud_section = $this->student_model->getStud_Section();
+        $stud_photo = $this->student_model->getStud_Photo();
         //$stud_status = $this->student_model->getStudent_clearance_status(trim($stud_id));
         $thisSig = $this->signatorialList_model->getSignId(Session::get_AssignSignatory());
         $stud_status = $this->clearanceStatus_model->getOverallSignatoryClearanceStatus($stud_id, $thisSig, $sy_sem_id);
@@ -183,6 +184,7 @@ class Index extends Controller {
         $this->template->assign('stud_yr_level', $stud_yr_level ." Year");
         $this->template->assign('stud_program', $stud_program);
         $this->template->assign('stud_section', $stud_section);
+        $this->template->assign('stud_photo', $stud_photo);
         $this->template->assign('stud_status', $stud_status);
     }  
 

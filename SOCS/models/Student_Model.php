@@ -22,6 +22,7 @@ class Student_Model extends Model{
     private $stud_yearLevel;
     private $stud_program;
     private $stud_section;
+    private $stud_photo;
     
     public function __construct() {        
         parent::__construct();
@@ -65,10 +66,14 @@ class Student_Model extends Model{
         return $this->stud_section;
     }
     
+    public function getStud_Photo(){
+        return $this->stud_photo;
+    }
+    
     public function queryStudent_Info($student_id){
         $this->query = mysql_query("select concat(Surname, ', ', First_Name, ' ', Middle_Name) as Name,
                                     courses.course_name, courses.course_id, departments.department_name, departments.department_id,
-                                    Gender, Year_Level, Program, Section from students
+                                    Gender, Year_Level, Program, Section, Picture from students
                                     inner join users on students.username = users.username
                                     inner join courses on students.course_id = courses.course_id
                                     inner join departments on courses.Department_ID = departments.Department_ID
@@ -84,7 +89,8 @@ class Student_Model extends Model{
         $this->stud_gender = $row['5'];
         $this->stud_yearLevel = $row['6'];
         $this->stud_program = $row['7'];
-        $this->stud_section = $row['8'];       
+        $this->stud_section = $row['8'];   
+        $this->stud_photo = $row['9'];
     }
     
     public function insert($uname, $gender, $yr_level, $program, $section, $courseID){
