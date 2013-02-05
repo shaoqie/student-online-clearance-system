@@ -18,6 +18,7 @@
         <h6 class="media-heading muted">
             Posted on {$date} at {$time}
         </h6>
+        <pre>
         <p>{$message}</p>
     </div>
 </div>

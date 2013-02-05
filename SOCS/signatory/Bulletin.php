@@ -136,11 +136,11 @@ class bulletin extends Controller {
         
         $this->bulletin_model->ViewBulletin($key, $sign_id);
         
-        $message = $this->parsingLengthPerLine($this->bulletin_model->getMessages());
+        $message = $this->bulletin_model->getMessages();
         $date = $this->getDate($this->bulletin_model->getPostDate());
         $time = $this->bulletin_model->getPostTime();
 
-        $this->template->assign('message', $this->parsingNewLine($message));
+        $this->template->assign('message', $message);
         $this->template->assign('date', $date);
         $this->template->assign('time', $time);
     }
@@ -173,37 +173,6 @@ class bulletin extends Controller {
         }
 
         return $temp;
-    }
-
-    /* ------------------------------------------ */
-
-    private function parsingNewLine($_messages) {
-        $temp = explode("\r\n", $_messages);
-        $strTemp = "";
-
-        foreach ($temp as $newvalue) {
-            $strTemp .= $newvalue . "<br/>";
-        }
-
-        return $strTemp;
-    }
-
-    private function parsingLengthPerLine($_str) {
-        $_array = str_split($_str);
-        $_strTemp = "";
-
-        $counter = 0;
-        foreach ($_array as $value) {
-            if ($counter >= 40) {
-                $_strTemp .= $value . "<br/>";
-                $counter = -1;
-            } else {
-                $_strTemp .= $value;
-                $counter++;
-            }
-        }
-
-        return $_strTemp;
     }
 
     /* ---------- for Date into word ---------------- */

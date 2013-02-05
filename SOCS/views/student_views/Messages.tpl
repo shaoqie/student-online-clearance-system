@@ -46,6 +46,7 @@
             <h6 class="media-heading muted">
                 Posted on {$_date[$k]} at {$_time[$k]}
             </h6>
+            <pre>
             <p>{$i}</p>
         </div>
     </div>
