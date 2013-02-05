@@ -15,6 +15,10 @@
     {call name=search}
 </span>
 
+{*<span>
+    {call name=advanced_search}
+</span>*}
+
 <!-- Student Table-->
 <table class="table table-hover">
     <tr>

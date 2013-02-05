@@ -13,7 +13,13 @@
 
 <!-- Search Bar-->
 <span class="pull-right">
-    {call name=search}
+    <form class="form-inline">
+        <input type="hidden" value="filter" name="action">
+        <input id="search" class="input-large" type="search" placeholder="Search date here  ..." value="{$filter}" name="filterName">
+        <button class="btn btn-success" type="submit">
+            <i class="icon-search icon-white"></i>
+        </button>
+    </form>
 </span>
 
 <!-- Table of Announcements-->
