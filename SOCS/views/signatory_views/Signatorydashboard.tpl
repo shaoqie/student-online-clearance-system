@@ -10,7 +10,7 @@
 
     </div>
     <div class="span9">
-        
+
         <!-- Header-->
         <h2 class="well center-text">Students</h2>
 
@@ -21,8 +21,15 @@
 
         <!-- Search Bar-->
         <span class="pull-right">
-            {call name=search}
-        </span>
+            {*{call name=search}*}
+            <div class="form-inline">
+                <input id="search" class="span3" type="search" placeholder="Search..." value="{$filter}" onkeypress="enterSearch(event)">
+                <button class="btn btn-success" type="button" onclick="jumpToPageWithSchoolYear()">
+                    <i class="icon-search icon-white"></i>
+                </button>
+            </div>
+            <br/>
+        </span>  
 
         <!-- Student Table-->
         <table class="table table-hover">

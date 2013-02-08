@@ -6,6 +6,12 @@
  * Administrator Script Functions
  */
 
+function enterSearch(e){
+    if(e.keyCode == 13){
+        jumpToPageWithSchoolYear();
+    }
+}
+
 function change_schoolYear(finder, sign_id, page){
     var sy = document.getElementById("school_year").value;
     var sem = document.getElementById("semester").value;
@@ -20,7 +26,7 @@ function jumpToPageWithSchoolYear(){
     var sy = document.getElementById("school_year").options[document.getElementById("school_year").selectedIndex].text;
     var sem = document.getElementById("semester").options[document.getElementById("semester").selectedIndex].text;
     
-    var jump = document.getElementById("jump").value;
+    var jump = document.getElementById("jump").value != "--"? document.getElementById("jump").value : 1;
     var search = document.getElementById("search").value;
      
     window.location.assign("?action=displayTable&filter=" + search +"&page=" + jump +"&sy=" +sy +"&sem=" +sem);

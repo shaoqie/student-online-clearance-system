@@ -21,15 +21,27 @@
         <input class="btn" type="button" value="Post Bulletin" onclick="window.location.href='../signatory/bulletin.php?action=viewPosting_Bulletin'">
 
         <!-- Search Bar-->
+        <!-- Search Bar-->
         <span class="pull-right">
-            <form class="form-inline">
-                <input type="hidden" value="filter" name="action">
-                <input id="search" class="input-large" type="search" placeholder="Search date here  ..." value="{$filter}" name="filterName">
-                <button class="btn btn-success" type="submit">
+            {*{call name=search}*}      
+            <div class="form-inline">
+                <input id="search" class="span3" type="search" placeholder="Search date here  ..." value="{$filter}" onkeypress="enterSearch(event)">
+                <button class="btn btn-success" type="button" onclick="jumpToPageWithSchoolYear()">
                     <i class="icon-search icon-white"></i>
                 </button>
-            </form>
+            </div>
+            <br/>
         </span>
+
+        {*<span class="pull-right">
+        <form class="form-inline">
+        <input type="hidden" value="filter" name="action">
+        <input id="search" class="input-large" type="search" placeholder="Search date here  ..." value="{$filter}" name="filterName">
+        <button class="btn btn-success" type="submit">
+        <i class="icon-search icon-white"></i>
+        </button>
+        </form>
+        </span>*}
 
         <!-- Table of Announcements-->
         <table class="table table-hover">
