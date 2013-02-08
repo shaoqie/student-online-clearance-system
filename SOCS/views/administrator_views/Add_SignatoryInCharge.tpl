@@ -11,11 +11,7 @@
     </div>
     <div class="span9">
         <!-- Header-->
-        <h2 class="well">Add Signatory in-Charge</h2>
-
-        <!-- Back Button-->
-        <button class="pull-right btn" onclick="window.location.href='index.php?user_type=Signatory'">Back</button>
-
+        <h2 class="well center-text">Add Signatory in-Charge</h2>
 
         <form method='post' class="form-horizontal">
             {literal}
@@ -88,10 +84,10 @@
                 </div>
             </div>
 
-            <div class="control-group">
-                <div class="controls">
+            <div class="form-actions control-group">
+                <div class="pull-right">
                     <input class="btn btn-primary" type='Submit' value='Register' name='Register'>
-                    <a href='/SOCS/index.php'> Cancel</a>
+                    <button class="btn" onclick="window.location.href='index.php?user_type=Signatory'">Back</button>
                 </div>
             </div>
         </form>

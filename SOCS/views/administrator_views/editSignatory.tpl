@@ -11,12 +11,12 @@
     </div>
     <div class="span9">
 
-        <!-- Back Button-->
-        <button class="pull-right btn" onclick="window.location.href='signatory_list_manager.php'">Back</button>
+        <!-- Header -->
+        <h2 class="well center-text">Edit Signatory</h2>
 
         <!-- Edit Signatory-->
         <form action="" method='post' class="form-horizontal">
-            <legend>Edit {$editSignatory_Name}:</legend>
+            <legend>Signatory Information:</legend>
             <div class="control-group">
                 <label class="control-label">Signatory Name: </label>
                 <div class="controls">
@@ -29,9 +29,10 @@
                     <textarea class="span5" name='sign_description' rows="5" cols="50" required>{$editSignatory_Desc}</textarea>
                 </div>
             </div>
-            <div class="control-group">
-                <div class="controls">
+            <div class="control-group form-actions">
+                <div class="pull-right">
                     <input class="btn btn-primary" type='Submit' value='Save' name ='editSave'>
+                    <button class="btn" type="button" onclick="window.location.href='signatory_list_manager.php'">Back</button>
                 </div>
             </div>
         </form>

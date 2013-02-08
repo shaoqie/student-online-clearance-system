@@ -10,13 +10,13 @@
 
     </div>
     <div class="span9">
-
-        <!-- Back Button-->
-        <button class="pull-right btn" onclick="window.location.href='department_list_manager.php'">Back</button>
+        
+        <!-- Header -->
+        <h2 class="well center-text">Edit Department</h2>
 
         <!-- Edit Form-->
         <form action="" method='post' class="form-horizontal">
-            <legend>Edit Department:</legend>
+            <legend>Department Information:</legend>
             <div class="control-group">
                 <label class="control-label">Department Name: </label>
                 <div class="controls">
@@ -29,9 +29,10 @@
                     <textarea class="span5" name='dept_description' rows="5" cols="50">{$editDepartment_Desc}</textarea>
                 </div>
             </div>
-            <div class="control-group">
-                <div class="controls">
+            <div class="control-group form-actions">
+                <div class="pull-right">
                     <input class="btn btn-primary" type='Submit' value='Save' name="editSave">
+                    <button class="btn" type="button" onclick="window.location.href='department_list_manager.php'">Back</button>
                 </div>
             </div>
         </form>

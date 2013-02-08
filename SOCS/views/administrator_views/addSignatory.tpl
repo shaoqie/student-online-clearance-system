@@ -11,27 +11,28 @@
     </div>
     <div class="span9">
 
-        <!-- Back Button-->
-        <button class="pull-right btn" onclick="window.location.href='signatory_list_manager.php'">Back</button>
+        <!-- Header-->
+        <h2 class="well center-text">Add Signatory</h2>
 
         <!-- Adding Form-->
         <form action="signatory_list_manager.php?action=add_signatory" method='post' class="form-horizontal">
-            <legend>Add Signatory:</legend>
+            <legend>Signatory Information: </legend>
             <div class="control-group">
                 <label class="control-label">Signatory Name: </label>
                 <div class="controls">
-                    <input style="width: 400px;" class="input-xlarge" type ='text' name='sign_name'>
+                    <input class="span5" type ='text' name='sign_name'>
                 </div>
             </div>
             <div class="control-group">
                 <label class="control-label">Description: </label>
                 <div class="controls">
-                    <textarea style="width: 400px;" class="input-xlarge" name='sign_description' rows="5" cols="50"></textarea>
+                    <textarea class="span5" name='sign_description' rows="5"></textarea>
                 </div>
             </div>
-            <div class="control-group">
-                <div class="controls">
-                    <input class="btn btn-primary" type='Submit' value='Save'>
+            <div class="form-actions control-group">
+                <div class="pull-right">
+                    <input class="btn btn-primary" type='Submit' value='Save' />
+                    <button class="btn" type="button" onclick="window.location.href='signatory_list_manager.php'">Back</button>
                 </div>
             </div>
         </form>
