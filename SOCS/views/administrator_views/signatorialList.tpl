@@ -57,6 +57,9 @@ $("#confirmed" +x).html("");
 
     </div>
     <div class="span9">
+        
+        <!-- Header-->
+        <h2 class="well center-text">{$Dept_name}</h2>
 
         <!-- Back Button-->
         <input class="btn pull-right" type="button" value="Back" onclick="window.location.href='department_list_manager.php'">
@@ -66,9 +69,6 @@ $("#confirmed" +x).html("");
             <li><a href='../administrator/course_list_byDepartment.php'>Courses</a></li>
             <li class="active"><a href='../administrator/signatorialList.php'>Signatorial List</a></li>
         </ul>
-
-        <!-- Header-->
-        <h2 class="well center-text">{$Dept_name}</h2>
 
         <!-- Add Signatory -->
         {if $countSignList > 0}

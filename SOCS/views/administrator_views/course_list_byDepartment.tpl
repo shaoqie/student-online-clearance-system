@@ -11,6 +11,9 @@
     </div>
     <div class="span9">
 
+        <!-- Header-->
+        <h2 class="well" style="text-align: center;">{$Dept_name}</h2>
+
         <!-- Back Button-->
         <input class="btn pull-right" type="button" value="Back" onclick="window.location.href='department_list_manager.php'">
 
@@ -19,9 +22,6 @@
             <li class="active"><a href='../administrator/course_list_byDepartment.php'>Courses</a></li>
             <li><a href='../administrator/signatorialList.php'>Signatorial List</a></li>
         </ul>
-
-        <!-- Department Name-->
-        <h2 class="well" style="text-align: center;">{$Dept_name}</h2>
 
         <!-- Add Courses Button-->
         <input class="btn" type="button" value="Add Courses" onclick="window.location.href='course_list_byDepartment.php?action=addCourse'">
@@ -32,7 +32,7 @@
         </span>
 
         <!-- Course List Table-->
-        <table class="table table-hover">     
+        <table class="table table-hover table-bordered">     
             <tr>
                 <th>
                     <input type="checkbox" onclick="isCheck({$rowCount_course})" id="check"> Courses

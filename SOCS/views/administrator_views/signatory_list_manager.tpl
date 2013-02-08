@@ -48,7 +48,7 @@
                             </td>
                             <td><label>{$desc_sign[$k]}</label></td>
                             <td>
-                                <i class="icon-pencil"></i><a style="cursor:pointer;" onclick="window.location.href='signatory_list_manager.php?action=editSignatory&seleted={$myKey_sign[$k]}'"> Edit</a>
+                                <a style="cursor:pointer;" onclick="window.location.href='signatory_list_manager.php?action=editSignatory&seleted={$myKey_sign[$k]}'"><i class="icon-pencil"></i> Edit</a>
                             </td>
                         </tr>
                     {/foreach}
