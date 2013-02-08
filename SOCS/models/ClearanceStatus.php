@@ -74,11 +74,14 @@ class ClearanceStatus extends Model{
                 $status = $this->getRequirementClearanceStatus($studentID, $row['Requirement_ID']);
             else{
                 $sigID = $row['Prerequisite_Signatory'];
-                $status = $this->getOverallSignatoryClearanceStatus($studentID, $sigID, $sysemID);
-                if($status == "No Requirements")
-                    $status = "Cleared";
+                
+                if ($this->isStudentUnderSpecifiedSignatory($studentID,$sigID)){
+                    $status = $this->getOverallSignatoryClearanceStatus($studentID, $sigID, $sysemID);
+                    if($status == "No Requirements")
+                        $status = "Cleared";
+                }
             }
-            array_push($arrayTemp, array($row['Requirement_ID'], $row['Title'], $row['Description'], $status));
+            array_push($arrayTemp, array($row['Requirement_ID'], $row['Title'], $row['Description'], $status, $row['Requirement_Type']));
         }
         return $arrayTemp;
     }
@@ -122,6 +125,17 @@ class ClearanceStatus extends Model{
     private function requirementClearanceStatusExists($studentID, $requirementID){
         $subquery = mysql_query("select * from clearancestatus where requirement_id='$requirementID' and  student='$studentID'");
         $count = mysql_num_rows($subquery);
+        return $count > 0 ? TRUE:FALSE;
+    }
+    
+    public function isStudentUnderSpecifiedSignatory($username, $sigID){
+        $this->query = mysql_query("select * from students
+            inner join courses on (students.course_id = courses.course_id)
+            inner join departments on (courses.department_id = departments.department_id)
+            inner join signatoriallist on (departments.department_id = signatoriallist.department_id)
+            where username='$username' and signatoriallist.signatory_id='$sigID'");
+        
+        $count = mysql_num_rows($this->query );
         return $count > 0 ? TRUE:FALSE;
     }
 }

@@ -32,13 +32,17 @@
 
                 {foreach from = $clearanceStatus key = k item = i}
                     <tr>
+                        
                         <td><input name="requirements" value="{$clearanceStatus[$k][0]}" id="rq{$clearanceStatus[$k][0]}" type="checkbox"
                         {if $clearanceStatus[$k][3] eq 'Cleared'}
                             checked=""
                         {/if}
-                        >
+                        {if $clearanceStatus[$k][4] eq 'Prerequisite'}
+                            disabled
+                        {/if}>
                         </td>
                         <td><p>{$clearanceStatus[$k][1]}</p></td>
+                        
                     </tr>
                 {/foreach}
             </table> 

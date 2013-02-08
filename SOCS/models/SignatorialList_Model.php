@@ -256,6 +256,9 @@ class SignatorialList_Model extends Model {
         
         return $listCourses;
     }
+    
+    
+    
 
     /* -------------------------------------------- */
 
