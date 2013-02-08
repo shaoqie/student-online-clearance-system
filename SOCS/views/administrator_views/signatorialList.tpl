@@ -113,8 +113,9 @@ $("#confirmed" +x).html("");
                         <label id="confirmed{$k}"></label>
                     </td>
                     <td>
-                        <i class="icon-pencil"></i>
-                        <a style="cursor:pointer;" href="javascript:edit('{$k}','{$myKey_signatorial[$k]}','{$rowCount_signatorial}','{$countSignList}')"> Edit</a>
+                        <a style="cursor:pointer;" href="javascript:edit('{$k}','{$myKey_signatorial[$k]}','{$rowCount_signatorial}','{$countSignList}')">
+                            <i class="icon-pencil"></i> Edit
+                        </a>
                     </td>    
                 </tr>
             {/foreach}
