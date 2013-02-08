@@ -79,7 +79,30 @@
         </a>
     </li>
 </ul>
+{/function}
 
+<!-- Navigation Signatory-->
+{function name=nav_signatory index=0}
+
+<ul class="nav nav-list well">
+    <li class="nav-header"><h5>Admin Menu</h5></li>
+
+    <li {if $index == 0}class="active"{/if}>
+        <a href='../signatory/index.php'>
+            <i class="icon-user"></i> Student
+        </a>
+    </li>
+    <li {if $index == 1}class="active"{/if}>
+        <a href='../signatory/bulletin.php'>
+            <i class="icon-align-justify"></i> Bulletin
+        </a>
+    </li>
+    <li {if $index == 2}class="active"{/if}>
+        <a href='../signatory/requirements.php'>
+            <i class="icon-check"></i> Requirements
+        </a>
+    </li>
+</ul>
 {/function}
 
 <!-- Navigation Tabs User Accounts-->
