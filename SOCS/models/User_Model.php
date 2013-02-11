@@ -268,7 +268,7 @@ class User_Model extends Model {
     /* ------------ For Signatory Dashboard Part ---------------- */
 
     public function filterStudent($Tsign_id, $searchName, $page) {
-        $this->query = mysql_query("select students.username, concat(Surname, ', ', First_Name, ' ', Middle_Name) as Name from students
+        $this->query = mysql_query("select students.username, concat(Surname, ', ', First_Name, ' ', Middle_Name) as Name, Picture from students
                                     inner join users on students.username = users.username
                                     
                                     inner join courses on students.course_id = courses.course_id
@@ -283,9 +283,11 @@ class User_Model extends Model {
 
         $this->filter_ID = array();
         $this->filter_Name = array();
+        $this->filter_Picture = array();
         while ($row = mysql_fetch_array($this->query)) {
             array_push($this->filter_ID, $row['0']);
             array_push($this->filter_Name, $row['1']);
+            array_push($this->filter_Picture, $row['2']);
         }
     }
 

@@ -70,6 +70,7 @@ class unconfirmed_signatory extends Controller{
         $getListofSignUser = $this->getListofName($this->user_model->getFilter_Name(), $searchName, $finder);
         $filter_ID = $this->user_model->getFilter_ID();
 
+        $this->template->set_Photos($this->user_model->getFilter_Picture());
         $this->template->assign('myName_unconfirmedSign', $getListofSignUser); //$this->signatory_model->filter_Description($searchName, $page));
         $this->template->assignByRef('myKey_unconfirmedSign', $filter_ID);
         $this->template->assign('filter', $searchName);

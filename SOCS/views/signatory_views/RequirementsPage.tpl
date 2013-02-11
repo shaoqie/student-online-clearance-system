@@ -34,7 +34,7 @@
         </span>
 
         <!-- Student Table-->
-        <table class="table table-hover">
+        <table class="table table-bordered table-hover">
             <tr>
                 <th>
                     <input type="checkbox" onclick="isCheck({$rowCount_requirement})" id="check"> Title

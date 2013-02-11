@@ -49,7 +49,13 @@
                         <tr>
                             <td>
                                 <label class="checkbox">
-                                    <input class="Checkbox" type="checkbox" id = '{$k}' value = {$myKey_admin[$k]}> {$i}
+                                    <input class="Checkbox" type="checkbox" id = '{$k}' value = {$myKey_admin[$k]}> 
+                                    {if isset($myPhotos[$k])}
+                                        <img src="{$myPhotos[$k]}" style="width:35px; height:35px"/>
+                                    {else}
+                                        <img src="{$host}/photos/default_student.png" style="width:35px; height:35px"/>
+                                    {/if}
+                                    {$i}
                                 </label>
                             </td>
                             <td>{$my_courseORsign[$k]}</td>

@@ -102,6 +102,7 @@ class Index extends Controller {
         //$getListOfStudenClearanceStatus = $this->clearanceStatus_model->getRequirementList($studentID, $signatoryID, $sysemID);
         $numOfResults = count($this->user_model->getFilter_Name());
         
+        $this->template->set_Photos($this->user_model->getFilter_Picture());
         $this->template->assign('myName_student_NameUser', $getListofStudent_Name); 
         $this->template->assign('myKey_Student_Username', $getListofStudent_Username); 
         $this->template->assign('myStudent_ClearanceStatus', $getListOfStudenClearanceStatus);
@@ -130,7 +131,6 @@ class Index extends Controller {
         $stud_photo = $this->student_model->getStud_Photo();
         
         $clearanceStatus = $this->clearanceStatus_model->getRequirementList($stud_id, $thisSig, $sy_sem_id);
-        
         
         $this->template->setPageName("Student Clearance Page");
         $this->template->setContent("ClearancePage.tpl");

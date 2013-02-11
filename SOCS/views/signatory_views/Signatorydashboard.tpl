@@ -32,7 +32,7 @@
         </span>  
 
         <!-- Student Table-->
-        <table class="table table-hover">
+        <table class="table table-bordered table-hover">
             <tr>
                 <th>ID</th>
                 <th>Name</th>  
@@ -41,7 +41,14 @@
             {foreach from = $myName_student_NameUser key = k item = i}
                 <tr> 
                     <td style="width:150px">{$myKey_Student_Username[$k]}</td>
-                    <td>{$i}</td>
+                    <td>
+                        {if isset($myPhotos[$k])}
+                            <img src="{$myPhotos[$k]}" style="width:35px; height:35px"/>
+                        {else}
+                            <img src="{$host}/photos/default_student.png" style="width:35px; height:35px"/>
+                        {/if}
+                        {$i}
+                    </td>
                     <td>
                         <div class="btn-group">
                             {if $myStudent_ClearanceStatus[$k] eq 'Cleared'}

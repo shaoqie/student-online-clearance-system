@@ -44,7 +44,7 @@
         </span>*}
 
         <!-- Table of Announcements-->
-        <table class="table table-hover">
+        <table class="table table-bordered table-hover">
             <tr>
                 <th>
                     <input type="checkbox" onclick="isCheck({$rowCount_bulletin})" id="check"></input> Messages
