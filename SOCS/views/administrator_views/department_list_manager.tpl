@@ -49,7 +49,7 @@
                             <td>
                                 <a href="department_list_manager.php?action=editDepartment&seleted={$myKey_dept[$k]}">
                                     <i class="icon-pencil"></i> Edit
-                                </a> &nbsp; 
+                                </a> &nbsp; <br class="hidden-desktop">
                                 <a href="department_list_manager.php?action=displayCourse&deptName={$i}">
                                     <i class="icon-eye-open"></i> View
                                 </a>

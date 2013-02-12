@@ -48,7 +48,7 @@
                     {foreach from = $myName key = k item = i}
                         <tr>
                             <td>
-                                <input class="Checkbox" type="checkbox" id = '{$k}' value = {$myKey_admin[$k]}> 
+                                <input class="Checkbox" type="checkbox" id = '{$k}' value = {$myKey_admin[$k]}> &nbsp;
                                 {if isset($myPhotos[$k])}
                                     <img src="{$myPhotos[$k]}" style="width:35px; height:35px"/>
                                 {else}

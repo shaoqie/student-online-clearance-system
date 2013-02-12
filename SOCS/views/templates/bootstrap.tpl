@@ -37,7 +37,7 @@
 
                 .socs-welcome{
                     background-color: transparent; 
-                    padding-bottom: 60px;
+                    padding-bottom: 245px;
                     padding-left: 75px;
                     text-shadow: inherit;
                 }
@@ -54,9 +54,9 @@
                     margin-top: 10px;
                 }
 
-                .carousel-images{
+                .carousel-images, .carousel-size{
                     width: 1200px; 
-                    height: 350px;
+                    height:500px;
                 }
                 /*
                 div{
@@ -226,17 +226,6 @@
         <script src="{$host}/public/js/vendor/bootbox.min.js"></script>
 
         <script src="{$host}/public/js/main.js"></script>
-
-        {literal}
-            <script type="text/javascript">
-                $(document).ready(function (){
-                    $('#socs-carousel').carousel({
-                        interval: 5000,
-                        pause: "hover"
-                    });
-                });
-            </script>
-        {/literal}
 
         {*
         {literal}
