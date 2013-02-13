@@ -19,6 +19,14 @@ class SchoolYearSem_Model extends Model{
         $this->query = "";
     }
     
+    public function insert($school_year){
+        mysql_query("INSERT INTO  `socs`.`schoolyearsem` (`SY_SEM_ID` ,`School_Year` ,`Semester`)
+                    VALUES 
+                    (NULL ,  '$school_year',  'First'),
+                    (NULL ,  '$school_year',  'Second'),
+                    (NULL ,  '$school_year',  'Summer')");
+    }
+    
     public function getSchool_Year(){
         $arrayTemp = array();
         $this->query = mysql_query("SELECT School_Year from schoolyearsem group by School_Year");

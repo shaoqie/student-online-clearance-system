@@ -23,6 +23,7 @@
 {function name=archiveSearch}
 <form class="form-inline" method="post">
     <label>School Year:  </label>
+
     <select id="school_year" name="school_year" class="span3">
         {foreach from = $mySchool_Year key = k item = i}
             {if $currentSchool_Year eq $i}
@@ -32,6 +33,22 @@
             {/if}
         {/foreach}
     </select>
+
+    {*
+    <input value="{$currentSchool_Year}" class="span2" type="text" maxlength="9" 
+    {literal}       
+    pattern="[0-9\-]{9}" id="school_year" name="school_year" autocomplete="off" class="input-small" data-provide="typeahead" data-source='[
+    {/literal}
+    {foreach from=$mySchool_Year key=k item=year}
+    {if $mySchool_Year|@count - 1 eq $k}
+    "{$year}"
+    {else}
+    "{$year}",
+    {/if}
+    {/foreach}
+
+    ]'>
+    *}
 
     <label>Semester: </label>
     <select id="semester" name="semester" class="span3">

@@ -42,12 +42,14 @@
                 <tr> 
                     <td style="width:150px">{$myKey_Student_Username[$k]}</td>
                     <td>
-                        {if isset($myPhotos[$k])}
-                            <img src="{$myPhotos[$k]}" style="width:35px; height:35px"/>
-                        {else}
-                            <img src="{$host}/photos/default_student.png" style="width:35px; height:35px"/>
-                        {/if}
-                        {$i}
+                        <div style="text-align: left;">
+                            {if isset($myPhotos[$k])}
+                                <img src="{$myPhotos[$k]}" style="width:35px; height:35px"/>
+                            {else}
+                                <img src="{$host}/photos/default_student.png" style="width:35px; height:35px"/>
+                            {/if}
+                            {$i}
+                        </div>
                     </td>
                     <td>
                         <div class="btn-group">

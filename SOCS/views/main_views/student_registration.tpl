@@ -39,8 +39,9 @@
             </select> 
             *}
              
-
-            <input type="text" maxlength="4" name="stud_id" autocomplete="off" class="input-small" data-provide="typeahead" data-source='[
+            {literal}
+            <input type="text" maxlength="4" pattern="[0-9]{4}" name="stud_id" autocomplete="off" class="input-small" data-provide="typeahead" data-source='[
+            {/literal}
                    {foreach from=$years key=k item=year}
                        {if $years|@count - 1 eq $k}
                            "{$year}"

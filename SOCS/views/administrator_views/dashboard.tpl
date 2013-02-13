@@ -48,13 +48,15 @@
                     {foreach from = $myName key = k item = i}
                         <tr>
                             <td>
-                                <input class="Checkbox" type="checkbox" id = '{$k}' value = {$myKey_admin[$k]}> &nbsp;
-                                {if isset($myPhotos[$k])}
-                                    <img src="{$myPhotos[$k]}" style="width:35px; height:35px"/>
-                                {else}
-                                    <img src="{$host}/photos/default_student.png" style="width:35px; height:35px"/>
-                                {/if}
-                                {$i}
+                                <div style="text-align: left;">
+                                    <input class="Checkbox" type="checkbox" id = '{$k}' value = {$myKey_admin[$k]}> &nbsp;
+                                    {if isset($myPhotos[$k])}
+                                        <img src="{$myPhotos[$k]}" style="width:35px; height:35px"/>
+                                    {else}
+                                        <img src="{$host}/photos/default_student.png" style="width:35px; height:35px"/>
+                                    {/if}
+                                    {$i}
+                                </div>
                             </td>
                             <td>{$my_courseORsign[$k]}</td>
                             <td>{$myType[$k]}</td>
