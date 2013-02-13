@@ -125,8 +125,8 @@ class Index extends Controller {
         
         if(isset($_POST['Register'])){
             $username = $_POST["uname"];
-            $newpass = $_POST["newpass"];
-            $confirmpass = $_POST["confirmpass"];
+            $newpass = md5($_POST["newpass"]);
+            $confirmpass = md5($_POST["confirmpass"]);
             $surname = $_POST["surname"];
             $firstname = $_POST["firstname"];
             $middleName = $_POST["middleName"];

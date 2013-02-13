@@ -34,22 +34,22 @@ class Index extends Controller {
     }
 
     public function login() {
-        if ($this->administrator_model->isExist(trim($_POST['username']), (trim($_POST['password'])))) {
-            $this->administrator_model->queryUser_Type(trim($_POST['username']), (trim($_POST['password'])));
+        if ($this->administrator_model->isExist(trim($_POST['username']), md5(trim($_POST['password'])))) {
+            $this->administrator_model->queryUser_Type(trim($_POST['username']), md5(trim($_POST['password'])));
             
             if ($this->administrator_model->Account_Type == "Admin") {
 
-                Session::set_user($_POST['username'], trim($_POST['password']));
+                Session::set_user($_POST['username'], md5(trim($_POST['password'])));
                 $this->setSession('Admin');
                 header('Location: ' . HOST . '/administrator/');
             } else if ($this->administrator_model->Account_Type == "Student" && $this->administrator_model->validation_status == "Confirmed") {
 
-                Session::set_user($_POST['username'], $_POST['password']);
+                Session::set_user($_POST['username'], md5(trim($_POST['password'])));
                 $this->setSession('Student');
                 header('Location: ' . HOST . '/student/');
             } else if ($this->administrator_model->Account_Type == "Signatory" && $this->administrator_model->validation_status == "Confirmed") {
                 $assign_sign = $this->administrator_model->getAssignSignatory(trim($_POST['username']));
-                Session::set_user($_POST['username'], $_POST['password']);
+                Session::set_user($_POST['username'], md5(trim($_POST['password'])));
                 Session::set_assignSignatory($assign_sign);
                 $this->setSession('Signatory');
                 header('Location: ' . HOST . '/signatory/');
@@ -69,7 +69,7 @@ class Index extends Controller {
         
         
         if(isset($_POST['GO'])){
-            $query = $this->administrator_model->updatePassword($username, $hash, $_POST['password']);
+            $query = $this->administrator_model->updatePassword($username, $hash, md5($_POST['password']));
             if(!$query){
                 $this->template->setAlert('Invalid URL!!....!' . mysql_error(), Template::ALERT_ERROR);
             }
@@ -116,7 +116,7 @@ class Index extends Controller {
             $hash = crypt(($_POST['stud_id'] . "-" . $_POST['number'] .$_POST['emailAdd']), 'wrawehydrufmjhyaswtgf');
             $course_id = $this->courses_model->getCourseID(trim($_POST['course']));
             
-            $this->administrator_model->insertStudent(($_POST['stud_id'] . "-" . $_POST['number']), (($_POST['password'])), trim($_POST['surname']), trim($_POST['firstname']), trim($_POST['middleName']), $_POST['emailAdd'], $hash);
+            $this->administrator_model->insertStudent(($_POST['stud_id'] . "-" . $_POST['number']), md5(($_POST['password'])), trim($_POST['surname']), trim($_POST['firstname']), trim($_POST['middleName']), $_POST['emailAdd'], $hash);
             
             //$this->administrator_model->insertStudent(($_POST['stud_id'] . "-" . $_POST['number']), (($_POST['password'])), trim($_POST['surname']), trim($_POST['firstname']), trim($_POST['middleName']), NULL, 'Student', NULL);
             $this->stud_model->insert(($_POST['stud_id'] . "-" . $_POST['number']), ($_POST['gender']), ($_POST['year_level']), ($_POST['program']), ($_POST['section']), $course_id);
@@ -161,7 +161,7 @@ class Index extends Controller {
     public function signatory_register() {
         if (isset($_POST['Save'])) {
             $sign_id = $this->signatoriallist_model->getSignId($_POST['sign_name']);
-            $this->administrator_model->insertSignatory_User(trim($_POST['uname']), trim($_POST['confirmpass']), trim($_POST['surname']), trim($_POST['firstname']), trim($_POST['middleName']), NULL, 'Signatory', $sign_id);
+            $this->administrator_model->insertSignatory_User(trim($_POST['uname']), md5(trim($_POST['confirmpass'])), trim($_POST['surname']), trim($_POST['firstname']), trim($_POST['middleName']), NULL, 'Signatory', $sign_id);
             
 //          echo "Password: " .trim($_POST['uname']) ."<br/>";
 //          echo "Confirm Password: " .trim($_POST['newpass']) ."<br/>";
@@ -205,7 +205,7 @@ class Index extends Controller {
     }
 
     private function setSession($account_type) {
-        $result = mysql_fetch_array($this->administrator_model->getUser(trim($_POST['username']), trim($_POST['password'])));
+        $result = mysql_fetch_array($this->administrator_model->getUser(trim($_POST['username']), md5(trim($_POST['password']))));
 
         Session::set_surname($result['Surname']);
         Session::set_firstname($result['First_Name']);
@@ -230,12 +230,6 @@ class Index extends Controller {
         }
 
         $this->administrator_model->db_close();
-    }
-    
-    /*-------------- function for forgotting password --------------------*/
-    
-    private function getNewPassword($key){
-        
     }
 
 }

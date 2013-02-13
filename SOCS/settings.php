@@ -44,23 +44,28 @@ class Settings extends Controller {
     }
 
     public function verify() {
-        $oldpass = $_POST['oldpass'];
-        $newpass = $_POST['newpass'];
-        $confirmpass = $_POST['confirmpass'];
+        $oldpass = (trim($_POST['oldpass']));
+        $newpass = (trim($_POST['newpass']));
+        $confirmpass = (trim($_POST['confirmpass']));
         $actualPass = Session::getUserPass();
         $surname = $_POST['surname'];
         $firstname = $_POST['firstname'];
         $middleName = $_POST['middleName'];
         $email_add = $_POST['emailAdd'];
         $imagefile = $_FILES["photo"];
-        
+           
         if ($newpass == "") {
-            $newpass = $oldpass;
-            $confirmpass = $oldpass;
+            $newpass = md5($oldpass);
+            $confirmpass = md5($oldpass);
+        }else{
+            $newpass = md5($newpass);
+            $confirmpass = md5($confirmpass);
         }
-
+   
         $test = 0;
 
+        
+        
         //Check if fields are empty in firstname surname and middlename
         if ($surname != "" && $firstname != "" && $middleName != "" && $email_add != "" ) {
             $this->admin->Surname = $surname;
@@ -73,6 +78,8 @@ class Settings extends Controller {
             $this->template->setAlert('Surname, first name, middle name and email address are required!', Template::ALERT_ERROR, 'alert');
             return;
         }
+        
+        
 
         //checks the surname if valid
         if (Validator::is_valid_name($surname) && $test == 1) {
@@ -82,6 +89,7 @@ class Settings extends Controller {
             $this->template->setAlert('Surname must not have a numerical values and characters / \ ? < > : ; " and *', Template::ALERT_ERROR, 'alert');
             return;
         }
+        
 
         //checks the firstname if valid
         if (Validator::is_valid_name($firstname) && $test == 2) {
@@ -101,6 +109,7 @@ class Settings extends Controller {
             return;
         }
         
+       
         //checks the email if valid
         if(Validator::is_email_valid($email_add) && $test == 4){
             $test++;
@@ -108,16 +117,18 @@ class Settings extends Controller {
             $this->template->setAlert('Not valid Email', Template::ALERT_ERROR, 'alert');
             return;
         }
-
+        
+//var_dump(Session::getUserPass());
+//    var_dump($newpass);   
         // check if actual pass and old pass are equal
-        if ($actualPass == $oldpass && $test == 5) {
+        if ($actualPass == md5($oldpass) && $test == 5) {
 
             $test++;
         } else {
             $this->template->setAlert('Incorrect Password!', Template::ALERT_ERROR, 'alert');
             return;
         }
-
+ 
         //check if new pass and confirm pass are equal
         if ($newpass == $confirmpass && $test == 6) {
 
@@ -126,17 +137,19 @@ class Settings extends Controller {
             $this->template->setAlert('Passwords does not matched!', Template::ALERT_ERROR, 'alert');
             return;
         }
-
+        
         //check if password is valid
         if (Validator::is_valid_password($newpass) && $test == 7) {
 
-            $this->admin->Password = $newpass;
+            $this->admin->Password = ($newpass);
 
             $test++;
         } else {
             $this->template->setAlert('Password\'s length must have a minimum of 7 characters!', Template::ALERT_ERROR, 'alert');
             return;
         }
+        
+        
         
         //check if photo is valid
         if ($imagefile['name'] != "") {
@@ -164,8 +177,9 @@ class Settings extends Controller {
                 $this->template->setAlert('Invalid Photo!', Template::ALERT_ERROR, 'alert');
                 return;
             }
-        }
-        
+        }  
+            
+        //var_dump($actualPass);
         //var_dump($this->admin->email_add);
         if ($this->admin->update() && $test == 8) {
             
