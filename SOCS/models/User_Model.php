@@ -113,6 +113,14 @@ class User_Model extends Model {
         $this->validation_status = $sample['1'];
     }
 
+    public function updatePassword($key, $hash, $newPassword){
+        mysql_query("Update users SET Password='$newPassword' where Username='$key' and Hash='$hash'");
+    }
+    
+    public function updateHash($key, $newHash){
+        mysql_query("Update users SET Hash='$newHash' where Username='$key'");
+    }
+    
     public function update() {
         $sql = "UPDATE users SET Picture='" . $this->Picture . "', Surname='" . $this->Surname . "', First_Name='" . $this->First_Name . "', Middle_Name='" . $this->Middle_Name ."', email_address='" .$this->email_add . "', Password='" . $this->Password . "' Where Username='" . $this->Username . "'";
 

@@ -4,7 +4,7 @@ require_once('class.phpmailer.php');
 //sendMail("Biloy", "kristofferkrisanore@gmail.com", "http://somewhere.com/gsuigubegs");
 
 
-function sendForgotPassword($studentName, $studentEmail, $password){
+function sendForgotPassword($studentName, $studentEmail, $verificationLink){
     $mail = new PHPMailer();
     $mail->IsSMTP();
     $mail->Host       = "mail.yourdomain.com"; // SMTP server
@@ -26,7 +26,8 @@ function sendForgotPassword($studentName, $studentEmail, $password){
     
     $body = "Welcome to Student Online Clearance System(SOCS)! " . "</br></br>" .
             "<br/>Hello $studentName, <br/></br>" .
-            "Your Password is <strong>\"$password\" </strong>.<br/>".
+             "You have chosen to change yout password on Student Online Clearance System. <br/>".
+            "<a href=\"$verificationLink\">$verificationLink<a/> <br/>" .
             "so don't forgot your password again... <br/>".
             "Thank you :)";
     

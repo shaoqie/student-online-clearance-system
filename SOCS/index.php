@@ -62,10 +62,39 @@ class Index extends Controller {
             exit;
         }
     }
+    
+    public function changePassword($username, $hash){
+        $this->template->setAlert('You choose to change sent your password!', Template::ALERT_INFO);
+        $this->template->setContent('changePassword.tpl');
+        
+        
+        if(isset($_POST['GO'])){
+            $query = $this->administrator_model->updatePassword($username, $hash, $_POST['password']);
+            if(!$query){
+                $this->template->setAlert('Invalid URL!!....!' . mysql_error(), Template::ALERT_ERROR);
+            }
+            
+           
+            //$this->template->setAlert('Your password has successfully change!', Template::ALERT_SUCCESS);
+            header("Location: index.php?action=changeSuccessful");
+        }
+    }
+    
+    public function changeSuccessful(){
+        $this->template->setContent('login.tpl');
+        $this->template->setAlert('Your password has successfully change!', Template::ALERT_SUCCESS);
+    }
 
     public function ForgotPass(){
+        $hash = crypt(trim($_POST['ForgotPass']), "aweawkskihdsdaw");
+        //$this->template->setContent('login.tpl');
         $this->administrator_model->getUserPassword($_POST['ForgotPass']);
-        sendForgotPassword($this->administrator_model->First_Name, $this->administrator_model->email_add, $this->administrator_model->Password);
+        $this->administrator_model->updateHash(trim($_POST['ForgotPass']), $hash);
+        
+        $verificationLink = HOST ."/index.php?action=changePassword&username=" .($_POST['ForgotPass']) ."&hash=" .$hash;
+            
+        
+        sendForgotPassword($this->administrator_model->First_Name, $this->administrator_model->email_add, $verificationLink);
         //var_dump($_POST['ForgotPass']);
         $this->template->setAlert('Your password was sent to your email address!', Template::ALERT_SUCCESS);
         //var_dump($_POST['ForgotPass']);
@@ -201,6 +230,12 @@ class Index extends Controller {
         }
 
         $this->administrator_model->db_close();
+    }
+    
+    /*-------------- function for forgotting password --------------------*/
+    
+    private function getNewPassword($key){
+        
     }
 
 }
