@@ -249,7 +249,7 @@ class Index extends Controller {
         
         if($curYear == $latestYear && $curMonth == 6 && $curDay == 7){
             $this->school_year_model->insert($curYear ."-" .($curYear + 1));
-        }        
+        }  
     }
     
 }

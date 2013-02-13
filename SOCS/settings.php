@@ -177,6 +177,8 @@ class Settings extends Controller {
                 $this->template->setAlert('Invalid Photo!', Template::ALERT_ERROR, 'alert');
                 return;
             }
+        }else{
+            $this->admin->Picture = Session::get_photo();
         }  
             
         //var_dump($actualPass);

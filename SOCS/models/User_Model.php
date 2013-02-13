@@ -289,7 +289,7 @@ class User_Model extends Model {
                                     inner join signatorialList on departments.Department_ID = signatorialList.department_id
                                     inner join signatories on signatorialList.signatory_id = signatories.signatory_id
                                     where (First_name like '%$searchName%' OR Surname like '%$searchName%' OR 
-                                    Middle_Name like '%$searchName%') AND Account_Type = 'student' 
+                                    Middle_Name like '%$searchName%') AND Account_Type = 'student' AND `Validation_Status` = 'confirmed'
                                     AND signatories.signatory_id = '$Tsign_id' group by Name order by Name
                                     LIMIT " . (($page - 1) * $this->itemsPerPage) . ", " . $this->itemsPerPage);
 
@@ -313,7 +313,7 @@ class User_Model extends Model {
                                     inner join signatorialList on departments.Department_ID = signatorialList.department_id
                                     inner join signatories on signatorialList.signatory_id = signatories.signatory_id
                         where (First_name like '%$searchName%' OR Surname like '%$searchName%' OR 
-                        Middle_Name like '%$searchName%') AND Account_Type = 'student'
+                        Middle_Name like '%$searchName%') AND Account_Type = 'student' AND `Validation_Status` = 'confirmed'
                         AND signatories.signatory_id = '$Tsign_id' group by Name");
         return mysql_num_rows($this->query) / $this->itemsPerPage;
     }
