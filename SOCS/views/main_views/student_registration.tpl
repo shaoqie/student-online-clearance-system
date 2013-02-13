@@ -31,13 +31,30 @@
         <label class="control-label">Student ID: </label>
         <div class="controls">
 
-            <select class="input-small" name="stud_id" required>
-                <option></option>
-                {foreach from=$years key=k item=year}
-                    <option>{$year}</option>
-                {/foreach}
-            </select> - 
+            {*<select class="input-small" name="stud_id" required>
+            <option></option>
+            {foreach from=$years key=k item=year}
+            <option>{$year}</option>
+            {/foreach}
+            </select> 
+            *}
+             
 
+            <input type="text" maxlength="4" name="stud_id" autocomplete="off" class="input-small" data-provide="typeahead" data-source='[
+                   {foreach from=$years key=k item=year}
+                       {if $years|@count - 1 eq $k}
+                           "{$year}"
+                       {else}
+                           "{$year}",
+                       {/if}
+                   {/foreach}
+
+                   {*
+                   "Ahmedabad","Akola","Asansol","Aurangabad","Bangaluru","Baroda","Belgaon","Berhumpur","Calicut","Chennai","Chapra","Cherapunji"
+                   *}
+                   ]'>
+            
+            -
             {literal}
                 <input class="input-small" type ='text' name='number' value="" maxlength="5" pattern="[0-9]{5}" required title="Numbers Only">
             {/literal}
@@ -83,7 +100,7 @@
             <input type='text'name='middleName' value="" pattern="[A-Za-z\s]+" required title="Letters and spaces only">
         </div>
     </div>
-    
+
     <div class="control-group">
         <label class="control-label">Email Address: </label>
         <div class="controls">
@@ -94,7 +111,7 @@
     <div class="control-group">
         <label class="control-label">Section: </label>
         <div class="controls">
-            <input type='text'name='section' value="" pattern="[A-Za-z\s]+" required title="Letters and spaces only">
+            <input type='text'name='section' value="" pattern="[0-9A-Za-z\s\-\_]+" required title="Letters and spaces only">
         </div>
     </div>
 
