@@ -157,6 +157,7 @@ class Index extends Controller {
 
     public function verify($username, $hash){
         $this->administrator_model->verifyStudent($username, $hash);
+        $this->template->setContent('login.tpl');
         $this->template->setAlert('Your Account was Successfully verified!... ', Template::ALERT_SUCCESS);
     }
     

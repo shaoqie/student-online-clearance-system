@@ -107,10 +107,10 @@ class Course_Model extends Model{
     
     public function getListDept_ID_inCourse(){
         $filter = array();
-        $this->query = mysql_query("select Department_ID from courses");
+        $this->query = mysql_query("select Department_ID, Course_Name from courses");
         
         while($row = mysql_fetch_array($this->query)){
-            array_push($filter, $row['0']);
+            array_push($filter, array($row['0'], $row['1']));
         }
         
         return $filter;

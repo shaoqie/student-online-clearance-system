@@ -8,8 +8,8 @@
         var str = "";
     {foreach from=$dept_id_inCourses key=k_course item=item}
                    
-        if(dept_id == {$item}){
-        str += "<option>{$course_underDept[$k_course]}</option>";
+        if(dept_id == {$dept_id_inCourses[$k_course][0]}){
+        str += "<option>{$dept_id_inCourses[$k_course][1]}</option>";
     }               
     {/foreach}                          
     select.innerHTML = str;
