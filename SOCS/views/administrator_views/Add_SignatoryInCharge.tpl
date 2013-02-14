@@ -70,17 +70,28 @@
             <div class="control-group">
                 <label class="control-label">Signatory: </label>
                 <div class="controls">
-
+                    {*
                     {if !isset($signatories)}
                         {assign var=signatories value=["OCSC", "OSS", "CTLC", "ICLC"]}
                     {/if}
-
+                    
                     <select name="sign_name" required>
                         <option></option>
                         {foreach from=$signatories item=signatory key=pk}
                             <option value="{$signatory_keys[$pk]}">{$signatory}</option>
                         {/foreach}
                     </select>
+                    *}
+                    
+                    <input type="text" required name="sign_name" autocomplete="off" class="input-large" data-provide="typeahead" data-source='[
+                   {foreach from=$signatories key=k item=signatory}
+                       {if $signatories|@count - 1 eq $k}
+                           "{$signatory}"
+                       {else}
+                           "{$signatory}",
+                       {/if}
+                   {/foreach}
+                   ]'>
                 </div>
             </div>
 

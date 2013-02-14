@@ -12,7 +12,7 @@
  */
 class Requirements_Model extends Model{
     private $query;
-    private $itemsPerPage = 10;
+    private $itemsPerPage = 30;
     
     private $ID;
     private $Title;

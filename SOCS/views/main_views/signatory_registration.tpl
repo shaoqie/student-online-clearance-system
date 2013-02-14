@@ -74,7 +74,7 @@
             </select>
             *}
             
-            <input type="text" class="input-large" required name="sign_name" autocomplete="off" class="input-small" data-provide="typeahead" data-source='[
+            <input type="text" required name="sign_name" autocomplete="off" class="input-large" data-provide="typeahead" data-source='[
                    {foreach from=$signatories key=k item=signatory}
                        {if $signatories|@count - 1 eq $k}
                            "{$signatory}"

@@ -130,7 +130,7 @@ class Index extends Controller {
             $surname = $_POST["surname"];
             $firstname = $_POST["firstname"];
             $middleName = $_POST["middleName"];
-            $assign_sign = $_POST['sign_name'];
+            $assign_sign = $this->signatoriallist_model->getSignId(trim($_POST['sign_name']));
             
             $this->administrator_model->Username = $username;
             $this->administrator_model->Password = $newpass;

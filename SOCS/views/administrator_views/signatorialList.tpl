@@ -57,7 +57,7 @@ $("#confirmed" +x).html("");
 
     </div>
     <div class="span9">
-        
+
         <!-- Header-->
         <h2 class="well center-text">{$Dept_name}</h2>
 
@@ -75,12 +75,28 @@ $("#confirmed" +x).html("");
             <span class="pull-left">
                 <form class="form-inline">
                     <label>Add Signatory:</label>
+
+                    
                     <select class="span2" id="cmdSignatory" required>
                         <option></option>
                         {foreach from = $SignatoryList item = i}
                             <option>{$i}</option>
                         {/foreach}
                     </select>
+
+
+                    {*
+                    <input type="text" id="cmdSignatory" required autocomplete="off" class="span2" data-provide="typeahead" data-source='[
+                    {foreach from=$SignatoryList key=k item=i}
+                    {if $SignatoryList|@count - 1 eq $k}
+                    "{$i}"
+                    {else}
+                    "{$i}",
+                    {/if}
+                    {/foreach}
+                    ]'>
+                    *}     
+
                     <input class="btn btn-primary" type="button" value="Add" onclick="getSignatory()">
                 </form>
             </span>

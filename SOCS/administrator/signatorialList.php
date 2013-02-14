@@ -103,7 +103,7 @@ class signatorialList extends Controller{
         $this->template->assign('signatorial_length', $numOfPages);
         $this->template->assign('rowCount_signatorial', $numOfResults);
         $this->template->assign('SignatoryList', $listOfUnSelectSignatory);
-		$this->template->assign('countSignList', count($listOfUnSelectSignatory));
+	$this->template->assign('countSignList', count($listOfUnSelectSignatory));
         
         if ($numOfResults == 0) {
             $this->template->setAlert('No Results Found.', Template::ALERT_ERROR, 'alert');
