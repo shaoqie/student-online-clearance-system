@@ -35,21 +35,21 @@ class Signatory_Registration extends Controller {
         $this->template->setPageName("Student Registration");
         $this->template->setContent("signatory_registration.tpl");
 
-        $listOfYear = $this->school_year_model->getListOfYear();
-        $listOfDept_Name = $this->department_model->getListOfDepartments();
-        $listOfDept_ID = $this->department_model->getListOfDept_ID();
-        $ListDept_ID_inCourse = $this->courses_model->getListDept_ID_inCourse();
-        $listOfCourses = $this->courses_model->getListOfCourses();
+        //$listOfYear = $this->school_year_model->getListOfYear();
+//        $listOfDept_Name = $this->department_model->getListOfDepartments();
+//        $listOfDept_ID = $this->department_model->getListOfDept_ID();
+//        $ListDept_ID_inCourse = $this->courses_model->getListDept_ID_inCourse();
+//        $listOfCourses = $this->courses_model->getListOfCourses();
         $listOfsignatory = $this->signatoriallist_model->getListofSignatory();
         $listOfKeysFromSignatories = $this->signatoriallist_model->getKeyListofSignatory();
 
         $this->template->assign('signatories', $listOfsignatory);
         $this->template->assign('signatory_keys', $listOfKeysFromSignatories);
-        $this->template->assign('years', $listOfYear);
-        $this->template->assign('depts', $listOfDept_Name);
-        $this->template->assign('dept_ID', $listOfDept_ID);
-        $this->template->assign('dept_id_inCourses', $ListDept_ID_inCourse);
-        $this->template->assign('course_underDept', $listOfCourses);
+        //$this->template->assign('years', $listOfYear);
+        //$this->template->assign('depts', $listOfDept_Name);
+        //$this->template->assign('dept_ID', $listOfDept_ID);
+        //$this->template->assign('dept_id_inCourses', $ListDept_ID_inCourse);
+        //$this->template->assign('course_underDept', $listOfCourses);
     }
 
     public function register() {
@@ -165,7 +165,7 @@ class Signatory_Registration extends Controller {
 //                $this->local_dir = PATH . "photos/default.png";
 //            }
 
-            $this->admin->Assigned_Signatory = $_POST["sign_name"];
+            $this->admin->Assigned_Signatory = $this->signatoriallist_model->getSignId(trim($_POST["sign_name"]));
             $this->admin->email_add = $_POST['emailAdd'];
 
             if ($test == 7 && $this->admin->insertSignatory_User()) {

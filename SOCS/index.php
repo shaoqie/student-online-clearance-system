@@ -32,7 +32,7 @@ class Index extends Controller {
         $this->template->setPageName('Home');
         $this->template->setContent('welcome.tpl');
         
-        $this->add_school_year();
+        //$this->add_school_year();
     }
 
     public function login() {
@@ -235,6 +235,7 @@ class Index extends Controller {
     }
 
     /*----------- for adding school year ----------------*/
+    /*
     private function add_school_year(){
         $date = explode("-", date("Y-m-d"));
         $curDay = $date[2];
@@ -251,7 +252,7 @@ class Index extends Controller {
             $this->school_year_model->insert($curYear ."-" .($curYear + 1));
         }  
     }
-    
+    */
 }
 
 $controller = new Index();
