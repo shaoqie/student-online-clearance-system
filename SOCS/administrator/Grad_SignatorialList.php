@@ -12,7 +12,7 @@
  */
 require_once '../config/config.php';
 
-class signatorialList extends Controller{
+class Grad_SignatorialList extends Controller{
     private $template;
     private $signatorialList_model;
     
@@ -61,7 +61,7 @@ class signatorialList extends Controller{
         foreach ($explode as $value) {
             $this->signatorialList_model->deleteSignatorial($dept_id, trim($value));
         }
-        $HOST = $explode[0] != null ? HOST . "/administrator/signatorialList.php?action=deleted" : HOST . "/administrator/signatorialList.php";
+        $HOST = $explode[0] != null ? HOST . "/administrator/Grad_SignatorialList.php?action=deleted" : HOST . "/administrator/Grad_SignatorialList.php";
         header('Location: ' . $HOST);
     }
     
@@ -78,7 +78,7 @@ class signatorialList extends Controller{
         $newSign_ID_temp = $this->signatorialList_model->getSignId($newSign_Name);
 
         $this->signatorialList_model->update($dept_id_temp, $oldSign_ID, $newSign_ID_temp);
-        header('Location: ' . HOST . "/administrator/signatorialList.php?action=edited");
+        header('Location: ' . HOST . "/administrator/Grad_SignatorialList.php?action=edited");
     }
     
     public function filter($filterName){
@@ -86,15 +86,15 @@ class signatorialList extends Controller{
     }  
     
     public function displayTable($searchName, $page, $finder){
-        $this->signatorialList_model->filter(Session::get_DepartmentName(), $searchName, $page, 'Under Graduate');
+        $this->signatorialList_model->filter(Session::get_DepartmentName(), $searchName, $page, 'Graduate');
         
-        $numOfPages = $this->signatorialList_model->getQueryPageSize(Session::get_DepartmentName(), $searchName, 'Under Graduate');
+        $numOfPages = $this->signatorialList_model->getQueryPageSize(Session::get_DepartmentName(), $searchName, 'Graduate');
         $numOfResults = count($this->signatorialList_model->getFilter_Name());
         $getListofSignatorialList = $this->getListofName($this->signatorialList_model->getFilter_Name(), $searchName, $finder);
         $filter_ID = $this->signatorialList_model->getFilter_ID();
         
-        $SignatoryList = $this->signatorialList_model->getListofSignatory('Under Graduate');
-        $getSignatorialList_signName = $this->signatorialList_model->getSignatorialList_underDeptName(Session::get_DepartmentName(), 'Under Graduate');
+        $SignatoryList = $this->signatorialList_model->getListofSignatory('Graduate');
+        $getSignatorialList_signName = $this->signatorialList_model->getSignatorialList_underDeptName(Session::get_DepartmentName(), 'Graduate');
         $listOfUnSelectSignatory = array_diff($SignatoryList, $getSignatorialList_signName);      
         
         $this->template->assign('myName_signatorial', $getListofSignatorialList); 
@@ -104,7 +104,7 @@ class signatorialList extends Controller{
         $this->template->assign('rowCount_signatorial', $numOfResults);
         $this->template->assign('SignatoryList', $listOfUnSelectSignatory);
 	$this->template->assign('countSignList', count($listOfUnSelectSignatory));
-        $this->template->assign('index_tabs', 0);
+        $this->template->assign('index_tabs', 1);
         
         if ($numOfResults == 0) {
             $this->template->setAlert('No Results Found.', Template::ALERT_ERROR, 'alert');
@@ -117,7 +117,7 @@ class signatorialList extends Controller{
     } 
 }
 
-$controller = new signatorialList();
+$controller = new Grad_SignatorialList();
 $controller->perform_actions();
 $controller->display();
 

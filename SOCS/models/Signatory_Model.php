@@ -48,9 +48,9 @@ class Signatory_Model extends Model{
     
     /*-----------------------------------------------*/
     
-    public function filter($Tsign_name ,$Tpage){
+    public function filter($Tsign_name ,$Tpage, $used_for){
         $this->query = mysql_query("select * from signatories
-                                    where Signatory_Name like '%$Tsign_name%' order by Signatory_Name 
+                                    where Signatory_Name like '%$Tsign_name%' and Used_For = '$used_for' order by Signatory_Name 
                                     LIMIT " . (($Tpage - 1) * $this->itemsPerPage) . ", " . $this->itemsPerPage);
         
         $this->filter_ID = array();
@@ -92,9 +92,9 @@ class Signatory_Model extends Model{
 //    
     /*-----------------------------------------*/
     
-    public function getQueryPageSize($searchName) {
+    public function getQueryPageSize($searchName, $used_for) {
         $this->query = mysql_query("select Signatory_Name from signatories 
-                        where Signatory_Name like '%$searchName%'");
+                        where Signatory_Name like '%$searchName%' and Used_For = '$used_for'");
         
         return mysql_num_rows($this->query) / $this->itemsPerPage;
     }
@@ -104,9 +104,9 @@ class Signatory_Model extends Model{
         if(!$delete){return "false";}
     }
     
-    public function insert($sign_name, $description){
-        mysql_query("INSERT INTO `socs`.`signatories` (`Signatory_ID`, `Signatory_Name`, `Description`) 
-                    VALUES (NULL, '$sign_name', '$description')");
+    public function insert($sign_name, $description, $used_for){
+        mysql_query("INSERT INTO `socs`.`signatories` (`Signatory_ID`, `Signatory_Name`, `Description`, `Used_For`) 
+                    VALUES (NULL, '$sign_name', '$description', '$used_for')");
     }
     
     public function update($key, $newSignName, $newSignDesc){
@@ -136,11 +136,22 @@ class Signatory_Model extends Model{
 //        return $row['Description'];
 //    }
     
+    public function getListofSignatoryName() {
+        $rowInfo = array();
+        $this->query = mysql_query("select signatory_name from signatories");
+
+        while ($row = mysql_fetch_array($this->query)) {
+            array_push($rowInfo, $row['signatory_name']   );
+        }
+
+        return $rowInfo;
+    }
+    
     /*------- for testing existing name --------*/
     
     public function isExist($sign_name, $description){
-        $this->query = mysql_query("select count(Signatory_Name) from signatories where Signatory_Name = '$sign_name' OR 
-                                    description = '$description'");
+        $this->query = mysql_query("select count(Signatory_Name) from signatories where (Signatory_Name = '$sign_name' OR 
+                                    description = '$description')");
         
         $row = mysql_fetch_array($this->query);
         

@@ -20,6 +20,7 @@ class Signatory_Registration extends Controller {
     private $courses_model;
     private $admin;
     private $signatoriallist_model;
+    private $signatory_model;
     private $local_dir;
 
     public function __construct() {
@@ -30,6 +31,7 @@ class Signatory_Registration extends Controller {
         $this->courses_model = new Course_Model();
         $this->admin = new User_Model();
         $this->signatoriallist_model = new SignatorialList_Model();
+        $this->signatory_model = new Signatory_Model();
 
         $this->template = new Template();
         $this->template->setPageName("Student Registration");
@@ -40,11 +42,9 @@ class Signatory_Registration extends Controller {
 //        $listOfDept_ID = $this->department_model->getListOfDept_ID();
 //        $ListDept_ID_inCourse = $this->courses_model->getListDept_ID_inCourse();
 //        $listOfCourses = $this->courses_model->getListOfCourses();
-        $listOfsignatory = $this->signatoriallist_model->getListofSignatory();
-        $listOfKeysFromSignatories = $this->signatoriallist_model->getKeyListofSignatory();
+        $listOfsignatory = $this->signatory_model->getListofSignatoryName();
 
         $this->template->assign('signatories', $listOfsignatory);
-        $this->template->assign('signatory_keys', $listOfKeysFromSignatories);
         //$this->template->assign('years', $listOfYear);
         //$this->template->assign('depts', $listOfDept_Name);
         //$this->template->assign('dept_ID', $listOfDept_ID);

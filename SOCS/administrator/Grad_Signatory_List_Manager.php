@@ -1,13 +1,14 @@
 <?php
 
-/**
- * Signatory_List_Manager Controller
- *
- * @author Ozy
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
  */
+
+
 require_once '../config/config.php';
 
-class Signatory_List_Manager extends Controller {
+class Grad_Signatory_List_Manager extends Controller {
 
     private $template;
     private $signatory_model;
@@ -18,7 +19,7 @@ class Signatory_List_Manager extends Controller {
 
             $this->signatory_model = new Signatory_Model();
             $this->template = new Template();
-            $this->template->setPageName('Under Graduate Signatories');
+            $this->template->setPageName('Graduate Signatories');
 
             $this->template->set_username(Session::get_user());
             $this->template->set_surname(Session::get_Surname());
@@ -32,15 +33,15 @@ class Signatory_List_Manager extends Controller {
             $this->template->assign('assign_sign', '');
 
             $this->displayTable('', 1, "default");
-            
-            if(isset($_GET['successEdit'])){
-                if($_GET['successEdit'] == 'true'){
+
+            if (isset($_GET['successEdit'])) {
+                if ($_GET['successEdit'] == 'true') {
                     $this->template->setAlert("Updating Signatory was Successful", Template::ALERT_SUCCESS, 'alert');
                 }
             }
-            
-            if(isset($_GET['successAdd'])){
-                if($_GET['successAdd'] == 'true'){
+
+            if (isset($_GET['successAdd'])) {
+                if ($_GET['successAdd'] == 'true') {
                     $this->template->setAlert("Adding Signatory was Successful", Template::ALERT_SUCCESS, 'alert');
                 }
             }
@@ -61,16 +62,15 @@ class Signatory_List_Manager extends Controller {
         }else if($this->signatory_model->isExist(trim($_POST['sign_name']), trim($_POST['sign_description']))){
             $this->template->setAlert("Cannot Add a Signatory that is Existing", Template::ALERT_ERROR, 'alert');
         }else{
-            $this->signatory_model->insert(trim($_POST['sign_name']), trim($_POST['sign_description']), 'Under Graduate');
+            $this->signatory_model->insert(trim($_POST['sign_name']), trim($_POST['sign_description']), 'Graduate');
             //$this->template->setAlert("Adding Signatory was Successful", Template::ALERT_SUCCESS, 'alert');
             
-            header('Location: signatory_list_manager.php?successAdd=true');
+            header('Location: grad_signatory_list_manager.php?successAdd=true');
         }
     }
     
     public function editSignatory($seleted){
         $this->signatory_model->getSign_Info($seleted);
-        
         //$sign_name = $this->signatory_model->getSign_Name($seleted);
         //$sign_desc = $this->signatory_model->getSign_Desc($seleted);
         
@@ -89,7 +89,7 @@ class Signatory_List_Manager extends Controller {
                 $this->template->assign("editSignatory_Name", trim($_POST['sign_name']));
                 $this->template->assign("editSignatory_Desc", trim($_POST['sign_description']));
                 
-                header('Location: signatory_list_manager.php?successEdit=true');
+                header('Location: grad_signatory_list_manager.php?successEdit=true');
             }
         }
         
@@ -106,7 +106,7 @@ class Signatory_List_Manager extends Controller {
             $delete = $this->signatory_model->deleteSignatory(trim($value));
             if($delete == "false"){ $this->template->setAlert('You can delete an Unuse Signatory only!..', Template::ALERT_ERROR, 'alert'); return;}
         }
-        $HOST = $explode[0] != null ? HOST . "/administrator/signatory_list_manager.php?action=deleted" : HOST . "/administrator/signatory_list_manager.php";
+        $HOST = $explode[0] != null ? HOST . "/administrator/grad_signatory_list_manager.php?action=deleted" : HOST . "/administrator/grad_signatory_list_manager.php";
         header('Location: ' . $HOST);
     }
 
@@ -118,9 +118,9 @@ class Signatory_List_Manager extends Controller {
     }
 
     public function displayTable($searchName, $page, $finder) {
-        $this->signatory_model->filter($searchName, $page, 'Under Graduate');
+        $this->signatory_model->filter($searchName, $page, 'Graduate');
         
-        $numOfPages = $this->signatory_model->getQueryPageSize($searchName, 'Under Graduate');
+        $numOfPages = $this->signatory_model->getQueryPageSize($searchName, 'Graduate');
         $numOfResults = count($this->signatory_model->getFilter_Name());
         $getListofSignName = $this->getListofName($this->signatory_model->getFilter_Name(), $searchName, $finder);
         $filter_ID = $this->signatory_model->getFilter_ID();
@@ -132,7 +132,7 @@ class Signatory_List_Manager extends Controller {
         $this->template->assign('sign_length', $numOfPages);
         $this->template->assign('rowCount_sign', $numOfResults);
         $this->template->assign('desc_sign', $filter_Desc);
-        $this->template->assign('index_tabs', 0);   
+        $this->template->assign('index_tabs', 1);
 
         if ($numOfResults == 0) {
             $this->template->setAlert('No Results Found.', Template::ALERT_ERROR, 'alert');
@@ -146,7 +146,7 @@ class Signatory_List_Manager extends Controller {
 
 }
 
-$controller = new Signatory_List_Manager();
+$controller = new Grad_Signatory_List_Manager();
 $controller->perform_actions();
 $controller->display();
 ?>

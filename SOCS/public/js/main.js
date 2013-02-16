@@ -6,10 +6,21 @@
  * Administrator Script Functions
  */
 
+function changeVisibility(){
+    var visibility = parseInt(document.getElementById("sign_visibility").value);
+    if(visibility == 0){    window.location.assign("../administrator/index.php?action=addSignatoryInCharge&used_for=UnderGrad");
+    }else{                  window.location.assign("../administrator/index.php?action=addSignatoryInCharge&used_for=Grad"); }
+
+}
+
+function signatorialList_visibility(){
+    var visibility = parseInt(document.getElementById("visibility").value);
+    if(visibility == 0){    window.location.assign("signatorialList.php");
+    }else{                  window.location.assign("Grad_SignatorialList.php"); }
+}
+
 function enterSearch(e){
-    if(e.keyCode == 13){
-        jumpToPageWithSchoolYear();
-    }
+    if(e.keyCode == 13){ jumpToPageWithSchoolYear(); }
 }
 
 function change_schoolYear(finder, sign_id, page){

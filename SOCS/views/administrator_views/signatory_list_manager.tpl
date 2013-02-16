@@ -9,7 +9,6 @@
 
             </div>
         </div>
-
     </div>
     <div class="span9">
 
@@ -18,8 +17,17 @@
         <div class="row">
             <div class="span9">
 
+                <ul class="nav nav-tabs">
+                    <li {if $index_tabs == 0}class="active" {/if}>
+                        <a href='../administrator/signatory_list_manager.php'>Under Graduate</a>
+                    </li>
+                    <li {if $index_tabs == 1}class="active" {/if}>
+                        <a href='../administrator/grad_signatory_list_manager.php'>Graduate</a>
+                    </li> 
+                </ul>
+
                 <!-- Add Signatory Button-->
-                <input class="btn" type="button" value="Add Signatory" onclick="window.location.href='signatory_list_manager.php?action=addSignatory'">
+                <input class="btn" type="button" value="Add Signatory" {if $index_tabs == 0} onclick="window.location.href='signatory_list_manager.php?action=addSignatory'" {/if} {if $index_tabs == 1} onclick="window.location.href='grad_signatory_list_manager.php?action=addSignatory'" {/if}>
 
                 <!-- Search Bar-->
                 <span class="pull-right">
@@ -48,7 +56,7 @@
                             </td>
                             <td><label>{$desc_sign[$k]}</label></td>
                             <td>
-                                <a style="cursor:pointer;" onclick="window.location.href='signatory_list_manager.php?action=editSignatory&seleted={$myKey_sign[$k]}'"><i class="icon-pencil"></i> Edit</a>
+                                <a style="cursor:pointer;" {if $index_tabs == 0} onclick="window.location.href='signatory_list_manager.php?action=editSignatory&seleted={$myKey_sign[$k]}'" {/if} {if $index_tabs == 1} onclick="window.location.href='grad_signatory_list_manager.php?action=editSignatory&seleted={$myKey_sign[$k]}'" {/if}><i class="icon-pencil"></i> Edit</a>
                             </td>
                         </tr>
                     {/foreach}

@@ -15,7 +15,7 @@
         <h2 class="well" style="text-align: center;">{$Dept_name}</h2>
 
         <!-- Back Button-->
-        <input class="btn pull-right" type="button" value="Back" onclick="window.location.href='department_list_manager.php'">
+        <!-- <input class="btn pull-right" type="button" value="Back" onclick="window.location.href='department_list_manager.php'"> -->
 
         <!-- Navigation Tabs-->
         <ul class="nav nav-tabs">

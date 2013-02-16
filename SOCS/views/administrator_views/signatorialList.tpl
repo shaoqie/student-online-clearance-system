@@ -61,22 +61,32 @@ $("#confirmed" +x).html("");
         <!-- Header-->
         <h2 class="well center-text">{$Dept_name}</h2>
 
+        <!-- Visibility -->
+        <div class="form-inline pull-right">
+            <label>Visibility: </label>
+            <select id="visibility" class="span2" onchange="signatorialList_visibility()">
+                <option value="0" {if $index_tabs == 0} selected {/if}>Under Graduate</option>
+                <option value="1" {if $index_tabs == 1} selected {/if}>Graduate</option>
+            </select>
+        </div>
+
+
         <!-- Back Button-->
-        <input class="btn pull-right" type="button" value="Back" onclick="window.location.href='department_list_manager.php'">
+        <!-- <input class="btn pull-right" type="button" value="Back" onclick="window.location.href='department_list_manager.php'"> -->
 
         <!-- Navigation Tab-->
         <ul class="nav nav-tabs">
             <li><a href='../administrator/course_list_byDepartment.php'>Courses</a></li>
             <li class="active"><a href='../administrator/signatorialList.php'>Signatorial List</a></li>
         </ul>
-
+       
         <!-- Add Signatory -->
         {if $countSignList > 0}
             <span class="pull-left">
                 <form class="form-inline">
                     <label>Add Signatory:</label>
 
-                    
+
                     <select class="span2" id="cmdSignatory" required>
                         <option></option>
                         {foreach from = $SignatoryList item = i}

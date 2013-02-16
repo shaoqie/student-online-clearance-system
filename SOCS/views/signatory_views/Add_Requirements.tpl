@@ -61,13 +61,13 @@ if(parseInt(SelectedIndex) == 1){ $("#Sign").show();
             <div class="control-group">
                 <label class="control-label">Title: </label>
                 <div class="controls">
-                    <input class="span5" type ='text' name='requirement_title'>
+                    <input required class="span5" type ='text' name='requirement_title'>
                 </div>
             </div>
             <div class="control-group">
                 <label class="control-label">Description: </label>
                 <div class="controls">
-                    <textarea class="span5" name='requirement_description' rows="5" cols="50"></textarea>
+                    <textarea required class="span5" name='requirement_description' rows="5" cols="50"></textarea>
                 </div>    
             </div>
 

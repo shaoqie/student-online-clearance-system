@@ -60,7 +60,7 @@
                 <div class="control-group">
                     <label class="control-label">Middle Name: </label>
                     <div class="controls">
-                        <input type='text'name='middleName' value="" pattern="[A-Za-z\s]{2,15}" required title="Letters and spaces only">
+                        <input type='text'name='middleName' value="" pattern="[A-Za-z\s]{1,15}" required title="Letters and spaces only">
                     </div>
                 </div>
             {/literal}

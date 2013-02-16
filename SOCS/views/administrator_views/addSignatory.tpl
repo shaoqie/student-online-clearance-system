@@ -10,12 +10,20 @@
 
     </div>
     <div class="span9">
-
         <!-- Header-->
         <h2 class="well center-text">Add Signatory</h2>
+                   
+        <ul class="nav nav-tabs">
+            <li {if $index_tabs == 0}class="active" {/if}>
+                <a href='../administrator/signatory_list_manager.php'>Under Graduate</a>
+            </li>
+            <li {if $index_tabs == 1}class="active" {/if}>
+                <a href='../administrator/grad_signatory_list_manager.php'>Graduate</a>
+            </li> 
+        </ul>
 
         <!-- Adding Form-->
-        <form action="signatory_list_manager.php?action=add_signatory" method='post' class="form-horizontal">
+        <form {if $index_tabs == 0} action="signatory_list_manager.php?action=add_signatory" {/if} {if $index_tabs == 1} action="grad_signatory_list_manager.php?action=add_signatory" {/if} method='post' class="form-horizontal">
             <legend>Signatory Information: </legend>
             <div class="control-group">
                 <label class="control-label">Signatory Name: </label>
@@ -32,7 +40,7 @@
             <div class="form-actions control-group">
                 <div class="pull-right">
                     <input class="btn btn-primary" type='Submit' value='Save' />
-                    <button class="btn" type="button" onclick="window.location.href='signatory_list_manager.php'">Back</button>
+                    <button class="btn" type="button" {if $index_tabs == 0} onclick="window.location.href='signatory_list_manager.php'" {/if} {if $index_tabs == 1} onclick="window.location.href='grad_signatory_list_manager.php'" {/if}>Back</button>
                 </div>
             </div>
         </form>

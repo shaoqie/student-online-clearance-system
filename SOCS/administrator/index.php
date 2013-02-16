@@ -12,6 +12,7 @@ class Index extends Controller {
     private $template;
     private $administrator_model;
     private $signatoriallist_model;
+    private $signatory_model;
 
     public function __construct() {
         parent::__construct();
@@ -19,6 +20,7 @@ class Index extends Controller {
 
             $this->administrator_model = new User_Model();
             $this->signatoriallist_model = new SignatorialList_Model();
+            $this->signatory_model = new Signatory_Model();
             $this->template = new Template();
             $this->template->setPageName('Administrator Page');
 
@@ -117,11 +119,10 @@ class Index extends Controller {
         $this->template->setPageName("Add Signatory In Charge");
         $this->template->setContent('Add_SignatoryInCharge.tpl');
         
-        $listOfsignatory = $this->signatoriallist_model->getListofSignatory();
-        $listOfKeysFromSignatories = $this->signatoriallist_model->getKeyListofSignatory();
+        $listOfsignatory = $this->signatory_model->getListofSignatoryName();
+        //$listOfKeysFromSignatories = $this->signatoriallist_model->getKeyListofSignatory();
 
-        $this->template->assign('signatories', $listOfsignatory);
-        $this->template->assign('signatory_keys', $listOfKeysFromSignatories);
+        $this->template->assign('signatories', $listOfsignatoryUnder_Grad);
         
         if(isset($_POST['Register'])){
             $username = $_POST["uname"];

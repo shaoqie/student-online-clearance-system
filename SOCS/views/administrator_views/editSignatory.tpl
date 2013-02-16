@@ -10,9 +10,17 @@
 
     </div>
     <div class="span9">
-
         <!-- Header -->
         <h2 class="well center-text">Edit Signatory</h2>
+        
+        <ul class="nav nav-tabs">
+            <li {if $index_tabs == 0}class="active" {/if}>
+                <a href='../administrator/signatory_list_manager.php'>Under Graduate</a>
+            </li>
+            <li {if $index_tabs == 1}class="active" {/if}>
+                <a href='../administrator/grad_signatory_list_manager.php'>Graduate</a>
+            </li> 
+        </ul>
 
         <!-- Edit Signatory-->
         <form action="" method='post' class="form-horizontal">
@@ -32,13 +40,12 @@
             <div class="control-group form-actions">
                 <div class="pull-right">
                     <input class="btn btn-primary" type='Submit' value='Save' name ='editSave'>
-                    <button class="btn" type="button" onclick="window.location.href='signatory_list_manager.php'">Back</button>
+                    <button class="btn" type="button" {if $index_tabs == 0} onclick="window.location.href='signatory_list_manager.php'" {/if} {if $index_tabs == 1} onclick="window.location.href='grad_signatory_list_manager.php'" {/if}>Back</button>
                 </div>
             </div>
         </form>
     </div>
 </div>
-
 {*
 <!-- Navigation Tabs-->
 <ul class="nav nav-tabs">

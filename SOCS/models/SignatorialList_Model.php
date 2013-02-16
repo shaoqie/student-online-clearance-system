@@ -43,13 +43,11 @@ class SignatorialList_Model extends Model {
 
     /* ----------------------------------------------- */
 
-    public function filter($Tdept_name, $Tsign_name, $Tpage) {
+    public function filter($Tdept_name, $Tsign_name, $Tpage, $used_for) {
         $this->query = mysql_query("select signatories.signatory_id, signatories.signatory_name  from signatorialList
-                                    inner join signatories 
-                                    on signatorialList.signatory_id = signatories.signatory_id
-                                    inner join departments
-                                    on signatorialList.department_id = departments.department_id
-                                    where departments.Department_Name like '%$Tdept_name%' and signatories.signatory_name like '%$Tsign_name%'
+                                    inner join signatories on signatorialList.signatory_id = signatories.signatory_id
+                                    inner join departments on signatorialList.department_id = departments.department_id
+                                    where departments.Department_Name like '%$Tdept_name%' and signatories.signatory_name like '%$Tsign_name%' and Used_For = '$used_for'
                                     LIMIT " . (($Tpage - 1) * $this->itemsPerPage) . ", " . $this->itemsPerPage);
 
         $this->filter_ID = array();
@@ -97,13 +95,11 @@ class SignatorialList_Model extends Model {
 //    }
     /* ----------------------------------- */
 
-    public function getQueryPageSize($Tdept_name, $searchName) {
+    public function getQueryPageSize($Tdept_name, $searchName, $used_for) {
         $this->query = mysql_query("select signatories.signatory_name from signatorialList
-                                    inner join signatories 
-                                    on signatorialList.signatory_id = signatories.signatory_id
-                                    inner join departments
-                                    on signatorialList.department_id = departments.department_id
-                                    where departments.Department_Name like '%$Tdept_name%' and signatories.signatory_name like '%$searchName%'");
+                                    inner join signatories on signatorialList.signatory_id = signatories.signatory_id
+                                    inner join departments on signatorialList.department_id = departments.department_id
+                                    where departments.Department_Name like '%$Tdept_name%' and signatories.signatory_name like '%$searchName%' and Used_For = '$used_for'");
 
         return mysql_num_rows($this->query) / $this->itemsPerPage;
     }
@@ -124,9 +120,9 @@ class SignatorialList_Model extends Model {
 
     /* --------- For Assigning Signatory ---------- */
 
-    public function getListofSignatory() {
+    public function getListofSignatory($used_for) {
         $rowInfo = array();
-        $this->query = mysql_query("select signatory_name from signatories");
+        $this->query = mysql_query("select signatory_name from signatories where Used_For = '$used_for'");
 
         while ($row = mysql_fetch_array($this->query)) {
             array_push($rowInfo, $row['signatory_name']);
@@ -157,12 +153,12 @@ class SignatorialList_Model extends Model {
         return $rowInfo;
     }
 
-    public function getSignatorialList_underDeptName($Tdept_name) {
+    public function getSignatorialList_underDeptName($Tdept_name, $used_for) {
         $filter = array();
         $this->query = mysql_query("select signatories.signatory_name from signatorialList
                                     inner join signatories on signatorialList.signatory_id = signatories.signatory_id
                                     inner join departments on signatorialList.department_id = departments.department_id
-                                    where departments.Department_Name = '$Tdept_name'");
+                                    where departments.Department_Name = '$Tdept_name' and Used_For = '$used_for'");
 
         while ($row = mysql_fetch_array($this->query)) {
             array_push($filter, $row['0']);
