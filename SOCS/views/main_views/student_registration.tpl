@@ -182,7 +182,9 @@
         <div class="controls">
             <input id="section" type='text'name='section' value="" pattern="[0-9A-Za-z\s\-\_\(\)]+" required title="Letters and spaces only">
         </div>
-    </div>       
+    </div>    
+    
+   <legend>Personal Identification: </legend>
 
     <div class="control-group">
         <label class="control-label"><b>Upload Picture: </b></label>
