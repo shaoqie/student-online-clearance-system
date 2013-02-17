@@ -2,13 +2,14 @@
 {literal}
     <script type="text/javascript">      
         function changeCourses(){
+            var stud_status = document.getElementById("stud_status").value;
             var select = document.getElementById("course");
             var dept_id = document.getElementById("dept").options[document.getElementById("dept").selectedIndex].value;
     {/literal}     
         var str = "";
     {foreach from=$dept_id_inCourses key=k_course item=item}
                    
-        if(dept_id == {$dept_id_inCourses[$k_course][0]}){
+        if(dept_id == {$dept_id_inCourses[$k_course][0]} && stud_status == "{$dept_id_inCourses[$k_course][2]}"){
         str += "<option>{$dept_id_inCourses[$k_course][1]}</option>";
     }               
     {/foreach}                          
@@ -148,6 +149,17 @@
                 <option></option>
                 <option>Day</option>
                 <option>Evening</option>
+            </select>
+        </div>
+    </div>
+    
+    <div class="control-group">
+        <label class="control-label">Status: </label>
+        <div class="controls">
+            <select id="stud_status" name="Status" required onchange="changeCourses()">
+                <option></option>
+                <option value="Under Graduate">Under Graduate</option>
+                <option value="Graduate">Graduate</option>
             </select>
         </div>
     </div>

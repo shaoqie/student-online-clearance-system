@@ -121,7 +121,7 @@ class Index extends Controller {
             $this->administrator_model->insertStudent(($_POST['stud_id'] . "-" . $_POST['number']), md5(($_POST['password'])), trim($_POST['surname']), trim($_POST['firstname']), trim($_POST['middleName']), $_POST['emailAdd'], $hash);
             
             //$this->administrator_model->insertStudent(($_POST['stud_id'] . "-" . $_POST['number']), (($_POST['password'])), trim($_POST['surname']), trim($_POST['firstname']), trim($_POST['middleName']), NULL, 'Student', NULL);
-            $this->stud_model->insert(($_POST['stud_id'] . "-" . $_POST['number']), ($_POST['gender']), ($_POST['year_level']), ($_POST['program']), ($_POST['section']), $course_id);
+            $this->stud_model->insert(($_POST['stud_id'] . "-" . $_POST['number']), ($_POST['gender']), ($_POST['year_level']), ($_POST['program']), ($_POST['section']), $course_id, ($_POST['Status']));
 
             
             $verificationLink = HOST ."/index.php?action=verify&username=" .($_POST['stud_id'] . "-" . $_POST['number']) ."&hash=" .$hash;
@@ -189,13 +189,11 @@ class Index extends Controller {
         $listOfDept_Name = $this->department_model->getListOfDepartments();
         $listOfDept_ID = $this->department_model->getListOfDept_ID();
         $ListDept_ID_inCourse = $this->courses_model->getListDept_ID_inCourse();
-        $listOfCourses = $this->courses_model->getListOfCourses();
 
         $this->template->assign('years', $listOfYear);
         $this->template->assign('depts', $listOfDept_Name);
         $this->template->assign('dept_ID', $listOfDept_ID);
         $this->template->assign('dept_id_inCourses', $ListDept_ID_inCourse);
-        $this->template->assign('course_underDept', $listOfCourses);
     }
 
     public function signatory_registrationForm() {

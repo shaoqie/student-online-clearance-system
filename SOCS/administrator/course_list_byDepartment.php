@@ -69,7 +69,7 @@ class course_list_byDepartment extends Controller {
         }else if($this->course_model->isExist(trim($_POST['course_name']), trim($_POST['course_description']))){
             $this->template->setAlert("Cannot Add a Course that is Existing", Template::ALERT_ERROR, 'alert');
         }else{ 
-            $this->course_model->insert(trim($_POST['course_name']), trim($_POST['course_description']), $dept_ID);
+            $this->course_model->insert(trim($_POST['course_name']), trim($_POST['course_description']), $_POST['course_usability'], $dept_ID);
             //$this->template->setAlert("Adding Course was Successful", Template::ALERT_SUCCESS, 'alert');
             
             header('Location: course_list_byDepartment.php?successAdd=true');
@@ -85,6 +85,7 @@ class course_list_byDepartment extends Controller {
         $this->template->setContent("editCourse.tpl");
         $this->template->assign("editCourse_Name", $this->course_model->getCourse_Name());
         $this->template->assign("editCourse_Desc", $this->course_model->getCourse_Desc());
+        $this->template->assign('editCourse_Usability', $this->course_model->getCourse_Usability());
         
         if(isset($_POST['editSave'])){
             if(trim($_POST['course_name']) == "" || trim($_POST['course_description']) == ""){       
@@ -92,10 +93,11 @@ class course_list_byDepartment extends Controller {
             }/*else if($this->course_model->isExist(trim($_POST['course_name']), trim($_POST['course_description']))){
                 $this->template->setAlert("Cannot Update a Course that is Existing", Template::ALERT_ERROR, 'alert');
             }*/else{
-                $this->course_model->update($seleted, trim($_POST['course_name']), trim($_POST['course_description']));
+                $this->course_model->update($seleted, trim($_POST['course_name']), trim($_POST['course_description']), $_POST['course_usability']);
                 //$this->template->setAlert("Updating Course was Successful", Template::ALERT_SUCCESS, 'alert');
                 $this->template->assign("editCourse_Name", trim($_POST['course_name']));
                 $this->template->assign("editCourse_Desc", trim($_POST['course_description']));
+                $this->template->assign('editCourse_Usability', $_POST['course_usability']);
                 
                 header('Location: course_list_byDepartment.php?successEdit=true');
             }
@@ -130,6 +132,7 @@ class course_list_byDepartment extends Controller {
         $getListofDeptName = $this->getListofName($this->course_model->getFilter_Name(), $searchName, $finder);
         $filter_ID = $this->course_model->getFilter_ID();
         $filter_Desc = $this->parsingNewLine_Decs($this->course_model->getFilter_Desc());
+        $filter_Usability = $this->course_model->getFilter_Usabililty();
         
         $this->template->assign('myName_course', $getListofDeptName); 
         $this->template->assignByRef('myKey_course', $filter_ID);
@@ -137,6 +140,7 @@ class course_list_byDepartment extends Controller {
         $this->template->assign('course_length', $numOfPages);
         $this->template->assign('rowCount_course', $numOfResults);
         $this->template->assign('desc_course', $filter_Desc);
+        $this->template->assign('usability_course', $filter_Usability);
         
         if ($numOfResults == 0) {
             $this->template->setAlert('No Results Found.', Template::ALERT_ERROR, 'alert');

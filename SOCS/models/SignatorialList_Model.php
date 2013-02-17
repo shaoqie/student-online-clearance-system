@@ -209,13 +209,19 @@ class SignatorialList_Model extends Model {
         return $row['Signatory_ID'];
     }
 
+    public function getUsed_For($sign_name){
+        $this->query = mysql_query("select Used_For from signatories where Signatory_Name like '%$sign_name%'");
+        $row = mysql_fetch_array($this->query);
+
+        return $row['Used_For'];
+    }
+    
     /* --------- For Student Page ---------- */
 
-    public function getListofSignatoryByDept($dept_id) {
-        $this->query = mysql_query("select signatoriallist.Signatory_ID, signatory_name from signatoriallist
-                                    inner join departments on departments.Department_ID = signatoriallist.Department_ID
+    public function getListofSignatoryByDept($dept_id, $used_for) {
+        $this->query = mysql_query("select signatoriallist.Signatory_ID, signatory_name, Used_For from signatoriallist
                                     inner join signatories on signatories.Signatory_ID = signatoriallist.Signatory_ID
-                                    where departments.Department_ID = '$dept_id'");
+                                    where Department_ID = '$dept_id' and Used_For = '$used_for'");
 
         $this->sign_ID = array();
         $this->sign_Name = array();

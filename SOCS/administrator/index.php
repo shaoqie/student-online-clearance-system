@@ -85,6 +85,8 @@ class Index extends Controller {
         
         
         $temp = $user_type == 'Student' ? "Courses" : "Assigned Signatory";
+        $status = $user_type == 'Student' ? $this->administrator_model->getStud_Status() : "";
+        
         $numOfPages = $this->administrator_model->getQueryPageSize($searchName, $user_type);
         $numOfResults = count($this->administrator_model->getFilter_Name());
 
@@ -98,6 +100,11 @@ class Index extends Controller {
         $this->template->assign('courseORsign', $temp);
         $this->template->assign('my_courseORsign', $this->administrator_model->getFilter_courseORsign());
 
+        if($user_type == 'Student'){
+            $this->template->assign('status', 'Status');
+            $this->template->assign('stud_status', $status);
+        }
+        
         if($finder == "default"){
             $this->template->set_Name($this->getNameofUser($this->administrator_model->getFilter_Name(), $searchName, "default"));
         }else{

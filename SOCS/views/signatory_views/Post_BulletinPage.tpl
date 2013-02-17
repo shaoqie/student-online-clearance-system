@@ -53,14 +53,14 @@
             <legend>Post Bulletin:</legend>
 
             <div class="control-group">
-                <div class="control-label">Announcement: </div>
+                <div class="control-label"><b>Announcement: </b></div>
                 <div class="controls">
                     <textarea class="input-block-level" placeholder="Post a bulletin here....." name='post_message' rows="10"></textarea>
                 </div>
             </div>
 
             <div class="control-group">
-                <label class="control-label">School Year:  </label>
+                <label class="control-label"><b>School Year:  </b></label>
                 <div class="controls">
                     <select id="school_year" name="school_year" class="span3">
                         {foreach from = $mySchool_Year key = k item = i}
@@ -75,7 +75,7 @@
             </div>
 
             <div class="control-group">
-                <label class="control-label">Semester: </label>
+                <label class="control-label"><b>Semester: </b></label>
                 <div class="controls">
                     <select id="semester" name="semester" class="span3">
                         {if $currentSemester eq 'First'}

@@ -48,9 +48,10 @@ class Index extends Controller {
             $stud_course = $this->student_model->getStud_Course();
             $stud_deptName = $this->student_model->getStud_DeptName();
             $stud_deptID = $this->student_model->getStud_DeptID();
+            $stud_status = $this->student_model->getStud_Status();
 
 
-            $this->signatoialList->getListofSignatoryByDept($stud_deptID);
+            $this->signatoialList->getListofSignatoryByDept($stud_deptID, $stud_status);
             $listOfSign_underDeptName = $this->signatoialList->getSign_Name();
             $listOfSignID_underDeptName = $this->signatoialList->getSign_ID();
             $listOfClearanceStatus = $this->getListofClearanceStatus($listOfSignID_underDeptName, $sy_id, Session::get_user());
@@ -72,6 +73,10 @@ class Index extends Controller {
             $this->template->assign('myKey_signID', $listOfSignID_underDeptName);          
             $this->template->assign('myStudent_ClearanceStatus', $listOfClearanceStatus);
             $this->template->assign('sy_sem_id', $sy_id);
+            
+            
+            $stud_status = $stud_status == "Graduate" ? "Grad" : "U_Grad";
+            $this->template->assign('status', $stud_status);
             
             $this->template->set_photo(Session::get_photo());
             

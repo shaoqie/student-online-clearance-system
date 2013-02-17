@@ -18,7 +18,7 @@
                 <legend>Login Information: </legend>
 
                 <div class="control-group">
-                    <label class="control-label">Username: </label>
+                    <label class="control-label"><b>Username: </b></label>
                     <div class="controls">
                         <input type ='text' name='uname' value="" maxlength="15" pattern="[0-9a-zA-Z]{7,32}" required title="Letters and numbers only">
 
@@ -26,7 +26,7 @@
                 </div>
 
                 <div class="control-group">
-                    <label class="control-label">Password: </label>
+                    <label class="control-label"><b>Password: </b></label>
                     <div class="controls">
 
                         <input id="password_entered" type='password' name='newpass' pattern="[0-9a-zA-Z]{7,32}" title="Password minimum of 7 characters" required>
@@ -35,7 +35,7 @@
                 </div>
 
                 <div class="control-group">
-                    <label class="control-label">Re-type Password: </label>
+                    <label class="control-label"><b>Re-type Password: </b></label>
                     <div class="controls">
                         <input id="retyped_password_entered" type='password' name='confirmpass' pattern="[0-9a-zA-Z]{7,50}" onblur="checkPasswordEquality()" required>
                     </div>
@@ -44,21 +44,21 @@
                 <legend>Personal Information: </legend>
 
                 <div class="control-group">
-                    <label class="control-label">Surname: </label>
+                    <label class="control-label"><b>Surname: </b></label>
                     <div class="controls">
                         <input type ='text' name='surname' value="" pattern="[A-Za-z\s]{2,15}" required title="Letters and spaces only">
                     </div>
                 </div>
 
                 <div class="control-group">
-                    <label class="control-label">First Name: </label>
+                    <label class="control-label"><b>First Name: </b></label>
                     <div class="controls">
                         <input type='text' name='firstname' value="" pattern="[A-Za-z\s]{2,15}" required title="Letters and spaces only">
                     </div>
                 </div>
 
                 <div class="control-group">
-                    <label class="control-label">Middle Name: </label>
+                    <label class="control-label"><b>Middle Name: </b></label>
                     <div class="controls">
                         <input type='text'name='middleName' value="" pattern="[A-Za-z\s]{1,15}" required title="Letters and spaces only">
                     </div>
@@ -68,7 +68,7 @@
             <legend>Signatory Designation: </legend>
 
             <div class="control-group">
-                <label class="control-label">Signatory: </label>
+                <label class="control-label"><b>Signatory: </b></label>
                 <div class="controls">
                     {*
                     {if !isset($signatories)}

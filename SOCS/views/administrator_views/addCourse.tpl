@@ -24,13 +24,19 @@
         <form action="course_list_byDepartment.php?action=add_course" method='post' class="form-horizontal">
             <legend>Add Course:</legend>
             <div class="control-group">
-                <label class="control-label">Course Name: </label>
+                <label class="control-label"><b>Course Name: </b></label>
                 <div class="controls">
                     <input style="width: 400px;" class="input-xlarge" type ='text' name='course_name'>
                 </div>
             </div>
+            <div class="control-group form-inline">
+                <div class="controls form-inline">
+                    <input type="radio" checked name="course_usability" value="Under Graduate"> <label><b>Under Graduate</b></label>
+                    <input type="radio" name="course_usability" value="Graduate"> <label><b>Graduate </b></label>
+                </div>
+            </div>
             <div class="control-group">
-                <label class="control-label">Description: </label>
+                <label class="control-label"><b>Description: </b></label>
                 <div class="controls">
                     <textarea style="width: 400px;" class="input-xlarge" name='course_description' rows="5" cols="50"></textarea>
                 </div>
@@ -38,7 +44,7 @@
             <div class="control-group form-actions">
                 <div class="pull-right">
                     <input class="btn btn-primary" type='Submit' value='Save'>
-                    <input class="btn" type="button" value="Back" onclick="window.location.href='department_list_manager.php'">
+                    <input class="btn" type="button" value="Back" onclick="window.location.href='course_list_byDepartment.php'">
                 </div>
             </div>
         </form>

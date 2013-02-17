@@ -23,6 +23,7 @@ class Student_Model extends Model{
     private $stud_program;
     private $stud_section;
     private $stud_photo;
+    private $stud_status;
     
     public function __construct() {        
         parent::__construct();
@@ -70,10 +71,14 @@ class Student_Model extends Model{
         return $this->stud_photo;
     }
     
+    public function getStud_Status(){
+        return $this->stud_status;
+    }
+    
     public function queryStudent_Info($student_id){
         $this->query = mysql_query("select concat(Surname, ', ', First_Name, ' ', Middle_Name) as Name,
                                     courses.course_name, courses.course_id, departments.department_name, departments.department_id,
-                                    Gender, Year_Level, Program, Section, Picture from students
+                                    Gender, Year_Level, Program, Section, Picture, Status from students
                                     inner join users on students.username = users.username
                                     inner join courses on students.course_id = courses.course_id
                                     inner join departments on courses.Department_ID = departments.Department_ID
@@ -91,12 +96,13 @@ class Student_Model extends Model{
         $this->stud_program = $row['7'];
         $this->stud_section = $row['8'];   
         $this->stud_photo = $row['9'];
+        $this->stud_status = $row['10'];
     }
     
-    public function insert($uname, $gender, $yr_level, $program, $section, $courseID){
-        $this->query = mysql_query("INSERT INTO `socs`.`students` (`Username`, `Gender`, `Year_Level`, `Program`, `Section`, `Course_ID`) 
+    public function insert($uname, $gender, $yr_level, $program, $section, $courseID, $status){
+        $this->query = mysql_query("INSERT INTO `socs`.`students` (`Username`, `Gender`, `Year_Level`, `Program`, `Section`, `Course_ID`, `Status`) 
                         VALUES 
-                        ('$uname', '$gender', '$yr_level', '$program', '$section', '$courseID')");
+                        ('$uname', '$gender', '$yr_level', '$program', '$section', '$courseID', '$status')");
         
     }
     

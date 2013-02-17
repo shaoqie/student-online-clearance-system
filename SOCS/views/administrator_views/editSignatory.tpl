@@ -26,13 +26,13 @@
         <form action="" method='post' class="form-horizontal">
             <legend>Signatory Information:</legend>
             <div class="control-group">
-                <label class="control-label">Signatory Name: </label>
+                <label class="control-label"><b>Signatory Name: </b></label>
                 <div class="controls">
                     <input class="span5" type ='text' name='sign_name' value='{$editSignatory_Name}' required>
                 </div>
             </div>
             <div class="control-group">
-                <label class="control-label">Description: </label>
+                <label class="control-label"><b>Description: </b></label>
                 <div class="controls">
                     <textarea class="span5" name='sign_description' rows="5" cols="50" required>{$editSignatory_Desc}</textarea>
                 </div>

@@ -38,6 +38,7 @@
                     <input type="checkbox" onclick="isCheck({$rowCount_course})" id="check"> Courses
                 </th>
                 <th>Description</th>
+                <th>Usability</th> 
                 <th>Controls</th>
             </tr>
             {foreach from = $myName_course key = k item = i}
@@ -47,7 +48,8 @@
                             <input class="Checkbox" type="checkbox" id = '{$k}' value = {$myKey_course[$k]} > {$i}
                         </label>
                     </td>
-                    <td><label>{$desc_course[$k]}</label></td>
+                    <td><label>{$desc_course[$k]}</label></td>    
+                    <td><label>{if $usability_course[$k] eq "Under Graduate"} UG {/if} {if $usability_course[$k] eq "Graduate"} G {/if}</label></td>
                     <td>
                         <div>
                             <a style="cursor:pointer;" onclick="window.location.href='course_list_byDepartment.php?action=editCourse&seleted={$myKey_course[$k]}'">

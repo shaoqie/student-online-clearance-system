@@ -16,9 +16,11 @@ class Course_Model extends Model{
     private $filter_ID;
     private $filter_Name;
     private $filter_Desc;
+    private $filter_usabililty;
     
     private $course_name;
     private $course_desc;
+    private $course_usability;
     
     public function __construct() {        
         parent::__construct();
@@ -38,12 +40,20 @@ class Course_Model extends Model{
         return $this->filter_Desc;
     }
     
+    public function getFilter_Usabililty(){
+        return $this->filter_usabililty;
+    }
+    
     public function getCourse_Name(){
         return $this->course_name;
     }
     
     public function getCourse_Desc(){
         return $this->course_desc;
+    }
+    
+    public function getCourse_Usability(){
+        return $this->course_usability;
     }
     
     /*-----------------------------------------------*/
@@ -57,11 +67,13 @@ class Course_Model extends Model{
         
         $this->filter_ID = array();
         $this->filter_Name = array();
+        $this->filter_usabililty = array();
         $this->filter_Desc = array();
         while($row = mysql_fetch_array($this->query)){
             array_push($this->filter_ID, $row['0']);
             array_push($this->filter_Name, $row['1']);
             array_push($this->filter_Desc, $row['2']);
+            array_push($this->filter_usabililty, $row['3']);
         }
     }
     
@@ -107,10 +119,10 @@ class Course_Model extends Model{
     
     public function getListDept_ID_inCourse(){
         $filter = array();
-        $this->query = mysql_query("select Department_ID, Course_Name from courses");
+        $this->query = mysql_query("select Department_ID, Course_Name, Usability from courses");
         
         while($row = mysql_fetch_array($this->query)){
-            array_push($filter, array($row['0'], $row['1']));
+            array_push($filter, array($row['0'], $row['1'], $row['2']));
         }
         
         return $filter;
@@ -131,14 +143,14 @@ class Course_Model extends Model{
         mysql_query("delete from courses where Course_ID = '$key'");
     }
     
-    public function insert($course_name, $description, $dept_ID){
-        mysql_query("INSERT INTO `socs`.`courses` (`Course_ID`, `Course_Name`, `Description`, `Department_ID`) 
-                    VALUES (NULL, '$course_name', '$description', '$dept_ID')");
+    public function insert($course_name, $description, $usability, $dept_ID){
+        mysql_query("INSERT INTO `socs`.`courses` (`Course_ID`, `Course_Name`, `Description`, `Usability`, `Department_ID`) 
+                    VALUES (NULL, '$course_name', '$description', '$usability', '$dept_ID')");
     }
     
-    public function update($key, $newCourseName, $newCourseDesc){
+    public function update($key, $newCourseName, $newCourseDesc, $newUsability){
         mysql_query("UPDATE `socs`.`courses` SET `Course_Name` = '$newCourseName',
-                    `Description` = '$newCourseDesc' WHERE `courses`.`Course_ID` ='$key'");
+                    `Description` = '$newCourseDesc', `Usability` = '$newUsability' WHERE `courses`.`Course_ID` ='$key'");
     }
     
     
@@ -157,6 +169,8 @@ class Course_Model extends Model{
         
         $this->course_name = $row['Course_Name'];
         $this->course_desc = $row['Description'];
+        $this->course_usability = $row['Usability'];
+        
     }
     
     public function getCourseID($course_name){

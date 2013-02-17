@@ -25,6 +25,7 @@ class User_Model extends Model {
     private $filter_Type;
     private $filter_AssignSignName;
     private $filter_courseORsign;
+    private $stud_status;
 
     public function __construct() {
         parent::__construct();
@@ -167,12 +168,16 @@ class User_Model extends Model {
     public function getFilter_courseORsign() {
         return $this->filter_courseORsign;
     }
+    
+    public function getStud_Status(){
+        return $this->stud_status;
+    }
 
     /* ----------------------------------------------- */
 
     public function filter($t_searchName, $t_page, $t_type) {
         //$valid = $t_type == 'Student' ? "and `Validation_Status` IS NULL" : "and `Validation_Status` = 'confirmed'";
-        $select = $t_type == 'Student' ? "course_name" : "signatory_name";
+        $select = $t_type == 'Student' ? "course_name, Status" : "signatory_name, description";
         $join = $t_type == 'Student' ? "inner join students on students.username = users.username
                                         inner join courses on courses .course_id = students.course_id " :
                 "inner join signatories on signatories.signatory_id = users.Assigned_Signatory ";
@@ -188,12 +193,14 @@ class User_Model extends Model {
         $this->filter_Picture = array();
         $this->filter_Type = array();
         $this->filter_courseORsign = array();
+        $this->stud_status = array();
         while ($row = mysql_fetch_array($this->query)) {
             array_push($this->filter_ID, $row['0']);
             array_push($this->filter_Name, $row['2']);
             array_push($this->filter_Picture, $row['1']);
             array_push($this->filter_Type, $row['3']);
             array_push($this->filter_courseORsign, $row['4']);
+            array_push($this->stud_status, $row['5']);
         }
     }
 
@@ -280,7 +287,7 @@ class User_Model extends Model {
     /* --------------------------------------------------------------------------------------- */
     /* ------------ For Signatory Dashboard Part ---------------- */
 
-    public function filterStudent($Tsign_id, $searchName, $page) {
+    public function filterStudent($Tsign_id, $searchName, $page, $used_for) {
         $this->query = mysql_query("select students.username, concat(Surname, ', ', First_Name, ' ', Middle_Name) as Name, Picture from students
                                     inner join users on students.username = users.username
                                     
@@ -290,7 +297,7 @@ class User_Model extends Model {
                                     inner join signatories on signatorialList.signatory_id = signatories.signatory_id
                                     where (First_name like '%$searchName%' OR Surname like '%$searchName%' OR 
                                     Middle_Name like '%$searchName%') AND Account_Type = 'student' AND `Validation_Status` = 'confirmed'
-                                    AND signatories.signatory_id = '$Tsign_id' group by Name order by Name
+                                    AND signatories.signatory_id = '$Tsign_id' AND signatories.used_for = '$used_for' AND students.status = '$used_for' group by Name order by Name
                                     LIMIT " . (($page - 1) * $this->itemsPerPage) . ", " . $this->itemsPerPage);
 
 

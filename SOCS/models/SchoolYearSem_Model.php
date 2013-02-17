@@ -94,7 +94,7 @@ class SchoolYearSem_Model extends Model{
         $first = $first[0];
         $last = $last[1];
         
-        for ($index = $first; $index <= $last; $index ++) {
+        for ($index = $first; $index < $last; $index ++) {
             array_push($array_temp, $index);
         }
         

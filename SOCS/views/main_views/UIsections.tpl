@@ -22,7 +22,7 @@
 <!-- Archive Search Bar-->
 {function name=archiveSearch}
 <form class="form-inline" method="post">
-    <label>School Year:  </label>
+    <label><b>School Year:  </b></label>
 
     <select id="school_year" name="school_year" class="span3">
         {foreach from = $mySchool_Year key = k item = i}
@@ -50,7 +50,7 @@
     ]'>
     *}
 
-    <label>Semester: </label>
+    <label><b>Semester: </b></label>
     <select id="semester" name="semester" class="span3">
         {if $currentSemester eq 'First'}
             <option selected>First</option>

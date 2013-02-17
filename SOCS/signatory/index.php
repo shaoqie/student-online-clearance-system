@@ -90,10 +90,10 @@ class Index extends Controller {
         }        
         
         $sign_id = $this->signatorialList_model->getSignId(Session::get_AssignSignatory()); 
-        //$listOfDept = $this->signatorialList_model->getListOfDept_underSignName($sign_id);
-        //$listOfCourse = $this->department_model->getListOfCourses(4);
+        $sign_usedFor = $this->signatorialList_model->getUsed_For(Session::get_AssignSignatory()); 
         
-        $this->user_model->filterStudent($sign_id, $searchName, $page);
+        
+        $this->user_model->filterStudent($sign_id, $searchName, $page, $sign_usedFor);
         
         $numOfPages = $this->user_model->getStudent_PageSize($sign_id, $searchName);
         $getListofStudent_Name = $this->getListofName($this->user_model->getFilter_Name(), $searchName, $finder);

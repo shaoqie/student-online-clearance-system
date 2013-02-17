@@ -43,6 +43,7 @@
                             <input type="checkbox" onclick="isCheck({$rowCount_admin})" id="check"> User
                         </th>
                         <th>{$courseORsign}</th>
+                        {if isset($status)} <th>Status</th> {/if}
                         <th>Type</th>
                     </tr>
                     {foreach from = $myName key = k item = i}
@@ -59,6 +60,7 @@
                                 </div>
                             </td>
                             <td>{$my_courseORsign[$k]}</td>
+                            {if isset($status)} <td>{$stud_status[$k]}</td> {/if}
                             <td>{$myType[$k]}</td>
                         </tr>
                     {/foreach}

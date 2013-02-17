@@ -63,7 +63,7 @@ $("#confirmed" +x).html("");
 
         <!-- Visibility -->
         <div class="form-inline pull-right">
-            <label>Visibility: </label>
+            <label><b>Visibility: </b></label>
             <select id="visibility" class="span2" onchange="signatorialList_visibility()">
                 <option value="0" {if $index_tabs == 0} selected {/if}>Under Graduate</option>
                 <option value="1" {if $index_tabs == 1} selected {/if}>Graduate</option>
@@ -84,7 +84,7 @@ $("#confirmed" +x).html("");
         {if $countSignList > 0}
             <span class="pull-left">
                 <form class="form-inline">
-                    <label>Add Signatory:</label>
+                    <label><b>Add Signatory: </b></label>
 
 
                     <select class="span2" id="cmdSignatory" required>

@@ -59,20 +59,20 @@ if(parseInt(SelectedIndex) == 1){ $("#Sign").show();
 
             <legend>Add Requirement:</legend>
             <div class="control-group">
-                <label class="control-label">Title: </label>
+                <label class="control-label"><b>Title: </b></label>
                 <div class="controls">
                     <input required class="span5" type ='text' name='requirement_title'>
                 </div>
             </div>
             <div class="control-group">
-                <label class="control-label">Description: </label>
+                <label class="control-label"><b>Description: </b></label>
                 <div class="controls">
                     <textarea required class="span5" name='requirement_description' rows="5" cols="50"></textarea>
                 </div>    
             </div>
 
             <div class="control-group">
-                <label class="control-label">Requirement Type: </label>
+                <label class="control-label"><b>Requirement Type: </b></label>
                 <div class="controls">
                     <select id="requirement_type" name="requirement_type" class="input-large" onchange="change_reqType()">
                         <option>Textual</option>
@@ -82,7 +82,7 @@ if(parseInt(SelectedIndex) == 1){ $("#Sign").show();
             </div>
 
             <div class="control-group">
-                <label class="control-label">School Year: </label>
+                <label class="control-label"><b>School Year: </b></label>
                 <div class="controls">
                     <select id="school_year" name="school_year" class="input-large">
                         {foreach from = $mySchool_Year key = k item = i}
@@ -97,7 +97,7 @@ if(parseInt(SelectedIndex) == 1){ $("#Sign").show();
             </div>
 
             <div class="control-group">
-                <label class="control-label">Semester: </label>
+                <label class="control-label"><b>Semester: </b></label>
                 <div class="controls">
                     <select id="semester" name="semester" class="input-large">
                         {if $currentSemester eq 'First'}
@@ -118,7 +118,7 @@ if(parseInt(SelectedIndex) == 1){ $("#Sign").show();
             </div>
 
             <div class="control-group" id="Sign" hidden>
-                <label class="control-label">Select Signatory: </label>
+                <label class="control-label"><b>Select Signatory: </b></label>
                 <div class="controls">
                     <select name="signatory" class="input-large">
                         {foreach from = $listOfSignatory key = k item = i}
@@ -133,7 +133,7 @@ if(parseInt(SelectedIndex) == 1){ $("#Sign").show();
             <legend>This Requirements applies to...</legend>
 
             <div class="control-group">
-                <label class="control-label"> Select: </label>
+                <label class="control-label"><b> Select: </b></label>
                 <div class="controls">
                     <select id="req_appliesTo" name="req_appliesTo" class="input-xlarge" onchange="change_req_appliesTo()">
                         <option value="All">All Students:</option>
@@ -146,7 +146,7 @@ if(parseInt(SelectedIndex) == 1){ $("#Sign").show();
             </div>  
 
             <div class="control-group" id="selected_Dept" hidden>
-                <label class="control-label" id> Departments: </label>
+                <label class="control-label"><b> Departments: </b></label>
                 <div class="controls">
                     <select name="Departments" class="input-xlarge">   
                         {foreach from = $listOfDepartments key = k item = i}
@@ -157,7 +157,7 @@ if(parseInt(SelectedIndex) == 1){ $("#Sign").show();
             </div>
 
             <div class="control-group" id="selected_Course" hidden>
-                <label class="control-label" id> Courses: </label>
+                <label class="control-label"><b> Courses: </b></label>
                 <div class="controls">
                     <select name="Courses" class="input-xlarge">   
                         {foreach from = $listOfCourse_UnderSign key = k item = i}
@@ -168,7 +168,7 @@ if(parseInt(SelectedIndex) == 1){ $("#Sign").show();
             </div>
 
             <div class="control-group" id="selected_YearLevel" hidden>
-                <label class="control-label" id> Year level: </label>
+                <label class="control-label"><b> Year level: </b></label>
                 <div class="controls">
                     <select name="Year_level" class="input-xlarge">   
                         <option>First Year</option>
@@ -181,7 +181,7 @@ if(parseInt(SelectedIndex) == 1){ $("#Sign").show();
             </div>
 
             <div class="control-group" id="selected_Program" hidden>
-                <label class="control-label" id> Program: </label>
+                <label class="control-label"><b> Program: </b></label>
                 <div class="controls">
                     <select name="Program" class="input-xlarge">   
                         <option>Day</option>

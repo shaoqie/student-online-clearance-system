@@ -20,6 +20,7 @@ if ($current_sem != "Summer")
     $current_sem .= " Semester";
 $current_sysemID = $_GET["sy_sem_id"];
 
+$stud_status = $_GET['status'] == "Grad" ? "Graduate" : "Under Graduate";
 
 $student_model = new Student_Model();
 $stud_id = Session::get_user();
@@ -32,7 +33,7 @@ $stud_dept = $student_model->getStud_DeptName();
 $stud_deptID = $student_model->getStud_DeptID();
 
 $signatorial_model = new SignatorialList_Model();
-$signatorial_model->getListofSignatoryByDept($stud_deptID);
+$signatorial_model->getListofSignatoryByDept($stud_deptID, $stud_status);
 $listOfSignatories["name"] = $signatorial_model->getSign_Name();
 $listOfSignatories["id"] = $signatorial_model->getSign_ID();
 

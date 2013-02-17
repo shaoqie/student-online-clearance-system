@@ -14,7 +14,7 @@
     <div class="span12">
         {*if $num_cleared == ($myListOfSign_underDeptName|@count)*}
         
-            <a class="pull-right" href="export.php?sy_sem_id={$sy_sem_id}"> 
+            <a class="pull-right" href="export.php?sy_sem_id={$sy_sem_id}&status={$status}"> 
                 <i class="icon-download"></i> Export to PDF
             </a>
         {*
