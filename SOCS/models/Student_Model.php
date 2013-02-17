@@ -106,6 +106,17 @@ class Student_Model extends Model{
         
     }
     
+    public function advance_update($key, $gender, $yr_level, $program, $section, $courseID, $status){
+        mysql_query("UPDATE  `socs`.`students` SET  
+                    `Gender` =  '$gender',
+                    `Year_Level` =  '$yr_level',
+                    `Program` =  '$program',
+                    `Section` =  '$section',
+                    `Course_ID` =  '$courseID',
+                    `Status` =  '$status' 
+                     WHERE  `students`.`Username` =  '$key'");
+    }
+    
     /*--------------------------------------*/
     
     /*

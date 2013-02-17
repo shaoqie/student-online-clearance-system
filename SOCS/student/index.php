@@ -16,6 +16,8 @@ class Index extends Controller {
     private $signatory_model;
     private $bulletin_model;
     private $clearanceStatus_model;
+    private $department_model;
+    private $courses_model;
 
     public function __construct() {
         parent::__construct();
@@ -28,6 +30,8 @@ class Index extends Controller {
             $this->signatory_model = new Signatory_Model();
             $this->bulletin_model = new Bulletin_Model();
             $this->clearanceStatus_model = new ClearanceStatus();
+            $this->department_model = new Department_Model();
+            $this->courses_model = new Course_Model();
 
             $listOfSchoolYear = $this->schoolYearSem_model->getSchool_Year();
             $currentSemester = $this->schoolYearSem_model->getCurSemester();
@@ -79,6 +83,10 @@ class Index extends Controller {
             $this->template->assign('status', $stud_status);
             
             $this->template->set_photo(Session::get_photo());
+            
+            if(isset($_GET['editSuccess'])){
+                $this->template->setAlert("Account has successfully updated!!... ", Template::ALERT_SUCCESS);
+            }
             
         } else {
             header('Location: /SOCS/index.php');
@@ -163,6 +171,33 @@ class Index extends Controller {
         $this->template->assign('n_count', count($result));
         $this->template->assign('clearanceList', $result);
         $this->template->assign('sign_id', $Tsign_ID);
+    }
+    
+    public function advance_settings(){
+        $this->template->setPageName("Advance Settings for Student");
+        $this->template->setContent("advance_settings.tpl");
+        $listOfDept_Name = $this->department_model->getListOfDepartments();
+        $listOfDept_ID = $this->department_model->getListOfDept_ID();
+        $ListDept_ID_inCourse = $this->courses_model->getListDept_ID_inCourse();
+        
+        $this->student_model->queryStudent_Info(Session::get_user());
+        $this->template->assign('year_level', $this->student_model->getStud_Yearlevel());
+        $this->template->assign('gender', $this->student_model->getStud_Gender());
+        $this->template->assign('program', $this->student_model->getStud_Program());
+        $this->template->assign('status', $this->student_model->getStud_Status());
+        $this->template->assign('stud_course', $this->student_model->getStud_Course());
+        $this->template->assign('section', $this->student_model->getStud_Section());
+        $this->template->assign('stud_dept', $this->student_model->getStud_DeptName());
+        
+        $this->template->assign('depts', $listOfDept_Name);
+        $this->template->assign('dept_ID', $listOfDept_ID);
+        $this->template->assign('dept_id_inCourses', $ListDept_ID_inCourse);
+        
+        if(isset($_POST['Save'])){
+            $course_id = $this->courses_model->getCourseID($_POST['course']);
+            $this->student_model->advance_update(Session::get_user(), $_POST['gender'], $_POST['year_level'], $_POST['program'], trim($_POST['section']), $course_id, $_POST['Status']);
+            header('Location: /SOCS/student/index.php?editSuccess=true');
+        }
     }
 
     public function display() {

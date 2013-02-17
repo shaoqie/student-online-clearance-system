@@ -1,21 +1,23 @@
-
 {literal}
     <script type="text/javascript">      
         function changeCourses(){
-            var stud_status = document.getElementById("stud_status").value;
+            if(document.getElementById("stud_status1").checked == true){ var stud_status = "Under Graduate";
+            }else{ var stud_status = "Graduate"; }
+                
             var select = document.getElementById("course");
             var dept_id = document.getElementById("dept").options[document.getElementById("dept").selectedIndex].value;
+             
     {/literal}     
         var str = "";
     {foreach from=$dept_id_inCourses key=k_course item=item}
                    
         if(dept_id == {$dept_id_inCourses[$k_course][0]} && stud_status == "{$dept_id_inCourses[$k_course][2]}"){
-        str += "<option>{$dept_id_inCourses[$k_course][1]}</option>";
+        str += "<option value='{$dept_id_inCourses[$k_course][1]}'>{$dept_id_inCourses[$k_course][1]}</option>";
     }               
     {/foreach}                          
     select.innerHTML = str;
     {literal}    
-        }
+        }          
     </script>
 {/literal}
 {*<pre>{$dept_id_inCourses|@print_r}</pre> *}
@@ -29,7 +31,7 @@
     <legend>Login Information: </legend>
 
     <div class="control-group">
-        <label class="control-label">Student ID: </label>
+        <label class="control-label"><b>Student ID: </b></label>
         <div class="controls">
 
             {*<select class="input-small" name="stud_id" required>
@@ -65,7 +67,7 @@
     </div>
 
     <div class="control-group">
-        <label class="control-label">Password: </label>
+        <label class="control-label"><b>Password: </b></label>
         <div class="controls">
             {literal}
                 <input id="password_entered" type='password' name='password' pattern="^.{7,50}$" title="Password minimum of 7 characters" required>
@@ -74,7 +76,7 @@
     </div>
 
     <div class="control-group">
-        <label class="control-label">Re-type Password: </label>
+        <label class="control-label"><b>Re-type Password: </b></label>
         <div class="controls">
             <input id="retyped_password_entered" type='password' name='confirmpass' onblur="checkPasswordEquality()" required>
         </div>
@@ -83,89 +85,72 @@
     <legend>Personal Information: </legend>
 
     <div class="control-group">
-        <label class="control-label">Surname: </label>
+        <label class="control-label"><b>Surname: </b></label>
         <div class="controls">
             <input type ='text' name='surname' value="" pattern="[A-Za-z\s]+" required title="Letters and spaces only">
         </div>
     </div>
 
     <div class="control-group">
-        <label class="control-label">First Name: </label>
+        <label class="control-label"><b>First Name: </b></label>
         <div class="controls">
             <input type='text' name='firstname' value="" pattern="[A-Za-z\s]+" required title="Letters and spaces only">
         </div>
     </div>
 
     <div class="control-group">
-        <label class="control-label">Middle Name: </label>
+        <label class="control-label"><b>Middle Name: </b></label>
         <div class="controls">
             <input type='text'name='middleName' value="" pattern="[A-Za-z\s]+" required title="Letters and spaces only">
         </div>
     </div>
 
     <div class="control-group">
-        <label class="control-label">Email Address: </label>
+        <label class="control-label"><b>Email Address: </b></label>
         <div class="controls">
             <input type='text'name='emailAdd' value="" required>
         </div>
     </div>
-
+    
+    <legend>Advance Information: </legend>
+    
     <div class="control-group">
-        <label class="control-label">Section: </label>
+        <label class="control-label"><b>Year Level: </b></label>
         <div class="controls">
-            <input type='text'name='section' value="" pattern="[0-9A-Za-z\s\-\_]+" required title="Letters and spaces only">
-        </div>
-    </div>
-
-    <div class="control-group">
-        <label class="control-label">Gender: </label>
-        <div class="controls">
-            <select name="gender" required>
+            <select id="year_level" name="year_level" required onchange="changeCourses()">
                 <option></option>
-                <option>Male</option>
-                <option>Female</option>
-            </select>
-        </div>
-    </div>
-
-    <div class="control-group">
-        <label class="control-label">Year Level: </label>
-        <div class="controls">
-            <select name="year_level" required>
-                <option></option>
-                <option>First Year</option>
-                <option>Second Year</option>
-                <option>Third Year</option>
-                <option>Fourth Year</option>
-                <option>Fifth Year</option>
-            </select>
-        </div>
-    </div>
-
-    <div class="control-group">
-        <label class="control-label">Program: </label>
-        <div class="controls">
-            <select name="program" required>
-                <option></option>
-                <option>Day</option>
-                <option>Evening</option>
+                <option value="1">First Year</option>
+                <option value="2">Second Year</option>
+                <option value="3">Third Year</option>
+                <option value="4">Fourth Year</option>
+                <option value="5">Fifth Year</option>
             </select>
         </div>
     </div>
     
-    <div class="control-group">
-        <label class="control-label">Status: </label>
-        <div class="controls">
-            <select id="stud_status" name="Status" required onchange="changeCourses()">
-                <option></option>
-                <option value="Under Graduate">Under Graduate</option>
-                <option value="Graduate">Graduate</option>
-            </select>
+    <div class="control-group form-inline">
+        <div class="controls form-inline">
+            <input type="radio" checked name="gender" value="Male"> <label><b>Male</b></label> &nbsp; &nbsp;
+            <input type="radio" name="gender" value="Female"> <label><b>Female </b></label>
+        </div>
+    </div> 
+    
+    <div class="control-group form-inline">
+        <div class="controls form-inline">
+            <input type="radio" checked name="program" value="Day"> <label><b>Day</b></label> &nbsp; &nbsp; &nbsp;
+            <input type="radio" name="program" value="Evening"> <label><b>Evening </b></label>
         </div>
     </div>
-
+    
+    <div class="control-group form-inline">
+        <div class="controls form-inline">
+            <input type="radio" checked name="Status" id="stud_status1" onclick="changeCourses()" value="Under Graduate"> <label><b>Under Graduate</b></label> &nbsp; &nbsp; &nbsp;
+            <input type="radio" name="Status" id="stud_status2" onclick="changeCourses()" value="Graduate"> <label><b>Graduate </b></label>
+        </div>
+    </div>
+    
     <div class="control-group">
-        <label class="control-label">Department: </label>
+        <label class="control-label"><b>Department: </b></label>
         <div class="controls">
             <select id="dept" name="dept" onchange="changeCourses()" required>
 
@@ -184,16 +169,23 @@
     </div>
 
     <div class="control-group">
-        <label class="control-label">Course: </label>
+        <label class="control-label"><b>Course: </b></label>
         <div class="controls">
-            <select id="course" name="course">
+            <select id="course" name="course" required>
                 <option></option>
             </select>
         </div>
     </div>
+    
+    <div class="control-group">
+        <label class="control-label"><b>Section: </b></label>
+        <div class="controls">
+            <input id="section" type='text'name='section' value="" pattern="[0-9A-Za-z\s\-\_\(\)]+" required title="Letters and spaces only">
+        </div>
+    </div>       
 
     <div class="control-group">
-        <label class="control-label">Upload Picture: </label>
+        <label class="control-label"><b>Upload Picture: </b></label>
         <div class="controls">
             <input type="file" name="photo">
         </div>

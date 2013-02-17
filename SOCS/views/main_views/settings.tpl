@@ -1,31 +1,40 @@
 <button class="pull-right btn" onclick="window.location.href='index.php'">Back</button>
+
+{if $account_type eq "Student"}
+    <div class="alert alert-block alert-info">
+        Choose to advance settings? <a href="student/index.php?action=advance_settings">Click Here</a>
+    </div>  
+{/if}
+
+
+
 <form action='settings.php?action=verify' method='post' class="form-horizontal" enctype="multipart/form-data">
 
     <legend>Edit Account: </legend>
 
     <div class="control-group">
-        <label class="control-label">Surname: </label>
+        <label class="control-label"><b>Surname: </b></label>
         <div class="controls">
             <input type ='text' name='surname' value="{$surname}" pattern="[A-Za-z\s]+" required title="Letters and spaces only">
         </div>
     </div>
 
     <div class="control-group">
-        <label class="control-label">First Name: </label>
+        <label class="control-label"><b>First Name: </b></label>
         <div class="controls">
             <input type='text' name='firstname' value="{$firstname}" pattern="[A-Za-z\s]+" required title="Letters and spaces only">
         </div>
     </div>
 
     <div class="control-group">
-        <label class="control-label">Middle Name: </label>
+        <label class="control-label"><b>Middle Name: </b></label>
         <div class="controls">
             <input type='text'name='middleName' value="{$middlename}" pattern="[A-Za-z\s]+" required title="Letters and spaces only">
         </div>
     </div>
 
     <div class="control-group">
-        <label class="control-label">Email Address: </label>
+        <label class="control-label"><b>Email Address: </b></label>
         <div class="controls">
             <input type='text'name='emailAdd' value="{$email_add}" {literal}pattern="[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)"{/literal} required>
         </div>
@@ -34,7 +43,7 @@
     <legend>Change password: </legend>
 
     <div class="control-group">
-        <label class="control-label">New password: </label>
+        <label class="control-label"><b>New password: </b></label>
         <div class="controls">
             {literal}
                 <input type='password' name='newpass' pattern="^.{7,50}$" title="Password minimum of 7 characters">
@@ -43,7 +52,7 @@
     </div>
 
     <div class="control-group">
-        <label class="control-label">Confirm new password: </label>
+        <label class="control-label"><b>Confirm new password: </b></label>
         <div class="controls">
             <input type='password' name='confirmpass'>
         </div>
@@ -52,7 +61,7 @@
     <legend>Upload Picture</legend>
 
     <div class="control-group">
-        <label class="control-label">Upload Picture: </label>
+        <label class="control-label"><b>Upload Picture: </b></label>
         <div class="controls">
             <input type="file" name="photo">
             <span class="help-block">Image file shall not exceed to 1MB</span>
@@ -62,7 +71,7 @@
     <legend>Authentication: </legend>
 
     <div class="control-group">
-        <label class="control-label">Old password: </label>
+        <label class="control-label"><b>Old password: </b></label>
         <div class="controls">
             <input type='password' name='oldpass' required>
         </div>
