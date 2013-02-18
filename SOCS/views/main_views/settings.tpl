@@ -1,4 +1,4 @@
-<button class="pull-right btn" onclick="window.location.href='index.php'">Back</button>
+<!-- <button class="pull-right btn" onclick="window.location.href='index.php'">Back</button> -->
 
 {if $account_type eq "Student"}
     <div class="alert alert-block alert-info">

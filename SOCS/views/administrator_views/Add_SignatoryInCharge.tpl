@@ -70,11 +70,11 @@
             <div class="control-group">
                 <label class="control-label"><b>Signatory: </b></label>
                 <div class="controls">
-                    {*
+                    
                     {if !isset($signatories)}
                         {assign var=signatories value=["OCSC", "OSS", "CTLC", "ICLC"]}
                     {/if}
-                    
+                    {*
                     <select name="sign_name" required>
                         <option></option>
                         {foreach from=$signatories item=signatory key=pk}

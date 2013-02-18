@@ -2,8 +2,20 @@
 <input class="btn pull-right" type="button" value="Back" onclick="window.location.href='index.php'"> 
 
 <!-- Archive Search Box-->
-<form class="form-inline">
+<div class="form-inline">
     <label>School Year:  </label>
+    {literal}<input type="text" maxlength="9" pattern="[0-9\-]{9}" {/literal}  id="school_year" name="school_year" value="{$currentSchool_Year}" autocomplete="off" class="span3" data-provide="typeahead" data-source='[
+        
+        {foreach from=$mySchool_Year key=k item=year}
+            {if $mySchool_Year|@count - 1 eq $k}
+                "{$year}"
+            {else}
+                "{$year}",
+            {/if}
+        {/foreach}
+        ]'>
+    
+    {*
     <select id="school_year" name="school_year" class="span3">
         {foreach from = $mySchool_Year key = k item = i}
             {if $currentSchool_Year eq $i}
@@ -13,7 +25,8 @@
             {/if}
         {/foreach}
     </select>
-
+    *}
+    
     <label>Semester: </label>
     <select id="semester" name="semester" class="span3">
         {if $currentSemester eq 'First'}
@@ -34,7 +47,7 @@
     <button class="btn btn-primary" type="button" name="GO" onclick="change_schoolYear('0','{$sign_id}','1')">
         <i class="icon-search icon-white"></i>
     </button>
-</form>
+</div>
 
 <!-- Header-->
 <h1>{$sign_name} Announcements</h1>

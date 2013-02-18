@@ -24,15 +24,28 @@
 <form class="form-inline" method="post">
     <label><b>School Year:  </b></label>
 
-    <select id="school_year" name="school_year" class="span3">
-        {foreach from = $mySchool_Year key = k item = i}
-            {if $currentSchool_Year eq $i}
-                <option selected>{$i}</option>
+        {literal}<input type="text" maxlength="9" pattern="[0-9\-]{9}" {/literal}  id="school_year" name="school_year" value="{$currentSchool_Year}" autocomplete="off" class="span3" data-provide="typeahead" data-source='[
+        
+        {foreach from=$mySchool_Year key=k item=year}
+            {if $mySchool_Year|@count - 1 eq $k}
+                "{$year}"
             {else}
-                <option>{$i}</option>
+                "{$year}",
             {/if}
         {/foreach}
+        ]'>
+
+    {*
+    <select id="school_year" name="school_year" class="span3">
+    {foreach from = $mySchool_Year key = k item = i}
+    {if $currentSchool_Year eq $i}
+    <option selected>{$i}</option>
+    {else}
+    <option>{$i}</option>
+    {/if}
+    {/foreach}
     </select>
+    *}
 
     {*
     <input value="{$currentSchool_Year}" class="span2" type="text" maxlength="9" 

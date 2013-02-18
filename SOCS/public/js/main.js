@@ -5,7 +5,6 @@
 /*
  * Administrator Script Functions
  */
-
 function changeVisibility(){
     var visibility = parseInt(document.getElementById("sign_visibility").value);
     if(visibility == 0){    window.location.assign("../administrator/index.php?action=addSignatoryInCharge&used_for=UnderGrad");
@@ -34,7 +33,8 @@ function change_schoolYear(finder, sign_id, page){
 }
 
 function jumpToPageWithSchoolYear(){
-    var sy = document.getElementById("school_year").options[document.getElementById("school_year").selectedIndex].text;
+    //var sy = document.getElementById("school_year").options[document.getElementById("school_year").selectedIndex].text;
+    var sy = document.getElementById("school_year").value;
     var sem = document.getElementById("semester").options[document.getElementById("semester").selectedIndex].text;
     
     var jump = document.getElementById("jump").value != "--"? document.getElementById("jump").value : 1;

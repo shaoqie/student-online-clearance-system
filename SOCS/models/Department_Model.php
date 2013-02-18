@@ -157,6 +157,13 @@ class Department_Model extends Model{
         return $row['Description'];
     }
     
+    public function getDescription($dept_name){
+        $this->query = mysql_query("select Description from departments where Department_Name = '$dept_name'");
+        $row = mysql_fetch_array($this->query);
+        
+        return $row['Description'];
+    }
+    
     
     /*------- for testing existing name --------*/
     

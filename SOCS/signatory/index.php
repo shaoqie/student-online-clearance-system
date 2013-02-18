@@ -183,7 +183,7 @@ class Index extends Controller {
         $this->template->assign('dept_name', $stud_dept);
         
         $this->template->assign('stud_gender', $stud_gender);
-        $this->template->assign('stud_yr_level', $stud_yr_level ." Year");
+        $this->template->assign('stud_yr_level', $stud_yr_level);
         $this->template->assign('stud_program', $stud_program);
         $this->template->assign('stud_section', $stud_section);
         $this->template->assign('stud_photo', $stud_photo);

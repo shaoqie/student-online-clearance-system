@@ -59,7 +59,12 @@ $("#confirmed" +x).html("");
     <div class="span9">
 
         <!-- Header-->
-        <h2 class="well center-text">{$Dept_name}</h2>
+        <pre>
+            <h2  style="text-align: center;">{$Dept_name}</h2>
+            <div  style="margin-left: 120px; margin-right: 100px; margin-top: -50px;">
+                {$Dept_desc}
+            </div>        
+        </pre>
 
         <!-- Visibility -->
         <div class="form-inline pull-right">

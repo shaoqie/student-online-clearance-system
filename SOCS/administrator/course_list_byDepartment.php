@@ -16,6 +16,7 @@ require_once '../config/config.php';
 class course_list_byDepartment extends Controller {
     private $template;
     private $course_model;
+    private $department_model;
     
     public function __construct() {
         parent::__construct();
@@ -23,6 +24,7 @@ class course_list_byDepartment extends Controller {
         
             $this->template = new Template();
             $this->course_model = new Course_Model();
+            $this->department_model = new Department_Model();
             $this->template->setPageName('Courses');
 
             $this->template->set_username(Session::get_user());
@@ -31,6 +33,7 @@ class course_list_byDepartment extends Controller {
             $this->template->set_middlename(Session::get_Middlename());
             $this->template->set_account_type(Session::get_Account_type());
             $this->template->assign('Dept_name', Session::get_DepartmentName());
+            $this->template->assign('Dept_desc', $this->department_model->getDescription(Session::get_DepartmentName()));
             $this->template->set_photo(Session::get_photo());
 
             $this->template->setContent('course_list_byDepartment.tpl');

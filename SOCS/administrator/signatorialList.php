@@ -15,12 +15,14 @@ require_once '../config/config.php';
 class signatorialList extends Controller{
     private $template;
     private $signatorialList_model;
+    private $department_model;
     
     public function __construct() {
         parent::__construct();
         if (Session::user_exist() && Session::get_Account_type() == "Admin") {
             $this->template = new Template();
             $this->signatorialList_model = new SignatorialList_Model();
+            $this->department_model = new Department_Model();
             
             $this->template->setPageName('Signatorial List');
             $this->template->set_username(Session::get_user());
@@ -29,6 +31,7 @@ class signatorialList extends Controller{
             $this->template->set_middlename(Session::get_Middlename());
             $this->template->set_account_type(Session::get_Account_type());
             $this->template->assign('Dept_name', Session::get_DepartmentName());
+            $this->template->assign('Dept_desc', $this->department_model->getDescription(Session::get_DepartmentName()));
             $this->template->set_photo(Session::get_photo());
             
             $this->template->setContent('signatorialList.tpl');

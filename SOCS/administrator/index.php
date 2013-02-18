@@ -129,7 +129,7 @@ class Index extends Controller {
         $listOfsignatory = $this->signatory_model->getListofSignatoryName();
         //$listOfKeysFromSignatories = $this->signatoriallist_model->getKeyListofSignatory();
 
-        $this->template->assign('signatories', $listOfsignatoryUnder_Grad);
+        $this->template->assign('signatories', $listOfsignatory);
         
         if(isset($_POST['Register'])){
             $username = $_POST["uname"];

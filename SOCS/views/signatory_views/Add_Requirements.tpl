@@ -74,7 +74,7 @@ if(parseInt(SelectedIndex) == 1){ $("#Sign").show();
             <div class="control-group">
                 <label class="control-label"><b>Requirement Type: </b></label>
                 <div class="controls">
-                    <select id="requirement_type" name="requirement_type" class="input-large" onchange="change_reqType()">
+                    <select id="requirement_type" name="requirement_type" class="input-xlarge" onchange="change_reqType()">
                         <option>Textual</option>
                         <option>Prerequisite</option>
                     </select>
@@ -84,6 +84,17 @@ if(parseInt(SelectedIndex) == 1){ $("#Sign").show();
             <div class="control-group">
                 <label class="control-label"><b>School Year: </b></label>
                 <div class="controls">
+                    {literal}<input type="text" maxlength="9" pattern="[0-9\-]{9}" {/literal}  id="school_year" name="school_year" value="{$currentSchool_Year}" autocomplete="off" class="span3" data-provide="typeahead" data-source='[
+                       {foreach from=$mySchool_Year key=k item=year}
+                           {if $mySchool_Year|@count - 1 eq $k}
+                               "{$year}"
+                           {else}
+                               "{$year}",
+                           {/if}
+                       {/foreach}
+                       ]'>
+                    
+                    {*
                     <select id="school_year" name="school_year" class="input-large">
                         {foreach from = $mySchool_Year key = k item = i}
                             {if $currentSchool_Year eq $i}
@@ -93,13 +104,14 @@ if(parseInt(SelectedIndex) == 1){ $("#Sign").show();
                             {/if}
                         {/foreach}
                     </select>
+                    *}
                 </div>
             </div>
 
             <div class="control-group">
                 <label class="control-label"><b>Semester: </b></label>
                 <div class="controls">
-                    <select id="semester" name="semester" class="input-large">
+                    <select id="semester" name="semester" class="input-xlarge">
                         {if $currentSemester eq 'First'}
                             <option selected>First</option>
                             <option>Second</option>
