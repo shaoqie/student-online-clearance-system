@@ -37,7 +37,7 @@
         </div>
         <div class="item">
             <div class="container">
-                <img class="carousel-images" src="{$host}/public/img/carousel/downsized_carousel_02.jpg" alt="" />
+                <img class="carousel-images" src="{$host}/public/img/carousel/downsized_carousel_03.jpg" alt="" />
                 {*
                 <div class="carousel-caption socs-welcome hero-unit">
                 <h1>Welcome to SOCS!</h1>
