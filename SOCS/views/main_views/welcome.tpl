@@ -13,7 +13,7 @@
     <div class="carousel-inner">
         <div class="item active">
             <div class="container">
-                <img class="carousel-images" src="{$host}/public/img/carousel/1.png" alt="" />
+                <img class="carousel-images" src="{$host}/public/img/carousel/downsized_carousel_01.jpg" alt="" />
 
                 <div class="carousel-caption socs-welcome hero-unit visible-desktop">
                     <h1>Welcome to SOCS!</h1>
@@ -25,7 +25,7 @@
         </div>
         <div class="item">
             <div class="container">
-                <img class="carousel-images" src="{$host}/public/img/carousel/2.png" alt="" />
+                <img class="carousel-images" src="{$host}/public/img/carousel/downsized_carousel_02.jpg" alt="" />
                 {*
                 <div class="carousel-caption socs-welcome hero-unit">
                 <h1>Welcome to SOCS!</h1>
@@ -37,7 +37,7 @@
         </div>
         <div class="item">
             <div class="container">
-                <img class="carousel-images" src="{$host}/public/img/carousel/3.png" alt="" />
+                <img class="carousel-images" src="{$host}/public/img/carousel/downsized_carousel_02.jpg" alt="" />
                 {*
                 <div class="carousel-caption socs-welcome hero-unit">
                 <h1>Welcome to SOCS!</h1>
