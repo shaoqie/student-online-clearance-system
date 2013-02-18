@@ -145,6 +145,41 @@ function printBody(){
 
     $fpdf->Ln($double_spacing);
 
+    
+    //foreach ($listOfSignatories["id"] as $key => $value) {
+
+    //}
+    
+    for($i=0; $i < count($listOfSignatories["id"]); $i+=4){
+        
+        for($k=$i; ($k < ($i+4))  && ($k < count($listOfSignatories["id"])); $k++){
+            if ($listOfSignatories["status"][$k] == "Cleared")
+                $fpdf->SetTextColor(38,148,10);
+            else
+                $fpdf->SetTextColor(242,34,34);
+            $fpdf->Write(1, str_repeat(" ", 5));
+            $fpdf->Cell(40, 5, $listOfSignatories["status"][$k], "B", 0, 'C', false);
+            
+            //echo $k . "<br/>";
+        }
+        
+        $fpdf->Ln();
+        
+        $fpdf->SetTextColor(0,0,0);
+        for($k=$i; ($k < ($i+4)) && ($k < count($listOfSignatories["id"])); $k++){
+            $fpdf->Write(1, str_repeat(" ", 5));
+            $fpdf->Cell(40, 5, $listOfSignatories["name"][$k], "T", 0, 'C', false);
+            //echo $k . "<br/>";
+        }
+        
+        $fpdf->Ln();
+        $fpdf->Ln();
+    }
+    
+    
+    
+    
+    /*
     $fpdf->SetFillColor(83,83,83);
     $fpdf->SetTextColor(255,255,255);
 
@@ -164,6 +199,7 @@ function printBody(){
             $fpdf->SetTextColor(242,34,34);
         $fpdf->Cell(0, 5, $listOfSignatories["status"][$key], 1, 1, 'L', true);
     }
+    */
     
     $fpdf->SetTextColor(0,0,0);
     
