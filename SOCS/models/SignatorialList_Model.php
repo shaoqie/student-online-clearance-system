@@ -122,7 +122,7 @@ class SignatorialList_Model extends Model {
 
     public function getListofSignatory($used_for) {
         $rowInfo = array();
-        $this->query = mysql_query("select signatory_name from signatories where Used_For = '$used_for'");
+        $this->query = mysql_query("select signatory_name from signatories where Used_For = '$used_for' order by signatory_name");
 
         while ($row = mysql_fetch_array($this->query)) {
             array_push($rowInfo, $row['signatory_name']);
@@ -133,7 +133,7 @@ class SignatorialList_Model extends Model {
     
     public function getListofSignatoryID($used_for) {
         $rowInfo = array();
-        $this->query = mysql_query("select signatory_ID from signatories where Used_For = '$used_for'");
+        $this->query = mysql_query("select signatory_ID from signatories where Used_For = '$used_for' order by signatory_name");
 
         while ($row = mysql_fetch_array($this->query)) {
             array_push($rowInfo, $row[0]);
@@ -201,6 +201,13 @@ class SignatorialList_Model extends Model {
         return $row['Department_ID'];
     }
 
+    public function getSignatory_ID($sign_name, $used_for){
+        $this->query = mysql_query("select Signatory_ID from signatories where Signatory_Name like '%$sign_name%' and Used_For = '$used_for'");
+        $row = mysql_fetch_array($this->query);
+
+        return $row['Signatory_ID'];
+    }
+    
     public function getSignId($sign_name) {
         $this->query = mysql_query("select Signatory_ID from signatories where Signatory_Name like '%$sign_name%'");
         $row = mysql_fetch_array($this->query);

@@ -149,9 +149,9 @@ class Signatory_Model extends Model{
     
     /*------- for testing existing name --------*/
     
-    public function isExist($sign_name, $description){
+    public function isExist($sign_name, $description, $use_for){
         $this->query = mysql_query("select count(Signatory_Name) from signatories where (Signatory_Name = '$sign_name' OR 
-                                    description = '$description')");
+                                    description = '$description') and Used_For = '$use_for'");
         
         $row = mysql_fetch_array($this->query);
         

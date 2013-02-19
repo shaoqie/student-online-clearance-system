@@ -47,7 +47,9 @@ class signatorialList extends Controller{
     
     public function addSignatory($cmdSignatory){    
         $dept_id = $this->signatorialList_model->getDeptId(Session::get_DepartmentName());
-        $sign_id = $this->signatorialList_model->getSignId(trim($cmdSignatory));
+        $sign_id = $this->signatorialList_model->getSignatory_ID(trim($cmdSignatory, 'Under Graduate'));
+        
+        
         $this->signatorialList_model->insert($dept_id, $sign_id);
         
         $this->displayTable('', 1, "default");
