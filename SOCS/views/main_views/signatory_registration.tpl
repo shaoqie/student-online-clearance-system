@@ -1,3 +1,25 @@
+<script>
+    function changeSignatory(){
+    if(document.getElementById("stud_status1").checked == true){ var stud_status = "Under Graduate";
+}else{ var stud_status = "Graduate"; }
+        
+var str = "<option></option>";
+        
+if(stud_status == "Graduate"){
+    {foreach from=$g_signatories item=signatory key=pk}
+str += "<option>{$signatory}</option>";
+    {/foreach}
+}else{
+    {foreach from=$ug_signatories item=signatory key=pk}
+str += "<option>{$signatory}</option>";
+    {/foreach}
+}
+        
+document.getElementById("sign_name").innerHTML = str;
+}
+</script>
+
+
 <form method='post' class="form-horizontal" action="{$host}/signatory_registration.php?action=register" enctype="multipart/form-data">
     {literal}
         <legend>Login Information: </legend>
@@ -58,31 +80,35 @@
 
     <legend>Signatory Designation: </legend>
 
+    <div class="control-group form-inline">
+        <div class="controls form-inline">
+            <input type="radio" checked name="sign_usability" id="stud_status1" onclick="changeSignatory()" value="Under Graduate"> <label><b>Under Graduate</b></label> &nbsp; &nbsp; &nbsp;
+            <input type="radio" name="sign_usability" id="stud_status2" onclick="changeSignatory()" value="Graduate"> <label><b>Graduate </b></label>
+        </div>
+    </div>
+
     <div class="control-group">
         <label class="control-label"><b>Signatory: </b></label>
         <div class="controls">
-            {*
-            {if !isset($signatories)}
-                {assign var=signatories value=["OCSC", "OSS", "CTLC", "ICLC"]}
-            {/if}
-
-            <select name="sign_name" required>
+            <select id="sign_name" name="sign_name" required>
                 <option></option>
-                {foreach from=$signatories item=signatory key=pk}
-                    <option value="{$signatory_keys[$pk]}">{$signatory}</option>
+                {foreach from=$ug_signatories item=signatory key=pk}
+                    <option>{$signatory}</option>
                 {/foreach}
             </select>
-            *}
-            
+
+            {*
             <input type="text" required name="sign_name" autocomplete="off" class="input-large" data-provide="typeahead" data-source='[
-                   {foreach from=$signatories key=k item=signatory}
-                       {if $signatories|@count - 1 eq $k}
-                           "{$signatory}"
-                       {else}
-                           "{$signatory}",
-                       {/if}
-                   {/foreach}
-                   ]'>
+            {foreach from=$signatories key=k item=signatory}
+            {if $signatories|@count - 1 eq $k}
+            "{$signatory}"
+            {else}
+            "{$signatory}",
+            {/if}
+            {/foreach}
+            ]'>
+            
+            *}
         </div>
     </div>
 

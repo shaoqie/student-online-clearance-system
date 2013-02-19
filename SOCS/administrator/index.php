@@ -85,14 +85,14 @@ class Index extends Controller {
         
         
         $temp = $user_type == 'Student' ? "Courses" : "Assigned Signatory";
-        $status = $user_type == 'Student' ? $this->administrator_model->getStud_Status() : "";
+        $status = $this->administrator_model->getStud_Status_Sign_Usability();
         
         $numOfPages = $this->administrator_model->getQueryPageSize($searchName, $user_type);
         $numOfResults = count($this->administrator_model->getFilter_Name());
 
         $this->template->assign('myKey_admin', $this->administrator_model->getFilter_ID());      
         $this->template->set_Photos($this->administrator_model->getFilter_Picture());
-        $this->template->set_Type($this->administrator_model->getFilter_Type());
+        $this->template->set_Type($this->administrator_model->getStud_Status_Sign_Usability());
         $this->template->set_Filter($searchName);
         $this->template->assign('admin_length', $numOfPages);
         $this->template->assign('rowCount_admin', $numOfResults);
@@ -126,11 +126,13 @@ class Index extends Controller {
         $this->template->setPageName("Add Signatory In Charge");
         $this->template->setContent('Add_SignatoryInCharge.tpl');
         
-        $listOfsignatory = $this->signatory_model->getListofSignatoryName();
+        $ug_listOfsignatory = $this->signatory_model->getListofSignatoryName('Under Graduate');
+        $g_listOfsignatory = $this->signatory_model->getListofSignatoryName('Graduate');
         //$listOfKeysFromSignatories = $this->signatoriallist_model->getKeyListofSignatory();
 
-        $this->template->assign('signatories', $listOfsignatory);
-        
+        $this->template->assign('ug_signatories', $ug_listOfsignatory);
+        $this->template->assign('g_signatories', $g_listOfsignatory);
+        //var_dump($listOfsignatory);
         if(isset($_POST['Register'])){
             $username = $_POST["uname"];
             $newpass = md5($_POST["newpass"]);
@@ -146,6 +148,7 @@ class Index extends Controller {
             $this->administrator_model->First_Name = $firstname;
             $this->administrator_model->Middle_Name = $middleName;
             $this->administrator_model->Assigned_Signatory = $assign_sign;
+            $this->administrator_model->Signatory_Usability = $_POST['sign_usability'];
             
             $this->administrator_model->insertSignatory_UserByAdmin();
             

@@ -132,11 +132,13 @@ if(parseInt(SelectedIndex) == 1){ $("#Sign").show();
             <div class="control-group" id="Sign" hidden>
                 <label class="control-label"><b>Select Signatory: </b></label>
                 <div class="controls">
+                    {assign var=index value=0}
                     <select name="signatory" class="input-large">
                         {foreach from = $listOfSignatory key = k item = i}
-                            {if $thisSignatory != $listOfSignatory[$k]}
-                                <option value="{$listOfSignatoryID[$k]}">{$listOfSignatory[$k]}</option>
+                            {if $thisSignatory != $listOfSignatory[$index]}
+                                <option value="{$listOfSignatoryID[$index]}">{$listOfSignatory[$index]}</option>
                             {/if}
+                            {assign var=index value=$index + 1}
                         {/foreach}
                     </select>
                 </div>    

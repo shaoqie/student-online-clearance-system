@@ -136,12 +136,12 @@ class Signatory_Model extends Model{
 //        return $row['Description'];
 //    }
     
-    public function getListofSignatoryName() {
+    public function getListofSignatoryName($use_for) {
         $rowInfo = array();
-        $this->query = mysql_query("select signatory_name from signatories");
+        $this->query = mysql_query("select signatory_name from signatories where Used_For = '$use_for' order by signatory_name");
 
         while ($row = mysql_fetch_array($this->query)) {
-            array_push($rowInfo, $row['signatory_name']   );
+            array_push($rowInfo, $row['signatory_name']);
         }
 
         return $rowInfo;

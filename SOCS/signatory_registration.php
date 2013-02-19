@@ -42,9 +42,12 @@ class Signatory_Registration extends Controller {
 //        $listOfDept_ID = $this->department_model->getListOfDept_ID();
 //        $ListDept_ID_inCourse = $this->courses_model->getListDept_ID_inCourse();
 //        $listOfCourses = $this->courses_model->getListOfCourses();
-        $listOfsignatory = $this->signatory_model->getListofSignatoryName();
+        $ug_listOfsignatory = $this->signatory_model->getListofSignatoryName('Under Graduate');
+        $g_listOfsignatory = $this->signatory_model->getListofSignatoryName('Graduate');
+        //$listOfKeysFromSignatories = $this->signatoriallist_model->getKeyListofSignatory();
 
-        $this->template->assign('signatories', $listOfsignatory);
+        $this->template->assign('ug_signatories', $ug_listOfsignatory);
+        $this->template->assign('g_signatories', $g_listOfsignatory);
         //$this->template->assign('years', $listOfYear);
         //$this->template->assign('depts', $listOfDept_Name);
         //$this->template->assign('dept_ID', $listOfDept_ID);
@@ -166,8 +169,8 @@ class Signatory_Registration extends Controller {
 //            }
 
             $this->admin->Assigned_Signatory = $this->signatoriallist_model->getSignId(trim($_POST["sign_name"]));
+            $this->admin->Signatory_Usability = $_POST['sign_usability'];
             $this->admin->email_add = $_POST['emailAdd'];
-
             if ($test == 7 && $this->admin->insertSignatory_User()) {
 
                 if (isset($imagefile['name'])) {

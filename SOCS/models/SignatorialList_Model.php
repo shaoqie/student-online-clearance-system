@@ -131,9 +131,9 @@ class SignatorialList_Model extends Model {
         return $rowInfo;
     }
     
-    public function getListofSignatoryID() {
+    public function getListofSignatoryID($used_for) {
         $rowInfo = array();
-        $this->query = mysql_query("select signatory_ID from signatories");
+        $this->query = mysql_query("select signatory_ID from signatories where Used_For = '$used_for'");
 
         while ($row = mysql_fetch_array($this->query)) {
             array_push($rowInfo, $row[0]);
@@ -170,7 +170,6 @@ class SignatorialList_Model extends Model {
     public function getListOfDept_underSignName($signID) {
         $filter = array();
         $this->query = mysql_query("select departments.department_name from signatorialList
-                                    inner join signatories on signatorialList.signatory_id = signatories.signatory_id
                                     inner join departments on signatorialList.department_id = departments.department_id
                                     where signatorialList.signatory_id = '$signID'");
 

@@ -66,6 +66,10 @@ class Session {
     public static function set_photo($photo){
         $_SESSION['photo'] = $photo;
     }
+    
+    public static function set_signatory_usability($sign_usability){
+        $_SESSION['signatory_usability'] = $sign_usability;
+    }
 
     //acessor
     public static function getSY_SEM_ID(){
@@ -116,7 +120,15 @@ class Session {
     public static function get_photo(){
         return $_SESSION['photo'];
     }
-
+    
+    public static function get_signatory_usability(){
+        return $_SESSION['signatory_usability'];
+    }
+    
+    
+    
+    /*----------------------------------------------*/
+    
     public static function user_exist(){
         if(isset($_SESSION['username'])){
             return true;
