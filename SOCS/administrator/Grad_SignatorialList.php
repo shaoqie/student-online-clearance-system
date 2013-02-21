@@ -49,11 +49,13 @@ class Grad_SignatorialList extends Controller{
         $dept_id = $this->signatorialList_model->getDeptId(Session::get_DepartmentName());
         $sign_id = $this->signatorialList_model->getSignatory_ID(trim($cmdSignatory), 'Graduate');
         
-        var_dump($sign_id);
-        $this->signatorialList_model->insert($dept_id, $sign_id);
+        if(!$this->signatorialList_model->isExist($dept_id, $sign_id, 'Graduate')){ 
+            $this->signatorialList_model->insert($dept_id, $sign_id); 
+            $this->template->setAlert('Signatorial List was Added Successfully!..', Template::ALERT_SUCCESS, 'alert');
+            $this->displayTable('', 1, "default");    
+        }
         
-        $this->displayTable('', 1, "default");
-        $this->template->setAlert('Signatorial List was Added Successfully!..', Template::ALERT_SUCCESS, 'alert');
+        
     }
     
     public function deleted() {
@@ -80,7 +82,7 @@ class Grad_SignatorialList extends Controller{
     
     public function editSignatorialList($newSign_Name, $oldSign_ID){
         $dept_id_temp = $this->signatorialList_model->getDeptId(Session::get_DepartmentName());
-        $newSign_ID_temp = $this->signatorialList_model->getSignId($newSign_Name);
+        $newSign_ID_temp = $this->signatorialList_model->getSignatory_ID(trim($newSign_Name), 'Graduate');
 
         $this->signatorialList_model->update($dept_id_temp, $oldSign_ID, $newSign_ID_temp);
         header('Location: ' . HOST . "/administrator/Grad_SignatorialList.php?action=edited");

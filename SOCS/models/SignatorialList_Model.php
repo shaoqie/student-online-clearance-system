@@ -265,7 +265,16 @@ class SignatorialList_Model extends Model {
         return $listCourses;
     }
     
-    
+    public function isExist($dept_id, $sign_id, $used_for){
+        $this->query = mysql_query("SELECT * from signatoriallist
+                                inner join Signatories on Signatories.`Signatory_ID` = signatoriallist.`Signatory_ID`
+                                where signatoriallist.`Department_ID` = '$dept_id' and signatoriallist.`Signatory_ID` = '$sign_id' and Signatories.Used_For = '$used_for'");
+        
+        
+        $row = mysql_num_rows($this->query);
+        
+        return $row > 0 ? true : false;
+    }
     
 
     /* -------------------------------------------- */
