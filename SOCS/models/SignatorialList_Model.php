@@ -237,11 +237,11 @@ class SignatorialList_Model extends Model {
         }
     }
     
-    public function getListOfCourse_Sign($signID){
+    public function getListOfCourse_Sign($signID, $used_for){
         $this->query = mysql_query("select courses.course_name from signatoriallist
                                     inner join departments on (signatoriallist.Department_ID = departments.Department_ID)  
                                     inner join courses on (departments.department_id = courses.department_id)
-                                    where signatoriallist.signatory_id = '$signID'");
+                                    where signatoriallist.signatory_id = '$signID' and Usability = '$used_for'");
         
         $listCourses = array();
         while ($row = mysql_fetch_array($this->query)) {
@@ -251,11 +251,11 @@ class SignatorialList_Model extends Model {
         return $listCourses;
     }
     
-    public function getListOfCourse_SignID($signID){
+    public function getListOfCourse_SignID($signID, $used_for){
         $this->query = mysql_query("select courses.course_id from signatoriallist
                                     inner join departments on (signatoriallist.Department_ID = departments.Department_ID)  
                                     inner join courses on (departments.department_id = courses.department_id)
-                                    where signatoriallist.signatory_id = '$signID'");
+                                    where signatoriallist.signatory_id = '$signID' and Usability = '$used_for'");
         
         $listCourses = array();
         while ($row = mysql_fetch_array($this->query)) {

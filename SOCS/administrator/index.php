@@ -67,20 +67,20 @@ class Index extends Controller {
             $this->administrator_model->deleteUser(trim($value));
         }
         
-        $HOST = $explode[0] != null ? HOST ."/administrator/?action=deleted&type=" .$user_type : HOST;
+        $HOST = $explode[0] != null ? HOST ."/administrator/?action=deleted&user_type=" .$user_type : HOST;
         header('Location: ' .$HOST);
     }
     
-    public function deleted($type){
+    public function deleted($user_type){
         $this->template->setAlert('Delete an Account Successfully!..', Template::ALERT_SUCCESS, 'alert');
-        $this->displayTable('', 1, $type, "default");
+        $this->displayTable('', 1, $user_type, "default");
     }
     
     public function filter($filterName, $type){
         $this->displayTable(trim($filterName), 1, $type, 'not');
     }
 
-    public function displayTable($searchName, $page, $user_type , $finder) {
+    public function displayTable($searchName, $page, $user_type , $finder) { 
         $this->administrator_model->filter($searchName, $page, $user_type);
         
         
@@ -100,6 +100,7 @@ class Index extends Controller {
         $this->template->assign('courseORsign', $temp);
         $this->template->assign('my_courseORsign', $this->administrator_model->getFilter_courseORsign());
 
+        
         if($user_type == 'Student'){
             $this->template->assign('status', 'Status');
             $this->template->assign('stud_status', $status);

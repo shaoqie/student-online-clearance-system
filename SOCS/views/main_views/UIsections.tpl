@@ -6,7 +6,7 @@
         <input type="hidden" value="filter" name="action">
         <input id="search" class="span3" type="search" placeholder="Search..." value="{$filter}" name="filterName">
         {if isset($user_type)}
-            <input type="hidden" value="{$user_type}" name="type">
+            <input type="hidden" value="{$user_type}" name="user_type">
         {/if}
 
         {*<input type="hidden" value="{$clearedStatus}" name="status">*}

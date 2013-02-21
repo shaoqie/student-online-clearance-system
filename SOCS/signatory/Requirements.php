@@ -120,9 +120,9 @@ class Requirements extends Controller{
         $listOfDepartmentsUnder =  $this->signatorialList_model->getListOfDept_underSignName($sign_id);
         $listOfDepartmentsUnderID =  $this->signatorialList_model->getListOfDept_underSignNameID($sign_id);
         
-        $listOfCourse_UnderSign = $this->signatorialList_model->getListOfCourse_Sign($sign_id);
-        $listOfCourse_UnderSignID = $this->signatorialList_model->getListOfCourse_SignID($sign_id);
-        
+        $listOfCourse_UnderSign = $this->signatorialList_model->getListOfCourse_Sign($sign_id, Session::get_signatory_usability());
+        $listOfCourse_UnderSignID = $this->signatorialList_model->getListOfCourse_SignID($sign_id, Session::get_signatory_usability());
+        //var_dump($sign_id);
         $thisSignatory = Session::get_AssignSignatory();
         
         $this->template->setPageName("Adding Requirements Page");
@@ -233,8 +233,8 @@ class Requirements extends Controller{
         $listOfDepartmentsUnder =  $this->signatorialList_model->getListOfDept_underSignName($sign_id);
         $listOfDepartmentsUnderID =  $this->signatorialList_model->getListOfDept_underSignNameID($sign_id);
         
-        $listOfCourse_UnderSign = $this->signatorialList_model->getListOfCourse_Sign($sign_id);
-        $listOfCourse_UnderSignID = $this->signatorialList_model->getListOfCourse_SignID($sign_id);
+        $listOfCourse_UnderSign = $this->signatorialList_model->getListOfCourse_Sign($sign_id, Session::get_signatory_usability());
+        $listOfCourse_UnderSignID = $this->signatorialList_model->getListOfCourse_SignID($sign_id, Session::get_signatory_usability());
         
         $thisSignatory = Session::get_AssignSignatory();
         

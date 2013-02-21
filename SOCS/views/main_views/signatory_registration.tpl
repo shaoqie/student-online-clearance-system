@@ -3,19 +3,19 @@
     if(document.getElementById("stud_status1").checked == true){ var stud_status = "Under Graduate";
 }else{ var stud_status = "Graduate"; }
         
-var str = "<option></option>";
-        
+document.getElementById("sign_name").innerHTML = "";
+var select = document.getElementById("sign_name");
+
 if(stud_status == "Graduate"){
     {foreach from=$g_signatories item=signatory key=pk}
-str += "<option>{$signatory}</option>";
+        select.options[select.options.length] = new Option("{$signatory}");
     {/foreach}
 }else{
     {foreach from=$ug_signatories item=signatory key=pk}
-str += "<option>{$signatory}</option>";
+         select.options[select.options.length] = new Option("{$signatory}");       
     {/foreach}
 }
         
-document.getElementById("sign_name").innerHTML = str;
 }
 </script>
 

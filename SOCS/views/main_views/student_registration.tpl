@@ -3,19 +3,17 @@
         function changeCourses(){
             if(document.getElementById("stud_status1").checked == true){ var stud_status = "Under Graduate";
             }else{ var stud_status = "Graduate"; }
-                
+              
+            document.getElementById("course").innerHTML = "";
             var select = document.getElementById("course");
             var dept_id = document.getElementById("dept").options[document.getElementById("dept").selectedIndex].value;
              
-    {/literal}     
-        var str = "";
-    {foreach from=$dept_id_inCourses key=k_course item=item}
-                   
+    {/literal}      
+    {foreach from=$dept_id_inCourses key=k_course item=item}       
         if(dept_id == {$dept_id_inCourses[$k_course][0]} && stud_status == "{$dept_id_inCourses[$k_course][2]}"){
-        str += "<option value='{$dept_id_inCourses[$k_course][1]}'>{$dept_id_inCourses[$k_course][1]}</option>";
+        select.options[select.options.length] = new Option("{$dept_id_inCourses[$k_course][1]}", "{$dept_id_inCourses[$k_course][1]}");
     }               
     {/foreach}                          
-    select.innerHTML = str;
     {literal}    
         }          
     </script>
