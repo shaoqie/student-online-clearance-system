@@ -46,7 +46,9 @@
                 <tr> 
                     <td>
                         <label class="checkbox">
-                            <input class="Checkbox" type="checkbox" id = '{$k}' value = {$requirement_ID[$k]}> {$i}
+                            <a href="?action=viewEdit_Requirements&reqID={$requirement_ID[$k]}">
+                                <input class="Checkbox" type="checkbox" id = '{$k}' value = {$requirement_ID[$k]}> {$i}
+                            </a>
                         </label>
                     </td>
                     <td>{$myDesc_requirements[$k]}</td>
@@ -55,7 +57,7 @@
         </table>
 
         <!-- Delete Selected Button-->
-        <a style="cursor:pointer;" onclick="findCheck('{$rowCount_requirement}','Requirements')">
+        <a style="cursor:pointer;" onclick="findCheck('{$rowCount_requirement}','Requirement')">
             <i class="icon-remove"></i> Delete Selected
         </a>
 

@@ -54,6 +54,44 @@ class Requirements_Model extends Model{
         var_dump(mysql_error());
     }
     
+    public function editRequirement($requirementID, $title, $description, $signatory, $sysemID, $visibility, 
+                                    $departmentID, $couseID, $yearLevel, $program, $requirement_type, $prereqSig){
+        
+        $departmentID = $departmentID != "NULL" ? "'$departmentID'" : $departmentID;
+        $couseID = $couseID != "NULL" ? "'$couseID'" : $couseID;
+        $yearLevel = $yearLevel != "NULL" ? "'$yearLevel'" : $yearLevel;
+        $program = $program != "NULL" ? "'$program'" : $program;
+        $prereqSig = $prereqSig != "NULL" ? "'$prereqSig'" : $prereqSig;
+        
+        var_dump("deptid: " . $departmentID);
+        
+        $this->query = mysql_query("UPDATE `socs`.`requirements` SET 
+                                    `Title` = '$title', 
+                                    `Description` = '$description', 
+                                    `Signatory_ID` = '$signatory', 
+                                    `SY_SEM_ID` = '$sysemID', 
+                                    `Visibility` = '$visibility', 
+                                    `Department_ID` = $departmentID, 
+                                    `Course_ID` = $couseID, 
+                                    `Year_Level` = $yearLevel, 
+                                    `Program` = $program, 
+                                    `Requirement_Type` = '$requirement_type', 
+                                    `Prerequisite_Signatory` = $prereqSig
+                                    WHERE `requirements`.`Requirement_ID` = $requirementID;");
+ 
+        var_dump(mysql_error());
+    }
+    
+    public function getRequirement($requirementID){
+        $this->query = mysql_query("SELECT `Title`,`Description`,`Signatory_ID`,`schoolyearsem`.`School_Year`, 
+                                    `schoolyearsem`.`Semester`,`Visibility`,`Department_ID`,`Course_ID`,`Year_Level`,
+                                    `Program`,`Requirement_Type`,`Prerequisite_Signatory` FROM `requirements` 
+                                    inner join schoolyearsem on (`schoolyearsem`.`SY_SEM_ID` = `requirements`.`SY_SEM_ID`) 
+                                    where requirement_id='$requirementID'");
+        
+        return mysql_fetch_array($this->query);
+    }
+    
     public function filterRequirements($sign_id, $sysem_id, $page, $search){
         $this->query = mysql_query("select * from requirements where Signatory_ID = '$sign_id' AND sy_sem_id = '$sysem_id' AND
                                     (Title like '%$search%')

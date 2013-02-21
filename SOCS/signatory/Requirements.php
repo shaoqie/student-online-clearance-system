@@ -52,7 +52,7 @@ class Requirements extends Controller{
     }
     
     public function deleted() {
-        $this->template->setAlert('Delete an Requirement was Successfully!..', Template::ALERT_SUCCESS, 'alert');
+        $this->template->setAlert('Selected requirements were deleted successfully.', Template::ALERT_SUCCESS, 'alert');
     }
 
     public function delete($selected) {
@@ -168,6 +168,7 @@ class Requirements extends Controller{
         $school_year  = $_POST['school_year'];
         $semester = $_POST['semester'];
         $sy_sem = $this->schoolYearSem_model->getSy_ID($school_year, $semester);
+        var_dump($sy_sem);
         
         $requirement_title = $_POST['requirement_title'];
         $requirement_desc = $_POST['requirement_description']; 
@@ -214,6 +215,121 @@ class Requirements extends Controller{
         header("location:requirements.php");
         
     }
+    
+    
+     /*----------- For Editing Requirements Page ------------*/
+
+    public function viewEdit_Requirements($reqID){ 
+        
+        $requirement_Data = $this->requirement_model->getRequirement($reqID);
+        
+        
+        $sign_usability = Session::get_signatory_usability();
+        $sign_id = $this->signatorialList_model->getSignId(Session::get_AssignSignatory());
+        
+        $listOfSignatory = $this->signatorialList_model->getListofSignatory($sign_usability);
+        $listOfSignatoryID = $this->signatorialList_model->getListofSignatoryID($sign_usability);
+        
+        $listOfDepartmentsUnder =  $this->signatorialList_model->getListOfDept_underSignName($sign_id);
+        $listOfDepartmentsUnderID =  $this->signatorialList_model->getListOfDept_underSignNameID($sign_id);
+        
+        $listOfCourse_UnderSign = $this->signatorialList_model->getListOfCourse_Sign($sign_id);
+        $listOfCourse_UnderSignID = $this->signatorialList_model->getListOfCourse_SignID($sign_id);
+        
+        $thisSignatory = Session::get_AssignSignatory();
+        
+        $this->template->setPageName("Edit Requirements");
+        $this->template->setContent("Edit_Requirements.tpl"); 
+        
+        $this->template->assign('listOfSignatory', $listOfSignatory);
+        $this->template->assign('listOfSignatoryID', $listOfSignatoryID);
+        
+        $this->template->assign('listOfDepartments', $listOfDepartmentsUnder);
+        $this->template->assign('listOfDepartmentsID', $listOfDepartmentsUnderID);
+        
+        $this->template->assign('listOfCourse_UnderSign', $listOfCourse_UnderSign);
+        $this->template->assign('listOfCourse_UnderSignID', $listOfCourse_UnderSignID);
+        
+        $this->template->assign('thisSignatory', $thisSignatory);
+        
+        $this->template->assign('req_Title', $requirement_Data['Title']);
+        $this->template->assign('req_Description', $requirement_Data['Description']);
+        $this->template->assign('req_Type', $requirement_Data['Requirement_Type']);
+        
+        $this->template->assign('req_SY', $requirement_Data['School_Year']);
+        $this->template->assign('req_Semester', $requirement_Data['Semester']);
+        
+        $this->template->assign('req_PrereqSignatory', $requirement_Data['Prerequisite_Signatory']);
+        
+        $this->template->assign('req_Visibility', $requirement_Data['Visibility']);
+        
+        $this->template->assign('req_Department', $requirement_Data['Department_ID']);
+        $this->template->assign('req_Course', $requirement_Data['Course_ID']);
+        $this->template->assign('req_YearLevel', $requirement_Data['Year_Level']);
+        $this->template->assign('req_Program', $requirement_Data['Program']);
+        
+        $this->template->assign('req_RequirementID', $reqID);
+    }
+    
+    
+    
+    public function viewEdit_Requirements_submit($id){
+        
+        $school_year  = $_POST['school_year'];
+        $semester = $_POST['semester'];
+        $sy_sem = $this->schoolYearSem_model->getSy_ID($school_year, $semester);
+        var_dump($sy_sem);
+        
+        $requirement_title = $_POST['requirement_title'];
+        $requirement_desc = $_POST['requirement_description']; 
+        $requirement_type = $_POST['requirement_type'];
+        if ($requirement_type == "Textual")
+            $signatory = "NULL" ;
+        else {
+            $signatory = $_POST['signatory']; 
+        }
+        
+        $thisSignantory = $this->signatorialList_model->getSignId(Session::get_AssignSignatory());
+        
+        $requirement_application = $_POST['req_appliesTo']; 
+        
+        $department = "NULL";
+        $courses = "NULL";
+        $year_level = "NULL";
+        $program = "NULL";
+        
+        switch ($requirement_application) {
+            case "By Department":
+                $department = $_POST['Departments'];
+                break;
+            case "By Course":
+                $courses = $_POST['Courses'];
+                break;
+            case "By Year Level":
+                $year_level = $_POST['Year_level'];
+                break;
+            case "By Program":
+                $program = $_POST['Program'];
+                break;
+        }
+        
+        
+        
+        /*
+        var_dump("sy-sem:'$sy_sem' title:'$requirement_title' desc:'$requirement_desc' type:'$requirement_type' sig:'$signatory' ".
+                 "appl:'$requirement_application' department:'$department' course:'$courses' yearlevel:'$year_level' program:'$program'");
+        */
+        
+        //$this->requirement_model->addRequirement($requirement_title, $requirement_desc, $thisSignantory, $sy_sem, $requirement_application, $department, $courses, $year_level, $program, $requirement_type, $signatory);
+    
+        $this->requirement_model->editRequirement($id, $requirement_title, $requirement_desc, $thisSignantory, $sy_sem, $requirement_application, $department, $courses, $year_level, $program, $requirement_type, $signatory);
+        
+        header("location:requirements.php");
+        
+    }
+    
+    
+    
     
     /*----------- For the next page for Adding Requirements ------------*/
     

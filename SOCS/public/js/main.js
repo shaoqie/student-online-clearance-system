@@ -80,7 +80,7 @@ function isCheckAll(isChecked, rowCount){
 function findCheck(rowCount, type){
     if($('.Checkbox:checked').length > 0){
         
-        bootbox.confirm("<strong>Attempting to delete " + $('.Checkbox:checked').length + " " +type +"/s. Are you sure?</strong>", function(result) {
+        bootbox.confirm("<strong>Are you sure you want to delete " + $('.Checkbox:checked').length + "  selected " + type + "(s) ?", function(result) {
             if(result == true){
                 var valueDeleted = "";
                 for(var i = 0; i < rowCount; i++){
