@@ -46,9 +46,8 @@
                 <tr> 
                     <td>
                         <label class="checkbox">
-                            <a href="?action=viewEdit_Requirements&reqID={$requirement_ID[$k]}">
-                                <input class="Checkbox" type="checkbox" id = '{$k}' value = {$requirement_ID[$k]}> {$i}
-                            </a>
+                            <input class="Checkbox" type="checkbox" id = '{$k}' value = {$requirement_ID[$k]}>
+                            <a href="?action=viewEdit_Requirements&reqID={$requirement_ID[$k]}">{$i}</a>
                         </label>
                     </td>
                     <td>{$myDesc_requirements[$k]}</td>
