@@ -48,7 +48,7 @@ foreach ($listOfSignatories["id"] as $key => $value) {
 
 //var_dump($listOfSignatories);
 
-$fpdf = new FPDF('P', 'mm', 'A4');
+$fpdf = new FPDF('P', 'mm', 'Legal');
 $fpdf->SetDisplayMode('fullpage', 'continuous');
 $fpdf->SetTitle("SOCS Clearance - Export Copy");
 $fpdf->SetCreator("USEP SOCS");
@@ -78,7 +78,7 @@ function printBody(){
     
     $fontsize = 10;
     $single_spacing = 4;
-    $double_spacing = 10;
+    $double_spacing = 8;
 
     $fpdf->SetFont('Times','I',$fontsize);
     $fpdf->Cell(0, 0, "Republic of the Philippines", 0, 1, 'C');
@@ -150,15 +150,17 @@ function printBody(){
 
     //}
     
-    for($i=0; $i < count($listOfSignatories["id"]); $i+=4){
+    $table_columns = 3;
+    
+    for($i=0; $i < count($listOfSignatories["id"]); $i+=$table_columns){
         
-        for($k=$i; ($k < ($i+4))  && ($k < count($listOfSignatories["id"])); $k++){
+        for($k=$i; ($k < ($i+$table_columns))  && ($k < count($listOfSignatories["id"])); $k++){
             if ($listOfSignatories["status"][$k] == "Cleared")
                 $fpdf->SetTextColor(38,148,10);
             else
                 $fpdf->SetTextColor(242,34,34);
-            $fpdf->Write(1, str_repeat(" ", 5));
-            $fpdf->Cell(40, 5, $listOfSignatories["status"][$k], "B", 0, 'C', false);
+            $fpdf->Write(1, str_repeat(" ", 10));
+            $fpdf->Cell(50, 5, $listOfSignatories["status"][$k], "B", 0, 'C', false);
             
             //echo $k . "<br/>";
         }
@@ -166,14 +168,13 @@ function printBody(){
         $fpdf->Ln();
         
         $fpdf->SetTextColor(0,0,0);
-        for($k=$i; ($k < ($i+4)) && ($k < count($listOfSignatories["id"])); $k++){
-            $fpdf->Write(1, str_repeat(" ", 5));
-            $fpdf->Cell(40, 5, $listOfSignatories["name"][$k], "T", 0, 'C', false);
+        for($k=$i; ($k < ($i+$table_columns)) && ($k < count($listOfSignatories["id"])); $k++){
+            $fpdf->Write(1, str_repeat(" ", 10));
+            $fpdf->Cell(50, 5, $listOfSignatories["name"][$k], "T", 0, 'C', false);
             //echo $k . "<br/>";
         }
         
-        $fpdf->Ln();
-        $fpdf->Ln();
+        $fpdf->Ln($double_spacing);
     }
     
     
@@ -203,13 +204,13 @@ function printBody(){
     
     $fpdf->SetTextColor(0,0,0);
     
-    $fpdf->Ln($double_spacing);
+    $fpdf->Ln(3);
     
 }
 
 //$fpdf->Write(5, "[This portion over here still needs to be coded and will be finished soon.]");
 
-$fpdf->Output("SOCS Clearance Export - $stud_name.pdf", 'D');
+$fpdf->Output("SOCS Clearance Export - $stud_name.pdf", 'I');
  
 
 /*
