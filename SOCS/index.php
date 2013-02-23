@@ -52,7 +52,7 @@ class Index extends Controller {
             } else if ($this->administrator_model->Account_Type == "Signatory" && $this->administrator_model->validation_status == "Confirmed") {
                 $assign_sign = $this->administrator_model->getAssignSignatory(trim($_POST['username']));
                 $sign_u = $this->administrator_model->getSignatory_Usability(trim($_POST['username']));
-                
+                 
                 Session::set_user($_POST['username'], md5(trim($_POST['password'])));
                 Session::set_signatory_usability($sign_u);
                 Session::set_assignSignatory($assign_sign);

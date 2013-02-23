@@ -33,25 +33,25 @@ class Settings extends Controller {
             $this->template->set_account_type(Session::get_Account_type());
             $this->template->set_photo(Session::get_photo());
             
-            if (Session::get_Account_type() == "Signatory") {
-                $this->template->assign('user_type', Session::get_Account_type());
+            $this->template->assign('user_type', Session::get_Account_type());
+            if (Session::get_Account_type() == "Signatory") {         
                 $this->template->set_account_type(Session::get_Account_type() . " in Charge");
                 $this->template->assign('assign_sign', ", " . Session::get_AssignSignatory());
+                
+                
+                $ug_listOfsignatory = $this->signatory_model->getListofSignatoryName('Under Graduate');
+                $g_listOfsignatory = $this->signatory_model->getListofSignatoryName('Graduate');
+                //$listOfKeysFromSignatories = $this->signatoriallist_model->getKeyListofSignatory();
+
+                $this->template->assign('ug_signatories', $ug_listOfsignatory);
+                $this->template->assign('g_signatories', $g_listOfsignatory);
+                $this->template->assign('current_assignSign', Session::get_AssignSignatory());
+                $this->template->assign('sign_status', Session::get_signatory_usability());
             } else {
                 $this->template->assign('assign_sign', '');
             }
 
-            $this->template->setContent('settings.tpl');
-            
-            
-            $ug_listOfsignatory = $this->signatory_model->getListofSignatoryName('Under Graduate');
-            $g_listOfsignatory = $this->signatory_model->getListofSignatoryName('Graduate');
-            //$listOfKeysFromSignatories = $this->signatoriallist_model->getKeyListofSignatory();
-
-            $this->template->assign('ug_signatories', $ug_listOfsignatory);
-            $this->template->assign('g_signatories', $g_listOfsignatory);
-            $this->template->assign('current_assignSign', Session::get_AssignSignatory());
-            $this->template->assign('sign_status', Session::get_signatory_usability());
+            $this->template->setContent('settings.tpl');   
         } else {
             header('Location: ' . HOST);
             exit;
