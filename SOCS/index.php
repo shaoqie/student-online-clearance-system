@@ -51,13 +51,11 @@ class Index extends Controller {
                 header('Location: ' . HOST . '/student/');
             } else if ($this->administrator_model->Account_Type == "Signatory" && $this->administrator_model->validation_status == "Confirmed") {
                 $assign_sign = $this->administrator_model->getAssignSignatory(trim($_POST['username']));
-                $sign_u = $this->administrator_model->getSignatory_Usability(trim($_POST['username']));
                  
                 Session::set_user($_POST['username'], md5(trim($_POST['password'])));
-                Session::set_signatory_usability($sign_u);
                 Session::set_assignSignatory($assign_sign);
                 $this->setSession('Signatory');
-                //header('Location: ' . HOST . '/signatory/');
+                header('Location: ' . HOST . '/signatory/');
             }else{
                 header('Location: index.php?action=login_error');
                 exit;

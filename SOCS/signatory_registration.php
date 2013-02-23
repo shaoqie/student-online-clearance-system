@@ -42,8 +42,8 @@ class Signatory_Registration extends Controller {
 //        $listOfDept_ID = $this->department_model->getListOfDept_ID();
 //        $ListDept_ID_inCourse = $this->courses_model->getListDept_ID_inCourse();
 //        $listOfCourses = $this->courses_model->getListOfCourses();
-        $ug_listOfsignatory = $this->signatory_model->getListofSignatoryName('Under Graduate');
-        $g_listOfsignatory = $this->signatory_model->getListofSignatoryName('Graduate');
+        $ug_listOfsignatory = $this->signatory_model->getListofSignatoryName();
+        $g_listOfsignatory = $this->signatory_model->getListofSignatoryName();
         //$listOfKeysFromSignatories = $this->signatoriallist_model->getKeyListofSignatory();
 
         $this->template->assign('ug_signatories', $ug_listOfsignatory);
@@ -169,7 +169,7 @@ class Signatory_Registration extends Controller {
 //            }
 
             $this->admin->Assigned_Signatory = $this->signatoriallist_model->getSignId(trim($_POST["sign_name"]));
-            $this->admin->Signatory_Usability = $_POST['sign_usability'];
+            //$this->admin->Signatory_Usability = $_POST['sign_usability'];
             $this->admin->email_add = $_POST['emailAdd'];
             if ($test == 7 && $this->admin->insertSignatory_User()) {
 

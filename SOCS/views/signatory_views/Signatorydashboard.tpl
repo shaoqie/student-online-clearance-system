@@ -55,11 +55,11 @@
                         <div class="btn-group">
                             {if $myStudent_ClearanceStatus[$k] eq 'Cleared'}
                              <!--   <img style="height: 15px; width: 30px;" src="{$host}/photos/cleared.png" class="img-polaroid" /> -->
-                                <a class="btn btn-small btn-success" href="#">
+                                <a class="btn btn-small btn-success" href="index.php?action=viewClearancePage&stud_id={$myKey_Student_Username[$k]}&sy_sem_id={$sysemid}">
                                 <i class="icon-ok-circle icon-large"></i> Cleared</a>                   
                             {else}
                               <!--  <img style="height: 15px; width: 30px;" src="{$host}/photos/not cleared.png" class="img-polaroid" /> -->
-                                  <a class="btn btn-small btn-danger" href="#">
+                                  <a class="btn btn-small btn-danger" href="index.php?action=viewClearancePage&stud_id={$myKey_Student_Username[$k]}&sy_sem_id={$sysemid}">
                                 <i class="icon-remove-circle icon-large"></i> Not Cleared</a> 
                             {/if}
                             <button style="height: 26px;"class="btn dropdown-toggle" data-toggle="dropdown">

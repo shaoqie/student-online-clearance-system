@@ -39,8 +39,8 @@ class Settings extends Controller {
                 $this->template->assign('assign_sign', ", " . Session::get_AssignSignatory());
                 
                 
-                $ug_listOfsignatory = $this->signatory_model->getListofSignatoryName('Under Graduate');
-                $g_listOfsignatory = $this->signatory_model->getListofSignatoryName('Graduate');
+                $ug_listOfsignatory = $this->signatory_model->getListofSignatoryName();
+                $g_listOfsignatory = $this->signatory_model->getListofSignatoryName();
                 //$listOfKeysFromSignatories = $this->signatoriallist_model->getKeyListofSignatory();
 
                 $this->template->assign('ug_signatories', $ug_listOfsignatory);
@@ -68,7 +68,7 @@ class Settings extends Controller {
         $middleName = $_POST['middleName'];
         $email_add = $_POST['emailAdd'];
         $imagefile = $_FILES["photo"];
-        $this->admin->Signatory_Usability = $_POST['sign_usability'];
+        //$this->admin->Signatory_Usability = $_POST['sign_usability'];
         $this->admin->Assigned_Signatory = $this->signatoriallist_model->getSignId(trim($_POST['sign_name']));
 
         if ($newpass == "") {

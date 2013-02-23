@@ -24,7 +24,7 @@ class Grad_SignatorialList extends Controller{
             $this->signatorialList_model = new SignatorialList_Model();
             $this->department_model = new Department_Model();
             
-            $this->template->setPageName('Signatorial List');
+            $this->template->setPageName('Signatorial List for Graduate');
             $this->template->set_username(Session::get_user());
             $this->template->set_surname(Session::get_Surname());
             $this->template->set_firstname(Session::get_Firstname());
@@ -47,10 +47,10 @@ class Grad_SignatorialList extends Controller{
     
     public function addSignatory($cmdSignatory){    
         $dept_id = $this->signatorialList_model->getDeptId(Session::get_DepartmentName());
-        $sign_id = $this->signatorialList_model->getSignatory_ID(trim($cmdSignatory), 'Graduate');
+        $sign_id = $this->signatorialList_model->getSignatory_ID(trim($cmdSignatory));
         
         if(!$this->signatorialList_model->isExist($dept_id, $sign_id, 'Graduate')){ 
-            $this->signatorialList_model->insert($dept_id, $sign_id); 
+            $this->signatorialList_model->insert($dept_id, $sign_id, 'Graduate'); 
             $this->template->setAlert('Signatorial List was Added Successfully!..', Template::ALERT_SUCCESS, 'alert');
             $this->displayTable('', 1, "default");    
         }

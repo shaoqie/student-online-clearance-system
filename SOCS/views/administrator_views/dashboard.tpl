@@ -45,7 +45,7 @@
                         <th>{$courseORsign}</th>
                         {if isset($status)} <th>Status</th> {/if}
                         <!-- <th>Type</th> -->
-                        {if $user_type == 'Signatory'}<th>Usability</th>{/if}
+                        {*if $user_type == 'Signatory'}<th>Usability</th>{/if*}
                     </tr>
                     {foreach from = $myName key = k item = i}
                         <tr>
@@ -62,7 +62,7 @@
                             </td>
                             <td>{$my_courseORsign[$k]}</td>
                             {if isset($status)} <td>{$stud_status[$k]}</td> {/if}
-                            {if $user_type == 'Signatory'}<td>{$myUsability[$k]}</td>{/if}
+                            {*if $user_type == 'Signatory'}<td>{$myUsability[$k]}</td>{/if*}
                         </tr>
                     {/foreach}
                 </table>

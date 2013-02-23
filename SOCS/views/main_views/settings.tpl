@@ -1,25 +1,3 @@
-<script>
-    function changeSignatory(){
-    if(document.getElementById("stud_status1").checked == true){ var stud_status = "Under Graduate";
-}else{ var stud_status = "Graduate"; }
-        
-var str = "<option></option>";
-        
-if(stud_status == "Graduate"){
-    {foreach from=$g_signatories item=signatory key=pk}
-str += "<option>{$signatory}</option>";
-    {/foreach}
-}else{
-    {foreach from=$ug_signatories item=signatory key=pk}
-str += "<option>{$signatory}</option>";
-    {/foreach}
-}
-        
-document.getElementById("sign_name").innerHTML = str;
-}
-</script>
-
-
 <!-- <button class="pull-right btn" onclick="window.location.href='index.php'">Back</button> -->
 
 {if $account_type eq "Student"}
@@ -83,18 +61,13 @@ document.getElementById("sign_name").innerHTML = str;
     {if $user_type eq "Signatory"}
         <legend>Signatory Designation: </legend>
 
-        <div class="control-group form-inline">
-            <div class="controls form-inline">
-                <input type="radio" {if $sign_status eq "Under Graduate"}checked{/if} name="sign_usability" id="stud_status1" onclick="changeSignatory()" value="Under Graduate"> <label><b>Under Graduate</b></label> &nbsp; &nbsp; &nbsp;
-                <input type="radio" {if $sign_status eq "Graduate"}checked{/if} name="sign_usability" id="stud_status2" onclick="changeSignatory()" value="Graduate"> <label><b>Graduate </b></label>
-            </div>
-        </div>
-
         <div class="control-group">
             <label class="control-label"><b>Signatory: </b></label>
             <div class="controls">
                 <select id="sign_name" name="sign_name"  required>
-                    <option>{$current_assignSign}</option>                
+                    {foreach from=$ug_signatories item=signatory key=pk}
+                        <option {if $signatory eq  $current_assignSign}selected{/if}>{$signatory}</option>
+                    {/foreach}
                 </select>
 
                 {*

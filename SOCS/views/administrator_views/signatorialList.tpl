@@ -3,7 +3,7 @@
     var cmdSignatory = document.getElementById("cmdSignatory").value;
     var cmdIndex = document.getElementById("cmdSignatory").selectedIndex;
     
-    if(cmdIndex > 0)window.location.assign("?action=addSignatory&cmdSignatory=" +cmdSignatory);  
+    window.location.assign("?action=addSignatory&cmdSignatory=" +cmdSignatory);  
 }
     
 function edit(idEdit, sign_id, length, countSignList){ 
@@ -42,6 +42,51 @@ $("#unSelectedSignatorialList" +x).html($("#edit" +x).val());
 $("#confirmed" +x).html("");
 }
 });
+}
+
+function newOptions(){
+    var select = document.getElementById("cmdSignatory");
+    var hide = document.getElementById("hide").value;
+    var flag = document.getElementById("flag").value;
+    var count = 0;
+    var temp = 0;
+    if(select.value == "---------Next--------"){ 
+        var holder = flag == 1 ? parseInt(hide) + 20 : parseInt(hide) + 10;
+        select.innerHTML = "";
+        {foreach from = $SignatoryList item = i}
+            if(count >= (holder - 10) && count <  holder){
+                select.options[select.options.length] = new Option("{$i}");  temp = count + 1;
+            }
+            count ++;
+        {/foreach} 
+        select.options[select.options.length] = new Option("---------Back--------");
+        if(temp % 10 == 0){
+            select.options[select.options.length] = new Option("---------Next--------");
+        }
+        
+        document.getElementById("hide").value = holder;
+        document.getElementById("flag").value = "0";
+    }else if(select.value == "---------Back--------"){
+    
+    
+        var holder = parseInt(flag) == 0 ? parseInt(hide) - 20 : parseInt(hide) - 10;
+        select.innerHTML = "";
+        
+        {foreach from = $SignatoryList item = i}
+            if(count >= holder && count <  holder + 10){
+                select.options[select.options.length] = new Option("{$i}");  
+            }
+            count ++;
+        {/foreach} 
+          
+        if(parseInt(holder) != 0){
+            select.options[select.options.length] = new Option("---------Back--------"); 
+        }
+        select.options[select.options.length] = new Option("---------Next--------");
+        
+        document.getElementById("hide").value = holder;
+        document.getElementById("flag").value = "1";
+    }
 }
 </script>
 
@@ -91,14 +136,16 @@ $("#confirmed" +x).html("");
                 <form class="form-inline">
                     <label><b>Add Signatory: </b></label>
 
-
-                    <select class="span2" id="cmdSignatory" required>
-                        <option></option>
+                    {assign var=count value=0}
+                    <select class="span2" id="cmdSignatory" required onchange="newOptions()">
                         {foreach from = $SignatoryList item = i}
-                            <option>{$i}</option>
+                            {if $count < 10}<option>{$i}</option>{/if}
+                            {assign var=count value=$count + 1}
                         {/foreach}
+                        <option>---------Next--------</option>
                     </select>
-
+                        <input type=hidden id="hide" value="10">
+                        <input type=hidden id="flag" value="0">
 
                     {*
                     <input type="text" id="cmdSignatory" required autocomplete="off" class="span2" data-provide="typeahead" data-source='[

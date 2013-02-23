@@ -16,16 +16,6 @@
 
         <div class="row">
             <div class="span9">
-
-                <ul class="nav nav-tabs">
-                    <li {if $index_tabs == 0}class="active" {/if}>
-                        <a href='../administrator/signatory_list_manager.php'>Under Graduate</a>
-                    </li>
-                    <li {if $index_tabs == 1}class="active" {/if}>
-                        <a href='../administrator/grad_signatory_list_manager.php'>Graduate</a>
-                    </li> 
-                </ul>
-
                 <!-- Add Signatory Button-->
                 <input class="btn" type="button" value="Add Signatory" {if $index_tabs == 0} onclick="window.location.href='signatory_list_manager.php?action=addSignatory'" {/if} {if $index_tabs == 1} onclick="window.location.href='grad_signatory_list_manager.php?action=addSignatory'" {/if}>
 

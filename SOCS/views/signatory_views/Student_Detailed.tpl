@@ -53,14 +53,18 @@
                             <td>{$stud_section}</td>
                         </tr>
                         <tr>
-                            <th style="text-align: right">Overall Status: </th>
+                            <th style="text-align: right">Status: </th>
+                            <td>{$stud_status}</td>
+                        </tr>
+                        <tr>
+                            <th style="text-align: right">Overall Clearance Status: </th>
                             <td>
-                                {if $stud_status eq 'Cleared'}
-                                    <span class="label label-success"> {$stud_status}</span>    
-                                {elseif $stud_status eq 'No Requirements'}
-                                    <span class="label">{$stud_status}</span>
+                                {if $stud_overall_status eq 'Cleared'}
+                                    <span class="label label-success"> {$stud_overall_status}</span>    
+                                {elseif $stud_overall_status eq 'No Requirements'}
+                                    <span class="label">{$stud_overall_status}</span>
                                 {else}
-                                    <span class="label label-important">{$stud_status}</span>
+                                    <span class="label label-important">{$stud_overall_status}</span>
                                 {/if}
                             </td>
                         </tr>

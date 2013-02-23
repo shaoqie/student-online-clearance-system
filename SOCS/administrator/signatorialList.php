@@ -24,7 +24,7 @@ class signatorialList extends Controller{
             $this->signatorialList_model = new SignatorialList_Model();
             $this->department_model = new Department_Model();
             
-            $this->template->setPageName('Signatorial List');
+            $this->template->setPageName('Signatorial List for Under Graduate');
             $this->template->set_username(Session::get_user());
             $this->template->set_surname(Session::get_Surname());
             $this->template->set_firstname(Session::get_Firstname());
@@ -47,13 +47,13 @@ class signatorialList extends Controller{
     
     public function addSignatory($cmdSignatory){    
         $dept_id = $this->signatorialList_model->getDeptId(Session::get_DepartmentName());
-        $sign_id = $this->signatorialList_model->getSignatory_ID(trim($cmdSignatory, 'Under Graduate'));
+        $sign_id = $this->signatorialList_model->getSignatory_ID(trim($cmdSignatory));
         
-        
-        $this->signatorialList_model->insert($dept_id, $sign_id);
-        
-        $this->displayTable('', 1, "default");
-        $this->template->setAlert('Signatorial List was Added Successfully!..', Template::ALERT_SUCCESS, 'alert');
+        if(!$this->signatorialList_model->isExist($dept_id, $sign_id, 'Under Graduate')){ 
+            $this->signatorialList_model->insert($dept_id, $sign_id, 'Under Graduate');
+            $this->displayTable('', 1, "default");
+            $this->template->setAlert('Signatorial List was Added Successfully!..', Template::ALERT_SUCCESS, 'alert');
+        }
     }
     
     public function deleted() {

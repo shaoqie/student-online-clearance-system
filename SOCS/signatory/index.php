@@ -90,10 +90,10 @@ class Index extends Controller {
         }        
         
         $sign_id = $this->signatorialList_model->getSignId(Session::get_AssignSignatory()); 
-        $sign_usedFor = $this->signatorialList_model->getUsed_For(Session::get_AssignSignatory()); 
+        //$sign_usedFor = $this->signatorialList_model->getUsed_For(Session::get_AssignSignatory()); 
         
         
-        $this->user_model->filterStudent($sign_id, $searchName, $page, $sign_usedFor);
+        $this->user_model->filterStudent($sign_id, $searchName, $page);
         
         $numOfPages = $this->user_model->getStudent_PageSize($sign_id, $searchName);
         $getListofStudent_Name = $this->getListofName($this->user_model->getFilter_Name(), $searchName, $finder);
@@ -172,9 +172,9 @@ class Index extends Controller {
         $stud_program = $this->student_model->getStud_Program();
         $stud_section = $this->student_model->getStud_Section();
         $stud_photo = $this->student_model->getStud_Photo();
-        //$stud_status = $this->student_model->getStudent_clearance_status(trim($stud_id));
+        $stud_status = $this->student_model->getStud_Status();
         $thisSig = $this->signatorialList_model->getSignId(Session::get_AssignSignatory());
-        $stud_status = $this->clearanceStatus_model->getOverallSignatoryClearanceStatus($stud_id, $thisSig, $sy_sem_id);
+        $stud_overall_status = $this->clearanceStatus_model->getOverallSignatoryClearanceStatus($stud_id, $thisSig, $sy_sem_id);
         
         $this->template->setPageName("Student Detailed Page");
         $this->template->setContent("Student_Detailed.tpl");
@@ -188,6 +188,7 @@ class Index extends Controller {
         $this->template->assign('stud_section', $stud_section);
         $this->template->assign('stud_photo', $stud_photo);
         $this->template->assign('stud_status', $stud_status);
+        $this->template->assign('stud_overall_status', $stud_overall_status);
     }  
 
     /*------------ Display UI -----------------*/

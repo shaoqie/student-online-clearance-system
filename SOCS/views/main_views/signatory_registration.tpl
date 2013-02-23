@@ -1,24 +1,49 @@
 <script>
-    function changeSignatory(){
-    if(document.getElementById("stud_status1").checked == true){ var stud_status = "Under Graduate";
-}else{ var stud_status = "Graduate"; }
+function newOptions(){
+    var select = document.getElementById("sign_name");
+    var hide = document.getElementById("hide").value;
+    var flag = document.getElementById("flag").value;
+    var count = 0;
+    var temp = 0;
+    if(select.value == "---------Next--------"){ 
+        var holder = flag == 1 ? parseInt(hide) + 20 : parseInt(hide) + 10;
+        select.innerHTML = "";
+        {foreach from = $ug_signatories item = i}
+            if(count >= (holder - 10) && count <  holder){
+                select.options[select.options.length] = new Option("{$i}");  temp = count + 1;
+            }
+            count ++;
+        {/foreach} 
+        select.options[select.options.length] = new Option("---------Back--------");
+        if(temp % 10 == 0){
+            select.options[select.options.length] = new Option("---------Next--------");
+        }
         
-document.getElementById("sign_name").innerHTML = "";
-var select = document.getElementById("sign_name");
-
-if(stud_status == "Graduate"){
-    {foreach from=$g_signatories item=signatory key=pk}
-        select.options[select.options.length] = new Option("{$signatory}");
-    {/foreach}
-}else{
-    {foreach from=$ug_signatories item=signatory key=pk}
-         select.options[select.options.length] = new Option("{$signatory}");       
-    {/foreach}
-}
+        document.getElementById("hide").value = holder;
+        document.getElementById("flag").value = "0";
+    }else if(select.value == "---------Back--------"){
+    
+    
+        var holder = parseInt(flag) == 0 ? parseInt(hide) - 20 : parseInt(hide) - 10;
+        select.innerHTML = "";
         
+        {foreach from = $ug_signatories item = i}
+            if(count >= holder && count <  holder + 10){
+                select.options[select.options.length] = new Option("{$i}");  
+            }
+            count ++;
+        {/foreach} 
+          
+        if(parseInt(holder) != 0){
+            select.options[select.options.length] = new Option("---------Back--------"); 
+        }
+        select.options[select.options.length] = new Option("---------Next--------");
+        
+        document.getElementById("hide").value = holder;
+        document.getElementById("flag").value = "1";
+    }
 }
 </script>
-
 
 <form method='post' class="form-horizontal" action="{$host}/signatory_registration.php?action=register" enctype="multipart/form-data">
     {literal}
@@ -80,22 +105,19 @@ if(stud_status == "Graduate"){
 
     <legend>Signatory Designation: </legend>
 
-    <div class="control-group form-inline">
-        <div class="controls form-inline">
-            <input type="radio" checked name="sign_usability" id="stud_status1" onclick="changeSignatory()" value="Under Graduate"> <label><b>Under Graduate</b></label> &nbsp; &nbsp; &nbsp;
-            <input type="radio" name="sign_usability" id="stud_status2" onclick="changeSignatory()" value="Graduate"> <label><b>Graduate </b></label>
-        </div>
-    </div>
-
     <div class="control-group">
         <label class="control-label"><b>Signatory: </b></label>
         <div class="controls">
-            <select id="sign_name" name="sign_name" required>
-                <option></option>
+            {assign var=count value=0}
+            <select id="sign_name" name="sign_name" required onchange="newOptions()">
                 {foreach from=$ug_signatories item=signatory key=pk}
-                    <option>{$signatory}</option>
+                    {if $count < 10}<option>{$signatory}</option>{/if}
+                    {assign var=count value=$count + 1}
                 {/foreach}
+                <option>---------Next--------</option>
             </select>
+            <input type=hidden id="hide" value="10">
+            <input type=hidden id="flag" value="0">
 
             {*
             <input type="text" required name="sign_name" autocomplete="off" class="input-large" data-provide="typeahead" data-source='[

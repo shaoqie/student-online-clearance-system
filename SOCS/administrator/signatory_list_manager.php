@@ -18,7 +18,7 @@ class Signatory_List_Manager extends Controller {
 
             $this->signatory_model = new Signatory_Model();
             $this->template = new Template();
-            $this->template->setPageName('Under Graduate Signatories');
+            $this->template->setPageName('List of Signatories');
 
             $this->template->set_username(Session::get_user());
             $this->template->set_surname(Session::get_Surname());

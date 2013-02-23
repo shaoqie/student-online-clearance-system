@@ -53,9 +53,9 @@ class User_Model extends Model {
 
     public function insertSignatory_User() {
 
-        $q = "INSERT INTO `socs`.`users` (`Username`, `Password`, `Surname`, `First_Name`, `Middle_Name`, `email_address`, `Picture`, `Account_Type`, `Assigned_Signatory`, `Signatory_Usability`, `Validation_Status`) 
+        $q = "INSERT INTO `socs`.`users` (`Username`, `Password`, `Surname`, `First_Name`, `Middle_Name`, `email_address`, `Picture`, `Account_Type`, `Assigned_Signatory`, `Validation_Status`) 
                             VALUES 
-                            ('$this->Username', '$this->Password', '$this->Surname', '$this->First_Name', '$this->Middle_Name', '$this->email_add', '$this->Picture', 'Signatory', '$this->Assigned_Signatory', '$this->Signatory_Usability', 'Unconfirmed')";
+                            ('$this->Username', '$this->Password', '$this->Surname', '$this->First_Name', '$this->Middle_Name', '$this->email_add', '$this->Picture', 'Signatory', '$this->Assigned_Signatory', 'Unconfirmed')";
         
         $this->query = mysql_query($q);
         
@@ -67,9 +67,9 @@ class User_Model extends Model {
     }
     
     public function insertSignatory_UserByAdmin(){
-        $this->query = mysql_query("INSERT INTO `socs`.`users` (`Username`, `Password`, `Surname`, `First_Name`, `Middle_Name`, `Picture`, `Account_Type`, `Assigned_Signatory`, `Signatory_Usability`, `Validation_Status`) 
+        $this->query = mysql_query("INSERT INTO `socs`.`users` (`Username`, `Password`, `Surname`, `First_Name`, `Middle_Name`, `Picture`, `Account_Type`, `Assigned_Signatory`, `Validation_Status`) 
                             VALUES 
-                            ('$this->Username', '$this->Password', '$this->Surname', '$this->First_Name', '$this->Middle_Name', NULL, 'Signatory', '$this->Assigned_Signatory', '$this->Signatory_Usability', 'Confirmed')");
+                            ('$this->Username', '$this->Password', '$this->Surname', '$this->First_Name', '$this->Middle_Name', NULL, 'Signatory', '$this->Assigned_Signatory', 'Confirmed')");
     }
 
     // mutator
@@ -127,7 +127,7 @@ class User_Model extends Model {
     
     public function update() {
         if(Session::get_Account_type() == "Signatory"){
-            $sql = "UPDATE users SET Picture='" . $this->Picture . "', Surname='" . $this->Surname . "', First_Name='" . $this->First_Name . "', Middle_Name='" . $this->Middle_Name ."', email_address='" .$this->email_add . "', Password='" . $this->Password . "',Assigned_Signatory = '$this->Assigned_Signatory' , Signatory_Usability = '$this->Signatory_Usability' Where Username='" . $this->Username . "'";      
+            $sql = "UPDATE users SET Picture='" . $this->Picture . "', Surname='" . $this->Surname . "', First_Name='" . $this->First_Name . "', Middle_Name='" . $this->Middle_Name ."', email_address='" .$this->email_add . "', Password='" . $this->Password . "',Assigned_Signatory = '$this->Assigned_Signatory' Where Username='" . $this->Username . "'";      
         }else{
             $sql = "UPDATE users SET Picture='" . $this->Picture . "', Surname='" . $this->Surname . "', First_Name='" . $this->First_Name . "', Middle_Name='" . $this->Middle_Name ."', email_address='" .$this->email_add . "', Password='" . $this->Password . "' Where Username='" . $this->Username . "'";
         }
@@ -186,7 +186,7 @@ class User_Model extends Model {
 
     public function filter($t_searchName, $t_page, $t_type) {
         //$valid = $t_type == 'Student' ? "and `Validation_Status` IS NULL" : "and `Validation_Status` = 'confirmed'";
-        $select = $t_type == 'Student' ? "course_name, Status" : "signatory_name, Signatory_Usability";
+        $select = $t_type == 'Student' ? "course_name, Status" : "signatory_name";
         $join = $t_type == 'Student' ? "inner join students on students.username = users.username
                                         inner join courses on courses .course_id = students.course_id " :
                 "inner join signatories on signatories.signatory_id = users.Assigned_Signatory ";
@@ -210,7 +210,7 @@ class User_Model extends Model {
             array_push($this->filter_Picture, $row['1']);
             array_push($this->filter_Type, $row['3']);
             array_push($this->filter_courseORsign, $row['4']);
-            array_push($this->stud_status_sign_usability, $row['5']);
+            if($t_type == 'Student'){array_push($this->stud_status_sign_usability, $row['5']);}   
         }
     }
 
@@ -304,7 +304,7 @@ class User_Model extends Model {
     /* --------------------------------------------------------------------------------------- */
     /* ------------ For Signatory Dashboard Part ---------------- */
 
-    public function filterStudent($Tsign_id, $searchName, $page, $used_for) {
+    public function filterStudent($Tsign_id, $searchName, $page) {
         $this->query = mysql_query("select students.username, concat(Surname, ', ', First_Name, ' ', Middle_Name) as Name, Picture from students
                                     inner join users on students.username = users.username
                                     
@@ -314,7 +314,7 @@ class User_Model extends Model {
                                     inner join signatories on signatorialList.signatory_id = signatories.signatory_id
                                     where (First_name like '%$searchName%' OR Surname like '%$searchName%' OR 
                                     Middle_Name like '%$searchName%') AND Account_Type = 'student' AND `Validation_Status` = 'confirmed'
-                                    AND signatories.signatory_id = '$Tsign_id' AND signatories.used_for = '$used_for' AND students.status = '$used_for' group by Name order by Name
+                                    AND signatories.signatory_id = '$Tsign_id' group by Name order by Name
                                     LIMIT " . (($page - 1) * $this->itemsPerPage) . ", " . $this->itemsPerPage);
 
 

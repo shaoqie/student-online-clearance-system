@@ -47,7 +47,7 @@ class SignatorialList_Model extends Model {
         $this->query = mysql_query("select signatories.signatory_id, signatories.signatory_name  from signatorialList
                                     inner join signatories on signatorialList.signatory_id = signatories.signatory_id
                                     inner join departments on signatorialList.department_id = departments.department_id
-                                    where departments.Department_Name like '%$Tdept_name%' and signatories.signatory_name like '%$Tsign_name%' and Used_For = '$used_for'
+                                    where departments.Department_Name like '%$Tdept_name%' and signatories.signatory_name like '%$Tsign_name%' and signatorialList.Usability = '$used_for'
                                     LIMIT " . (($Tpage - 1) * $this->itemsPerPage) . ", " . $this->itemsPerPage);
 
         $this->filter_ID = array();
@@ -99,7 +99,7 @@ class SignatorialList_Model extends Model {
         $this->query = mysql_query("select signatories.signatory_name from signatorialList
                                     inner join signatories on signatorialList.signatory_id = signatories.signatory_id
                                     inner join departments on signatorialList.department_id = departments.department_id
-                                    where departments.Department_Name like '%$Tdept_name%' and signatories.signatory_name like '%$searchName%' and Used_For = '$used_for'");
+                                    where departments.Department_Name like '%$Tdept_name%' and signatories.signatory_name like '%$searchName%' and signatorialList.Usability = '$used_for'");
 
         return mysql_num_rows($this->query) / $this->itemsPerPage;
     }
@@ -113,16 +113,16 @@ class SignatorialList_Model extends Model {
         mysql_query("delete from signatoriallist where Department_ID = '$dept_ID' and Signatory_ID = '$sign_ID'");
     }
 
-    public function insert($dept_ID, $sign_ID) {
-        mysql_query("INSERT INTO `socs`.`signatoriallist` (`Department_ID`, `Signatory_ID`) 
-                VALUES ('$dept_ID', '$sign_ID')");
+    public function insert($dept_ID, $sign_ID, $usable) {
+        mysql_query("INSERT INTO `socs`.`signatoriallist` (`Department_ID`, `Signatory_ID`, `Usability`) 
+                VALUES ('$dept_ID', '$sign_ID', '$usable')");
     }
 
     /* --------- For Assigning Signatory ---------- */
 
-    public function getListofSignatory($used_for) {
+    public function getListofSignatory() {
         $rowInfo = array();
-        $this->query = mysql_query("select signatory_name from signatories where Used_For = '$used_for' order by signatory_name");
+        $this->query = mysql_query("select signatory_name from signatories order by signatory_name");
 
         while ($row = mysql_fetch_array($this->query)) {
             array_push($rowInfo, $row['signatory_name']);
@@ -131,9 +131,9 @@ class SignatorialList_Model extends Model {
         return $rowInfo;
     }
     
-    public function getListofSignatoryID($used_for) {
+    public function getListofSignatoryID() {
         $rowInfo = array();
-        $this->query = mysql_query("select signatory_ID from signatories where Used_For = '$used_for' order by signatory_name");
+        $this->query = mysql_query("select signatory_ID from signatories order by signatory_name");
 
         while ($row = mysql_fetch_array($this->query)) {
             array_push($rowInfo, $row[0]);
@@ -158,7 +158,7 @@ class SignatorialList_Model extends Model {
         $this->query = mysql_query("select signatories.signatory_name from signatorialList
                                     inner join signatories on signatorialList.signatory_id = signatories.signatory_id
                                     inner join departments on signatorialList.department_id = departments.department_id
-                                    where departments.Department_Name = '$Tdept_name' and Used_For = '$used_for'");
+                                    where departments.Department_Name = '$Tdept_name' and signatorialList.Usability = '$used_for'");
 
         while ($row = mysql_fetch_array($this->query)) {
             array_push($filter, $row['0']);
@@ -201,8 +201,8 @@ class SignatorialList_Model extends Model {
         return $row['Department_ID'];
     }
 
-    public function getSignatory_ID($sign_name, $used_for){
-        $this->query = mysql_query("select Signatory_ID from signatories where Signatory_Name like '%$sign_name%' and Used_For = '$used_for'");
+    public function getSignatory_ID($sign_name){
+        $this->query = mysql_query("select Signatory_ID from signatories where Signatory_Name like '%$sign_name%'");
         $row = mysql_fetch_array($this->query);
 
         return $row['Signatory_ID'];
@@ -215,19 +215,20 @@ class SignatorialList_Model extends Model {
         return $row['Signatory_ID'];
     }
 
+    /*
     public function getUsed_For($sign_name){
         $this->query = mysql_query("select Used_For from signatories where Signatory_Name like '%$sign_name%'");
         $row = mysql_fetch_array($this->query);
 
         return $row['Used_For'];
     }
-    
+    */
     /* --------- For Student Page ---------- */
 
     public function getListofSignatoryByDept($dept_id, $used_for) {
-        $this->query = mysql_query("select signatoriallist.Signatory_ID, signatory_name, Used_For from signatoriallist
+        $this->query = mysql_query("select signatoriallist.Signatory_ID, signatory_name from signatoriallist
                                     inner join signatories on signatories.Signatory_ID = signatoriallist.Signatory_ID
-                                    where Department_ID = '$dept_id' and Used_For = '$used_for'");
+                                    where Department_ID = '$dept_id' and signatoriallist.Usability = '$used_for'");
 
         $this->sign_ID = array();
         $this->sign_Name = array();
@@ -237,11 +238,11 @@ class SignatorialList_Model extends Model {
         }
     }
     
-    public function getListOfCourse_Sign($signID, $used_for){
+    public function getListOfCourse_Sign($signID){
         $this->query = mysql_query("select courses.course_name from signatoriallist
                                     inner join departments on (signatoriallist.Department_ID = departments.Department_ID)  
                                     inner join courses on (departments.department_id = courses.department_id)
-                                    where signatoriallist.signatory_id = '$signID' and Usability = '$used_for'");
+                                    where signatoriallist.signatory_id = '$signID'");
         
         $listCourses = array();
         while ($row = mysql_fetch_array($this->query)) {
@@ -251,11 +252,11 @@ class SignatorialList_Model extends Model {
         return $listCourses;
     }
     
-    public function getListOfCourse_SignID($signID, $used_for){
+    public function getListOfCourse_SignID($signID){
         $this->query = mysql_query("select courses.course_id from signatoriallist
                                     inner join departments on (signatoriallist.Department_ID = departments.Department_ID)  
                                     inner join courses on (departments.department_id = courses.department_id)
-                                    where signatoriallist.signatory_id = '$signID' and Usability = '$used_for'");
+                                    where signatoriallist.signatory_id = '$signID'");
         
         $listCourses = array();
         while ($row = mysql_fetch_array($this->query)) {
@@ -268,7 +269,7 @@ class SignatorialList_Model extends Model {
     public function isExist($dept_id, $sign_id, $used_for){
         $this->query = mysql_query("SELECT * from signatoriallist
                                 inner join Signatories on Signatories.`Signatory_ID` = signatoriallist.`Signatory_ID`
-                                where signatoriallist.`Department_ID` = '$dept_id' and signatoriallist.`Signatory_ID` = '$sign_id' and Signatories.Used_For = '$used_for'");
+                                where signatoriallist.`Department_ID` = '$dept_id' and signatoriallist.`Signatory_ID` = '$sign_id' and signatoriallist.Usability = '$used_for'");
         
         
         $row = mysql_num_rows($this->query);
