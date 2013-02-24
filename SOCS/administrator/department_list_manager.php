@@ -30,6 +30,9 @@ class Department_List_Manager extends Controller {
             $this->template->setContent('department_list_manager.tpl');
             $this->template->setCalendar('Calendar.tpl');
             $this->template->assign('assign_sign', '');
+            
+            $filename = "../Excel_File/student_current_enroll.xls";
+            if (file_exists($filename)){ $this->template->assign('excel_file', 'true'); }
 
             $this->displayTable('', 1, "default");
             

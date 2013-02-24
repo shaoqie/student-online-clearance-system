@@ -63,6 +63,10 @@ function autoload_libs($class){
     if($class == "upload"){
         require_once PATH."libs/class.upload/class.upload.php";
     }
+    
+    if($class == "Spreadsheet_Excel_Reader"){
+        require_once PATH."libs/php-excel-reader-2.21/excel_reader2.php";
+    }
 }
 
 /*

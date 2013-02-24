@@ -12,15 +12,6 @@
     <div class="span9">
         <!-- Header-->
         <h2 class="well center-text">Add Signatory</h2>
-                   
-        <ul class="nav nav-tabs">
-            <li {if $index_tabs == 0}class="active" {/if}>
-                <a href='../administrator/signatory_list_manager.php'>Under Graduate</a>
-            </li>
-            <li {if $index_tabs == 1}class="active" {/if}>
-                <a href='../administrator/grad_signatory_list_manager.php'>Graduate</a>
-            </li> 
-        </ul>
 
         <!-- Adding Form-->
         <form {if $index_tabs == 0} action="signatory_list_manager.php?action=add_signatory" {/if} {if $index_tabs == 1} action="grad_signatory_list_manager.php?action=add_signatory" {/if} method='post' class="form-horizontal">

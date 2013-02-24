@@ -39,6 +39,9 @@ class course_list_byDepartment extends Controller {
             $this->template->setContent('course_list_byDepartment.tpl');
             $this->template->setCalendar('Calendar.tpl');
             $this->template->assign('assign_sign', '');
+            
+            $filename = "../Excel_File/student_current_enroll.xls";
+            if (file_exists($filename)){ $this->template->assign('excel_file', 'true'); }
 
             $this->displayTable('', 1, "default");
             

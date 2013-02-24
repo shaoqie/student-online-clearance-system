@@ -33,6 +33,9 @@ class Signatory_List_Manager extends Controller {
 
             $this->displayTable('', 1, "default");
             
+            $filename = "../Excel_File/student_current_enroll.xls";
+            if (file_exists($filename)){ $this->template->assign('excel_file', 'true'); }
+            
             if(isset($_GET['successEdit'])){
                 if($_GET['successEdit'] == 'true'){
                     $this->template->setAlert("Updating Signatory was Successful", Template::ALERT_SUCCESS, 'alert');

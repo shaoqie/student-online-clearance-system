@@ -31,6 +31,10 @@ class unconfirmed_signatory extends Controller{
             $this->template->assign('assign_sign', '');
             
             $this->displayTable('', 1, "default");
+            
+            
+            $filename = "../Excel_File/student_current_enroll.xls";
+            if (file_exists($filename)){ $this->template->assign('excel_file', 'true'); }
         }else{
              header('Location: ' . HOST);
         }

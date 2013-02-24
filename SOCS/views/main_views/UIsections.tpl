@@ -24,65 +24,65 @@
 <form class="form-inline" method="post">
     <label><b>School Year:  </b></label>
 
-        {literal}<input type="text" maxlength="9" pattern="[0-9\-]{9}" {/literal}  id="school_year" name="school_year" value="{$currentSchool_Year}" autocomplete="off" class="span3" data-provide="typeahead" data-source='[
-        
-        {foreach from=$mySchool_Year key=k item=year}
-            {if $mySchool_Year|@count - 1 eq $k}
-                "{$year}"
-            {else}
-                "{$year}",
-            {/if}
-        {/foreach}
-        ]'>
+{literal}<input type="text" maxlength="9" pattern="[0-9\-]{9}" {/literal}  id="school_year" name="school_year" value="{$currentSchool_Year}" autocomplete="off" class="span3" data-provide="typeahead" data-source='[
 
-    {*
-    <select id="school_year" name="school_year" class="span3">
-    {foreach from = $mySchool_Year key = k item = i}
-    {if $currentSchool_Year eq $i}
-    <option selected>{$i}</option>
+       {foreach from=$mySchool_Year key=k item=year}
+           {if $mySchool_Year|@count - 1 eq $k}
+               "{$year}"
+           {else}
+               "{$year}",
+           {/if}
+       {/foreach}
+       ]'>
+
+{*
+<select id="school_year" name="school_year" class="span3">
+{foreach from = $mySchool_Year key = k item = i}
+{if $currentSchool_Year eq $i}
+<option selected>{$i}</option>
+{else}
+<option>{$i}</option>
+{/if}
+{/foreach}
+</select>
+*}
+
+{*
+<input value="{$currentSchool_Year}" class="span2" type="text" maxlength="9" 
+{literal}       
+pattern="[0-9\-]{9}" id="school_year" name="school_year" autocomplete="off" class="input-small" data-provide="typeahead" data-source='[
+{/literal}
+{foreach from=$mySchool_Year key=k item=year}
+{if $mySchool_Year|@count - 1 eq $k}
+"{$year}"
+{else}
+"{$year}",
+{/if}
+{/foreach}
+
+]'>
+*}
+
+<label><b>Semester: </b></label>
+<select id="semester" name="semester" class="span3">
+    {if $currentSemester eq 'First'}
+        <option selected>First</option>
+        <option>Second</option>
+        <option>Summer</option>
+    {elseif $currentSemester eq 'Second'}
+        <option>First</option>
+        <option selected>Second</option>
+        <option>Summer</option>
     {else}
-    <option>{$i}</option>
-    {/if}
-    {/foreach}
-    </select>
-    *}
+        <option>First</option>
+        <option>Second</option>
+        <option selected>Summer</option>
+    {/if}           
+</select>
 
-    {*
-    <input value="{$currentSchool_Year}" class="span2" type="text" maxlength="9" 
-    {literal}       
-    pattern="[0-9\-]{9}" id="school_year" name="school_year" autocomplete="off" class="input-small" data-provide="typeahead" data-source='[
-    {/literal}
-    {foreach from=$mySchool_Year key=k item=year}
-    {if $mySchool_Year|@count - 1 eq $k}
-    "{$year}"
-    {else}
-    "{$year}",
-    {/if}
-    {/foreach}
-
-    ]'>
-    *}
-
-    <label><b>Semester: </b></label>
-    <select id="semester" name="semester" class="span3">
-        {if $currentSemester eq 'First'}
-            <option selected>First</option>
-            <option>Second</option>
-            <option>Summer</option>
-        {elseif $currentSemester eq 'Second'}
-            <option>First</option>
-            <option selected>Second</option>
-            <option>Summer</option>
-        {else}
-            <option>First</option>
-            <option>Second</option>
-            <option selected>Summer</option>
-        {/if}           
-    </select>
-
-    <button class="btn btn-primary" type="submit" name="GO">
-        <i class="icon-search icon-white"></i>
-    </button>
+<button class="btn btn-primary" type="submit" name="GO">
+    <i class="icon-search icon-white"></i>
+</button>
 </form>
 {/function}
 
@@ -109,6 +109,20 @@
         </a>
     </li>
 </ul>
+
+<hr/>
+
+<form action="../administrator/index.php?action=upload_excel_file" method="post" enctype="multipart/form-data">
+<div class="control-group">
+    <label class="control-label"><b>Upload Excel File: </b></label>
+    <div class="controls">
+        <input type="file" name="excel_file">
+    </div>
+    <input class="btn-primary" type="submit" name="save" value="Submit">
+</div>  
+
+</form>   
+{if isset($excel_file)}<div style="color: green;"><i class="icon-file icon-large"> student_current_enroll</i></div>{/if}
 {/function}
 
 <!-- Navigation Signatory-->
