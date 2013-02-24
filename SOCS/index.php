@@ -31,14 +31,14 @@ class Index extends Controller {
         $this->template = new Template();
         $this->template->setPageName('Home');
         $this->template->setContent('welcome.tpl');
-        
+
         //$this->add_school_year();
     }
 
     public function login() {
         if ($this->administrator_model->isExist(trim($_POST['username']), md5(trim($_POST['password'])))) {
             $this->administrator_model->queryUser_Type(trim($_POST['username']), md5(trim($_POST['password'])));
-            
+
             if ($this->administrator_model->Account_Type == "Admin") {
 
                 Session::set_user($_POST['username'], md5(trim($_POST['password'])));
@@ -51,12 +51,12 @@ class Index extends Controller {
                 header('Location: ' . HOST . '/student/');
             } else if ($this->administrator_model->Account_Type == "Signatory" && $this->administrator_model->validation_status == "Confirmed") {
                 $assign_sign = $this->administrator_model->getAssignSignatory(trim($_POST['username']));
-                 
+
                 Session::set_user($_POST['username'], md5(trim($_POST['password'])));
                 Session::set_assignSignatory($assign_sign);
                 $this->setSession('Signatory');
                 header('Location: ' . HOST . '/signatory/');
-            }else{
+            } else {
                 header('Location: index.php?action=login_error');
                 exit;
             }
@@ -65,44 +65,44 @@ class Index extends Controller {
             exit;
         }
     }
-    
-    public function changePassword($username, $hash){
+
+    public function changePassword($username, $hash) {
         $this->template->setAlert('You choose to change sent your password!', Template::ALERT_INFO);
         $this->template->setContent('changePassword.tpl');
-        
-        
-        if(isset($_POST['GO'])){
+
+
+        if (isset($_POST['GO'])) {
             $query = $this->administrator_model->updatePassword($username, $hash, md5($_POST['password']));
-            if(!$query){
+            if (!$query) {
                 $this->template->setAlert('Invalid URL!!....!' . mysql_error(), Template::ALERT_ERROR);
             }
-            
-           
+
+
             //$this->template->setAlert('Your password has successfully change!', Template::ALERT_SUCCESS);
             header("Location: index.php?action=changeSuccessful");
         }
     }
-    
-    public function changeSuccessful(){
+
+    public function changeSuccessful() {
         $this->template->setContent('login.tpl');
         $this->template->setAlert('Your password has successfully change!', Template::ALERT_SUCCESS);
     }
 
-    public function ForgotPass(){
+    public function ForgotPass() {
         $hash = crypt(trim($_POST['ForgotPass']), "aweawkskihdsdaw");
         //$this->template->setContent('login.tpl');
         $this->administrator_model->getUserPassword($_POST['ForgotPass']);
         $this->administrator_model->updateHash(trim($_POST['ForgotPass']), $hash);
-        
-        $verificationLink = HOST ."/index.php?action=changePassword&username=" .($_POST['ForgotPass']) ."&hash=" .$hash;
-            
-        
+
+        $verificationLink = HOST . "/index.php?action=changePassword&username=" . ($_POST['ForgotPass']) . "&hash=" . $hash;
+
+
         sendForgotPassword($this->administrator_model->First_Name, $this->administrator_model->email_add, $verificationLink);
         //var_dump($_POST['ForgotPass']);
         $this->template->setAlert('Your password was sent to your email address!', Template::ALERT_SUCCESS);
         //var_dump($_POST['ForgotPass']);
     }
-    
+
     public function logout() {
         $this->template->setContent('login.tpl');
         $this->template->setAlert('Logout Successfully!', Template::ALERT_SUCCESS);
@@ -116,27 +116,45 @@ class Index extends Controller {
 
     public function student_register() {
         if (isset($_POST['Save'])) {
-            $hash = crypt(($_POST['stud_id'] . "-" . $_POST['number'] .$_POST['emailAdd']), 'wrawehydrufmjhyaswtgf');
-            $course_id = $this->courses_model->getCourseID(trim($_POST['course']));
+            $excel_data = new Spreadsheet_Excel_Reader('Excel_File/student_current_enroll.xls');
+            $stud_id = trim($_POST['stud_id'] . "-" . $_POST['number']);
+            $stud_name = trim($_POST['surname']) .", " .trim($_POST['firstname']);
+            $found = false;
             
-            $this->administrator_model->insertStudent(($_POST['stud_id'] . "-" . $_POST['number']), md5(($_POST['password'])), trim($_POST['surname']), trim($_POST['firstname']), trim($_POST['middleName']), $_POST['emailAdd'], $hash);
-            
-            //$this->administrator_model->insertStudent(($_POST['stud_id'] . "-" . $_POST['number']), (($_POST['password'])), trim($_POST['surname']), trim($_POST['firstname']), trim($_POST['middleName']), NULL, 'Student', NULL);
-            $this->stud_model->insert(($_POST['stud_id'] . "-" . $_POST['number']), ($_POST['gender']), ($_POST['year_level']), ($_POST['program']), ($_POST['section']), $course_id, ($_POST['Status']));
-
-            
-            $verificationLink = HOST ."/index.php?action=verify&username=" .($_POST['stud_id'] . "-" . $_POST['number']) ."&hash=" .$hash;
-            
-            //var_dump($_POST['emailAdd']);
-            
-            
-            if(!sendMail(trim($_POST['firstname']), $_POST['emailAdd'], $verificationLink)){
-                //echo "wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww";
-            }else{
-                //echo "wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww2222222222222222222";
+            for ($y = 4; $y <= $excel_data->rowCount(); $y++) {
+                $temp_name = $excel_data->val($y, C);
+                $temp = (stripos(trim($temp_name), ".") -1) == -1 && substr(trim($temp_name), strlen(trim($temp_name)) -2) == " " ? trim($temp_name) : trim(substr(trim($temp_name), 0, stripos(trim($temp_name), ".") -1));
+                if ($excel_data->val($y, B) == $stud_id && $stud_name == $temp) {
+                    $found = true;
+                    break;
+                }
             }
-            $this->template->setContent('login.tpl');
-            $this->template->setAlert('Please confirm your registration by clicking the link sent in your email!... ', Template::ALERT_SUCCESS);
+
+            if ($found) {
+                $hash = crypt(($_POST['stud_id'] . "-" . $_POST['number'] . $_POST['emailAdd']), 'wrawehydrufmjhyaswtgf');
+                $course_id = $this->courses_model->getCourseID(trim($_POST['course']));
+
+                $this->administrator_model->insertStudent(($_POST['stud_id'] . "-" . $_POST['number']), md5(($_POST['password'])), trim($_POST['surname']), trim($_POST['firstname']), trim($_POST['middleName']), $_POST['emailAdd'], $hash);
+
+                //$this->administrator_model->insertStudent(($_POST['stud_id'] . "-" . $_POST['number']), (($_POST['password'])), trim($_POST['surname']), trim($_POST['firstname']), trim($_POST['middleName']), NULL, 'Student', NULL);
+                $this->stud_model->insert(($_POST['stud_id'] . "-" . $_POST['number']), ($_POST['gender']), ($_POST['year_level']), ($_POST['program']), ($_POST['section']), $course_id, ($_POST['Status']));
+
+
+                $verificationLink = HOST . "/index.php?action=verify&username=" . ($_POST['stud_id'] . "-" . $_POST['number']) . "&hash=" . $hash;
+
+                //var_dump($_POST['emailAdd']);
+
+
+                if (!sendMail(trim($_POST['firstname']), $_POST['emailAdd'], $verificationLink)) {
+                    //echo "wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww";
+                } else {
+                    //echo "wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww2222222222222222222";
+                }
+                $this->template->setContent('login.tpl');
+                $this->template->setAlert('Please confirm your registration by clicking the link sent in your email!... ', Template::ALERT_SUCCESS);
+            } else {
+                $this->student_registrationForm(true);
+            }
         }
 
         /*
@@ -156,17 +174,17 @@ class Index extends Controller {
          */
     }
 
-    public function verify($username, $hash){
+    public function verify($username, $hash) {
         $this->administrator_model->verifyStudent($username, $hash);
         $this->template->setContent('login.tpl');
         $this->template->setAlert('Your Account was Successfully verified!... ', Template::ALERT_SUCCESS);
     }
-    
+
     public function signatory_register() {
         if (isset($_POST['Save'])) {
             $sign_id = $this->signatoriallist_model->getSignId($_POST['sign_name']);
             $this->administrator_model->insertSignatory_User(trim($_POST['uname']), md5(trim($_POST['confirmpass'])), trim($_POST['surname']), trim($_POST['firstname']), trim($_POST['middleName']), NULL, 'Signatory', $sign_id);
-            
+
 //          echo "Password: " .trim($_POST['uname']) ."<br/>";
 //          echo "Confirm Password: " .trim($_POST['newpass']) ."<br/>";
 //          echo "Confirm Password: " .trim($_POST['confirmpass']) ."<br/>";
@@ -174,15 +192,15 @@ class Index extends Controller {
 //          echo "Firstname: " .trim($_POST['firstname']) ."<br/>";
 //          echo "Middlename: " .trim($_POST['middleName']) ."<br/>";
 //          echo "Section: " .$_POST['sign_name'] ."<br/>";
-          
-            
-            
+
+
+
             $this->template->setContent('login.tpl');
             $this->template->setAlert('Your registration form was succesfully save. See the Admin to confirmed your account!... ', Template::ALERT_SUCCESS);
         }
     }
 
-    public function student_registrationForm() {
+    public function student_registrationForm($is_register = false) {
         $this->template->setPageName("Student Registration Form");
         $this->template->setContent("student_registration.tpl");
 
@@ -195,6 +213,15 @@ class Index extends Controller {
         $this->template->assign('depts', $listOfDept_Name);
         $this->template->assign('dept_ID', $listOfDept_ID);
         $this->template->assign('dept_id_inCourses', $ListDept_ID_inCourse);
+
+        if ($is_register) {
+            $this->template->assign('s_name', trim($_POST['surname']));
+            $this->template->assign('f_name', trim($_POST['firstname']));
+            $this->template->assign('m_name', trim($_POST['middleName']));
+            $this->template->assign('e_add', trim($_POST['emailAdd']));
+
+            $this->template->setAlert('ID number did not match to the enroll student database!... ', Template::ALERT_ERROR);
+        }
     }
 
     public function signatory_registrationForm() {
@@ -234,25 +261,25 @@ class Index extends Controller {
         $this->administrator_model->db_close();
     }
 
-    /*----------- for adding school year ----------------*/
+    /* ----------- for adding school year ---------------- */
     /*
-    private function add_school_year(){
-        $date = explode("-", date("Y-m-d"));
-        $curDay = $date[2];
-        $curMonth = $date[1];
-        $curYear = $date[0];
-        
-        $hold = $this->school_year_model->getSchool_Year();
-        $latestSchool_Year = $hold[count($hold) - 1];
-        
-        $latestYear = explode("-", $latestSchool_Year);
-        $latestYear = $latestYear[1];
-        
-        if($curYear == $latestYear && $curMonth == 6 && $curDay == 7){
-            $this->school_year_model->insert($curYear ."-" .($curYear + 1));
-        }  
-    }
-    */
+      private function add_school_year(){
+      $date = explode("-", date("Y-m-d"));
+      $curDay = $date[2];
+      $curMonth = $date[1];
+      $curYear = $date[0];
+
+      $hold = $this->school_year_model->getSchool_Year();
+      $latestSchool_Year = $hold[count($hold) - 1];
+
+      $latestYear = explode("-", $latestSchool_Year);
+      $latestYear = $latestYear[1];
+
+      if($curYear == $latestYear && $curMonth == 6 && $curDay == 7){
+      $this->school_year_model->insert($curYear ."-" .($curYear + 1));
+      }
+      }
+     */
 }
 
 $controller = new Index();

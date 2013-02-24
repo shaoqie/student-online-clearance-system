@@ -113,28 +113,28 @@
     <div class="control-group">
         <label class="control-label"><b>Surname: </b></label>
         <div class="controls">
-            <input type ='text' name='surname' value="" pattern="[A-Za-z\s]+" required title="Letters and spaces only">
+            <input type ='text' name='surname' {if isset($s_name)}value="{$s_name}"{/if} pattern="[A-Za-z\s]+" required title="Letters and spaces only">
         </div>
     </div>
 
     <div class="control-group">
         <label class="control-label"><b>First Name: </b></label>
         <div class="controls">
-            <input type='text' name='firstname' value="" pattern="[A-Za-z\s]+" required title="Letters and spaces only">
+            <input type='text' name='firstname' {if isset($f_name)}value="{$f_name}"{/if} pattern="[A-Za-z\s]+" required title="Letters and spaces only">
         </div>
     </div>
 
     <div class="control-group">
         <label class="control-label"><b>Middle Name: </b></label>
         <div class="controls">
-            <input type='text'name='middleName' value="" pattern="[A-Za-z\s]+" required title="Letters and spaces only">
+            <input type='text'name='middleName' {if isset($m_name)}value="{$m_name}"{/if} pattern="[A-Za-z\s]+" required title="Letters and spaces only">
         </div>
     </div>
 
     <div class="control-group">
         <label class="control-label"><b>Email Address: </b></label>
         <div class="controls">
-            <input type='text'name='emailAdd' value="" required>
+            <input type='text'name='emailAdd' {if isset($e_add)}value="{$e_add}"{/if} required>
         </div>
     </div>
     
