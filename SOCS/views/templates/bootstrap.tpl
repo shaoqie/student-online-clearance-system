@@ -37,7 +37,7 @@
 
                 .socs-welcome{
                     background-color: transparent; 
-                    padding-bottom: 245px;
+                    /*padding-bottom: 145px;*/
                     padding-left: 75px;
                     text-shadow: inherit;
                 }
@@ -56,7 +56,11 @@
 
                 .carousel-images, .carousel-size{
                     width: 1200px; 
-                    height:500px;
+                    height: 300px;
+                }
+
+                ul.nav #dropdown-hover:hover ul.dropdown-menu{
+                    display: block;
                 }
                 /*
                 div{
@@ -91,20 +95,20 @@
 
                         {function name=welcome_navigations}
 
-                        <ul class="nav">
-                            <li>
-                                <a href="index.php">Home</a>
-                            </li>
-                            <li>
-                                <a href="index.php?action=student_registrationForm">Register</a>
-                            </li>
-                        </ul>
+                            <ul class="nav">
+                                <li>
+                                    <a href="index.php">Home</a>
+                                </li>
+                                <li>
+                                    <a href="index.php?action=student_registrationForm">Register</a>
+                                </li>
+                            </ul>
 
                         {/function}
 
                         {if isset($username)}
                             <div class="btn-group pull-right">
-                                <button class="btn btn-inverse" onclick="window.location.href='index.php'">
+                                <button class="btn btn-inverse" onclick="window.location.href = 'index.php';">
                                     <i class="icon-user icon-white"></i> {$username}
                                 </button>
                                 <button class="btn btn-inverse dropdown-toggle" data-toggle="dropdown">

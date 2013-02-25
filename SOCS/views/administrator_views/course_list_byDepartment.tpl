@@ -1,24 +1,33 @@
 <div class="row">
     <div class="span3">
 
+        <!-- Header-->
+        <h4 class="well center-text well-small">Departments</h4>
+
         <!-- Navigations-->
         <div class="row">
             <div class="span3">
-                {call name=nav_admin index=4}
+                {call name=nav_admin index=3}
             </div>
         </div>
+
+        <!-- Controls-->
+        <ul class="nav nav-tabs nav-stacked">
+            <li>
+                <a href="{$host}/administrator/course_list_byDepartment.php?action=addCourse">
+                    <i class="icon-book"></i> Add Course
+                </a>
+            </li>
+        </ul>
 
     </div>
     <div class="span9">
 
         <!-- Header-->
-        <pre>
-            <h2  style="text-align: center;">{$Dept_name}</h2>
-            <div  style="margin-left: 120px; margin-right: 100px; margin-top: -50px;">
-                {$Dept_desc}
-            </div>        
-        </pre>
-        
+        <div class="well center-text well-small">
+            <h3>{$Dept_name} </h3>
+            <small>{$Dept_desc}</small>
+        </div>
 
         <!-- Back Button-->
         <!-- <input class="btn pull-right" type="button" value="Back" onclick="window.location.href='department_list_manager.php'"> -->
@@ -29,8 +38,10 @@
             <li><a href='../administrator/signatorialList.php'>Signatorial List</a></li>
         </ul>
 
+        {*
         <!-- Add Courses Button-->
-        <input class="btn" type="button" value="Add Courses" onclick="window.location.href='course_list_byDepartment.php?action=addCourse'">
+        <input class="btn" type="button" value="Add Courses" onclick="window.location.href = 'course_list_byDepartment.php?action=addCourse'">
+        *}
 
         <!-- Search Bar-->
         <span class="pull-right">
@@ -58,7 +69,7 @@
                     <td><label>{$usability_course[$k]}  {*if $usability_course[$k] eq "Under Graduate"} UG {/if} {if $usability_course[$k] eq "Graduate"} G {/if*}</label></td>
                     <td>
                         <div>
-                            <a style="cursor:pointer;" onclick="window.location.href='course_list_byDepartment.php?action=editCourse&seleted={$myKey_course[$k]}'">
+                            <a style="cursor:pointer;" onclick="window.location.href = 'course_list_byDepartment.php?action=editCourse&seleted={$myKey_course[$k]}'">
                                 <i class="icon-pencil"></i> Edit
                             </a>
                         </div>
@@ -68,7 +79,7 @@
         </table>
 
         <!-- Delete Button-->
-        <a style="cursor:pointer;" onclick="findCheck('{$rowCount_course}','course')" >
+        <a style="cursor:pointer;" onclick="findCheck('{$rowCount_course}', 'course')" >
             <i class="icon-remove"></i> Delete Selected
         </a>
 
@@ -77,7 +88,7 @@
             Jump to: <select id="jump" class="input-mini" onchange="jumpToPage()">
                 <option>--</option>
                 {for $start = 1 to $course_length}
-                <option>{$start}</option>
+                    <option>{$start}</option>
                 {/for}
             </select>
         </div>

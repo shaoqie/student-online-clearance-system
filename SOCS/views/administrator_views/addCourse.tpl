@@ -1,19 +1,34 @@
 <div class="row">
     <div class="span3">
 
+        <!-- Header-->
+        <h4 class="well center-text well-small">Departments</h4>
+
         <!-- Navigations-->
         <div class="row">
             <div class="span3">
-                {call name=nav_admin index=4}
+                {call name=nav_admin index=0}
             </div>
         </div>
+
+        <!-- Controls-->
+        <ul class="nav nav-tabs nav-stacked">
+            <li class="active">
+                <a href="{$host}/administrator/course_list_byDepartment.php?action=addCourse">
+                    <i class="icon-book"></i> Add Course
+                </a>
+            </li>
+        </ul>
 
     </div>
     <div class="span9">
 
         <!-- Header-->
-        <h2 class="well center-text">{$Dept_name}</h2>
-        
+        <div class="well center-text well-small">
+            <h3>{$Dept_name} </h3>
+            <small>{$Dept_desc}</small>
+        </div>
+
         <!-- Navigation Tabs-->
         <ul class="nav nav-tabs">
             <li class="active"><a href='../administrator/course_list_byDepartment.php'>Courses</a></li>
@@ -44,7 +59,7 @@
             <div class="control-group form-actions">
                 <div class="pull-right">
                     <input class="btn btn-primary" type='Submit' value='Save'>
-                    <input class="btn" type="button" value="Back" onclick="window.location.href='course_list_byDepartment.php'">
+                    <input class="btn" type="button" value="Back" onclick="window.location.href = 'course_list_byDepartment.php'">
                 </div>
             </div>
         </form>
