@@ -224,17 +224,17 @@ class Requirements extends Controller{
         $requirement_Data = $this->requirement_model->getRequirement($reqID);
         
         
-        $sign_usability = Session::get_signatory_usability();
+        //$sign_usability = Session::get_signatory_usability();
         $sign_id = $this->signatorialList_model->getSignId(Session::get_AssignSignatory());
         
-        $listOfSignatory = $this->signatorialList_model->getListofSignatory($sign_usability);
-        $listOfSignatoryID = $this->signatorialList_model->getListofSignatoryID($sign_usability);
+        $listOfSignatory = $this->signatorialList_model->getListofSignatory();
+        $listOfSignatoryID = $this->signatorialList_model->getListofSignatoryID();
         
         $listOfDepartmentsUnder =  $this->signatorialList_model->getListOfDept_underSignName($sign_id);
         $listOfDepartmentsUnderID =  $this->signatorialList_model->getListOfDept_underSignNameID($sign_id);
         
-        $listOfCourse_UnderSign = $this->signatorialList_model->getListOfCourse_Sign($sign_id, Session::get_signatory_usability());
-        $listOfCourse_UnderSignID = $this->signatorialList_model->getListOfCourse_SignID($sign_id, Session::get_signatory_usability());
+        $listOfCourse_UnderSign = $this->signatorialList_model->getListOfCourse_Sign($sign_id);
+        $listOfCourse_UnderSignID = $this->signatorialList_model->getListOfCourse_SignID($sign_id);
         
         $thisSignatory = Session::get_AssignSignatory();
         
