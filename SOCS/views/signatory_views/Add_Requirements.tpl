@@ -23,7 +23,8 @@
 }  
 }); 
 }
-    
+/*-------- end function ----------*/
+
 function change_reqType(){
 var x = document.getElementById("requirement_type").selectedIndex;
 var select = document.getElementById  ("requirement_type").options;
@@ -36,6 +37,61 @@ if(parseInt(SelectedIndex) == 1){ $("#Sign").show();
 }  
 }); 
 }
+/*-------- end function ----------*/
+
+
+function newOptions(){
+    var select = finder == 0 ? document.getElementById("sign_name") : document.getElementById("course_name");
+    var hide = document.getElementById("hide").value;
+    var flag = document.getElementById("flag").value;
+    var count = 0;
+    var temp = 0;
+    if(select.value == "---------Next--------"){ 
+    var holder = flag == 1 ? parseInt(hide) + 20 : parseInt(hide) + 10;
+    select.innerHTML = "";
+    
+    {assign var=newArraySignList value=$listOfSignatory}
+    {assign var=newArraySignId value=$listOfSignatoryID}
+    {assign var=index value=0}
+    {foreach from = $newArraySignList item = i}
+            if(count >= (holder - 10) && count <  holder){
+            select.options[select.options.length] = new Option("{$i}","{$newArraySignId[$index]}");  temp = count + 1;
+        }
+        count ++;
+        {assign var=index value=$index + 1}
+    {/foreach} 
+        select.options[select.options.length] = new Option("---------Back--------");
+        if(temp % 10 == 0){
+        select.options[select.options.length] = new Option("---------Next--------");
+    }
+        
+    document.getElementById("hide").value = holder;
+    document.getElementById("flag").value = "0";
+    }else if(select.value == "---------Back--------"){
+
+
+    var holder = parseInt(flag) == 0 ? parseInt(hide) - 20 : parseInt(hide) - 10;
+    select.innerHTML = "";
+        {assign var=index value=0}
+        {foreach from = $newArraySignList item = i}
+            if(count >= holder && count <  holder + 10){
+                select.options[select.options.length] = new Option("{$i}","{$newArraySignId[$index]}");  
+            }
+            count ++;
+            {assign var=index value=$index + 1}
+        {/foreach} 
+
+    if(parseInt(holder) != 0){
+        select.options[select.options.length] = new Option("---------Back--------"); 
+    }
+    select.options[select.options.length] = new Option("---------Next--------");
+
+    document.getElementById("hide").value = holder;
+    document.getElementById("flag").value = "1";
+    }
+}
+
+
 </script>
 
 <div class="row">
@@ -133,14 +189,17 @@ if(parseInt(SelectedIndex) == 1){ $("#Sign").show();
                 <label class="control-label"><b>Select Signatory: </b></label>
                 <div class="controls">
                     {assign var=index value=0}
-                    <select name="signatory" class="input-large">
+                    <select id="sign_name" name="signatory" class="input-large" onchange="newOptions()">
                         {foreach from = $listOfSignatory key = k item = i}
-                            {if $thisSignatory != $listOfSignatory[$index]}
+                            {if $thisSignatory != $listOfSignatory[$index] && $index < 10}
                                 <option value="{$listOfSignatoryID[$index]}">{$listOfSignatory[$index]}</option>
                             {/if}
                             {assign var=index value=$index + 1}
                         {/foreach}
+                        <option>---------Next--------</option>
                     </select>
+                    <input type=hidden id="hide" value="10">
+                    <input type=hidden id="flag" value="0">
                 </div>    
             </div>    
 
@@ -173,11 +232,12 @@ if(parseInt(SelectedIndex) == 1){ $("#Sign").show();
             <div class="control-group" id="selected_Course" hidden>
                 <label class="control-label"><b> Courses: </b></label>
                 <div class="controls">
-                    <select name="Courses" class="input-xlarge">   
+                    <select name="Courses" class="input-xlarge" onchange="">   
                         {foreach from = $listOfCourse_UnderSign key = k item = i}
                             <option value="{$listOfCourse_UnderSignID[$k]}">{$listOfCourse_UnderSign[$k]}</option>
                         {/foreach}
                     </select>
+ 
                 </div>    
             </div>
 
