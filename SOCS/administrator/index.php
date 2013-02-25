@@ -152,10 +152,17 @@ class Index extends Controller {
             $this->administrator_model->Middle_Name = $middleName;
             $this->administrator_model->Assigned_Signatory = $assign_sign;
             //$this->administrator_model->Signatory_Usability = $_POST['sign_usability'];
-
-            $this->administrator_model->insertSignatory_UserByAdmin();
-
-            $this->template->setAlert('Signatoy In-Charge was Successfully Added!', Template::ALERT_SUCCESS);
+            
+            if($this->administrator_model->isUsername_Exist(trim($username))){
+                $this->template->setAlert('Username is Already Exist!..', Template::ALERT_ERROR);
+                $this->template->assign('s_name', $surname);
+                $this->template->assign('f_name', $firstname);
+                $this->template->assign('m_name', $middleName);
+            }else{
+                $this->administrator_model->insertSignatory_UserByAdmin();
+                $this->template->setAlert('Signatoy In-Charge was Successfully Added!', Template::ALERT_SUCCESS);
+            }
+            
         }
     }
 

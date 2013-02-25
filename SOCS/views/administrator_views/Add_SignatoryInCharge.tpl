@@ -93,21 +93,21 @@
                 <div class="control-group">
                     <label class="control-label"><b>Surname: </b></label>
                     <div class="controls">
-                        <input type ='text' name='surname' value="" pattern="[A-Za-z\s]{2,15}" required title="Letters and spaces only">
+                        <input type ='text' name='surname' {/literal}{if isset($s_name)} value="{$s_name}" {/if}{literal} pattern="[A-Za-z\s]{2,15}" required title="Letters and spaces only">
                     </div>
                 </div>
 
                 <div class="control-group">
                     <label class="control-label"><b>First Name: </b></label>
                     <div class="controls">
-                        <input type='text' name='firstname' value="" pattern="[A-Za-z\s]{2,15}" required title="Letters and spaces only">
+                        <input type='text' name='firstname' {/literal}{if isset($f_name)} value="{$f_name}" {/if}{literal} pattern="[A-Za-z\s\.]{2,15}" required title="Letters and spaces only">
                     </div>
                 </div>
 
                 <div class="control-group">
-                    <label class="control-label"><b>Middle Name: </b></label>
+                    <label class="control-label"><b>Middle Initial: </b></label>
                     <div class="controls">
-                        <input type='text'name='middleName' value="" pattern="[A-Za-z\s]{1,15}" required title="Letters and spaces only">
+                        <input type='text'name='middleName' maxlength="1" {/literal}{if isset($m_name)} value="{$m_name}" {/if}{literal} pattern="[A-Z\s]{1,15}" required title="Letters and spaces only">
                     </div>
                 </div>
             {/literal}

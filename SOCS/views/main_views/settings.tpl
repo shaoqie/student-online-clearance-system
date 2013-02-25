@@ -22,7 +22,7 @@
     <div class="control-group">
         <label class="control-label"><b>First Name: </b></label>
         <div class="controls">
-            <input type='text' name='firstname' value="{$firstname}" pattern="[A-Za-z\s]+" required title="Letters and spaces only">
+            <input type='text' name='firstname' value="{$firstname}" pattern="[A-Za-z\s\.]+" required title="Letters and spaces only">
         </div>
     </div>
 

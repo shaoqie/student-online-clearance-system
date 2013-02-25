@@ -67,6 +67,16 @@ class Signatory_Registration extends Controller {
             $imagefile = $_FILES["photo"];
 
             $test = 0;
+            
+            if($this->admin->isUsername_Exist(trim($username))){
+                $this->template->setAlert('Username is Already Exist!..', Template::ALERT_ERROR);
+                $this->template->assign('s_name', $surname);
+                $this->template->assign('f_name', $firstname);
+                $this->template->assign('m_name', $middleName);
+                $this->template->assign('e_add', trim($_POST['emailAdd']));
+                
+                return;
+            }
 
             //Check if fields are empty in firstname surname and middlename
             if ($surname != "" && $firstname != "" && $middleName != "" && $username != "") {
@@ -147,7 +157,7 @@ class Signatory_Registration extends Controller {
                     return;
                 }
             } else {
-                $this->admin->Picture = HOST . "/photos/default.png";
+                $this->admin->Picture = HOST . "/photos/default_student.png";
             }
 
 //            //check if photo is valid

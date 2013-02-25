@@ -160,7 +160,7 @@
 
                     </div>
                     <div class="span5">
-                        <h4>{$surname}, {$firstname} {$middlename}</h4>
+                        <h4>{$surname}, {$firstname} {$middlename}.</h4>
                         <h5>- {$account_type} {$assign_sign}</h5>
                     </div>
                 </div>

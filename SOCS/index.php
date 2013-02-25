@@ -116,25 +116,63 @@ class Index extends Controller {
 
     public function student_register() {
         if (isset($_POST['Save'])) {
+            $filename = "Excel_File/student_current_enroll.xls";
+            if (!file_exists($filename)) {
+                $this->template->setAlert("Current enroll student file was not uploaded yet... <br/>
+                                            Sorry but you can't register for a meantime...", Template::ALERT_WARNING);
+                return;
+            }
+
+            $imagefile = $_FILES["photo"];
             $excel_data = new Spreadsheet_Excel_Reader('Excel_File/student_current_enroll.xls');
             $stud_id = trim($_POST['stud_id'] . "-" . $_POST['number']);
-            $stud_name = trim($_POST['surname']) .", " .trim($_POST['firstname']);
+            $stud_surname = trim($_POST['surname']);
             $found = false;
-            
+
+            /* ------ checking for valid photo ------ */
+            //var_dump($imagefile);
+            $Picture = $imagefile['name'] != "" ? HOST . "/photos/student/" . $stud_id . "." . "jpg" : HOST . "/photos/default_student.png";
+
+            if($imagefile['name'] != ""){
+                if (Validator::is_valid_photo($imagefile)) {               
+                    $local_dir = PATH . "photos/student/"; 
+                    $image_upload = new upload($imagefile);
+
+                    $image_upload->image_convert = "jpg";
+                    $image_upload->file_overwrite = true;
+                    $image_upload->file_new_name_body = $stud_id;
+
+                    $image_upload->process($local_dir);
+                } else {
+                    $this->template->setAlert('Invalid Photo!', Template::ALERT_ERROR, 'alert');
+                    return;
+                }
+            }
+
+
+
+            /* ------ checking for valid account ------ */
             for ($y = 4; $y <= $excel_data->rowCount(); $y++) {
                 $temp_name = $excel_data->val($y, C);
-                $temp = (stripos(trim($temp_name), ".") -1) == -1 && substr(trim($temp_name), strlen(trim($temp_name)) -2) == " " ? trim($temp_name) : trim(substr(trim($temp_name), 0, stripos(trim($temp_name), ".") -1));
-                if ($excel_data->val($y, B) == $stud_id && $stud_name == $temp) {
+                $temp = substr(trim($temp_name), 0, (stripos(trim($temp_name), ",")));
+                //$temp = (stripos(trim($temp_name), ".") - 1) == -1 && substr(trim($temp_name), strlen(trim($temp_name)) - 2) == " " ? trim($temp_name) : trim(substr(trim($temp_name), 0, stripos(trim($temp_name), ".") - 1));
+                if ($excel_data->val($y, B) == $stud_id && strtolower($stud_surname) == strtolower($temp)) {
                     $found = true;
                     break;
                 }
             }
-
+            
+            if ($this->administrator_model->isUsername_Exist(trim($stud_id))) {
+                //$this->template->setAlert('Student ID Number is Already Exist!..', Template::ALERT_ERROR);
+                $this->student_registrationForm(false, true);
+                //return;
+            }
+            
             if ($found) {
                 $hash = crypt(($_POST['stud_id'] . "-" . $_POST['number'] . $_POST['emailAdd']), 'wrawehydrufmjhyaswtgf');
                 $course_id = $this->courses_model->getCourseID(trim($_POST['course']));
 
-                $this->administrator_model->insertStudent(($_POST['stud_id'] . "-" . $_POST['number']), md5(($_POST['password'])), trim($_POST['surname']), trim($_POST['firstname']), trim($_POST['middleName']), $_POST['emailAdd'], $hash);
+                $this->administrator_model->insertStudent(($_POST['stud_id'] . "-" . $_POST['number']), md5(($_POST['password'])), trim($_POST['surname']), trim($_POST['firstname']), trim($_POST['middleName']), $_POST['emailAdd'], $Picture, $hash);
 
                 //$this->administrator_model->insertStudent(($_POST['stud_id'] . "-" . $_POST['number']), (($_POST['password'])), trim($_POST['surname']), trim($_POST['firstname']), trim($_POST['middleName']), NULL, 'Student', NULL);
                 $this->stud_model->insert(($_POST['stud_id'] . "-" . $_POST['number']), ($_POST['gender']), ($_POST['year_level']), ($_POST['program']), ($_POST['section']), $course_id, ($_POST['Status']));
@@ -200,7 +238,7 @@ class Index extends Controller {
         }
     }
 
-    public function student_registrationForm($is_register = false) {
+    public function student_registrationForm($is_register = false, $isExist = false) {
         $this->template->setPageName("Student Registration Form");
         $this->template->setContent("student_registration.tpl");
 
@@ -220,7 +258,16 @@ class Index extends Controller {
             $this->template->assign('m_name', trim($_POST['middleName']));
             $this->template->assign('e_add', trim($_POST['emailAdd']));
 
-            $this->template->setAlert('ID number did not match to the enroll student database!... ', Template::ALERT_ERROR);
+            $this->template->setAlert('ID Number and Name of a student did not match to the enroll student database!... ', Template::ALERT_ERROR);
+        }
+        
+        if($isExist){
+            $this->template->assign('s_name', trim($_POST['surname']));
+            $this->template->assign('f_name', trim($_POST['firstname']));
+            $this->template->assign('m_name', trim($_POST['middleName']));
+            $this->template->assign('e_add', trim($_POST['emailAdd']));
+            
+            $this->template->setAlert('Student ID Number is Already Exist!..', Template::ALERT_ERROR);
         }
     }
 

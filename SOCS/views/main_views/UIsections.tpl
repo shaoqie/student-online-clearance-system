@@ -122,7 +122,7 @@ pattern="[0-9\-]{9}" id="school_year" name="school_year" autocomplete="off" clas
 </div>  
 
 </form>   
-{if isset($excel_file)}<div style="color: green;"><i class="icon-file icon-large"> student_current_enroll</i></div>{/if}
+{if isset($excel_file)}<div style="color: green;"><i class="icon-file icon-large"> student_current_enroll.xls</i></div>{/if}
 {/function}
 
 <!-- Navigation Signatory-->

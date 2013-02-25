@@ -52,7 +52,7 @@
     Assign as a signatory? <a href="signatory_registration.php">Click Here</a>
 </div>
 
-<form method='post' class="form-horizontal" action="/SOCS/index.php?action=student_register">
+<form method='post' class="form-horizontal" action="/SOCS/index.php?action=student_register" enctype="multipart/form-data">
 
     <legend>Login Information: </legend>
 
@@ -69,7 +69,7 @@
             *}
              
             {literal}
-            <input type="text" maxlength="4" pattern="[0-9]{4}" name="stud_id" autocomplete="off" class="input-small" data-provide="typeahead" data-source='[
+                <input required type="text" maxlength="4" pattern="[0-9]{4}" name="stud_id" autocomplete="off" class="input-small" data-provide="typeahead" data-source='[
             {/literal}
                    {foreach from=$years key=k item=year}
                        {if $years|@count - 1 eq $k}
@@ -120,14 +120,14 @@
     <div class="control-group">
         <label class="control-label"><b>First Name: </b></label>
         <div class="controls">
-            <input type='text' name='firstname' {if isset($f_name)}value="{$f_name}"{/if} pattern="[A-Za-z\s]+" required title="Letters and spaces only">
+            <input type='text' name='firstname' {if isset($f_name)}value="{$f_name}"{/if} pattern="[A-Za-z\s\.]+" required title="Letters and spaces only">
         </div>
     </div>
 
     <div class="control-group">
-        <label class="control-label"><b>Middle Name: </b></label>
+        <label class="control-label"><b>Middle Initial: </b></label>
         <div class="controls">
-            <input type='text'name='middleName' {if isset($m_name)}value="{$m_name}"{/if} pattern="[A-Za-z\s]+" required title="Letters and spaces only">
+            <input type='text'name='middleName' maxlength="1" {if isset($m_name)}value="{$m_name}"{/if} pattern="[A-Z\s]+" required title="Letters and spaces only">
         </div>
     </div>
 
