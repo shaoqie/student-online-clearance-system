@@ -41,7 +41,7 @@ if(parseInt(SelectedIndex) == 1){ $("#Sign").show();
 
 
 function newOptions(){
-    var select = finder == 0 ? document.getElementById("sign_name") : document.getElementById("course_name");
+    var select = document.getElementById("sign_name");
     var hide = document.getElementById("hide").value;
     var flag = document.getElementById("flag").value;
     var count = 0;
