@@ -100,6 +100,26 @@ class SchoolYearSem_Model extends Model{
         
         return $array_temp;
     }
+    
+    public function getLastAddedSchoolYearInDatabase(){
+        $q = "SELECT * FROM `schoolyearsem` order by School_Year desc, Semester desc limit 0,1";
+        $this->query = mysql_query($q);
+        $row = mysql_fetch_array($this->query);
+        return $row;
+    }
+    
+    public function insertSchoolYear($school_year, $sem){
+        if (!$this->isSYSemExists($school_year, $sem)){
+            mysql_query("INSERT INTO  `socs`.`schoolyearsem` (`School_Year` ,`Semester`)
+                        VALUES 
+                        ('$school_year',  '$sem')");
+            //echo "Added: $school_year $sem </br>";
+        }
+    }
+    public function isSYSemExists($school_year, $sem){
+        $this->query = mysql_query("Select * from schoolyearsem where School_Year='$school_year' and Semester='$sem'");
+        return 0 < mysql_num_rows($this->query);
+    }
 }
 
 ?>

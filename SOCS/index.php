@@ -32,7 +32,7 @@ class Index extends Controller {
         $this->template->setPageName('Home');
         $this->template->setContent('welcome.tpl');
 
-        //$this->add_school_year();
+        $this->add_school_year();
     }
 
     public function login() {
@@ -309,24 +309,96 @@ class Index extends Controller {
     }
 
     /* ----------- for adding school year ---------------- */
+    
     /*
       private function add_school_year(){
-      $date = explode("-", date("Y-m-d"));
-      $curDay = $date[2];
-      $curMonth = $date[1];
-      $curYear = $date[0];
+        $date = explode("-", date("Y-m-d"));
+        $curDay = $date[2];
+        $curMonth = $date[1];
+        $curYear = $date[0];
 
-      $hold = $this->school_year_model->getSchool_Year();
-      $latestSchool_Year = $hold[count($hold) - 1];
+        $hold = $this->school_year_model->getSchool_Year();
+        $latestSchool_Year = $hold[count($hold) - 1];
 
-      $latestYear = explode("-", $latestSchool_Year);
-      $latestYear = $latestYear[1];
+        $latestYear = explode("-", $latestSchool_Year);
+        $latestYear = $latestYear[1];
 
-      if($curYear == $latestYear && $curMonth == 6 && $curDay == 7){
-      $this->school_year_model->insert($curYear ."-" .($curYear + 1));
+        if($curYear == $latestYear && $curMonth == 6 && $curDay == 7){
+        $this->school_year_model->insert($curYear ."-" .($curYear + 1));
+        }
       }
-      }
-     */
+      */
+     private function add_school_year(){
+        $date = explode("-", date("Y-m-d"));
+        //$curDay = intval($date[2]);
+        $curMonth = intval($date[1]);
+        $curYear = intval($date[0]);
+
+        $getLastAddedSY = $this->school_year_model->getLastAddedSchoolYearInDatabase();
+        $glYear = explode("-", $getLastAddedSY["School_Year"]);
+        $glYear = $glYear[0];
+        
+        $cSem = array("First" => 0,
+                      "Second" => 1,
+                      "Summer" => 2);
+        $glSem = $cSem[$getLastAddedSY["Semester"]];
+        
+        $hlCurrent = $this->convDateToSYSem($curMonth, $curYear);
+        
+        //echo($hlCurrent[0] . ">" . $glYear);
+        //echo $hlCurrent[1] .">". $glSem;
+        //var_dump((($hlCurrent[0] > $glYear) && ($hlCurrent[1] > $glSem)));
+        if ($hlCurrent[0] > $glYear){
+            
+            $this->insertInterveningSchoolYears($glYear, $glSem, $hlCurrent[0], $hlCurrent[1]);
+            
+        }elseif($hlCurrent[0] == $glYear){
+            if ($hlCurrent[1] > $glSem){
+                $this->insertInterveningSchoolYears($glYear, $glSem, $hlCurrent[0], $hlCurrent[1]);
+            }
+        }
+        
+        
+    }
+    
+    private function convDateToSYSem($tMonth, $tYear){
+        $sem = "";
+        $sy="";
+        if($tMonth >= 1 && $tMonth <=3){
+            $sem = 1; //second
+            $sy=($tYear-1);
+        }else if ($tMonth >= 6 && $tMonth <=10){
+            $sem = 0; //first
+            $sy=$tYear;
+        }else if ($tMonth >=11 && $tMonth <=12){
+            $sem = 1; //first
+            $sy=$tYear;
+        }else{
+            $sem = 2; //summer
+            $sy=($tYear-1);
+        }
+	return array($sy,$sem);
+    }
+    
+    private function insertInterveningSchoolYears($startingYear,$startingSem,$endYear,$endSem){
+        //$cSem = array("First" => 0,
+                      //"Second" => 1,
+                      //"Summer" => 2);
+        $ccsSem = array(0 => "First",
+                        1 => "Second",
+                        2 => "Summer");
+        
+        for ($y=$startingYear; $y<=$endYear; $y++){
+            for ($s=0; $s<=2; $s++){
+                $this->school_year_model->insertSchoolYear($y . "-" . ($y+1), $ccsSem[$s]);
+                if ($y == $endYear && $s == $endSem) break;
+            }
+        }
+    }
+    
+    
+      
+     
 }
 
 $controller = new Index();
