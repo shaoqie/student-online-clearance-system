@@ -36,6 +36,94 @@ if(parseInt(SelectedIndex) == 1){ $("#Sign").show();
 }  
 }); 
 }
+
+
+function newOptions(finder){
+    var select = finder == 0 ? document.getElementById("sign_name") : document.getElementById("course_name");
+    var hide = finder == 0 ? document.getElementById("hide").value : document.getElementById("course_hide").value;
+    var flag = finder == 0 ? document.getElementById("flag").value : document.getElementById("course_flag").value;
+    
+    var hide_temp = finder == 0 ? document.getElementById("hide") : document.getElementById("course_hide");
+    var flag_temp = finder == 0 ? document.getElementById("flag"): document.getElementById("course_flag");
+    
+    var newAssignArray = finder == 0 ? newAssignArray = getSignList() : getCourseList();
+    
+    var count = 0;
+    var temp = 0;
+    
+    if(select.value == "---------Next--------"){ 
+    var holder = flag == 1 ? parseInt(hide) + 20 : parseInt(hide) + 10;
+    select.innerHTML = "";
+
+    for(var x = 0; x < newAssignArray.length; x ++){
+            if(count >= (holder - 10) && count <  holder){
+            select.options[select.options.length] = new Option(newAssignArray[x][0],newAssignArray[x][1]);  temp = count + 1;
+        }
+        count ++;
+    }     
+    
+        //alert(newAssignArray.length % temp);
+       
+        //if(!((newAssignArray.length % temp) == 0 && (temp % 10) > 0)){
+            //if(!(newAssignArray.length == temp && (temp % 10) == 0)){
+                select.options[select.options.length] = new Option("---------Back--------");
+            //}
+            if(!((newAssignArray.length == temp))){
+                select.options[select.options.length] = new Option("---------Next--------");
+            }
+        //}
+        
+    hide_temp.value = holder;
+    flag_temp.value = "0";
+    }else if(select.value == "---------Back--------"){
+    
+    
+    var holder = parseInt(flag) == 0 ? parseInt(hide) - 20 : parseInt(hide) - 10;
+    select.innerHTML = "";
+        for(var x = 0; x < newAssignArray.length; x ++){
+            if(count >= holder && count <  holder + 10){
+                select.options[select.options.length] = new Option(newAssignArray[x][0],newAssignArray[x][1]);  
+            }
+            count ++;
+        }
+
+    if(parseInt(holder) != 0){
+        select.options[select.options.length] = new Option("---------Back--------"); 
+    }
+    select.options[select.options.length] = new Option("---------Next--------");
+
+    hide_temp.value = holder;
+    flag_temp.value = "1";
+    }
+}
+
+function getSignList(){
+    var this_val = new Array();
+    
+    {assign var=index value=0}
+    {foreach from = $listOfSignatory item = i}
+        this_val[{$index}] = new Array(2);
+        this_val[{$index}][0] = "{$i}";
+        this_val[{$index}][1] = {$listOfSignatoryID[$index]};
+        {assign var=index value=$index + 1}
+    {/foreach}
+    
+    return this_val;
+}
+
+function getCourseList(){
+    var this_val = new Array();
+    
+    {assign var=index value=0}
+    {foreach from = $listOfCourse_UnderSign item = i}
+        this_val[{$index}] = new Array(2);
+        this_val[{$index}][0] = "{$i}";
+        this_val[{$index}][1] = {$listOfCourse_UnderSignID[$index]};
+        {assign var=index value=$index + 1}
+    {/foreach}
+    
+    return this_val;    
+}
 </script>
 
 <div class="row">
@@ -122,15 +210,12 @@ if(parseInt(SelectedIndex) == 1){ $("#Sign").show();
             <div class="control-group" id="Sign" {if $req_Type eq 'Textual'}hidden{/if}>
                 <label class="control-label"><b>Select Signatory: </b></label>
                 <div class="controls">
-                    {assign var=index value=0}
-                    <select name="signatory" class="input-large">
-                        {foreach from = $listOfSignatory key = k item = i}
-                            {if $thisSignatory != $listOfSignatory[$index]}
-                                <option value="{$listOfSignatoryID[$index]}" {if $listOfSignatoryID[$index] eq $req_PrereqSignatory} selected{/if}>{$listOfSignatory[$index]}</option>
-                            {/if}
-                            {assign var=index value=$index + 1}
-                        {/foreach}
+                    <select id="sign_name" name="signatory" class="input-large" onchange="newOptions(0)">
+                        <option value="{$req_PrereqSignatory}">{$req_PrereqSignatory_Name}</option>
+                        <option>---------Next--------</option>
                     </select>
+                    <input type=hidden id="hide" value="10">
+                    <input type=hidden id="flag" value="0">
                 </div>    
             </div>    
 
@@ -179,15 +264,16 @@ if(parseInt(SelectedIndex) == 1){ $("#Sign").show();
                  {/if}
                  >
                 <label class="control-label"><b> Courses: </b></label>
-                <div class="controls">
-                    <select name="Courses" class="input-xlarge">   
-                        {foreach from = $listOfCourse_UnderSign key = k item = i}
-                            <option value="{$listOfCourse_UnderSignID[$k]}" {if $req_Course eq $listOfCourse_UnderSignID[$k]}selected{/if}>{$listOfCourse_UnderSign[$k]}</option>
-                        {/foreach}
+                <div class="controls">  
+                    <select id="course_name" name="Courses" class="input-xlarge" onchange="newOptions(1)">   
+                        <option value="{$req_Course}">{$req_Course_Name}</option>
+                        <option>---------Next--------</option>
                     </select>
+                    <input type=hidden id="course_hide" value="10">
+                    <input type=hidden id="course_flag" value="0">
                 </div>    
             </div>
-
+                            
             <div class="control-group" id="selected_YearLevel"  
                  {if $req_Visibility eq 'All' or 
                      $req_Visibility eq 'By Course' or

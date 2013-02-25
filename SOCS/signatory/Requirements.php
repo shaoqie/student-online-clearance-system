@@ -17,6 +17,8 @@ class Requirements extends Controller{
     private $schoolYearSem_model;
     private $requirement_model;
     private $signatorialList_model;
+    private $signatory_model;
+    private $course_model;
     
     
     public function __construct() {
@@ -25,6 +27,8 @@ class Requirements extends Controller{
         $this->schoolYearSem_model = new SchoolYearSem_Model();
         $this->requirement_model = new Requirements_Model();
         $this->signatorialList_model = new SignatorialList_Model(); 
+        $this->signatory_model = new Signatory_Model();
+        $this->course_model = new Course_Model();
         
         $listOfSchoolYear = $this->schoolYearSem_model->getSchool_Year();
         $currentSemester = $this->schoolYearSem_model->getCurSemester();
@@ -222,7 +226,8 @@ class Requirements extends Controller{
     public function viewEdit_Requirements($reqID){ 
         
         $requirement_Data = $this->requirement_model->getRequirement($reqID);
-        
+        $this->signatory_model->getSign_Info($requirement_Data['Prerequisite_Signatory']);
+        $this->course_model->getCourse_Info($requirement_Data['Course_ID']);
         
         //$sign_usability = Session::get_signatory_usability();
         $sign_id = $this->signatorialList_model->getSignId(Session::get_AssignSignatory());
@@ -260,11 +265,13 @@ class Requirements extends Controller{
         $this->template->assign('req_Semester', $requirement_Data['Semester']);
         
         $this->template->assign('req_PrereqSignatory', $requirement_Data['Prerequisite_Signatory']);
+        $this->template->assign('req_PrereqSignatory_Name', $this->signatory_model->getSign_Name());
         
         $this->template->assign('req_Visibility', $requirement_Data['Visibility']);
         
         $this->template->assign('req_Department', $requirement_Data['Department_ID']);
         $this->template->assign('req_Course', $requirement_Data['Course_ID']);
+        $this->template->assign('req_Course_Name', $this->course_model->getCourse_Name());
         $this->template->assign('req_YearLevel', $requirement_Data['Year_Level']);
         $this->template->assign('req_Program', $requirement_Data['Program']);
         

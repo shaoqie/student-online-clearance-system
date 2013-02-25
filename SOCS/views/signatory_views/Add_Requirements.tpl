@@ -40,55 +40,91 @@ if(parseInt(SelectedIndex) == 1){ $("#Sign").show();
 /*-------- end function ----------*/
 
 
-function newOptions(){
-    var select = document.getElementById("sign_name");
-    var hide = document.getElementById("hide").value;
-    var flag = document.getElementById("flag").value;
+function newOptions(finder){
+    var select = finder == 0 ? document.getElementById("sign_name") : document.getElementById("course_name");
+    var hide = finder == 0 ? document.getElementById("hide").value : document.getElementById("course_hide").value;
+    var flag = finder == 0 ? document.getElementById("flag").value : document.getElementById("course_flag").value;
+    
+    var hide_temp = finder == 0 ? document.getElementById("hide") : document.getElementById("course_hide");
+    var flag_temp = finder == 0 ? document.getElementById("flag"): document.getElementById("course_flag");
+    
+    var newAssignArray = finder == 0 ? newAssignArray = getSignList() : getCourseList();
+    
     var count = 0;
     var temp = 0;
+    
     if(select.value == "---------Next--------"){ 
     var holder = flag == 1 ? parseInt(hide) + 20 : parseInt(hide) + 10;
     select.innerHTML = "";
-    
-    {assign var=newArraySignList value=$listOfSignatory}
-    {assign var=newArraySignId value=$listOfSignatoryID}
-    {assign var=index value=0}
-    {foreach from = $newArraySignList item = i}
+
+    for(var x = 0; x < newAssignArray.length; x ++){
             if(count >= (holder - 10) && count <  holder){
-            select.options[select.options.length] = new Option("{$i}","{$newArraySignId[$index]}");  temp = count + 1;
+            select.options[select.options.length] = new Option(newAssignArray[x][0],newAssignArray[x][1]);  temp = count + 1;
         }
         count ++;
-        {assign var=index value=$index + 1}
-    {/foreach} 
-        select.options[select.options.length] = new Option("---------Back--------");
-        if(temp % 10 == 0){
-        select.options[select.options.length] = new Option("---------Next--------");
-    }
+    }     
+    
+        //alert(newAssignArray.length % temp);
+       
+        //if(!((newAssignArray.length % temp) == 0 && (temp % 10) > 0)){
+            //if(!(newAssignArray.length == temp && (temp % 10) == 0)){
+                select.options[select.options.length] = new Option("---------Back--------");
+            //}
+            if(!((newAssignArray.length == temp))){
+                select.options[select.options.length] = new Option("---------Next--------");
+            }
+        //}
         
-    document.getElementById("hide").value = holder;
-    document.getElementById("flag").value = "0";
+    hide_temp.value = holder;
+    flag_temp.value = "0";
     }else if(select.value == "---------Back--------"){
-
-
+    
+    
     var holder = parseInt(flag) == 0 ? parseInt(hide) - 20 : parseInt(hide) - 10;
     select.innerHTML = "";
-        {assign var=index value=0}
-        {foreach from = $newArraySignList item = i}
+        for(var x = 0; x < newAssignArray.length; x ++){
             if(count >= holder && count <  holder + 10){
-                select.options[select.options.length] = new Option("{$i}","{$newArraySignId[$index]}");  
+                select.options[select.options.length] = new Option(newAssignArray[x][0],newAssignArray[x][1]);  
             }
             count ++;
-            {assign var=index value=$index + 1}
-        {/foreach} 
+        }
 
     if(parseInt(holder) != 0){
         select.options[select.options.length] = new Option("---------Back--------"); 
     }
     select.options[select.options.length] = new Option("---------Next--------");
 
-    document.getElementById("hide").value = holder;
-    document.getElementById("flag").value = "1";
+    hide_temp.value = holder;
+    flag_temp.value = "1";
     }
+}
+
+function getSignList(){
+    var this_val = new Array();
+    
+    {assign var=index value=0}
+    {foreach from = $listOfSignatory item = i}
+        this_val[{$index}] = new Array(2);
+        this_val[{$index}][0] = "{$i}";
+        this_val[{$index}][1] = {$listOfSignatoryID[$index]};
+        {assign var=index value=$index + 1}
+    {/foreach}
+    
+    return this_val;
+}
+
+function getCourseList(){
+    var this_val = new Array();
+    
+    {assign var=index value=0}
+    {foreach from = $listOfCourse_UnderSign item = i}
+        this_val[{$index}] = new Array(2);
+        this_val[{$index}][0] = "{$i}";
+        this_val[{$index}][1] = {$listOfCourse_UnderSignID[$index]};
+        {assign var=index value=$index + 1}
+    {/foreach}
+    
+    return this_val;    
 }
 
 
@@ -189,7 +225,7 @@ function newOptions(){
                 <label class="control-label"><b>Select Signatory: </b></label>
                 <div class="controls">
                     {assign var=index value=0}
-                    <select id="sign_name" name="signatory" class="input-large" onchange="newOptions()">
+                    <select id="sign_name" name="signatory" class="input-large" onchange="newOptions(0)">
                         {foreach from = $listOfSignatory key = k item = i}
                             {if $thisSignatory != $listOfSignatory[$index] && $index < 10}
                                 <option value="{$listOfSignatoryID[$index]}">{$listOfSignatory[$index]}</option>
@@ -232,12 +268,16 @@ function newOptions(){
             <div class="control-group" id="selected_Course" hidden>
                 <label class="control-label"><b> Courses: </b></label>
                 <div class="controls">
-                    <select name="Courses" class="input-xlarge" onchange="">   
+                    {assign var=index value=0}
+                    <select id="course_name" name="Courses" class="input-xlarge" onchange="newOptions(1)">   
                         {foreach from = $listOfCourse_UnderSign key = k item = i}
-                            <option value="{$listOfCourse_UnderSignID[$k]}">{$listOfCourse_UnderSign[$k]}</option>
+                            {if $index < 10}<option value="{$listOfCourse_UnderSignID[$k]}">{$listOfCourse_UnderSign[$k]}</option>{/if}
+                            {assign var=index value=$index + 1}
                         {/foreach}
+                        <option>---------Next--------</option>
                     </select>
- 
+                    <input type=hidden id="course_hide" value="10">
+                    <input type=hidden id="course_flag" value="0">        
                 </div>    
             </div>
 
