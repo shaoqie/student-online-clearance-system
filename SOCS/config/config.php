@@ -6,35 +6,25 @@
  * -----------------------------------------------------------------------------
  */
 
-/*
- * Server
- */
-define('SERVER', 'localhost');
+// socs global settings (for localhost)
+define('SERVER', 'localhost');                      //server
+define('USERNAME', 'root');                 // username
+define('PASSWORD', '');                 // password
+define('DATABASE', 'socs');                  // database name
+define('PATH', "C:/wamp/www/SOCS/");      //project root
+define('HOST', "http://localhost/SOCS");              //host url
 
-/*
- * Username
- */
-define('USERNAME', 'root');
 
+// socs global settings (for hosting)
 /*
- * Password
- */
-define('PASSWORD', '');
+define('SERVER', 'localhost');                      //server
+define('USERNAME', 'socsx10m_usr');                 // username
+define('PASSWORD', 'U$2fs?MX]41V');                 // password
+define('DATABASE', 'socsx10m_db');                  // database name
+define('PATH', "/home/socsx10m/public_html/");      //project root
+define('HOST', "http://socs.x10.mx");              //host url
+*/
 
-/*
- * Database
- */
-define('DATABASE', 'socs');
-
-/*
- * Project Root
- */
-define('PATH', "C:/wamp/www/SOCS/");
-
-/*
- * Host
- */
-define('HOST', "http://localhost/SOCS");
 
 /*
  * Default Photo
