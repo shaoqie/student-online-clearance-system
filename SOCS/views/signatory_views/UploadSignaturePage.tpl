@@ -15,7 +15,7 @@
         <h2 class="well center-text">Upload Signature</h2>
         
         <legend>Current signature image</legend>
-        <img src="{$signatureImage}" class="img-polaroid" width="200" height="50"></br>
+        <img src="{$signatureImage}" class="img-polaroid" width="200" height="35"></br>
         {if $hasImageSet eq '1'}<a href="uploadSignature.php?action=reset">Remove Signature</a>{/if}
         
         <legend>Upload new signature</legend>
@@ -25,7 +25,7 @@
                 <label class="control-label"><b>Upload Picture: </b></label>
                 <div class="controls">
                     <input type="file" name="signatureimage">
-                    <span class="help-block">Only 200x50 image dimensions are allowed. Max 1MB size.</span>
+                    <span class="help-block">Only 200 x 35 image dimensions are allowed. Max 1MB size.</span>
                 </div>
             </div>
             

@@ -82,7 +82,7 @@ class Validator {
         }
         
         list($width, $height) = getimagesize($imagefile["tmp_name"]);
-        if($width==200 && $height ==50){
+        if($width==200 && $height ==35){
             $test++;
             //echo "pass4 </br>";
         }

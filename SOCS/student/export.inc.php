@@ -54,7 +54,7 @@ foreach ($listOfSignatories["id"] as $key => $value) {
     <body style="font-size:11px;">
 <?php
 printClearance();
-echo "<br/><br/><hr/><br/><br/>";
+echo "<br/><hr/><br/>";
 printClearance();
 ?>
 
@@ -80,7 +80,7 @@ function printClearance() {
             -->
             
             <div style="position:relative;">
-                <div style="position:absolute;left:0;"><img style="height: 120px; width:120px;" src="logo.jpg"/></div>
+                <div style="position:absolute;left:0;"><img style="height: 90px; width:90px;" src="logo.jpg"/></div>
 
 
                 <div>
@@ -93,22 +93,22 @@ function printClearance() {
                 </div>
             </div>
             
-            <br/><br/><br/><br/><br/>
+            <br/><br/>
             <p><b>I.D. No.</b> <span style="text-decoration: underline"><?php echo $stud_id ?></span></p>
 
             <p>TO WHOM IT MAY CONCERN:</p>
 
-            <p>This is to certify that 
+            <p><?php echo str_repeat("&nbsp;", 20); ?>This is to certify that 
                 <b><?php
         if ($stud_gender == "Male")
-            echo "Mr. ";
+            echo "<u>Mr. ";
         else
-            echo "Ms./Mrs. ";
+            echo "<u>Ms./Mrs. ";
         echo $stud_name;
-    ?></b>,
-                a <b><?php echo $stud_year; ?></b> <b><?php echo $stud_course; ?></b>
-                student in the <b><?php echo $stud_dept; ?></b> is cleared of all, property and other accountabilities with this University as of the 
-                <b><?php echo $current_sem; ?></b>, SY <b><?php echo $current_sy; ?>.</b></p>
+        ?></u></b>,
+                a <b><u><?php echo $stud_year; ?></u></b> <b><u><?php echo $stud_course; ?></u></b>
+                student in the <b><u><?php echo $stud_dept; ?></u></b> is cleared of all, property and other accountabilities with this University as of the 
+                <b><u><?php echo $current_sem; ?></u></b>, SY <b><u><?php echo $current_sy; ?></u>.</b></p>
 
 
             <table border="0" align="center">
@@ -122,17 +122,35 @@ function printClearance() {
                         echo '<tr style="min-height:60px;">';
                         $vt = $i + 2;
                     }
-
+                    
                     echo '<td style="vertical-align:bottom; text-align:center;">';
-                    if ($listOfSignatories["status"][$i] == "Cleared") {
-                        ?> <span style="color: green;">  <?php
-                        echo $listOfSignatories["status"][$i];
-                        ?> </span><?php
-                    } else {
-                        ?> <span style="color: red;">  <?php
-                        echo $listOfSignatories["status"][$i];
-                        ?> </span><?php
+                    
+                    $sigIm = $signatory_model->getSignature($listOfSignatories["id"][$i]);
+                    if(is_null($sigIm)){
+                        
+                        if ($listOfSignatories["status"][$i] == "Cleared") {
+                            ?> <span style="color: green;">  <?php
+                            echo $listOfSignatories["status"][$i];
+                            ?> </span><?php
+                        } else {
+                            ?> <span style="color: red;">  <?php
+                            echo $listOfSignatories["status"][$i];
+                            ?> </span><?php
+                        }
+                        
+                    }else{
+                        if ($listOfSignatories["status"][$i] == "Cleared"){
+                            
+                            $sigIm = $signatory_model->getSignature($listOfSignatories["id"][$i]);
+                            $sigIm = parse_url($sigIm, PHP_URL_PATH);
+                            $sigIm = substr($sigIm, strrpos($sigIm, "/")+1);
+                            $sigIm = "../photos/signatures/" . $sigIm;
+                            
+                            echo '<img src="'.$sigIm.'" />';
+                            
+                        }
                     }
+                    
                     echo '<hr style="border-style:solid;margin-bottom:1px; margin-top:1px;" />';
                     echo $listOfSignatories["name"][$i];
                     echo "</td>";
