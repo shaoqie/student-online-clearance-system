@@ -24,7 +24,7 @@ class signatorialList extends Controller{
             $this->signatorialList_model = new SignatorialList_Model();
             $this->department_model = new Department_Model();
             
-            $this->template->setPageName('Signatorial List for Under Graduate');
+            $this->template->setPageName('Departments Page');
             $this->template->set_username(Session::get_user());
             $this->template->set_surname(Session::get_Surname());
             $this->template->set_firstname(Session::get_Firstname());

@@ -25,7 +25,7 @@ class course_list_byDepartment extends Controller {
             $this->template = new Template();
             $this->course_model = new Course_Model();
             $this->department_model = new Department_Model();
-            $this->template->setPageName('Courses');
+            $this->template->setPageName('Departments Page');
 
             $this->template->set_username(Session::get_user());
             $this->template->set_surname(Session::get_Surname());

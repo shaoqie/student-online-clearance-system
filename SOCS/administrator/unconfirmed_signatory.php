@@ -18,7 +18,7 @@ class unconfirmed_signatory extends Controller{
         if (Session::user_exist() && Session::get_Account_type() == "Admin") {
             $this->user_model = new User_Model();
             $this->template = new Template();
-            $this->template->setPageName('List Of Unconfirmed Signatory Users');
+            $this->template->setPageName('User Accounts Page');
 
             $this->template->set_username(Session::get_user());
             $this->template->set_surname(Session::get_Surname());

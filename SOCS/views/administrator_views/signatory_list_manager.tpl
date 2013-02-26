@@ -4,27 +4,17 @@
         <!-- Header-->
         <h4 class="well center-text well-small">Signatories</h4>
 
-        <!-- Navigations-->
-        <div class="row">
-            <div class="span3">
-                {call name=nav_admin index=2}
-            </div>
-        </div>
-
-        <!-- Controls-->
-        <ul class="nav nav-tabs nav-stacked">
-            <li>
-                <a href="{$host}/administrator/signatory_list_manager.php?action=addSignatory">
-                    <i class="icon-group"></i> Add Signatory
-                </a>
-            </li>
-        </ul>
-
+        <!-- Signatories Navigations-->
+        {call name=nav_signatories index=1}
+        
     </div>
     <div class="span9">
 
         <div class="row">
             <div class="span9">
+
+                <!-- Header-->
+                <h4 class="well center-text well-small">List of Signatories</h4>
 
                 {*
                 <!-- Add Signatory Button-->
@@ -58,20 +48,20 @@
                             </td>
                             <td><label>{$desc_sign[$k]}</label></td>
                             <td>
-                                <a style="cursor:pointer;" {if $index_tabs == 0} onclick="window.location.href = 'signatory_list_manager.php?action=editSignatory&seleted={$myKey_sign[$k]}'" {/if} {if $index_tabs == 1} onclick="window.location.href = 'grad_signatory_list_manager.php?action=editSignatory&seleted={$myKey_sign[$k]}'" {/if}><i class="icon-pencil"></i> Edit</a>
+                                <a style="cursor:pointer;" {if $index_tabs == 0} onclick="window.location.href = 'signatory_list_manager.php?action=editSignatory&seleted={$myKey_sign[$k]}';" {/if} {if $index_tabs == 1} onclick="window.location.href = 'grad_signatory_list_manager.php?action=editSignatory&seleted={$myKey_sign[$k]}';" {/if}><i class="icon-pencil"></i> Edit</a>
                             </td>
                         </tr>
                     {/foreach}
                 </table>
 
                 <!-- Delete Control-->
-                <a style="cursor:pointer;" onclick="findCheck('{$rowCount_sign}', 'signatory')">
+                <a style="cursor:pointer;" onclick="findCheck('{$rowCount_sign}', 'signatory');">
                     <i class="icon-remove"></i> Delete Selected
                 </a>
 
                 <!-- Pagination-->
                 <div class="pull-right">
-                    Jump to: <select id="jump" class="input-mini" onchange="jumpToPage()">
+                    Jump to: <select id="jump" class="input-mini" onchange="jumpToPage();">
                         <option>--</option>
                         {for $start = 1 to $sign_length}
                             <option>{$start}</option>

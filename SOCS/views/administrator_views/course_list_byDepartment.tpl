@@ -4,38 +4,30 @@
         <!-- Header-->
         <h4 class="well center-text well-small">Departments</h4>
 
-        <!-- Navigations-->
-        <div class="row">
-            <div class="span3">
-                {call name=nav_admin index=3}
-            </div>
-        </div>
-
-        <!-- Controls-->
+        <!-- Navigations and Controls-->
+        {call name=nav_departments index=0}
+                
+        <!-- Another Controls-->
         <ul class="nav nav-tabs nav-stacked">
-            <li>
-                <a href="{$host}/administrator/course_list_byDepartment.php?action=addCourse">
-                    <i class="icon-book"></i> Add Course
-                </a>
-            </li>
-        </ul>
+        <li>
+            <a href="{$host}/administrator/course_list_byDepartment.php?action=addCourse">
+                <i class="icon-book"></i> Add Course
+            </a>
+        </li>
 
     </div>
     <div class="span9">
 
         <!-- Header-->
         <div class="well center-text well-small">
-            <h3>{$Dept_name} </h3>
+            <h4>{$Dept_name} </h4>
             <small>{$Dept_desc}</small>
         </div>
 
-        <!-- Back Button-->
-        <!-- <input class="btn pull-right" type="button" value="Back" onclick="window.location.href='department_list_manager.php'"> -->
-
         <!-- Navigation Tabs-->
         <ul class="nav nav-tabs">
-            <li class="active"><a href='../administrator/course_list_byDepartment.php'>Courses</a></li>
-            <li><a href='../administrator/signatorialList.php'>Signatorial List</a></li>
+            <li class="active"><a href='{$host}/administrator/course_list_byDepartment.php'>Courses</a></li>
+            <li><a href='{$host}/administrator/signatorialList.php'>Signatorial List</a></li>
         </ul>
 
         {*

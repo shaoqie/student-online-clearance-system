@@ -1,3 +1,41 @@
+<!-- Welcome Navigations-->
+{function name=welcome_navigations}
+    <ul class="nav">
+        <li>
+            <a href="index.php">Home</a>
+        </li>
+        <li>
+            <a href="index.php?action=student_registrationForm">Register</a>
+        </li>
+    </ul>
+{/function}
+
+<!-- Admin Navigations-->
+{function name="nav_admin" index=0}
+    <ul class="nav">
+        <li class="dropdown {if $index == 1}active{/if}">
+            <a class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="100" href='#'>
+                <i class="icon-user"></i> User Accounts
+            </a>
+            <ul class="dropdown-menu">
+                <li><a href="{$host}/administrator/index.php?user_type=Student">Students</a></li>
+                <li><a href="{$host}/administrator/index.php?user_type=Signatory">Signatories-in-charge</a></li>
+                <li><a href="{$host}/administrator/unconfirmed_signatory.php">Unconfirmed Signatories-in-charge</a></li>
+            </ul>
+        </li>
+        <li {if $index == 2}class="active"{/if}>
+            <a href="{$host}/administrator/signatory_list_manager.php">
+                <i class="icon-coffee"></i> Signatories
+            </a>
+        </li>
+        <li {if $index == 3}class="active"{/if}>
+            <a href="{$host}/administrator/department_list_manager.php">
+                <i class="icon-building"></i> Departments
+            </a>
+        </li>
+    </ul>
+{/function}
+
 <!-- Search Bar-->
 {function name=search}
     {if isset($filter)}
@@ -88,32 +126,117 @@
 </form>
 {/function}
 
-<!-- Navigation Admin-->
-{function name=nav_admin index=0}
+<!-- Admin Functions-->
+
+<!-- User Accounts Navigation-->
+{function name=nav_user_accounts index=0}
 
     <ul class="nav nav-tabs nav-stacked">
-
         <li {if $index == 1}class="active"{/if}>
-            <a href='../administrator/index.php?user_type=Student'>
-                <i class="icon-user"></i> User Accounts
-            </a>
+            <a href='{$host}/administrator/index.php?user_type=Student'>Students</a>
         </li>
-
         <li {if $index == 2}class="active"{/if}>
-            <a href='../administrator/signatory_list_manager.php'>
-                <i class="icon-coffee"></i> Signatories
-            </a>
+            <a href='{$host}/administrator/index.php?user_type=Signatory'>Signatories-in-Charge</a>
         </li>
         <li {if $index == 3}class="active"{/if}>
-            <a href='../administrator/department_list_manager.php'>
-                <i class="icon-building"></i> Departments
+            <a href='{$host}/administrator/unconfirmed_signatory.php'>Unconfirmed Signatories-in-charge</a>
+        </li>
+    </ul>
+
+    <ul class="nav nav-tabs nav-stacked">
+        <li {if $index == 4}class="active"{/if}>
+            <a href="{$host}/administrator/index.php?action=addSignatoryInCharge">
+                <i class="icon-check"></i> Add Signatory In-Charge
             </a>
         </li>
     </ul>
 
+    <!-- Upload Student List-->
+    <form class="form-inline" action="../administrator/index.php?action=upload_excel_file" method="post" enctype="multipart/form-data">
+
+        <label>
+            <b>Upload Student List: </b>
+            <input type="file" name="excel_file">
+        </label>
+        <button class="btn btn-primary" type="submit" name="save">
+            <i class="icon-upload-alt"></i> Upload
+        </button>
+    </form>
+
+    {if isset($excel_file)}
+        <div style="color: green;">
+            <i class="icon-file icon-large"> student_current_enroll</i>
+        </div>
+    {/if}
+
+    {*
+    <ul class="nav nav-tabs nav-stacked">
+
+    <li {if $index == 1}class="active"{/if}>
+    <a href='../administrator/index.php?user_type=Student'>
+    <i class="icon-user"></i> User Accounts
+    </a>
+    </li>
+
+    <li {if $index == 2}class="active"{/if}>
+    <a href='../administrator/signatory_list_manager.php'>
+    <i class="icon-coffee"></i> Signatories
+    </a>
+    </li>
+    <li {if $index == 3}class="active"{/if}>
+    <a href='../administrator/department_list_manager.php'>
+    <i class="icon-building"></i> Departments
+    </a>
+    </li>
+    </ul>
+    *}
+
 {/function}
 
-<!-- Navigation Signatory-->
+<!-- Signatories Navigations-->
+{function name=nav_signatories index=0}
+    <!-- Controls-->
+    <ul class="nav nav-tabs nav-stacked">
+        <li {if $index == 1}class="active"{/if}>
+            <a href="{$host}/administrator/signatory_list_manager.php">
+                <i class="icon-list"></i> List of Signatories
+            </a>
+        </li>
+    </ul>
+
+    <ul class="nav nav-tabs nav-stacked">
+        <li {if $index == 2}class="active"{/if}>
+            <a href="{$host}/administrator/signatory_list_manager.php?action=addSignatory">
+                <i class="icon-group"></i> Add Signatory
+            </a>
+        </li>
+    </ul>
+{/function}
+
+<!-- Departments Navigations-->
+{function name=nav_departments index=0}
+    <!-- Navigations-->
+    <ul class="nav nav-tabs nav-stacked">
+        <li {if $index == 1}class="active"{/if}>
+            <a href="{$host}/administrator/department_list_manager.php">
+                <i class="icon-list"></i> List of Departments
+            </a>
+        </li>
+    </ul>
+    
+    <!-- Controls-->
+    <ul class="nav nav-tabs nav-stacked">
+        <li {if $index == 2}class="active"{/if}>
+            <a href="{$host}/administrator/department_list_manager.php?action=addDepartment">
+                <i class="icon-book"></i> Add Department
+            </a>
+        </li>
+    </ul>
+{/function}
+
+<!-- Signatory-in-charge Functions-->
+
+<!-- Signatory Navigation-->
 {function name=nav_signatory index=0}
     <ul class="nav nav-tabs nav-stacked">
         <li {if $index == 0}class="active"{/if}>
@@ -137,38 +260,4 @@
             </a>
         </li>
     </ul>
-{/function}
-
-<!-- Navigation Tabs User Accounts-->
-{function name="nav_user_accounts" index=0}
-    <ul class="nav nav-tabs">
-        <li {if $index == 0}class="active"{/if}>
-            <a href='../administrator/index.php?user_type=Student'>Students</a>
-        </li>
-        <li {if $index == 1}class="active"{/if}>
-            <a href='../administrator/index.php?user_type=Signatory'>Signatories-in-Charge</a>
-        </li>
-        <li {if $index == 2}class="active"{/if}>
-            <a href='../administrator/unconfirmed_signatory.php'>Unconfirmed Signatories-in-charge</a>
-        </li>
-    </ul>
-{/function}
-
-<!-- Upload Student Lists-->
-{function name="upload_excel"}
-    <form class="form-inline" action="../administrator/index.php?action=upload_excel_file" method="post" enctype="multipart/form-data">
-
-        <label>Upload Student List: 
-            <input type="file" name="excel_file">
-        </label>
-        <button class="btn btn-primary" type="submit" name="save">
-            <i class="icon-upload-alt"></i> Upload
-        </button>
-    </form>
-
-    {if isset($excel_file)}
-        <div style="color: green;">
-            <i class="icon-file icon-large"> student_current_enroll</i>
-        </div>
-    {/if}
 {/function}

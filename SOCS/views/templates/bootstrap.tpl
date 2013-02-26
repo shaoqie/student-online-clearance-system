@@ -82,6 +82,8 @@
 
         <!-- This code is taken from http://twitter.github.com/bootstrap/examples/hero.html -->
 
+        {include file='UIsections.tpl'}
+
         <div class="navbar navbar-inverse navbar-fixed-top" id="navbar">
             <div class="navbar-inner">
                 <div class="container">
@@ -93,18 +95,15 @@
                     <a class="brand" href="index.php"><img src="{$host}/public/img/logo.png"> SOCS</a>
                     <div class="nav-collapse collapse">
 
-                        {function name=welcome_navigations}
-
-                            <ul class="nav">
-                                <li>
-                                    <a href="index.php">Home</a>
-                                </li>
-                                <li>
-                                    <a href="index.php?action=student_registrationForm">Register</a>
-                                </li>
-                            </ul>
-
-                        {/function}
+                        {if isset($account_type) && $account_type == "System Administrator"}
+                            {if $page_name=="User Accounts Page"}
+                                {call name=nav_admin index=1}
+                            {elseif $page_name=="Signatories Page"}
+                                {call name=nav_admin index=2}
+                            {elseif $page_name=="Departments Page"}
+                                {call name=nav_admin index=3}
+                            {/if}
+                        {/if}
 
                         {if isset($username)}
                             <div class="btn-group pull-right">
@@ -175,7 +174,6 @@
 
             {$alert}
 
-            {include file='UIsections.tpl'}
             {include file=$content}
 
             <hr>
@@ -185,49 +183,13 @@
             </footer>
 
         </div>
-        {*
-        <div class="span10 offset1">
-
-        {if isset($username)}
-        <div id="header" class="row socs-content">
-        <div class="span1">
-
-        {if isset($photo)}
-        <img src="{$photo}" class="img-polaroid" />
-        {else}
-        <img src="{$host}/photos/default.png" class="img-polaroid" />
-        {/if}
-
-        </div>
-        <div class="span5">
-        <h4>{$surname}, {$firstname} {$middlename}</h4>
-        <h5>- {$account_type} {$assign_sign}</h5>
-        </div>
-        </div>
-        {/if}
-
-        <div class="row socs-content">
-
-        {$alert}
-
-        {include file='UIsections.tpl'}
-        {include file=$content}
-
-        <hr>
-
-        <footer>
-        <p>&copy; Student Online Clearance System 2012</p>
-        </footer>
-
-        </div>
-        </div>
-        *}
         <!--<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>-->
         <!--<script>window.jQuery || document.write('<script src="{$host}/js/vendor/jquery-1.8.3.min.js"><\/script>')</script>-->
 
         <script src="{$host}/public/js/vendor/jquery-1.8.3.min.js"></script>
         <script src="{$host}/public/js/vendor/bootstrap.min.js"></script>
         <script src="{$host}/public/js/vendor/bootbox.min.js"></script>
+        <script src="{$host}/public/js/vendor/twitter-bootstrap-hover-dropdown.min.js"></script>
 
         <script src="{$host}/public/js/main.js"></script>
 

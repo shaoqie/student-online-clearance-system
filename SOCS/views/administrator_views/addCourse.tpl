@@ -4,14 +4,10 @@
         <!-- Header-->
         <h4 class="well center-text well-small">Departments</h4>
 
-        <!-- Navigations-->
-        <div class="row">
-            <div class="span3">
-                {call name=nav_admin index=0}
-            </div>
-        </div>
+        <!-- Navigations and Controls-->
+        {call name=nav_departments index=0}
 
-        <!-- Controls-->
+        <!-- Another Controls-->
         <ul class="nav nav-tabs nav-stacked">
             <li class="active">
                 <a href="{$host}/administrator/course_list_byDepartment.php?action=addCourse">

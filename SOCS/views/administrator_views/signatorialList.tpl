@@ -97,89 +97,85 @@
         <!-- Header-->
         <h4 class="well center-text well-small">Departments</h4>
 
-        <!-- Navigations-->
-        <div class="row">
-            <div class="span3">
-                {call name=nav_admin index=2}
-            </div>
+        <!-- Navigations and Controls-->
+        {call name=nav_departments index=0}
+                
+        <!-- Another Controls-->
+        <ul class="nav nav-tabs nav-stacked">
+        <li>
+            <a href="{$host}/administrator/course_list_byDepartment.php?action=addCourse">
+                <i class="icon-book"></i> Add Course
+            </a>
+        </li>
+
+    </div>
+    <div class="span9">
+
+        <!-- Header-->
+        <div class="well center-text well-small">
+            <h4>{$Dept_name} </h4>
+            <small>{$Dept_desc}</small>
         </div>
 
-        <div class="row">
-            <div class="span3">
-                <!-- Add Signatory -->
-                {if $countSignList > 0}
-                    <form class="form-inline">
-                        <label><b>Add Signatory: </b></label>
+        <!-- Visibility -->
+        <div class="form-inline pull-right">
+            <label><b>Visibility: </b></label>
+            <select id="visibility" class="span2" onchange="signatorialList_visibility();">
+                <option value="0" {if $index_tabs == 0} selected {/if}>Under Graduate</option>
+                <option value="1" {if $index_tabs == 1} selected {/if}>Graduate</option>
+            </select>
+        </div>
 
-                        {assign var=count value=0}
-                        <select id="cmdSignatory" required onchange="newOptions();">
-                            {foreach from = $SignatoryList item = i}
-                            {if $count < 10}<option>{$i}</option>{/if}
-                            {assign var=count value=$count + 1}
-                        {/foreach}
-                        <option>---------Next--------</option>
-                    </select>
-                    <input type=hidden id="hide" value="10">
-                    <input type=hidden id="flag" value="0">
+        <!-- Navigation Tab-->
+        <ul class="nav nav-tabs">
+            <li><a href='../administrator/course_list_byDepartment.php'>Courses</a></li>
+            <li class="active"><a href='../administrator/signatorialList.php'>Signatorial List</a></li>
+        </ul>
 
-                    {*
-                    <input type="text" id="cmdSignatory" required autocomplete="off" class="span2" data-provide="typeahead" data-source='[
-                    {foreach from=$SignatoryList key=k item=i}
-                    {if $SignatoryList|@count - 1 eq $k}
-                    "{$i}"
-                    {else}
-                    "{$i}",
-                    {/if}
-                    {/foreach}
-                    ]'>
-                    *}     
+        <!-- Search Bar-->
+        <span class="pull-right">
+            {call name=search}
+        </span>
 
-                    <button class="btn btn-success" type="button" onclick="getSignatory();">
-                        <i class="icon-plus"></i> Add
-                    </button>
-                </form>
+        <!-- Add Signatory -->
+        {if $countSignList > 0}
+            <form class="form-inline">
+                <label><b>Add Signatory: </b></label>
+
+                {assign var=count value=0}
+                <select id="cmdSignatory" required onchange="newOptions();">
+                    {foreach from = $SignatoryList item = i}
+                    {if $count < 10}<option>{$i}</option>{/if}
+                    {assign var=count value=$count + 1}
+                {/foreach}
+                <option>---------Next--------</option>
+            </select>
+            <input type=hidden id="hide" value="10">
+            <input type=hidden id="flag" value="0">
+
+            {*
+            <input type="text" id="cmdSignatory" required autocomplete="off" class="span2" data-provide="typeahead" data-source='[
+            {foreach from=$SignatoryList key=k item=i}
+            {if $SignatoryList|@count - 1 eq $k}
+            "{$i}"
+            {else}
+            "{$i}",
             {/if}
-        </div>
-    </div>
+            {/foreach}
+            ]'>
+            *}     
 
-</div>
-<div class="span9">
-
-    <!-- Header-->
-    <div class="well center-text well-small">
-        <h3>{$Dept_name} </h3>
-        <small>{$Dept_desc}</small>
-    </div>
-
-    <!-- Visibility -->
-    <div class="form-inline pull-right">
-        <label><b>Visibility: </b></label>
-        <select id="visibility" class="span2" onchange="signatorialList_visibility()">
-            <option value="0" {if $index_tabs == 0} selected {/if}>Under Graduate</option>
-            <option value="1" {if $index_tabs == 1} selected {/if}>Graduate</option>
-        </select>
-    </div>
-
-
-    <!-- Back Button-->
-    <!-- <input class="btn pull-right" type="button" value="Back" onclick="window.location.href='department_list_manager.php'"> -->
-
-    <!-- Navigation Tab-->
-    <ul class="nav nav-tabs">
-        <li><a href='../administrator/course_list_byDepartment.php'>Courses</a></li>
-        <li class="active"><a href='../administrator/signatorialList.php'>Signatorial List</a></li>
-    </ul>
-
-    <!-- Search Bar-->
-    <span class="pull-right">
-        {call name=search}
-    </span>
+            <button class="btn btn-success" type="button" onclick="getSignatory();">
+                <i class="icon-plus"></i> Add
+            </button>
+        </form>
+    {/if}
 
     <!-- Table of Signatories-->
     <table class="table table-hover">    
         <tr>
             <th>
-                <input type="checkbox" onclick="isCheck({$rowCount_signatorial})" id="check"> Signatories
+                <input type="checkbox" onclick="isCheck({$rowCount_signatorial});" id="check"> Signatories
             </th>
             <th></th>
             <th>Controls</th>

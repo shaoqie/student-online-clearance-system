@@ -2,26 +2,18 @@
     <div class="span3">
 
         <!-- Header-->
-        <h4 class="well center-text well-small">Add Department</h4>
+        <h4 class="well center-text well-small">Departments</h4>
 
-        <!-- Navigations-->
-        <div class="row">
-            <div class="span3">
-                {call name=nav_admin}
-            </div>
-        </div>
-
-        <!-- Controls-->
-        <ul class="nav nav-tabs nav-stacked">
-            <li class="active">
-                <a href="{$host}/administrator/department_list_manager.php?action=addDepartment">
-                    <i class="icon-book"></i> Add Department
-                </a>
-            </li>
-        </ul>
+        <!-- Navigations and Controls-->
+        {call name=nav_departments index=2}
+    </ul>
+        
     </div>
     <div class="span9">
 
+        <!-- Header-->
+        <h4 class="well center-text well-small">Add Department</h4>
+        
         <!-- Adding Form-->
         <form action="department_list_manager.php?action=add_department" method='post' class="form-horizontal">
             <legend>Department Information: </legend>

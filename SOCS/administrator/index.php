@@ -23,7 +23,7 @@ class Index extends Controller {
             $this->signatoriallist_model = new SignatorialList_Model();
             $this->signatory_model = new Signatory_Model();
             $this->template = new Template();
-            $this->template->setPageName('Administrator Page');
+            $this->template->setPageName('User Accounts Page');
 
             $this->template->set_username(Session::get_user());
             $this->template->set_surname(Session::get_Surname());
@@ -126,7 +126,6 @@ class Index extends Controller {
     }
 
     public function addSignatoryInCharge() {
-        $this->template->setPageName("Add Signatory In Charge");
         $this->template->setContent('Add_SignatoryInCharge.tpl');
 
         $ug_listOfsignatory = $this->signatory_model->getListofSignatoryName();

@@ -7,15 +7,20 @@
         <!-- Navigations-->
         <div class="row">
             <div class="span3">
-                {call name=nav_admin index=1}
+                {call name=nav_user_accounts index=3}
             </div>
         </div>
 
     </div>
     <div class="span9">
 
+        <!-- Header-->
+        <h4 class="well center-text well-small">Unconfirmed Signatories-in-charge</h4>
+        
+        {*
         <!-- Navigation Tab-->
         {call name=nav_user_accounts index=2}
+        *}
 
         <!-- Search Bar-->
         <div class="row">

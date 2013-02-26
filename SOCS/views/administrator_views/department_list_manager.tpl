@@ -4,21 +4,9 @@
         <!-- Header-->
         <h4 class="well center-text well-small">Departments</h4>
 
-        <!-- Navigations-->
-        <div class="row">
-            <div class="span3">
-                {call name=nav_admin index=3}
-            </div>
-        </div>
-
-        <!-- Controls-->
-        <ul class="nav nav-tabs nav-stacked">
-            <li>
-                <a href="{$host}/administrator/department_list_manager.php?action=addDepartment">
-                    <i class="icon-book"></i> Add Department
-                </a>
-            </li>
-        </ul>
+        <!-- Navigations and Controls-->
+        {call name=nav_departments index=1}
+        
     </div>
     <div class="span9">
 
@@ -29,6 +17,9 @@
                 <!-- Add Department Button-->
                 <input class="btn" type="button" value="Add Department" onclick="window.location.href = 'department_list_manager.php?action=addDepartment'">
                 *}
+
+                <!-- Header-->
+                <h4 class="well center-text well-small">List of Departments</h4>
 
                 <!-- Search Bar-->
                 <span class="pull-right">
@@ -43,7 +34,7 @@
                 <table class="table table-bordered table-hover">   
                     <tr>
                         <th>
-                            <input type="checkbox" onclick="isCheck({$rowCount_dept})" id="check"> Departments
+                            <input type="checkbox" onclick="isCheck({$rowCount_dept});" id="check"> Departments
                         </th>
                         <th>Description</th>
                         <th>Controls</th>
@@ -53,7 +44,7 @@
                             <td>
                                 <label class="checkbox">
                                     <input class="Checkbox" type="checkbox" id = '{$k}' value = {$myKey_dept[$k]} >
-                                    <div id="hover_link" onclick="window.location.href = 'department_list_manager.php?action=displayCourse&deptName={$i}'" >{$i}</div>
+                                    <div id="hover_link" onclick="window.location.href = 'department_list_manager.php?action=displayCourse&deptName={$i}';" >{$i}</div>
                                 </label>        
                             </td>
                             <td>{$desc_dept[$k]}</td>

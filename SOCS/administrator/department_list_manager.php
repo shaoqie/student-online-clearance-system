@@ -18,7 +18,7 @@ class Department_List_Manager extends Controller {
 
             $this->template = new Template();
             $this->department_model = new Department_Model();
-            $this->template->setPageName('Departments');
+            $this->template->setPageName("Departments Page");
 
             $this->template->set_username(Session::get_user());
             $this->template->set_surname(Session::get_Surname());

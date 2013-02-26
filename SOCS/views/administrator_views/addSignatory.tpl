@@ -4,24 +4,14 @@
         <!-- Header-->
         <h4 class="well center-text well-small">Signatories</h4>
 
-        <!-- Navigations-->
-        <div class="row">
-            <div class="span3">
-                {call name=nav_admin index=0}
-            </div>
-        </div>
-
-        <!-- Controls-->
-        <ul class="nav nav-tabs nav-stacked">
-            <li class="active">
-                <a href="{$host}/administrator/signatory_list_manager.php?action=addSignatory">
-                    <i class="icon-group"></i> Add Signatory
-                </a>
-            </li>
-        </ul>
+        <!-- Signatories Navigations-->
+        {call name=nav_signatories index=2}
 
     </div>
     <div class="span9">
+
+        <!-- Header-->
+        <h4 class="well center-text well-small">Add Signatory</h4>
 
         <!-- Adding Form-->
         <form {if $index_tabs == 0} action="signatory_list_manager.php?action=add_signatory" {/if} {if $index_tabs == 1} action="grad_signatory_list_manager.php?action=add_signatory" {/if} method='post' class="form-horizontal">

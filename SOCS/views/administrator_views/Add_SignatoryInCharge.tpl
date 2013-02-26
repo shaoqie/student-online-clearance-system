@@ -50,32 +50,24 @@
     <div class="span3">
 
         <!-- Header-->
-        <h4 class="well center-text well-small">Add Signatory in-Charge</h4>
+        <h4 class="well center-text well-small">User Accounts</h4>
 
-        <!-- Navigations-->
+        <!-- Navigations and Controls-->
         <div class="row">
             <div class="span3">
-                {call name=nav_admin index=0}
-            </div>
-        </div>
-
-        <!-- Controls-->
-        <div class="row">
-            <div class="span3">
-                <ul class="nav nav-tabs nav-stacked">
-                    <li class="active">
-                        <a href="{$host}/administrator/index.php?action=addSignatoryInCharge">
-                            <i class="icon-check"></i> Add Signatory In-Charge
-                        </a>
-                    </li>
-                </ul>
+                {call name=nav_user_accounts index=4}
             </div>
         </div>
 
     </div>
     <div class="span9">
 
+        <!-- Header-->
+        <h4 class="well center-text well-small">Add Signatory In-Charge</h4>
+        
+        {*
         {call name=nav_user_accounts index=1}
+        *}
 
         <form method='post' class="form-horizontal">
             {literal}
