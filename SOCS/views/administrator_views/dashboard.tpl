@@ -1,3 +1,11 @@
+{*
+<ul class="breadcrumb">
+    <li><a href="#">Home</a> <span class="divider"><i class="icon-chevron-right"></i></span></li>
+    <li><a href="#">Library</a> <span class="divider"><i class="icon-chevron-right"></i></span></li>
+    <li class="active">Data</li>
+</ul>
+*}
+
 <div class="row">
     <div class="span3">
 
@@ -12,18 +20,18 @@
         <!-- Navigations-->
         <div class="row">
             <div class="span3">
-                
+
                 <!-- Admin Navigation-->
                 {if $user_type == 'Student'}
                     {call name=nav_user_accounts index=1}
                 {else}
                     {call name=nav_user_accounts index=2}
                 {/if}
-   
+
             </div>
         </div>
     </div>
-                
+
     <div class="span9">
 
         <div class="row">
