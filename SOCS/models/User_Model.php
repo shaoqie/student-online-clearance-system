@@ -300,6 +300,14 @@ class User_Model extends Model {
         
         return $row['Signatory_Name'];
     }
+    
+    public function getAssignSignatory_SigIDOnly($uname) {
+        $this->query = mysql_query("select Assigned_Signatory from users where username='$uname'");
+        $row = mysql_fetch_array($this->query);
+        
+        return $row[0];
+    }
+    
 
     public function getSignatory_Usability($uname){
         $this->query = mysql_query("select Signatory_Usability  from users where username = '$uname'");

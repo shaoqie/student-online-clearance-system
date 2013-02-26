@@ -14,6 +14,7 @@ if (!(Session::user_exist() && Session::get_Account_type() == "Student")) {
 }
 
 $sy_model = new SchoolYearSem_Model();
+$signatory_model = new Signatory_Model();
 $current_sy = $sy_model->getCurSchool_Year();
 $current_sem = $sy_model->getCurSemester();
 if ($current_sem != "Summer")
@@ -74,7 +75,8 @@ printBody();
 
 function printBody(){
     global $fpdf, $stud_id, $stud_gender, $stud_name, $stud_year, 
-            $stud_course, $stud_dept, $current_sem, $current_sy, $listOfSignatories;
+            $stud_course, $stud_dept, $current_sem, $current_sy, $listOfSignatories,
+            $signatory_model;
     
     $fontsize = 10;
     $single_spacing = 4;
@@ -160,8 +162,15 @@ function printBody(){
             else
                 $fpdf->SetTextColor(242,34,34);
             $fpdf->Write(1, str_repeat(" ", 10));
-            $fpdf->Cell(50, 5, $listOfSignatories["status"][$k], "B", 0, 'C', false);
             
+            $sigIm = $signatory_model->getSignature($listOfSignatories["id"][$k]);
+            if(is_null($sigIm)){
+                $fpdf->Cell(50, 5, $listOfSignatories["status"][$k], "B", 0, 'C', false);
+            }else{
+                if ($listOfSignatories["status"][$k] == "Cleared"){
+                    $fpdf->Image($sigIm,null,null, 0, 0);
+                }
+            }
             //echo $k . "<br/>";
         }
         

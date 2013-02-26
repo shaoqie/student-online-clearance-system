@@ -96,7 +96,7 @@
         <label class="control-label"><b>Password: </b></label>
         <div class="controls">
             {literal}
-                <input id="password_entered" type='password' name='password' pattern="^.{7,50}$" title="Password minimum of 7 characters" required>
+                <input id="password_entered" type='password' name='password' pattern="^.{4,50}$" title="Password minimum of 4 characters" required>
             {/literal}
         </div>
     </div>
@@ -113,14 +113,14 @@
     <div class="control-group">
         <label class="control-label"><b>Surname: </b></label>
         <div class="controls">
-            <input type ='text' name='surname' {if isset($s_name)}value="{$s_name}"{/if} pattern="[A-Za-z\s]+" required title="Letters and spaces only">
+            <input type ='text' name='surname' {if isset($s_name)}value="{$s_name}"{/if} pattern="[A-Za-z\s\-]+" required title="Letters and spaces only">
         </div>
     </div>
 
     <div class="control-group">
         <label class="control-label"><b>First Name: </b></label>
         <div class="controls">
-            <input type='text' name='firstname' {if isset($f_name)}value="{$f_name}"{/if} pattern="[A-Za-z\s\.]+" required title="Letters and spaces only">
+            <input type='text' name='firstname' {if isset($f_name)}value="{$f_name}"{/if} pattern="[A-Za-z\s\.\-]+" required title="Letters and spaces only">
         </div>
     </div>
 

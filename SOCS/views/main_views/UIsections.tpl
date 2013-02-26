@@ -131,6 +131,11 @@
                 <i class="icon-check"></i> Requirements
             </a>
         </li>
+        <li {if $index == 3}class="active"{/if}>
+            <a href='../signatory/uploadsignature.php'>
+                <i class="icon-arrow-up"></i> Upload Signature
+            </a>
+        </li>
     </ul>
 {/function}
 

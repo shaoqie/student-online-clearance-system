@@ -43,7 +43,7 @@ class Validator {
             $test++;
         }
 
-        if ($imagefile["size"] < 1000000) {
+        if ($imagefile["size"] < 1048576) { // 1 MB == 1,048,576 bytes
             $test++;
         }
         
@@ -52,6 +52,42 @@ class Validator {
         }
 
         if($test == 3){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    
+    public static function is_valid_signature_image($imagefile) {
+
+        $types = array("image/jpeg", "image/png", "image/gif", "image/pjpeg");
+
+        $test = 0;
+        
+        //var_dump($imagefile["type"]);
+        
+        if (in_array($imagefile["type"], $types)) {
+            $test++;
+            //echo "pass1 </br>";
+        }
+
+        if ($imagefile["size"] < 1048576) {
+            $test++;
+            //echo "pass2 </br>";
+        }
+        
+        if($imagefile["error"] == 0){
+            $test++;
+            //echo "pass3 </br>";
+        }
+        
+        list($width, $height) = getimagesize($imagefile["tmp_name"]);
+        if($width==200 && $height ==50){
+            $test++;
+            //echo "pass4 </br>";
+        }
+
+        if($test == 4){
             return true;
         }else{
             return false;

@@ -120,7 +120,22 @@ class Signatory_Model extends Model{
         $row = mysql_fetch_array($this->query);
         $this->sign_name = $row['Signatory_Name'];
         $this->sign_desc = $row['Description'];
-    }   
+    }
+    
+    public function updateSignature($signatoryID, $imgpath){
+        mysql_query("update signatories set signature_image='$imgpath' where signatory_id='$signatoryID'");
+        //var_dump(mysql_errno());
+    }
+    
+    public function getSignature($signatoryID){
+        $this->query = mysql_query("select signature_image from signatories where signatory_id='$signatoryID'");
+        $row = mysql_fetch_array($this->query);
+        return $row[0];
+    }
+    
+    public function resetSignature($signatoryID){
+        mysql_query("update signatories set signature_image=NULL where signatory_id='$signatoryID'");
+    }
     
 //    public function getSign_Name($key){
 //        $this->query = mysql_query("select Signatory_Name from signatories where Signatory_ID = '$key'");

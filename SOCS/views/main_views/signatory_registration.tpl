@@ -52,8 +52,8 @@ function newOptions(){
         <div class="control-group">
             <label class="control-label"><b>Username: </b></label>
             <div class="controls">
-                <input type ='text' name='uname' value="" maxlength="15" pattern="[0-9a-zA-Z]{7,32}" required title="Letters and numbers only">
-
+                <input type ='text' name='uname' value="" maxlength="15" pattern="[0-9a-zA-Z]{4,32}" required title="Letters and numbers only.">
+            
             </div>
         </div>
 
@@ -61,15 +61,15 @@ function newOptions(){
             <label class="control-label"><b>Password: </b></label>
             <div class="controls">
 
-                <input id="password_entered" type='password' name='newpass' pattern="[0-9a-zA-Z]{7,32}" title="Password minimum of 7 characters" required>
-
+                <input id="password_entered" type='password' name='newpass' pattern=".{4,32}" title="Minimum 4 characters" required> 
+                
             </div>
         </div>
 
         <div class="control-group">
             <label class="control-label"><b>Re-type Password: </b></label>
             <div class="controls">
-                <input id="retyped_password_entered" type='password' name='confirmpass' pattern="[0-9a-zA-Z]{7,50}" onblur="checkPasswordEquality()" required>
+                <input id="retyped_password_entered" type='password' name='confirmpass' pattern=".{4,32}" onblur="checkPasswordEquality()" required>
             </div>
         </div>
 
@@ -78,21 +78,21 @@ function newOptions(){
         <div class="control-group">
             <label class="control-label"><b>Surname: </b></label>
             <div class="controls">
-                <input type ='text' name='surname' {/literal}{if isset($s_name)} value="{$s_name}" {/if}{literal} pattern="[A-Za-z\s]{2,15}" required title="Letters and spaces only">
+                <input type ='text' name='surname' {/literal}{if isset($s_name)} value="{$s_name}" {/if}{literal} pattern="[A-Za-z\s\-]{2,32}" required title="Letters and spaces only">
             </div>
         </div>
 
         <div class="control-group">
             <label class="control-label"><b>First Name: </b></label>
             <div class="controls">
-                <input type='text' name='firstname' {/literal}{if isset($f_name)} value="{$f_name}" {/if}{literal} pattern="[A-Za-z\s\.]{2,15}" required title="Letters and spaces only">
+                <input type='text' name='firstname' {/literal}{if isset($f_name)} value="{$f_name}" {/if}{literal} pattern="[A-Za-z\s\.\-]{2,32}" required title="Letters and spaces only">
             </div>
         </div>
 
         <div class="control-group">
             <label class="control-label"><b>Middle Initial: </b></label>
             <div class="controls">
-                <input type='text'name='middleName' maxlength="1" {/literal}{if isset($m_name)} value="{$m_name}" {/if}{literal} pattern="[A-Z\s]{1,15}" required title="Letters and spaces only">
+                <input type='text'name='middleName' maxlength="1" {/literal}{if isset($m_name)} value="{$m_name}" {/if}{literal} pattern="[A-Z\s]{1,32}" required title="Letters and spaces only">
             </div>
         </div>
 

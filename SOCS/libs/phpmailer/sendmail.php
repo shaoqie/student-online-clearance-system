@@ -24,10 +24,10 @@ function sendForgotPassword($studentName, $studentEmail, $verificationLink){
 
     $mail->Subject    = "SOCS Forgotten Password ";
     
-    $body = "Welcome to Student Online Clearance System(SOCS)! " . "</br></br>" .
-            "<br/>Hello $studentName, <br/></br>" .
+    $body = "Student Online Clearance System(SOCS) Password reset " . "</br></br>" .
+            "<br/>Hi $studentName, <br/></br>" .
              "You have chosen to change yout password on Student Online Clearance System. <br/>".
-            "<a href=\"$verificationLink\">$verificationLink<a/> <br/>" .
+            "<a href=\"$verificationLink\">$verificationLink</a> <br/>" .
             "so don't forgot your password again... <br/>".
             "Thank you :)";
     
@@ -68,7 +68,7 @@ function sendMail($studentName, $studentEmail, $verificationLink){
     $body = "Welcome to Student Online Clearance System(SOCS)! " . "</br></br>" .
             "<br/>Hello $studentName, <br/></br>" .
             "You have chosen to register an account on Student Online Clearance System. <br/>".
-            "<a href=\"$verificationLink\">$verificationLink<a/> <br/>" .
+            "<a href=\"$verificationLink\">$verificationLink</a> <br/>" .
             "Please click on above's link to confirm your registration..".
             "Thank you :)";
     
