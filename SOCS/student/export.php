@@ -165,7 +165,14 @@ function printBody(){
             
             $sigIm = $signatory_model->getSignature($listOfSignatories["id"][$k]);
             if(is_null($sigIm)){
-                $fpdf->Cell(50, 5, $listOfSignatories["status"][$k], "B", 0, 'C', false);
+                //$fpdf->Cell(50, 5, $listOfSignatories["status"][$k], "B", 0, 'C', false);
+                
+                if ($listOfSignatories["status"][$k] == "Cleared"){
+                    $fpdf->Image(HOST . "/photos/cleared.jpg",null,null, 0, 0);
+                }else{
+                    $fpdf->Image(HOST . "/photos/not_cleared.jpg",null,null, 0, 0);
+                }
+                
             }else{
                 if ($listOfSignatories["status"][$k] == "Cleared"){
                     $fpdf->Image($sigIm,null,null, 0, 0);

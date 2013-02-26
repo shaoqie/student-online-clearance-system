@@ -52,7 +52,7 @@
     Assign as a signatory? <a href="signatory_registration.php">Click Here</a>
 </div>
 
-<form method='post' class="form-horizontal" action="/index.php?action=student_register" enctype="multipart/form-data">
+<form method='post' class="form-horizontal" action="{$host}/index.php?action=student_register" enctype="multipart/form-data">
 
     <legend>Login Information: </legend>
 
