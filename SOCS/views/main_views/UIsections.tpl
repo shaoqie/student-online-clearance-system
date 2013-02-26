@@ -18,14 +18,26 @@
                 <i class="icon-user"></i> User Accounts
             </a>
             <ul class="dropdown-menu">
-                <li><a href="{$host}/administrator/index.php?user_type=Student">Students</a></li>
-                <li><a href="{$host}/administrator/index.php?user_type=Signatory">Signatories-in-charge</a></li>
-                <li><a href="{$host}/administrator/unconfirmed_signatory.php">Unconfirmed Signatories-in-charge</a></li>
+                <li>
+                    <a href="{$host}/administrator/index.php?user_type=Student">
+                        <i class="icon-user"></i> Students
+                    </a>
+                </li>
+                <li>
+                    <a href="{$host}/administrator/index.php?user_type=Signatory">
+                        <i class="icon-edit"></i> Signatories-in-charge
+                    </a>
+                </li>
+                <li>
+                    <a href="{$host}/administrator/unconfirmed_signatory.php">
+                        <i class="icon-warning-sign"></i> Unconfirmed Signatories-in-charge
+                    </a>
+                </li>
             </ul>
         </li>
         <li {if $index == 2}class="active"{/if}>
             <a href="{$host}/administrator/signatory_list_manager.php">
-                <i class="icon-coffee"></i> Signatories
+                <i class="icon-edit"></i> Signatories
             </a>
         </li>
         <li {if $index == 3}class="active"{/if}>
@@ -134,7 +146,7 @@
     <ul class="nav nav-tabs nav-stacked">
         <li {if $index == 1}class="active"{/if}>
             <a href='{$host}/administrator/index.php?user_type=Student'>
-                <i class="icon-star"></i> Students</a>
+                <i class="icon-user"></i> Students</a>
         </li>
         <li {if $index == 2}class="active"{/if}>
             <a href='{$host}/administrator/index.php?user_type=Signatory'>
@@ -149,7 +161,7 @@
     <ul class="nav nav-tabs nav-stacked">
         <li {if $index == 4}class="active"{/if}>
             <a href="{$host}/administrator/index.php?action=addSignatoryInCharge">
-                <i class="icon-check"></i> Add Signatory In-Charge
+                <i class="icon-plus"></i> Add Signatory In-Charge
             </a>
         </li>
     </ul>
@@ -210,7 +222,7 @@
     <ul class="nav nav-tabs nav-stacked">
         <li {if $index == 2}class="active"{/if}>
             <a href="{$host}/administrator/signatory_list_manager.php?action=addSignatory">
-                <i class="icon-group"></i> Add Signatory
+                <i class="icon-plus"></i> Add Signatory
             </a>
         </li>
     </ul>
@@ -231,7 +243,7 @@
     <ul class="nav nav-tabs nav-stacked">
         <li {if $index == 2}class="active"{/if}>
             <a href="{$host}/administrator/department_list_manager.php?action=addDepartment">
-                <i class="icon-building"></i> Add Department
+                <i class="icon-plus"></i> Add Department
             </a>
         </li>
     </ul>

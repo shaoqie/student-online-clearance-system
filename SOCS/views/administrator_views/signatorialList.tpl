@@ -104,7 +104,7 @@
         <ul class="nav nav-tabs nav-stacked">
         <li>
             <a href="{$host}/administrator/course_list_byDepartment.php?action=addCourse">
-                <i class="icon-book"></i> Add Course
+                <i class="icon-plus"></i> Add Course
             </a>
         </li>
 
@@ -216,82 +216,3 @@
 
 </div>
 </div>
-
-{*
-<!-- Back Button-->
-<input class="btn pull-right" type="button" value="Back" onclick="window.location.href='department_list_manager.php'">
-
-<!-- Navigation Tab-->
-<ul class="nav nav-tabs">
-<li><a href='../administrator/course_list_byDepartment.php'>Courses</a></li>
-<li class="active"><a href='../administrator/signatorialList.php'>Signatorial List</a></li>
-</ul>
-
-<!-- Header-->
-<div class="row">
-<div class="span9 well">
-<h1 style="text-align: center;">{$Dept_name}</h1>
-</div>
-</div>
-
-<!-- Add Signatory -->
-{if $countSignList > 0}
-<span class="pull-left">
-<form class="form-inline">
-<label>Add Signatory:</label>
-<select class="span2" id="cmdSignatory" required>
-<option></option>
-{foreach from = $SignatoryList item = i}
-<option>{$i}</option>
-{/foreach}
-</select>
-<input class="btn btn-primary" type="button" value="Add" onclick="getSignatory()">
-</form>
-</span>
-{/if}
-
-<!-- Search Bar-->
-<span class="pull-right">
-{call name=search}
-</span>
-
-<!-- Table of Signatories-->
-<table class="table table-hover">    
-<tr>
-<th>
-<input type="checkbox" onclick="isCheck({$rowCount_signatorial})" id="check"> Signatories
-</th>
-<th></th>
-<th>Controls</th>
-</tr>
-{foreach from = $myName_signatorial key = k item = i} 
-<tr>
-<td>
-<label class="checkbox">
-<input type="hidden" id = 'edit{$k}' value = "{$i}">
-<input class="Checkbox" type="checkbox" id = '{$k}' value = {$myKey_signatorial[$k]} ></input> 
-<div id='unSelectedSignatorialList{$k}'>{$i}</div>
-</label>
-</td>    
-<td>
-<label id="confirmed{$k}"></label>
-</td>
-<td>
-<i class="icon-pencil"></i>
-<a style="cursor:pointer;" href="javascript:edit('{$k}','{$myKey_signatorial[$k]}','{$rowCount_signatorial}','{$countSignList}')"> Edit</a>
-</td>    
-</tr>
-{/foreach}
-</table>
-
-<i class="icon-remove"></i><a style="cursor:pointer;" onclick="findCheck('{$rowCount_signatorial}','signatorial list')" >Delete Selected</a>
-
-<div class="pull-right">
-Jump to: <select id="jump" class="input-mini" onchange="jumpToPage()">
-<option>--</option>
-{for $start = 1 to $signatorial_length}
-<option>{$start}</option>
-{/for}
-</select>
-</div>
-*}

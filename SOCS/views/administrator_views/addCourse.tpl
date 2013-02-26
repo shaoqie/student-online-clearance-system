@@ -11,7 +11,7 @@
         <ul class="nav nav-tabs nav-stacked">
             <li class="active">
                 <a href="{$host}/administrator/course_list_byDepartment.php?action=addCourse">
-                    <i class="icon-book"></i> Add Course
+                    <i class="icon-plus"></i> Add Course
                 </a>
             </li>
         </ul>
