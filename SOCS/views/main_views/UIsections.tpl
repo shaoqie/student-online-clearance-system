@@ -14,7 +14,7 @@
 {function name="nav_admin" index=0}
     <ul class="nav">
         <li class="dropdown {if $index == 1}active{/if}">
-            <a class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="100" href='#'>
+            <a class="dropdown-toggle" data-toggle="dropdown" href='#'>
                 <i class="icon-user"></i> User Accounts
             </a>
             <ul class="dropdown-menu">
@@ -133,13 +133,16 @@
 
     <ul class="nav nav-tabs nav-stacked">
         <li {if $index == 1}class="active"{/if}>
-            <a href='{$host}/administrator/index.php?user_type=Student'>Students</a>
+            <a href='{$host}/administrator/index.php?user_type=Student'>
+                <i class="icon-star"></i> Students</a>
         </li>
         <li {if $index == 2}class="active"{/if}>
-            <a href='{$host}/administrator/index.php?user_type=Signatory'>Signatories-in-Charge</a>
+            <a href='{$host}/administrator/index.php?user_type=Signatory'>
+                <i class="icon-edit"></i> Signatories-in-Charge</a>
         </li>
         <li {if $index == 3}class="active"{/if}>
-            <a href='{$host}/administrator/unconfirmed_signatory.php'>Unconfirmed Signatories-in-charge</a>
+            <a href='{$host}/administrator/unconfirmed_signatory.php'>
+                <i class="icon-warning-sign"></i> Unconfirmed Signatories-in-charge</a>
         </li>
     </ul>
 
@@ -228,7 +231,7 @@
     <ul class="nav nav-tabs nav-stacked">
         <li {if $index == 2}class="active"{/if}>
             <a href="{$host}/administrator/department_list_manager.php?action=addDepartment">
-                <i class="icon-book"></i> Add Department
+                <i class="icon-building"></i> Add Department
             </a>
         </li>
     </ul>

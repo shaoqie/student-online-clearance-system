@@ -189,7 +189,6 @@
         <script src="{$host}/public/js/vendor/jquery-1.8.3.min.js"></script>
         <script src="{$host}/public/js/vendor/bootstrap.min.js"></script>
         <script src="{$host}/public/js/vendor/bootbox.min.js"></script>
-        <script src="{$host}/public/js/vendor/twitter-bootstrap-hover-dropdown.min.js"></script>
 
         <script src="{$host}/public/js/main.js"></script>
 
