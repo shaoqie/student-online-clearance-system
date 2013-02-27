@@ -34,7 +34,7 @@
 
         <div class="form-actions">
             <div class="pull-right">
-                <input class="btn btn-primary" type='Submit' value='Upload' />
+                <input class="btn btn-primary" type='Submit' value='Upload' name='upload' />
                 <button class="btn" type="button" onclick="window.history.back();">Back</button>
             </div>
         </div>

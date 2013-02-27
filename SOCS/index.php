@@ -41,19 +41,19 @@ class Index extends Controller {
 
             if ($this->administrator_model->Account_Type == "Admin") {
 
-                Session::set_user($_POST['username'], md5(trim($_POST['password'])));
+                Session::set_user(trim($_POST['username']), md5(trim($_POST['password'])));
                 $this->setSession('Admin');
                 header('Location: ' . HOST . '/administrator/');
             } else if ($this->administrator_model->Account_Type == "Student" && $this->administrator_model->validation_status == "Confirmed") {
 
-                Session::set_user($_POST['username'], md5(trim($_POST['password'])));
+                Session::set_user(trim($_POST['username']), md5(trim($_POST['password'])));
                 $this->setSession('Student');
                 header('Location: ' . HOST . '/student/');
             } else if ($this->administrator_model->Account_Type == "Signatory" && $this->administrator_model->validation_status == "Confirmed") {
                 $assign_sign = $this->administrator_model->getAssignSignatory(trim($_POST['username']));
 
-                Session::set_user($_POST['username'], md5(trim($_POST['password'])));
-                Session::set_assignSignatory($assign_sign);
+                Session::set_user(trim($_POST['username']), md5(trim($_POST['password'])));
+                Session::set_assignSignatory(trim($assign_sign));
                 $this->setSession('Signatory');
                 header('Location: ' . HOST . '/signatory/');
             } else {
@@ -283,11 +283,11 @@ class Index extends Controller {
     private function setSession($account_type) {
         $result = mysql_fetch_array($this->administrator_model->getUser(trim($_POST['username']), md5(trim($_POST['password']))));
 
-        Session::set_surname($result['Surname']);
-        Session::set_firstname($result['First_Name']);
-        Session::set_middlename($result['Middle_Name']);
-        Session::set_emailAdd($result['email_address']);
-        Session::set_photo($result['Picture']);
+        Session::set_surname(trim($result['Surname']));
+        Session::set_firstname(trim($result['First_Name']));
+        Session::set_middlename(trim($result['Middle_Name']));
+        Session::set_emailAdd(trim($result['email_address']));
+        Session::set_photo(($result['Picture']));
 
         Session::set_Account_type($account_type);
     }

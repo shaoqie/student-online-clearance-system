@@ -75,9 +75,16 @@ class UploadSignature extends Controller {
     }
     
     public function uploadSignature(){
+//        if(!isset($_POST['upload'])){
+//            return; 
+//        }
+//        var_dump($_POST['upload']);
         $imagefile = $_FILES["signatureimage"];
         
         //var_dump($imagefile);
+        //if($imagefile['name'] == ""){$this->template->setAlert('Choose photo of signature first...', Template::ALERT_ERROR);}
+        
+        
         
         if (Validator::is_valid_signature_image($imagefile)) {
             
@@ -98,7 +105,6 @@ class UploadSignature extends Controller {
                 $image_upload->process($local_dir);
 
                 if ($image_upload->processed) {
-                    
                     $imagepath = HOST . "/photos/signatures/" . $img_filename . "." . "jpg";
                     $this->signatory_model->updateSignature($this->signatoryID, $imagepath);
                     
@@ -115,8 +121,8 @@ class UploadSignature extends Controller {
 
             
         } else {
-            $this->template->setAlert('Invalid image! The image must be of valid file type (jpg, png, or gif), has exactly 200x50 size, and is less than 1 MB.', Template::ALERT_ERROR, 'alert');
-            return;
+            $this->template->setAlert('Invalid image! The image must be of valid file type (jpg, png, or gif), has exactly 200x35 size, and is less than 1 MB.', Template::ALERT_ERROR, 'alert');
+            //return;
         }
     }
     
