@@ -78,7 +78,7 @@ class Index extends Controller {
             }
 
 
-            //$this->template->setAlert('Your password has successfully change!', Template::ALERT_SUCCESS);
+            
             header("Location: index.php?action=changeSuccessful");
         }
     }
