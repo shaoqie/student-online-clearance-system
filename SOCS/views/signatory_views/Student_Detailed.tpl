@@ -1,6 +1,9 @@
 <div class="row">
     <div class="span3">
 
+        <!-- Header-->
+        <h4 class="well center-text well-small">Requirements</h4>
+
         <!-- Navigations-->
         <div class="row">
             <div class="span3">
@@ -12,12 +15,16 @@
     <div class="span9">
 
         <div class="row">
-            <div class="span8  well">
+            <div class="span8 well well-small">
                 {if isset($stud_photo)}
-                    <div class="span1"><img src="{$stud_photo}" class="img-polaroid" /></div>
-                    {else}
-                    <div class="span1"><img src="{$host}/photos/default_student.png" class="img-polaroid" /></div>
-                    {/if}
+                    <div class="span1">
+                        <img src="{$stud_photo}" class="img-polaroid" />
+                    </div>
+                {else}
+                    <div class="span1">
+                        <img src="{$host}/photos/default_student.png" class="img-polaroid" />
+                    </div>
+                {/if}
                 <div class="span6">
                     <h4>{$student_name}</h4>
                     <h5>{$course_name}, {$dept_name}</h5>
@@ -72,7 +79,7 @@
                 </table>
             </div>
         </div>
-                            
+
         <div class="form-actions">
             <div class="pull-right">
                 <input type="button" class="btn" value="Back" onclick="window.location.href='../signatory/index.php'">

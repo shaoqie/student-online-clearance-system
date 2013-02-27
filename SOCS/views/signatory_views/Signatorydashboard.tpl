@@ -1,5 +1,8 @@
 <div class="row">
     <div class="span3">
+        
+        <!-- Header-->
+        <h4 class="well center-text well-small">Students</h4>
 
         <!-- Navigations-->
         <div class="row">
@@ -12,7 +15,7 @@
     <div class="span9">
 
         <!-- Header-->
-        <h2 class="well center-text">Students</h2>
+        <h4 class="well center-text well-small">List of Students</h4>
 
         <!-- Archive Search-->
         <span>

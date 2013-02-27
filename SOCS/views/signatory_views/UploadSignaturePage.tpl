@@ -1,6 +1,9 @@
 <div class="row">
     <div class="span3">
 
+        <!-- Header-->
+        <h4 class="well center-text well-small">Upload Signature</h4>
+
         <!-- Navigations-->
         <div class="row">
             <div class="span3">
@@ -12,34 +15,33 @@
     <div class="span9">
 
         <!-- Header-->
-        <h2 class="well center-text">Upload Signature</h2>
-        
+        <h4 class="well center-text well-small">Signature</h4>
+
         <legend>Current signature image</legend>
         <img src="{$signatureImage}" class="img-polaroid" width="200" height="35"></br>
-        {if $hasImageSet eq '1'}<a href="uploadSignature.php?action=reset">Remove Signature</a>{/if}
-        
-        <legend>Upload new signature</legend>
-        
-        <form action='UploadSignature.php?action=uploadSignature' method='post' class="form-horizontal" enctype="multipart/form-data">
-            <div class="control-group">
-                <label class="control-label"><b>Upload Picture: </b></label>
-                <div class="controls">
-                    <input type="file" name="signatureimage">
-                    <span class="help-block">Only 200 x 35 image dimensions are allowed. Max 1MB size.</span>
-                </div>
-            </div>
-            
-            <div class="control-group">
-                <div class="controls">
-                    <input class="btn btn-primary" type='Submit' value='Upload'> &nbsp;
-                    <a href='/SOCS/'> Cancel</a>
-                </div>
-            </div>
-            
-        </form>
+    {if $hasImageSet eq '1'}<a href="uploadSignature.php?action=reset">Remove Signature</a>{/if}
 
-        
-    </div>
+    <legend>Upload new signature</legend>
+
+    <form action='UploadSignature.php?action=uploadSignature' method='post' class="form-horizontal" enctype="multipart/form-data">
+        <div class="control-group">
+            <label class="control-label"><b>Upload Picture: </b></label>
+            <div class="controls">
+                <input type="file" name="signatureimage">
+                <span class="help-block">Only 200 x 35 image dimensions are allowed. Max 1MB size.</span>
+            </div>
+        </div>
+
+        <div class="form-actions">
+            <div class="pull-right">
+                <input class="btn btn-primary" type='Submit' value='Upload' />
+                <button class="btn" type="button" onclick="window.history.back();">Back</button>
+            </div>
+        </div>
+    </form>
+
+
+</div>
 </div>
 
 {*

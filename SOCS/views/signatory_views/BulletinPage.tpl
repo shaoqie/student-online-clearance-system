@@ -1,6 +1,9 @@
 <div class="row">
     <div class="span3">
 
+        <!-- Header-->
+        <h4 class="well center-text well-small">Bulletin</h4>
+        
         <!-- Navigations-->
         <div class="row">
             <div class="span3">
@@ -12,13 +15,13 @@
     <div class="span9">
 
         <!-- Header-->
-        <h2 class="well center-text">Bulletin</h2>
+        <h4 class="well center-text well-small">List of Announcements</h4>
 
         <!-- Archive Search-->
         {call name=archiveSearch}
 
         <!-- Post Bulletin Button-->
-        <input class="btn" type="button" value="Post Bulletin" onclick="window.location.href='../signatory/bulletin.php?action=viewPosting_Bulletin'">
+        <input class="btn" type="button" value="Post Announcement" onclick="window.location.href='../signatory/bulletin.php?action=viewPosting_Bulletin'">
 
         <!-- Search Bar-->
         <!-- Search Bar-->

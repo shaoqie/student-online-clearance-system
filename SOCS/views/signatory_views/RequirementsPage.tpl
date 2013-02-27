@@ -1,6 +1,9 @@
 <div class="row">
     <div class="span3">
 
+        <!-- Header-->
+        <h4 class="well center-text well-small">Requirements</h4>
+
         <!-- Navigations-->
         <div class="row">
             <div class="span3">
@@ -12,13 +15,13 @@
     <div class="span9">
 
         <!-- Header-->
-        <h2 class="well center-text">Requirements</h2>
+        <h4 class="well center-text well-small">List of Requirements</h4>
 
         <!--Archive Search Bar -->
         {call name=archiveSearch}
 
         <!-- Add Requirements Button-->
-        <input class="btn" type="button" value="Add Requirements" onclick="window.location.href='../signatory/requirements.php?action=viewAdd_Requirements'">
+        <input class="btn" type="button" value="Add Requirement" onclick="window.location.href='../signatory/requirements.php?action=viewAdd_Requirements'">
 
 
         <!-- Search Bar-->
@@ -39,7 +42,8 @@
                 <th>
                     <input type="checkbox" onclick="isCheck({$rowCount_requirement})" id="check"> Title
                 </th>
-                <th>Description</th>    
+                <th>Description</th>
+                <th>Controls</th>
             </tr>
 
             {foreach from = $myName_requirements key = k item = i}
@@ -47,10 +51,15 @@
                     <td>
                         <label class="checkbox">
                             <input class="Checkbox" type="checkbox" id = '{$k}' value = {$requirement_ID[$k]}>
-                            <a href="?action=viewEdit_Requirements&reqID={$requirement_ID[$k]}">{$i}</a>
+                            <p>{$i}</p>
                         </label>
                     </td>
                     <td>{$myDesc_requirements[$k]}</td>
+                    <td>
+                        <a href="?action=viewEdit_Requirements&reqID={$requirement_ID[$k]}">
+                            <i class="icon-edit"></i> Edit
+                        </a>
+                    </td>
                 </tr>
             {/foreach}
         </table>

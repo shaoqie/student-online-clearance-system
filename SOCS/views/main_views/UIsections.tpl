@@ -180,7 +180,7 @@
 
     {if isset($excel_file)}
         <div style="color: green;">
-            <i class="icon-file icon-large"> student_current_enroll</i>
+            <i class="icon-file icon-large"> student_current_enroll.xls</i>
         </div>
     {/if}
 
@@ -256,7 +256,7 @@
     <ul class="nav nav-tabs nav-stacked">
         <li {if $index == 0}class="active"{/if}>
             <a href='../signatory/index.php'>
-                <i class="icon-user"></i> Student
+                <i class="icon-user"></i> Students
             </a>
         </li>
         <li {if $index == 1}class="active"{/if}>

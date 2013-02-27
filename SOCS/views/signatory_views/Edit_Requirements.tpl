@@ -129,6 +129,9 @@ function getCourseList(){
 <div class="row">
     <div class="span3">
 
+        <!-- Header-->
+        <h4 class="well center-text well-small">Requirements</h4>
+        
         <!-- Navigations-->
         <div class="row">
             <div class="span3">
@@ -140,7 +143,7 @@ function getCourseList(){
     <div class="span9">
 
         <!-- Header-->
-        <h2 class="well center-text">Requirements</h2>
+        <h4 class="well center-text well-small">Edit Requirement</h4>
 
         <!--Archive Search Bar -->
         <form method='post' class="form-horizontal" action="requirements.php?action=viewEdit_Requirements_submit&id={$req_RequirementID}">

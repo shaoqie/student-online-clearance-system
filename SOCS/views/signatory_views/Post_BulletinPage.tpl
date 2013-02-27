@@ -1,6 +1,9 @@
 <div class="row">
     <div class="span3">
 
+        <!-- Header-->
+        <h4 class="well center-text well-small">Bulletin</h4>
+        
         <!-- Navigations-->
         <div class="row">
             <div class="span3">
@@ -12,7 +15,7 @@
     <div class="span9">
 
         <!-- Header-->
-        <h2 class="well center-text">Bulletin</h2>
+        <h4 class="well center-text well-small">Post Annoucement</h4>
 
         {*
         <!-- Archive Search Bar-->
@@ -50,7 +53,7 @@
         <!-- Post Bulletin-->
         <form class="form-horizontal" method="post">
 
-            <legend>Post Bulletin:</legend>
+            <legend>Announcement Details:</legend>
 
             <div class="control-group">
                 <div class="control-label"><b>Announcement: </b></div>
