@@ -7,14 +7,6 @@
         <!-- Admin Navigations-->
         {call name=nav_admin index=3}
 
-        <!-- Another Controls-->
-        <ul class="nav nav-tabs nav-stacked">
-            <li>
-                <a href="{$host}/administrator/course_list_byDepartment.php?action=addCourse">
-                    <i class="icon-plus"></i> Add Course
-                </a>
-            </li>
-
     </div>
     <div class="span9">
 
@@ -27,24 +19,18 @@
         <div class="navbar">
             <div class="navbar-inner">
 
-                {call name=nav_departments index=0}
+                {call name=nav_departments index=1}
 
                 {call name=search}
 
             </div>
         </div>
 
-        <!-- Navigation Tabs-->
-        <ul class="nav nav-tabs">
-            <li class="active"><a href='{$host}/administrator/course_list_byDepartment.php'>Courses</a></li>
-            <li><a href='{$host}/administrator/signatorialList.php'>Signatorial List</a></li>
-        </ul>
-
         <!-- Course List Table-->
         <table class="table table-hover table-bordered">     
             <tr>
                 <th>
-                    <input type="checkbox" onclick="isCheck({$rowCount_course})" id="check"> Courses
+                    <input type="checkbox" onclick="isCheck({$rowCount_course});" id="check"> Courses
                 </th>
                 <th>Description</th>
                 <th>Usability</th> 

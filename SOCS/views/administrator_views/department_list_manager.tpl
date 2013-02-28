@@ -19,7 +19,7 @@
                 <div class="navbar">
                     <div class="navbar-inner">
 
-                        {call name=nav_departments index=1}
+                        {call name=nav_departments flag=1 index=0}
 
                         {call name=search}
 

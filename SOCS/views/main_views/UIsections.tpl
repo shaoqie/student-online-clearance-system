@@ -185,37 +185,49 @@
 {/function}
 
 <!-- Departments Navigations-->
-{function name=nav_departments index=0}
-    <ul class="nav">
+{function name=nav_departments flag=0 index=0}
 
+    <ul class="nav">
         <li class="divider-vertical"></li>
 
-        {if $index == 2}
+        {if $flag == 1}
+
             <li>
-                <a class="tips" href="#" title="Back">
-                    <i class="icon-arrow-left"></i> 
+                <a class="tips" data-toggle="tooltip" title="Add Department" href="{$host}/administrator/department_list_manager.php?action=addDepartment">
+                    <i class="icon-plus"></i>
                 </a>
             </li>
 
-            <li class="divider-vertical"></li>
-            {/if}
+        {else}
 
-        <li {if $index == 2}class="active"{/if}>
-            <a class="tips" href="{$host}/administrator/department_list_manager.php?action=addDepartment">
-                <i class="icon-plus"></i>
+            <li {if $index == 1}class="active"{/if}>
+                <a class="tips" data-toggle="tooltip" title="List of Course under {$Dept_name}" href='{$host}/administrator/course_list_byDepartment.php'>
+                    <i class="icon-book"></i>
+                </a>
+            </li>
+            <li {if $index == 2}class="active"{/if}>
+                <a class="tips" data-toggle="tooltip" title="List of Signatory under {$Dept_name}" href='{$host}/administrator/signatorialList.php'>
+                    <i class="icon-pencil"></i>
+                </a>
+            </li>
+            <li class="divider-vertical"></li>
+            <li>
+                <a class="tips" data-toggle="tooltip" title="Add Course" href='{$host}/administrator/course_list_byDepartment.php?action=addCourse'>
+                    <i class="icon-plus"></i>
+                </a>
+            </li>
+
+        {/if}
+
+        <li class="dropdown">
+            <a class="tips" href="#" title="Delete Selected">
+                <i class="icon-trash"></i> 
             </a>
         </li>
 
-        {if $index != 2}
-            <li class="dropdown">
-                <a class="tips" href="#" title="Delete Selected">
-                    <i class="icon-trash"></i> 
-                </a>
-            </li>
-        {/if}
-
         <li class="divider-vertical"></li>
     </ul>
+
 {/function}
 
 <!-- Signatory-in-charge Functions-->
