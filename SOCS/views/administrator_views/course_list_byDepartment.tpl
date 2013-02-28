@@ -4,16 +4,16 @@
         <!-- Header-->
         <h4 class="well center-text well-small">Departments</h4>
 
-        <!-- Navigations and Controls-->
-        {call name=nav_departments index=0}
-                
+        <!-- Admin Navigations--> 
+        {call name=nav_admin index=3}
+
         <!-- Another Controls-->
         <ul class="nav nav-tabs nav-stacked">
-        <li>
-            <a href="{$host}/administrator/course_list_byDepartment.php?action=addCourse">
-                <i class="icon-plus"></i> Add Course
-            </a>
-        </li>
+            <li>
+                <a href="{$host}/administrator/course_list_byDepartment.php?action=addCourse">
+                    <i class="icon-plus"></i> Add Course
+                </a>
+            </li>
 
     </div>
     <div class="span9">
@@ -24,21 +24,21 @@
             <small>{$Dept_desc}</small>
         </div>
 
+        <div class="navbar">
+            <div class="navbar-inner">
+
+                {call name=nav_departments index=0}
+
+                {call name=search}
+
+            </div>
+        </div>
+
         <!-- Navigation Tabs-->
         <ul class="nav nav-tabs">
             <li class="active"><a href='{$host}/administrator/course_list_byDepartment.php'>Courses</a></li>
             <li><a href='{$host}/administrator/signatorialList.php'>Signatorial List</a></li>
         </ul>
-
-        {*
-        <!-- Add Courses Button-->
-        <input class="btn" type="button" value="Add Courses" onclick="window.location.href = 'course_list_byDepartment.php?action=addCourse'">
-        *}
-
-        <!-- Search Bar-->
-        <span class="pull-right">
-            {call name=search}
-        </span>
 
         <!-- Course List Table-->
         <table class="table table-hover table-bordered">     

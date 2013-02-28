@@ -1,18 +1,20 @@
 <div class="row">
     <div class="span3">
 
-        <!-- Navigations-->
-        <div class="row">
-            <div class="span3">
-                {call name=nav_admin index=4}
-            </div>
-        </div>
+        <!-- Header-->
+        <h4 class="well center-text well-small">Departments</h4>
+        
+        <!-- Admin Navigations--> 
+        {call name=nav_admin index=3}
 
     </div>
     <div class="span9">
 
         <!-- Header-->
-        <h2 class="well center-text">{$Dept_name}</h2>
+        <div class="well center-text well-small">
+            <h4>{$Dept_name} </h4>
+            <small>{$Dept_desc}</small>
+        </div>
 
         <!-- Navigation Tabs-->
         <ul class="nav nav-tabs">

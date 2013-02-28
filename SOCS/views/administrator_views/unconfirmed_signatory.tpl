@@ -4,30 +4,39 @@
         <!-- Header-->
         <h4 class="well center-text well-small">User Accounts</h4>
 
-        <!-- Navigations-->
-        <div class="row">
-            <div class="span3">
-                {call name=nav_user_accounts index=3}
+        <!-- Admin Navigations--> 
+        {call name=nav_admin index=1}
+
+        <!-- Upload Student List-->
+        <form class="form-inline" action="../administrator/index.php?action=upload_excel_file" method="post" enctype="multipart/form-data">
+
+            <label>
+                <b>Upload Student List: </b>
+                <input type="file" name="excel_file">
+            </label>
+            <button class="btn btn-primary" type="submit" name="save">
+                <i class="icon-upload-alt"></i> Upload
+            </button>
+        </form>
+
+        {if isset($excel_file)}
+            <div style="color: green;">
+                <i class="icon-file icon-large"> student_current_enroll.xls</i>
             </div>
-        </div>
+        {/if}
 
     </div>
     <div class="span9">
 
         <!-- Header-->
         <h4 class="well center-text well-small">Unconfirmed Signatories-in-charge</h4>
-        
-        {*
-        <!-- Navigation Tab-->
-        {call name=nav_user_accounts index=2}
-        *}
 
-        <!-- Search Bar-->
-        <div class="row">
-            <div class="span9">
-                <span class="pull-right">
-                    {call name=search}
-                </span>
+        <div class="navbar">
+            <div class="navbar-inner">
+
+                {call name=nav_user_accounts index=3}
+
+                {call name=search}
             </div>
         </div>
 

@@ -4,9 +4,9 @@
         <!-- Header-->
         <h4 class="well center-text well-small">Signatories</h4>
 
-        <!-- Signatories Navigations-->
-        {call name=nav_signatories index=1}
-        
+        <!-- Admin Navigations--> 
+        {call name=nav_admin index=2}
+
     </div>
     <div class="span9">
 
@@ -16,15 +16,15 @@
                 <!-- Header-->
                 <h4 class="well center-text well-small">List of Signatories</h4>
 
-                {*
-                <!-- Add Signatory Button-->
-                <input class="btn" type="button" value="Add Signatory" {if $index_tabs == 0} onclick="window.location.href='signatory_list_manager.php?action=addSignatory'" {/if} {if $index_tabs == 1} onclick="window.location.href='grad_signatory_list_manager.php?action=addSignatory'" {/if}>
-                *}
+                <div class="navbar">
+                    <div class="navbar-inner">
 
-                <!-- Search Bar-->
-                <span class="pull-right">
-                    {call name=search}
-                </span>
+                        {call name=nav_signatories index=0}
+                        
+                        {call name=search}
+
+                    </div>
+                </div>
             </div>
         </div>
 

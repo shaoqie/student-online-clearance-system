@@ -4,16 +4,25 @@
         <!-- Header-->
         <h4 class="well center-text well-small">Departments</h4>
 
-        <!-- Navigations and Controls-->
-        {call name=nav_departments index=2}
-    </ul>
-        
+        <!-- Admin Navigations--> 
+        {call name=nav_admin index=3}
+
     </div>
     <div class="span9">
 
         <!-- Header-->
         <h4 class="well center-text well-small">Add Department</h4>
-        
+
+        {*
+        <div class="navbar">
+            <div class="navbar-inner">
+
+                {call name=nav_signatories index=2}
+
+            </div>
+        </div>
+        *}
+
         <!-- Adding Form-->
         <form action="department_list_manager.php?action=add_department" method='post' class="form-horizontal">
             <legend>Department Information: </legend>

@@ -1,26 +1,27 @@
 <div class="row">
     <div class="span3">
 
-        <!-- Navigations-->
-        <div class="row">
-            <div class="span3">
-                {call name=nav_admin index=3}
-            </div>
-        </div>
+        <!-- Header-->
+        <h4 class="well center-text well-small">Signatories</h4>
+
+        <!-- Admin Navigations--> 
+        {call name=nav_admin index=2}
 
     </div>
     <div class="span9">
-        <!-- Header -->
-        <h2 class="well center-text">Edit Signatory</h2>
-        
-        <ul class="nav nav-tabs">
-            <li {if $index_tabs == 0}class="active" {/if}>
-                <a href='../administrator/signatory_list_manager.php'>Under Graduate</a>
-            </li>
-            <li {if $index_tabs == 1}class="active" {/if}>
-                <a href='../administrator/grad_signatory_list_manager.php'>Graduate</a>
-            </li> 
-        </ul>
+
+        <!-- Header-->
+        <h4 class="well center-text well-small">Edit Signatory</h4>
+
+        {*
+        <div class="navbar">
+            <div class="navbar-inner">
+
+                {call name=nav_signatories index=2}
+
+            </div>
+        </div>
+        *}
 
         <!-- Edit Signatory-->
         <form action="" method='post' class="form-horizontal">
@@ -40,7 +41,7 @@
             <div class="control-group form-actions">
                 <div class="pull-right">
                     <input class="btn btn-primary" type='Submit' value='Save' name ='editSave'>
-                    <button class="btn" type="button" {if $index_tabs == 0} onclick="window.location.href='signatory_list_manager.php'" {/if} {if $index_tabs == 1} onclick="window.location.href='grad_signatory_list_manager.php'" {/if}>Back</button>
+                    <button class="btn" type="button" {if $index_tabs == 0} onclick="window.location.href = 'signatory_list_manager.php'" {/if} {if $index_tabs == 1} onclick="window.location.href = 'grad_signatory_list_manager.php'" {/if}>Back</button>
                 </div>
             </div>
         </form>

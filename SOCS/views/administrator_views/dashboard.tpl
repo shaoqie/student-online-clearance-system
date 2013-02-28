@@ -1,8 +1,8 @@
 {*
 <ul class="breadcrumb">
-    <li><a href="#">Home</a> <span class="divider"><i class="icon-chevron-right"></i></span></li>
-    <li><a href="#">Library</a> <span class="divider"><i class="icon-chevron-right"></i></span></li>
-    <li class="active">Data</li>
+<li><a href="#">Home</a> <span class="divider"><i class="icon-chevron-right"></i></span></li>
+<li><a href="#">Library</a> <span class="divider"><i class="icon-chevron-right"></i></span></li>
+<li class="active">Data</li>
 </ul>
 *}
 
@@ -11,9 +11,7 @@
 
         <div class="row">
             <div class="span3">
-
                 <h4 class="well center-text well-small">User Accounts</h4>
-
             </div>
         </div>
 
@@ -21,15 +19,29 @@
         <div class="row">
             <div class="span3">
 
-                <!-- Admin Navigation-->
-                {if $user_type == 'Student'}
-                    {call name=nav_user_accounts index=1}
-                {else}
-                    {call name=nav_user_accounts index=2}
-                {/if}
+                <!-- Admin Navigations--> 
+                {call name=nav_admin index=1}
 
             </div>
         </div>
+
+        <!-- Upload Student List-->
+        <form class="form-inline" action="../administrator/index.php?action=upload_excel_file" method="post" enctype="multipart/form-data">
+
+            <label>
+                <b>Upload Student List: </b>
+                <input type="file" name="excel_file">
+            </label>
+            <button class="btn btn-primary" type="submit" name="save">
+                <i class="icon-upload-alt"></i> Upload
+            </button>
+        </form>
+
+        {if isset($excel_file)}
+            <div style="color: green;">
+                <i class="icon-file icon-large"> student_current_enroll.xls</i>
+            </div>
+        {/if}
     </div>
 
     <div class="span9">
@@ -44,10 +56,25 @@
                     <h4 class="well center-text well-small">Students</h4>
                 {/if}
 
+                <div class="navbar">
+                    <div class="navbar-inner">
+
+                        {if $user_type == 'Student'}
+                            {call name=nav_user_accounts index=1}
+                        {else}
+                            {call name=nav_user_accounts index=2}
+                        {/if}
+
+                        {call name=search}
+                    </div>
+                </div>
+
+                {*
                 <!-- Search Bar-->
                 <span class="pull-right">
-                    {call name=search}
+                {call name=search}
                 </span>
+                *}
 
                 {*
                 <!-- Navigation Tabs-->
@@ -111,7 +138,7 @@
             </table>
 
             <!-- Delete Control-->
-            <a style="cursor:pointer;" onclick="findCheckUser('{$rowCount_admin}', 'users', '{$user_type}')">
+            <a style="cursor:pointer;" onclick="findCheckUser('{$rowCount_admin}', 'users', '{$user_type}');">
                 <i class="icon-remove"></i> Delete Selected
             </a>
 
@@ -128,5 +155,4 @@
             </div>
         </div>
     </div>
-</div>
 </div>

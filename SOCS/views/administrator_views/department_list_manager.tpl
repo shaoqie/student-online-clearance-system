@@ -4,27 +4,28 @@
         <!-- Header-->
         <h4 class="well center-text well-small">Departments</h4>
 
-        <!-- Navigations and Controls-->
-        {call name=nav_departments index=1}
-        
+        <!-- Admin Navigations--> 
+        {call name=nav_admin index=3}
+
     </div>
     <div class="span9">
 
         <div class="row">
             <div class="span9">
 
-                {*
-                <!-- Add Department Button-->
-                <input class="btn" type="button" value="Add Department" onclick="window.location.href = 'department_list_manager.php?action=addDepartment'">
-                *}
-
                 <!-- Header-->
                 <h4 class="well center-text well-small">List of Departments</h4>
 
-                <!-- Search Bar-->
-                <span class="pull-right">
-                    {call name=search}
-                </span>
+                <div class="navbar">
+                    <div class="navbar-inner">
+
+                        {call name=nav_departments index=1}
+
+                        {call name=search}
+
+                    </div>
+                </div>
+
             </div>
         </div>
 

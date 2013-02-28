@@ -52,12 +52,8 @@
         <!-- Header-->
         <h4 class="well center-text well-small">User Accounts</h4>
 
-        <!-- Navigations and Controls-->
-        <div class="row">
-            <div class="span3">
-                {call name=nav_user_accounts index=4}
-            </div>
-        </div>
+        <!-- Admin Navigations--> 
+        {call name=nav_admin index=1}
 
     </div>
     <div class="span9">
@@ -66,7 +62,12 @@
         <h4 class="well center-text well-small">Add Signatory In-Charge</h4>
         
         {*
-        {call name=nav_user_accounts index=1}
+        <div class="navbar">
+            <div class="navbar-inner">
+
+                {call name=nav_user_accounts index=4}
+            </div>
+        </div>
         *}
 
         <form method='post' class="form-horizontal">

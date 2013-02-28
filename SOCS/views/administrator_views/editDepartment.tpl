@@ -1,18 +1,27 @@
 <div class="row">
     <div class="span3">
 
-        <!-- Navigations-->
-        <div class="row">
-            <div class="span3">
-                {call name=nav_admin index=4}
-            </div>
-        </div>
+        <!-- Header-->
+        <h4 class="well center-text well-small">Departments</h4>
+
+        <!-- Admin Navigations--> 
+        {call name=nav_admin index=3}
 
     </div>
     <div class="span9">
-        
-        <!-- Header -->
-        <h2 class="well center-text">Edit Department</h2>
+
+        <!-- Header-->
+        <h4 class="well center-text well-small">Edit Department</h4>
+
+        {*
+        <div class="navbar">
+            <div class="navbar-inner">
+
+                {call name=nav_signatories index=2}
+
+            </div>
+        </div>
+        *}
 
         <!-- Edit Form-->
         <form action="" method='post' class="form-horizontal">
@@ -32,7 +41,7 @@
             <div class="control-group form-actions">
                 <div class="pull-right">
                     <input class="btn btn-primary" type='Submit' value='Save' name="editSave">
-                    <button class="btn" type="button" onclick="window.location.href='department_list_manager.php'">Back</button>
+                    <button class="btn" type="button" onclick="window.location.href = 'department_list_manager.php'">Back</button>
                 </div>
             </div>
         </form>

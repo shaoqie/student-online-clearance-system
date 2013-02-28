@@ -10,8 +10,10 @@
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width">
 
-        <link rel="stylesheet" href="{$host}/public/css/bootstrap.min.css">
+        <link rel="stylesheet" href="{$host}/public/css/bootstrap.css">
         <link rel="stylesheet" href="{$host}/public/css/font-awesome.min.css">
+        <link rel="stylesheet" href="{$host}/public/css/bootstrap-fileupload.css">
+
         {literal}
             <style>
                 body {{/literal}
@@ -62,6 +64,7 @@
                 ul.nav #dropdown-hover:hover ul.dropdown-menu{
                     display: block;
                 }
+
                 /*
                 div{
                 border: 1px #000 solid;
@@ -95,15 +98,17 @@
                     <a class="brand" href="index.php"><img src="{$host}/public/img/logo.png"> SOCS</a>
                     <div class="nav-collapse collapse">
 
+                        {*
                         {if isset($account_type) && $account_type == "System Administrator"}
-                            {if $page_name=="User Accounts Page"}
-                                {call name=nav_admin index=1}
-                            {elseif $page_name=="Signatories Page"}
-                                {call name=nav_admin index=2}
-                            {elseif $page_name=="Departments Page"}
-                                {call name=nav_admin index=3}
-                            {/if}
+                        {if $page_name=="User Accounts Page"}
+                        {call name=nav_admin index=1}
+                        {elseif $page_name=="Signatories Page"}
+                        {call name=nav_admin index=2}
+                        {elseif $page_name=="Departments Page"}
+                        {call name=nav_admin index=3}
                         {/if}
+                        {/if}
+                        *}
 
                         {if isset($username)}
                             <div class="btn-group pull-right">
@@ -189,8 +194,16 @@
         <script src="{$host}/public/js/vendor/jquery-1.8.3.min.js"></script>
         <script src="{$host}/public/js/vendor/bootstrap.min.js"></script>
         <script src="{$host}/public/js/vendor/bootbox.min.js"></script>
-
+        <script src="{$host}/public/js/vendor/bootstrap-fileupload.js"></script>
         <script src="{$host}/public/js/main.js"></script>
+
+        {literal}
+            <script type="text/javascript">
+                                    $(document).ready(function() {
+                                        $('.tips').tooltip();
+                                    });
+            </script>
+        {/literal}
 
         {*
         {literal}
@@ -202,5 +215,6 @@
         </script>
         {/literal}
         *}
+        
     </body>
 </html>

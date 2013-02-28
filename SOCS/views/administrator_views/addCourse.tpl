@@ -4,6 +4,9 @@
         <!-- Header-->
         <h4 class="well center-text well-small">Departments</h4>
 
+        <!-- Admin Navigations--> 
+        {call name=nav_admin index=3}
+        
         <!-- Navigations and Controls-->
         {call name=nav_departments index=0}
 
@@ -21,7 +24,7 @@
 
         <!-- Header-->
         <div class="well center-text well-small">
-            <h3>{$Dept_name} </h3>
+            <h4>{$Dept_name} </h4>
             <small>{$Dept_desc}</small>
         </div>
 
