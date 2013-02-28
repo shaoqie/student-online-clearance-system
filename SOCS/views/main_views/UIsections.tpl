@@ -127,22 +127,24 @@
         </li>
         <li class="divider-vertical"></li>
         <li>
-            <a class="tips" href="#" title="Upload Enrolled Students">
+            <a class="tips" href="#upload_excel" data-toggle="modal" title="Upload Enrolled Students">
                 <i class="icon-upload-alt"></i> 
             </a>
         </li>
-        <li {if $index == 4}class="active"{/if}>
+        <li class="dropdown {if $index == 4}active{/if}">
             <a class="tips" href="{$host}/administrator/index.php?action=addSignatoryInCharge" title="Add Signatory-in-charge">
                 <i class="icon-plus"></i>
             </a>
         </li>
 
         {if $index != 4}
+            {*
             <li class="dropdown">
-                <a class="tips" href="#" title="Delete Selected">
-                    <i class="icon-trash"></i> 
-                </a>
+            <a class="tips" href="#" title="Delete Selected">
+            <i class="icon-trash"></i> 
+            </a>
             </li>
+            *}
         {/if}
 
         <li class="divider-vertical"></li>
@@ -173,11 +175,13 @@
         </li>
 
         {if $index != 2}
+            {*
             <li class="dropdown">
-                <a class="tips" href="#" title="Delete Selected">
-                    <i class="icon-trash"></i> 
-                </a>
+            <a class="tips" href="#" title="Delete Selected">
+            <i class="icon-trash"></i> 
+            </a>
             </li>
+            *}
         {/if}
 
         <li class="divider-vertical"></li>
@@ -219,11 +223,13 @@
 
         {/if}
 
+        {*
         <li class="dropdown">
-            <a class="tips" href="#" title="Delete Selected">
-                <i class="icon-trash"></i> 
-            </a>
+        <a class="tips" href="#" title="Delete Selected">
+        <i class="icon-trash"></i> 
+        </a>
         </li>
+        *}
 
         <li class="divider-vertical"></li>
     </ul>
@@ -256,4 +262,61 @@
             </a>
         </li>
     </ul>
+{/function}
+
+{function name="upload_excel"}
+
+    <div id="upload_excel" class="modal hide fade">
+        <div class="modal-header">
+            <button class="close" data-dismiss="modal"><i class="icon-remove"></i></button>
+            <h4>Upload List of Enrolled Students</h4>
+        </div>
+        <div class="modal-body">
+
+            <div class="fileupload fileupload-new" data-provides="fileupload">
+                <form class="form-inline" action="../administrator/index.php?action=upload_excel_file" method="post" enctype="multipart/form-data">
+                    
+                    {if isset($excel_file)}
+                        
+                        <label>
+                            <b>Current File: </b>
+                            <span class="text-success">
+                                <i class="icon-ms-excel"></i> student_current_enroll.xls
+                            </span>
+                        </label>
+                        <div>
+                            <label>
+                                <b>Replace File: </b>
+                            </label>
+                            <span class="btn btn-file">
+                                Browse<input type="file" name="excel_file" />
+                            </span>
+                        </div>
+                        
+                    {else}
+                        
+                        <label>
+                            <b>Upload MS Excel File: </b>
+                        </label>
+                        <span class="btn btn-file">
+                            Browse<input type="file" name="excel_file" />
+                        </span>
+                        
+                    {/if}
+
+                    <div class="form-actions fileupload-exists">
+                        <i class="icon-file-alt icon-2x"></i> 
+                        <span class="fileupload-preview"></span>
+                        <div class="pull-right">
+                            <button class="btn btn-success btn-primary" type="submit" name="save">Upload</button>
+                            <button class="btn" data-dismiss="fileupload" type="button">Remove</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn pull-right" data-dismiss="modal">Cancel</button>
+        </div>
+    </div>
 {/function}

@@ -24,24 +24,6 @@
 
             </div>
         </div>
-
-        <!-- Upload Student List-->
-        <form class="form-inline" action="../administrator/index.php?action=upload_excel_file" method="post" enctype="multipart/form-data">
-
-            <label>
-                <b>Upload Student List: </b>
-                <input type="file" name="excel_file">
-            </label>
-            <button class="btn btn-primary" type="submit" name="save">
-                <i class="icon-upload-alt"></i> Upload
-            </button>
-        </form>
-
-        {if isset($excel_file)}
-            <div style="color: green;">
-                <i class="icon-file icon-large"> student_current_enroll.xls</i>
-            </div>
-        {/if}
     </div>
 
     <div class="span9">
@@ -68,32 +50,6 @@
                         {call name=search}
                     </div>
                 </div>
-
-                {*
-                <!-- Search Bar-->
-                <span class="pull-right">
-                {call name=search}
-                </span>
-                *}
-
-                {*
-                <!-- Navigation Tabs-->
-                {if $user_type == 'Signatory'}
-                {call name=nav_user_accounts index=1}
-                {else}
-                {call name=nav_user_accounts index=0}
-                {/if}
-                *}
-
-                {*
-                <div class="row">
-                <div class="span5">
-                {if $user_type == 'Signatory'}
-                <!-- Add Signatory In-charge Button-->
-                <input class="btn" type="button" value="Add Signatory In-Charge" onclick="window.location.href = '../administrator/index.php?action=addSignatoryInCharge'">
-                {/if}
-                </div>
-                *}
             </div>
         </div>
     </div>
@@ -101,7 +57,7 @@
     <div class="row">
         <div class="span9">
             <!-- User Table-->
-            <table class="table table-bordered table-hover">     
+            <table class="table table-bordered table-hover">
                 <tr>
                     <th>
                         <input type="checkbox" onclick="isCheck({$rowCount_admin});" id="check" /> User
@@ -143,7 +99,6 @@
             </a>
 
             <!-- Pagination -->
-
             <div class="pull-right">
                 Jump to: 
                 <select id="jump" class="input-mini" onchange="jumpToPageUser('{$user_type}');">

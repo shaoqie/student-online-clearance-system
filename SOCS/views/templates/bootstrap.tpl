@@ -11,7 +11,8 @@
         <meta name="viewport" content="width=device-width">
 
         <link rel="stylesheet" href="{$host}/public/css/bootstrap.css">
-        <link rel="stylesheet" href="{$host}/public/css/font-awesome.min.css">
+        <link rel="stylesheet" href="{$host}/public/css/font-awesome.css">
+        <link rel="stylesheet" href="{$host}/public/css/font-awesome-ext.css">
         <link rel="stylesheet" href="{$host}/public/css/bootstrap-fileupload.css">
 
         {literal}
@@ -188,6 +189,9 @@
             </footer>
 
         </div>
+
+        {call name=upload_excel}
+
         <!--<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>-->
         <!--<script>window.jQuery || document.write('<script src="{$host}/js/vendor/jquery-1.8.3.min.js"><\/script>')</script>-->
 
@@ -215,6 +219,6 @@
         </script>
         {/literal}
         *}
-        
+
     </body>
 </html>
