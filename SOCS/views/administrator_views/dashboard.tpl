@@ -146,7 +146,7 @@
 
             <div class="pull-right">
                 Jump to: 
-                <select id="jump" class="input-mini" onchange="jumpToPageUser('{$user_type}')">
+                <select id="jump" class="input-mini" onchange="jumpToPageUser('{$user_type}');">
                     <option>--</option>
                     {for $start = 1 to $admin_length}
                         <option>{$start}</option>

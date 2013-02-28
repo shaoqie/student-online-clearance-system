@@ -4,7 +4,7 @@
         <!-- Header-->
         <h4 class="well center-text well-small">Departments</h4>
 
-        <!-- Admin Navigations--> 
+        <!-- Admin Navigations-->
         {call name=nav_admin index=3}
 
         <!-- Another Controls-->

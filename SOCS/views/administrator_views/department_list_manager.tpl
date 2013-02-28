@@ -62,13 +62,13 @@
                 </table>
 
                 <!-- Delete Control-->
-                <a style="cursor:pointer;" onclick="findCheck('{$rowCount_dept}', 'department')" >
+                <a style="cursor:pointer;" onclick="findCheck('{$rowCount_dept}', 'department');" >
                     <i class="icon-remove"></i> Delete Selected
                 </a>
 
                 <!-- Pagination-->
                 <div class="pull-right">
-                    Jump to: <select id="jump" class="input-mini" onchange="jumpToPage()">
+                    Jump to: <select id="jump" class="input-mini" onchange="jumpToPage();">
                         <option>--</option>
                         {for $start = 1 to $dept_length}
                             <option>{$start}</option>
