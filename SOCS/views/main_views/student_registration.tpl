@@ -1,14 +1,22 @@
 {literal}
     <script type="text/javascript">      
         function changeCourses(){
-            var department = document.getElementById("dept");
+            var department = document.getElementById("dept"); //alert(document.getElementById("stud_status1").checked);
             department.innerHTML = "";
             if(document.getElementById("stud_status1").checked == true){ var stud_status = "Under Graduate"; 
                 document.getElementById("prog_evening").disabled = false;
                                       
                 {/literal}
                 {foreach from=$depts key=k item=dept}
-                    department.options[department.options.length] = new Option("{$dept}", "{$dept_ID[$k]}");
+                    if(document.getElementById("prog_evening").checked){
+                        {if $dept eq "University Evening Program"}
+                            department.options[department.options.length] = new Option("{$dept}", "{$dept_ID[$k]}");
+                        {/if}
+                    }else{
+                        {if $dept != "University Evening Program"}
+                            department.options[department.options.length] = new Option("{$dept}", "{$dept_ID[$k]}");
+                        {/if}
+                    }
                 {/foreach}
                 {literal}
             }else{ var stud_status = "Graduate";    document.getElementById("prog_evening").disabled = true;    
@@ -19,10 +27,13 @@
                     {/if}
                 {/foreach}
                 {literal}
+                    
+                    document.getElementById("prog_evening").checked = false; 
+                    document.getElementById("prog_day").checked = true;
             }
             
-            document.getElementById("prog_evening").checked = false; 
-            document.getElementById("prog_day").checked = true;
+            //document.getElementById("prog_evening").checked = false; 
+            //document.getElementById("prog_day").checked = true;
                 
             changeOptions();   
         }    
@@ -163,8 +174,8 @@
     
     <div class="control-group form-inline">
         <div class="controls form-inline">
-            <input type="radio" id="prog_day" checked name="program" value="Day"> <label><b>Day</b></label> &nbsp; &nbsp; &nbsp;
-            <input type="radio" id="prog_evening" name="program" value="Evening"> <label><b>Evening </b></label>
+            <input type="radio" id="prog_day" checked name="program" value="Day"  onclick="changeCourses()"> <label><b>Day</b></label> &nbsp; &nbsp; &nbsp;
+            <input type="radio" id="prog_evening" name="program" value="Evening"  onclick="changeCourses()"> <label><b>Evening </b></label>
         </div>
     </div>
     
