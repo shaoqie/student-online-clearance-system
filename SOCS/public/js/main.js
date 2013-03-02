@@ -50,7 +50,7 @@ function jumpToPageMessages(finder, sign_id){
 
 function isCheck(rowCount){
     var check = document.getElementById("check").checked;
-    isCheckAll(check, rowCount)
+    isCheckAll(check, rowCount);
 }
 
 function jumpToPage(){   

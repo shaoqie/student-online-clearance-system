@@ -21,15 +21,15 @@
         {call name=archiveSearch}
 
         <!-- Post Bulletin Button-->
-        <input class="btn" type="button" value="Post Announcement" onclick="window.location.href='../signatory/bulletin.php?action=viewPosting_Bulletin'">
+        <input class="btn" type="button" value="Post Announcement" onclick="window.location.href='../signatory/bulletin.php?action=viewPosting_Bulletin';">
 
-        <!-- Search Bar-->
+        
         <!-- Search Bar-->
         <span class="pull-right">
-            {*{call name=search}*}      
+  
             <div class="form-inline">
-                <input id="search" class="span3" type="search" placeholder="Search date here  ..." value="{$filter}" onkeypress="enterSearch(event)">
-                <button class="btn btn-success" type="button" onclick="jumpToPageWithSchoolYear()">
+                <input id="search" class="span3" type="search" placeholder="Search date here  ..." value="{$filter}" onkeypress="enterSearch(event);">
+                <button class="btn btn-success" type="button" onclick="jumpToPageWithSchoolYear();">
                     <i class="icon-search icon-white"></i>
                 </button>
             </div>
@@ -50,7 +50,7 @@
         <table class="table table-bordered table-hover">
             <tr>
                 <th>
-                    <input type="checkbox" onclick="isCheck({$rowCount_bulletin})" id="check"></input> Messages
+                    <input type="checkbox" onclick="isCheck({$rowCount_bulletin});" id="check"></input> Messages
                 </th> 
                 <th> Post Date and Time</th>
                 <th> Message Info.</th>
@@ -66,19 +66,19 @@
                     <td>{$my_dateTime[$k]}</td>
                     <td>
                         <i class="icon-eye-open"></i>
-                        <a style="cursor:pointer;" onclick="window.location.href='../signatory/bulletin.php?action=viewPosted_Bulletin&key={$myMessage_ID[$k]}'"> View</a>
+                        <a style="cursor:pointer;" onclick="window.location.href='../signatory/bulletin.php?action=viewPosted_Bulletin&key={$myMessage_ID[$k]}';"> View</a>
                     </td>
                 </tr>
             {/foreach}
         </table>
 
         <!-- Delete Selected Button-->
-        <a style="cursor:pointer;" onclick="findCheck('{$rowCount_bulletin}','Bulletin')">
+        <a style="cursor:pointer;" onclick="findCheck('{$rowCount_bulletin}','Bulletin');">
             <i class="icon-remove"></i> Delete Selected
         </a>
 
         <div class="pull-right">
-            Jump to: <select id="jump" class="input-mini" onchange="jumpToPageWithSchoolYear()">
+            Jump to: <select id="jump" class="input-mini" onchange="jumpToPageWithSchoolYear();">
                 <option>--</option>
                 {for $start = 1 to $bulletin_length}
                 <option>{$start}</option>

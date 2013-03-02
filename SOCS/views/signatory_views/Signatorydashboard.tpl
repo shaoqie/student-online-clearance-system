@@ -20,8 +20,8 @@
         <span class="pull-right">
             {*{call name=search}*}
             <div class="form-inline">
-                <input id="search" class="span3" type="search" placeholder="Search..." value="{$filter}" onkeypress="enterSearch(event)">
-                <button class="btn btn-success" type="button" onclick="jumpToPageWithSchoolYear()">
+                <input id="search" class="span3" type="search" placeholder="Search..." value="{$filter}" onkeypress="enterSearch(event);">
+                <button class="btn btn-success" type="button" onclick="jumpToPageWithSchoolYear();">
                     <i class="icon-search icon-white"></i>
                 </button>
             </div>
@@ -64,10 +64,10 @@
                             </button>
                             <ul class="dropdown-menu">
                                 <li>
-                                    <a style="cursor:pointer;" onclick="window.location.href = 'index.php?action=viewStudent_Detail&stud_id={$myKey_Student_Username[$k]}&sy_sem_id={$sysemid}'"> <i  class="icon-info-sign"></i> Detail</a>
+                                    <a style="cursor:pointer;" onclick="window.location.href = 'index.php?action=viewStudent_Detail&stud_id={$myKey_Student_Username[$k]}&sy_sem_id={$sysemid}';"> <i  class="icon-info-sign"></i> Detail</a>
                                 </li>
                                 <li>
-                                    <a style="cursor:pointer;" onclick="window.location.href = 'index.php?action=viewClearancePage&stud_id={$myKey_Student_Username[$k]}&sy_sem_id={$sysemid}'"> <i class="icon-zoom-in"></i> Clearance</a>
+                                    <a style="cursor:pointer;" onclick="window.location.href = 'index.php?action=viewClearancePage&stud_id={$myKey_Student_Username[$k]}&sy_sem_id={$sysemid}';"> <i class="icon-zoom-in"></i> Clearance</a>
                                 </li>
                             </ul>    
                         </div> 
@@ -79,7 +79,7 @@
         <!-- Pagination-->
         <div class="pull-right">
             Jump to: 
-            <select id="jump" class="input-mini" onchange="jumpToPageWithSchoolYear()">
+            <select id="jump" class="input-mini" onchange="jumpToPageWithSchoolYear();">
                 <option>--</option>
                 {for $start = 1 to $signatoryDashboard_length}
                     <option>{$start}</option>
@@ -88,74 +88,3 @@
         </div>
     </div>
 </div>
-
-{*
-<!-- Navigation Tabs-->
-<ul class="nav nav-tabs">       
-<li class="active"><a href='../signatory/index.php'>Student</a></li>
-<li><a href='../signatory/bulletin.php'>Bulletin</a></li>
-<li><a href='../signatory/requirements.php'>Requirements</a></li>       
-</ul>
-
-<!-- Archive Search-->
-<span>
-{call name=archiveSearch}
-</span>
-
-<!-- Search Bar-->
-<span class="pull-right">
-{call name=search}
-</span>
-
-<!--
-<span>
-{call name=advanced_search}
-</span>
--->
-
-<!-- Student Table-->
-<table class="table table-hover">
-<tr>
-<th>ID</th>
-<th>Name</th>  
-<th>Status</th>    
-</tr>
-{foreach from = $myName_student_NameUser key = k item = i}
-<tr> 
-<td style="width:150px">{$myKey_Student_Username[$k]}</td>
-<td>{$i}</td>
-<td>
-<div class="btn-group">
-{if $myStudent_ClearanceStatus[$k] eq 'Cleared'}
-<img style="height: 15px; width: 30px;" src="{$host}/photos/cleared.png" class="img-polaroid" />
-{else}
-<img style="height: 15px; width: 30px;" src="{$host}/photos/not cleared.png" class="img-polaroid" />
-{/if}
-<button style="height: 25px;"class="btn dropdown-toggle" data-toggle="dropdown">
-<span class="caret"></span>
-</button>
-<ul class="dropdown-menu">
-<li>
-<a style="cursor:pointer;" onclick="window.location.href='index.php?action=viewStudent_Detail&stud_id={$myKey_Student_Username[$k]}&sy_sem_id={$sysemid}'"> <i  class="icon-info-sign"></i> Detail</a>
-</li>
-<li>
-<a style="cursor:pointer;" onclick="window.location.href='index.php?action=viewClearancePage&stud_id={$myKey_Student_Username[$k]}&sy_sem_id={$sysemid}'"> <i class="icon-zoom-in"></i> Clearance</a>
-</li>
-</ul>    
-</div> 
-</td>
-</tr>
-{/foreach}
-</table>
-
-<!-- Pagination-->
-<div class="pull-right">
-Jump to: 
-<select id="jump" class="input-mini" onchange="jumpToPageWithSchoolYear()">
-<option>--</option>
-{for $start = 1 to $signatoryDashboard_length}
-<option>{$start}</option>
-{/for}
-</select>
-</div>
-*}

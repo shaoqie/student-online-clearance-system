@@ -86,7 +86,7 @@
         </select>
 
         <button class="btn btn-primary" type="submit" name="GO">
-            <i class="icon-briefcase"></i>
+            <i class="icon-search"></i>
         </button>
     </form>
 {/function}

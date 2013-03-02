@@ -38,14 +38,3 @@ div:hover#hover_link{
 .center-text{
     text-align: center;
 }
-
-/* Landscape phones and down */
-@media (max-width: 767px) {
-    table tr td{
-        font-size: 85%;
-    }
-
-    table tr td label{
-        font-size: 85%;
-    }
-}
