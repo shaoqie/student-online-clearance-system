@@ -33,9 +33,9 @@
 
                 <!-- Header-->
                 {if $user_type == 'Signatory'}
-                    <h4 class="well center-text well-small">Signatories-in-charge</h4>
+                    <h4 class="well center-text well-small">List of Signatories-in-charge</h4>
                 {else}
-                    <h4 class="well center-text well-small">Students</h4>
+                    <h4 class="well center-text well-small">List of Students</h4>
                 {/if}
 
                 <div class="navbar">

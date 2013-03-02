@@ -1,15 +1,11 @@
 <div class="row">
     <div class="span3">
-        
+
         <!-- Header-->
         <h4 class="well center-text well-small">Students</h4>
 
         <!-- Navigations-->
-        <div class="row">
-            <div class="span3">
-                {call name=nav_signatory}
-            </div>
-        </div>
+        {call name=nav_signatory}
 
     </div>
     <div class="span9">
@@ -18,9 +14,7 @@
         <h4 class="well center-text well-small">List of Students</h4>
 
         <!-- Archive Search-->
-        <span>
-            {call name=archiveSearch}
-        </span>
+        {call name=archiveSearch}
 
         <!-- Search Bar-->
         <span class="pull-right">
@@ -59,21 +53,21 @@
                             {if $myStudent_ClearanceStatus[$k] eq 'Cleared'}
                              <!--   <img style="height: 15px; width: 30px;" src="{$host}/photos/cleared.png" class="img-polaroid" /> -->
                                 <a class="btn btn-small btn-success" href="index.php?action=viewClearancePage&stud_id={$myKey_Student_Username[$k]}&sy_sem_id={$sysemid}">
-                                <i class="icon-ok-circle icon-large"></i> Cleared</a>                   
-                            {else}
-                              <!--  <img style="height: 15px; width: 30px;" src="{$host}/photos/not cleared.png" class="img-polaroid" /> -->
-                                  <a class="btn btn-small btn-danger" href="index.php?action=viewClearancePage&stud_id={$myKey_Student_Username[$k]}&sy_sem_id={$sysemid}">
-                                <i class="icon-remove-circle icon-large"></i> Not Cleared</a> 
-                            {/if}
+                                    <i class="icon-ok-circle icon-large"></i> Cleared</a>                   
+                                {else}
+                                  <!--  <img style="height: 15px; width: 30px;" src="{$host}/photos/not cleared.png" class="img-polaroid" /> -->
+                                <a class="btn btn-small btn-danger" href="index.php?action=viewClearancePage&stud_id={$myKey_Student_Username[$k]}&sy_sem_id={$sysemid}">
+                                    <i class="icon-remove-circle icon-large"></i> Not Cleared</a> 
+                                {/if}
                             <button style="height: 26px;"class="btn dropdown-toggle" data-toggle="dropdown">
                                 <span class="caret"></span>
                             </button>
                             <ul class="dropdown-menu">
                                 <li>
-                                    <a style="cursor:pointer;" onclick="window.location.href='index.php?action=viewStudent_Detail&stud_id={$myKey_Student_Username[$k]}&sy_sem_id={$sysemid}'"> <i  class="icon-info-sign"></i> Detail</a>
+                                    <a style="cursor:pointer;" onclick="window.location.href = 'index.php?action=viewStudent_Detail&stud_id={$myKey_Student_Username[$k]}&sy_sem_id={$sysemid}'"> <i  class="icon-info-sign"></i> Detail</a>
                                 </li>
                                 <li>
-                                    <a style="cursor:pointer;" onclick="window.location.href='index.php?action=viewClearancePage&stud_id={$myKey_Student_Username[$k]}&sy_sem_id={$sysemid}'"> <i class="icon-zoom-in"></i> Clearance</a>
+                                    <a style="cursor:pointer;" onclick="window.location.href = 'index.php?action=viewClearancePage&stud_id={$myKey_Student_Username[$k]}&sy_sem_id={$sysemid}'"> <i class="icon-zoom-in"></i> Clearance</a>
                                 </li>
                             </ul>    
                         </div> 
@@ -88,7 +82,7 @@
             <select id="jump" class="input-mini" onchange="jumpToPageWithSchoolYear()">
                 <option>--</option>
                 {for $start = 1 to $signatoryDashboard_length}
-                <option>{$start}</option>
+                    <option>{$start}</option>
                 {/for}
             </select>
         </div>

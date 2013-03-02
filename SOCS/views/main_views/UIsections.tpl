@@ -86,7 +86,7 @@
         </select>
 
         <button class="btn btn-primary" type="submit" name="GO">
-            <i class="icon-search icon-white"></i>
+            <i class="icon-briefcase"></i>
         </button>
     </form>
 {/function}
@@ -274,35 +274,24 @@
         <div class="modal-body">
 
             <div class="fileupload fileupload-new" data-provides="fileupload">
-                <form class="form-inline" action="../administrator/index.php?action=upload_excel_file" method="post" enctype="multipart/form-data">
-                    
-                    {if isset($excel_file)}
-                        
-                        <label>
-                            <b>Current File: </b>
-                            <span class="text-success">
-                                <i class="icon-ms-excel"></i> student_current_enroll.xls
-                            </span>
-                        </label>
-                        <div>
-                            <label>
-                                <b>Replace File: </b>
-                            </label>
-                            <span class="btn btn-file">
-                                Browse<input type="file" name="excel_file" />
-                            </span>
-                        </div>
-                        
-                    {else}
-                        
-                        <label>
-                            <b>Upload MS Excel File: </b>
-                        </label>
-                        <span class="btn btn-file">
-                            Browse<input type="file" name="excel_file" />
-                        </span>
-                        
-                    {/if}
+
+                {if isset($excel_file)}
+
+                    <table class="table table-condensed table-bordered">
+                        <tr>
+                            <td>Current File: </td>
+                            <td><i class="icon-ms-excel"></i> student_current_enroll.xls</td>
+                        </tr>
+                    </table>
+                {/if}
+
+                <form class="form-inline" action="{$host}/administrator/index.php?action=upload_excel_file" method="post" enctype="multipart/form-data">
+                    <label>
+                        <b>Upload MS Excel File: </b>
+                    </label>
+                    <span class="btn btn-file">
+                        Browse<input type="file" name="excel_file" />
+                    </span>
 
                     <div class="form-actions fileupload-exists">
                         <i class="icon-file-alt icon-2x"></i> 
@@ -316,7 +305,7 @@
             </div>
         </div>
         <div class="modal-footer">
-            <button class="btn pull-right" data-dismiss="modal">Cancel</button>
+            <button class="btn btn-primary pull-right" data-dismiss="modal">Cancel</button>
         </div>
     </div>
 {/function}

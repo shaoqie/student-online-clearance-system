@@ -54,7 +54,7 @@ class bulletin extends Controller {
 
             if (isset($_GET['successAdd'])) {
                 if ($_GET['successAdd'] == 'true') {
-                    $this->template->setAlert("Posting a Bulletin was Successful", Template::ALERT_SUCCESS, 'alert');
+                    $this->template->setAlert("An announcement has been posted in the bulletin.", Template::ALERT_SUCCESS, 'alert');
                 }
             }
         } else {
@@ -108,6 +108,7 @@ class bulletin extends Controller {
     public function viewPosting_Bulletin() {
         $this->template->setPageName('Posting Bulletin Page');
         $this->template->setContent('Post_BulletinPage.tpl');
+        $this->template->assign('alert', "");
 
         $sign_id = $this->signatorialList_model->getSignId(Session::get_AssignSignatory());
         $sy_id = $this->schoolYearSem_model->getSy_ID(trim($_POST['school_year']), trim($_POST['semester']));
@@ -152,7 +153,7 @@ class bulletin extends Controller {
     /* ------------ Special Purposes --------------- */
 
     public function deleted() {
-        $this->template->setAlert('Delete an Posting Bulletin was Successfully!..', Template::ALERT_SUCCESS, 'alert');
+        $this->template->setAlert('Has been deleted succesfully!', Template::ALERT_SUCCESS, 'alert');
     }
 
     public function delete($selected) {
