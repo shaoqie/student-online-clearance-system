@@ -38,49 +38,13 @@
                     background-repeat: no-repeat;
                 }{literal}
 
-                .socs-welcome{
-                    background-color: transparent; 
-                    /*padding-bottom: 145px;*/
-                    padding-left: 75px;
-                    text-shadow: inherit;
-                }
-
-                .carousel-caption h1,
-                .carousel-caption .lead {
-                    margin: 0;
-                    line-height: 1.25;
-                    color: #fff;
-                    text-shadow: 0 1px 1px rgba(0,0,0,.4);
-                }
-
-                .carousel-caption .btn {
-                    margin-top: 10px;
-                }
-
-                .carousel-images, .carousel-size{
-                    width: 1200px; 
-                    height: 300px;
-                }
-
-                ul.nav #dropdown-hover:hover ul.dropdown-menu{
-                    display: block;
-                }
-
-                .progress .bar {
-                    -webkit-transition: width 1s ease-in-out;
-                    -moz-transition: width 1s ease-in-out;
-                    -ms-transition: width 1s ease-in-out;
-                    -o-transition: width 1s ease-in-out;
-                    transition: width 1s ease-in-out;
-                }
-
                 /*
                 div{
                 border: 1px #000 solid;
                 }*/
             </style>
         {/literal}
-        <link rel="stylesheet" href="{$host}/public/css/bootstrap-responsive.min.css">
+        <link rel="stylesheet" href="{$host}/public/css/bootstrap-responsive.css">
         <link rel="stylesheet" href="{$host}/public/css/main.css">
 
         <script src="{$host}/public/js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
@@ -106,18 +70,6 @@
                     </a>
                     <a class="brand" href="index.php"><img src="{$host}/public/img/logo.png"> SOCS</a>
                     <div class="nav-collapse collapse">
-
-                        {*
-                        {if isset($account_type) && $account_type == "System Administrator"}
-                        {if $page_name=="User Accounts Page"}
-                        {call name=nav_admin index=1}
-                        {elseif $page_name=="Signatories Page"}
-                        {call name=nav_admin index=2}
-                        {elseif $page_name=="Departments Page"}
-                        {call name=nav_admin index=3}
-                        {/if}
-                        {/if}
-                        *}
 
                         {if isset($username)}
                             <div class="btn-group pull-right">
