@@ -54,6 +54,42 @@
 
 <!-- Archive Search Bar-->
 {function name=archiveSearch}
+
+    {*
+    <form class="form-inline" method="post">
+
+    <select id="school_year" class="select2 input-medium" name="school_year">
+    {foreach from=$mySchool_Year key=k item=year}
+    {if $year eq $currentSchool_Year}
+    <option selected>{$year}</option>
+    {else}
+    <option>{$year}</option>
+    {/if}
+    {/foreach}
+    </select>
+
+    <select class="select2 input-medium" id="semester" name="semester">
+    {if $currentSemester eq 'First'}
+    <option selected>First</option>
+    <option>Second</option>
+    <option>Summer</option>
+    {elseif $currentSemester eq 'Second'}
+    <option>First</option>
+    <option selected>Second</option>
+    <option>Summer</option>
+    {else}
+    <option>First</option>
+    <option>Second</option>
+    <option selected>Summer</option>
+    {/if}           
+    </select>
+
+    <button class="btn btn-primary" type="submit" name="GO">
+    <i class="icon-search"></i>
+    </button>
+    </form>
+    *}
+
     <form class="form-inline" method="post">
         <label><b>School Year:  </b></label>
 

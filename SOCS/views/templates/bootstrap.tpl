@@ -14,6 +14,7 @@
         <link rel="stylesheet" href="{$host}/public/css/font-awesome.css">
         <link rel="stylesheet" href="{$host}/public/css/font-awesome-ext.css">
         <link rel="stylesheet" href="{$host}/public/css/bootstrap-fileupload.css">
+        <link rel="stylesheet" href="{$host}/public/select2/select2.css">
 
         {literal}
             <style>
@@ -160,6 +161,7 @@
         <script src="{$host}/public/js/vendor/bootbox.min.js"></script>
         <script src="{$host}/public/js/vendor/bootstrap-fileupload.js"></script>
         <script src="{$host}/public/js/vendor/bootstrap-progressbar.js"></script>
+        <script src="{$host}/public/select2/select2.js"></script>
         <script src="{$host}/public/js/main.js"></script>
 
         {literal}
@@ -170,6 +172,8 @@
                                         $('#clearance_status').progressbar({
                                             display_text: 1
                                         });
+                                        
+                                        $('.select2').select2();
                                     });
             </script>
         {/literal}
