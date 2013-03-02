@@ -66,6 +66,14 @@
                     display: block;
                 }
 
+                .progress .bar {
+                    -webkit-transition: width 1s ease-in-out;
+                    -moz-transition: width 1s ease-in-out;
+                    -ms-transition: width 1s ease-in-out;
+                    -o-transition: width 1s ease-in-out;
+                    transition: width 1s ease-in-out;
+                }
+
                 /*
                 div{
                 border: 1px #000 solid;
@@ -199,12 +207,17 @@
         <script src="{$host}/public/js/vendor/bootstrap.min.js"></script>
         <script src="{$host}/public/js/vendor/bootbox.min.js"></script>
         <script src="{$host}/public/js/vendor/bootstrap-fileupload.js"></script>
+        <script src="{$host}/public/js/vendor/bootstrap-progressbar.js"></script>
         <script src="{$host}/public/js/main.js"></script>
 
         {literal}
             <script type="text/javascript">
                                     $(document).ready(function() {
                                         $('.tips').tooltip();
+
+                                        $('#clearance_status').progressbar({
+                                            display_text: 1
+                                        });
                                     });
             </script>
         {/literal}

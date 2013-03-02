@@ -31,10 +31,17 @@
 
 <p>Clearance Overall Status: </p>
 <div class="progress">
-    <div class="bar bar-success" style="min-width: {math equation="(c / i) * 100" i=($myListOfSign_underDeptName|@count) c=$num_cleared format="%d"}%;">
-        <p>{math equation="(c / i) * 100" i=($myListOfSign_underDeptName|@count) c=$num_cleared format="%d"}%</p>
-    </div>
+    <div id="clearance_status" class="bar" data-percentage="{math equation="(c / i) * 100" i=($myListOfSign_underDeptName|@count) c=$num_cleared format="%d"}"></div>
 </div>
+
+{*
+<p>Clearance Overall Status: </p>
+<div class="progress">
+<div id="clearance_status" class="bar bar-success" style="min-width: {math equation="(c / i) * 100" i=($myListOfSign_underDeptName|@count) c=$num_cleared format="%d"}%;">
+<p>{math equation="(c / i) * 100" i=($myListOfSign_underDeptName|@count) c=$num_cleared format="%d"}%</p>
+</div>
+</div>
+*}
 
 <!-- Clearance-->
 <div class="row">
