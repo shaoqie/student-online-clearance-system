@@ -121,89 +121,94 @@
 
         <!-- Visibility -->
         <div class="form-inline pull-right">
-            <label><b>Visibility: </b></label>
-            <select id="visibility" class="span2" onchange="signatorialList_visibility();">
+            <select id="visibility" class="select2 span2" onchange="signatorialList_visibility();">
                 <option value="0" {if $index_tabs == 0} selected {/if}>Under Graduate</option>
                 <option value="1" {if $index_tabs == 1} selected {/if}>Graduate</option>
             </select>
         </div>
 
-        <!-- Add Signatory -->
-        {if $countSignList > 0}
-            <form class="form-inline">
-                <label><b>Add Signatory: </b></label>
+        <form class="form-inline">
 
-                {assign var=count value=0}
-                <select id="cmdSignatory" required onchange="newOptions();">
-                    {foreach from = $SignatoryList item = i}
-                    {if $count < 10}<option>{$i}</option>{/if}
-                    {assign var=count value=$count + 1}
+            <input type="hidden" name="action" value="addSignatory">
+            
+            <select name="cmdSignatory" class="select2 input-large" data-placeholder="Select Signatory" required>
+                <option></option>
+                {foreach from = $SignatoryList item = i}
+                    <option>{$i}</option>
                 {/foreach}
-                <option>---------Next--------</option>
             </select>
-            <input type=hidden id="hide" value="10">
-            <input type=hidden id="flag" value="0">
 
-            {*
-            <input type="text" id="cmdSignatory" required autocomplete="off" class="span2" data-provide="typeahead" data-source='[
-            {foreach from=$SignatoryList key=k item=i}
-            {if $SignatoryList|@count - 1 eq $k}
-            "{$i}"
-            {else}
-            "{$i}",
-            {/if}
-            {/foreach}
-            ]'>
-            *}     
-
-            <button class="btn btn-success" type="button" onclick="getSignatory();">
+            <button class="btn btn-success" type="submit">
                 <i class="icon-plus"></i> Add
             </button>
         </form>
-    {/if}
 
-    <!-- Table of Signatories-->
-    <table class="table table-hover">    
-        <tr>
-            <th>
-                <input type="checkbox" onclick="isCheck({$rowCount_signatorial});" id="check"> Signatories
-            </th>
-            <th></th>
-            <th>Controls</th>
-        </tr>
-        {foreach from = $myName_signatorial key = k item = i} 
-            <tr>
-                <td>
-                    <label class="checkbox">
-                        <input type="hidden" id = 'edit{$k}' value = "{$i}">
-                        <input class="Checkbox" type="checkbox" id = '{$k}' value = {$myKey_signatorial[$k]} ></input> 
-                        <div id='unSelectedSignatorialList{$k}'>{$i}</div>
-                    </label>
-                </td>    
-                <td>
-                    <label id="confirmed{$k}"></label>
-                </td>
-                <td>
-                    <a style="cursor:pointer;" href="javascript:edit('{$k}','{$myKey_signatorial[$k]}','{$rowCount_signatorial}','{$countSignList}')">
-                        <i class="icon-pencil"></i> Edit
-                    </a>
-                </td>    
-            </tr>
+        {*
+        <!-- Add Signatory -->
+        {if $countSignList > 0}
+        <form class="form-inline">
+        <label><b>Add Signatory: </b></label>
+    
+        {assign var=count value=0}
+        <select id="cmdSignatory" required onchange="newOptions();">
+        {foreach from = $SignatoryList item = i}
+        {if $count < 10}<option>{$i}</option>{/if}
+        {assign var=count value=$count + 1}
         {/foreach}
-    </table>
-
-    <i class="icon-remove"></i>
-    <a style="cursor:pointer;" onclick="findCheck('{$rowCount_signatorial}', 'signatorial list');" >Delete Selected
-    </a>
-
-    <div class="pull-right">
-        Jump to: <select id="jump" class="input-mini" onchange="jumpToPage();">
-            <option>--</option>
-            {for $start = 1 to $signatorial_length}
-                <option>{$start}</option>
-            {/for}
+        <option>---------Next--------</option>
         </select>
-    </div>
+        <input type=hidden id="hide" value="10">
+        <input type=hidden id="flag" value="0">
+    
+        <button class="btn btn-success" type="button" onclick="getSignatory();">
+        <i class="icon-plus"></i> Add
+        </button>
+        </form>
+        {/if}
+        *}
 
-</div>
+        <!-- Table of Signatories-->
+        <table class="table table-hover">    
+            <tr>
+                <th>
+                    <input type="checkbox" onclick="isCheck({$rowCount_signatorial});" id="check"> Signatories
+                </th>
+                <th></th>
+                <th>Controls</th>
+            </tr>
+            {foreach from = $myName_signatorial key = k item = i} 
+                <tr>
+                    <td>
+                        <label class="checkbox">
+                            <input type="hidden" id = 'edit{$k}' value = "{$i}">
+                            <input class="Checkbox" type="checkbox" id = '{$k}' value = {$myKey_signatorial[$k]} ></input> 
+                            <div id='unSelectedSignatorialList{$k}'>{$i}</div>
+                        </label>
+                    </td>    
+                    <td>
+                        <label id="confirmed{$k}"></label>
+                    </td>
+                    <td>
+                        <a style="cursor:pointer;" href="javascript:edit('{$k}','{$myKey_signatorial[$k]}','{$rowCount_signatorial}','{$countSignList}')">
+                            <i class="icon-pencil"></i> Edit
+                        </a>
+                    </td>    
+                </tr>
+            {/foreach}
+        </table>
+
+        <i class="icon-remove"></i>
+        <a style="cursor:pointer;" onclick="findCheck('{$rowCount_signatorial}', 'signatorial list');" >Delete Selected
+        </a>
+
+        <div class="pull-right">
+            Jump to: <select id="jump" class="input-mini" onchange="jumpToPage();">
+                <option>--</option>
+                {for $start = 1 to $signatorial_length}
+                    <option>{$start}</option>
+                {/for}
+            </select>
+        </div>
+
+    </div>
 </div>
