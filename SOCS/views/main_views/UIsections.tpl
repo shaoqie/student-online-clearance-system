@@ -31,6 +31,46 @@
     </ul>
 {/function}
 
+{function name=search_input}
+    {if isset($filter)}
+        <input type="hidden" value="filter" name="action">
+        <input id="search" class="span3" type="search" placeholder="Search..." value="{$filter}" name="filterName">
+        {if isset($user_type)}
+            <input type="hidden" value="{$user_type}" name="user_type">
+        {/if}
+    {/if}
+{/function}
+
+{function name=schoolyear_sem_inputs}
+
+    <select id="school_year" class="select2 input-medium" name="school_year">
+        {foreach from=$mySchool_Year key=k item=year}
+            {if $year eq $currentSchool_Year}
+                <option selected>{$year}</option>
+            {else}
+                <option>{$year}</option>
+            {/if}
+        {/foreach}
+    </select>
+
+    <select id="semester" class="select2 input-medium" name="semester">
+        {if $currentSemester eq 'First'}
+            <option selected>First</option>
+            <option>Second</option>
+            <option>Summer</option>
+        {elseif $currentSemester eq 'Second'}
+            <option>First</option>
+            <option selected>Second</option>
+            <option>Summer</option>
+        {else}
+            <option>First</option>
+            <option>Second</option>
+            <option selected>Summer</option>
+        {/if}           
+    </select>
+
+{/function}
+
 <!-- Search Bar-->
 {function name=search}
     {if isset($filter)}
@@ -55,20 +95,57 @@
 <!-- Archive Search Bar-->
 {function name=archiveSearch}
 
+    <form class="navbar-form pull-right" method="post">
+
+        <select id="school_year" class="select2 input-large" name="school_year">
+            {foreach from=$mySchool_Year key=k item=year}
+                {if $year eq $currentSchool_Year}
+                    <option selected>{$year}</option>
+                {else}
+                    <option>{$year}</option>
+                {/if}
+            {/foreach}
+        </select>
+
+        <select class="select2 input-large" id="semester" name="semester">
+            {if $currentSemester eq 'First'}
+                <option selected>First</option>
+                <option>Second</option>
+                <option>Summer</option>
+            {elseif $currentSemester eq 'Second'}
+                <option>First</option>
+                <option selected>Second</option>
+                <option>Summer</option>
+            {else}
+                <option>First</option>
+                <option>Second</option>
+                <option selected>Summer</option>
+            {/if}           
+        </select>
+
+        <button class="btn btn-primary" type="submit" name="GO">
+            <i class="icon-search"></i>
+        </button>
+    </form>
+
+
     {*
     <form class="form-inline" method="post">
+    <label><b>School Year:  </b></label>
 
-    <select id="school_year" class="select2 input-medium" name="school_year">
+    <input type="text" maxlength="9" {literal}pattern="[0-9\-]{9}" {/literal}  id="school_year" name="school_year" value="{$currentSchool_Year}" autocomplete="off" class="span3" data-provide="typeahead" data-source='[
+
     {foreach from=$mySchool_Year key=k item=year}
-    {if $year eq $currentSchool_Year}
-    <option selected>{$year}</option>
+    {if $mySchool_Year|@count - 1 eq $k}
+    "{$year}"
     {else}
-    <option>{$year}</option>
+    "{$year}",
     {/if}
     {/foreach}
-    </select>
+    ]'>
 
-    <select class="select2 input-medium" id="semester" name="semester">
+    <label><b>Semester: </b></label>
+    <select id="semester" name="semester" class="span3">
     {if $currentSemester eq 'First'}
     <option selected>First</option>
     <option>Second</option>
@@ -89,42 +166,6 @@
     </button>
     </form>
     *}
-
-    <form class="form-inline" method="post">
-        <label><b>School Year:  </b></label>
-
-        <input type="text" maxlength="9" {literal}pattern="[0-9\-]{9}" {/literal}  id="school_year" name="school_year" value="{$currentSchool_Year}" autocomplete="off" class="span3" data-provide="typeahead" data-source='[
-
-               {foreach from=$mySchool_Year key=k item=year}
-                   {if $mySchool_Year|@count - 1 eq $k}
-                       "{$year}"
-                   {else}
-                       "{$year}",
-                   {/if}
-               {/foreach}
-               ]'>
-
-        <label><b>Semester: </b></label>
-        <select id="semester" name="semester" class="span3">
-            {if $currentSemester eq 'First'}
-                <option selected>First</option>
-                <option>Second</option>
-                <option>Summer</option>
-            {elseif $currentSemester eq 'Second'}
-                <option>First</option>
-                <option selected>Second</option>
-                <option>Summer</option>
-            {else}
-                <option>First</option>
-                <option>Second</option>
-                <option selected>Summer</option>
-            {/if}           
-        </select>
-
-        <button class="btn btn-primary" type="submit" name="GO">
-            <i class="icon-search"></i>
-        </button>
-    </form>
 {/function}
 
 <!-- Admin Functions-->

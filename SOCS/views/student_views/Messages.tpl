@@ -2,42 +2,58 @@
 <h4 class="well well-small center-text">{$sign_name} Bulletin</h4>
 
 <!-- Archive Search Box-->
+<div class="navbar">
+    <div class="navbar-inner">
+
+        <form class="navbar-form" method="post">
+
+            {call name=schoolyear_sem_inputs}
+
+            <button class="btn btn-success" type="button" name="GO" onclick="change_schoolYear('0', '{$sign_id}', '1')">
+                <i class="icon-search icon-white"></i>
+            </button>
+
+        </form>
+    </div>
+</div>
+
+{*
+<!-- Archive Search Box-->
 <div class="form-inline">
-    <label>School Year:  </label>
+<label>School Year:  </label>
 {literal}<input type="text" maxlength="9" pattern="[0-9\-]{9}" {/literal}  id="school_year" name="school_year" value="{$currentSchool_Year}" autocomplete="off" class="span3" data-provide="typeahead" data-source='[
 
-       {foreach from=$mySchool_Year key=k item=year}
-           {if $mySchool_Year|@count - 1 eq $k}
-               "{$year}"
-           {else}
-               "{$year}",
-           {/if}
-       {/foreach}
-       ]'>
+{foreach from=$mySchool_Year key=k item=year}
+{if $mySchool_Year|@count - 1 eq $k}
+"{$year}"
+{else}
+"{$year}",
+{/if}
+{/foreach}
+]'>
 
 <label>Semester: </label>
 <select id="semester" name="semester" class="span3">
-    {if $currentSemester eq 'First'}
-        <option selected>First</option>
-        <option>Second</option>
-        <option>Summer</option>
-    {elseif $currentSemester eq 'Second'}
-        <option>First</option>
-        <option selected>Second</option>
-        <option>Summer</option>
-    {else}
-        <option>First</option>
-        <option>Second</option>
-        <option selected>Summer</option>
-    {/if}           
+{if $currentSemester eq 'First'}
+<option selected>First</option>
+<option>Second</option>
+<option>Summer</option>
+{elseif $currentSemester eq 'Second'}
+<option>First</option>
+<option selected>Second</option>
+<option>Summer</option>
+{else}
+<option>First</option>
+<option>Second</option>
+<option selected>Summer</option>
+{/if}           
 </select>
 
 <button class="btn btn-primary" type="button" name="GO" onclick="change_schoolYear('0', '{$sign_id}', '1')">
-    <i class="icon-search icon-white"></i>
+<i class="icon-search icon-white"></i>
 </button>
 </div>
-
-    <hr>
+*}
 
 {if $my_messages|@count != 0}
 

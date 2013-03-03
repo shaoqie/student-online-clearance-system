@@ -1,9 +1,3 @@
-<!-- Header-->
-<h4 class="well well-small center-text">Student's Clearance</h4>
-
-<!-- Archive Search Box-->
-{call name=archiveSearch}
-
 {assign var=num_cleared value=0}
 
 {foreach from = $myListOfSign_underDeptName key = k item = i}
@@ -14,18 +8,40 @@
 
 {/foreach}
 
-<!-- Export Link-->
-<div class="row">
-    <div class="span12">
-        {if $num_cleared == ($myListOfSign_underDeptName|@count)}
-            <a class="pull-right" href="export1.php?sy_sem_id={$sy_sem_id}&status={$status}"> 
-                <i class="icon-download"></i> Export to PDF
-            </a>
-        {else}
-            <a class="pull-right" href="#" onclick="bootbox.alert('<div class=\'alert alert-info alert-block\'><i class=\'icon-info-sign\'></i> <strong>Oops!</strong> Must clear all signatories before can download the clearance form.</div>');"> 
-                <i class="icon-download"></i> Export to PDF
-            </a>
-        {/if}
+<!-- Header-->
+<h4 class="well well-small center-text">Student's Clearance</h4>
+
+<!-- Archive Search Box-->
+<div class="navbar">
+    <div class="navbar-inner">
+
+        <form class="navbar-form pull-right" method="post">
+
+            {call name=schoolyear_sem_inputs}
+
+            <button class="btn btn-success" type="submit" name="GO">
+                <i class="icon-search"></i>
+            </button>
+
+        </form>
+
+        <ul class="nav">
+
+            <li class="divider-vertical"></li>
+            <li>
+                {if $num_cleared == ($myListOfSign_underDeptName|@count)}
+                    <a class="tips" title="Export the clearance file" href="export1.php?sy_sem_id={$sy_sem_id}&status={$status}"> 
+                        <i class="icon-download"></i>
+                    </a>
+                {else}
+                    <a class="tips" title="Export the clearance file" href="#" onclick="bootbox.alert('<div class=\'alert alert-info alert-block\'><i class=\'icon-info-sign\'></i> <strong>Oops!</strong> Must clear all signatories before can download the clearance form.</div>');"> 
+                        <i class="icon-download"></i>
+                    </a>
+                {/if}
+            </li>
+            <li class="divider-vertical"></li>
+        </ul>
+
     </div>
 </div>
 
@@ -35,10 +51,18 @@
 </div>
 
 {*
-<p>Clearance Overall Status: </p>
-<div class="progress">
-<div id="clearance_status" class="bar bar-success" style="min-width: {math equation="(c / i) * 100" i=($myListOfSign_underDeptName|@count) c=$num_cleared format="%d"}%;">
-<p>{math equation="(c / i) * 100" i=($myListOfSign_underDeptName|@count) c=$num_cleared format="%d"}%</p>
+<!-- Export Link-->
+<div class="row">
+<div class="span12">
+{if $num_cleared == ($myListOfSign_underDeptName|@count)}
+<a class="pull-right" href="export1.php?sy_sem_id={$sy_sem_id}&status={$status}"> 
+<i class="icon-download"></i> Export to PDF
+</a>
+{else}
+<a class="pull-right" href="#" onclick="bootbox.alert('<div class=\'alert alert-info alert-block\'><i class=\'icon-info-sign\'></i> <strong>Oops!</strong> Must clear all signatories before can download the clearance form.</div>');"> 
+<i class="icon-download"></i> Export to PDF
+</a>
+{/if}
 </div>
 </div>
 *}

@@ -17,24 +17,52 @@
         <!-- Header-->
         <h4 class="well center-text well-small">List of Requirements</h4>
 
+        <!-- Controls-->
+        <div class="navbar">
+            <div class="navbar-inner">
+
+                <ul class="nav">
+                    <li class="divider-vertical"></li>
+                    <li>
+                        <a class="tips" title="Add Requirements" href="{$host}/signatory/requirements.php?action=viewAdd_Requirements">
+                            <i class="icon-plus"></i>
+                        </a>
+                    </li>
+                    <li class="divider-vertical"></li>
+                </ul>
+
+                <form class="navbar-form pull-right">
+
+                    {call name=schoolyear_sem_inputs}
+
+                    <input id="search" class="span3" type="search" placeholder="Search..." value="{$filter}" onkeypress="enterSearch(event);">
+                    <button class="btn btn-success" type="button" onclick="jumpToPageWithSchoolYear();">
+                        <i class="icon-search icon-white"></i>
+                    </button>
+
+                </form>
+            </div>
+        </div>
+
+        {*
         <!--Archive Search Bar -->
         {call name=archiveSearch}
-
+        
         <!-- Add Requirements Button-->
-        <input class="btn" type="button" value="Add Requirement" onclick="window.location.href='../signatory/requirements.php?action=viewAdd_Requirements'">
-
+        <input class="btn" type="button" value="Add Requirement" onclick="window.location.href = '../signatory/requirements.php?action=viewAdd_Requirements';">
 
         <!-- Search Bar-->
         <span class="pull-right">
-            {*{call name=search}*}
-            <div class="form-inline">
-                <input id="search" class="span3" type="search" placeholder="Search..." value="{$filter}" onkeypress="enterSearch(event)">
-                <button class="btn btn-success" type="button" onclick="jumpToPageWithSchoolYear()">
-                    <i class="icon-search icon-white"></i>
-                </button>
-            </div>
-            <br/>
+        {*{call name=search}
+        <div class="form-inline">
+        <input id="search" class="span3" type="search" placeholder="Search..." value="{$filter}" onkeypress="enterSearch(event);">
+        <button class="btn btn-success" type="button" onclick="jumpToPageWithSchoolYear();">
+        <i class="icon-search icon-white"></i>
+        </button>
+        </div>
+        <br/>
         </span>
+        *}
 
         <!-- Student Table-->
         <table class="table table-bordered table-hover">
@@ -65,7 +93,7 @@
         </table>
 
         <!-- Delete Selected Button-->
-        <a style="cursor:pointer;" onclick="findCheck('{$rowCount_requirement}','Requirement')">
+        <a style="cursor:pointer;" onclick="findCheck('{$rowCount_requirement}', 'Requirement')">
             <i class="icon-remove"></i> Delete Selected
         </a>
 
@@ -75,7 +103,7 @@
             <select id="jump" class="input-mini" onchange="jumpToPageWithSchoolYear()">
                 <option>--</option>
                 {for $start = 1 to $requirement_length}
-                <option>{$start}</option>
+                    <option>{$start}</option>
                 {/for}
             </select>
         </div>

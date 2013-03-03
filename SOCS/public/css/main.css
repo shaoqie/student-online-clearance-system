@@ -74,3 +74,7 @@ ul.nav #dropdown-hover:hover ul.dropdown-menu{
     -o-transition: width 1s ease-in-out;
     transition: width 1s ease-in-out;
 }
+
+.navbar .navbar-inner .select2-container{
+    padding-top: 5px;
+}

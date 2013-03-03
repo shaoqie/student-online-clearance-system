@@ -13,20 +13,39 @@
         <!-- Header-->
         <h4 class="well center-text well-small">List of Students</h4>
 
+        <!-- Controls-->
+        <div class="navbar">
+            <div class="navbar-inner">
+                <form class="navbar-form pull-right">
+
+                    {call name=schoolyear_sem_inputs}
+
+                    <input id="search" class="span3" type="search" placeholder="Search..." value="{$filter}" onkeypress="enterSearch(event);">
+
+                    <button class="btn btn-success" type="button" onclick="jumpToPageWithSchoolYear();">
+                        <i class="icon-search icon-white"></i>
+                    </button>
+
+                </form>
+            </div>
+        </div>
+
+        {*
         <!-- Archive Search-->
         {call name=archiveSearch}
 
         <!-- Search Bar-->
         <span class="pull-right">
-            {*{call name=search}*}
-            <div class="form-inline">
-                <input id="search" class="span3" type="search" placeholder="Search..." value="{$filter}" onkeypress="enterSearch(event);">
-                <button class="btn btn-success" type="button" onclick="jumpToPageWithSchoolYear();">
-                    <i class="icon-search icon-white"></i>
-                </button>
-            </div>
-            <br/>
-        </span>  
+        {*{call name=search}
+        <div class="form-inline">
+        <input id="search" class="span3" type="search" placeholder="Search..." value="{$filter}" onkeypress="enterSearch(event);">
+        <button class="btn btn-success" type="button" onclick="jumpToPageWithSchoolYear();">
+        <i class="icon-search icon-white"></i>
+        </button>
+        </div>
+        <br/>
+        </span>
+        *}
 
         <!-- Student Table-->
         <table class="table table-bordered table-hover">
@@ -51,11 +70,11 @@
                     <td>
                         <div class="btn-group">
                             {if $myStudent_ClearanceStatus[$k] eq 'Cleared'}
-                             <!--   <img style="height: 15px; width: 30px;" src="{$host}/photos/cleared.png" class="img-polaroid" /> -->
+                            <!--   <img style="height: 15px; width: 30px;" src="{$host}/photos/cleared.png" class="img-polaroid" /> -->
                                 <a class="btn btn-small btn-success" href="index.php?action=viewClearancePage&stud_id={$myKey_Student_Username[$k]}&sy_sem_id={$sysemid}">
                                     <i class="icon-ok-circle icon-large"></i> Cleared</a>                   
                                 {else}
-                                  <!--  <img style="height: 15px; width: 30px;" src="{$host}/photos/not cleared.png" class="img-polaroid" /> -->
+                                <!--  <img style="height: 15px; width: 30px;" src="{$host}/photos/not cleared.png" class="img-polaroid" /> -->
                                 <a class="btn btn-small btn-danger" href="index.php?action=viewClearancePage&stud_id={$myKey_Student_Username[$k]}&sy_sem_id={$sysemid}">
                                     <i class="icon-remove-circle icon-large"></i> Not Cleared</a> 
                                 {/if}
