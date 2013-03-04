@@ -78,3 +78,7 @@ ul.nav #dropdown-hover:hover ul.dropdown-menu{
 .navbar .navbar-inner .select2-container{
     padding-top: 5px;
 }
+
+.form-inline .select2-container{
+    padding-bottom: 10px;
+}

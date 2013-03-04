@@ -17,8 +17,6 @@
         <!-- Header-->
         <h4 class="well center-text well-small">List of Announcements</h4>
 
-        <input type="button" class="pull-right btn" value="Back" onclick="window.location.href='../signatory/bulletin.php'">
-
         <legend>Already Posted Bulletin</legend>
 
         <div class="media">
@@ -29,6 +27,12 @@
                 <p>{$message}</p>
             </div>
         </div>
+            
+            <div class="form-actions">
+                <div class="pull-right">
+                    <input type="button" class="btn btn-primary" value="Back" onclick="window.location.href='../signatory/bulletin.php'">
+                </div>
+            </div>
     </div>
 </div>
 

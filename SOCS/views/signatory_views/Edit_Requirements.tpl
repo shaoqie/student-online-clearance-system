@@ -280,7 +280,7 @@ return this_val;
                       {/if}
                           >
                           <label class="control-label"><b> Courses: </b></label>
-                          <option value="{$req_Course}">{$req_Course_Name}</option>
+                          {*<option value="{$req_Course}">{$req_Course_Name}</option>*}
                           <div class="controls">  
                               {assign var=index value=0}
                               <select id="course_name" name="Courses" class="select2 input-xlarge" onchange="">   

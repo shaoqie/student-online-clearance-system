@@ -120,39 +120,37 @@
                         {/if}           
                     </select> 
                 </div>
-            </div>       
-    </div>
+            </div>
 
-
-    {*<div class="control-group">
-    <label class="control-label"><b>Semester: </b></label>
-    <div class="controls">
-    <select id="semester" name="semester" class="span3">
-    {if $currentSemester eq 'First'}
-    <option selected>First</option>
-    <option>Second</option>
-    <option>Summer</option>
-    {elseif $currentSemester eq 'Second'}
-    <option>First</option>
-    <option selected>Second</option>
-    <option>Summer</option>
-    {else}
-    <option>First</option>
-    <option>Second</option>
-    <option selected>Summer</option>
-    {/if}           
-    </select>
+            {*<div class="control-group">
+            <label class="control-label"><b>Semester: </b></label>
+            <div class="controls">
+            <select id="semester" name="semester" class="span3">
+            {if $currentSemester eq 'First'}
+            <option selected>First</option>
+            <option>Second</option>
+            <option>Summer</option>
+            {elseif $currentSemester eq 'Second'}
+            <option>First</option>
+            <option selected>Second</option>
+            <option>Summer</option>
+            {else}
+            <option>First</option>
+            <option>Second</option>
+            <option selected>Summer</option>
+            {/if}           
+            </select>
+            </div>
+            </div>
+            *}
+            <div class="control-group form-actions">
+                <div class="pull-right">
+                    <input type="submit" class="btn btn-primary" value="Post" name="postBulletin">
+                    <input type="button" class="btn" value="Back" onclick="window.location.href = '../signatory/bulletin.php'">
+                </div>
+            </div>
+        </form>
     </div>
-    </div>
-    *}
-    <div class="control-group form-actions">
-        <div class="pull-right">
-            <input type="submit" class="btn btn-primary" value="Post" name="postBulletin">
-            <input type="button" class="btn" value="Back" onclick="window.location.href='../signatory/bulletin.php'">
-        </div>
-    </div>
-</form>
-</div>
 </div>
 
 {*

@@ -130,7 +130,7 @@
         <form class="form-inline">
 
             <input type="hidden" name="action" value="addSignatory">
-            
+
             <select name="cmdSignatory" class="select2 input-large" data-placeholder="Select Signatory" required>
                 <option></option>
                 {foreach from = $SignatoryList item = i}
@@ -189,9 +189,16 @@
                         <label id="confirmed{$k}"></label>
                     </td>
                     <td>
-                        <a style="cursor:pointer;" href="javascript:edit('{$k}','{$myKey_signatorial[$k]}','{$rowCount_signatorial}','{$countSignList}')">
+
+                        <a href="#edit_dept_signatory" data-toggle="modal">
                             <i class="icon-pencil"></i> Edit
                         </a>
+
+                        {*
+                        <a style="cursor:pointer;" href="javascript:edit('{$k}','{$myKey_signatorial[$k]}','{$rowCount_signatorial}','{$countSignList}')">
+                        <i class="icon-pencil"></i> Edit
+                        </a>
+                        *}
                     </td>    
                 </tr>
             {/foreach}

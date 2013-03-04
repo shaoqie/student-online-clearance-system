@@ -153,6 +153,29 @@
 
         {call name=upload_excel}
 
+        <div id="edit_dept_signatory" class="modal hide fade">
+            <div class="modal-header">
+                <button class="close" data-dismiss="modal">
+                    <i class="icon-remove"></i>
+                </button>
+                <h4>Edit Signatory</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-inline">
+                    <label><b> Signatory Name: </b></label>
+                    <select class='select2 input-large' id='editSignatorialList'>
+                        {foreach from = $SignatoryList item = i}"
+                            <option>{$i}</option>
+                        {/foreach}
+                    </select>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <input type='button' class='btn btn-primary' value='Save' id='save'>
+                <input type='button' class='btn' value='Cancel' data-dismiss="modal">
+            </div>
+        </div>
+
         <!--<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>-->
         <!--<script>window.jQuery || document.write('<script src="{$host}/js/vendor/jquery-1.8.3.min.js"><\/script>')</script>-->
 
@@ -172,7 +195,7 @@
                                         $('#clearance_status').progressbar({
                                             display_text: 1
                                         });
-                                        
+
                                         $('.select2').select2();
                                     });
             </script>
