@@ -46,7 +46,7 @@ class Settings extends Controller {
                 $this->template->assign('ug_signatories', $ug_listOfsignatory);
                 $this->template->assign('g_signatories', $g_listOfsignatory);
                 $this->template->assign('current_assignSign', Session::get_AssignSignatory());
-                $this->template->assign('sign_status', Session::get_signatory_usability());
+                //$this->template->assign('sign_status', Session::get_signatory_usability());
             } else {
                 $this->template->assign('assign_sign', '');
             }

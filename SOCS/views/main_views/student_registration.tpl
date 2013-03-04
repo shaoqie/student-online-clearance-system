@@ -71,14 +71,13 @@
         <label class="control-label"><b>Student ID: </b></label>
         <div class="controls">
 
-            {*<select class="input-small" name="stud_id" required>
-            <option></option>
-            {foreach from=$years key=k item=year}
-            <option>{$year}</option>
-            {/foreach}
+            <select class="select2 input-small" name="stud_id" required>
+                {foreach from=$years key=k item=year}
+                    <option>{$year}</option>
+                {/foreach}
             </select> 
-            *}
-             
+            
+             {*
             {literal}
                 <input required type="text" maxlength="4" pattern="[0-9]{4}" name="stud_id" autocomplete="off" class="input-small" data-provide="typeahead" data-source='[
             {/literal}
@@ -90,10 +89,10 @@
                        {/if}
                    {/foreach}
 
-                   {*
+                   
                    "Ahmedabad","Akola","Asansol","Aurangabad","Bangaluru","Baroda","Belgaon","Berhumpur","Calicut","Chennai","Chapra","Cherapunji"
-                   *}
-                   ]'>
+                  
+                   ]'> *}
             
             -
             {literal}

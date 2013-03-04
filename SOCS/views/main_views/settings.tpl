@@ -64,7 +64,7 @@
         <div class="control-group">
             <label class="control-label"><b>Signatory: </b></label>
             <div class="controls">
-                <select id="sign_name" name="sign_name"  required>
+                <select id="sign_name" name="sign_name" class="select2 input-large"  required>
                     {foreach from=$ug_signatories item=signatory key=pk}
                         <option {if $signatory eq  $current_assignSign}selected{/if}>{$signatory}</option>
                     {/foreach}

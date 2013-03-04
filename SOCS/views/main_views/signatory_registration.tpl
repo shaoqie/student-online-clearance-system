@@ -109,15 +109,15 @@ function newOptions(){
         <label class="control-label"><b>Signatory: </b></label>
         <div class="controls">
             {assign var=count value=0}
-            <select id="sign_name" name="sign_name" required onchange="newOptions()">
+            <select id="sign_name" name="sign_name" class="select2 input-large" required onchange="">
                 {foreach from=$ug_signatories item=signatory key=pk}
-                    {if $count < 10}<option>{$signatory}</option>{/if}
+                    <option>{$signatory}</option>
                     {assign var=count value=$count + 1}
                 {/foreach}
-                <option>---------Next--------</option>
+                {*<option>---------Next--------</option>*}
             </select>
-            <input type=hidden id="hide" value="10">
-            <input type=hidden id="flag" value="0">
+            {*<input type=hidden id="hide" value="10">
+            <input type=hidden id="flag" value="0">*}
 
             {*
             <input type="text" required name="sign_name" autocomplete="off" class="input-large" data-provide="typeahead" data-source='[

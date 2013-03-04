@@ -1,4 +1,42 @@
-<script>
+<?php /* Smarty version Smarty-3.1.12, created on 2013-03-04 17:58:28
+         compiled from "C:\wamp\www\SOCS\views\signatory_views\Add_Requirements.tpl" */ ?>
+<?php /*%%SmartyHeaderCode:246105134e0c4365f12-44842889%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+$_valid = $_smarty_tpl->decodeProperties(array (
+  'file_dependency' => 
+  array (
+    '4fff65bc4aedc33a733cb05c455d15dd9607b374' => 
+    array (
+      0 => 'C:\\wamp\\www\\SOCS\\views\\signatory_views\\Add_Requirements.tpl',
+      1 => 1362418954,
+      2 => 'file',
+    ),
+  ),
+  'nocache_hash' => '246105134e0c4365f12-44842889',
+  'function' => 
+  array (
+  ),
+  'variables' => 
+  array (
+    'listOfSignatory' => 0,
+    'index' => 0,
+    'i' => 0,
+    'listOfSignatoryID' => 0,
+    'listOfCourse_UnderSign' => 0,
+    'listOfCourse_UnderSignID' => 0,
+    'currentSchool_Year' => 0,
+    'mySchool_Year' => 0,
+    'k' => 0,
+    'year' => 0,
+    'currentSemester' => 0,
+    'thisSignatory' => 0,
+    'listOfDepartments' => 0,
+    'listOfDepartmentsID' => 0,
+  ),
+  'has_nocache_code' => false,
+  'version' => 'Smarty-3.1.12',
+  'unifunc' => 'content_5134e0c45c3ec3_95281942',
+),false); /*/%%SmartyHeaderCode%%*/?>
+<?php if ($_valid && !is_callable('content_5134e0c45c3ec3_95281942')) {function content_5134e0c45c3ec3_95281942($_smarty_tpl) {?><script>
     //var select = document.getElementById("req_appliesTo").value;
     //alert(select);
     
@@ -102,13 +140,22 @@ function newOptions(finder){
 function getSignList(){
     var this_val = new Array();
     
-    {assign var=index value=0}
-    {foreach from = $listOfSignatory item = i}
-        this_val[{$index}] = new Array(2);
-        this_val[{$index}][0] = "{$i}";
-        this_val[{$index}][1] = {$listOfSignatoryID[$index]};
-        {assign var=index value=$index + 1}
-    {/foreach}
+    <?php $_smarty_tpl->tpl_vars['index'] = new Smarty_variable(0, null, 0);?>
+    <?php  $_smarty_tpl->tpl_vars['i'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['i']->_loop = false;
+ $_from = $_smarty_tpl->tpl_vars['listOfSignatory']->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
+foreach ($_from as $_smarty_tpl->tpl_vars['i']->key => $_smarty_tpl->tpl_vars['i']->value){
+$_smarty_tpl->tpl_vars['i']->_loop = true;
+?>
+        this_val[<?php echo $_smarty_tpl->tpl_vars['index']->value;?>
+] = new Array(2);
+        this_val[<?php echo $_smarty_tpl->tpl_vars['index']->value;?>
+][0] = "<?php echo $_smarty_tpl->tpl_vars['i']->value;?>
+";
+        this_val[<?php echo $_smarty_tpl->tpl_vars['index']->value;?>
+][1] = <?php echo $_smarty_tpl->tpl_vars['listOfSignatoryID']->value[$_smarty_tpl->tpl_vars['index']->value];?>
+;
+        <?php $_smarty_tpl->tpl_vars['index'] = new Smarty_variable($_smarty_tpl->tpl_vars['index']->value+1, null, 0);?>
+    <?php } ?>
     
     return this_val;
 }
@@ -116,13 +163,22 @@ function getSignList(){
 function getCourseList(){
     var this_val = new Array();
     
-    {assign var=index value=0}
-    {foreach from = $listOfCourse_UnderSign item = i}
-        this_val[{$index}] = new Array(2);
-        this_val[{$index}][0] = "{$i}";
-        this_val[{$index}][1] = {$listOfCourse_UnderSignID[$index]};
-        {assign var=index value=$index + 1}
-    {/foreach}
+    <?php $_smarty_tpl->tpl_vars['index'] = new Smarty_variable(0, null, 0);?>
+    <?php  $_smarty_tpl->tpl_vars['i'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['i']->_loop = false;
+ $_from = $_smarty_tpl->tpl_vars['listOfCourse_UnderSign']->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
+foreach ($_from as $_smarty_tpl->tpl_vars['i']->key => $_smarty_tpl->tpl_vars['i']->value){
+$_smarty_tpl->tpl_vars['i']->_loop = true;
+?>
+        this_val[<?php echo $_smarty_tpl->tpl_vars['index']->value;?>
+] = new Array(2);
+        this_val[<?php echo $_smarty_tpl->tpl_vars['index']->value;?>
+][0] = "<?php echo $_smarty_tpl->tpl_vars['i']->value;?>
+";
+        this_val[<?php echo $_smarty_tpl->tpl_vars['index']->value;?>
+][1] = <?php echo $_smarty_tpl->tpl_vars['listOfCourse_UnderSignID']->value[$_smarty_tpl->tpl_vars['index']->value];?>
+;
+        <?php $_smarty_tpl->tpl_vars['index'] = new Smarty_variable($_smarty_tpl->tpl_vars['index']->value+1, null, 0);?>
+    <?php } ?>
     
     return this_val;    
 }
@@ -139,7 +195,8 @@ function getCourseList(){
         <!-- Navigations-->
         <div class="row">
             <div class="span3">
-                {call name=nav_signatory index=2}
+                <?php smarty_template_function_nav_signatory($_smarty_tpl,array('index'=>2));?>
+
             </div>
         </div>
 
@@ -169,7 +226,7 @@ function getCourseList(){
             <div class="control-group">
                 <label class="control-label"><b>Requirement Type: </b></label>
                 <div class="controls">
-                    <select id="requirement_type" name="requirement_type" class="select2 input-xlarge" onchange="change_reqType()">
+                    <select id="requirement_type" name="requirement_type" class="input-xlarge" onchange="change_reqType()">
                         <option>Textual</option>
                         <option>Prerequisite</option>
                     </select>
@@ -179,58 +236,46 @@ function getCourseList(){
             <div class="control-group">
                 <label class="control-label"><b>School Year: </b></label>
                 <div class="controls">
-                    <select id="school_year" name="school_year" class="select2 input-xlarge">
-                        {foreach from = $mySchool_Year key = k item = i}
-                            {if $currentSchool_Year eq $i}
-                                <option selected>{$i}</option>
-                            {else}
-                                <option>{$i}</option>
-                            {/if}
-                        {/foreach}
-                    </select>
-                </div>
-                 {*<div class="controls">
-                    {literal}<input type="text" maxlength="9" pattern="[0-9\-]{9}" {/literal}  id="school_year" name="school_year" value="{$currentSchool_Year}" autocomplete="off" class="span3" data-provide="typeahead" data-source='[
-                       {foreach from=$mySchool_Year key=k item=year}
-                           {if $mySchool_Year|@count - 1 eq $k}
-                               "{$year}"
-                           {else}
-                               "{$year}",
-                           {/if}
-                       {/foreach}
+                    <input type="text" maxlength="9" pattern="[0-9\-]{9}"   id="school_year" name="school_year" value="<?php echo $_smarty_tpl->tpl_vars['currentSchool_Year']->value;?>
+" autocomplete="off" class="span3" data-provide="typeahead" data-source='[
+                       <?php  $_smarty_tpl->tpl_vars['year'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['year']->_loop = false;
+ $_smarty_tpl->tpl_vars['k'] = new Smarty_Variable;
+ $_from = $_smarty_tpl->tpl_vars['mySchool_Year']->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
+foreach ($_from as $_smarty_tpl->tpl_vars['year']->key => $_smarty_tpl->tpl_vars['year']->value){
+$_smarty_tpl->tpl_vars['year']->_loop = true;
+ $_smarty_tpl->tpl_vars['k']->value = $_smarty_tpl->tpl_vars['year']->key;
+?>
+                           <?php if (count($_smarty_tpl->tpl_vars['mySchool_Year']->value)-1==$_smarty_tpl->tpl_vars['k']->value){?>
+                               "<?php echo $_smarty_tpl->tpl_vars['year']->value;?>
+"
+                           <?php }else{ ?>
+                               "<?php echo $_smarty_tpl->tpl_vars['year']->value;?>
+",
+                           <?php }?>
+                       <?php } ?>
                        ]'>
                     
-                   
-                    <select id="school_year" name="school_year" class="input-large">
-                        {foreach from = $mySchool_Year key = k item = i}
-                            {if $currentSchool_Year eq $i}
-                                <option selected>{$i}</option>
-                            {else}
-                                <option>{$i}</option>
-                            {/if}
-                        {/foreach}
-                    </select>
                     
-                </div>*}
+                </div>
             </div>
 
             <div class="control-group">
                 <label class="control-label"><b>Semester: </b></label>
                 <div class="controls">
-                    <select id="semester" name="semester" class="select2 input-xlarge">
-                        {if $currentSemester eq 'First'}
+                    <select id="semester" name="semester" class="input-xlarge">
+                        <?php if ($_smarty_tpl->tpl_vars['currentSemester']->value=='First'){?>
                             <option selected>First</option>
                             <option>Second</option>
                             <option>Summer</option>
-                        {elseif $currentSemester eq 'Second'}
+                        <?php }elseif($_smarty_tpl->tpl_vars['currentSemester']->value=='Second'){?>
                             <option>First</option>
                             <option selected>Second</option>
                             <option>Summer</option>
-                        {else}
+                        <?php }else{ ?>
                             <option>First</option>
                             <option>Second</option>
                             <option selected>Summer</option>
-                        {/if}           
+                        <?php }?>           
                     </select>
                 </div>
             </div>
@@ -238,28 +283,26 @@ function getCourseList(){
             <div class="control-group" id="Sign" hidden>
                 <label class="control-label"><b>Select Signatory: </b></label>
                 <div class="controls">
-                    {*{assign var=index value=0}
+                    <?php $_smarty_tpl->tpl_vars['index'] = new Smarty_variable(0, null, 0);?>
                     <select id="sign_name" name="signatory" class="input-large" onchange="newOptions(0)">
-                        {foreach from = $listOfSignatory key = k item = i}
-                            {if $thisSignatory != $listOfSignatory[$index] && $index < 10}
-                                <option value="{$listOfSignatoryID[$index]}">{$listOfSignatory[$index]}</option>
-                            {/if}
-                            {assign var=index value=$index + 1}
-                        {/foreach}
+                        <?php  $_smarty_tpl->tpl_vars['i'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['i']->_loop = false;
+ $_smarty_tpl->tpl_vars['k'] = new Smarty_Variable;
+ $_from = $_smarty_tpl->tpl_vars['listOfSignatory']->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
+foreach ($_from as $_smarty_tpl->tpl_vars['i']->key => $_smarty_tpl->tpl_vars['i']->value){
+$_smarty_tpl->tpl_vars['i']->_loop = true;
+ $_smarty_tpl->tpl_vars['k']->value = $_smarty_tpl->tpl_vars['i']->key;
+?>
+                            <?php if ($_smarty_tpl->tpl_vars['thisSignatory']->value!=$_smarty_tpl->tpl_vars['listOfSignatory']->value[$_smarty_tpl->tpl_vars['index']->value]&&$_smarty_tpl->tpl_vars['index']->value<10){?>
+                                <option value="<?php echo $_smarty_tpl->tpl_vars['listOfSignatoryID']->value[$_smarty_tpl->tpl_vars['index']->value];?>
+"><?php echo $_smarty_tpl->tpl_vars['listOfSignatory']->value[$_smarty_tpl->tpl_vars['index']->value];?>
+</option>
+                            <?php }?>
+                            <?php $_smarty_tpl->tpl_vars['index'] = new Smarty_variable($_smarty_tpl->tpl_vars['index']->value+1, null, 0);?>
+                        <?php } ?>
                         <option>---------Next--------</option>
                     </select>
                     <input type=hidden id="hide" value="10">
                     <input type=hidden id="flag" value="0">
-                    *}
-                    {assign var=index value=0}
-                    <select id="sign_name" name="signatory" class="select2 input-xlarge" >
-                        {foreach from = $listOfSignatory key = k item = i}
-                            {*if $thisSignatory != $listOfSignatory[$index] && $index < 10*}
-                                <option value="{$listOfSignatoryID[$index]}">{$listOfSignatory[$index]}</option>
-                            {*/if*}
-                            {assign var=index value=$index + 1}
-                        {/foreach}
-                    </select>
                 </div>    
             </div>    
 
@@ -268,7 +311,7 @@ function getCourseList(){
             <div class="control-group">
                 <label class="control-label"><b> Select: </b></label>
                 <div class="controls">
-                    <select id="req_appliesTo" name="req_appliesTo" class="select2 input-xlarge" onchange="change_req_appliesTo()">
+                    <select id="req_appliesTo" name="req_appliesTo" class="input-xlarge" onchange="change_req_appliesTo()">
                         <option value="All">All Students:</option>
                         <option value="By Department">Students from the following department:</option>
                         <option value="By Course">Students from the following course:</option>
@@ -281,10 +324,18 @@ function getCourseList(){
             <div class="control-group" id="selected_Dept" hidden>
                 <label class="control-label"><b> Departments: </b></label>
                 <div class="controls">
-                    <select name="Departments" class="select2 input-xlarge">   
-                        {foreach from = $listOfDepartments key = k item = i}
-                            <option value="{$listOfDepartmentsID[$k]}">{$listOfDepartments[$k]}</option>
-                        {/foreach}
+                    <select name="Departments" class="input-xlarge">   
+                        <?php  $_smarty_tpl->tpl_vars['i'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['i']->_loop = false;
+ $_smarty_tpl->tpl_vars['k'] = new Smarty_Variable;
+ $_from = $_smarty_tpl->tpl_vars['listOfDepartments']->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
+foreach ($_from as $_smarty_tpl->tpl_vars['i']->key => $_smarty_tpl->tpl_vars['i']->value){
+$_smarty_tpl->tpl_vars['i']->_loop = true;
+ $_smarty_tpl->tpl_vars['k']->value = $_smarty_tpl->tpl_vars['i']->key;
+?>
+                            <option value="<?php echo $_smarty_tpl->tpl_vars['listOfDepartmentsID']->value[$_smarty_tpl->tpl_vars['k']->value];?>
+"><?php echo $_smarty_tpl->tpl_vars['listOfDepartments']->value[$_smarty_tpl->tpl_vars['k']->value];?>
+</option>
+                        <?php } ?>
                     </select>
                 </div>    
             </div>
@@ -292,24 +343,31 @@ function getCourseList(){
             <div class="control-group" id="selected_Course" hidden>
                 <label class="control-label"><b> Courses: </b></label>
                 <div class="controls">
-                    {assign var=index value=0}
-                    <select id="course_name" name="Courses" class="select2 input-xlarge" onchange="">   
-                        {foreach from = $listOfCourse_UnderSign key = k item = i}
-                            {*if $index < 10}<option value="{$listOfCourse_UnderSignID[$k]}">{$listOfCourse_UnderSign[$k]}</option>{/if*}
-                            <option value="{$listOfCourse_UnderSignID[$k]}">{$listOfCourse_UnderSign[$k]}</option>
-                            {assign var=index value=$index + 1}
-                        {/foreach}
-                        {*<option>---------Next--------</option>*}
+                    <?php $_smarty_tpl->tpl_vars['index'] = new Smarty_variable(0, null, 0);?>
+                    <select id="course_name" name="Courses" class="input-xlarge" onchange="newOptions(1)">   
+                        <?php  $_smarty_tpl->tpl_vars['i'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['i']->_loop = false;
+ $_smarty_tpl->tpl_vars['k'] = new Smarty_Variable;
+ $_from = $_smarty_tpl->tpl_vars['listOfCourse_UnderSign']->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
+foreach ($_from as $_smarty_tpl->tpl_vars['i']->key => $_smarty_tpl->tpl_vars['i']->value){
+$_smarty_tpl->tpl_vars['i']->_loop = true;
+ $_smarty_tpl->tpl_vars['k']->value = $_smarty_tpl->tpl_vars['i']->key;
+?>
+                            <?php if ($_smarty_tpl->tpl_vars['index']->value<10){?><option value="<?php echo $_smarty_tpl->tpl_vars['listOfCourse_UnderSignID']->value[$_smarty_tpl->tpl_vars['k']->value];?>
+"><?php echo $_smarty_tpl->tpl_vars['listOfCourse_UnderSign']->value[$_smarty_tpl->tpl_vars['k']->value];?>
+</option><?php }?>
+                            <?php $_smarty_tpl->tpl_vars['index'] = new Smarty_variable($_smarty_tpl->tpl_vars['index']->value+1, null, 0);?>
+                        <?php } ?>
+                        <option>---------Next--------</option>
                     </select>
-                    {*<input type=hidden id="course_hide" value="10">
-                    <input type=hidden id="course_flag" value="0">*}        
+                    <input type=hidden id="course_hide" value="10">
+                    <input type=hidden id="course_flag" value="0">        
                 </div>    
             </div>
 
             <div class="control-group" id="selected_YearLevel" hidden>
                 <label class="control-label"><b> Year level: </b></label>
                 <div class="controls">
-                    <select name="Year_level" class="select2 input-xlarge">   
+                    <select name="Year_level" class="input-xlarge">   
                         <option>First Year</option>
                         <option>Second Year</option>
                         <option>Third Year</option>
@@ -322,7 +380,7 @@ function getCourseList(){
             <div class="control-group" id="selected_Program" hidden>
                 <label class="control-label"><b> Program: </b></label>
                 <div class="controls">
-                    <select name="Program" class="select2 input-xlarge">   
+                    <select name="Program" class="input-xlarge">   
                         <option>Day</option>
                         <option>Evening</option>
                     </select>
@@ -385,4 +443,4 @@ function getCourseList(){
             </div>
         </form>
     </div>
-</div>
+</div><?php }} ?>
