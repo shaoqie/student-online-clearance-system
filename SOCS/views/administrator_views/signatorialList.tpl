@@ -190,15 +190,16 @@
                     </td>
                     <td>
 
-                        <a href="#edit_dept_signatory" data-toggle="modal">
-                            <i class="icon-pencil"></i> Edit
-                        </a>
-
                         {*
-                        <a style="cursor:pointer;" href="javascript:edit('{$k}','{$myKey_signatorial[$k]}','{$rowCount_signatorial}','{$countSignList}')">
+                        <a href="#edit_dept_signatory" data-toggle="modal">
                         <i class="icon-pencil"></i> Edit
                         </a>
                         *}
+
+                        <a style="cursor:pointer;" href="javascript:edit('{$k}','{$myKey_signatorial[$k]}','{$rowCount_signatorial}','{$countSignList}')">
+                            <i class="icon-pencil"></i> Edit
+                        </a>
+
                     </td>    
                 </tr>
             {/foreach}
