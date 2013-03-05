@@ -1,94 +1,94 @@
 <script>
     function getSignatory() {
-        var cmdSignatory = document.getElementById("cmdSignatory").value;
-        var cmdIndex = document.getElementById("cmdSignatory").selectedIndex;
+    var cmdSignatory = document.getElementById("cmdSignatory").value;
+    var cmdIndex = document.getElementById("cmdSignatory").selectedIndex;
 
-        window.location.assign("?action=addSignatory&cmdSignatory=" + cmdSignatory);
-    }
+    window.location.assign("?action=addSignatory&cmdSignatory=" + cmdSignatory);
+}
 
-    function edit(idEdit, sign_id, length, countSignList) {
-        if (parseInt(countSignList) > 0) {
-            var listOfUnSelectSignatory = "<select class='input-large' id='editSignatorialList'>"
-                    + "{foreach from = $SignatoryList item = i}"
-                    + "<option>{$i}</option>"
-                    + "{/foreach}"
-                    + "</select>";
-            var editSignatorialList = "<input type='button' class='btn' value='Confirmed' id='save'> "
-                    + "<input type='button' class='btn' value='Cancel' id='cancel'>";
+function edit(idEdit, sign_id, length, countSignList) {
+if (parseInt(countSignList) > 0) {
+var listOfUnSelectSignatory = "<select class='input-large' id='editSignatorialList'>"
+    + "{foreach from = $SignatoryList item = i}"
+    + "<option>{$i}</option>"
+    + "{/foreach}"
+    + "</select>";
+var editSignatorialList = "<input type='button' class='btn' value='Confirmed' id='save'> "
+    + "<input type='button' class='btn' value='Cancel' id='cancel'>";
 
-            hideAll(length);
-            $(document).ready(function() {
-                $("#unSelectedSignatorialList" + idEdit).html(listOfUnSelectSignatory);
-                $("#confirmed" + idEdit).html(editSignatorialList);
+hideAll(length);
+$(document).ready(function() {
+$("#unSelectedSignatorialList" + idEdit).html(listOfUnSelectSignatory);
+$("#confirmed" + idEdit).html(editSignatorialList);
 
 
-                $("#save").click(function() {
-                    window.location.assign("?action=editSignatorialList&newSign_Name=" + $("#editSignatorialList").val() + "&oldSign_ID=" + sign_id);
-                });
-                $("#cancel").click(function() {
-                    $("#unSelectedSignatorialList" + idEdit).html($("#edit" + idEdit).val());
-                    $("#confirmed" + idEdit).html("");
-                });
-            });
-        } else {
-            window.location.assign("?action=cannotEdit");
-        }
-    }
+$("#save").click(function() {
+window.location.assign("?action=editSignatorialList&newSign_Name=" + $("#editSignatorialList").val() + "&oldSign_ID=" + sign_id);
+});
+$("#cancel").click(function() {
+$("#unSelectedSignatorialList" + idEdit).html($("#edit" + idEdit).val());
+$("#confirmed" + idEdit).html("");
+});
+});
+} else {
+window.location.assign("?action=cannotEdit");
+}
+}
 
-    function hideAll(Tlength) {
-        $(document).ready(function() {
-            for (var x = 0; x < Tlength; x++) {
-                $("#unSelectedSignatorialList" + x).html($("#edit" + x).val());
-                $("#confirmed" + x).html("");
-            }
-        });
-    }
+function hideAll(Tlength) {
+$(document).ready(function() {
+for (var x = 0; x < Tlength; x++) {
+$("#unSelectedSignatorialList" + x).html($("#edit" + x).val());
+$("#confirmed" + x).html("");
+}
+});
+}
 
-    function newOptions() {
-        var select = document.getElementById("cmdSignatory");
-        var hide = document.getElementById("hide").value;
-        var flag = document.getElementById("flag").value;
-        var count = 0;
-        var temp = 0;
-        if (select.value == "---------Next--------") {
-            var holder = flag == 1 ? parseInt(hide) + 20 : parseInt(hide) + 10;
-            select.innerHTML = "";
+function newOptions() {
+var select = document.getElementById("cmdSignatory");
+var hide = document.getElementById("hide").value;
+var flag = document.getElementById("flag").value;
+var count = 0;
+var temp = 0;
+if (select.value == "---------Next--------") {
+var holder = flag == 1 ? parseInt(hide) + 20 : parseInt(hide) + 10;
+select.innerHTML = "";
     {foreach from = $SignatoryList item = i}
-            if (count >= (holder - 10) && count < holder) {
-                select.options[select.options.length] = new Option("{$i}");
-                temp = count + 1;
-            }
-            count++;
+if (count >= (holder - 10) && count < holder) {
+select.options[select.options.length] = new Option("{$i}");
+temp = count + 1;
+}
+count++;
     {/foreach}
-            select.options[select.options.length] = new Option("---------Back--------");
-            if (temp % 10 == 0) {
-                select.options[select.options.length] = new Option("---------Next--------");
-            }
+select.options[select.options.length] = new Option("---------Back--------");
+if (temp % 10 == 0) {
+select.options[select.options.length] = new Option("---------Next--------");
+}
 
-            document.getElementById("hide").value = holder;
-            document.getElementById("flag").value = "0";
-        } else if (select.value == "---------Back--------") {
+document.getElementById("hide").value = holder;
+document.getElementById("flag").value = "0";
+} else if (select.value == "---------Back--------") {
 
 
-            var holder = parseInt(flag) == 0 ? parseInt(hide) - 20 : parseInt(hide) - 10;
-            select.innerHTML = "";
+var holder = parseInt(flag) == 0 ? parseInt(hide) - 20 : parseInt(hide) - 10;
+select.innerHTML = "";
 
     {foreach from = $SignatoryList item = i}
-            if (count >= holder && count < holder + 10) {
-                select.options[select.options.length] = new Option("{$i}");
-            }
-            count++;
+if (count >= holder && count < holder + 10) {
+select.options[select.options.length] = new Option("{$i}");
+}
+count++;
     {/foreach}
 
-            if (parseInt(holder) != 0) {
-                select.options[select.options.length] = new Option("---------Back--------");
-            }
-            select.options[select.options.length] = new Option("---------Next--------");
+if (parseInt(holder) != 0) {
+select.options[select.options.length] = new Option("---------Back--------");
+}
+select.options[select.options.length] = new Option("---------Next--------");
 
-            document.getElementById("hide").value = holder;
-            document.getElementById("flag").value = "1";
-        }
-    }
+document.getElementById("hide").value = holder;
+document.getElementById("flag").value = "1";
+}
+}
 </script>
 
 <div class="row">
@@ -181,7 +181,7 @@
                     <td>
                         <label class="checkbox">
                             <input type="hidden" id = 'edit{$k}' value = "{$i}">
-                            <input class="Checkbox" type="checkbox" id = '{$k}' value = {$myKey_signatorial[$k]} ></input> 
+                            <input class="Checkbox" type="checkbox" id = '{$k}' value = {$myKey_signatorial[$k]} >
                             <div id='unSelectedSignatorialList{$k}'>{$i}</div>
                         </label>
                     </td>    
@@ -213,7 +213,7 @@
             Jump to: <select id="jump" class="input-mini" onchange="jumpToPage();">
                 <option>--</option>
                 {for $start = 1 to $signatorial_length}
-                    <option>{$start}</option>
+                <option>{$start}</option>
                 {/for}
             </select>
         </div>
