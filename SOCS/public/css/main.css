@@ -82,3 +82,7 @@ ul.nav #dropdown-hover:hover ul.dropdown-menu{
 .form-inline .select2-container{
     padding-bottom: 10px;
 }
+
+.icon-tail{
+    font-size: 8px;
+}

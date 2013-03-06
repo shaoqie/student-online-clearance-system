@@ -1,0 +1,72 @@
+@font-face {
+	font-family: 'socs-icons';
+	src:url('fonts/socs-icons.eot');
+	src:url('fonts/socs-icons.eot?#iefix') format('embedded-opentype'),
+		url('fonts/socs-icons.woff') format('woff'),
+		url('fonts/socs-icons.ttf') format('truetype'),
+		url('fonts/socs-icons.svg#socs-icons') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+/* Use the following CSS code if you want to use data attributes for inserting your icons */
+[data-icon]:before {
+	font-family: 'socs-icons';
+	content: attr(data-icon);
+	speak: none;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+	-webkit-font-smoothing: antialiased;
+}
+
+/* Use the following CSS code if you want to have a class per icon */
+/*
+Instead of a list of all class selectors,
+you can use the generic selector below, but it's slower:
+[class*="icon-socs-"]:before {
+*/
+.icon-socs-user-add:before, .icon-socs-feather:before, .icon-socs-library:before, .icon-socs-book:before, .icon-socs-graduate:before, .icon-socs-profile:before, .icon-socs-folder-check:before, .icon-socs-folder-add:before, .icon-socs-export:before, .icon-socs-add:before, .icon-socs-user:before {
+	font-family: 'socs-icons';
+	speak: none;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+	-webkit-font-smoothing: antialiased;
+}
+.icon-socs-user-add:before {
+	content: "\e002";
+}
+.icon-socs-feather:before {
+	content: "\e005";
+}
+.icon-socs-library:before {
+	content: "\e006";
+}
+.icon-socs-book:before {
+	content: "\e007";
+}
+.icon-socs-graduate:before {
+	content: "\e008";
+}
+.icon-socs-profile:before {
+	content: "\e009";
+}
+.icon-socs-folder-check:before {
+	content: "\e00c";
+}
+.icon-socs-folder-add:before {
+	content: "\e00d";
+}
+.icon-socs-export:before {
+	content: "\e00e";
+}
+.icon-socs-add:before {
+	content: "\e00f";
+}
+.icon-socs-user:before {
+	content: "\e003";
+}

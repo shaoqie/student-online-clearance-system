@@ -16,12 +16,6 @@
             <small>{$Dept_desc}</small>
         </div>
 
-        <!-- Navigation Tabs-->
-        <ul class="nav nav-tabs">
-            <li class="active"><a href='../administrator/course_list_byDepartment.php'>Courses</a></li>
-            <li><a href='../administrator/signatorialList.php'>Signatorial List</a></li>
-        </ul>
-
         <!-- Edit Course-->
         <form action="" method='post' class="form-horizontal">
             <legend>Edit Course:</legend>

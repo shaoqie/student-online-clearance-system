@@ -15,6 +15,7 @@
         <link rel="stylesheet" href="{$host}/public/css/font-awesome-ext.css">
         <link rel="stylesheet" href="{$host}/public/css/bootstrap-fileupload.css">
         <link rel="stylesheet" href="{$host}/public/select2/select2.css">
+        <link rel="stylesheet" href="{$host}/public/socs-icons/socs-icons.css">
 
         {literal}
             <style>
