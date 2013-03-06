@@ -160,20 +160,24 @@
                 </button>
                 <h4>Edit Signatory</h4>
             </div>
-            <div class="modal-body">
-                <form class="form-inline">
+
+            <form class="form-inline">
+                <div class="modal-body" style="min-height: 75px;">
+                    <input type="hidden" name="action" value="editSignatorialList" />
                     <label><b> Signatory Name: </b></label>
-                    <select class='select2 input-large' id='editSignatorialList'>
-                        {foreach from = $SignatoryList item = i}"
+                    <select class='select2 input-large' id='editSignatorialList' name="newSign_Name" data-placeholder="Select Signatory" required>
+                        <option></option>
+                        {foreach from = $SignatoryList item = i}
                             <option>{$i}</option>
                         {/foreach}
                     </select>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <input type='button' class='btn btn-primary' value='Save' id='save'>
-                <input type='button' class='btn' value='Cancel' data-dismiss="modal">
-            </div>
+                    <span id="hidden_input"></span>
+                </div>
+                <div class="modal-footer">
+                    <input type='submit' class='btn btn-primary' value='Save' id='save'>
+                    <input type='button' class='btn' value='Cancel' data-dismiss="modal">
+                </div>
+            </form>
         </div>
 
         <!--<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>-->
@@ -189,15 +193,22 @@
 
         {literal}
             <script type="text/javascript">
-                                    $(document).ready(function() {
-                                        $('.tips').tooltip();
+                
+                function set_input(id){
+                    $("#hidden_input").html("<input type='hidden' name='oldSign_ID' value='" + id + "'>");
+                }
+                
+                $(document).ready(function() {
+                    
+                    $('.tips').tooltip();
 
-                                        $('#clearance_status').progressbar({
-                                            display_text: 1
-                                        });
+                    $('#clearance_status').progressbar({
+                        display_text: 1
+                    });
 
-                                        $('.select2').select2();
-                                    });
+                    $('.select2').select2();
+                        
+                });
             </script>
         {/literal}
 

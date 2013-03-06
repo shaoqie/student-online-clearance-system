@@ -190,15 +190,15 @@ document.getElementById("flag").value = "1";
                     </td>
                     <td>
 
+                        <a href="#edit_dept_signatory" data-toggle="modal" onclick="set_input({$myKey_signatorial[$k]})">
+                            <i class="icon-pencil"></i> Edit
+                        </a>
+
                         {*
-                        <a href="#edit_dept_signatory" data-toggle="modal">
+                        <a style="cursor:pointer;" href="javascript:edit('{$k}','{$myKey_signatorial[$k]}','{$rowCount_signatorial}','{$countSignList}')">
                         <i class="icon-pencil"></i> Edit
                         </a>
                         *}
-
-                        <a style="cursor:pointer;" href="javascript:edit('{$k}','{$myKey_signatorial[$k]}','{$rowCount_signatorial}','{$countSignList}')">
-                            <i class="icon-pencil"></i> Edit
-                        </a>
 
                     </td>    
                 </tr>
