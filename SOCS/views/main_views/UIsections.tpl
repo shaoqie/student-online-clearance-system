@@ -73,6 +73,7 @@
 
 {/function}
 
+
 <!-- Search Bar-->
 {function name=search}
 {if isset($filter)}
@@ -84,7 +85,7 @@
             <input type="hidden" value="{$user_type}" name="user_type">
         {/if}
 
-        {*<input type="hidden" value="{$clearedStatus}" name="status">*}
+        <input type="hidden" value="{$clearedStatus}" name="status">
 
         <button class="btn btn-success" type="submit">
             <i class="icon-search icon-white"></i>
@@ -130,7 +131,6 @@
     </button>
 </form>
 
-
 {*
 <form class="form-inline" method="post">
 <label><b>School Year:  </b></label>
@@ -169,6 +169,7 @@
 </form>
 *}
 {/function}
+
 
 <!-- Admin Functions-->
 
@@ -299,6 +300,13 @@
                 <i class="icon-plus"></i>
             </a>
         </li>
+        {*
+        <li>
+            <a href='#add_dept_signatory' class="tips" data-toggle="tooltip" title="Add Signatory under {$Dept_name}">
+                <i class="icon-plus"></i>
+            </a>
+        </li>
+        *}
 
     {/if}
 
@@ -390,8 +398,8 @@
 </div>
 {/function}
 
-<!-- Replace Signatory Modal-->
-{function name="replace_signatory"}
+<!-- Replace Signatory in departmet Modal-->
+{function name="replace_dept_signatory"}
 <div id="edit_dept_signatory" class="modal hide fade">
     <div class="modal-header">
         <button class="close" data-dismiss="modal">
@@ -414,6 +422,37 @@
         </div>
         <div class="modal-footer">
             <input type='submit' class='btn btn-primary' value='Save' id='save'>
+            <input type='button' class='btn' value='Cancel' data-dismiss="modal">
+        </div>
+    </form>
+</div>
+{/function}
+
+<!-- Add Signatory to a department Modal-->
+{function name="add_dept_signatory"}
+<div id="add_dept_signatory" class="modal hide fade">
+    <div class="modal-header">
+        <button class="close" data-dismiss="modal">
+            <i class="icon-remove"></i>
+        </button>
+        <h4>Replace Signatory</h4>
+    </div>
+
+    <form class="form-inline">
+        <div class="modal-body" style="min-height: 75px;">
+            <input type="hidden" name="action" value="addSignatory">
+
+            <select name="cmdSignatory" class="select2 input-large" data-placeholder="Select Signatory" required>
+                <option></option>
+                {foreach from = $SignatoryList item = i}
+                    <option>{$i}</option>
+                {/foreach}
+            </select>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-success" type="submit">
+                <i class="icon-plus"></i> Add
+            </button>
             <input type='button' class='btn' value='Cancel' data-dismiss="modal">
         </div>
     </form>

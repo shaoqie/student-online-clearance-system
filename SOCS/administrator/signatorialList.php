@@ -57,12 +57,12 @@ class signatorialList extends Controller {
         if (!$this->signatorialList_model->isExist($dept_id, $sign_id, 'Under Graduate')) {
             $this->signatorialList_model->insert($dept_id, $sign_id, 'Under Graduate');
             $this->displayTable('', 1, "default");
-            $this->template->setAlert('Signatorial List was Added Successfully!..', Template::ALERT_SUCCESS, 'alert');
+            $this->template->setAlert('A Signatory was Added Successfully!..', Template::ALERT_SUCCESS, 'alert');
         }
     }
 
     public function deleted() {
-        $this->template->setAlert('Delete an Signatorial List Successfully!..', Template::ALERT_SUCCESS, 'alert');
+        $this->template->setAlert('A signatory has been deleted successfully!..', Template::ALERT_SUCCESS, 'alert');
     }
 
     public function delete($selected) {
@@ -76,7 +76,7 @@ class signatorialList extends Controller {
     }
 
     public function edited() {
-        $this->template->setAlert('Signatorial List was Edited Successfully!..', Template::ALERT_SUCCESS, 'alert');
+        $this->template->setAlert('A signatory has been replaced successfully!..', Template::ALERT_SUCCESS, 'alert');
     }
 
     public function cannotEdit() {

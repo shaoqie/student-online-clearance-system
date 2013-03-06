@@ -152,7 +152,8 @@
         </div>
 
         {call name=upload_excel}
-        {call name="replace_signatory"}
+        {call name="replace_dept_signatory"}
+        {call name="add_dept_signatory"}
 
         <!--<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>-->
         <!--<script>window.jQuery || document.write('<script src="{$host}/js/vendor/jquery-1.8.3.min.js"><\/script>')</script>-->
