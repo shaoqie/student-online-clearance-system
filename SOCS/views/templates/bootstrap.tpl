@@ -152,33 +152,7 @@
         </div>
 
         {call name=upload_excel}
-
-        <div id="edit_dept_signatory" class="modal hide fade">
-            <div class="modal-header">
-                <button class="close" data-dismiss="modal">
-                    <i class="icon-remove"></i>
-                </button>
-                <h4>Edit Signatory</h4>
-            </div>
-
-            <form class="form-inline">
-                <div class="modal-body" style="min-height: 75px;">
-                    <input type="hidden" name="action" value="editSignatorialList" />
-                    <label><b> Signatory Name: </b></label>
-                    <select class='select2 input-large' id='editSignatorialList' name="newSign_Name" data-placeholder="Select Signatory" required>
-                        <option></option>
-                        {foreach from = $SignatoryList item = i}
-                            <option>{$i}</option>
-                        {/foreach}
-                    </select>
-                    <span id="hidden_input"></span>
-                </div>
-                <div class="modal-footer">
-                    <input type='submit' class='btn btn-primary' value='Save' id='save'>
-                    <input type='button' class='btn' value='Cancel' data-dismiss="modal">
-                </div>
-            </form>
-        </div>
+        {call name="replace_signatory"}
 
         <!--<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>-->
         <!--<script>window.jQuery || document.write('<script src="{$host}/js/vendor/jquery-1.8.3.min.js"><\/script>')</script>-->

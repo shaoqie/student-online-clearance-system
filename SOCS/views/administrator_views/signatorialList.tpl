@@ -143,37 +143,12 @@ document.getElementById("flag").value = "1";
             </button>
         </form>
 
-        {*
-        <!-- Add Signatory -->
-        {if $countSignList > 0}
-        <form class="form-inline">
-        <label><b>Add Signatory: </b></label>
-    
-        {assign var=count value=0}
-        <select id="cmdSignatory" required onchange="newOptions();">
-        {foreach from = $SignatoryList item = i}
-        {if $count < 10}<option>{$i}</option>{/if}
-        {assign var=count value=$count + 1}
-        {/foreach}
-        <option>---------Next--------</option>
-        </select>
-        <input type=hidden id="hide" value="10">
-        <input type=hidden id="flag" value="0">
-    
-        <button class="btn btn-success" type="button" onclick="getSignatory();">
-        <i class="icon-plus"></i> Add
-        </button>
-        </form>
-        {/if}
-        *}
-
         <!-- Table of Signatories-->
-        <table class="table table-hover">    
+        <table class="table table-hover table-bordered">    
             <tr>
                 <th>
                     <input type="checkbox" onclick="isCheck({$rowCount_signatorial});" id="check"> Signatories
                 </th>
-                <th></th>
                 <th>Controls</th>
             </tr>
             {foreach from = $myName_signatorial key = k item = i} 
@@ -186,12 +161,9 @@ document.getElementById("flag").value = "1";
                         </label>
                     </td>    
                     <td>
-                        <label id="confirmed{$k}"></label>
-                    </td>
-                    <td>
 
                         <a href="#edit_dept_signatory" data-toggle="modal" onclick="set_input({$myKey_signatorial[$k]})">
-                            <i class="icon-pencil"></i> Edit
+                            <i class="icon-exchange"></i> Replace
                         </a>
 
                         {*
