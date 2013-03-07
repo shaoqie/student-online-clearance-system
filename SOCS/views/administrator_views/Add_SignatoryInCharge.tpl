@@ -60,93 +60,95 @@
 
         <!-- Header-->
         <h4 class="well center-text well-small">Add Signatory In-Charge</h4>
-        
+
         {*
         <div class="navbar">
-            <div class="navbar-inner">
+        <div class="navbar-inner">
 
-                {call name=nav_user_accounts index=4}
-            </div>
+        {call name=nav_user_accounts index=4}
+        </div>
         </div>
         *}
 
         <form method='post' class="form-horizontal">
             {literal}
-                <div class="row">
-                    <div class="span4">
+                <legend>Login Information: </legend>
 
-                        <legend>Login Information: </legend>
-
-                        <div class="control-group">
-                            <label class="control-label"><b>Username: </b></label>
-                            <div class="controls">
-                                <input class="span2" type ='text' name='uname' value="" maxlength="15" pattern="[0-9a-zA-Z]{7,32}" required title="Letters and numbers only">
-                            </div>
-                        </div>
-
-                        <div class="control-group">
-                            <label class="control-label"><b>Password: </b></label>
-                            <div class="controls">
-                                <input id="password_entered" class="span2" type='password' name='newpass' pattern="[0-9a-zA-Z]{7,32}" title="Password minimum of 7 characters" required>
-                            </div>
-                        </div>
-
-                        <div class="control-group">
-                            <label class="control-label"><b>Re-type Password: </b></label>
-                            <div class="controls">
-                                <input id="retyped_password_entered" class="span2" type='password' name='confirmpass' pattern="[0-9a-zA-Z]{7,50}" onblur="checkPasswordEquality()" required>
-                            </div>
-                        </div>
-
+                <div class="control-group">
+                    <label class="control-label"><b>Username: </b></label>
+                    <div class="controls">
+                        <input class="span3" type ='text' name='uname' value="" maxlength="15" pattern="[0-9a-zA-Z]{7,32}" required title="Letters and numbers only">
                     </div>
-
-                    <div class="span5">
-                        <legend>Personal Information: </legend>
-
-                        <div class="control-group">
-                            <label class="control-label"><b>Surname: </b></label>
-                            <div class="controls">
-                                <input class="span2" type ='text' name='surname' value="" pattern="[A-Za-z\s]{2,15}" required title="Letters and spaces only">
-                            </div>
-                        </div>
-
-                        <div class="control-group">
-                            <label class="control-label"><b>First Name: </b></label>
-                            <div class="controls">
-                                <input class="span2" type='text' name='firstname' value="" pattern="[A-Za-z\s]{2,15}" required title="Letters and spaces only">
-                            </div>
-                        </div>
-
-                        <div class="control-group">
-                            <label class="control-label"><b>Middle Name: </b></label>
-                            <div class="controls">
-                                <input class="span2" type='text' name='middleName' value="" pattern="[A-Za-z\s]{1,15}" required title="Letters and spaces only">
-                            </div>
-                        </div>
-                    {/literal}
                 </div>
-            </div>
+
+                <div class="control-group">
+                    <label class="control-label"><b>Password: </b></label>
+                    <div class="controls">
+                        <input id="password_entered" class="span3" type='password' name='newpass' pattern="[0-9a-zA-Z]{7,32}" title="Password minimum of 7 characters" required>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <label class="control-label"><b>Re-type Password: </b></label>
+                    <div class="controls">
+                        <input id="retyped_password_entered" class="span3" type='password' name='confirmpass' pattern="[0-9a-zA-Z]{7,50}" onblur="checkPasswordEquality()" required>
+                    </div>
+                </div>
+
+                <legend>Personal Information: </legend>
+
+                <div class="control-group">
+                    <label class="control-label"><b>Surname: </b></label>
+                    <div class="controls">
+                        <input class="span3" type ='text' name='surname' value="" pattern="[A-Za-z\s]{2,15}" required title="Letters and spaces only">
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <label class="control-label"><b>First Name: </b></label>
+                    <div class="controls">
+                        <input class="span3" type='text' name='firstname' value="" pattern="[A-Za-z\s]{2,15}" required title="Letters and spaces only">
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <label class="control-label"><b>Middle Name: </b></label>
+                    <div class="controls">
+                        <input class="span3" type='text' name='middleName' value="" pattern="[A-Za-z\s]{1,15}" required title="Letters and spaces only">
+                    </div>
+                </div>
+            {/literal}
 
             <legend>Signatory Designation: </legend>
 
             <div class="control-group">
-                <label class="control-label"><b>Signatory: </b></label>
+                <label class="control-label">
+                    <b>Signatory: </b>
+                </label>
                 <div class="controls">
 
                     {if !isset($signatories)}
                         {assign var=signatories value=["OCSC", "OSS", "CTLC", "ICLC"]}
                     {/if}
 
-                    <select class="select2" id="sign_name" name="sign_name" required onchange="">
+                    <select class="select2 input-large" id="sign_name" name="sign_name" required data-placeholder="Select Signatory">
+                        <option></option>
                         {foreach from=$ug_signatories item=signatory key=pk}
-                                <option>{$signatory}</option>
-                            {assign var=count value=$count + 1}
+                            <option>{$signatory}</option>
                         {/foreach}
-                        <option>---------Next--------</option>
                     </select>
+
+                    {*
+                    <select class="select2" id="sign_name" name="sign_name" required onchange="">
+                    {foreach from=$ug_signatories item=signatory key=pk}
+                    <option>{$signatory}</option>
+                    {assign var=count value=$count + 1}
+                    {/foreach}
+                    <option>---------Next--------</option>
+                    </select>
+                    *}
                     {*<input type=hidden id="hide" value="10">
                     <input type=hidden id="flag" value="0">*}
-
 
                     {*
                     <input type="text" id="sign_name" required name="sign_name" autocomplete="off" class="input-large" data-provide="typeahead" data-source='[
