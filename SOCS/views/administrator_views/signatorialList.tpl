@@ -133,6 +133,7 @@
         </div>
         *}
 
+        {*
         <form class="form-inline">
 
             <input type="hidden" name="action" value="addSignatory">
@@ -148,6 +149,7 @@
                 <i class="icon-plus"></i> Add
             </button>
         </form>
+        *}
 
         <!-- Table of Signatories-->
         <table class="table table-hover table-bordered">    
@@ -168,7 +170,7 @@
                     </td>    
                     <td>
 
-                        <a href="#edit_dept_signatory" data-toggle="modal" onclick="set_input({$myKey_signatorial[$k]})">
+                        <a href="#edit_dept_signatory" data-toggle="modal" onclick="set_input({$myKey_signatorial[$k]}, '{$i}');">
                             <i class="icon-exchange"></i> Replace
                         </a>
 

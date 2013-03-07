@@ -73,7 +73,6 @@
 
 {/function}
 
-
 <!-- Search Bar-->
 {function name=search}
     {if isset($filter)}
@@ -134,7 +133,6 @@
     </form>
 
 {/function}
-
 
 <!-- Admin Functions-->
 
@@ -271,28 +269,11 @@
                 </a>
             </li>
             <li class="dropdown">
-                <a class="tips" data-toggle="tooltip" title="Add Signatory under {$Dept_name}" href='#'>
+                <a class="tips" data-toggle="modal" title="Add Signatory under {$Dept_name}" href='#add_dept_signatory'>
                     <i class="icon-edit"></i><i class="icon-plus icon-tail"></i>
                 </a>
             </li>
-            {*
-            <li>
-            <a href='#add_dept_signatory' class="tips" data-toggle="tooltip" title="Add Signatory under {$Dept_name}">
-            <i class="icon-plus"></i>
-            </a>
-            </li>
-            *}
-
         {/if}
-
-        {*
-        <li class="dropdown">
-        <a class="tips" href="#" title="Delete Selected">
-        <i class="icon-trash"></i> 
-        </a>
-        </li>
-        *}
-
         <li class="divider-vertical"></li>
     </ul>
 
@@ -334,41 +315,60 @@
             <button class="close" data-dismiss="modal"><i class="icon-remove"></i></button>
             <h4>Upload List of Enrolled Students</h4>
         </div>
-        <div class="modal-body">
 
-            <div class="fileupload fileupload-new" data-provides="fileupload">
+        <div class="fileupload fileupload-new" data-provides="fileupload">
+            <form class="form-horizontal" action="{$host}/administrator/index.php?action=upload_excel_file" method="post" enctype="multipart/form-data">
+                <div class="modal-body">
+                    {if isset($excel_file)}
 
-                {if isset($excel_file)}
+                        <div class="control-group">
+                            <label class="control-label">
+                                <b>Current File: </b>
+                            </label>
+                            <div class="controls">
+                                <i class="icon-ms-excel" style="font-size: 22px;"></i> student_current_enroll.xls
+                            </div>
+                        </div>
 
-                    <table class="table table-condensed table-bordered">
+                        {*
+                        <table class="table table-condensed table-bordered">
                         <tr>
-                            <td>Current File: </td>
-                            <td><i class="icon-ms-excel"></i> student_current_enroll.xls</td>
+                        <td>Current File: </td>
+                        <td><i class="icon-ms-excel"></i> student_current_enroll.xls</td>
                         </tr>
-                    </table>
-                {/if}
+                        </table>
+                        *}
 
-                <form class="form-inline" action="{$host}/administrator/index.php?action=upload_excel_file" method="post" enctype="multipart/form-data">
-                    <label>
-                        <b>Upload MS Excel File: </b>
-                    </label>
-                    <span class="btn btn-file">
-                        Browse<input type="file" name="excel_file" />
-                    </span>
+                    {/if}
 
-                    <div class="form-actions fileupload-exists">
-                        <i class="icon-file-alt icon-2x"></i> 
-                        <span class="fileupload-preview"></span>
-                        <div class="pull-right">
-                            <button class="btn btn-success btn-primary" type="submit" name="save">Upload</button>
-                            <button class="btn" data-dismiss="fileupload" type="button">Remove</button>
+                    <div class="control-group">
+                        <label class="control-label">
+                            <b>Upload MS Excel File: </b>
+                        </label>
+                        <div class="controls">
+                            <span class="btn btn-file">
+                                Browse<input type="file" name="excel_file" />
+                            </span>
                         </div>
                     </div>
-                </form>
-            </div>
-        </div>
-        <div class="modal-footer">
-            <button class="btn btn-primary pull-right" data-dismiss="modal">Cancel</button>
+
+                    <div class="control-group fileupload-exists alert alert-info">
+                        <label class="control-label">
+                            <b>To be uploaded file: </b></label>
+                        <div class="controls">
+                            <i class="icon-file-alt icon-2x"></i>
+                            <span class="fileupload-preview"></span>
+                            <div class="pull-right">
+                                <button class="btn pull-right" data-dismiss="fileupload" type="button">Remove</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary fileupload-exists" type="submit" name="save">Upload</button>
+                    <button class="btn pull-right" data-dismiss="modal">Cancel</button>
+                </div>
+            </form>
         </div>
     </div>
 {/function}
@@ -380,7 +380,7 @@
             <button class="close" data-dismiss="modal">
                 <i class="icon-remove"></i>
             </button>
-            <h4>Replace Signatory</h4>
+            <h4>Replace <span id="signatory_name"></span> Signatory</h4>
         </div>
 
         <form class="form-horizontal">
@@ -417,22 +417,25 @@
             <h4>Add Signatory</h4>
         </div>
 
-        <form class="form-inline">
+        <form class="form-horizontal">
             <div class="modal-body" style="min-height: 75px;">
-                <input type="hidden" name="action" value="addSignatory">
+                <label class="control-label">
+                    <b>Signatory Name</b>
+                </label>
+                <div class="controls">
+                    <input type="hidden" name="action" value="addSignatory">
 
-                <select name="cmdSignatory" class="select2 input-large" data-placeholder="Select Signatory" required>
-                    <option></option>
-                    {foreach from = $SignatoryList item = i}
-                        <option>{$i}</option>
-                    {/foreach}
-                </select>
+                    <select name="cmdSignatory" class="select2 input-large" data-placeholder="Select Signatory" required>
+                        <option></option>
+                        {foreach from = $SignatoryList item = i}
+                            <option>{$i}</option>
+                        {/foreach}
+                    </select>
+                </div>
             </div>
             <div class="modal-footer">
-                <button class="btn btn-success" type="submit">
-                    <i class="icon-plus"></i> Add
-                </button>
-                <input type='button' class='btn' value='Cancel' data-dismiss="modal">
+                <button class="btn btn-primary" type="submit">Add</button>
+                <button type='button' class='btn' data-dismiss="modal">Cancel</button>
             </div>
         </form>
     </div>

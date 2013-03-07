@@ -167,27 +167,6 @@
         <script src="{$host}/public/select2/select2.js"></script>
         <script src="{$host}/public/js/main.js"></script>
 
-        {literal}
-            <script type="text/javascript">
-                
-                function set_input(id){
-                    $("#hidden_input").html("<input type='hidden' name='oldSign_ID' value='" + id + "'>");
-                }
-                
-                $(document).ready(function() {
-                    
-                    $('.tips').tooltip();
-
-                    $('#clearance_status').progressbar({
-                        display_text: 1
-                    });
-
-                    $('.select2').select2();
-                        
-                });
-            </script>
-        {/literal}
-
         {*
         {literal}
         <script>
