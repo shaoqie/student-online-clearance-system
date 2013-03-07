@@ -291,17 +291,17 @@
         </li>
         <li {if $index == 1}class="active"{/if}>
             <a href='../signatory/bulletin.php'>
-                <i class="icon-align-justify"></i> Bulletin
+                <i class="icon-bullhorn"></i> Bulletin
             </a>
         </li>
         <li {if $index == 2}class="active"{/if}>
             <a href='../signatory/requirements.php'>
-                <i class="icon-check"></i> Requirements
+                <i class="icon-socs-folder-check"></i> Requirements
             </a>
         </li>
         <li {if $index == 3}class="active"{/if}>
             <a href='../signatory/uploadsignature.php'>
-                <i class="icon-arrow-up"></i> Upload Signature
+                <i class="icon-upload-alt"></i> Upload Signature
             </a>
         </li>
     </ul>

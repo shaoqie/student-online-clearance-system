@@ -25,7 +25,7 @@
                     <li class="divider-vertical"></li>
                     <li>
                         <a class="tips" title="Add Requirements" href="{$host}/signatory/requirements.php?action=viewAdd_Requirements">
-                            <i class="icon-plus"></i>
+                            <i class="icon-socs-folder-add"></i>
                         </a>
                     </li>
                     <li class="divider-vertical"></li>
@@ -85,7 +85,7 @@
                     <td>{$myDesc_requirements[$k]}</td>
                     <td>
                         <a href="?action=viewEdit_Requirements&reqID={$requirement_ID[$k]}">
-                            <i class="icon-edit"></i> Edit
+                            <i class="icon-pencil"></i> Edit
                         </a>
                     </td>
                 </tr>

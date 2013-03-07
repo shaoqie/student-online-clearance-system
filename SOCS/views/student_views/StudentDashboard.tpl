@@ -31,11 +31,11 @@
             <li>
                 {if $num_cleared == ($myListOfSign_underDeptName|@count)}
                     <a class="tips" title="Export the clearance file" href="export1.php?sy_sem_id={$sy_sem_id}&status={$status}" target="_blank"> 
-                        <i class="icon-download"></i>
+                        <i class="icon-socs-export"></i>
                     </a>
                 {else}
                     <a class="tips" title="Export the clearance file" href="#" onclick="bootbox.alert('<div class=\'alert alert-info alert-block\'><i class=\'icon-info-sign\'></i> <strong>Oops!</strong> Must clear all signatories before can download the clearance form.</div>');"> 
-                        <i class="icon-download"></i>
+                        <i class="icon-socs-export"></i>
                     </a>
                 {/if}
             </li>

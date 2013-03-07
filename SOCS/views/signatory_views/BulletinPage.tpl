@@ -25,7 +25,7 @@
                     <li class="divider-vertical"></li>
                     <li>
                         <a class="tips" title="Post Annoucements" href="{$host}/signatory/bulletin.php?action=viewPosting_Bulletin">
-                            <i class="icon-bullhorn"></i>
+                            <i class="icon-bullhorn"></i><i class="icon-plus icon-tail"></i>
                         </a>
                     </li>
                     <li class="divider-vertical"></li>
@@ -93,8 +93,9 @@
                     </td>
                     <td>{$my_dateTime[$k]}</td>
                     <td>
-                        <i class="icon-eye-open"></i>
-                        <a style="cursor:pointer;" onclick="window.location.href = '../signatory/bulletin.php?action=viewPosted_Bulletin&key={$myMessage_ID[$k]}';"> View</a>
+                        <a href = "{$host}/signatory/bulletin.php?action=viewPosted_Bulletin&key={$myMessage_ID[$k]}">
+                            <i class="icon-eye-open"></i> View
+                        </a>
                     </td>
                 </tr>
             {/foreach}
