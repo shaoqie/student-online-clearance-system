@@ -46,6 +46,9 @@
     }
 </script>
 
+<!-- Breadcrumb-->
+{call name=breadcrumb lvl2=1 lvl3=3 activelvl=3}
+
 <div class="row">
     <div class="span3">
 

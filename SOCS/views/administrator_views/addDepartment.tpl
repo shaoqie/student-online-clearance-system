@@ -1,3 +1,6 @@
+<!-- Breadcrumb-->
+{call name=breadcrumb lvl2=3 lvl3=7 activelvl=3}
+
 <div class="row">
     <div class="span3">
 

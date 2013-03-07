@@ -1,3 +1,6 @@
+<!-- Breadcrumb-->
+{call name=breadcrumb lvl2=3 lvl3=6 activelvl=3 dept_name="{$editDepartment_Name}"}
+
 <div class="row">
     <div class="span3">
 
@@ -12,16 +15,6 @@
 
         <!-- Header-->
         <h4 class="well center-text well-small">Edit Department</h4>
-
-        {*
-        <div class="navbar">
-            <div class="navbar-inner">
-
-                {call name=nav_signatories index=2}
-
-            </div>
-        </div>
-        *}
 
         <!-- Edit Form-->
         <form action="" method='post' class="form-horizontal">

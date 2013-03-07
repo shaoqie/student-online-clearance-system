@@ -1,3 +1,6 @@
+<!-- Breadcrumb-->
+{call name=breadcrumb lvl2=3 lvl3=8 lvl4=1 lvl5=2 activelvl=5 dept_name="{$Dept_name}" course_name="{$editCourse_Name}"}
+
 <div class="row">
     <div class="span3">
 

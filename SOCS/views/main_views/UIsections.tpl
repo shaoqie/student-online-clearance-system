@@ -171,7 +171,7 @@
         <li class="divider-vertical"></li>
 
         {if $index==1}
-            <li>
+            <li class="dropdown">
                 <a class="tips" href="#upload_excel" data-toggle="modal" title="Upload Enrolled Students">
                     <i class="icon-user"></i><i class="icon-arrow-up icon-tail"></i> 
                 </a>
@@ -401,12 +401,14 @@
                     <label class="control-label"><b> Signatory Name: </b></label>
                     <div class="controls">
                         <input type="hidden" name="action" value="editSignatorialList" />
-                        <select class='select2 input-large' id='editSignatorialList' name="newSign_Name" data-placeholder="Select Signatory" required>
-                            <option></option>
-                            {foreach from = $SignatoryList item = i}
-                                <option>{$i}</option>
-                            {/foreach}
-                        </select>
+                        {if isset($SignatoryList)}
+                            <select class='select2 input-large' id='editSignatorialList' name="newSign_Name" data-placeholder="Select Signatory" required>
+                                <option></option>
+                                {foreach from = $SignatoryList item = i}
+                                    <option>{$i}</option>
+                                {/foreach}
+                            </select>
+                        {/if}
                         <span id="hidden_input"></span>
                     </div>
                 </div>
@@ -437,12 +439,14 @@
                 <div class="controls">
                     <input type="hidden" name="action" value="addSignatory">
 
-                    <select name="cmdSignatory" class="select2 input-large" data-placeholder="Select Signatory" required>
-                        <option></option>
-                        {foreach from = $SignatoryList item = i}
-                            <option>{$i}</option>
-                        {/foreach}
-                    </select>
+                    {if isset($SignatoryList)}
+                        <select name="cmdSignatory" class="select2 input-large" data-placeholder="Select Signatory" required>
+                            <option></option>
+                            {foreach from = $SignatoryList item = i}
+                                <option>{$i}</option>
+                            {/foreach}
+                        </select>
+                    {/if}
                 </div>
             </div>
             <div class="modal-footer">
@@ -451,4 +455,67 @@
             </div>
         </form>
     </div>
+{/function}
+
+<!-- Breadcrumb-->
+
+{function name=breadcrumb lvl2=0 lvl3=0 lvl4=0 lvl5=0 activelvl=0 sig_name="" dept_name="" course_name=""}
+
+    {assign var=arr_level2 value=['', 'User Accounts', 'Signatories', 'Department']}
+    {assign var=arr_level2_links value=['','administrator/index.php', 'administrator/signatory_list_manager.php', 'administrator/department_list_manager.php']}
+
+    {assign var=arr_level3 value=['', 'List of Students', 'List of Signatories-in-charge', 
+'Add Signatory-in-charge', 'List of Unconfirmed Signatories-in-charge', 'Add Signatory', 
+'Edit ', 'Add Department', '']}
+
+    {assign var=arr_level4 value=['', 'Courses', 'Signatories for Undergraduates', 'Signatories for Graduates']}
+
+    {assign var=arr_level5 value=['', 'Add Course', 'Edit ']}
+
+    <ul class="breadcrumb">
+        <li>
+            <a href="{$host}/administrator/index.php">Home</a> 
+            <span class="divider">
+                <i class="icon-chevron-right"></i>
+            </span>
+        </li>
+        
+        {if $activelvl==2 && $lvl2!=0}
+            <li class="active">{$arr_level2[$lvl2]}</li>
+        {elseif $lvl2!=0}
+            <li>
+                <a href="{$host}/{$arr_level2_links[$lvl2]}">{$arr_level2[$lvl2]}</a> 
+                <span class="divider">
+                    <i class="icon-chevron-right"></i>
+                </span>
+            </li>
+        {/if}
+
+        {if $activelvl==3 && $lvl3!=0}
+            <li class="active">{$arr_level3[$lvl3]}{$sig_name}{$dept_name}</li>
+        {elseif $lvl3!=0}
+            <li>
+                <a href="{$host}/administrator/course_list_byDepartment.php">{$arr_level3[$lvl3]}{$dept_name}</a> 
+                <span class="divider">
+                    <i class="icon-chevron-right"></i>
+                </span>
+            </li>
+        {/if}
+
+        {if $activelvl==4 && $lvl4!=0}
+            <li class="active">{$arr_level4[$lvl4]}</li>
+        {elseif $lvl4!=0}
+            <li>
+                <a href="{$host}/administrator/course_list_byDepartment.php">{$arr_level4[$lvl4]}</a> 
+                <span class="divider">
+                    <i class="icon-chevron-right"></i>
+                </span>
+            </li>
+        {/if}
+
+        {if $activelvl==5 && $lvl5!=0}
+            <li class="active">{$arr_level5[$lvl5]}{$course_name}</li>
+        {/if}
+    </ul>
+
 {/function}

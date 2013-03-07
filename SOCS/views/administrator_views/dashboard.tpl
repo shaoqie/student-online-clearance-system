@@ -1,10 +1,10 @@
-{*
-<ul class="breadcrumb">
-<li><a href="#">Home</a> <span class="divider"><i class="icon-chevron-right"></i></span></li>
-<li><a href="#">Library</a> <span class="divider"><i class="icon-chevron-right"></i></span></li>
-<li class="active">Data</li>
-</ul>
-*}
+<!-- Breadcrumb-->
+
+{if $user_type == 'Signatory'}
+    {call name=breadcrumb lvl2=1 lvl3=2 activelvl=3}
+{else}
+    {call name=breadcrumb lvl2=1 lvl3=1 activelvl=3}
+{/if}
 
 <div class="row">
     <div class="span3">

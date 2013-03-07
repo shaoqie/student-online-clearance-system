@@ -91,6 +91,14 @@
     }
 </script>
 
+<!-- Breadcrumb-->
+
+{if $index_tabs == 0}
+    {call name=breadcrumb lvl2=3 lvl3=8 lvl4=2 activelvl=4 dept_name="{$Dept_name}"}
+{else}
+    {call name=breadcrumb lvl2=3 lvl3=8 lvl4=3 activelvl=4 dept_name="{$Dept_name}"}
+{/if}
+
 <div class="row">
     <div class="span3">
 
@@ -136,18 +144,18 @@
         {*
         <form class="form-inline">
 
-            <input type="hidden" name="action" value="addSignatory">
+        <input type="hidden" name="action" value="addSignatory">
 
-            <select name="cmdSignatory" class="select2 input-large" data-placeholder="Select Signatory" required>
-                <option></option>
-                {foreach from = $SignatoryList item = i}
-                    <option>{$i}</option>
-                {/foreach}
-            </select>
+        <select name="cmdSignatory" class="select2 input-large" data-placeholder="Select Signatory" required>
+        <option></option>
+        {foreach from = $SignatoryList item = i}
+        <option>{$i}</option>
+        {/foreach}
+        </select>
 
-            <button class="btn btn-success" type="submit">
-                <i class="icon-plus"></i> Add
-            </button>
+        <button class="btn btn-success" type="submit">
+        <i class="icon-plus"></i> Add
+        </button>
         </form>
         *}
 
