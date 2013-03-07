@@ -169,16 +169,22 @@
             </a>
         </li>
         <li class="divider-vertical"></li>
-        <li>
-            <a class="tips" href="#upload_excel" data-toggle="modal" title="Upload Enrolled Students">
-                <i class="icon-user"></i><i class="icon-arrow-up icon-tail"></i> 
-            </a>
-        </li>
-        <li class="dropdown {if $index == 4}active{/if}">
-            <a class="tips" href="{$host}/administrator/index.php?action=addSignatoryInCharge" title="Add Signatory-in-charge">
-                <i class="icon-coffee"></i><i class="icon-plus icon-tail"></i>
-            </a>
-        </li>
+
+        {if $index==1}
+            <li>
+                <a class="tips" href="#upload_excel" data-toggle="modal" title="Upload Enrolled Students">
+                    <i class="icon-user"></i><i class="icon-arrow-up icon-tail"></i> 
+                </a>
+            </li>
+        {/if}
+
+        {if $index!=1}
+            <li class="dropdown">
+                <a class="tips" href="{$host}/administrator/index.php?action=addSignatoryInCharge" title="Add Signatory-in-charge">
+                    <i class="icon-coffee"></i><i class="icon-plus icon-tail"></i>
+                </a>
+            </li>
+        {/if}
 
         {if $index != 4}
             {*
@@ -263,16 +269,22 @@
                 </a>
             </li>
             <li class="divider-vertical"></li>
-            <li>
-                <a class="tips" data-toggle="tooltip" title="Add Course under {$Dept_name}" href='{$host}/administrator/course_list_byDepartment.php?action=addCourse'>
-                    <i class="icon-book"></i><i class="icon-plus icon-tail"></i>
-                </a>
-            </li>
-            <li class="dropdown">
-                <a class="tips" data-toggle="modal" title="Add Signatory under {$Dept_name}" href='#add_dept_signatory'>
-                    <i class="icon-edit"></i><i class="icon-plus icon-tail"></i>
-                </a>
-            </li>
+
+            {if $index==1}
+                <li class="dropdown">
+                    <a class="tips" data-toggle="tooltip" title="Add Course under {$Dept_name}" href='{$host}/administrator/course_list_byDepartment.php?action=addCourse'>
+                        <i class="icon-book"></i><i class="icon-plus icon-tail"></i>
+                    </a>
+                </li>
+            {/if}
+
+            {if $index!=1}
+                <li class="dropdown">
+                    <a class="tips" data-toggle="modal" title="Add Signatory under {$Dept_name}" href='#add_dept_signatory'>
+                        <i class="icon-edit"></i><i class="icon-plus icon-tail"></i>
+                    </a>
+                </li>
+            {/if}
         {/if}
         <li class="divider-vertical"></li>
     </ul>
