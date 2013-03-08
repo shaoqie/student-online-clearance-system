@@ -1,3 +1,5 @@
+<!-- Breadcrumb-->
+{call name=breadcrumb lvl2=5 lvl3=9 activelvl=3}
 <div class="row">
     <div class="span3">
 
@@ -15,7 +17,7 @@
     <div class="span9">
 
         <!-- Header-->
-        <h4 class="well center-text well-small">Post Annoucement</h4>
+        <h4 class="well center-text well-small">Post Announcement</h4>
 
         {*
         <!-- Archive Search Bar-->

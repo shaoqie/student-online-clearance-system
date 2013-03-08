@@ -130,6 +130,9 @@ function getCourseList(){
 
 </script>
 
+<!-- Breadcrumb-->
+{call name=breadcrumb lvl2=6 lvl3=12 activelvl=3}
+
 <div class="row">
     <div class="span3">
 

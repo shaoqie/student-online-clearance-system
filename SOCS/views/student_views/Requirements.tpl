@@ -68,7 +68,7 @@
         </thead>
         <tbody>
             {foreach from = $clearanceList key = k item = i}
-                <tr>
+                <tr {if $clearanceList[$k][3] != "Not Cleared"}class="success"{else}class="error"{/if}>
                     <td>{$clearanceList[$k][1]}</td>
                     <td>{$clearanceList[$k][3]}</td>
                 </tr>

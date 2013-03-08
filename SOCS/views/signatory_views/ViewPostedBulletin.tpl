@@ -1,3 +1,6 @@
+<!-- Breadcrumb-->
+{call name=breadcrumb lvl2=5 lvl3=10 activelvl=3}
+
 <div class="row">
     <div class="span3">
 
@@ -15,7 +18,7 @@
     <div class="span9">
 
         <!-- Header-->
-        <h4 class="well center-text well-small">List of Announcements</h4>
+        <h4 class="well center-text well-small">View Announcement</h4>
 
         <legend>Already Posted Bulletin</legend>
 

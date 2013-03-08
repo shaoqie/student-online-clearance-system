@@ -126,6 +126,9 @@ return this_val;
 }
 </script>
 
+<!-- Breadcrumb-->
+{call name=breadcrumb lvl2=6 lvl3=11 activelvl=3}
+
 <div class="row">
     <div class="span3">
 
