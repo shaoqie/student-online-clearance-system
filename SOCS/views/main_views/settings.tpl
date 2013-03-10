@@ -1,37 +1,42 @@
-<!-- <button class="pull-right btn" onclick="window.location.href='index.php'">Back</button> -->
-
+{*
 {if $account_type eq "Student"}
-    <div class="alert alert-block alert-info">
-        Choose to advance settings? <a href="student/index.php?action=advance_settings">Click Here</a>
-    </div>  
+<div class="alert alert-block alert-info">
+Choose to advance settings? <a href="student/index.php?action=advance_settings">Click Here</a>
+</div>  
 {/if}
-
-
+*}
 
 <form action='settings.php?action=verify' method='post' class="form-horizontal" enctype="multipart/form-data">
 
-    <legend>Edit Account: </legend>
+    <legend>Account Details: </legend>
 
-    <div class="control-group">
-        <label class="control-label"><b>Surname: </b></label>
-        <div class="controls">
-            <input type ='text' name='surname' value="{$surname}" pattern="[A-Za-z\s]+" required title="Letters and spaces only">
-        </div>
-    </div>
+    {if $account_type eq "Student"}
+        <input type="hidden" name="surname" value="{$surname}" />
+        <input type="hidden" name="firstname" value="{$firstname}" />
+        <input type="hidden" name="middleName" value="{$middlename}" />
 
-    <div class="control-group">
-        <label class="control-label"><b>First Name: </b></label>
-        <div class="controls">
-            <input type='text' name='firstname' value="{$firstname}" pattern="[A-Za-z\s\.]+" required title="Letters and spaces only">
+    {else}
+        <div class="control-group">
+            <label class="control-label"><b>Surname: </b></label>
+            <div class="controls">
+                <input type ='text' name='surname' value="{$surname}" pattern="[A-Za-z\s]+" required title="Letters and spaces only">
+            </div>
         </div>
-    </div>
 
-    <div class="control-group">
-        <label class="control-label"><b>Middle Name: </b></label>
-        <div class="controls">
-            <input type='text'name='middleName' value="{$middlename}" pattern="[A-Za-z\s]+" required title="Letters and spaces only">
+        <div class="control-group">
+            <label class="control-label"><b>First Name: </b></label>
+            <div class="controls">
+                <input type='text' name='firstname' value="{$firstname}" pattern="[A-Za-z\s\.]+" required title="Letters and spaces only">
+            </div>
         </div>
-    </div>
+
+        <div class="control-group">
+            <label class="control-label"><b>Middle Name: </b></label>
+            <div class="controls">
+                <input type='text'name='middleName' value="{$middlename}" pattern="[A-Za-z\s]+" required title="Letters and spaces only">
+            </div>
+        </div>
+    {/if}
 
     <div class="control-group">
         <label class="control-label"><b>Email Address: </b></label>
@@ -40,7 +45,7 @@
         </div>
     </div>
 
-    <legend>Change password: </legend>
+    <legend>Change Password: </legend>
 
     <div class="control-group">
         <label class="control-label"><b>New password: </b></label>
@@ -91,10 +96,28 @@
     <div class="control-group">
         <label class="control-label"><b>Upload Picture: </b></label>
         <div class="controls">
-            <input type="file" name="photo">
-            <span class="help-block">Image file shall not exceed to 1MB</span>
+            <div class="fileupload fileupload-new" data-provides="fileupload">
+                <div class="fileupload-exists fileupload-preview thumbnail" style="width: 256px; height: 256px;"></div><br>
+                <span class="btn btn-file">
+                    Browse<input type="file" name="photo">
+                </span>
+                <input type="button" class="btn fileupload-exists" value="Cancel" data-dismiss="fileupload" />
+            </div>
+            <span class="help-block">
+                <p class="text-info">Image file shall not exceed to 1MB. Recommended size is 256 x 256</p>
+            </span>
         </div>
     </div>
+
+    {*
+    <div class="control-group">
+    <label class="control-label"><b>Upload Picture: </b></label>
+    <div class="controls">
+    <input type="file" name="photo">
+    <span class="help-block">Image file shall not exceed to 1MB</span>
+    </div>
+    </div>
+    *}
 
     <legend>Authentication: </legend>
 
@@ -105,10 +128,10 @@
         </div>
     </div>
 
-    <div class="control-group">
-        <div class="controls">
-            <input class="btn btn-primary" type='Submit' value='Save'> &nbsp;
-            <a href='/SOCS/'> Cancel</a>
+    <div class="control-group form-actions">
+        <div class="controls pull-right">
+            <input class="btn btn-primary" type='submit' value='Save'>
+            <input class="btn" type='button' value='Cancel' onclick="window.history.back();">
         </div>
     </div>
 </form>

@@ -1,3 +1,4 @@
+{*
 <script>
     function view_ForgotPass(){
         
@@ -10,6 +11,7 @@
         }); 
     }
 </script>
+*}
 
 <div class="row">
     <div class="span3">
@@ -34,11 +36,15 @@
 
             <div class="control-group">
                 <div class="controls">
-                    <button class="btn btn-primary" type="submit"><i class="icon-check icon-white"></i>  Login</button>
+                    <button class="btn btn-primary" type="submit">
+                        <i class="icon-signin icon-white"></i>  Login
+                    </button>
+                    <a href="#forgot_pass" class="btn btn-link" data-toggle="modal">Forgot Password?</a>
                 </div>
             </div>    
         </form>
         
+        {*
         <form class="form-horizontal" method="post" action="index.php?action=ForgotPass">
             <div class="control-group">
                 <div class="controls">
@@ -57,9 +63,8 @@
                     <input type="submit" class="btn btn-primary" value="Submit" name="submit">
                 </div>
             </div>
-        </form> 
-            
-            
+        </form>
+        *}
     </div>
 </div>
 

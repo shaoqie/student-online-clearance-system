@@ -221,6 +221,9 @@ class Settings extends Controller {
 
                 if ($image_upload->uploaded) {
 
+                    $image_upload->image_resize = "true";
+                    $image_upload->image_y = 256;
+                    $image_upload->image_ratio_x = "true";
                     $image_upload->image_convert = "jpg";
                     $image_upload->file_overwrite = true;
                     $image_upload->file_new_name_body = Session::get_user();

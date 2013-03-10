@@ -139,6 +139,10 @@
 
         <div class="container socs-content">
 
+            {if $alert != "" && $smarty.get.action == "logout"}
+                {$alert}
+            {/if}
+
             {include file=$content}
 
             <hr>
@@ -153,7 +157,7 @@
         {call name="replace_dept_signatory"}
         {call name="add_dept_signatory"}
 
-        {if $alert != ""}
+        {if $alert != "" && $smarty.get.action != "logout"}
             <div id="socs-alert" class="modal hide fade">
                 <div class="modal-body">
                     {$alert}
@@ -163,6 +167,37 @@
                 </div>
             </div>
         {/if}
+
+        <div id="forgot_pass" class="modal hide fade">
+            <div class="modal-header">
+                <a class="close" href="#" data-dismiss="modal">
+                    <i class="icon-remove"></i>
+                </a>
+                <h4>Input your username</h4>
+            </div>
+
+            <form class="form-horizontal" method="post" action="index.php?action=ForgotPass">
+
+                <div class="modal-body">
+                    <div class="control-group" id="forgotPass">
+                        <label class="control-label">
+                            <b>Username:</b> </label>
+                        <div class="controls">
+                            <input type="text" placeholder="Enter Your Username" name="ForgotPass">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="control-group" id="forgotOk">
+                        <label class="control-label"></label>
+                        <div class="controls">
+                            <input type="submit" class="btn btn-primary" value="Submit" name="submit">
+                            <button class="btn" data-dismiss="modal">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
 
         <!--<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>-->
         <!--<script>window.jQuery || document.write('<script src="{$host}/js/vendor/jquery-1.8.3.min.js"><\/script>')</script>-->

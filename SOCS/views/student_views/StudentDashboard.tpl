@@ -29,6 +29,7 @@
 
             <li class="divider-vertical"></li>
             <li>
+
                 {if $num_cleared == ($myListOfSign_underDeptName|@count)}
                     <a class="tips" title="Export the clearance file" href="export1.php?sy_sem_id={$sy_sem_id}&status={$status}" target="_blank"> 
                         <i class="icon-socs-export"></i>
@@ -38,6 +39,12 @@
                         <i class="icon-socs-export"></i>
                     </a>
                 {/if}
+
+                {*
+                <a class="tips" title="Export the clearance file" href="#" onclick="check_clearance({$num_cleared}, {$myListOfSign_underDeptName|@count}, '{$currentSchool_Year}', '{$currentSemester}', '{$sy_sem_id}', '{$status}')"> 
+                <i class="icon-socs-export"></i>
+                </a>
+                *}
             </li>
             <li class="divider-vertical"></li>
         </ul>

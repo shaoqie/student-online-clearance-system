@@ -11,10 +11,24 @@ $(document).ready(function() {
     });
 
     $('.select2').select2();
-    
+
     $('#socs-alert').modal('show');
 
 });
+
+/*
+function check_clearance(num_cleared, num_dept, current_sy, current_sem, sy_sem_id, status) {
+
+    var sy = $('#school_year').val();
+    var sem = $('#semester').val();
+
+    if (current_sy === sy && current_sem === sem && num_cleared === num_dept) {
+        window.open("export1.php?sy_sem_id=" + sy_sem_id + "&status=" + status);
+    } else {
+        bootbox.alert('<div class=\'alert alert-info\'><i class=\'icon-info-sign\'></i> <strong>Oops!</strong> Must clear all signatories before can download the clearance form. You can only download ' + current_sy + ' ' + current_sem + ' Semester issued clearance</div>');
+    }
+}
+*/
 
 function set_input(id, name) {
     $("#hidden_input").html("<input type='hidden' name='oldSign_ID' value='" + id + "'>");
@@ -23,17 +37,16 @@ function set_input(id, name) {
 
 function changeVisibility() {
     var visibility = parseInt(document.getElementById("sign_visibility").value);
-    if (visibility == 0) {
+    if (visibility === 0) {
         window.location.assign("../administrator/index.php?action=addSignatoryInCharge&used_for=UnderGrad");
     } else {
         window.location.assign("../administrator/index.php?action=addSignatoryInCharge&used_for=Grad");
     }
-
 }
 
 function signatorialList_visibility() {
     var visibility = parseInt(document.getElementById("visibility").value);
-    if (visibility == 0) {
+    if (visibility === 0) {
         window.location.assign("signatorialList.php");
     } else {
         window.location.assign("Grad_SignatorialList.php");
@@ -41,7 +54,7 @@ function signatorialList_visibility() {
 }
 
 function enterSearch(e) {
-    if (e.keyCode == 13) {
+    if (e.keyCode === 13) {
         jumpToPageWithSchoolYear();
     }
 }
@@ -52,7 +65,7 @@ function change_schoolYear(finder, sign_id, page) {
 
     var sy_sem = sy + "@" + sem;
 
-    var control = finder == 0 ? "viewMessages" : "viewRequirements";
+    var control = finder === 0 ? "viewMessages" : "viewRequirements";
     window.location.assign("?action=" + control + "&Tsign_ID=" + sign_id + "&page=" + page + "&sysem=" + sy_sem);
 }
 
@@ -61,7 +74,7 @@ function jumpToPageWithSchoolYear() {
     var sy = document.getElementById("school_year").value;
     var sem = document.getElementById("semester").options[document.getElementById("semester").selectedIndex].text;
 
-    var jump = document.getElementById("jump").value != "--" ? document.getElementById("jump").value : 1;
+    var jump = document.getElementById("jump").value !== "--" ? document.getElementById("jump").value : 1;
     var search = document.getElementById("search").value;
 
     window.location.assign("?action=displayTable&filter=" + search + "&page=" + jump + "&sy=" + sy + "&sem=" + sem);
@@ -105,10 +118,10 @@ function findCheck(rowCount, type) {
     if ($('.Checkbox:checked').length > 0) {
 
         bootbox.confirm("<div class='alert'><i class='icon-question-sign'></i> <strong>Warning!</strong> Attempting to delete " + $('.Checkbox:checked').length + " " + type + "/s, are you sure?</div>", function(result) {
-            if (result == true) {
+            if (result === true) {
                 var valueDeleted = "";
                 for (var i = 0; i < rowCount; i++) {
-                    if (document.getElementById("" + i).checked == true) {
+                    if (document.getElementById("" + i).checked === true) {
                         valueDeleted += document.getElementById("" + i).value + "-";
                     }
                 }
@@ -122,10 +135,10 @@ function findCheckUser(rowCount, type, user_type) {
     if ($('.Checkbox:checked').length > 0) {
 
         bootbox.confirm("<div class='alert'><i class='icon-question-sign'></i> <strong>Warning!</strong> Attempting to delete " + $('.Checkbox:checked').length + " " + type + "/s. Are you sure?</div>", function(result) {
-            if (result == true) {
+            if (result === true) {
                 var valueDeleted = "";
                 for (var i = 0; i < rowCount; i++) {
-                    if (document.getElementById("" + i).checked == true) {
+                    if (document.getElementById("" + i).checked === true) {
                         valueDeleted += document.getElementById("" + i).value + "@";
                     }
                 }
@@ -139,7 +152,7 @@ function findCheckUser(rowCount, type, user_type) {
 function confirmDelete(selected) {
     var bool = confirm("Are you sure you want delete?");
 
-    if (bool == true) {
+    if (bool === true) {
         window.location = "?action=delete&selected=" + selected;
     }
 }
@@ -155,7 +168,7 @@ function checkPasswordEquality() {
 }
 
 function alert_box(msg) {
-    bootbox.alert(msg)
+    bootbox.alert(msg);
 }
 
 /*=========== for registration purposes =======================*/
