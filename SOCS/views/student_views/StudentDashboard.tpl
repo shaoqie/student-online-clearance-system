@@ -45,27 +45,27 @@
     </div>
 </div>
 
-<p>Clearance Overall Status: </p>
-<div class="progress">
-    <div id="clearance_status" class="bar" data-percentage="{math equation="(c / i) * 100" i=($myListOfSign_underDeptName|@count) c=$num_cleared format="%d"}"></div>
-</div>
-
 {*
 <!-- Export Link-->
 <div class="row">
 <div class="span12">
 {if $num_cleared == ($myListOfSign_underDeptName|@count)}
 <a class="pull-right" href="export1.php?sy_sem_id={$sy_sem_id}&status={$status}"> 
-<i class="icon-download"></i> Export to PDF
+<i class="icon-socs-export icon-large"></i> Export to PDF
 </a>
 {else}
 <a class="pull-right" href="#" onclick="bootbox.alert('<div class=\'alert alert-info alert-block\'><i class=\'icon-info-sign\'></i> <strong>Oops!</strong> Must clear all signatories before can download the clearance form.</div>');"> 
-<i class="icon-download"></i> Export to PDF
+<i class="icon-socs-export icon-large"></i> Export to PDF
 </a>
 {/if}
 </div>
 </div>
 *}
+
+<p>Clearance Overall Status: </p>
+<div class="progress">
+    <div id="clearance_status" class="bar" data-percentage="{math equation="(c / i) * 100" i=($myListOfSign_underDeptName|@count) c=$num_cleared format="%d"}"></div>
+</div>
 
 <!-- Clearance-->
 <div class="row">

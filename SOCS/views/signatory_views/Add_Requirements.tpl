@@ -179,6 +179,13 @@ function getCourseList(){
                 </div>    
             </div>
 
+            <!-- Temporary kani lng sah... wala pa mn nnu nakapa ang backend-->
+            <input type="hidden" name="school_year" value="{$currentSchool_Year}" />
+            
+            <!-- Temporary kani lng sah... wala pa mn nnu nakapa ang backend-->
+            <input type="hidden" name="semester" value="{$currentSemester}" />
+            
+            {*
             <div class="control-group">
                 <label class="control-label"><b>School Year: </b></label>
                 <div class="controls">
@@ -214,9 +221,9 @@ function getCourseList(){
                         {/foreach}
                     </select>
                     
-                </div>*}
+                </div>
             </div>
-
+            
             <div class="control-group">
                 <label class="control-label"><b>Semester: </b></label>
                 <div class="controls">
@@ -237,6 +244,7 @@ function getCourseList(){
                     </select>
                 </div>
             </div>
+            *}
 
             <div class="control-group" id="Sign" hidden>
                 <label class="control-label"><b>Select Signatory: </b></label>

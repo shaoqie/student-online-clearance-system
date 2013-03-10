@@ -33,7 +33,9 @@
                             <div class="fileupload fileupload-new" data-provides="fileupload">
                                 <div class="fileupload-exists fileupload-preview thumbnail" style="width: 200px; height: 35px;"></div>
                                 <div class="fileupload-controls">
-                                    <span class="btn btn-file">Browse<input type="file"></span>
+                                    <span class="btn btn-file">
+                                        Browse<input type="file" name="signatureimage" required>
+                                    </span>
                                     <a href="#" class="btn fileupload-exists" data-dismiss="fileupload">Remove</a>
                                 </div>
                             </div>

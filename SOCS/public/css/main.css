@@ -1,5 +1,3 @@
-
-
 /* ==========================================================================
    SOCS's custom styles
    ========================================================================== */
@@ -46,6 +44,23 @@ div:hover#hover_link{
     text-shadow: inherit;
 }
 
+ul.nav #dropdown-hover:hover ul.dropdown-menu{
+    display: block;
+}
+
+.navbar .navbar-inner .select2-container{
+    padding-top: 5px;
+}
+
+.form-inline .select2-container{
+    padding-bottom: 10px;
+}
+
+.icon-tail{
+    font-size: 8px;
+}
+/* Home Page Styles*/
+
 .carousel-caption h1,
 .carousel-caption .lead {
     margin: 0;
@@ -63,9 +78,7 @@ div:hover#hover_link{
     height: 300px;
 }
 
-ul.nav #dropdown-hover:hover ul.dropdown-menu{
-    display: block;
-}
+/* Student's Page Styles */
 
 .progress .bar {
     -webkit-transition: width 1s ease-in-out;
@@ -73,16 +86,4 @@ ul.nav #dropdown-hover:hover ul.dropdown-menu{
     -ms-transition: width 1s ease-in-out;
     -o-transition: width 1s ease-in-out;
     transition: width 1s ease-in-out;
-}
-
-.navbar .navbar-inner .select2-container{
-    padding-top: 5px;
-}
-
-.form-inline .select2-container{
-    padding-bottom: 10px;
-}
-
-.icon-tail{
-    font-size: 8px;
 }

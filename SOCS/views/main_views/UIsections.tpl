@@ -458,7 +458,6 @@
 {/function}
 
 <!-- Breadcrumb-->
-
 {function name=breadcrumb lvl2=0 lvl3=0 lvl4=0 lvl5=0 activelvl=0 sig_name="" dept_name="" course_name=""}
 
     {assign var=arr_level2 value=['', 'User Accounts', 'Signatories', 'Department', 
