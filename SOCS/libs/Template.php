@@ -29,8 +29,8 @@ class Template extends Smarty {
         $this->setConfigDir(PATH . '/libs/smarty/configs/');
         $this->setCacheDir(PATH . '/libs/smarty/cache/');
 
-        $this-> caching= 0;
-        
+        $this->caching = 0;
+
         $this->assign('alert', '');
         $this->assign('path', PATH);
         $this->assign('host', HOST);
@@ -67,12 +67,12 @@ class Template extends Smarty {
     public function setContent($tpl_file) {
         $this->assign('content', $tpl_file);
     }
-    
+
     public function setSchool_YearSemContent($tpl_file) {
         $this->assign('School_year_content', $tpl_file);
     }
-    
-    public function setCalendar($tpl_file){
+
+    public function setCalendar($tpl_file) {
         $this->assign('calendar', $tpl_file);
     }
 
@@ -81,19 +81,25 @@ class Template extends Smarty {
         $pre_msg = "";
 
         if ($alert_type == self::ALERT_ERROR) {
-            $pre_msg = "Error! ";
+            $pre_msg = "<i class='icon-exclamation-sign'></i> <strong>Error!</strong>";
         } else if ($alert_type == self::ALERT_INFO) {
-            $pre_msg = "Oops! ";
+            $pre_msg = "<i class='icon-info-sign'></i> <strong>Oops!</strong>";
         } else if ($alert_type == self::ALERT_SUCCESS) {
-            $pre_msg = "Success! ";
+            $pre_msg = "<i class='icon-check'></i> <strong>Success!</strong>";
         } else {
-            $pre_msg = "Warning! ";
+            $pre_msg = "<i class='icon-warning-sign'></i> <strong>Warning!</strong>";
         }
-        
+
         $alert = "<div class='$alert_type'>" .
-                "<a href='#' class='close' data-dismiss='alert'><i class='icon-remove'></i></a>" .
-                "<strong>$pre_msg</strong>$msg" .
+                "$pre_msg $msg" .
                 "</div>";
+        
+        /*
+          $alert = "<div class='$alert_type'>" .
+          "<a href='#' class='close' data-dismiss='alert'><i class='icon-remove'></i></a>" .
+          "<strong>$pre_msg</strong>$msg" .
+          "</div>";
+         */
 
         $this->assign('alert', $alert);
     }
@@ -121,8 +127,8 @@ class Template extends Smarty {
     public function set_header_right($tpl_file) {
         $this->assign('header_right', $tpl_file);
     }
-    
-    public function set_photo($photo){
+
+    public function set_photo($photo) {
         $this->assign('photo', $photo);
     }
 

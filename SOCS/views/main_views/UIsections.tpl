@@ -378,7 +378,8 @@
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-primary fileupload-exists" type="submit" name="save">Upload</button>
-                    <button class="btn pull-right" data-dismiss="modal">Cancel</button>
+                    <button class="btn fileupload-exists" data-dismiss="modal">Cancel</button>
+                    <button class="btn btn-primary fileupload-new" data-dismiss="modal">Cancel</button>
                 </div>
             </form>
         </div>

@@ -9,7 +9,6 @@
         <title>{$page_name} - Student Online Clearance System</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width">
-
         <link rel="stylesheet" href="{$host}/public/css/bootstrap.css">
         <link rel="stylesheet" href="{$host}/public/css/font-awesome.css">
         <link rel="stylesheet" href="{$host}/public/css/font-awesome-ext.css">
@@ -140,14 +139,12 @@
 
         <div class="container socs-content">
 
-            {$alert}
-
             {include file=$content}
 
             <hr>
 
             <footer>
-                <p>&copy; Student Online Clearance System 2012</p>
+                <p>&copy; Student Online Clearance System {$smarty.now|date_format: "%Y"}</p>
             </footer>
 
         </div>
@@ -155,6 +152,17 @@
         {call name=upload_excel}
         {call name="replace_dept_signatory"}
         {call name="add_dept_signatory"}
+
+        {if $alert != ""}
+            <div id="socs-alert" class="modal hide fade">
+                <div class="modal-body">
+                    {$alert}
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary" data-dismiss="modal">OK</button>
+                </div>
+            </div>
+        {/if}
 
         <!--<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>-->
         <!--<script>window.jQuery || document.write('<script src="{$host}/js/vendor/jquery-1.8.3.min.js"><\/script>')</script>-->

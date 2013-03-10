@@ -11,6 +11,8 @@ $(document).ready(function() {
     });
 
     $('.select2').select2();
+    
+    $('#socs-alert').modal('show');
 
 });
 
@@ -102,7 +104,7 @@ function isCheckAll(isChecked, rowCount) {
 function findCheck(rowCount, type) {
     if ($('.Checkbox:checked').length > 0) {
 
-        bootbox.confirm("<strong>Are you sure you want to delete " + $('.Checkbox:checked').length + "  selected " + type + "(s) ?", function(result) {
+        bootbox.confirm("<div class='alert'><i class='icon-question-sign'></i> <strong>Warning!</strong> Attempting to delete " + $('.Checkbox:checked').length + " " + type + "/s, are you sure?</div>", function(result) {
             if (result == true) {
                 var valueDeleted = "";
                 for (var i = 0; i < rowCount; i++) {
@@ -119,7 +121,7 @@ function findCheck(rowCount, type) {
 function findCheckUser(rowCount, type, user_type) {
     if ($('.Checkbox:checked').length > 0) {
 
-        bootbox.confirm("<strong>Attempting to delete " + $('.Checkbox:checked').length + " " + type + "/s. Are you sure?</strong>", function(result) {
+        bootbox.confirm("<div class='alert'><i class='icon-question-sign'></i> <strong>Warning!</strong> Attempting to delete " + $('.Checkbox:checked').length + " " + type + "/s. Are you sure?</div>", function(result) {
             if (result == true) {
                 var valueDeleted = "";
                 for (var i = 0; i < rowCount; i++) {
