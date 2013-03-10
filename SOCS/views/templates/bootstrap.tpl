@@ -37,64 +37,68 @@
                     background: url('{$host}/public/img/title.png');
                     background-position: bottom right;
                     background-repeat: no-repeat;
-                }{literal}
-
-                /*
-                div{
-                border: 1px #000 solid;
-                }*/
+                }
             </style>
-        {/literal}
-        <link rel="stylesheet" href="{$host}/public/css/bootstrap-responsive.css">
-        <link rel="stylesheet" href="{$host}/public/css/main.css">
+            <link rel="stylesheet" href="{$host}/public/css/bootstrap-responsive.css">
+            <link rel="stylesheet" href="{$host}/public/css/main.css">
 
-        <script src="{$host}/public/js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
-        <script src="{$host}/public/js/calendarview.js"></script>
-        <script src="{$host}/public/js/prototype.js"></script>
-    </head>
-    <body>
-        <!--[if lt IE 7]>
-            <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
-        <![endif]-->
+            <script src="{$host}/public/js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+            <script src="{$host}/public/js/calendarview.js"></script>
+            <script src="{$host}/public/js/prototype.js"></script>
+        </head>
+        <body>
+            <!--[if lt IE 7]>
+                <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+            <![endif]-->
 
-        <!-- This code is is taken from http://twitter.github.com/bootstrap/examples/hero.html -->
+            <!-- This code is is taken from http://twitter.github.com/bootstrap/examples/hero.html -->
 
-        {include file='UIsections.tpl'}
+            {include file='UIsections.tpl'}
 
-        <div class="navbar navbar-inverse navbar-fixed-top" id="navbar">
-            <div class="navbar-inner">
-                <div class="container">
-                    <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </a>
-                    <a class="brand" href="index.php"><img src="{$host}/public/img/logo.png"> SOCS</a>
-                    <div class="nav-collapse collapse">
+            <div class="navbar navbar-inverse navbar-fixed-top" id="navbar">
+                <div class="navbar-inner">
+                    <div class="container">
+                        <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </a>
+                        <a class="brand" href="index.php"><img src="{$host}/public/img/logo.png"> SOCS{*{$page_name}*}</a>
+                        <div class="nav-collapse collapse">
 
-                        {if isset($username)}
-                            <div class="btn-group pull-right">
-                                <button class="btn btn-inverse" onclick="window.location.href = 'index.php';">
-                                    <i class="icon-user icon-white"></i> {$username}
-                                </button>
-                                <button class="btn btn-inverse dropdown-toggle" data-toggle="dropdown">
-                                    <span class="caret"></span>
-                                </button>
-                                <ul class="dropdown-menu">
-                                    <li>
-                                        <a href="{$host}/settings.php"><i class="icon-wrench"></i> My Account</a>
-                                    </li>
-                                    <li>
-                                        <a href="{$host}/index.php?action=logout"><i class="icon-off"></i> Logout</a>
-                                    </li>
-                                </ul>
-                            </div>
+                            {if isset($username)}
+                                <div class="btn-group pull-right">
+                                    <button class="btn btn-inverse" onclick="window.location.href = 'index.php';">
+                                        <i class="icon-user icon-white"></i> {$username}
+                                    </button>
+                                    <button class="btn btn-inverse dropdown-toggle" data-toggle="dropdown">
+                                        <span class="caret"></span>
+                                    </button>
+                                    <ul class="dropdown-menu">
+                                        <li>
+                                            <a href="{$host}/settings.php"><i class="icon-wrench"></i> Settings</a>
+                                        </li>
+                                        <li>
+                                            <a href="{$host}/index.php?action=logout"><i class="icon-off"></i> Logout</a>
+                                        </li>
+                                    </ul>
+                                </div>
 
-                        {elseif isset($smarty.get.action) && !isset($username)}
+                            {elseif isset($smarty.get.action) && !isset($username)}
 
-                            {call name=welcome_navigations}
+                                {call name=welcome_navigations}
 
-                            {if $smarty.get.action == "student_registrationForm"}
+                                {if $smarty.get.action == "student_registrationForm"}
+                                    <form class="navbar-form pull-right" action="index.php?action=login" method="post">
+                                        <input class="span2" type="text" placeholder="Username" name="username" required>
+                                        <input class="span2" type="password" placeholder="Password" name="password" required>
+                                        <button type="submit" class="btn"><i class="icon-check"></i> Sign in</button>
+                                    </form>
+                                {/if}
+
+                            {else}
+                                {call name=welcome_navigations}
+
                                 <form class="navbar-form pull-right" action="index.php?action=login" method="post">
                                     <input class="span2" type="text" placeholder="Username" name="username" required>
                                     <input class="span2" type="password" placeholder="Password" name="password" required>
@@ -102,124 +106,86 @@
                                 </form>
                             {/if}
 
-                        {else}
-                            {call name=welcome_navigations}
-
-                            <form class="navbar-form pull-right" action="index.php?action=login" method="post">
-                                <input class="span2" type="text" placeholder="Username" name="username" required>
-                                <input class="span2" type="password" placeholder="Password" name="password" required>
-                                <button type="submit" class="btn"><i class="icon-check"></i> Sign in</button>
-                            </form>
-                        {/if}
-
-                    </div><!--/.nav-collapse -->
-                </div>
-            </div>
-        </div>
-
-        {if isset($username)}
-            <div id="header" class="container socs-content">
-                <div class="row">
-                    <div class="span1">
-
-                        {if isset($photo)}
-                            <img src="{$photo}" class="img-polaroid"/>
-                        {else}
-                            <img src="{$host}/photos/default.png" class="img-polaroid"/>
-                        {/if}
-
-                    </div>
-                    <div class="span5">
-                        <h4>{$surname}, {$firstname} {$middlename}.</h4>
-                        <h5>- {$account_type} {$assign_sign}</h5>
+                        </div><!--/.nav-collapse -->
                     </div>
                 </div>
             </div>
-        {/if}
 
-        <div class="container socs-content">
+            {if isset($username)}
+                <div id="header" class="container socs-content">
+                    <div class="row">
+                        <div class="span1">
 
-            {if $alert != "" && $smarty.get.action == "logout"}
-                {$alert}
+                            {if isset($photo)}
+                                <img src="{$photo}" class="img-polaroid"/>
+                            {else}
+                                <img src="{$host}/photos/default.png" class="img-polaroid"/>
+                            {/if}
+
+                        </div>
+                        <div class="span5">
+                            <h4>{$surname}, {$firstname} {$middlename}.</h4>
+                            <h5>- {$account_type} {$assign_sign}</h5>
+                        </div>
+                    </div>
+                </div>
             {/if}
 
-            {include file=$content}
+            <div class="container socs-content">
 
-            <hr>
+                {if isset($smarty.get.action)}
+                    {if $alert != "" && $smarty.get.action == "logout" || $smarty.get.action == "login_error"}
+                        {$alert}
+                    {/if}   
+                {/if}
 
-            <footer>
-                <p>&copy; Student Online Clearance System {$smarty.now|date_format: "%Y"}</p>
-            </footer>
+                {include file=$content}
 
-        </div>
+                <hr>
 
-        {call name=upload_excel}
-        {call name="replace_dept_signatory"}
-        {call name="add_dept_signatory"}
+                <footer>
+                    <p>&copy; Student Online Clearance System {$smarty.now|date_format: "%Y"}</p>
+                </footer>
 
-        {if $alert != "" && $smarty.get.action != "logout"}
-            <div id="socs-alert" class="modal hide fade">
-                <div class="modal-body">
-                    {$alert}
-                </div>
-                <div class="modal-footer">
-                    <button class="btn btn-primary" data-dismiss="modal">OK</button>
-                </div>
-            </div>
-        {/if}
-
-        <div id="forgot_pass" class="modal hide fade">
-            <div class="modal-header">
-                <a class="close" href="#" data-dismiss="modal">
-                    <i class="icon-remove"></i>
-                </a>
-                <h4>Input your username</h4>
             </div>
 
-            <form class="form-horizontal" method="post" action="index.php?action=ForgotPass">
+            {call name=upload_excel}
+            {call name="replace_dept_signatory"}
+            {call name="add_dept_signatory"}
+            {call name="forgot_pass_modal"}
 
-                <div class="modal-body">
-                    <div class="control-group" id="forgotPass">
-                        <label class="control-label">
-                            <b>Username:</b> </label>
-                        <div class="controls">
-                            <input type="text" placeholder="Enter Your Username" name="ForgotPass">
-                        </div>
+            {if $alert != "" && $smarty.get.action != "logout" && $smarty.get.action != "login_error"}
+                <div id="socs-alert" class="modal hide fade">
+                    <div class="modal-body">
+                        {$alert}
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-primary" data-dismiss="modal">OK</button>
                     </div>
                 </div>
-                <div class="modal-footer">
-                    <div class="control-group" id="forgotOk">
-                        <label class="control-label"></label>
-                        <div class="controls">
-                            <input type="submit" class="btn btn-primary" value="Submit" name="submit">
-                            <button class="btn" data-dismiss="modal">Cancel</button>
-                        </div>
-                    </div>
-                </div>
-            </form>
-        </div>
+            {/if}
 
-        <!--<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>-->
-        <!--<script>window.jQuery || document.write('<script src="{$host}/js/vendor/jquery-1.8.3.min.js"><\/script>')</script>-->
+            <!--<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>-->
+            <!--<script>window.jQuery || document.write('<script src="{$host}/js/vendor/jquery-1.8.3.min.js"><\/script>')</script>-->
 
-        <script src="{$host}/public/js/vendor/jquery-1.8.3.min.js"></script>
-        <script src="{$host}/public/js/vendor/bootstrap.min.js"></script>
-        <script src="{$host}/public/js/vendor/bootbox.min.js"></script>
-        <script src="{$host}/public/js/vendor/bootstrap-fileupload.js"></script>
-        <script src="{$host}/public/js/vendor/bootstrap-progressbar.js"></script>
-        <script src="{$host}/public/select2/select2.js"></script>
-        <script src="{$host}/public/js/main.js"></script>
+            <script src="{$host}/public/js/vendor/jquery-1.8.3.min.js"></script>
+            <script src="{$host}/public/js/vendor/bootstrap.min.js"></script>
+            <script src="{$host}/public/js/vendor/bootbox.min.js"></script>
+            <script src="{$host}/public/js/vendor/bootstrap-fileupload.js"></script>
+            <script src="{$host}/public/js/vendor/bootstrap-progressbar.js"></script>
+            <script src="{$host}/public/select2/select2.js"></script>
+            <script src="{$host}/public/js/main.js"></script>
 
-        {*
-        {literal}
-        <script>
-        var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
-        (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
-        g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
-        s.parentNode.insertBefore(g,s)}(document,'script'));
-        </script>
-        {/literal}
-        *}
+            {*
+            {literal}
+            <script>
+            var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
+            (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+            g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+            s.parentNode.insertBefore(g,s)}(document,'script'));
+            </script>
+            {/literal}
+            *}
 
-    </body>
-</html>
+        </body>
+    </html>

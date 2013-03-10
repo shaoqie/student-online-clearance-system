@@ -47,6 +47,17 @@ class Settings extends Controller {
                 $this->template->assign('g_signatories', $g_listOfsignatory);
                 $this->template->assign('current_assignSign', Session::get_AssignSignatory());
                 //$this->template->assign('sign_status', Session::get_signatory_usability());
+            } else if(Session::get_Account_type() == "Student"){
+                
+                $this->student_model = new Student_Model();
+                $this->student_model->queryStudent_Info(Session::get_user());
+                
+                $stud_deptName = $this->student_model->getStud_DeptName();
+                $stud_course = $this->student_model->getStud_Course();
+                
+                $this->template->set_account_type($stud_course);
+                $this->template->assign('assign_sign', ", " . $stud_deptName);
+                
             } else {
                 $this->template->assign('assign_sign', '');
             }

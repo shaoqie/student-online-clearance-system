@@ -297,22 +297,22 @@
 {function name=nav_signatory index=0}
     <ul class="nav nav-tabs nav-stacked">
         <li {if $index == 0}class="active"{/if}>
-            <a href='../signatory/index.php'>
+            <a href='{$host}/signatory/index.php'>
                 <i class="icon-user"></i> Students
             </a>
         </li>
         <li {if $index == 1}class="active"{/if}>
-            <a href='../signatory/bulletin.php'>
+            <a href='{$host}/signatory/bulletin.php'>
                 <i class="icon-bullhorn"></i> Bulletin
             </a>
         </li>
         <li {if $index == 2}class="active"{/if}>
-            <a href='../signatory/requirements.php'>
+            <a href='{$host}/signatory/requirements.php'>
                 <i class="icon-socs-folder-check"></i> Requirements
             </a>
         </li>
         <li {if $index == 3}class="active"{/if}>
-            <a href='../signatory/uploadsignature.php'>
+            <a href='{$host}/signatory/uploadsignature.php'>
                 <i class="icon-upload-alt"></i> Upload Signature
             </a>
         </li>
@@ -462,7 +462,8 @@
 {function name=breadcrumb lvl2=0 lvl3=0 lvl4=0 lvl5=0 activelvl=0 sig_name="" dept_name="" course_name=""}
 
     {assign var=arr_level2 value=['', 'User Accounts', 'Signatories', 'Department', 
-'Students', 'Bulletin', 'Requirements', 'Upload Signature']}
+'Students', 'Bulletin', 'Requirements', 'Upload Signature',
+'Settings']}
     {assign var=arr_level2_links value=['','administrator/index.php', 'administrator/signatory_list_manager.php', 'administrator/department_list_manager.php', 
 'signatory/index.php', 'signatory/bulletin.php', 'signatory/requirements.php', 'signatory/uploadsignature.php']}
 
@@ -526,5 +527,37 @@
             <li class="active">{$arr_level5[$lvl5]}{$course_name}</li>
             {/if}
     </ul>
+{/function}
 
+{function name=forgot_pass_modal}
+    <div id="forgot_pass" class="modal hide fade">
+        <div class="modal-header">
+            <a class="close" href="#" data-dismiss="modal">
+                <i class="icon-remove"></i>
+            </a>
+            <h4>Input your username</h4>
+        </div>
+
+        <form class="form-horizontal" method="post" action="index.php?action=ForgotPass">
+
+            <div class="modal-body">
+                <div class="control-group" id="forgotPass">
+                    <label class="control-label">
+                        <b>Username:</b> </label>
+                    <div class="controls">
+                        <input type="text" placeholder="Enter Your Username" name="ForgotPass">
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div class="control-group" id="forgotOk">
+                    <label class="control-label"></label>
+                    <div class="controls">
+                        <input type="submit" class="btn btn-primary" value="Submit" name="submit">
+                        <button class="btn" data-dismiss="modal">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
 {/function}
