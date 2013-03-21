@@ -154,15 +154,17 @@
             {call name="add_dept_signatory"}
             {call name="forgot_pass_modal"}
 
-            {if $alert != "" && $smarty.get.action != "logout" && $smarty.get.action != "login_error"}
-                <div id="socs-alert" class="modal hide fade">
-                    <div class="modal-body">
-                        {$alert}
+            {if isset($smarty.get.action)}
+                {if $alert != "" && $smarty.get.action != "logout" && $smarty.get.action != "login_error"}
+                    <div id="socs-alert" class="modal hide fade">
+                        <div class="modal-body">
+                            {$alert}
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn btn-primary" data-dismiss="modal">OK</button>
+                        </div>
                     </div>
-                    <div class="modal-footer">
-                        <button class="btn btn-primary" data-dismiss="modal">OK</button>
-                    </div>
-                </div>
+                {/if}
             {/if}
 
             <!--<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>-->

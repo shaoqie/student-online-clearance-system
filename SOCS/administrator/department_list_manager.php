@@ -70,7 +70,7 @@ class Department_List_Manager extends Controller {
             $imagepath = $this->getImage_Path();
             $this->department_model->insert(trim($_POST['dept_name']), trim($_POST['dept_description']), $imagepath);
             //$this->template->setAlert("Adding Department was Successful", Template::ALERT_SUCCESS, 'alert');
-            header('Location: department_list_manager.php?successAdd=true');
+            header('Location: department_list_manager.php?action=addDepartment&successAdd=true');
         }
     }
 

@@ -61,7 +61,7 @@
             <div class="form-actions control-group">
                 <div class="pull-right">
                     <input class="btn btn-primary" type='Submit' value='Save' />
-                    <button class="btn" type="button" onclick="window.history.back();">Back</button>
+                    <a class="btn" href="{$host}/administrator/department_list_manager.php">Back</a>
                 </div>
             </div>
         </form>

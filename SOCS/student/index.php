@@ -37,6 +37,9 @@ class Index extends Controller {
             $currentSemester = $this->schoolYearSem_model->getCurSemester();
             $currentSchool_Year = $this->schoolYearSem_model->getCurSchool_Year();
             
+            $this->template->assign('most_current_sem', $currentSemester);
+            $this->template->assign('most_current_sy', $currentSchool_Year);
+            
             if (isset($_POST['GO'])) {
                 $sy_id = $this->schoolYearSem_model->getSy_ID(trim($_POST['school_year']), trim($_POST['semester']));
                 $this->template->assign('currentSemester', trim($_POST['semester']));
