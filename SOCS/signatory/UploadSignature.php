@@ -98,10 +98,14 @@ class UploadSignature extends Controller {
             $image_upload = new upload($imagefile);
 
             if ($image_upload->uploaded) {
-
-                $image_upload->image_convert = "jpg";
-                $image_upload->file_overwrite = true;
-                $image_upload->file_new_name_body = $img_filename;
+                
+                $image_upload->image_convert        = "jpg";
+                $image_upload->file_overwrite       = true;
+                $image_upload->file_new_name_body   = $img_filename;
+                $image_upload->image_resize         = true;
+                $image_upload->image_y              = 35;
+                $image_upload->image_x              = 200;
+                
                 $image_upload->process($local_dir);
 
                 if ($image_upload->processed) {

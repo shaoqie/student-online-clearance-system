@@ -131,14 +131,14 @@ class Department_Model extends Model{
         if(!$delete){return "false";}
     }
     
-    public function insert($dept_name, $description){
-        mysql_query("INSERT INTO `socs`.`departments` (`Department_ID`, `Department_Name`, `Description`) 
-                    VALUES (NULL, '$dept_name', '$description');");
+    public function insert($dept_name, $description, $dept_logo){
+        mysql_query("INSERT INTO `socs`.`departments` (`Department_ID`, `Department_Name`, `Description`, `Department_Logo`) 
+                    VALUES (NULL, '$dept_name', '$description', '$dept_logo');");
     }
     
-    public function update($key, $newDeptName, $newDeptDesc){
+    public function update($key, $newDeptName, $newDeptDesc, $newDept_Logo){
         mysql_query("UPDATE `socs`.`departments` SET `Department_Name` = '$newDeptName',
-                    `Description` = '$newDeptDesc' WHERE `departments`.`Department_ID` ='$key'");
+                    `Description` = '$newDeptDesc', `Department_Logo` = '$newDept_Logo' WHERE `departments`.`Department_ID` ='$key'");
     }
     
     

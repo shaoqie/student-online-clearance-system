@@ -86,7 +86,8 @@ class Requirements extends Controller{
             $sy_id = $this->schoolYearSem_model->getSy_ID($this->schoolYearSem_model->getCurSchool_Year(), $this->schoolYearSem_model->getCurSemester());
         }
 
-       
+        $this->template->assign('pre_sy', $this->schoolYearSem_model->getCurSchool_Year());
+        $this->template->assign('pre_sem', $this->schoolYearSem_model->getCurSemester());
         
         $t_sign_id = $this->signatorialList_model->getSignId(Session::get_AssignSignatory());
         $this->requirement_model->filterRequirements($t_sign_id, $sy_id, $page, $searchName);

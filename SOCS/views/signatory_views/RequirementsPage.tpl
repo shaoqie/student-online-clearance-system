@@ -87,9 +87,13 @@
                     </td>
                     <td>{$myDesc_requirements[$k]}</td>
                     <td>
-                        <a href="?action=viewEdit_Requirements&reqID={$requirement_ID[$k]}">
-                            <i class="icon-pencil"></i> Edit
-                        </a>
+                        {if $pre_sy eq $currentSchool_Year && $pre_sem eq $currentSemester}
+                            <a href="?action=viewEdit_Requirements&reqID={$requirement_ID[$k]}">
+                                <i class="icon-pencil"></i> Edit
+                            </a>
+                        {else}
+                            <a href=""><i class="icon-pencil"></i> Edit </a>
+                        {/if}
                     </td>
                 </tr>
             {/foreach}
