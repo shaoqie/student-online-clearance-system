@@ -67,7 +67,7 @@ class Signatory_List_Manager extends Controller {
             $this->signatory_model->insert(trim($_POST['sign_name']), trim($_POST['sign_description']), 'Under Graduate');
             //$this->template->setAlert("Adding Signatory was Successful", Template::ALERT_SUCCESS, 'alert');
             
-            header('Location: signatory_list_manager.php?successAdd=true');
+            header('Location: signatory_list_manager.php?action=addSignatory&successAdd=true');
         }
     }
     
@@ -100,14 +100,14 @@ class Signatory_List_Manager extends Controller {
 
     /*---------------- Deleting Signatory -----------------*/
     public function deleted() {
-        $this->template->setAlert('Delete an Signatory Successfully!..', Template::ALERT_SUCCESS, 'alert');
+        $this->template->setAlert('A signatory has been deleted successfully!..', Template::ALERT_SUCCESS, 'alert');
     }
 
     public function delete($selected) {
         $explode = explode("-", $selected);
         foreach ($explode as $value) {
             $delete = $this->signatory_model->deleteSignatory(trim($value));
-            if($delete == "false"){ $this->template->setAlert('You can delete an Unuse Signatory only!..', Template::ALERT_ERROR, 'alert'); return;}
+            if($delete == "false"){ $this->template->setAlert('The signatory that you want to delete is already used!', Template::ALERT_ERROR, 'alert'); return;}
         }
         $HOST = $explode[0] != null ? HOST . "/administrator/signatory_list_manager.php?action=deleted" : HOST . "/administrator/signatory_list_manager.php";
         header('Location: ' . $HOST);

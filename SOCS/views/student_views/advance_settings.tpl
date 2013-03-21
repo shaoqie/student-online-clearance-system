@@ -1,61 +1,70 @@
 {literal}
-    <script type="text/javascript">      
-         function changeCourses(){
+    <script type="text/javascript">
+        function changeCourses() {
             var department = document.getElementById("dept"); //alert(document.getElementById("stud_status1").checked);
             department.innerHTML = "";
-            if(document.getElementById("stud_status1").checked == true){ var stud_status = "Under Graduate"; 
+            if (document.getElementById("stud_status1").checked == true) {
+                var stud_status = "Under Graduate";
                 document.getElementById("prog_evening").disabled = false;
-                                      
-                {/literal}
-                {foreach from=$depts key=k item=dept}
-                    if(document.getElementById("prog_evening").checked){
-                        {if $dept eq "University Evening Program"}
+
+    {/literal}
+    {foreach from=$depts key=k item=dept}
+                            if (document.getElementById("prog_evening").checked) {
+        {if $dept eq "University Evening Program"}
+                                department.options[department.options.length] = new Option("{$dept}", "{$dept_ID[$k]}");
+        {/if}
+                            } else {
+        {if $dept != "University Evening Program"}
+                                department.options[department.options.length] = new Option("{$dept}", "{$dept_ID[$k]}");
+        {/if}
+                            }
+    {/foreach}
+    {literal}
+                        } else {
+                            var stud_status = "Graduate";
+                            document.getElementById("prog_evening").disabled = true;
+    {/literal}
+    {foreach from=$depts key=k item=dept}
+        {if $dept != "University Evening Program"}
                             department.options[department.options.length] = new Option("{$dept}", "{$dept_ID[$k]}");
-                        {/if}
-                    }else{
-                        {if $dept != "University Evening Program"}
-                            department.options[department.options.length] = new Option("{$dept}", "{$dept_ID[$k]}");
-                        {/if}
+        {/if}
+    {/foreach}
+    {literal}
+                            document.getElementById("prog_evening").checked = false;
+                            document.getElementById("prog_day").checked = true;
+                        }
+
+                        //document.getElementById("prog_evening").checked = false; 
+                        //document.getElementById("prog_day").checked = true;
+
+                        changeOptions();
                     }
-                {/foreach}
-                {literal}
-            }else{ var stud_status = "Graduate";    document.getElementById("prog_evening").disabled = true;    
-                {/literal}
-                {foreach from=$depts key=k item=dept}
-                    {if $dept != "University Evening Program"}
-                        department.options[department.options.length] = new Option("{$dept}", "{$dept_ID[$k]}");
-                    {/if}
-                {/foreach}
-                {literal}
-                    document.getElementById("prog_evening").checked = false; 
-                    document.getElementById("prog_day").checked = true;
-            }
-            
-            //document.getElementById("prog_evening").checked = false; 
-            //document.getElementById("prog_day").checked = true;
-                
-            changeOptions();   
-        }      
-        
-        function changeOptions(){
-            if(document.getElementById("stud_status1").checked == true){ var stud_status = "Under Graduate";
-            }else{ var stud_status = "Graduate";}
-            
-            var department = document.getElementById("dept");
-            document.getElementById("course").innerHTML = "";
-            var select = document.getElementById("course");
-            var dept_id = department.options[department.selectedIndex].value;
-                
-            {/literal}      
-            {foreach from=$dept_id_inCourses key=k_course item=item}       
-                if(dept_id == {$dept_id_inCourses[$k_course][0]} && stud_status == "{$dept_id_inCourses[$k_course][2]}"){
-                select.options[select.options.length] = new Option("{$dept_id_inCourses[$k_course][1]}", "{$dept_id_inCourses[$k_course][1]}");
-            }               
-            {/foreach}                          
-            {literal}    
-        }
+
+                    function changeOptions() {
+                        if (document.getElementById("stud_status1").checked == true) {
+                            var stud_status = "Under Graduate";
+                        } else {
+                            var stud_status = "Graduate";
+                        }
+
+                        var department = document.getElementById("dept");
+                        document.getElementById("course").innerHTML = "";
+                        var select = document.getElementById("course");
+                        var dept_id = department.options[department.selectedIndex].value;
+
+    {/literal}      
+    {foreach from=$dept_id_inCourses key=k_course item=item}
+                        if (dept_id == {$dept_id_inCourses[$k_course][0]} && stud_status == "{$dept_id_inCourses[$k_course][2]}") {
+                            select.options[select.options.length] = new Option("{$dept_id_inCourses[$k_course][1]}", "{$dept_id_inCourses[$k_course][1]}");
+                        }
+    {/foreach}
+    {literal}    
+                    }
     </script>
 {/literal}
+
+<h4 class="well center-text well-small">Settings</h4>
+
 <form action='' method='post' class="form-horizontal">  
     <legend>Advance Settings: </legend>
 
@@ -85,7 +94,7 @@
             <input type="radio" onclick="changeCourses()" id="prog_evening" {if $program eq "Evening"} checked {/if} name="program" value="Evening"> <label><b>Evening </b></label>
         </div>
     </div>  
-    
+
     <div class="control-group form-inline">
         <div class="controls form-inline">
             <input type="radio" onclick="changeCourses()" id="stud_status1" {if $status eq "Under Graduate"} checked {/if} name="Status" value="Under Graduate"> <label><b>Under Graduate</b></label> &nbsp; &nbsp; &nbsp;
@@ -128,10 +137,10 @@
         </div>
     </div>
 
-    <div class="control-group">
-        <div class="controls">
-            <input class="btn btn-primary" type='Submit' value='Save' name='Save'>
-            <a href='/SOCS/settings.php'>Cancel</a>
+    <div class="control-group form-actions">
+        <div class="controls pull-right">
+            <input class="btn btn-primary" type='submit' value='Save' name='Save'>
+            <a class="btn" href="{$host}/settings.php">Cancel</a>
         </div>
-    </div>            
+    </div>
 </form>
