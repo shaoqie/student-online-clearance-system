@@ -14,12 +14,14 @@ class Index extends Controller {
     private $signatoriallist_model;
     private $signatory_model;
     private $directory;
+    private $registered_student_model;
 
     public function __construct() {
         parent::__construct();
         if (Session::user_exist() && Session::get_Account_type() == "Admin") {
 
             $this->administrator_model = new User_Model();
+            $this->registered_student_model = new Registered_Student();
             $this->signatoriallist_model = new SignatorialList_Model();
             $this->signatory_model = new Signatory_Model();
             $this->template = new Template();
@@ -35,9 +37,11 @@ class Index extends Controller {
             $this->template->setContent('dashboard.tpl');
             $this->template->setCalendar('Calendar.tpl');
             $this->template->assign('assign_sign', '');
-            
+
             $filename = "../Excel_File/student_current_enroll.xls";
-            if (file_exists($filename)){ $this->template->assign('excel_file', 'true'); }
+            if (file_exists($filename)) {
+                $this->template->assign('excel_file', 'true');
+            }
 
             //var_dump($_GET['account_types']);
             if (isset($_GET['user_type'])) {
@@ -151,17 +155,16 @@ class Index extends Controller {
             $this->administrator_model->Middle_Name = $middleName;
             $this->administrator_model->Assigned_Signatory = $assign_sign;
             //$this->administrator_model->Signatory_Usability = $_POST['sign_usability'];
-            
-            if($this->administrator_model->isUsername_Exist(trim($username))){
+
+            if ($this->administrator_model->isUsername_Exist(trim($username))) {
                 $this->template->setAlert('Username is Already Exist!..', Template::ALERT_ERROR);
                 $this->template->assign('s_name', $surname);
                 $this->template->assign('f_name', $firstname);
                 $this->template->assign('m_name', $middleName);
-            }else{
+            } else {
                 $this->administrator_model->insertSignatory_UserByAdmin();
                 $this->template->setAlert('Signatoy In-Charge was Successfully Added!', Template::ALERT_SUCCESS);
             }
-            
         }
     }
 
@@ -169,21 +172,45 @@ class Index extends Controller {
         $excel_file = $_FILES['excel_file'];
         $this->directory = PATH . "Excel_File/";
 
-        if ($excel_file['name'] != ""){
-            if($excel_file["type"] == "application/vnd.ms-excel") {
+        if ($excel_file['name'] != "") {
+            if ($excel_file["type"] == "application/vnd.ms-excel") {
                 $excel_file_upload = new upload($excel_file);
                 $excel_file_upload->file_overwrite = true;
                 $excel_file_upload->file_new_name_body = "student_current_enroll";
                 $excel_file_upload->process($this->directory);
 
                 //if ($image_upload->processed) {
-                    //$this->registered();
-                    $this->template->setAlert("File was Successfully Uploaded!..", Template::ALERT_SUCCESS);
-                    $excel_file_upload->clean();
+                //$this->registered();
+                $this->template->setAlert("File was Successfully Uploaded!..", Template::ALERT_SUCCESS);
+                $excel_file_upload->clean();
+
+                $filename = "../Excel_File/student_current_enroll.xls";
+                if (file_exists($filename)) {
+                    $this->template->assign('excel_file', 'true');
+                }
+
+
+                /* inserting into database table */
+                $excel_data = new Spreadsheet_Excel_Reader('../Excel_File/student_current_enroll.xls');
+
+                for ($y = 2; $y <= $excel_data->rowCount(); $y++) {
+                    $student_id = $excel_data->val($y, A);
+                    $lastname = $excel_data->val($y, B);
+                    $firstname = $excel_data->val($y, C);
+                    $middle_initial = $excel_data->val($y, D);
                     
-                    $filename = "../Excel_File/student_current_enroll.xls";
-                    if (file_exists($filename)){ $this->template->assign('excel_file', 'true'); }
-            }else{
+                    if($this->registered_student_model->isValid($student_id, $lastname, $firstname) &&
+                            $this->administrator_model->isValid($student_id, $lastname, $firstname)){
+                        $this->registered_student_model->insert($student_id, $lastname, $firstname, $middle_initial);
+                    }      
+                    
+                }
+
+
+
+
+                /* ------------------------------- */
+            } else {
                 $this->template->setAlert("You can Upload a XLS file only!..", Template::ALERT_ERROR);
             }
         }

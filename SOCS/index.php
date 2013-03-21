@@ -17,6 +17,7 @@ class Index extends Controller {
     private $courses_model;
     private $stud_model;
     private $signatoriallist_model;
+    private $registered_student_model;
 
     public function __construct() {
         parent::__construct();
@@ -27,6 +28,7 @@ class Index extends Controller {
         $this->courses_model = new Course_Model();
         $this->stud_model = new Student_Model();
         $this->signatoriallist_model = new SignatorialList_Model();
+        $this->registered_student_model = new Registered_Student();
 
         $this->template = new Template();
         $this->template->setPageName('Home');
@@ -152,7 +154,9 @@ class Index extends Controller {
 
 
             /* ------ checking for valid account ------ */
-            for ($y = 4; $y <= $excel_data->rowCount(); $y++) {
+            
+            
+            /*for ($y = 4; $y <= $excel_data->rowCount(); $y++) {
                 $temp_name = $excel_data->val($y, C);
                 $temp = substr(trim($temp_name), 0, (stripos(trim($temp_name), ",")));
                 //$temp = (stripos(trim($temp_name), ".") - 1) == -1 && substr(trim($temp_name), strlen(trim($temp_name)) - 2) == " " ? trim($temp_name) : trim(substr(trim($temp_name), 0, stripos(trim($temp_name), ".") - 1));
@@ -160,7 +164,7 @@ class Index extends Controller {
                     $found = true;
                     break;
                 }
-            }
+            }*/
             
             if ($this->administrator_model->isUsername_Exist(trim($stud_id))) {
                 //$this->template->setAlert('Student ID Number is Already Exist!..', Template::ALERT_ERROR);
@@ -168,7 +172,7 @@ class Index extends Controller {
                 //return;
             }
             
-            if ($found) {
+            if (!$this->registered_student_model->isValid($stud_id, trim($_POST['surname']), trim($_POST['firstname']))) {
                 $hash = crypt(($_POST['stud_id'] . "-" . $_POST['number'] . $_POST['emailAdd']), 'wrawehydrufmjhyaswtgf');
                 $course_id = $this->courses_model->getCourseID(trim($_POST['course']));
 

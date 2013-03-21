@@ -356,6 +356,15 @@ class User_Model extends Model {
                         AND signatories.signatory_id = '$Tsign_id' group by Name");
         return mysql_num_rows($this->query) / $this->itemsPerPage;
     }
+    
+    /*------------ for uploading student record ----------------------*/
+    
+    public function isValid($stud_id, $lname, $fname){
+        $this->query = mysql_query("select count(*) from users where username = '$stud_id' and Surname = '$lname' and First_Name = '$fname'");
+        $row = mysql_fetch_array($this->query);
+        
+        return $row['0'] == 0;
+    }
 
 }
 
