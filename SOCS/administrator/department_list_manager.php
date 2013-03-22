@@ -104,20 +104,23 @@ class Department_List_Manager extends Controller {
         $this->template->assign("editDepartment_Name", $dept_name);
         $this->template->assign("editDepartment_Desc", $dept_desc);
 
+        $logo = $this->department_model->get_logo($seleted);
+        $this->template->assign('dept_logo', $logo);
+
         if (isset($_POST['editSave'])) {
             if (trim($_POST['dept_name']) == "" || trim($_POST['dept_description']) == "") {
                 $this->template->setAlert("Updating Signatory was Failed", Template::ALERT_ERROR);
             }/* else if($this->department_model->isExist(trim($_POST['dept_name']), trim($_POST['dept_description']))){
               $this->template->setAlert("Cannot Update a Department that is Existing", Template::ALERT_ERROR, 'alert');
               } */ else {
-                  
+
                 $imagepath = $this->getImage_Path();
                 $this->department_model->update($seleted, trim($_POST['dept_name']), trim($_POST['dept_description']), $imagepath);
                 //$this->template->setAlert("Updating Signatory was Successful", Template::ALERT_SUCCESS, 'alert');
                 $this->template->assign("editDepartment_Name", trim($_POST['dept_name']));
                 $this->template->assign("editDepartment_Desc", trim($_POST['dept_description']));
-
-                header('Location: department_list_manager.php?successEdit=true');
+                
+                header("Location: department_list_manager.php?action=editDepartment&seleted=$seleted&successEdit=true");
             }
         }
     }
@@ -156,19 +159,21 @@ class Department_List_Manager extends Controller {
         if (Validator::is_valid_signature_image($imagefile)) {
             $image_upload = new upload($imagefile);
 
+            $dept_name = str_replace(" ", "_", trim($_POST['dept_name']));
+            
             if ($image_upload->uploaded) {
 
                 $image_upload->image_convert = "jpg";
                 $image_upload->file_overwrite = true;
-                $image_upload->file_new_name_body = trim($_POST['dept_name']);
+                $image_upload->file_new_name_body = $dept_name;
                 $image_upload->image_resize = true;
                 $image_upload->image_y = 150;
                 $image_upload->image_x = 150;
 
                 $image_upload->process($local_dir);
-
+                
                 if ($image_upload->processed) {
-                    $imagepath = HOST . "/photos/administrator/department_logo/" . trim($_POST['dept_name']) . "." . "jpg";
+                    $imagepath = HOST . "/photos/administrator/department_logo/" . $dept_name . "." . "jpg";
                     $this->template->setAlert('Signature image has been successfully uploaded.', Template::ALERT_SUCCESS);
                 } else {
                     $this->template->setAlert('An error occured while uploading the image.' . $image_upload->error, Template::ALERT_INFO);
@@ -177,7 +182,7 @@ class Department_List_Manager extends Controller {
                 $this->template->setAlert('An error occured while uploading the image.', Template::ALERT_INFO);
             }
         }
-        
+
         return $imagepath;
     }
 

@@ -141,8 +141,6 @@ class Department_Model extends Model{
                     `Description` = '$newDeptDesc', `Department_Logo` = '$newDept_Logo' WHERE `departments`.`Department_ID` ='$key'");
     }
     
-    
-    
     public function getDept_Name($key){
         $this->query = mysql_query("select Department_Name from departments where Department_ID = '$key'");
         $row = mysql_fetch_array($this->query);
@@ -164,7 +162,16 @@ class Department_Model extends Model{
         return $row['Description'];
     }
     
-    
+    public function get_logo($id){
+        $this->query = mysql_query("SELECT Department_Logo FROM departments WHERE Department_ID=$id");
+        $row = mysql_fetch_array($this->query);
+        
+        return $row[0];
+    }
+
+
+
+
     /*------- for testing existing name --------*/
     
     public function isExist($dept_name, $description){

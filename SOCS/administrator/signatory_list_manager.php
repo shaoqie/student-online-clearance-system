@@ -92,7 +92,7 @@ class Signatory_List_Manager extends Controller {
                 $this->template->assign("editSignatory_Name", trim($_POST['sign_name']));
                 $this->template->assign("editSignatory_Desc", trim($_POST['sign_description']));
                 
-                header('Location: signatory_list_manager.php?successEdit=true');
+                header("Location: signatory_list_manager.php?action=editSignatory&seleted=$seleted&successEdit=true");
             }
         }
         

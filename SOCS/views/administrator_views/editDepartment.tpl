@@ -36,12 +36,19 @@
                 <label class="control-label"><b>Upload Logo: </b></label>
                 <div class="controls">
                     <div class="fileupload fileupload-new" data-provides="fileupload">
-                        <div class="fileupload-preview thumbnail" style="width: 150px; height: 150px;"></div><br>
+                        <div class="fileupload-preview thumbnail" style="width: 150px; height: 150px;"></div>
+                        {if $dept_logo != null}
+                            <div class="thumbnail" style="width: 150px; height: 150px;">
+                                <img src="{$dept_logo}" />
+                            </div>
+                        {/if}
+                        <br>
                         <span class="btn btn-file">
                             Browse<input type="file" name="dept_logo">
                         </span>
                         <input type="button" class="btn fileupload-exists" value="Cancel" data-dismiss="fileupload" />
                     </div>
+
                     <span class="help-block">
                         <p class="text-info">Image file shall not exceed to 1MB. Recommended size is 150 x 150</p>
                     </span>
