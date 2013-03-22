@@ -30,12 +30,12 @@
             <li class="divider-vertical"></li>
             <li>
 
-                {if $num_cleared == ($myListOfSign_underDeptName|@count) && $currentSchool_Year == $most_current_sy && $currentSemester == $most_current_sem}
+                {if $currentSchool_Year == $most_current_sy && $currentSemester == $most_current_sem}
                     <a class="tips" title="Export the clearance file" href="export1.php?sy_sem_id={$sy_sem_id}&status={$status}" target="_blank"> 
                         <i class="icon-socs-export"></i>
                     </a>
                 {else}
-                    <a class="tips" title="Export the clearance file" href="#" onclick="bootbox.alert('<div class=\'alert alert-info alert-block\'><i class=\'icon-info-sign\'></i> <strong>Oops!</strong> Must clear all signatories before can download the clearance form and it must be in current school year and semester.</div>');"> 
+                    <a class="tips" title="Export the clearance file" href="#" onclick="bootbox.alert('<div class=\'alert alert-info alert-block\'><i class=\'icon-info-sign\'></i> <strong>Oops!</strong> Must be in current school year and semester.</div>');"> 
                         <i class="icon-socs-export"></i>
                     </a>
                 {/if}
