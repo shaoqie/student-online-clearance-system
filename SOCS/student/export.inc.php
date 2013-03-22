@@ -150,9 +150,15 @@ foreach ($listOfSignatories["id"] as $key => $value) {
                         $sigIm = $signatory_model->getSignature($listOfSignatories["id"][$i]);
                         $sigIm = parse_url($sigIm, PHP_URL_PATH);
                         $sigIm = substr($sigIm, strrpos($sigIm, "/") + 1);
-                        $sigIm = "../photos/signatures/" . $sigIm;
+                        $sigIm = PATH . "/photos/signatures/" . $sigIm;
 
-                        echo '<img src="'.$sigIm.'" />';
+                        if (file_exists($sigIm)) {
+                            echo '<img src="' . $sigIm . '" />';
+                        } else {
+                            ?> <span style="color: green;">  <?php
+                                echo $listOfSignatories["status"][$i];
+                                ?> </span><?php
+                        }
                     }
                 }
 
