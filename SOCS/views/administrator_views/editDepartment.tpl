@@ -15,20 +15,20 @@
 
         <!-- Header-->
         <h4 class="well center-text well-small">Edit Department</h4>
-
+        
         <!-- Edit Form-->
         <form action="" method='post' class="form-horizontal" enctype="multipart/form-data">
             <legend>Department Information:</legend>
             <div class="control-group">
                 <label class="control-label"><b>Department Name: </b></label>
                 <div class="controls">
-                    <input class="span5" type ='text' name='dept_name' value='{$editDepartment_Name}'>
+                    <input class="span5" type ='text' name='dept_name' value='{$editDepartment_Name}' required>
                 </div>
             </div>
             <div class="control-group">
                 <label class="control-label"><b>Description: </b></label>
                 <div class="controls">
-                    <textarea class="span5" name='dept_description' rows="5" cols="50">{$editDepartment_Desc}</textarea>
+                    <textarea class="span5" name='dept_description' rows="5" cols="50" required>{$editDepartment_Desc}</textarea>
                 </div>
             </div>
 
@@ -44,7 +44,7 @@
                         {/if}
                         <br>
                         <span class="btn btn-file">
-                            Browse<input type="file" name="dept_logo">
+                            Browse<input type="file" name="dept_logo" required />
                         </span>
                         <input type="button" class="btn fileupload-exists" value="Cancel" data-dismiss="fileupload" />
                     </div>

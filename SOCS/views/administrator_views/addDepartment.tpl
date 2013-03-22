@@ -32,13 +32,13 @@
             <div class="control-group">
                 <label class="control-label"><b>Department Name: </b></label>
                 <div class="controls">
-                    <input class="span5" type ='text' name='dept_name'>
+                    <input class="span5" type ='text' name='dept_name' required>
                 </div>
             </div>
             <div class="control-group">
                 <label class="control-label"><b>Description: </b></label>
                 <div class="controls">
-                    <textarea class="span5" name='dept_description' rows="5" cols="50"></textarea>
+                    <textarea class="span5" name='dept_description' rows="5" cols="50" required></textarea>
                 </div>
             </div>
             
@@ -48,7 +48,7 @@
                     <div class="fileupload fileupload-new" data-provides="fileupload">
                         <div class="fileupload-preview thumbnail" style="width: 150px; height: 150px;"></div><br>
                         <span class="btn btn-file">
-                            Browse<input type="file" name="dept_logo">
+                            Browse<input type="file" name="dept_logo" required>
                         </span>
                         <input type="button" class="btn fileupload-exists" value="Cancel" data-dismiss="fileupload" />
                     </div>
