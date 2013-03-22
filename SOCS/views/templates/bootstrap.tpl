@@ -178,6 +178,25 @@
             <script src="{$host}/public/select2/select2.js"></script>
             <script src="{$host}/public/js/main.js"></script>
 
+            {if isset($sy_attended) && isset($sem_attended)}
+                {if $sy_attended != $most_current_sy || $sem_attended != $most_current_sem}
+                    <script type="text/javascript">
+                        
+                        var renew = "{$host}/student/index.php?action=renew_student";
+                        
+                        {literal}
+                            $(document).ready(function() {
+                                bootbox.confirm("<div class='alert alert-info'><i class='icon-info-sign'></i> <strong>Alright!</strong> Classes are already starting. Do you want to renew your clearance?</div>", function(result) {
+                                    if (result === true) {
+                                        window.location.href = renew;
+                                    }
+                                });
+                            });
+                        {/literal}
+                    </script>
+                {/if}
+            {/if}
+
             {*
             {literal}
             <script>

@@ -40,6 +40,9 @@ class Index extends Controller {
             $this->template->assign('most_current_sem', $currentSemester);
             $this->template->assign('most_current_sy', $currentSchool_Year);
             
+            Session::setSchoolYear($currentSchool_Year);
+            Session::setSemester($currentSemester);
+            
             if (isset($_POST['GO'])) {
                 $sy_id = $this->schoolYearSem_model->getSy_ID(trim($_POST['school_year']), trim($_POST['semester']));
                 $this->template->assign('currentSemester', trim($_POST['semester']));
@@ -56,7 +59,15 @@ class Index extends Controller {
             $stud_deptName = $this->student_model->getStud_DeptName();
             $stud_deptID = $this->student_model->getStud_DeptID();
             $stud_status = $this->student_model->getStud_Status();
-
+            $stud_sy_sem = $this->student_model->get_last_attended_sy_sem();
+            
+            $sy_attended = $this->schoolYearSem_model->getSchool_Year_by_id($stud_sy_sem);
+            $sem_attended = $this->schoolYearSem_model->getSem_by_id($stud_sy_sem);
+            
+            Session::setSY_SEM_ID($sy_id);
+            
+            $this->template->assign('sy_attended', $sy_attended);
+            $this->template->assign('sem_attended', $sem_attended);
 
             $this->signatoialList->getListofSignatoryByDept($stud_deptID, $stud_status);
             $listOfSign_underDeptName = $this->signatoialList->getSign_Name();
@@ -234,6 +245,11 @@ class Index extends Controller {
             "September", "October", "November", "December");
 
         return $_month[$month - 1];
+    }
+    
+    public function renew_student(){
+        $this->student_model->updateSY_SEM_ID(Session::getSY_SEM_ID(), Session::get_user());
+        header("Location: " . HOST . "/student/index.php");
     }
 
 }
