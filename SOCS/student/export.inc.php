@@ -85,6 +85,14 @@ foreach ($listOfSignatories["id"] as $key => $value) {
             <div style="position:relative;">
                 <div style="position:absolute;left:0;"><img style="height: 90px; width:90px;" src="logo.jpg"/></div>
 
+                <?php if($dept_logo != null && isset($dept_logo) && $dept_logo != ""){ 
+                        $dept_logo = parse_url($dept_logo, PHP_URL_PATH);
+                        $dept_logo = substr($dept_logo, strrpos($dept_logo, "/") + 1);
+                        $dept_logo = PATH . "/photos/administrator/department_logo/" . $dept_logo;
+                    ?>
+                     <div style="position:absolute;right:0;"><img style="height: 90px; width:90px;" src="<?php echo $dept_logo; ?>" /></div>
+                <?php } ?>
+                
                 <div>
                     <p style="text-align: center;">
                         <i>Republic of the Philippines</i><br/>
@@ -93,10 +101,6 @@ foreach ($listOfSignatories["id"] as $key => $value) {
                         <b>STUDENT CLEARANCE</b><br/>
                     </p>
                 </div>
-
-                <?php if ($dept_logo != null && isset($dept_logo) && $dept_logo != ""): ?>
-                    <div style="position:absolute;right:0;"><img style="height: 90px; width:90px;" src="<?php echo $dept_logo ?>" /></div>
-                <?php endif ?>
 
             </div>
 
