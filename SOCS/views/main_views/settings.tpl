@@ -2,7 +2,7 @@
 {function name=settings}
     <h4 class="well center-text well-small">Settings</h4>
 
-    {if $account_type != "System Administrator" || $account_type != "Signatory in Charge"}
+    {if $account_type != "System Administrator" && $account_type != "Signatory in Charge"}
         <div class="alert alert-block alert-info">
             Choose to advance settings? <a href="student/index.php?action=advance_settings">Click Here</a>
         </div>  
@@ -162,7 +162,7 @@
     </form>
 {/function}
 
-{if $account_type != "System Administrator" || $account_type != "Signatory in Charge"}
+{if $account_type != "System Administrator" && $account_type != "Signatory in Charge"}
     {call name=settings}
 {else}
 
@@ -174,7 +174,7 @@
                 <h4 class="well center-text well-small">Settings</h4>
                 {call name=nav_admin}
             {elseif $account_type == "Signatory in Charge"}
-                <h4 class="well center-text well-small">Settings</h4>s
+                <h4 class="well center-text well-small">Settings</h4>
                 {call name=nav_signatory index=5}
             {/if}
 
