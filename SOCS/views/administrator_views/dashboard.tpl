@@ -79,6 +79,7 @@
                                 {else}
                                     <img src="{$host}/photos/default_student.png" style="width:35px; height:35px"/>
                                 {/if}
+                                <br class="visible-phone">
                                 {$i}
                             </label>
                         </td>

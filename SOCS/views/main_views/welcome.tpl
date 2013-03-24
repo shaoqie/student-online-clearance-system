@@ -7,7 +7,7 @@
                 <div class="carousel-caption socs-welcome hero-unit">
                     <h1>Welcome to SOCS!</h1>
                     <p class="lead">The Student Online Clearance System of The University of Southeastern Philippines, Davao City.</p>
-                    <button class="btn btn-primary btn-large">Learn More &raquo;</button><br>
+                    <a class="btn btn-primary btn-large" href="#socs_about">Learn More &raquo;</a>
                 </div>
 
             </div>
@@ -41,12 +41,15 @@
     <a class="carousel-control right" href="#socs-carousel" data-slide="next">&rsaquo;</a>
 </div>
 
-<div class="hero-unit visible-phone">
-    <h1>Welcome to SOCS!</h1>
-    <p>The Student Online Clearance System of The University of Southeastern Philippines, Davao City.</p>
-    <button class="btn btn-primary btn-large">Learn More &raquo;</button><br>
+<div class="row">
+    <div class="span12">
+        <div class="visible-phone">
+            <h1>Welcome to SOCS!</h1>
+            <p>The Student Online Clearance System of The University of Southeastern Philippines, Davao City.</p>
+            <a class="btn btn-primary btn-large">Learn More &raquo;</a><br>
+        </div>
+    </div>
 </div>
-
 
 <div class="row">
     <div class="span3">
@@ -54,7 +57,7 @@
     </div>
     <div class="span9">
 
-        <h1>About</h1>
+        <h1 id="socs_about">About</h1>
         <p>A Clearance is defined as the act or process of clearing.</p>
         <p>The Student’s Online Clearance System (SOCS) is system that will systematically checks balances, 
             fees and other obligations of the students at the University of Southeastern Philippines through online.</p>
@@ -71,9 +74,25 @@
             Jayson Torres (Researcher and System Analyst), 
             Kristoffer Anore (Graphic Artist and Front-end Programmer),
             Ozy Hale Manipis (Front-end Programmer and Project Planner)</p>
-        <blockquote>
-            <p>The Internet is becoming the town square for the global village of tomorrow.</p>
-            <small>Bill Gates</small>
-        </blockquote>
+
+        <div class="row">
+            <div class="span3 offset1">
+                <img src="{$host}/student/logo.jpg" style="max-width: 150px; max-height: 150px;" />
+            </div>
+            <div class="span3 offset1">
+                <img src="{$host}/public/img/ic-logo.png" style="max-width: 150px; max-height: 150px;" />
+            </div>
+        </div>
+
+            <br>
+            
+        <div class="row">
+            <div class="span9">
+                <blockquote>
+                    <p>The Internet is becoming the town square for the global village of tomorrow.</p>
+                    <small>Bill Gates</small>
+                </blockquote>
+            </div>
+        </div>
     </div>
 </div>

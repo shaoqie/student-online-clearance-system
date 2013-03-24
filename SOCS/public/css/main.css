@@ -20,19 +20,6 @@ div:hover#hover_link{
 }
 */
 
-.socs-content{
-    background-color: white;
-    box-shadow: 5px 5px 7px #444;
-    /*border: dotted 1px;*/
-    padding-left: 20px;
-    padding-right: 20px;
-    padding-top: 10px;
-    padding-bottom: 20px;
-    /*border-radius: 10px;*/
-    opacity: 0.9;
-    margin-bottom: 5px;
-}
-
 .center-text{
     text-align: center;
 }
