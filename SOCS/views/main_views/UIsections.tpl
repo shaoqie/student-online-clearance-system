@@ -47,15 +47,20 @@
 
     <select id="school_year" class="select2 input-medium" name="school_year">
         {foreach from=$mySchool_Year key=k item=year}
-            {if $year eq $currentSchool_Year}
-                <option selected>{$year}</option>
-            {else}
-                <option>{$year}</option>
+
+            {if $sy_attended >= $year}
+                {if $year eq $currentSchool_Year}
+                    <option selected>{$year}</option>
+                {else}
+                    <option>{$year}</option>
+                {/if}
             {/if}
+
         {/foreach}
     </select>
 
     <select id="semester" class="select2 input-medium" name="semester">
+
         {if $currentSemester eq 'First'}
             <option selected>First</option>
             <option>Second</option>
@@ -68,7 +73,8 @@
             <option>First</option>
             <option>Second</option>
             <option selected>Summer</option>
-        {/if}           
+        {/if}
+
     </select>
 
 {/function}

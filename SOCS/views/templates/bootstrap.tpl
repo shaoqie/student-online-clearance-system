@@ -176,16 +176,32 @@
             <script src="{$host}/public/js/vendor/bootstrap-fileupload.js"></script>
             <script src="{$host}/public/js/vendor/bootstrap-progressbar.js"></script>
             <script src="{$host}/public/select2/select2.js"></script>
+            <script src="{$host}/public/js/vendor/jquery.cookie.js"></script>
             <script src="{$host}/public/js/main.js"></script>
 
             {if isset($sy_attended) && isset($sem_attended)}
-                {if $sy_attended != $most_current_sy || $sem_attended != $most_current_sem}
+                {if ($sy_attended != $most_current_sy || $sem_attended != $most_current_sem)}
                     <script type="text/javascript">
-                        
+
                         var renew = "{$host}/student/index.php?action=renew_student";
-                        
+                        var username = {$username} + "";
+
                         {literal}
                             $(document).ready(function() {
+
+                                if ($.cookie(username) !== "no") {
+                                    bootbox.confirm("<div class='alert alert-info'><i class='icon-info-sign'></i> <strong>Alright!</strong> Classes are already starting. Do you want to renew your clearance?</div>", function(result) {
+                                        if (result === true) {
+                                            window.location.href = renew;
+                                            $.removeCookie(username);
+                                        } else {
+                                            $.cookie(username, 'no', {expires: 1});
+                                        }
+                                    });
+                                }
+                            });
+
+                            $('#socs-renew').on('click', function() {
                                 bootbox.confirm("<div class='alert alert-info'><i class='icon-info-sign'></i> <strong>Alright!</strong> Classes are already starting. Do you want to renew your clearance?</div>", function(result) {
                                     if (result === true) {
                                         window.location.href = renew;

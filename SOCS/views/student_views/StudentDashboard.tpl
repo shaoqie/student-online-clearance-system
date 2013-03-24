@@ -30,7 +30,7 @@
             <li class="divider-vertical"></li>
             <li>
 
-                {if $currentSchool_Year == $most_current_sy && $currentSemester == $most_current_sem}
+                {if $currentSchool_Year == $sy_attended && $currentSemester == $sem_attended}
                     <a class="tips" title="Export the clearance file" href="export1.php?sy_sem_id={$sy_sem_id}&status={$status}" target="_blank"> 
                         <i class="icon-socs-export"></i>
                     </a>
@@ -40,34 +40,25 @@
                     </a>
                 {/if}
 
-                {*
-                <a class="tips" title="Export the clearance file" href="#" onclick="check_clearance({$num_cleared}, {$myListOfSign_underDeptName|@count}, '{$currentSchool_Year}', '{$currentSemester}', '{$sy_sem_id}', '{$status}')"> 
-                <i class="icon-socs-export"></i>
-                </a>
-                *}
             </li>
+
             <li class="divider-vertical"></li>
+
+            {if isset($sy_attended) && isset($sem_attended)}
+                {if ($sy_attended != $most_current_sy || $sem_attended != $most_current_sem)}
+                    <li class="dropdown">
+                        <a id="socs-renew" class="tips" href="#" title="Renew Clearance">
+                            <i class="icon-legal"></i>
+                        </a>
+                    </li>
+                    
+                    <li class="divider-vertical"></li>
+                {/if}
+            {/if}
         </ul>
 
     </div>
 </div>
-
-{*
-<!-- Export Link-->
-<div class="row">
-<div class="span12">
-{if $num_cleared == ($myListOfSign_underDeptName|@count)}
-<a class="pull-right" href="export1.php?sy_sem_id={$sy_sem_id}&status={$status}"> 
-<i class="icon-socs-export icon-large"></i> Export to PDF
-</a>
-{else}
-<a class="pull-right" href="#" onclick="bootbox.alert('<div class=\'alert alert-info alert-block\'><i class=\'icon-info-sign\'></i> <strong>Oops!</strong> Must clear all signatories before can download the clearance form.</div>');"> 
-<i class="icon-socs-export icon-large"></i> Export to PDF
-</a>
-{/if}
-</div>
-</div>
-*}
 
 <p>Clearance Overall Status: </p>
 <div class="progress">
